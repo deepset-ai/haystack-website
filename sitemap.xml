@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/file_convertersmd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/apiindexingmd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/rest_apimd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/databasemd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/domain_adaptionmd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/get_startedmd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/intromd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/termsmd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/null</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/tutorial2md</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/tutorial3md</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/tutorial4md</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/tutorial5md</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/tutorial6md</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/apidatabasemd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/apireadermd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/apiretrievermd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/readermd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/retrievermd</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/en/docs/tutorial1md</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://www.haystack.oi/haystack-io/using-typescript/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+</urlset>

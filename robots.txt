@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.haystack.oi/sitemap.xml
+Host: https://www.haystack.oi
