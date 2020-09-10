@@ -1,5 +1,4 @@
 module.exports = {
-  pathPrefix: "/haystack-io",
   siteMetadata: {
     title: `haystack-oi`,
     siteUrl: `https://www.haystack.oi`,
