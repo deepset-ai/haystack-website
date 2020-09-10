@@ -1,22 +1,73 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+import GithubLogo from "../images/icon/GitHub-Mark-32px.png"; 
+
+import LocalizedLink from "../components/localizedLink/localizedLink";  
+
+import GithubButton from "react-github-button";
+import "react-github-button/assets/style.css";
+import "../scss/index.scss";
+
+const IndexPage = () => {
+
+  return (
+    <Layout>
+      <SEO title="Haystack" />
+      <main className="home-wrapper">
+        <section className="section1">
+          <div className="githubicon">
+            <GithubButton
+              type="stargazers"
+              size="default"
+              namespace="deepset-ai"
+              repo="haystack"
+            />
+          </div>
+          <h1>Haystack</h1>
+          <h3>Neural Question Answering at Scale</h3>
+          <div className="btn-wrapper">
+            <LocalizedLink
+              className="primary white-color"
+              to="/en/docs/usagemd"
+              locale="en"
+            >
+              Get started
+            </LocalizedLink>
+            <LocalizedLink
+              className="primary white-color"
+              to="/en/docs/intromd"
+              locale="en"
+            >
+              Learn more
+            </LocalizedLink>
+          </div>
+        </section>
+        <section className="section2">
+        </section>
+        <section className="section4">
+          <h2>Open Source</h2>
+          <p>Haystack is open-sourced on GitHub</p>
+          <p>Contribution and Feedback are welcome!</p>
+          <div className="btn-wrapper">
+            <a
+              className="primary primary-color with-icon"
+              href="https://github.com/deepset-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={GithubLogo} alt="github"></img>
+              <span>Contribute on Github</span>
+            </a>
+          </div>
+        </section>
+      </main>
+    </Layout>
+  );
+
+};
+  
 
 export default IndexPage

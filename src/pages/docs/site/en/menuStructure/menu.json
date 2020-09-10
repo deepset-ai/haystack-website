@@ -1,0 +1,183 @@
+{
+    "menuList": [
+      {
+        "id": "usage_haystack",
+        "title": "Usage",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 0,
+        "isMenu": true
+      },
+      {
+        "id": "intromd",
+        "title": "What is Haystack",
+        "label1": "usage_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 0
+      },
+      {
+        "id": "get_startedmd",
+        "title": "Get Started",
+        "label1": "usage_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 1
+      },
+      {
+        "id": "databasemd",
+        "title": "Document Store",
+        "label1": "usage_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 2
+      },
+      {
+        "id": "retrievermd",
+        "title": "Retriever",
+        "label1": "usage_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 3
+      },
+      {
+        "id": "readermd",
+        "title": "Reader",
+        "label1": "usage_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 4
+      },
+      {
+        "id": "domain_adaptionmd",
+        "title": "Domain Adaption",
+        "label1": "usage_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 5
+      },
+      {
+        "id": "termsmd",
+        "title": "Glossary",
+        "label1": "usage_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 6
+      },
+      {
+        "id": "tutorials_haystack",
+        "title": "Tutorials",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 1,
+        "isMenu": true
+      },
+      {
+        "id": "tutorial1md",
+        "title": "Task: Question Answering for Game of Thrones",
+        "label1": "tutorials_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 0
+      },
+      {
+        "id": "tutorial2md",
+        "title": "Fine-tuning a model on your own data",
+        "label1": "tutorials_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 1
+      },
+      {
+        "id": "tutorial3md",
+        "title": "Task: Build a Question Answering pipeline without Elasticsearch",
+        "label1": "tutorials_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 2
+      },
+      {
+        "id": "tutorial4md",
+        "title": "FAQ-Style QA: Utilizing existing FAQs for Question Answering",
+        "label1": "tutorials_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 3
+      },
+      {
+        "id": "tutorial5md",
+        "title": "Evaluation",
+        "label1": "tutorials_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 4
+      },
+      {
+        "id": "tutorial6md",
+        "title": "Better retrieval via Dense Passage Retrieval",
+        "label1": "tutorials_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 5
+      },
+      {
+        "id": "api_haystack",
+        "title": "API",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 2,
+        "isMenu": true
+      },
+      {
+        "id": "apidatabasemd",
+        "title": "Database",
+        "label1": "api_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 0
+      },
+      {
+        "id": "apiretrievermd",
+        "title": "Retriever",
+        "label1": "api_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 1
+      },
+      {
+        "id": "apireadermd",
+        "title": "Reader",
+        "label1": "api_haystack",
+        "label2": "api_haystack",
+        "label3": "",
+        "order": 2
+      },
+      {
+        "id": "apiindexingmd",
+        "title": "Indexing",
+        "label1": "api_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 3
+      },
+      {
+        "id": "rest_apimd",
+        "title": "Rest API",
+        "label1": "api_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 4
+      },
+      {
+        "id": "file_convertersmd",
+        "title": "File Converters",
+        "label1": "api_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 5
+      }
+    ]
+  }
