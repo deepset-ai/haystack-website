@@ -208,11 +208,6 @@ export default function Template({
     document.execCommand(`copy`);
     document.body.removeChild(el);
   };
-
-  //const title = isBenchmark
-  //  ? `Milvus benchmark`
-  //  : `${headings[0] && headings[0].value}`;
-
   const onOverlayClick = () => setShowModal(false);
 
   return (

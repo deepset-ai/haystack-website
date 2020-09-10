@@ -31,6 +31,7 @@
     "source": "0.0.3"
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "prettier": "2.1.0"
   },
   "keywords": [
@@ -44,7 +45,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "deploy": "gatsby build --prefix-path && gh-pages -d public"
   },
   "repository": {
     "type": "git",

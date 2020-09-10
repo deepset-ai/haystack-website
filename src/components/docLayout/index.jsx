@@ -46,9 +46,9 @@ export default (props) => {
       return;
     }
     const repoUrl = `https://api.github.com/repos/deepset-ai/haystack`;
-    let latest = window.localStorage.getItem("milvus.io.stargazers");
+    let latest = window.localStorage.getItem("deepset-ai.io.stargazers");
     const latestFetchTime = window.localStorage.getItem(
-      "milvus.io.stargazers_fetch_time"
+      "deepset-ai.io.stargazers_fetch_time"
     );
 
     if (
@@ -63,11 +63,11 @@ export default (props) => {
           if (data) {
             if (data.stargazers_count >= latest) {
               window.localStorage.setItem(
-                "milvus.io.stargazers",
+                "deepset-ai.io.stargazers",
                 data.stargazers_count
               );
               window.localStorage.setItem(
-                "milvus.io.stargazers_fetch_time",
+                "deepset-ai.io.stargazers_fetch_time",
                 Date.now()
               );
               star.current.innerHTML = `<i class="fab fa-github" aria-hidden="true"></i> 
