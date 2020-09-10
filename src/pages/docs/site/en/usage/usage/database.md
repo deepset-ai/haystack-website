@@ -2,7 +2,7 @@
 title: "Database"
 metaTitle: "Document Store"
 metaDescription: ""
-slug: "/documentation/database"
+slug: "/docs/database"
 date: "2020-09-03"
 id: "databasemd"
 ---

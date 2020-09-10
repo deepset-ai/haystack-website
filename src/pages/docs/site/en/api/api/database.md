@@ -2,7 +2,7 @@
 title: "Database"
 metaTitle: "Database"
 metaDescription: ""
-slug: "/documentation/abidatabase"
+slug: "/docs/abidatabase"
 date: "2020-09-03"
 id: "apidatabasemd"
 ---

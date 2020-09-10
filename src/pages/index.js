@@ -21,7 +21,7 @@ const IndexPage = () => {
           <div className="githubicon">
             <GithubButton
               type="stargazers"
-              size="default"
+              size="large"
               namespace="deepset-ai"
               repo="haystack"
             />
@@ -31,7 +31,7 @@ const IndexPage = () => {
           <div className="btn-wrapper">
             <LocalizedLink
               className="primary white-color"
-              to="/en/docs/usagemd"
+              to="/en/docs/intromd"
               locale="en"
             >
               Get started

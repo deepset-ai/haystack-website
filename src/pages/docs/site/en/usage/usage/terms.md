@@ -2,7 +2,7 @@
 title: "Glossary"
 metaTitle: "Glossary"
 metaDescription: ""
-slug: "/documentation/terms"
+slug: "/docs/terms"
 date: "2020-09-03"
 id: "termsmd"
 ---

@@ -2,7 +2,7 @@
 title: "Indexing"
 metaTitle: "Indexing"
 metaDescription: ""
-slug: "/documentation/apiindexing"
+slug: "/docs/apiindexing"
 date: "2020-09-03"
 id: "apiindexingmd"
 ---

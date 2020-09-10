@@ -2,7 +2,7 @@
 title: "What is Haystack"
 metaTitle: "What is Haystack"
 metaDescription: ""
-slug: "/documentation/intro"
+slug: "/docs/intro"
 date: "2020-09-03"
 id: "intromd"
 ---

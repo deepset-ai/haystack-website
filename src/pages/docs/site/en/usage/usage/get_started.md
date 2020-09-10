@@ -2,7 +2,7 @@
 title: "Get Started"
 metaTitle: "Get Started"
 metaDescription: ""
-slug: "/documentation/get_started"
+slug: "/docs/get_started"
 date: "2020-09-03"
 id: "get_startedmd"
 ---

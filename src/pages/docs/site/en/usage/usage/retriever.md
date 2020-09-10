@@ -2,7 +2,7 @@
 title: "Retriever"
 metaTitle: "Retriever"
 metaDescription: ""
-slug: "/documentation/retriever"
+slug: "/docs/retriever"
 date: "2020-09-03"
 id: "retrievermd"
 ---

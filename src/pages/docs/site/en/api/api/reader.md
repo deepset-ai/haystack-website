@@ -2,7 +2,7 @@
 title: "Reader"
 metaTitle: "Reader"
 metaDescription: ""
-slug: "/documentation/apireader"
+slug: "/docs/apireader"
 date: "2020-09-03"
 id: "apireadermd"
 ---

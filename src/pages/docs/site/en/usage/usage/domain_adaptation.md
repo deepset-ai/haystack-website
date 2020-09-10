@@ -2,7 +2,7 @@
 title: "Domain Adaption"
 metaTitle: "Domain Adaption"
 metaDescription: ""
-slug: "/documentation/domain_adaption"
+slug: "/docs/domain_adaption"
 date: "2020-09-03"
 id: "domain_adaptionmd"
 ---
