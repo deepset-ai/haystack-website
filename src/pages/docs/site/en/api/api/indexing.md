@@ -12,11 +12,17 @@ id: "apiindexingmd"
 ## Cleaning
 
 
-### haystack.indexing.cleaning.clean_wiki_text(text: str)
+```
+haystack.indexing.cleaning.clean_wiki_text(text: str)
+```
+
 ## Utils
 
 
-### haystack.indexing.utils.convert_files_to_dicts(dir_path: str, clean_func: Optional[Callable] = None, split_paragraphs: bool = False)
+```
+haystack.indexing.utils.convert_files_to_dicts(dir_path: str, clean_func: Optional[Callable] = None, split_paragraphs: bool = False)
+```
+
 Convert all files(.txt, .pdf) in the sub-directories of the given path to Python dicts that can be written to a
 Document Store.
 
@@ -40,7 +46,9 @@ Document Store.
 
 
 
-### haystack.indexing.utils.fetch_archive_from_http(url: str, output_dir: str, proxies: Optional[dict] = None)
+```
+haystack.indexing.utils.fetch_archive_from_http(url: str, output_dir: str, proxies: Optional[dict] = None)
+```
 Fetch an archive (zip or tar.gz) from a url via http and extract content to an output directory.
 
 

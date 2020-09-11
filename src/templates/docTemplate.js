@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Layout from "../components/docLayout";
-//import SEO from "../components/seo";
 import { graphql } from "gatsby";
-import hljs from "highlight.js";//todo
+import hljs from "highlight.js";
 import ReactTooltip from "react-tooltip";
 import "highlight.js/styles/github.css";
 import "./docTemplate.scss";
-import { useMobileScreen } from "../hooks";//todo
-import Code from "../components/code/code";//todo
-import QueryModal from "../components/query-modal/query-modal.js";//todo
+import { useMobileScreen } from "../hooks";
+import Code from "../components/code/code";
+import QueryModal from "../components/query-modal/query-modal.js";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export default function Template({
   data,
@@ -243,7 +244,7 @@ export default function Template({
                 target="_blank"
                 rel="noreferrer noopener"
               >
-                <i class="fas fa-edit"></i>
+                <FontAwesomeIcon icon={faEdit}/>
                 Edit
               </a>
           </div>

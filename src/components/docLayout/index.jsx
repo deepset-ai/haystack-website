@@ -3,6 +3,9 @@ import Menu from "../menu";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import "./index.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
+import GithubLogo from "../../images/icon/GitHub-Mark-32px.png"; 
 
 export default (props) => {
   const {
@@ -70,13 +73,12 @@ export default (props) => {
                 "deepset-ai.io.stargazers_fetch_time",
                 Date.now()
               );
-              star.current.innerHTML = `<i class="fab fa-github" aria-hidden="true"></i> 
-                  ${data.stargazers_count}`;
+              star.current.innerHTML = `<img src={GithubLogo} alt="github"></img> ${data.stargazers_count}`;
             }
           }
         });
     } else {
-      star.current.innerHTML = `<i class="fab fa-github" aria-hidden="true"></i> ${latest}`;
+      star.current.innerHTML = `<img src={GithubLogo} alt="github"></img> ${latest}`;
     }
   }, []);
 
@@ -184,18 +186,14 @@ export default (props) => {
                   className="btn"
                   href="http://github.com/deepset-ai/haystack"
                 >
-                  <i
-                    className="fab fa-github"
-                    id="btn-star"
-                    aria-hidden="true"
-                  ></i>
-                  4000
+                  <img src={GithubLogo} alt="Github"></img>
+                  788 stars
                 </a>
                 <a
                   className="btn"
                   href="https://github.com/deepset-ai/haystack/discussions"
                 >
-                  <i className="far fa-comments" aria-hidden="true"></i>
+                  <FontAwesomeIcon icon={faComment}/>
                   Github Discussions
                 </a>
               </div>

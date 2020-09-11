@@ -30,7 +30,7 @@ const Header = ({ siteTitle, menuLinks }) => {
               <LocalizedLink
                 locale="en"
                 className="link"
-                to="/en/docs/intromd"
+                to="/en/docs/get_startedmd"
               >
                 Quick Start
               </LocalizedLink>

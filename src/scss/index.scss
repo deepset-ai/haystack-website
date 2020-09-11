@@ -94,6 +94,10 @@
       margin-bottom: 3rem;
     }
 
+    h2 {
+      margin-top: 15px;
+    }
+
     h3 {
       margin-top: 8px;
       font-size: 16px;
@@ -120,11 +124,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 12rem;
-    background: url("../images/website/sketched_concepts_white.png") no-repeat;
+    height: 22rem;
+    background: url("../images/website/sketched_concepts_white_.png") no-repeat;
     background-position: bottom;
     background-size: cover;
-    margin-top: 150px;
+    //margin-top: 100px;
   }
 
   .section3 {

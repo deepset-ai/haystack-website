@@ -12,14 +12,17 @@ id: "apiretrievermd"
 ## Base
 
 
-### class haystack.retriever.base.BaseRetriever()
+```
+cass haystack.retriever.base.BaseRetriever()
 Bases: `abc.ABC`
+```
 
 ## Dense
 
-
-### class haystack.retriever.dense.DensePassageRetriever(document_store: haystack.database.base.BaseDocumentStore, embedding_model: str, use_gpu: bool = True, batch_size: int = 16, do_lower_case: bool = False, use_amp: str = None)
+```
+class haystack.retriever.dense.DensePassageRetriever(document_store: haystack.database.base.BaseDocumentStore, embedding_model: str, use_gpu: bool = True, batch_size: int = 16, do_lower_case: bool = False, use_amp: str = None)
 Bases: `haystack.retriever.base.BaseRetriever`
+```
 
 Retriever that uses a bi-encoder (one transformer for query, one transformer for passage).
 See the original paper for more details:
@@ -27,7 +30,10 @@ Karpukhin, Vladimir, et al. (2020): “Dense Passage Retrieval for Open-Domain Q
 ([https://arxiv.org/abs/2004.04906](https://arxiv.org/abs/2004.04906)).
 
 
-#### \__init__(document_store: haystack.database.base.BaseDocumentStore, embedding_model: str, use_gpu: bool = True, batch_size: int = 16, do_lower_case: bool = False, use_amp: str = None)
+```
+__init__(document_store: haystack.database.base.BaseDocumentStore, embedding_model: str, use_gpu: bool = True, batch_size: int = 16, do_lower_case: bool = False, use_amp: str = None)
+```
+
 Init the Retriever incl. the two encoder models from a local or remote model checkpoint.
 The checkpoint format matches the one of the original author’s in the repository ([https://github.com/facebookresearch/DPR](https://github.com/facebookresearch/DPR))
 See their readme for manual download instructions: [https://github.com/facebookresearch/DPR#resources–data-formats](https://github.com/facebookresearch/DPR#resources--data-formats)
@@ -83,7 +89,9 @@ See their readme for manual download instructions: [https://github.com/facebookr
 
 
 
-#### embed_passages(texts: List[str])
+```
+embed_passages(texts: List[str])
+```
 Create embeddings for a list of passages using the passage encoder
 
 
@@ -99,7 +107,9 @@ Create embeddings for a list of passages using the passage encoder
 
 
 
-#### embed_queries(texts: List[str])
+```
+embed_queries(texts: List[str])
+```
 Create embeddings for a list of queries using the query encoder
 
 
@@ -115,11 +125,14 @@ Create embeddings for a list of queries using the query encoder
 
 
 
-### class haystack.retriever.dense.EmbeddingRetriever(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, embedding_model: str, use_gpu: bool = True, model_format: str = 'farm', pooling_strategy: str = 'reduce_mean', emb_extraction_layer: int = - 1)
+```
+class haystack.retriever.dense.EmbeddingRetriever(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, embedding_model: str, use_gpu: bool = True, model_format: str = 'farm', pooling_strategy: str = 'reduce_mean', emb_extraction_layer: int = - 1)
 Bases: `haystack.retriever.base.BaseRetriever`
+```
 
-
-#### \__init__(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, embedding_model: str, use_gpu: bool = True, model_format: str = 'farm', pooling_strategy: str = 'reduce_mean', emb_extraction_layer: int = - 1)
+```
+__init__(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, embedding_model: str, use_gpu: bool = True, model_format: str = 'farm', pooling_strategy: str = 'reduce_mean', emb_extraction_layer: int = - 1)
+```
 
 * **Parameters**
 
@@ -146,13 +159,17 @@ Bases: `haystack.retriever.base.BaseRetriever`
 
 
 
-#### embed(texts: Union[List[str], str])
+```
+embed(texts: Union[List[str], str])
+```
 Create embeddings for each text in a list of texts using the retrievers model (self.embedding_model)
 :param texts: texts to embed
 :return: list of embeddings (one per input text). Each embedding is a list of floats.
 
 
-#### embed_passages(texts: List[str])
+```
+embed_passages(texts: List[str])
+```
 Create embeddings for a list of passages. For this Retriever type: The same as calling .embed()
 
 
@@ -168,7 +185,9 @@ Create embeddings for a list of passages. For this Retriever type: The same as c
 
 
 
-#### embed_queries(texts: List[str])
+```
+embed_queries(texts: List[str])
+```
 Create embeddings for a list of queries. For this Retriever type: The same as calling .embed()
 
 
@@ -186,18 +205,23 @@ Create embeddings for a list of queries. For this Retriever type: The same as ca
 ## Sparse
 
 
-### class haystack.retriever.sparse.ElasticsearchFilterOnlyRetriever(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, custom_query: str = None)
+```
+class haystack.retriever.sparse.ElasticsearchFilterOnlyRetriever(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, custom_query: str = None)
 Bases: `haystack.retriever.sparse.ElasticsearchRetriever`
+```
 
 Naive “Retriever” that returns all documents that match the given filters. No impact of query at all.
 Helpful for benchmarking, testing and if you want to do QA on small documents without an “active” retriever.
 
 
-### class haystack.retriever.sparse.ElasticsearchRetriever(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, custom_query: str = None)
+```
+class haystack.retriever.sparse.ElasticsearchRetriever(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, custom_query: str = None)
 Bases: `haystack.retriever.base.BaseRetriever`
+```
 
-
-#### \__init__(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, custom_query: str = None)
+```
+__init__(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, custom_query: str = None)
+```
 
 * **Parameters**
 
@@ -247,7 +271,9 @@ Bases: `haystack.retriever.base.BaseRetriever`
 
 
 
-#### eval(label_index: str = 'feedback', doc_index: str = 'eval_document', label_origin: str = 'gold_label', top_k: int = 10)
+```
+eval(label_index: str = 'feedback', doc_index: str = 'eval_document', label_origin: str = 'gold_label', top_k: int = 10)
+```
 Performs evaluation on the Retriever.
 Retriever is evaluated based on whether it finds the correct document given the question string and at which
 position in the ranking of documents the correct document is.
@@ -275,28 +301,39 @@ Returns a dict containing the following metrics:
 
 
 
-### class haystack.retriever.sparse.Paragraph(paragraph_id, document_id, text, meta)
+```
+class haystack.retriever.sparse.Paragraph(paragraph_id, document_id, text, meta)
 Bases: `tuple`
+```
 
-
-#### document_id()
+```
+document_id()
+```
 Alias for field number 1
 
 
-#### meta()
+```
+meta()
+```
 Alias for field number 3
 
 
-#### paragraph_id()
+```
+paragraph_id()
+```
 Alias for field number 0
 
 
-#### text()
+```
+text()
+```
 Alias for field number 2
 
 
-### class haystack.retriever.sparse.TfidfRetriever(document_store: haystack.database.base.BaseDocumentStore)
+```
+class haystack.retriever.sparse.TfidfRetriever(document_store: haystack.database.base.BaseDocumentStore)
 Bases: `haystack.retriever.base.BaseRetriever`
+```
 
 Read all documents from a SQL backend.
 
@@ -306,5 +343,7 @@ computations when text is passed on to a Reader for QA.
 It uses sklearn’s TfidfVectorizer to compute a tf-idf matrix.
 
 
-#### \__init__(document_store: haystack.database.base.BaseDocumentStore)
+```
+__init__(document_store: haystack.database.base.BaseDocumentStore)
 Initialize self.  See help(type(self)) for accurate signature.
+```

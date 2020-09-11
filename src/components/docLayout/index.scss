@@ -48,7 +48,7 @@ body {
 
 a.btn {
   border-radius: 4px;
-  border: #000 solid;
+  border: 2px #000 solid;
   color: #000 !important;
   font-weight: bold;
   display: block;
@@ -65,6 +65,10 @@ a.btn {
     color: #000 !important;
     text-decoration: none;
   }
+}
+
+.svg-inline--fa {
+  margin-right: 5px !important;
 }
 
 .doc-wrapper {
@@ -193,7 +197,7 @@ a.btn {
 
       &:hover,
       &.active {
-        color: #33b6f2;
+        color: #000;
       }
     }
   }
@@ -266,7 +270,7 @@ a.btn {
   z-index: 1000;
 
   :hover {
-    color: var(--color-highlight);
+    color: #000;
   }
 
   /*@include media(">=1600px") {

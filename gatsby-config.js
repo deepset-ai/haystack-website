@@ -17,6 +17,7 @@ module.exports = {
     author: `@deepset`,
   },
   plugins: [
+    `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-sass`,
@@ -75,6 +76,15 @@ module.exports = {
               // the content container as this plugin uses this as the
               // base for generating different widths of each image.
               maxWidth: 590,
+            },
+          },
+          {
+            resolve: "gatsby-remark-autolink-headers",
+            options: {
+              offsetY: `100`,
+              maintainCase: true,
+              enableCustomId: true,
+              isIconAfterHeader: true,
             },
           },
         ],

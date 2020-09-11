@@ -1,6 +1,6 @@
 import React from "react"
 
-import Layout from "../components/layout"
+import Layout from "../components/layout/layout";
 import SEO from "../components/seo"
 
 import GithubLogo from "../images/icon/GitHub-Mark-32px.png"; 
@@ -27,11 +27,11 @@ const IndexPage = () => {
             />
           </div>
           <h1>Haystack</h1>
-          <h3>Neural Question Answering at Scale</h3>
+          <h2>Neural Question Answering at Scale</h2>
           <div className="btn-wrapper">
             <LocalizedLink
               className="primary white-color"
-              to="/en/docs/intromd"
+              to="/en/docs/get_startedmd"
               locale="en"
             >
               Get started

@@ -12,13 +12,17 @@ id: "file_convertersmd"
 ## Base
 
 
-### class haystack.indexing.file_converters.base.BaseConverter(remove_numeric_tables: Optional[bool] = None, remove_header_footer: Optional[bool] = None, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
+class haystack.indexing.file_converters.base.BaseConverter(remove_numeric_tables: Optional[bool] = None, remove_header_footer: Optional[bool] = None, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
 Bases: `object`
+```
 
 Base class for implementing file converts to transform input documents to text format for indexing in database.
 
 
-#### \__init__(remove_numeric_tables: Optional[bool] = None, remove_header_footer: Optional[bool] = None, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
+__init__(remove_numeric_tables: Optional[bool] = None, remove_header_footer: Optional[bool] = None, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
 
 * **Parameters**
 
@@ -50,14 +54,17 @@ Base class for implementing file converts to transform input documents to text f
 
 
 
-#### abstract extract_pages(file_path: pathlib.Path)
+```
+abstract extract_pages(file_path: pathlib.Path)
+```
 
-#### find_and_remove_header_footer(pages: List[str], n_chars: int, n_first_pages_to_ignore: int, n_last_pages_to_ignore: int)
+```
+find_and_remove_header_footer(pages: List[str], n_chars: int, n_first_pages_to_ignore: int, n_last_pages_to_ignore: int)
+```
+
 Heuristic to find footers and headers across different pages by searching for the longest common string.
 For headers we only search in the first n_chars characters (for footer: last n_chars).
-Note: This heuristic uses exact matches and therefore works well for footers like “Copyright 2019 by XXX”,
-
-> but won’t detect “Page 3 of 4” or similar.
+Note: This heuristic uses exact matches and therefore works well for footers like “Copyright 2019 by XXX”, but won’t detect “Page 3 of 4” or similar.
 
 
 * **Parameters**
@@ -82,17 +89,24 @@ Note: This heuristic uses exact matches and therefore works well for footers lik
 
 
 
-#### validate_language(text: str)
+```
+validate_language(text: str)
+```
+
 Validate if the language of the text is one of valid languages.
 
 ## Docx
 
 
-### class haystack.indexing.file_converters.docx.DocxToTextConverter(remove_numeric_tables: Optional[bool] = None, remove_header_footer: Optional[bool] = None, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
+class haystack.indexing.file_converters.docx.DocxToTextConverter(remove_numeric_tables: Optional[bool] = None, remove_header_footer: Optional[bool] = None, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
 Bases: `haystack.indexing.file_converters.base.BaseConverter`
+```
 
+```
+extract_pages(file_path: pathlib.Path)
+```
 
-#### extract_pages(file_path: pathlib.Path)
 Extract text from a .docx file.
 Note: As docx doesn’t contain “page” information, we actually extract and return a list of paragraphs here.
 For compliance with other converters we nevertheless opted for keeping the methods name.
@@ -106,11 +120,14 @@ For compliance with other converters we nevertheless opted for keeping the metho
 ## PDF
 
 
-### class haystack.indexing.file_converters.pdf.PDFToTextConverter(remove_numeric_tables: Optional[bool] = False, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, remove_header_footer: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
+class haystack.indexing.file_converters.pdf.PDFToTextConverter(remove_numeric_tables: Optional[bool] = False, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, remove_header_footer: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
 Bases: `haystack.indexing.file_converters.base.BaseConverter`
+```
 
-
-#### \__init__(remove_numeric_tables: Optional[bool] = False, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, remove_header_footer: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
+__init__(remove_numeric_tables: Optional[bool] = False, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, remove_header_footer: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
 
 * **Parameters**
 
@@ -142,15 +159,21 @@ Bases: `haystack.indexing.file_converters.base.BaseConverter`
 
 
 
-#### extract_pages(file_path: pathlib.Path)
+```
+extract_pages(file_path: pathlib.Path)
+```
+
 ## Txt
 
 
-### class haystack.indexing.file_converters.txt.TextConverter(remove_numeric_tables: Optional[bool] = False, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, remove_header_footer: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
+class haystack.indexing.file_converters.txt.TextConverter(remove_numeric_tables: Optional[bool] = False, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, remove_header_footer: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
 Bases: `haystack.indexing.file_converters.base.BaseConverter`
+```
 
-
-#### \__init__(remove_numeric_tables: Optional[bool] = False, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, remove_header_footer: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
+__init__(remove_numeric_tables: Optional[bool] = False, remove_whitespace: Optional[bool] = None, remove_empty_lines: Optional[bool] = None, remove_header_footer: Optional[bool] = None, valid_languages: Optional[List[str]] = None)
+```
 
 * **Parameters**
 
@@ -182,5 +205,8 @@ Bases: `haystack.indexing.file_converters.base.BaseConverter`
 
 
 
-#### extract_pages(file_path: pathlib.Path)
+```
+extract_pages(file_path: pathlib.Path)
+```
+
 ## Tika

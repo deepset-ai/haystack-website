@@ -11,9 +11,10 @@ id: "apidatabasemd"
 
 ## Base
 
-
-### class haystack.database.base.BaseDocumentStore()
+```
+lass haystack.database.base.BaseDocumentStore()
 Bases: `abc.ABC`
+```
 
 Base class for implementing Document Stores.
 
@@ -39,12 +40,14 @@ Indexes documents for later queries.
 
 ## Elasticsearch
 
-
-### class haystack.database.elasticsearch.ElasticsearchDocumentStore(host: str = 'localhost', port: int = 9200, username: str = '', password: str = '', index: str = 'document', search_fields: Union[str, list] = 'text', text_field: str = 'text', name_field: str = 'name', external_source_id_field: str = 'external_source_id', embedding_field: Optional[str] = None, embedding_dim: Optional[int] = None, custom_mapping: Optional[dict] = None, excluded_meta_data: Optional[list] = None, faq_question_field: Optional[str] = None, scheme: str = 'http', ca_certs: bool = False, verify_certs: bool = True, create_index: bool = True)
+```
+class haystack.database.elasticsearch.ElasticsearchDocumentStore(host: str = 'localhost', port: int = 9200, username: str = '', password: str = '', index: str = 'document', search_fields: Union[str, list] = 'text', text_field: str = 'text', name_field: str = 'name', external_source_id_field: str = 'external_source_id', embedding_field: Optional[str] = None, embedding_dim: Optional[int] = None, custom_mapping: Optional[dict] = None, excluded_meta_data: Optional[list] = None, faq_question_field: Optional[str] = None, scheme: str = 'http', ca_certs: bool = False, verify_certs: bool = True, create_index: bool = True)
 Bases: `haystack.database.base.BaseDocumentStore`
+```
+```
+__init__(host: str = 'localhost', port: int = 9200, username: str = '', password: str = '', index: str = 'document', search_fields: Union[str, list] = 'text', text_field: str = 'text', name_field: str = 'name', external_source_id_field: str = 'external_source_id', embedding_field: Optional[str] = None, embedding_dim: Optional[int] = None, custom_mapping: Optional[dict] = None, excluded_meta_data: Optional[list] = None, faq_question_field: Optional[str] = None, scheme: str = 'http', ca_certs: bool = False, verify_certs: bool = True, create_index: bool = True)
+```
 
-
-#### \__init__(host: str = 'localhost', port: int = 9200, username: str = '', password: str = '', index: str = 'document', search_fields: Union[str, list] = 'text', text_field: str = 'text', name_field: str = 'name', external_source_id_field: str = 'external_source_id', embedding_field: Optional[str] = None, embedding_dim: Optional[int] = None, custom_mapping: Optional[dict] = None, excluded_meta_data: Optional[list] = None, faq_question_field: Optional[str] = None, scheme: str = 'http', ca_certs: bool = False, verify_certs: bool = True, create_index: bool = True)
 A DocumentStore using Elasticsearch to store and query the documents for our search.
 
 > 
@@ -113,8 +116,10 @@ A DocumentStore using Elasticsearch to store and query the documents for our sea
     * **create_index** – Whether to try creating a new index (If the index of that name is already existing, we will just continue in any case)
 
 
+```
+add_eval_data(filename: str, doc_index: str = 'eval_document', label_index: str = 'feedback')
+```
 
-#### add_eval_data(filename: str, doc_index: str = 'eval_document', label_index: str = 'feedback')
 Adds a SQuAD-formatted file to the DocumentStore in order to be able to perform evaluation on it.
 
 
@@ -130,8 +135,10 @@ Adds a SQuAD-formatted file to the DocumentStore in order to be able to perform 
     * **label_index** (*str*) – Elasticsearch index where labeled questions should be stored
 
 
+```
+pdate_embeddings(retriever)
+```
 
-#### update_embeddings(retriever)
 Updates the embeddings in the the document store using the encoding model specified in the retriever.
 This can be useful if want to add or change the embeddings for your documents (e.g. after changing the retriever config).
 
@@ -171,33 +178,53 @@ Indexes documents for later queries in Elasticsearch.
 
 ## Memory
 
+```
+class haystack.database.memory.InMemoryDocumentStore(embedding_field: Optional[str] = None)
+```
 
-### class haystack.database.memory.InMemoryDocumentStore(embedding_field: Optional[str] = None)
 Bases: `haystack.database.base.BaseDocumentStore`
 
 In-memory document store
 
+```
+__init__(embedding_field: Optional[str] = None)
+```
 
-#### \__init__(embedding_field: Optional[str] = None)
 Initialize self.  See help(type(self)) for accurate signature.
 
 
-#### get_all_documents()
+```
+get_all_documents()
+```
 
-#### get_document_by_id(id: str)
+```
+get_document_by_id(id: str)
+```
 
-#### get_document_count()
+```
+get_document_count()
+```
 
-#### get_document_ids_by_tags(tags: Union[List[Dict[str, Union[str, List[str]]]], Dict[str, Union[str, List[str]]]])
+```
+get_document_ids_by_tags(tags: Union[List[Dict[str, Union[str, List[str]]]], Dict[str, Union[str, List[str]]]])
+```
+
 The format for the dict is {“tag-1”: “value-1”, “tag-2”: “value-2” …}
 The format for the dict is {“tag-1”: [“value-1”,”value-2”], “tag-2”: [“value-3]” …}
 
 
-#### index(: Optional[str])
+```
+index(: Optional[str])
+```
 
-#### query_by_embedding(query_emb: List[float], filters: Optional[dict] = None, top_k: int = 10, index: Optional[str] = None)
+```
+query_by_embedding(query_emb: List[float], filters: Optional[dict] = None, top_k: int = 10, index: Optional[str] = None)
+```
 
-#### update_embeddings(retriever)
+```
+update_embeddings(retriever)
+```
+
 Updates the embeddings in the the document store using the encoding model specified in the retriever.
 This can be useful if want to add or change the embeddings for your documents (e.g. after changing the retriever config).
 
@@ -214,7 +241,10 @@ This can be useful if want to add or change the embeddings for your documents (e
 
 
 
-#### write_documents(documents: List[dict])
+```
+write_documents(documents: List[dict])
+```
+
 Indexes documents for later queries.
 
 
@@ -234,11 +264,14 @@ Indexes documents for later queries.
 ## SQL
 
 
-### class haystack.database.sql.Document(\*\*kwargs)
+```
+class haystack.database.sql.Document(\*\*kwargs)
 Bases: `haystack.database.sql.ORMBase`
+```
+```
+__init__(\*\*kwargs)
+```
 
-
-#### \__init__(\*\*kwargs)
 A simple constructor that allows initialization from kwargs.
 
 Sets attributes on the constructed instance using the names and
@@ -248,24 +281,39 @@ Only keys that are present as
 attributes of the instance’s class are allowed. These could be,
 for example, any mapped columns or relationships.
 
+```
+created()
+```
 
-#### created()
+```
+id()
+```
 
-#### id()
+```
+meta_data()
+```
 
-#### meta_data()
+```
+tags()
+```
 
-#### tags()
+```
+text()
+```
 
-#### text()
+```
+updated()
+```
 
-#### updated()
-
-### class haystack.database.sql.DocumentTag(\*\*kwargs)
+```
+class haystack.database.sql.DocumentTag(\*\*kwargs)
 Bases: `haystack.database.sql.ORMBase`
+```
 
+```
+__init__(\*\*kwargs)
+```
 
-#### \__init__(\*\*kwargs)
 A simple constructor that allows initialization from kwargs.
 
 Sets attributes on the constructed instance using the names and
@@ -275,42 +323,71 @@ Only keys that are present as
 attributes of the instance’s class are allowed. These could be,
 for example, any mapped columns or relationships.
 
+```
+created()
+```
 
-#### created()
+```
+document_id()
+```
 
-#### document_id()
+```
+id()
+```
 
-#### id()
+```
+tag_id()
+```
 
-#### tag_id()
+```
+updated()
+```
 
-#### updated()
-
-### class haystack.database.sql.ORMBase(\*\*kwargs)
+```
+class haystack.database.sql.ORMBase(\*\*kwargs)
 Bases: `sqlalchemy.ext.declarative.api.Base`
+```
 
+```
+created( = Column(None, DateTime(), table=None, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x7f3ceabd2970; now>, for_update=False)))
+```
 
-#### created( = Column(None, DateTime(), table=None, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x7f3ceabd2970; now>, for_update=False)))
+```
+id( = Column(None, Integer(), table=None, primary_key=True, nullable=False))
+```
 
-#### id( = Column(None, Integer(), table=None, primary_key=True, nullable=False))
+```
+updated( = Column(None, DateTime(), table=None, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x7f3ce9fd52b0; now>, for_update=False)))
+```
 
-#### updated( = Column(None, DateTime(), table=None, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x7f3ce9fd52b0; now>, for_update=False)))
-
-### class haystack.database.sql.SQLDocumentStore(url: str = 'sqlite://')
+```
+class haystack.database.sql.SQLDocumentStore(url: str = 'sqlite://')
 Bases: `haystack.database.base.BaseDocumentStore`
+```
 
+```
+__init__(url: str = 'sqlite://')
+```
 
-#### \__init__(url: str = 'sqlite://')
 Initialize self.  See help(type(self)) for accurate signature.
 
 
-#### get_all_documents()
+```
+get_all_documents()
+```
 
-#### get_document_by_id(id: str)
+```
+get_document_by_id(id: str)
+```
 
-#### get_document_count()
+```
+get_document_count()
+```
 
-#### get_document_ids_by_tags(tags: Dict[str, Union[str, List]])
+```
+get_document_ids_by_tags(tags: Dict[str, Union[str, List]])
+```
+
 Get list of document ids that have tags from the given list of tags.
 
 
@@ -321,11 +398,19 @@ Get list of document ids that have tags from the given list of tags.
 
 
 
-#### index(: Optional[str])
+```
+index(: Optional[str])
+```
+.
 
-#### query_by_embedding(query_emb: List[float], filters: Optional[dict] = None, top_k: int = 10, index: Optional[str] = None)
+```
+query_by_embedding(query_emb: List[float], filters: Optional[dict] = None, top_k: int = 10, index: Optional[str] = None)
+```
 
-#### write_documents(documents: List[dict])
+```
+write_documents(documents: List[dict])
+```
+
 Indexes documents for later queries.
 
 
@@ -342,11 +427,15 @@ Indexes documents for later queries.
 
 
 
-### class haystack.database.sql.Tag(\*\*kwargs)
+```
+class haystack.database.sql.Tag(\*\*kwargs)
 Bases: `haystack.database.sql.ORMBase`
+```
 
+```
+__init__(\*\*kwargs)
+```
 
-#### \__init__(\*\*kwargs)
 A simple constructor that allows initialization from kwargs.
 
 Sets attributes on the constructed instance using the names and
@@ -357,14 +446,26 @@ attributes of the instance’s class are allowed. These could be,
 for example, any mapped columns or relationships.
 
 
-#### created()
+```
+created()
+```
 
-#### documents()
+```
+documents()
+```
 
-#### id()
+```
+id()
+```
 
-#### name()
+```
+name()
+```
 
-#### updated()
+```
+updated()
+```
 
-#### value()
+```
+value()
+```

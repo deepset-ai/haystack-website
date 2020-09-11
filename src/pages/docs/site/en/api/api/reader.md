@@ -12,14 +12,18 @@ id: "apireadermd"
 ## Base
 
 
-### class haystack.reader.base.BaseReader()
+```
+class haystack.reader.base.BaseReader()
 Bases: `abc.ABC`
+```
 
 ## FARM
 
 
-### class haystack.reader.farm.FARMReader(model_name_or_path: Union[str, pathlib.Path], context_window_size: int = 150, batch_size: int = 50, use_gpu: bool = True, no_ans_boost: Optional[int] = None, top_k_per_candidate: int = 3, top_k_per_sample: int = 1, num_processes: Optional[int] = None, max_seq_len: int = 256, doc_stride: int = 128)
+```
+class haystack.reader.farm.FARMReader(model_name_or_path: Union[str, pathlib.Path], context_window_size: int = 150, batch_size: int = 50, use_gpu: bool = True, no_ans_boost: Optional[int] = None, top_k_per_candidate: int = 3, top_k_per_sample: int = 1, num_processes: Optional[int] = None, max_seq_len: int = 256, doc_stride: int = 128)
 Bases: `haystack.reader.base.BaseReader`
+```
 
 Transformer based model for extractive Question Answering using the FARM framework ([https://github.com/deepset-ai/FARM](https://github.com/deepset-ai/FARM)).
 While the underlying model can vary (BERT, Roberta, DistilBERT …) the interface remains the same.
@@ -33,7 +37,9 @@ With a FARMReader, you can:
     * fine-tune the model on QA data via train()
 
 
-#### \__init__(model_name_or_path: Union[str, pathlib.Path], context_window_size: int = 150, batch_size: int = 50, use_gpu: bool = True, no_ans_boost: Optional[int] = None, top_k_per_candidate: int = 3, top_k_per_sample: int = 1, num_processes: Optional[int] = None, max_seq_len: int = 256, doc_stride: int = 128)
+```
+__init__(model_name_or_path: Union[str, pathlib.Path], context_window_size: int = 150, batch_size: int = 50, use_gpu: bool = True, no_ans_boost: Optional[int] = None, top_k_per_candidate: int = 3, top_k_per_sample: int = 1, num_processes: Optional[int] = None, max_seq_len: int = 256, doc_stride: int = 128)
+```
 
 * **Parameters**
 
@@ -100,7 +106,10 @@ With a FARMReader, you can:
 
 
 
-#### classmethod convert_to_onnx(model_name_or_path, opset_version: int = 11, optimize_for: Optional[str] = None)
+```
+classmethod convert_to_onnx(model_name_or_path, opset_version: int = 11, optimize_for: Optional[str] = None)
+```
+
 Convert a PyTorch BERT model to ONNX format and write to ./onnx-export dir. The converted ONNX model
 can be loaded with in the FARMReader using the export path as model_name_or_path param.
 
@@ -125,7 +134,10 @@ Usage:
 
 
 
-#### eval(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, device: str, label_index: str = 'feedback', doc_index: str = 'eval_document', label_origin: str = 'gold_label')
+```
+eval(document_store: haystack.database.elasticsearch.ElasticsearchDocumentStore, device: str, label_index: str = 'feedback', doc_index: str = 'eval_document', label_origin: str = 'gold_label')
+```
+
 Performs evaluation on evaluation documents in Elasticsearch DocumentStore.
 
 Returns a dict containing the following metrics:
@@ -156,7 +168,10 @@ Returns a dict containing the following metrics:
 
 
 
-#### eval_on_file(data_dir: str, test_filename: str, device: str)
+```
+eval_on_file(data_dir: str, test_filename: str, device: str)
+```
+
 Performs evaluation on a SQuAD-formatted file.
 
 Returns a dict containing the following metrics:
@@ -183,10 +198,13 @@ Returns a dict containing the following metrics:
     * **device** (*str*) – The device on which the tensors should be processed. Choose from “cpu” and “cuda”.
 
 
+```
+predict(question: str, documents: List[haystack.database.base.Document], top_k: Optional[int] = None)
+```
 
-#### predict(question: str, documents: List[haystack.database.base.Document], top_k: Optional[int] = None)
 Use loaded QA model to find answers for a question in the supplied list of Document.
 
+```
 Returns dictionaries containing answers sorted by (desc.) probability
 Example:
 {‘question’: ‘Who is the father of Arya Stark?’,
@@ -206,7 +224,7 @@ Example:
 > ]
 
 }
-
+```
 
 * **Parameters**
 
@@ -227,7 +245,10 @@ Example:
 
 
 
-#### train(data_dir: str, train_filename: str, dev_filename: Optional[str] = None, test_file_name: Optional[str] = None, use_gpu: Optional[bool] = None, batch_size: int = 10, n_epochs: int = 2, learning_rate: float = 1e-05, max_seq_len: Optional[int] = None, warmup_proportion: float = 0.2, dev_split: Optional[float] = 0.1, evaluate_every: int = 300, save_dir: Optional[str] = None)
+```
+train(data_dir: str, train_filename: str, dev_filename: Optional[str] = None, test_file_name: Optional[str] = None, use_gpu: Optional[bool] = None, batch_size: int = 10, n_epochs: int = 2, learning_rate: float = 1e-05, max_seq_len: Optional[int] = None, warmup_proportion: float = 0.2, dev_split: Optional[float] = 0.1, evaluate_every: int = 300, save_dir: Optional[str] = None)
+```
+
 Fine-tune a model on a QA dataset. Options:
 - Take a plain language model (e.g. bert-base-cased) and train it for QA (e.g. on SQuAD data)
 - Take a QA model (e.g. deepset/bert-base-cased-squad2) and fine-tune it for your domain (e.g. using your labels collected via the haystack annotation tool)
@@ -286,9 +307,10 @@ Fine-tune a model on a QA dataset. Options:
 
 ## Transformers
 
-
-### class haystack.reader.transformers.TransformersReader(model: str = 'distilbert-base-uncased-distilled-squad', tokenizer: str = 'distilbert-base-uncased', context_window_size: int = 30, use_gpu: int = 0, n_best_per_passage: int = 2)
+```
+class haystack.reader.transformers.TransformersReader(model: str = 'distilbert-base-uncased-distilled-squad', tokenizer: str = 'distilbert-base-uncased', context_window_size: int = 30, use_gpu: int = 0, n_best_per_passage: int = 2)
 Bases: `haystack.reader.base.BaseReader`
+```
 
 Transformer based model for extractive Question Answering using the huggingface’s transformers framework
 ([https://github.com/huggingface/transformers](https://github.com/huggingface/transformers)).
@@ -300,7 +322,10 @@ With the reader, you can:
     * directly get predictions via predict()
 
 
-#### \__init__(model: str = 'distilbert-base-uncased-distilled-squad', tokenizer: str = 'distilbert-base-uncased', context_window_size: int = 30, use_gpu: int = 0, n_best_per_passage: int = 2)
+```
+__init__(model: str = 'distilbert-base-uncased-distilled-squad', tokenizer: str = 'distilbert-base-uncased', context_window_size: int = 30, use_gpu: int = 0, n_best_per_passage: int = 2)
+```
+
 Load a QA model from Transformers.
 Available models include:
 - distilbert-base-uncased-distilled-squad
@@ -328,9 +353,13 @@ See [https://huggingface.co/models](https://huggingface.co/models) for full list
 
 
 
-#### predict(question: str, documents: List[haystack.database.base.Document], top_k: Optional[int] = None)
+```
+predict(question: str, documents: List[haystack.database.base.Document], top_k: Optional[int] = None)
+```
+
 Use loaded QA model to find answers for a question in the supplied list of Document.
 
+```
 Returns dictionaries containing answers sorted by (desc.) probability
 Example:
 {‘question’: ‘Who is the father of Arya Stark?’,
@@ -350,7 +379,7 @@ Example:
 > ]
 
 }
-
+```
 
 * **Parameters**
 
