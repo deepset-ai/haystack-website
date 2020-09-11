@@ -73,12 +73,12 @@ export default (props) => {
                 "deepset-ai.io.stargazers_fetch_time",
                 Date.now()
               );
-              star.current.innerHTML = `<img src={GithubLogo} alt="Github"></img> ${data.stargazers_count} stars`;
+              star.current.innerHTML = `Github ${data.stargazers_count} stars`;
             }
           }
         });
     } else {
-      star.current.innerHTML = `<img src={GithubLogo} alt="Github"></img> ${latest} stars`;
+      star.current.innerHTML = `Github ${latest} stars`;
     }
   }, []);
 
