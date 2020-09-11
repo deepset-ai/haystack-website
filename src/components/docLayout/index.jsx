@@ -189,13 +189,6 @@ export default (props) => {
                   <img src={GithubLogo} alt="Github"></img>
                   788 stars
                 </a>
-                <a
-                  className="btn"
-                  href="https://github.com/deepset-ai/haystack/discussions"
-                >
-                  <FontAwesomeIcon icon={faComment}/>
-                  Github Discussions
-                </a>
               </div>
             </section>
           </div>
