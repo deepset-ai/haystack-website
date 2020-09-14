@@ -2,470 +2,499 @@
 title: "Database"
 metaTitle: "Database"
 metaDescription: ""
-slug: "/docs/abidatabase"
+slug: "/docs/apidatabase"
 date: "2020-09-03"
 id: "apidatabasemd"
 ---
 
-# Database
+<a name="database.elasticsearch"></a>
+# database.elasticsearch
 
-## Base
+<a name="database.elasticsearch.ElasticsearchDocumentStore"></a>
+## ElasticsearchDocumentStore Objects
 
+```python
+class ElasticsearchDocumentStore(BaseDocumentStore)
 ```
-lass haystack.database.base.BaseDocumentStore()
-Bases: `abc.ABC`
-```
 
-Base class for implementing Document Stores.
+<a name="database.elasticsearch.ElasticsearchDocumentStore.__init__"></a>
+#### \_\_init\_\_
 
-
-#### abstract write_documents(documents: List[dict])
-Indexes documents for later queries.
-
-
-* **Parameters**
-
-    **documents** – List of dictionaries.
-    Default format: {“text”: “<the-actual-text>”}
-    Optionally: Include meta data via {“text”: “<the-actual-text>”,
-    “meta”:{“name”: “<some-document-name>, “author”: “somebody”, …}}
-    It can be used for filtering and is accessible in the responses of the Finder.
-
-
-
-* **Returns**
-
-    None
-
-
-## Elasticsearch
-
-```
-class haystack.database.elasticsearch.ElasticsearchDocumentStore(host: str = 'localhost', port: int = 9200, username: str = '', password: str = '', index: str = 'document', search_fields: Union[str, list] = 'text', text_field: str = 'text', name_field: str = 'name', external_source_id_field: str = 'external_source_id', embedding_field: Optional[str] = None, embedding_dim: Optional[int] = None, custom_mapping: Optional[dict] = None, excluded_meta_data: Optional[list] = None, faq_question_field: Optional[str] = None, scheme: str = 'http', ca_certs: bool = False, verify_certs: bool = True, create_index: bool = True)
-Bases: `haystack.database.base.BaseDocumentStore`
-```
-```
-__init__(host: str = 'localhost', port: int = 9200, username: str = '', password: str = '', index: str = 'document', search_fields: Union[str, list] = 'text', text_field: str = 'text', name_field: str = 'name', external_source_id_field: str = 'external_source_id', embedding_field: Optional[str] = None, embedding_dim: Optional[int] = None, custom_mapping: Optional[dict] = None, excluded_meta_data: Optional[list] = None, faq_question_field: Optional[str] = None, scheme: str = 'http', ca_certs: bool = False, verify_certs: bool = True, create_index: bool = True)
+```python
+ | __init__(host: str = "localhost", port: int = 9200, username: str = "", password: str = "", index: str = "document", label_index: str = "label", search_fields: Union[str, list] = "text", text_field: str = "text", name_field: str = "name", embedding_field: str = "embedding", embedding_dim: int = 768, custom_mapping: Optional[dict] = None, excluded_meta_data: Optional[list] = None, faq_question_field: Optional[str] = None, scheme: str = "http", ca_certs: bool = False, verify_certs: bool = True, create_index: bool = True, update_existing_documents: bool = False, refresh_type: str = "wait_for")
 ```
 
 A DocumentStore using Elasticsearch to store and query the documents for our search.
 
-> 
-> * Keeps all the logic to store and query documents from Elastic, incl. mapping of fields, adding filters or boosts to your queries, and storing embeddings
+* Keeps all the logic to store and query documents from Elastic, incl. mapping of fields, adding filters or boosts to your queries, and storing embeddings
+* You can either use an existing Elasticsearch index or create a new one via haystack
+* Retrievers operate on top of this DocumentStore to find the relevant documents for a query
 
+**Arguments**:
 
-> * You can either use an existing Elasticsearch index or create a new one via haystack
+- `host`: url of elasticsearch
+- `port`: port of elasticsearch
+- `username`: username
+- `password`: password
+- `index`: Name of index in elasticsearch to use. If not existing yet, we will create one.
+- `search_fields`: Name of fields used by ElasticsearchRetriever to find matches in the docs to our incoming query (using elastic's multi_match query), e.g. ["title", "full_text"]
+- `text_field`: Name of field that might contain the answer and will therefore be passed to the Reader Model (e.g. "full_text").
+If no Reader is used (e.g. in FAQ-Style QA) the plain content of this field will just be returned.
+- `name_field`: Name of field that contains the title of the the doc
+- `embedding_field`: Name of field containing an embedding vector (Only needed when using a dense retriever (e.g. DensePassageRetriever, EmbeddingRetriever) on top)
+- `embedding_dim`: Dimensionality of embedding vector (Only needed when using a dense retriever (e.g. DensePassageRetriever, EmbeddingRetriever) on top)
+- `custom_mapping`: If you want to use your own custom mapping for creating a new index in Elasticsearch, you can supply it here as a dictionary.
+- `excluded_meta_data`: Name of fields in Elasticsearch that should not be returned (e.g. [field_one, field_two]).
+Helpful if you have fields with long, irrelevant content that you don't want to display in results (e.g. embedding vectors).
+- `scheme`: 'https' or 'http', protocol used to connect to your elasticsearch instance
+- `ca_certs`: Root certificates for SSL
+- `verify_certs`: Whether to be strict about ca certificates
+- `create_index`: Whether to try creating a new index (If the index of that name is already existing, we will just continue in any case)
+- `update_existing_documents`: Whether to update any existing documents with the same ID when adding
+documents. When set as True, any document with an existing ID gets updated.
+If set to False, an error is raised if the document ID of the document being
+added already exists.
+- `refresh_type`: Type of ES refresh used to control when changes made by a request (e.g. bulk) are made visible to search.
+Values:
+- 'wait_for' => continue only after changes are visible (slow, but safe)
+- 'false' => continue directly (fast, but sometimes unintuitive behaviour when docs are not immediately available after indexing)
+More info at https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-refresh.html
 
+<a name="database.elasticsearch.ElasticsearchDocumentStore.write_documents"></a>
+#### write\_documents
 
-> * Retrievers operate on top of this DocumentStore to find the relevant documents for a query
-
-
-* **Parameters**
-
-    
-    * **host** – url of elasticsearch
-
-
-    * **port** – port of elasticsearch
-
-
-    * **username** – username
-
-
-    * **password** – password
-
-
-    * **index** – Name of index in elasticsearch to use. If not existing yet, we will create one.
-
-
-    * **search_fields** – Name of fields used by ElasticsearchRetriever to find matches in the docs to our incoming query (using elastic’s multi_match query), e.g. [“title”, “full_text”]
-
-
-    * **text_field** – Name of field that might contain the answer and will therefore be passed to the Reader Model (e.g. “full_text”).
-    If no Reader is used (e.g. in FAQ-Style QA) the plain content of this field will just be returned.
-
-
-    * **name_field** – Name of field that contains the title of the the doc
-
-
-    * **external_source_id_field** – If you have an external id (= non-elasticsearch) that identifies your documents, you can specify it here.
-
-
-    * **embedding_field** – Name of field containing an embedding vector (Only needed when using a dense retriever (e.g. DensePassageRetriever, EmbeddingRetriever) on top)
-
-
-    * **embedding_dim** – Dimensionality of embedding vector (Only needed when using a dense retriever (e.g. DensePassageRetriever, EmbeddingRetriever) on top)
-
-
-    * **custom_mapping** – If you want to use your own custom mapping for creating a new index in Elasticsearch, you can supply it here as a dictionary.
-
-
-    * **excluded_meta_data** – Name of fields in Elasticsearch that should not be returned (e.g. [field_one, field_two]).
-    Helpful if you have fields with long, irrelevant content that you don’t want to display in results (e.g. embedding vectors).
-
-
-    * **scheme** – ‘https’ or ‘http’, protocol used to connect to your elasticsearch instance
-
-
-    * **ca_certs** – Root certificates for SSL
-
-
-    * **verify_certs** – Whether to be strict about ca certificates
-
-
-    * **create_index** – Whether to try creating a new index (If the index of that name is already existing, we will just continue in any case)
-
-
+```python
+ | write_documents(documents: Union[List[dict], List[Document]], index: Optional[str] = None)
 ```
-add_eval_data(filename: str, doc_index: str = 'eval_document', label_index: str = 'feedback')
+
+Indexes documents for later queries in Elasticsearch.
+
+When using explicit document IDs, any existing document with the same ID gets updated.
+
+**Arguments**:
+
+- `documents`: a list of Python dictionaries or a list of Haystack Document objects.
+For documents as dictionaries, the format is {"text": "<the-actual-text>"}.
+Optionally: Include meta data via {"text": "<the-actual-text>",
+"meta":{"name": "<some-document-name>, "author": "somebody", ...}}
+It can be used for filtering and is accessible in the responses of the Finder.
+Advanced: If you are using your own Elasticsearch mapping, the key names in the dictionary
+should be changed to what you have set for self.text_field and self.name_field.
+- `index`: Elasticsearch index where the documents should be indexed. If not supplied, self.index will be used.
+
+**Returns**:
+
+None
+
+<a name="database.elasticsearch.ElasticsearchDocumentStore.update_embeddings"></a>
+#### update\_embeddings
+
+```python
+ | update_embeddings(retriever: BaseRetriever, index: Optional[str] = None)
+```
+
+Updates the embeddings in the the document store using the encoding model specified in the retriever.
+This can be useful if want to add or change the embeddings for your documents (e.g. after changing the retriever config).
+
+**Arguments**:
+
+- `retriever`: Retriever
+- `index`: Index name to update
+
+**Returns**:
+
+None
+
+<a name="database.elasticsearch.ElasticsearchDocumentStore.add_eval_data"></a>
+#### add\_eval\_data
+
+```python
+ | add_eval_data(filename: str, doc_index: str = "eval_document", label_index: str = "label")
 ```
 
 Adds a SQuAD-formatted file to the DocumentStore in order to be able to perform evaluation on it.
 
+**Arguments**:
 
-* **Parameters**
+- `filename`: Name of the file containing evaluation data
+:type filename: str
+- `doc_index`: Elasticsearch index where evaluation documents should be stored
+:type doc_index: str
+- `label_index`: Elasticsearch index where labeled questions should be stored
+:type label_index: str
 
-    
-    * **filename** (*str*) – Name of the file containing evaluation data
+<a name="database.elasticsearch.ElasticsearchDocumentStore.delete_all_documents"></a>
+#### delete\_all\_documents
 
-
-    * **doc_index** (*str*) – Elasticsearch index where evaluation documents should be stored
-
-
-    * **label_index** (*str*) – Elasticsearch index where labeled questions should be stored
-
-
-```
-pdate_embeddings(retriever)
-```
-
-Updates the embeddings in the the document store using the encoding model specified in the retriever.
-This can be useful if want to add or change the embeddings for your documents (e.g. after changing the retriever config).
-
-
-* **Parameters**
-
-    **retriever** – Retriever
-
-
-
-* **Returns**
-
-    None
-
-
-
-#### write_documents(documents: List[dict])
-Indexes documents for later queries in Elasticsearch.
-
-
-* **Parameters**
-
-    **documents** – List of dictionaries.
-    Default format: {“text”: “<the-actual-text>”}
-    Optionally: Include meta data via {“text”: “<the-actual-text>”,
-    “meta”:{“name”: “<some-document-name>, “author”: “somebody”, …}}
-    It can be used for filtering and is accessible in the responses of the Finder.
-    Advanced: If you are using your own Elasticsearch mapping, the key names in the dictionary
-    should be changed to what you have set for self.text_field and self.name_field .
-
-
-
-* **Returns**
-
-    None
-
-
-## Memory
-
-```
-class haystack.database.memory.InMemoryDocumentStore(embedding_field: Optional[str] = None)
+```python
+ | delete_all_documents(index: str)
 ```
 
-Bases: `haystack.database.base.BaseDocumentStore`
+Delete all documents in an index.
+
+**Arguments**:
+
+- `index`: index name
+
+**Returns**:
+
+None
+
+<a name="database.memory"></a>
+# database.memory
+
+<a name="database.memory.InMemoryDocumentStore"></a>
+## InMemoryDocumentStore Objects
+
+```python
+class InMemoryDocumentStore(BaseDocumentStore)
+```
 
 In-memory document store
 
-```
-__init__(embedding_field: Optional[str] = None)
+<a name="database.memory.InMemoryDocumentStore.write_documents"></a>
+#### write\_documents
+
+```python
+ | write_documents(documents: Union[List[dict], List[Document]], index: Optional[str] = None)
 ```
 
-Initialize self.  See help(type(self)) for accurate signature.
+Indexes documents for later queries.
 
 
-```
-get_all_documents()
-```
+**Arguments**:
 
-```
-get_document_by_id(id: str)
-```
+- `documents`: a list of Python dictionaries or a list of Haystack Document objects.
+For documents as dictionaries, the format is {"text": "<the-actual-text>"}.
+Optionally: Include meta data via {"text": "<the-actual-text>",
+"meta": {"name": "<some-document-name>, "author": "somebody", ...}}
+It can be used for filtering and is accessible in the responses of the Finder.
+- `index`: write documents to a custom namespace. For instance, documents for evaluation can be indexed in a
+separate index than the documents for search.
 
-```
-get_document_count()
-```
+**Returns**:
 
-```
-get_document_ids_by_tags(tags: Union[List[Dict[str, Union[str, List[str]]]], Dict[str, Union[str, List[str]]]])
-```
+None
 
-The format for the dict is {“tag-1”: “value-1”, “tag-2”: “value-2” …}
-The format for the dict is {“tag-1”: [“value-1”,”value-2”], “tag-2”: [“value-3]” …}
+<a name="database.memory.InMemoryDocumentStore.update_embeddings"></a>
+#### update\_embeddings
 
-
-```
-index(: Optional[str])
-```
-
-```
-query_by_embedding(query_emb: List[float], filters: Optional[dict] = None, top_k: int = 10, index: Optional[str] = None)
-```
-
-```
-update_embeddings(retriever)
+```python
+ | update_embeddings(retriever: BaseRetriever, index: Optional[str] = None)
 ```
 
 Updates the embeddings in the the document store using the encoding model specified in the retriever.
 This can be useful if want to add or change the embeddings for your documents (e.g. after changing the retriever config).
 
+**Arguments**:
 
-* **Parameters**
+- `retriever`: Retriever
+- `index`: Index name to update
 
-    **retriever** – Retriever
+**Returns**:
 
+None
 
+<a name="database.memory.InMemoryDocumentStore.add_eval_data"></a>
+#### add\_eval\_data
 
-* **Returns**
-
-    None
-
-
-
-```
-write_documents(documents: List[dict])
-```
-
-Indexes documents for later queries.
-
-
-* **Parameters**
-
-    **documents** – List of dictionaries in the format {“text”: “<the-actual-text>”}.
-    Optionally, you can also supply “tags”: [“one-tag”, “another-one”]
-    or additional meta data via “meta”: {“name”: “<some-document-name>, “author”: “someone”, “url”:”some-url” …}
-
-
-
-* **Returns**
-
-    None
-
-
-## SQL
-
-
-```
-class haystack.database.sql.Document(\*\*kwargs)
-Bases: `haystack.database.sql.ORMBase`
-```
-```
-__init__(\*\*kwargs)
+```python
+ | add_eval_data(filename: str, doc_index: Optional[str] = None, label_index: Optional[str] = None)
 ```
 
-A simple constructor that allows initialization from kwargs.
+Adds a SQuAD-formatted file to the DocumentStore in order to be able to perform evaluation on it.
 
-Sets attributes on the constructed instance using the names and
-values in `kwargs`.
+**Arguments**:
 
-Only keys that are present as
-attributes of the instance’s class are allowed. These could be,
-for example, any mapped columns or relationships.
+- `filename`: Name of the file containing evaluation data
+:type filename: str
+- `doc_index`: Elasticsearch index where evaluation documents should be stored
+:type doc_index: str
+- `label_index`: Elasticsearch index where labeled questions should be stored
+:type label_index: str
 
-```
-created()
-```
+<a name="database.memory.InMemoryDocumentStore.delete_all_documents"></a>
+#### delete\_all\_documents
 
-```
-id()
-```
-
-```
-meta_data()
+```python
+ | delete_all_documents(index: Optional[str] = None)
 ```
 
-```
-tags()
+Delete all documents in a index.
+
+**Arguments**:
+
+- `index`: index name
+
+**Returns**:
+
+None
+
+<a name="database.sql"></a>
+# database.sql
+
+<a name="database.sql.SQLDocumentStore"></a>
+## SQLDocumentStore Objects
+
+```python
+class SQLDocumentStore(BaseDocumentStore)
 ```
 
-```
-text()
-```
+<a name="database.sql.SQLDocumentStore.write_documents"></a>
+#### write\_documents
 
-```
-updated()
-```
-
-```
-class haystack.database.sql.DocumentTag(\*\*kwargs)
-Bases: `haystack.database.sql.ORMBase`
-```
-
-```
-__init__(\*\*kwargs)
-```
-
-A simple constructor that allows initialization from kwargs.
-
-Sets attributes on the constructed instance using the names and
-values in `kwargs`.
-
-Only keys that are present as
-attributes of the instance’s class are allowed. These could be,
-for example, any mapped columns or relationships.
-
-```
-created()
-```
-
-```
-document_id()
-```
-
-```
-id()
-```
-
-```
-tag_id()
-```
-
-```
-updated()
-```
-
-```
-class haystack.database.sql.ORMBase(\*\*kwargs)
-Bases: `sqlalchemy.ext.declarative.api.Base`
-```
-
-```
-created( = Column(None, DateTime(), table=None, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x7f3ceabd2970; now>, for_update=False)))
-```
-
-```
-id( = Column(None, Integer(), table=None, primary_key=True, nullable=False))
-```
-
-```
-updated( = Column(None, DateTime(), table=None, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x7f3ce9fd52b0; now>, for_update=False)))
-```
-
-```
-class haystack.database.sql.SQLDocumentStore(url: str = 'sqlite://')
-Bases: `haystack.database.base.BaseDocumentStore`
-```
-
-```
-__init__(url: str = 'sqlite://')
-```
-
-Initialize self.  See help(type(self)) for accurate signature.
-
-
-```
-get_all_documents()
-```
-
-```
-get_document_by_id(id: str)
-```
-
-```
-get_document_count()
-```
-
-```
-get_document_ids_by_tags(tags: Dict[str, Union[str, List]])
-```
-
-Get list of document ids that have tags from the given list of tags.
-
-
-* **Parameters**
-
-    **tags** – limit scope to documents having the given tags and their corresponding values.
-    The format for the dict is {“tag-1”: “value-1”, “tag-2”: “value-2” …}
-
-
-
-```
-index(: Optional[str])
-```
-.
-
-```
-query_by_embedding(query_emb: List[float], filters: Optional[dict] = None, top_k: int = 10, index: Optional[str] = None)
-```
-
-```
-write_documents(documents: List[dict])
+```python
+ | write_documents(documents: Union[List[dict], List[Document]], index: Optional[str] = None)
 ```
 
 Indexes documents for later queries.
 
+**Arguments**:
 
-* **Parameters**
+- `documents`: a list of Python dictionaries or a list of Haystack Document objects.
+For documents as dictionaries, the format is {"text": "<the-actual-text>"}.
+Optionally: Include meta data via {"text": "<the-actual-text>",
+"meta":{"name": "<some-document-name>, "author": "somebody", ...}}
+It can be used for filtering and is accessible in the responses of the Finder.
+- `index`: add an optional index attribute to documents. It can be later used for filtering. For instance,
+documents for evaluation can be indexed in a separate index than the documents for search.
 
-    **documents** – List of dictionaries in the format {“text”: “<the-actual-text>”}.
-    Optionally, you can also supply meta data via “meta”: {“author”: “someone”, “url”:”some-url” …}
+**Returns**:
 
+None
 
+<a name="database.sql.SQLDocumentStore.add_eval_data"></a>
+#### add\_eval\_data
 
-* **Returns**
-
-    None
-
-
-
-```
-class haystack.database.sql.Tag(\*\*kwargs)
-Bases: `haystack.database.sql.ORMBase`
-```
-
-```
-__init__(\*\*kwargs)
+```python
+ | add_eval_data(filename: str, doc_index: str = "eval_document", label_index: str = "label")
 ```
 
-A simple constructor that allows initialization from kwargs.
+Adds a SQuAD-formatted file to the DocumentStore in order to be able to perform evaluation on it.
 
-Sets attributes on the constructed instance using the names and
-values in `kwargs`.
+**Arguments**:
 
-Only keys that are present as
-attributes of the instance’s class are allowed. These could be,
-for example, any mapped columns or relationships.
+- `filename`: Name of the file containing evaluation data
+:type filename: str
+- `doc_index`: Elasticsearch index where evaluation documents should be stored
+:type doc_index: str
+- `label_index`: Elasticsearch index where labeled questions should be stored
+:type label_index: str
 
+<a name="database.sql.SQLDocumentStore.delete_all_documents"></a>
+#### delete\_all\_documents
 
-```
-created()
-```
-
-```
-documents()
-```
-
-```
-id()
+```python
+ | delete_all_documents(index=None)
 ```
 
-```
-name()
+Delete all documents in a index.
+
+**Arguments**:
+
+- `index`: index name
+
+**Returns**:
+
+None
+
+<a name="database.base"></a>
+# database.base
+
+<a name="database.base.Document"></a>
+## Document Objects
+
+```python
+class Document()
 ```
 
-```
-updated()
+<a name="database.base.Document.__init__"></a>
+#### \_\_init\_\_
+
+```python
+ | __init__(text: str, id: str = None, query_score: Optional[float] = None, question: Optional[str] = None, meta: Optional[Dict[str, Any]] = None, embedding: Optional[np.array] = None)
 ```
 
+Object used to represent documents / passages in a standardized way within Haystack.
+For example, this is what the retriever will return from the DocumentStore,
+regardless if it's ElasticsearchDocumentStore or InMemoryDocumentStore.
+
+Note that there can be multiple Documents originating from one file (e.g. PDF),
+if you split the text into smaller passages. We'll have one Document per passage in this case.
+
+**Arguments**:
+
+- `id`: ID used within the DocumentStore
+- `text`: Text of the document
+- `query_score`: Retriever's query score for a retrieved document
+- `question`: Question text for FAQs.
+- `meta`: Meta fields for a document like name, url, or author.
+- `embedding`: Vector encoding of the text
+
+<a name="database.base.Label"></a>
+## Label Objects
+
+```python
+class Label()
 ```
-value()
+
+<a name="database.base.Label.__init__"></a>
+#### \_\_init\_\_
+
+```python
+ | __init__(question: str, answer: str, is_correct_answer: bool, is_correct_document: bool, origin: str, document_id: Optional[str] = None, offset_start_in_doc: Optional[int] = None, no_answer: Optional[bool] = None, model_id: Optional[int] = None)
 ```
+
+Object used to represent label/feedback in a standardized way within Haystack.
+This includes labels from dataset like SQuAD, annotations from labeling tools,
+or, user-feedback from the Haystack REST API.
+
+**Arguments**:
+
+- `question`: the question(or query) for finding answers.
+- `answer`: the answer string.
+- `is_correct_answer`: whether the sample is positive or negative.
+- `is_correct_document`: in case of negative sample(is_correct_answer is False), there could be two cases;
+incorrect answer but correct document & incorrect document. This flag denotes if
+the returned document was correct.
+- `origin`: the source for the labels. It can be used to later for filtering.
+- `document_id`: the document_store's ID for the returned answer document.
+- `offset_start_in_doc`: the answer start offset in the document.
+- `no_answer`: whether the question in unanswerable.
+- `model_id`: model_id used for prediction (in-case of user feedback).
+
+<a name="database.base.MultiLabel"></a>
+## MultiLabel Objects
+
+```python
+class MultiLabel()
+```
+
+<a name="database.base.MultiLabel.__init__"></a>
+#### \_\_init\_\_
+
+```python
+ | __init__(question: str, multiple_answers: List[str], is_correct_answer: bool, is_correct_document: bool, origin: str, multiple_document_ids: List[Any], multiple_offset_start_in_docs: List[Any], no_answer: Optional[bool] = None, model_id: Optional[int] = None)
+```
+
+Object used to aggregate multiple possible answers for the same question
+
+**Arguments**:
+
+- `question`: the question(or query) for finding answers.
+- `multiple_answers`: list of possible answer strings
+- `is_correct_answer`: whether the sample is positive or negative.
+- `is_correct_document`: in case of negative sample(is_correct_answer is False), there could be two cases;
+incorrect answer but correct document & incorrect document. This flag denotes if
+the returned document was correct.
+- `origin`: the source for the labels. It can be used to later for filtering.
+- `multiple_document_ids`: the document_store's IDs for the returned answer documents.
+- `multiple_offset_start_in_docs`: the answer start offsets in the document.
+- `no_answer`: whether the question in unanswerable.
+- `model_id`: model_id used for prediction (in-case of user feedback).
+
+<a name="database.base.BaseDocumentStore"></a>
+## BaseDocumentStore Objects
+
+```python
+class BaseDocumentStore(ABC)
+```
+
+Base class for implementing Document Stores.
+
+<a name="database.base.BaseDocumentStore.write_documents"></a>
+#### write\_documents
+
+```python
+ | @abstractmethod
+ | write_documents(documents: Union[List[dict], List[Document]], index: Optional[str] = None)
+```
+
+Indexes documents for later queries.
+
+**Arguments**:
+
+- `documents`: a list of Python dictionaries or a list of Haystack Document objects.
+For documents as dictionaries, the format is {"text": "<the-actual-text>"}.
+Optionally: Include meta data via {"text": "<the-actual-text>",
+"meta":{"name": "<some-document-name>, "author": "somebody", ...}}
+It can be used for filtering and is accessible in the responses of the Finder.
+- `index`: Optional name of index where the documents shall be written to.
+If None, the DocumentStore's default index (self.index) will be used.
+
+**Returns**:
+
+None
+
+<a name="database.faiss"></a>
+# database.faiss
+
+<a name="database.faiss.FAISSDocumentStore"></a>
+## FAISSDocumentStore Objects
+
+```python
+class FAISSDocumentStore(SQLDocumentStore)
+```
+
+Document store for very large scale embedding based dense retrievers like the DPR.
+
+It implements the FAISS library(https://github.com/facebookresearch/faiss)
+to perform similarity search on vectors.
+
+The document text and meta-data(for filtering) is stored using the SQLDocumentStore, while
+the vector embeddings are indexed in a FAISS Index.
+
+<a name="database.faiss.FAISSDocumentStore.__init__"></a>
+#### \_\_init\_\_
+
+```python
+ | __init__(sql_url: str = "sqlite:///", index_buffer_size: int = 10_000, vector_size: int = 768, faiss_index: Optional[IndexHNSWFlat] = None)
+```
+
+**Arguments**:
+
+- `sql_url`: SQL connection URL for database. It defaults to local file based SQLite DB. For large scale
+deployment, Postgres is recommended.
+- `index_buffer_size`: When working with large dataset, the indexing process(FAISS + SQL) can be buffered in
+smaller chunks to reduce memory footprint.
+- `vector_size`: the embedding vector size.
+- `faiss_index`: load an existing FAISS Index.
+
+<a name="database.faiss.FAISSDocumentStore.update_embeddings"></a>
+#### update\_embeddings
+
+```python
+ | update_embeddings(retriever: BaseRetriever, index: Optional[str] = None)
+```
+
+Updates the embeddings in the the document store using the encoding model specified in the retriever.
+This can be useful if want to add or change the embeddings for your documents (e.g. after changing the retriever config).
+
+**Arguments**:
+
+- `retriever`: Retriever to use to get embeddings for text
+- `index`: Index name to update
+
+**Returns**:
+
+None
+
+<a name="database.faiss.FAISSDocumentStore.save"></a>
+#### save
+
+```python
+ | save(file_path: Union[str, Path])
+```
+
+Save FAISS Index to the specified file.
+
+<a name="database.faiss.FAISSDocumentStore.load"></a>
+#### load
+
+```python
+ | @classmethod
+ | load(cls, faiss_file_path: Union[str, Path], sql_url: str, index_buffer_size: int = 10_000, vector_size: int = 768)
+```
+
+Load a saved FAISS index from a file and connect to the SQL database.
+
