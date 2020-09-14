@@ -1,9 +1,14 @@
 import PropTypes from "prop-types"
 import React from "react"
+import {Link} from 'gatsby'
 
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
 
 import "./header.scss";
+
+import Button from "../landing-page/Button";
+
+import Logo from "../../images/HaystackLogo.png"
 
 const Header = ({ siteTitle, menuLinks }) => {
 
@@ -13,7 +18,7 @@ const Header = ({ siteTitle, menuLinks }) => {
         <header className="header-wrapper">
           <div className="logo-wrapper">
             <LocalizedLink locale="en" to={"/"}>
-              <img src="https://static.tildacdn.com/tild6530-3133-4463-b033-623266656263/deepsetv2_Kopie.png" alt="deepset Logo">
+              <img src={Logo} alt="Haystack Logo">
               </img>
             </LocalizedLink>
           </div>
@@ -21,11 +26,26 @@ const Header = ({ siteTitle, menuLinks }) => {
             <div className="right">
               <LocalizedLink
                 locale="en"
-                to="/en/docs/intromd"
+                to="/"
                 className="link"
               >
                 Overview
               </LocalizedLink>
+              
+              <LocalizedLink
+                locale="en"
+                to="/en/docs/tutorial1md"
+                className="link"
+              >
+                Use Cases
+              </LocalizedLink>
+
+              <Link
+                to="/pricing/pricing"
+                className="link"
+              >
+                Pricing
+              </Link>
 
               <LocalizedLink
                 locale="en"
@@ -42,6 +62,17 @@ const Header = ({ siteTitle, menuLinks }) => {
                 >
                   Docs
                 </LocalizedLink>
+
+                <LocalizedLink
+                  locale="en"
+                  className="link"
+                  to="/contact/contact"
+                >
+                  Talk to us
+                </LocalizedLink>
+
+                <Button label="Login" />
+                <Button label="Try Free" />
             </div>
         </header>
       </div>
