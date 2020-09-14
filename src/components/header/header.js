@@ -4,6 +4,7 @@ import React from "react"
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
 
 import "./header.scss";
+import Logo from "../../images/HaystackLogo.png"
 
 const Header = ({ siteTitle, menuLinks }) => {
 
@@ -13,7 +14,7 @@ const Header = ({ siteTitle, menuLinks }) => {
         <header className="header-wrapper">
           <div className="logo-wrapper">
             <LocalizedLink locale="en" to={"/"}>
-              <img src="https://static.tildacdn.com/tild6530-3133-4463-b033-623266656263/deepsetv2_Kopie.png" alt="deepset Logo">
+              <img src={Logo} alt="Haystack Logo">
               </img>
             </LocalizedLink>
           </div>
