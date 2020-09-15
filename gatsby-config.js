@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `haystack-oi`,
-    siteUrl: `https://www.haystack.oi`,
+    siteUrl: `https://haystack.deepset.ai`,
     menuLinks:[
       {
         name: `home`,
@@ -17,6 +17,7 @@ module.exports = {
     author: `@deepset`,
   },
   plugins: [
+    'gatsby-plugin-cname',
     `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-sitemap`,
