@@ -4,7 +4,7 @@ import React from "react"
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
 
 import "./header.scss";
-import Logo from "../../images/HaystackLogo.png"
+import Logo from "../../images/Haystack_White_Text.png"
 
 const Header = ({ siteTitle, menuLinks }) => {
 

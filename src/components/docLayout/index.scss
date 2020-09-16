@@ -1,4 +1,4 @@
-//@import "../include_media.scss";
+@import "../include_media.scss";
 
 html {
   height: 100%;
@@ -36,9 +36,9 @@ body {
   font-size: 15px;
   background-color: #fafafa !important;
   color: #434548;
-  /*@include media("<=1000px") {
+  @include media("<=1000px") {
     font-size: 14px;
-  }*/
+  }
 }
 
 ::selection {
@@ -68,7 +68,7 @@ a.btn {
 }
 
 .svg-inline--fa {
-  margin-right: 5px !important;
+  height: 0.8em;
 }
 
 .doc-wrapper {
@@ -79,9 +79,9 @@ a.btn {
   background-color: #fff;
   min-height: calc(100vh);
   padding-top: 60px;
-  // @include media("<1600px") {
-  //   margin: 0;
-  // }
+  @include media("<1600px") {
+     margin: 0;
+  }
 
   .menu-container {
     top: 60px;
@@ -90,7 +90,7 @@ a.btn {
     width: 250px;
     overflow: auto;
 
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       position: fixed;
       top: 0;
       bottom: 0;
@@ -100,7 +100,7 @@ a.btn {
       height: 100vh;
       box-sizing: border-box;
       z-index: 1000;
-    }*/
+    }
   }
 
   .inner-container {
@@ -116,7 +116,7 @@ a.btn {
       position: absolute;
       top: 0;
     }
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       flex: 0 0 100%;
       margin: 0;
       max-width: 100%;
@@ -124,7 +124,7 @@ a.btn {
       &.fullwidth {
         width: 100%;
       }
-    }*/
+    }
   }
   .button-container {
     margin-top: 50px;
@@ -160,18 +160,18 @@ a.btn {
     }
 
     // background-color: #fff;
-    // @include media("<=1700px") {
-    //   right: 2rem;
-    // }
+    @include media("<=1700px") {
+       right: 2rem;
+    }
 
-    // @include media("<1400px") {
-    //   background-color: #fff;
-    //   right: 0;
-    // }
+    @include media("<1400px") {
+      background-color: #fff;
+      right: 0;
+    }
 
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       display: none;
-    }*/
+    }
 
     .parent-item {
       padding-left: 10px;
@@ -207,15 +207,15 @@ a.btn {
   }
 }
 
-// .inner-container {
-//   width: 1000px;
+ .inner-container {
+   width: 1000px;
 
-//   @include media("<=1000px") {
-//     width: auto;
-//   }
+   @include media("<=1000px") {
+     width: auto;
+   }
 
-//   margin: 0 auto;
-// }
+   margin: 0 auto;
+ }
 
 .not-found {
   background: #fff;
@@ -273,7 +273,7 @@ a.btn {
     color: #000;
   }
 
-  /*@include media(">=1600px") {
+  @include media(">=1600px") {
     position: fixed;
     right: 20%;
     bottom: 80px;
@@ -283,5 +283,5 @@ a.btn {
     position: fixed;
     right: 25%;
     bottom: 80px;
-  }*/
+  }
 }

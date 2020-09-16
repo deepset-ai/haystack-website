@@ -11,21 +11,25 @@ id: "get_startedmd"
 
 ## Installation
 
-Basic
+<div class="filter">
+<a href="#basic">Basic</a> <a href="#editable">Editable</a>
+</div>
+<div class="filter-basic table-wrapper" markdown="block">
 
 The most straightforward way to install Haystack is through pip.
 
-```
+```python
 $ pip install farm-haystack
 ```
 
-Editable
+</div>
+<div class="filter-editable table-wrapper" markdown="block">
 
 If you’d like to run a specific, unreleased version of Haystack, or make edits to the way Haystack runs,
 you’ll want to install it using `git` and `pip --editable`.
 This clones a copy of the repo to a local directory and runs Haystack from there.
 
-```
+```python
 $ git clone https://github.com/deepset-ai/haystack.git
 $ cd haystack
 $ pip install --editable .
@@ -33,6 +37,8 @@ $ pip install --editable .
 
 By default, this will give you the latest version of the master branch.
 Use regular git commands to switch between different branches and commits.
+
+</div>
 
 <!-- _comment: !! Have a tab for docker!! -->
 <!-- -comment: !! Have a hello world example!! -->
@@ -42,7 +48,7 @@ Here’s a sample of some Haystack code showing the most important components.
 For a working code example, check out our starter tutorial.
 
 <!-- _comment: !!link!! -->
-```
+```python
 # DocumentStore: holds all your data
 document_store = ElasticsearchDocumentStore()
 
@@ -70,7 +76,7 @@ print_answers(prediction)
 
 In Haystack, DocumentStores expect Documents in a dictionary format. They are loaded as follows:
 
-```
+```python
 document_store = ElasticsearchDocumentStore()
 dicts = [
     {
@@ -107,7 +113,7 @@ When documents are loaded, Haystack will precompute any of the results that migh
 
 In Haystack, querying is performed with a `Finder` object which connects the reader to the retriever.
 
-```
+```python
 # The Finder sticks together reader and retriever in a pipeline to answer our questions.
 finder = Finder(reader, retriever)
 
@@ -118,7 +124,7 @@ prediction = finder.get_answers(question)
 
 When the query is complete, you can expect to see results that look something like this:
 
-```
+```python
 [
     {   'answer': 'Eddard',
         'context': 's Nymeria after a legendary warrior queen. She travels '

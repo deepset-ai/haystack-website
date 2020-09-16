@@ -272,11 +272,13 @@ Dict containing question and answers
 Convert a PyTorch BERT model to ONNX format and write to ./onnx-export dir. The converted ONNX model
 can be loaded with in the `FARMReader` using the export path as `model_name_or_path` param.
 
-Usage:
->>> from haystack.reader.farm import FARMReader
->>> FARMReader.convert_to_onnx(model_name_or_path="deepset/bert-base-cased-squad2", optimize_for="gpu_tensor_core")
->>> FARMReader(model_name_or_path=Path("onnx-export"))
+**Usage:**
 
+```python
+from haystack.reader.farm import FARMReader
+FARMReader.convert_to_onnx(model_name_or_path="deepset/bert-base-cased-squad2", optimize_for="gpu_tensor_core")
+FARMReader(model_name_or_path=Path("onnx-export"))
+``` 
 
 **Arguments**:
 

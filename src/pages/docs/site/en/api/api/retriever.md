@@ -107,16 +107,19 @@ Karpukhin, Vladimir, et al. (2020): "Dense Passage Retrieval for Open-Domain Que
 Init the Retriever incl. the two encoder models from a local or remote model checkpoint.
 The checkpoint format matches huggingface transformers' model format
 
-:Example:
->>> # remote model from FAIR
->>> DensePassageRetriever(document_store=your_doc_store,
->>>                       query_embedding_model="facebook/dpr-question_encoder-single-nq-base",
->>>                       passage_embedding_model="facebook/dpr-ctx_encoder-single-nq-base")
+**Example**
 
->>> # or from local path
->>> DensePassageRetriever(document_store=your_doc_store,
->>>                       query_embedding_model="model_directory/question-encoder",
->>>                       passage_embedding_model="model_directory/context-encoder")
+```python
+# remote model from FAIR
+DensePassageRetriever(document_store=your_doc_store,
+                       query_embedding_model="facebook/dpr-question_encoder-single-nq-base",
+                       passage_embedding_model="facebook/dpr-ctx_encoder-single-nq-base")
+
+# or from local path
+DensePassageRetriever(document_store=your_doc_store,
+                      query_embedding_model="model_directory/question-encoder",
+                      passage_embedding_model="model_directory/context-encoder")
+``` 
 
 **Arguments**:
 

@@ -14,29 +14,37 @@ id: "databasemd"
 
 Initialising a new Document Store is straight forward.
 
-Elasticsearch
+<div class="filter">
+<a href="#elasticsearch">Elasticsearch</a> <a href="#faiss">FAISS</a> <a href="#sql">SQL</a> <a href="#inmemory">In Memory</a>
+</div>
+<div class="filter-elasticsearch table-wrapper" markdown="block">
 
-```
+```python
 document_store = ElasticsearchDocumentStore()
 ```
 
-FAISS
+</div>
+<div class="filter-faiss table-wrapper" markdown="block">
 
-```
+```python
 document_store = FAISSDocumentStore()
 ```
 
-SQL
+</div>
+<div class="filter-sql table-wrapper" markdown="block">
 
-```
+```python
 document_store = SQLDocumentStore()
 ```
 
-In Memory
+</div>
+<div class="filter-inmemory table-wrapper" markdown="block">
 
-```
+```python
 document_store = InMemoryDocumentStore()
 ```
+
+</div>
 
 Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
 See API documentation for more info.
@@ -46,7 +54,7 @@ See API documentation for more info.
 DocumentStores expect Documents in dictionary form, like that below.
 They are loaded using the `DocumentStore.write_documents()` method.
 
-```
+```python
 document_store = ElasticsearchDocumentStore()
 dicts = [
     {
@@ -67,7 +75,7 @@ See the File Converters section in the API docs for more information.
 Haystack also has a `convert_files_to_dicts()` utility function that will convert
 all txt or pdf files in a given folder into this dictionary format.
 
-```
+```python
 document_store = ElasticsearchDocumentStore()
 dicts = convert_files_to_dicts(dir_path=doc_dir)
 document_store.write_documents(dicts)
@@ -83,7 +91,7 @@ For **sparse**, keyword based retrievers such as BM25 and TF-IDF,
 you simply have to call `DocumentStore.write_documents()`.
 The creation of the inverted index which optimises querying speed is handled automatically.
 
-```
+```python
 document_store.write_documents(dicts)
 ```
 
@@ -95,7 +103,7 @@ indexing involves computing the Document embeddings which will be compared again
 The storing of the text is handled by `DocumentStore.write_documents()` and the computation of the
 embeddings is started by `DocumentStore.update_embeddings()`.
 
-```
+```python
 document_store.write_documents(dicts)
 document_store.update_embeddings(retriever)
 ```

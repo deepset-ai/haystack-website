@@ -1,4 +1,4 @@
-//@import '../components/include_media.scss'; // hero image
+@import '../components/include_media.scss'; // hero image
 
 .scenarios-wrapper {
 
@@ -151,7 +151,7 @@
 
   }
 
-  /*@include media("<=1000px") {
+  @include media("<=1000px") {
     .section1 {
       h2 {
         font-size: 20px;
@@ -185,5 +185,5 @@
       }
 
     }
-  }*/
+  }
 }

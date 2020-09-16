@@ -76,7 +76,7 @@
       },
       {
         "id": "tutorial1md",
-        "title": "Task: Question Answering for Game of Thrones",
+        "title": "Navigate Through Knowledge Bases or Long Documents",
         "label1": "tutorials_haystack",
         "label2": "",
         "label3": "",
@@ -92,7 +92,7 @@
       },
       {
         "id": "tutorial3md",
-        "title": "Task: Build a Question Answering pipeline without Elasticsearch",
+        "title": "Build a Question Answering pipeline without Elasticsearch",
         "label1": "tutorials_haystack",
         "label2": "",
         "label3": "",
@@ -100,7 +100,7 @@
       },
       {
         "id": "tutorial4md",
-        "title": "FAQ-Style QA: Utilizing existing FAQs for Question Answering",
+        "title": "Utilizing existing FAQs for Question Answering",
         "label1": "tutorials_haystack",
         "label2": "",
         "label3": "",
@@ -108,7 +108,7 @@
       },
       {
         "id": "tutorial5md",
-        "title": "Evaluation",
+        "title": "Evaluation of a QA System",
         "label1": "tutorials_haystack",
         "label2": "",
         "label3": "",
