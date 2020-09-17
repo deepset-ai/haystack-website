@@ -4,14 +4,19 @@ import Layout from "../components/layout/layout";
 import SEO from "../components/seo"
 
 import GithubLogo from "../images/icon/GitHub-Mark-32px.png"; 
+import Banner from "../images/haystack_logo_blue_banner.png";
+import Icon from "../images/HaystackIcon.png"
 
 import LocalizedLink from "../components/localizedLink/localizedLink";  
 
 import GithubButton from "react-github-button";
 import "react-github-button/assets/style.css";
+import { useMobileScreen } from "../hooks";
 import "../scss/index.scss";
 
 const IndexPage = () => {
+
+  const screenWidth = useMobileScreen();
 
   return (
     <Layout>
@@ -26,7 +31,13 @@ const IndexPage = () => {
               repo="haystack"
             />
           </div>
-          <div className="deepset-banner"></div>
+          <div className="deepset-banner">
+          {screenWidth > 1000 ? (
+            <img  claccName="img-deepset-banner" src={Banner}></img>
+          ) : (
+            <img  claccName="img-deepset-banner" src={Icon}></img>
+          )}
+          </div>
           <div className="btn-wrapper">
             <LocalizedLink
               className="primary white-color"

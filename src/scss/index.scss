@@ -91,22 +91,31 @@
 
     @include media(">1000px") {
       .deepset-banner {
-        height: 100%;
-        width: 50%;
-        background: url("../images/haystack_logo_blue_banner.png") no-repeat;
+        height: 500px;
+        width: 1000px;
         background-size: cover;
         background-position: bottom;
         background-size: cover;
+
+      }
+
+      .deepset-banner img {
+        width: 100%;
+        height: auto;
       }
     }
     @include media("<=1000px") {
       .deepset-banner {
-        height: 40%;
-        width: 50%;
-        background: url("../images/HaystackIcon.png") no-repeat;
+        height: 220px;
+        width: 180px;
         background-size: cover;
         background-position: bottom;
         background-size: cover;
+      }
+
+      .deepset-banner img {
+        width: 100%;
+        height: auto;
       }
     }
 
