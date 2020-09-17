@@ -7,17 +7,198 @@ date: "2020-09-03"
 id: "apiretrievermd"
 ---
 
-<a name="retriever.sparse"></a>
-# retriever.sparse
+# Retriever
 
-<a name="retriever.sparse.ElasticsearchRetriever"></a>
-## ElasticsearchRetriever Objects
+<a name="dpr_utils"></a>
+# dpr\_utils
+
+<a name="dpr_utils.ModelOutput"></a>
+## ModelOutput
+
+```python
+class ModelOutput()
+```
+
+Base class for all model outputs as dataclass. Has a ``__getitem__`` that allows preprocessor by integer or slice (like
+a tuple) or strings (like a dictionnary) that will ignore the ``None`` attributes.
+
+<a name="dpr_utils.ModelOutput.to_tuple"></a>
+#### to\_tuple
+
+```python
+ | to_tuple()
+```
+
+Converts :obj:`self` to a tuple.
+
+Return: A tuple containing all non-:obj:`None` attributes of the :obj:`self`.
+
+<a name="dpr_utils.ModelOutput.to_dict"></a>
+#### to\_dict
+
+```python
+ | to_dict()
+```
+
+Converts :obj:`self` to a Python dictionary.
+
+Return: A dictionary containing all non-:obj:`None` attributes of the :obj:`self`.
+
+<a name="dpr_utils.BaseModelOutputWithPooling"></a>
+## BaseModelOutputWithPooling
+
+```python
+@dataclass
+class BaseModelOutputWithPooling(ModelOutput)
+```
+
+Base class for model's outputs that also contains a pooling of the last hidden states.
+
+**Arguments**:
+
+  last_hidden_state (:obj:`torch.FloatTensor` of shape :obj:`(batch_size, sequence_length, hidden_size)`):
+  Sequence of hidden-states at the output of the last layer of the model.
+  pooler_output (:obj:`torch.FloatTensor` of shape :obj:`(batch_size, hidden_size)`):
+  Last layer hidden-state of the first token of the sequence (classification token)
+  further processed by a Linear layer and a Tanh activation function. The Linear
+  layer weights are trained from the next sentence prediction (classification)
+  objective during pretraining.
+  
+  This output is usually *not* a good summary
+  of the semantic content of the input, you're often better with averaging or pooling
+  the sequence of hidden-states for the whole input sequence.
+  hidden_states (:obj:`tuple(torch.FloatTensor)`, `optional`, returned when ``output_hidden_states=True`` is passed or when ``config.output_hidden_states=True``):
+  Tuple of :obj:`torch.FloatTensor` (one for the output of the embeddings + one for the output of each layer)
+  of shape :obj:`(batch_size, sequence_length, hidden_size)`.
+  
+  Hidden-states of the model at the output of each layer plus the initial embedding outputs.
+  attentions (:obj:`tuple(torch.FloatTensor)`, `optional`, returned when ``output_attentions=True`` is passed or when ``config.output_attentions=True``):
+  Tuple of :obj:`torch.FloatTensor` (one for each layer) of shape
+  :obj:`(batch_size, num_heads, sequence_length, sequence_length)`.
+  
+  Attentions weights after the attention softmax, used to compute the weighted average in the self-attention
+  heads.
+
+<a name="dpr_utils.DPRContextEncoderOutput"></a>
+## DPRContextEncoderOutput
+
+```python
+@dataclass
+class DPRContextEncoderOutput(ModelOutput)
+```
+
+Class for outputs of :class:`~transformers.DPRQuestionEncoder`.
+
+**Arguments**:
+
+- `pooler_output` - (:obj:``torch.FloatTensor`` of shape ``(batch_size, embeddings_size)``):
+  The DPR encoder outputs the `pooler_output` that corresponds to the context representation.
+  Last layer hidden-state of the first token of the sequence (classification token)
+  further processed by a Linear layer. This output is to be used to embed contexts for
+  nearest neighbors queries with questions embeddings.
+  hidden_states (:obj:`tuple(torch.FloatTensor)`, `optional`, returned when ``output_hidden_states=True`` is passed or when ``config.output_hidden_states=True``):
+  Tuple of :obj:`torch.FloatTensor` (one for the output of the embeddings + one for the output of each layer)
+  of shape :obj:`(batch_size, sequence_length, hidden_size)`.
+  
+  Hidden-states of the model at the output of each layer plus the initial embedding outputs.
+  attentions (:obj:`tuple(torch.FloatTensor)`, `optional`, returned when ``output_attentions=True`` is passed or when ``config.output_attentions=True``):
+  Tuple of :obj:`torch.FloatTensor` (one for each layer) of shape
+  :obj:`(batch_size, num_heads, sequence_length, sequence_length)`.
+  
+  Attentions weights after the attention softmax, used to compute the weighted average in the self-attention
+  heads.
+
+<a name="dpr_utils.DPRQuestionEncoderOutput"></a>
+## DPRQuestionEncoderOutput
+
+```python
+@dataclass
+class DPRQuestionEncoderOutput(ModelOutput)
+```
+
+Class for outputs of :class:`~transformers.DPRQuestionEncoder`.
+
+**Arguments**:
+
+- `pooler_output` - (:obj:``torch.FloatTensor`` of shape ``(batch_size, embeddings_size)``):
+  The DPR encoder outputs the `pooler_output` that corresponds to the question representation.
+  Last layer hidden-state of the first token of the sequence (classification token)
+  further processed by a Linear layer. This output is to be used to embed questions for
+  nearest neighbors queries with context embeddings.
+  hidden_states (:obj:`tuple(torch.FloatTensor)`, `optional`, returned when ``output_hidden_states=True`` is passed or when ``config.output_hidden_states=True``):
+  Tuple of :obj:`torch.FloatTensor` (one for the output of the embeddings + one for the output of each layer)
+  of shape :obj:`(batch_size, sequence_length, hidden_size)`.
+  
+  Hidden-states of the model at the output of each layer plus the initial embedding outputs.
+  attentions (:obj:`tuple(torch.FloatTensor)`, `optional`, returned when ``output_attentions=True`` is passed or when ``config.output_attentions=True``):
+  Tuple of :obj:`torch.FloatTensor` (one for each layer) of shape
+  :obj:`(batch_size, num_heads, sequence_length, sequence_length)`.
+  
+  Attentions weights after the attention softmax, used to compute the weighted average in the self-attention
+  heads.
+
+<a name="dpr_utils.DPRReaderOutput"></a>
+## DPRReaderOutput
+
+```python
+@dataclass
+class DPRReaderOutput(ModelOutput)
+```
+
+Class for outputs of :class:`~transformers.DPRQuestionEncoder`.
+
+**Arguments**:
+
+- `start_logits` - (:obj:``torch.FloatTensor`` of shape ``(n_passages, sequence_length)``):
+  Logits of the start index of the span for each passage.
+- `end_logits` - (:obj:``torch.FloatTensor`` of shape ``(n_passages, sequence_length)``):
+  Logits of the end index of the span for each passage.
+- `relevance_logits` - (:obj:`torch.FloatTensor`` of shape ``(n_passages, )``):
+  Outputs of the QA classifier of the DPRReader that corresponds to the scores of each passage
+  to answer the question, compared to all the other passages.
+  hidden_states (:obj:`tuple(torch.FloatTensor)`, `optional`, returned when ``output_hidden_states=True`` is passed or when ``config.output_hidden_states=True``):
+  Tuple of :obj:`torch.FloatTensor` (one for the output of the embeddings + one for the output of each layer)
+  of shape :obj:`(batch_size, sequence_length, hidden_size)`.
+  
+  Hidden-states of the model at the output of each layer plus the initial embedding outputs.
+  attentions (:obj:`tuple(torch.FloatTensor)`, `optional`, returned when ``output_attentions=True`` is passed or when ``config.output_attentions=True``):
+  Tuple of :obj:`torch.FloatTensor` (one for each layer) of shape
+  :obj:`(batch_size, num_heads, sequence_length, sequence_length)`.
+  
+  Attentions weights after the attention softmax, used to compute the weighted average in the self-attention
+  heads.
+
+<a name="dpr_utils.DPRPretrainedContextEncoder"></a>
+## DPRPretrainedContextEncoder
+
+```python
+class DPRPretrainedContextEncoder(PreTrainedModel)
+```
+
+An abstract class to handle weights initialization and
+a simple interface for downloading and loading pretrained models.
+
+<a name="dpr_utils.DPRPretrainedQuestionEncoder"></a>
+## DPRPretrainedQuestionEncoder
+
+```python
+class DPRPretrainedQuestionEncoder(PreTrainedModel)
+```
+
+An abstract class to handle weights initialization and
+a simple interface for downloading and loading pretrained models.
+
+<a name="sparse"></a>
+# sparse
+
+<a name="sparse.ElasticsearchRetriever"></a>
+## ElasticsearchRetriever
 
 ```python
 class ElasticsearchRetriever(BaseRetriever)
 ```
 
-<a name="retriever.sparse.ElasticsearchRetriever.__init__"></a>
+<a name="sparse.ElasticsearchRetriever.__init__"></a>
 #### \_\_init\_\_
 
 ```python
@@ -58,8 +239,8 @@ For this custom_query, a sample retrieve() could be:
 self.retrieve(query="Why did the revenue increase?",
 filters={"years": ["2019"], "quarters": ["Q1", "Q2"]})
 
-<a name="retriever.sparse.ElasticsearchFilterOnlyRetriever"></a>
-## ElasticsearchFilterOnlyRetriever Objects
+<a name="sparse.ElasticsearchFilterOnlyRetriever"></a>
+## ElasticsearchFilterOnlyRetriever
 
 ```python
 class ElasticsearchFilterOnlyRetriever(ElasticsearchRetriever)
@@ -68,8 +249,8 @@ class ElasticsearchFilterOnlyRetriever(ElasticsearchRetriever)
 Naive "Retriever" that returns all documents that match the given filters. No impact of query at all.
 Helpful for benchmarking, testing and if you want to do QA on small documents without an "active" retriever.
 
-<a name="retriever.sparse.TfidfRetriever"></a>
-## TfidfRetriever Objects
+<a name="sparse.TfidfRetriever"></a>
+## TfidfRetriever
 
 ```python
 class TfidfRetriever(BaseRetriever)
@@ -82,11 +263,11 @@ computations when text is passed on to a Reader for QA.
 
 It uses sklearn's TfidfVectorizer to compute a tf-idf matrix.
 
-<a name="retriever.dense"></a>
-# retriever.dense
+<a name="dense"></a>
+# dense
 
-<a name="retriever.dense.DensePassageRetriever"></a>
-## DensePassageRetriever Objects
+<a name="dense.DensePassageRetriever"></a>
+## DensePassageRetriever
 
 ```python
 class DensePassageRetriever(BaseRetriever)
@@ -97,7 +278,7 @@ See the original paper for more details:
 Karpukhin, Vladimir, et al. (2020): "Dense Passage Retrieval for Open-Domain Question Answering."
 (https://arxiv.org/abs/2004.04906).
 
-<a name="retriever.dense.DensePassageRetriever.__init__"></a>
+<a name="dense.DensePassageRetriever.__init__"></a>
 #### \_\_init\_\_
 
 ```python
@@ -107,7 +288,7 @@ Karpukhin, Vladimir, et al. (2020): "Dense Passage Retrieval for Open-Domain Que
 Init the Retriever incl. the two encoder models from a local or remote model checkpoint.
 The checkpoint format matches huggingface transformers' model format
 
-**Example**
+**Example:**
 
 ```python
 # remote model from FAIR
@@ -117,9 +298,9 @@ DensePassageRetriever(document_store=your_doc_store,
 
 # or from local path
 DensePassageRetriever(document_store=your_doc_store,
-                      query_embedding_model="model_directory/question-encoder",
-                      passage_embedding_model="model_directory/context-encoder")
-``` 
+                       query_embedding_model="model_directory/question-encoder",
+                       passage_embedding_model="model_directory/context-encoder")
+```
 
 **Arguments**:
 
@@ -139,7 +320,7 @@ Currently available remote names: ``"facebook/dpr-ctx_encoder-single-nq-base"``
 - ``True`` => Embed passage as single text, si`milar to embed_title = False (i.e [CLS] passage_tok1 ... [SEP])
 - ``False`` => Embed passage as text pair with empty title (i.e. [CLS] [SEP] passage_tok1 ... [SEP])
 
-<a name="retriever.dense.DensePassageRetriever.embed_queries"></a>
+<a name="dense.DensePassageRetriever.embed_queries"></a>
 #### embed\_queries
 
 ```python
@@ -156,7 +337,7 @@ Create embeddings for a list of queries using the query encoder
 
 Embeddings, one per input queries
 
-<a name="retriever.dense.DensePassageRetriever.embed_passages"></a>
+<a name="dense.DensePassageRetriever.embed_passages"></a>
 #### embed\_passages
 
 ```python
@@ -173,14 +354,14 @@ Create embeddings for a list of passages using the passage encoder
 
 Embeddings of documents / passages shape (batch_size, embedding_dim)
 
-<a name="retriever.dense.EmbeddingRetriever"></a>
-## EmbeddingRetriever Objects
+<a name="dense.EmbeddingRetriever"></a>
+## EmbeddingRetriever
 
 ```python
 class EmbeddingRetriever(BaseRetriever)
 ```
 
-<a name="retriever.dense.EmbeddingRetriever.__init__"></a>
+<a name="dense.EmbeddingRetriever.__init__"></a>
 #### \_\_init\_\_
 
 ```python
@@ -207,7 +388,7 @@ Options:
 - `emb_extraction_layer`: Number of layer from which the embeddings shall be extracted (for farm / transformers models only).
 Default: -1 (very last layer).
 
-<a name="retriever.dense.EmbeddingRetriever.embed"></a>
+<a name="dense.EmbeddingRetriever.embed"></a>
 #### embed
 
 ```python
@@ -224,7 +405,7 @@ Create embeddings for each text in a list of texts using the retrievers model (`
 
 List of embeddings (one per input text). Each embedding is a list of floats.
 
-<a name="retriever.dense.EmbeddingRetriever.embed_queries"></a>
+<a name="dense.EmbeddingRetriever.embed_queries"></a>
 #### embed\_queries
 
 ```python
@@ -241,7 +422,7 @@ Create embeddings for a list of queries. For this Retriever type: The same as ca
 
 Embeddings, one per input queries
 
-<a name="retriever.dense.EmbeddingRetriever.embed_passages"></a>
+<a name="dense.EmbeddingRetriever.embed_passages"></a>
 #### embed\_passages
 
 ```python
@@ -258,17 +439,14 @@ Create embeddings for a list of passages. For this Retriever type: The same as c
 
 Embeddings, one per input passage
 
-<a name="retriever.base"></a>
-# retriever.base
-
-<a name="retriever.base.BaseRetriever"></a>
-## BaseRetriever Objects
+<a name="base.BaseRetriever"></a>
+## BaseRetriever
 
 ```python
 class BaseRetriever(ABC)
 ```
 
-<a name="retriever.base.BaseRetriever.retrieve"></a>
+<a name="base.BaseRetriever.retrieve"></a>
 #### retrieve
 
 ```python
@@ -286,7 +464,7 @@ that are most relevant to the query.
 - `top_k`: How many documents to return per query.
 - `index`: The name of the index in the DocumentStore from which to retrieve documents
 
-<a name="retriever.base.BaseRetriever.eval"></a>
+<a name="base.BaseRetriever.eval"></a>
 #### eval
 
 ```python

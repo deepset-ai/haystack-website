@@ -84,11 +84,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 12rem;
-    //background: url("../images/website/sketched_concepts_white.png") no-repeat;
+    height: 40rem;
     background-position: bottom;
     background-size: cover;
     margin-top: 150px;
+
+    .deepset-banner {
+      background: url("../images/haystack_logo_blue_banner.png") no-repeat;
+      height: 100%;
+      width: 50%;
+      background-position: bottom;
+      background-size: cover;
+    }
 
     .githubicon {
       margin-bottom: 3rem;
@@ -502,6 +509,6 @@
   .section6,
   .section7,
   .sdk-tools {
-    margin-top: 10rem;
+    margin-top: 5rem;
   }
 }

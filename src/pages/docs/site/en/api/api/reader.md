@@ -7,11 +7,13 @@ date: "2020-09-03"
 id: "apireadermd"
 ---
 
-<a name="reader.farm"></a>
-# reader.farm
+# Reader
 
-<a name="reader.farm.FARMReader"></a>
-## FARMReader Objects
+<a name="farm"></a>
+# farm
+
+<a name="farm.FARMReader"></a>
+## FARMReader
 
 ```python
 class FARMReader(BaseReader)
@@ -25,7 +27,7 @@ While the underlying model can vary (BERT, Roberta, DistilBERT, ...), the interf
  - directly get predictions via predict()
  - fine-tune the model on QA data via train()
 
-<a name="reader.farm.FARMReader.__init__"></a>
+<a name="farm.FARMReader.__init__"></a>
 #### \_\_init\_\_
 
 ```python
@@ -76,7 +78,7 @@ want to debug the Language Model, you might need to disable multiprocessing!
 - `max_seq_len`: Max sequence length of one input text for the model
 - `doc_stride`: Length of striding window for splitting long texts (used if ``len(text) > max_seq_len``)
 
-<a name="reader.farm.FARMReader.train"></a>
+<a name="farm.FARMReader.train"></a>
 #### train
 
 ```python
@@ -114,7 +116,7 @@ Set to None to use all CPU cores minus one.
 
 None
 
-<a name="reader.farm.FARMReader.save"></a>
+<a name="farm.FARMReader.save"></a>
 #### save
 
 ```python
@@ -127,7 +129,7 @@ Saves the Reader model so that it can be reused at a later point in time.
 
 - `directory`: Directory where the Reader model should be saved
 
-<a name="reader.farm.FARMReader.predict_batch"></a>
+<a name="farm.FARMReader.predict_batch"></a>
 #### predict\_batch
 
 ```python
@@ -148,7 +150,7 @@ Returns list of dictionaries containing answers sorted by (desc.) probability
 
 List of dictionaries containing question and answers
 
-<a name="reader.farm.FARMReader.predict"></a>
+<a name="farm.FARMReader.predict"></a>
 #### predict
 
 ```python
@@ -184,7 +186,7 @@ Example:
 
 Dict containing question and answers
 
-<a name="reader.farm.FARMReader.eval_on_file"></a>
+<a name="farm.FARMReader.eval_on_file"></a>
 #### eval\_on\_file
 
 ```python
@@ -206,7 +208,7 @@ Returns a dict containing the following metrics:
 - `device`: The device on which the tensors should be processed. Choose from "cpu" and "cuda".
 :type device: str
 
-<a name="reader.farm.FARMReader.eval"></a>
+<a name="farm.FARMReader.eval"></a>
 #### eval
 
 ```python
@@ -226,7 +228,7 @@ Returns a dict containing the following metrics:
 - `label_index`: Index/Table name where labeled questions are stored
 - `doc_index`: Index/Table name where documents that are used for evaluation are stored
 
-<a name="reader.farm.FARMReader.predict_on_texts"></a>
+<a name="farm.FARMReader.predict_on_texts"></a>
 #### predict\_on\_texts
 
 ```python
@@ -261,7 +263,7 @@ Example:
 
 Dict containing question and answers
 
-<a name="reader.farm.FARMReader.convert_to_onnx"></a>
+<a name="farm.FARMReader.convert_to_onnx"></a>
 #### convert\_to\_onnx
 
 ```python
@@ -272,13 +274,11 @@ Dict containing question and answers
 Convert a PyTorch BERT model to ONNX format and write to ./onnx-export dir. The converted ONNX model
 can be loaded with in the `FARMReader` using the export path as `model_name_or_path` param.
 
-**Usage:**
+Usage:
+>>> from haystack.reader.farm import FARMReader
+>>> FARMReader.convert_to_onnx(model_name_or_path="deepset/bert-base-cased-squad2", optimize_for="gpu_tensor_core")
+>>> FARMReader(model_name_or_path=Path("onnx-export"))
 
-```python
-from haystack.reader.farm import FARMReader
-FARMReader.convert_to_onnx(model_name_or_path="deepset/bert-base-cased-squad2", optimize_for="gpu_tensor_core")
-FARMReader(model_name_or_path=Path("onnx-export"))
-``` 
 
 **Arguments**:
 
@@ -287,11 +287,11 @@ FARMReader(model_name_or_path=Path("onnx-export"))
 are "gpu_tensor_core" (GPUs with tensor core like V100 or T4),
 "gpu_without_tensor_core" (most other GPUs), and "cpu".
 
-<a name="reader.transformers"></a>
-# reader.transformers
+<a name="transformers"></a>
+# transformers
 
-<a name="reader.transformers.TransformersReader"></a>
-## TransformersReader Objects
+<a name="transformers.TransformersReader"></a>
+## TransformersReader
 
 ```python
 class TransformersReader(BaseReader)
@@ -305,7 +305,7 @@ While the underlying model can vary (BERT, Roberta, DistilBERT ...), the interfa
 
     - directly get predictions via predict()
 
-<a name="reader.transformers.TransformersReader.__init__"></a>
+<a name="transformers.TransformersReader.__init__"></a>
 #### \_\_init\_\_
 
 ```python
@@ -343,7 +343,7 @@ set no_answer_boost, use a FARMReader.
 - `max_seq_len`: max sequence length of one input text for the model
 - `doc_stride`: length of striding window for splitting long texts (used if len(text) > max_seq_len)
 
-<a name="reader.transformers.TransformersReader.predict"></a>
+<a name="transformers.TransformersReader.predict"></a>
 #### predict
 
 ```python

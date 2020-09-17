@@ -158,7 +158,7 @@ exports.createPages = ({ actions, graphql }) => {
       let editPath = fileAbsolutePath.split(
         fileLang === "en" ? "/en/" : "/zh-CN/"
       )[1];
-      editPath = editPath.replace(".md", ".rst");
+      //editPath = editPath.replace(".md", ".rst");
       
       const localizedPath = generatePath(
         fileId,

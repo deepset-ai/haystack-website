@@ -19,6 +19,7 @@ Clone master branch and run it locally:
 ```
 git clone https://github.com/deepset-ai/haystack-io.git
 cd haystack-io
+npm install
 gatsby develop
 ```
 

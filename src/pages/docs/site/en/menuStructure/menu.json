@@ -50,8 +50,8 @@
         "order": 4
       },
       {
-        "id": "domain_adaptionmd",
-        "title": "Domain Adaption",
+        "id": "domain_adaptationmd",
+        "title": "Domain Adaptation",
         "label1": "usage_haystack",
         "label2": "",
         "label3": "",
@@ -124,7 +124,7 @@
       },
       {
         "id": "api_haystack",
-        "title": "API",
+        "title": "API reference",
         "label1": "",
         "label2": "",
         "label3": "",
@@ -133,7 +133,7 @@
       },
       {
         "id": "apidatabasemd",
-        "title": "Database",
+        "title": "Document Store",
         "label1": "api_haystack",
         "label2": "",
         "label3": "",
@@ -157,7 +157,7 @@
       },
       {
         "id": "apiindexingmd",
-        "title": "Indexing",
+        "title": "Preprocessor",
         "label1": "api_haystack",
         "label2": "",
         "label3": "",

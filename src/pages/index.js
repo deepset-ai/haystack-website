@@ -26,8 +26,7 @@ const IndexPage = () => {
               repo="haystack"
             />
           </div>
-          <h1>Haystack</h1>
-          <h2>Neural Question Answering at Scale</h2>
+          <div className="deepset-banner"></div>
           <div className="btn-wrapper">
             <LocalizedLink
               className="primary white-color"
@@ -44,8 +43,6 @@ const IndexPage = () => {
               Learn more
             </LocalizedLink>
           </div>
-        </section>
-        <section className="section2">
         </section>
         <section className="section4">
           <h2>Open Source</h2>

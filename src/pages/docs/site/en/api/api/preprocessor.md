@@ -1,16 +1,21 @@
 ---
-title: "Indexing"
-metaTitle: "Indexing"
+title: "Preprocessor"
+metaTitle: "Preprocessor"
 metaDescription: ""
 slug: "/docs/apiindexing"
 date: "2020-09-03"
 id: "apiindexingmd"
 ---
 
-<a name="indexing.utils"></a>
-# indexing.utils
+# Preprocessor
 
-<a name="indexing.utils.eval_data_from_file"></a>
+<a name="cleaning"></a>
+# cleaning
+
+<a name="utils"></a>
+# utils
+
+<a name="utils.eval_data_from_file"></a>
 #### eval\_data\_from\_file
 
 ```python
@@ -28,7 +33,7 @@ Document and Labels can then be indexed to the DocumentStore and be used for eva
 
 (List of Documents, List of Labels)
 
-<a name="indexing.utils.convert_files_to_dicts"></a>
+<a name="utils.convert_files_to_dicts"></a>
 #### convert\_files\_to\_dicts
 
 ```python
@@ -40,7 +45,7 @@ Document Store.
 
 **Arguments**:
 
-- `dir_path`: path for the documents to be written to the database
+- `dir_path`: path for the documents to be written to the DocumentStore
 - `clean_func`: a custom cleaning function that gets applied to each doc (input: str, output:str)
 - `split_paragraphs`: split text in paragraphs.
 
@@ -48,7 +53,7 @@ Document Store.
 
 None
 
-<a name="indexing.utils.tika_convert_files_to_dicts"></a>
+<a name="utils.tika_convert_files_to_dicts"></a>
 #### tika\_convert\_files\_to\_dicts
 
 ```python
@@ -60,7 +65,7 @@ Document Store.
 
 **Arguments**:
 
-- `dir_path`: path for the documents to be written to the database
+- `dir_path`: path for the documents to be written to the DocumentStore
 - `clean_func`: a custom cleaning function that gets applied to each doc (input: str, output:str)
 - `split_paragraphs`: split text in paragraphs.
 
@@ -68,7 +73,7 @@ Document Store.
 
 None
 
-<a name="indexing.utils.fetch_archive_from_http"></a>
+<a name="utils.fetch_archive_from_http"></a>
 #### fetch\_archive\_from\_http
 
 ```python
