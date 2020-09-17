@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `haystack-oi`,
+    title: ``,
     siteUrl: `https://haystack.deepset.ai`,
     menuLinks:[
       {

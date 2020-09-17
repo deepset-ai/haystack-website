@@ -89,12 +89,25 @@
     background-size: cover;
     margin-top: 150px;
 
-    .deepset-banner {
-      background: url("../images/haystack_logo_blue_banner.png") no-repeat;
-      height: 100%;
-      width: 50%;
-      background-position: bottom;
-      background-size: cover;
+    @include media(">1000px") {
+      .deepset-banner {
+        height: 100%;
+        width: 50%;
+        background: url("../images/haystack_logo_blue_banner.png") no-repeat;
+        background-size: cover;
+        background-position: bottom;
+        background-size: cover;
+      }
+    }
+    @include media("<=1000px") {
+      .deepset-banner {
+        height: 40%;
+        width: 50%;
+        background: url("../images/HaystackIcon.png") no-repeat;
+        background-size: cover;
+        background-position: bottom;
+        background-size: cover;
+      }
     }
 
     .githubicon {
