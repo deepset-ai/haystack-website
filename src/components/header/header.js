@@ -34,7 +34,7 @@ const Header = ({ siteTitle, menuLinks }) => {
             <div className="right">
               <LocalizedLink
                 locale="en"
-                to="/en/docs/intromd"
+                to="/"
                 className="link"
               >
                 Overview

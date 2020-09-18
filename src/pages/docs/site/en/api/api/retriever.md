@@ -1,14 +1,3 @@
----
-title: "Retriever"
-metaTitle: "Retriever"
-metaDescription: ""
-slug: "/docs/apiretrievermd"
-date: "2020-09-03"
-id: "apiretrievermd"
----
-
-# Retriever
-
 <a name="sparse"></a>
 # sparse
 
@@ -109,16 +98,16 @@ Karpukhin, Vladimir, et al. (2020): "Dense Passage Retrieval for Open-Domain Que
 Init the Retriever incl. the two encoder models from a local or remote model checkpoint.
 The checkpoint format matches huggingface transformers' model format
 
-:Example:
->>> # remote model from FAIR
->>> DensePassageRetriever(document_store=your_doc_store,
->>>                       query_embedding_model="facebook/dpr-question_encoder-single-nq-base",
->>>                       passage_embedding_model="facebook/dpr-ctx_encoder-single-nq-base")
+Example:
+remote model from FAIR
+DensePassageRetriever(document_store=your_doc_store,
+query_embedding_model="facebook/dpr-question_encoder-single-nq-base",
+passage_embedding_model="facebook/dpr-ctx_encoder-single-nq-base")
 
->>> # or from local path
->>> DensePassageRetriever(document_store=your_doc_store,
->>>                       query_embedding_model="model_directory/question-encoder",
->>>                       passage_embedding_model="model_directory/context-encoder")
+or from local path
+DensePassageRetriever(document_store=your_doc_store,
+query_embedding_model="model_directory/question-encoder",
+passage_embedding_model="model_directory/context-encoder")
 
 **Arguments**:
 
@@ -135,8 +124,9 @@ Currently available remote names: ``"facebook/dpr-ctx_encoder-single-nq-base"``
 - `embed_title`: Whether to concatenate title and passage to a text pair that is then used to create the embedding
 - `remove_sep_tok_from_untitled_passages`: If embed_title is ``True``, there are different strategies to deal with documents that don't have a title.
 
-- ``True`` => Embed passage as single text, si`milar to embed_title = False (i.e [CLS] passage_tok1 ... [SEP])
-- ``False`` => Embed passage as text pair with empty title (i.e. [CLS] [SEP] passage_tok1 ... [SEP])
+Returns:
+``True`` => Embed passage as single text, si`milar to embed_title = False (i.e [CLS] passage_tok1 ... [SEP])
+``False`` => Embed passage as text pair with empty title (i.e. [CLS] [SEP] passage_tok1 ... [SEP])
 
 <a name="dense.DensePassageRetriever.embed_queries"></a>
 #### embed\_queries
@@ -256,6 +246,12 @@ Create embeddings for a list of passages. For this Retriever type: The same as c
 **Returns**:
 
 Embeddings, one per input passage
+
+<a name="__init__"></a>
+# \_\_init\_\_
+
+<a name="base"></a>
+# base
 
 <a name="base.BaseRetriever"></a>
 ## BaseRetriever

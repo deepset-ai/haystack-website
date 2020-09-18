@@ -1,11 +1,11 @@
----
+<!---
 title: "Reader"
 metaTitle: "Reader"
 metaDescription: ""
 slug: "/docs/reader"
 date: "2020-09-03"
 id: "readermd"
----
+--->
 
 # Reader
 
@@ -113,7 +113,7 @@ reader = FARMReader("ahotrod/albert_xxlargev1_squad2_512")
 **Transformers**
 
 <div class="filter">
-<a href="#roberta_">RoBERTa (base)</a> <a href="#minilm_">MiniLM</a> <a href="#albert_">ALBERT (XXL)</a>
+<a href="#roberta_">FRoBERTa (base)</a> <a href="#minilm_">MiniLM</a> <a href="#albert_">ALBERT (XXL)</a>
 </div>
 <div class="filter-roberta_ table-wrapper" markdown="block">
 
@@ -214,7 +214,7 @@ reader = FARMReader("deepset/xlm-roberta-large-squad2")
 **Transformers**
 
 <div class="filter">
-<a href="#french_">French</a> <a href="#italien_">Italien</a> <a href="#zeroshot_">Zero-shot</a>
+<a href="#french_">French</a> <a href="#italian_">Italian</a> <a href="#zeroshot_">Zero-shot</a>
 </div>
 <div class="filter-french_ table-wrapper" markdown="block">
 
@@ -223,7 +223,7 @@ reader = TransformersReader("illuin/camembert-base-fquad")
 ```
 
 </div>
-<div class="filter-italien_ table-wrapper" markdown="block">
+<div class="filter-italian_ table-wrapper" markdown="block">
 
 ```python
 reader = TransformersReader("mrm8488/bert-italian-finedtuned-squadv1-it-alfa")
@@ -318,16 +318,16 @@ that are each offset by `doc_stride` number of tokens.
 These can be set when the Reader is initialized.
 
 <div class="filter">
-<a href="#farm_">FARM</a> <a href="#transformers_">Transformers</a>
+<a href="#farm">FARM</a> <a href="#transformers">Transformers</a>
 </div>
-<div class="filter-farm_ table-wrapper" markdown="block">
+<div class="filter-farm table-wrapper" markdown="block">
 
 ```python
 reader = FARMReader(... max_seq_len=384, doc_stride=128 ...)
 ```
 
 </div>
-<div class="filter-transformers_ table-wrapper" markdown="block">
+<div class="filter-transformers table-wrapper" markdown="block">
 
 ```python
 reader = TransformersReader(... max_seq_len=384, doc_stride=128 ...
