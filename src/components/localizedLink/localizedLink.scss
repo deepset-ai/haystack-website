@@ -1,4 +1,4 @@
-//@import "../include_media";
+@import "../include_media";
 
 $primary: #fff;
 
@@ -20,11 +20,11 @@ a {
     min-width: 160px;
     text-align: center;
 
-    //@include media("<=1000px") {
-    //  &:lang(en) {
-    //    letter-spacing: 2px;
-    //  }
-    //}
+    @include media("<=1000px") {
+      &:lang(en) {
+        letter-spacing: 2px;
+      }
+    }
   }
 
   &.primary-color {
@@ -38,7 +38,7 @@ a {
     border: 2px solid #000;
 
     &:hover {
-      color: #000;
+      color: #08415D;
       background: #fff;
     }
   }

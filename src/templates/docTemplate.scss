@@ -1,15 +1,15 @@
-//@import "../components/include_media";
+@import "../components/include_media";
 
 :root {
   --color-primary: #202124;
   --color-primarydark: #000;
-  --color-highlight: #33b6f2;
+  --color-highlight: #49B0E4;
   --color-secondary: #f8b108;
   --color-teriary: #69e0e5;
   --color-darkgray: #28292e;
   --color-gray: #999;
   --color-lightgray: #b0b0b9;
-  --color-state-hover: rgba(255, 255, 255, 0.15);
+  --color-state-hover: #f3f3f3;
 }
 
 .doc-post-container {
@@ -19,11 +19,11 @@
   overflow: hidden;
   color: var(--color-primary);
 
-  /*@include media("<=1000px") {
+  @include media("<=1000px") {
     padding: 1rem;
     padding-top: 2rem;
     font-size: 16px;
-  }*/
+  }
 
   .tab-wrapper {
     font-size: 0;
@@ -39,10 +39,10 @@
       box-shadow: 0 1px 0 rgba(27, 31, 35, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.03);
 
-      /*@include media("<=1000px") {
+      @include media("<=1000px") {
         margin-right: 0;
         border-radius: 0;
-      }*/
+      }
 
       &.active {
         background: var(--color-highlight);
@@ -56,7 +56,7 @@
 
       &:hover {
         text-decoration: none;
-        color: #000;
+        color: #08415D;
         background: var(--color-highlight);
         border: 1px solid var(--color-highlight);
       }
@@ -68,9 +68,9 @@
     border-bottom: 2px solid #eee;
     display: flex;
     flex-direction: row;
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       overflow-x: auto;
-    }*/
+    }
     height: 38px;
     a {
       display: block;
@@ -85,10 +85,10 @@
       box-shadow: 0 1px 0 rgba(27, 31, 35, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.03);
 
-      /*@include media("<=1000px") {
+      @include media("<=1000px") {
         margin-right: 0;
         border-radius: 0;
-      }*/
+      }
       &:before {
         background: #e1e2e6;
         bottom: 0;
@@ -111,10 +111,11 @@
 
       &:hover {
         text-decoration: none;
+        color: var(-color-highlight);
       }
 
       &:hover:not(.active) {
-        color: #000;
+        color: var(-color-highlight);
         text-decoration: none;
         &:after,
         &:before {
@@ -248,10 +249,10 @@
     padding: 1.5rem;
     opacity: 1;
 
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       width: 100%;
       left: 0 !important;
-    }*/
+    }
   }
 
   article,
@@ -496,10 +497,11 @@
   a:active,
   a:hover {
     text-decoration: underline;
+    color: #08415D;
   }
 
   a.anchor {
-    fill: #33b6f2;
+    fill: #08415D;
   }
 
   img {
@@ -539,9 +541,9 @@
     margin: 4rem 0 1rem;
     text-rendering: optimizeLegibility;
 
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       font-size: 1rem;
-    }*/
+    }
   }
 
   h3 {
@@ -550,9 +552,9 @@
     margin: 3rem 0 1rem;
     text-rendering: optimizeLegibility;
 
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       font-size: 1rem;
-    }*/
+    }
   }
 
   h4 {
@@ -688,10 +690,10 @@
     border-collapse: collapse;
     width: 100%;
 
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       display: block;
       overflow: auto;
-    }*/
+    }
   }
 
   fieldset {
@@ -873,10 +875,10 @@
     max-width: 370px;
     border: 4px solid #fff;
 
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       font-size: 12px;
       padding: 0 1.4rem;
-    }*/
+    }
   }
 
   th:first-child,
@@ -928,6 +930,7 @@
 
     &:hover {
       text-decoration: none;
+      color: #08415D;
     }
 
     /*@include media("<=1000px") {
@@ -955,9 +958,9 @@
   cursor: pointer;
   z-index: 3;
 
-  /*@include media("<=1000px") {
+  @include media("<=1000px") {
     left: 20px;
-  }*/
+  }
 }
 
 .overlay {

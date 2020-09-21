@@ -10,33 +10,47 @@ id: "databasemd"
 
 # Document Stores
 
+You can think of the Document Store as a "database" that:
+- stores your texts and meta data  
+- provides them to the retriever at query time 
+
+There are different DocumentStores in Haystack to fit different use cases and tech stacks. 
+
 ## Initialisation
 
 Initialising a new Document Store is straight forward.
 
-Elasticsearch
+<div class="filter">
+<a href="#elasticsearch">Elasticsearch</a> <a href="#faiss">FAISS</a> <a href="#inmemory">In Memory</a> <a href="#sql">SQL</a>
+</div>
+<div class="filter-elasticsearch table-wrapper" markdown="block">
 
-```
+```python
 document_store = ElasticsearchDocumentStore()
 ```
 
-FAISS
+</div>
+<div class="filter-faiss table-wrapper" markdown="block">
 
-```
+```python
 document_store = FAISSDocumentStore()
 ```
 
-SQL
+</div>
+<div class="filter-sql table-wrapper" markdown="block">
 
-```
+```python
 document_store = SQLDocumentStore()
 ```
 
-In Memory
+</div>
+<div class="filter-inmemory table-wrapper" markdown="block">
 
-```
+```python
 document_store = InMemoryDocumentStore()
 ```
+
+</div>
 
 Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
 See API documentation for more info.
@@ -46,7 +60,7 @@ See API documentation for more info.
 DocumentStores expect Documents in dictionary form, like that below.
 They are loaded using the `DocumentStore.write_documents()` method.
 
-```
+```python
 document_store = ElasticsearchDocumentStore()
 dicts = [
     {
@@ -67,7 +81,7 @@ See the File Converters section in the API docs for more information.
 Haystack also has a `convert_files_to_dicts()` utility function that will convert
 all txt or pdf files in a given folder into this dictionary format.
 
-```
+```python
 document_store = ElasticsearchDocumentStore()
 dicts = convert_files_to_dicts(dir_path=doc_dir)
 document_store.write_documents(dicts)
@@ -83,7 +97,7 @@ For **sparse**, keyword based retrievers such as BM25 and TF-IDF,
 you simply have to call `DocumentStore.write_documents()`.
 The creation of the inverted index which optimises querying speed is handled automatically.
 
-```
+```python
 document_store.write_documents(dicts)
 ```
 
@@ -95,7 +109,7 @@ indexing involves computing the Document embeddings which will be compared again
 The storing of the text is handled by `DocumentStore.write_documents()` and the computation of the
 embeddings is started by `DocumentStore.update_embeddings()`.
 
-```
+```python
 document_store.write_documents(dicts)
 document_store.update_embeddings(retriever)
 ```
@@ -105,14 +119,65 @@ Having GPU acceleration will significantly speed this up.
 
 <!-- _comment: !! Diagrams of inverted index / document embeds !! -->
 <!-- _comment: !! Make this a tab element to show how different datastores are initialized !! -->
-## Choosing the right database
+## Choosing the right document store
 
-Document storage is important
-There are many types and each has implications on memory consumption, indexing and querying
+The Document stores have different characteristics. You should choose one depending on the maturity of your project, the use case and technical environment: 
 
-Talk about trade offs
-Elasticsearch vs SQL vs In Memory vs FAISS
 
-Show some code snippets of each using tab elements
+<div class="filter">
+<a href="#elasticsearch">Elasticsearch</a> <a href="#faiss">FAISS</a> <a href="#inmemory">In Memory</a> <a href="#sql">SQL</a>
+</div>
+<div class="filter-elasticsearch table-wrapper" markdown="block">
 
-Use tabbed element to show how each is initialized
+**Pros:** 
+- Fast & accurate sparse retrieval
+- Basic support for dense retrieval
+- Production-ready 
+- Many options to tune sparse retrieval
+
+**Cons:** 
+- Slow for dense retrieval with more than ~ 1 Mio documents
+
+</div>
+<div class="filter-faiss table-wrapper" markdown="block">
+
+**Pros:** 
+- Fast & accurate dense retrieval
+- Highly scalable due to approximate nearest neighbour algorithms (ANN)
+- Many options to tune dense retrieval via different index types 
+
+**Cons:**
+- No efficient sparse retrieval
+
+</div>
+<div class="filter-sql table-wrapper" markdown="block">
+
+**Pros:**
+- Simple
+- Exists already in many environments
+
+**Cons:**
+- Only compatible with minimal TF-IDF Retriever
+- Bad retrieval performance
+- Not recommended for production
+
+</div>
+<div class="filter-inmemory table-wrapper" markdown="block">
+
+**Pros:**
+- Simple & fast to test
+- No database requirements
+
+**Cons:** 
+- Not scalable
+- Not persisting your data on disk
+
+</div>
+
+#### Our recommendations
+
+**Restricted environment:** Use the `InMemoryDocumentStore`, if you are just giving Haystack a quick try on a small sample and are working in a restricted environment that complicates running Elasticsearch or other databases  
+
+**Allrounder:** Use the `ElasticSearchDocumentStore`, if you want to evaluate the performance of different retrieval options (dense vs. sparse) and are aiming for a smooth transition from PoC to production
+
+**Vector Specialist:** Use the `FAISSDocumentStore`, if you want to focus on dense retrieval and possibly deal with larger datasets

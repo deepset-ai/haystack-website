@@ -25,21 +25,27 @@ Haystack’s Readers are:
 
 * state-of-the-art in QA tasks like SQuAD and Natural Questions
 
-FARM
+<div class="filter">
+<a href="#farm">FARM</a> <a href="#transformers">Transformers</a>
+</div>
+<div class="filter-farm table-wrapper" markdown="block">
 
-```
+```python
 model = "deepset/roberta-base-squad2"
 reader = FARMReader(model, use_gpu=True)
 finder = Finder(reader, retriever)
 ```
 
-Transformers
+</div>
+<div class="filter-transformers table-wrapper" markdown="block">
 
-```
+```python
 model = "deepset/roberta-base-squad2"
 reader = TransformersReader(model, use_gpu=1)
 finder = Finder(reader, retriever)
 ```
+
+</div>
 
 While these models can work on CPU, it is recommended that they are run using GPUs to keep query times low.
 
@@ -52,13 +58,16 @@ and you have the option of using the QA pipeline from deepset FARM or HuggingFac
 Currently, there are a lot of different models out there and it can be rather overwhelming trying to pick the one that fits your use case.
 To get you started, we have a few recommendations for you to try out.
 
-FARM
+**FARM**
 
-RoBERTa (base)
+<div class="filter">
+<a href="#roberta">RoBERTa (base)</a> <a href="#minilm">MiniLM</a> <a href="#albert">ALBERT (XXL)</a>
+</div>
+<div class="filter-roberta table-wrapper" markdown="block">
 
 **An optimised variant of BERT and a great starting point.**
 
-```
+```python
 reader = FARMReader("deepset/roberta-base-squad2")
 ```
 
@@ -68,11 +77,12 @@ reader = FARMReader("deepset/roberta-base-squad2")
 
 * **Con**: There are other models that are either faster or more accurate
 
-MiniLM
+</div>
+<div class="filter-minilm table-wrapper" markdown="block">
 
 **A cleverly distilled model that sacrifices a little accuracy for speed.**
 
-```
+```python
 reader = FARMReader("deepset/minilm-uncased-squad2")
 ```
 
@@ -82,11 +92,12 @@ reader = FARMReader("deepset/minilm-uncased-squad2")
 
 * **Con**: Still doesn’t match the best base sized models in accuracy
 
-ALBERT (XXL)
+</div>
+<div class="filter-albert table-wrapper" markdown="block">
 
 **Large, powerful, SotA model.**
 
-```
+```python
 reader = FARMReader("ahotrod/albert_xxlargev1_squad2_512")
 ```
 
@@ -96,13 +107,19 @@ reader = FARMReader("ahotrod/albert_xxlargev1_squad2_512")
 
 * **Con**: The computational power needed make it impractical for most use cases
 
-Transformers
+</div>
 
-RoBERTa (base)
+
+**Transformers**
+
+<div class="filter">
+<a href="#roberta_">FRoBERTa (base)</a> <a href="#minilm_">MiniLM</a> <a href="#albert_">ALBERT (XXL)</a>
+</div>
+<div class="filter-roberta_ table-wrapper" markdown="block">
 
 **An optimised variant of BERT and a great starting point.**
 
-```
+```python
 reader = TransformersReader("deepset/roberta-base-squad2")
 ```
 
@@ -112,11 +129,12 @@ reader = TransformersReader("deepset/roberta-base-squad2")
 
 * **Con**: There are other models that are either faster or more accurate
 
-MiniLM
+</div>
+<div class="filter-minilm_ table-wrapper" markdown="block">
 
 **A cleverly distilled model that sacrifices a little accuracy for speed.**
 
-```
+```python
 reader = TransformersReader("deepset/minilm-uncased-squad2")
 ```
 
@@ -126,11 +144,12 @@ reader = TransformersReader("deepset/minilm-uncased-squad2")
 
 * **Con**: Still doesn’t match the best base sized models in accuracy
 
-ALBERT (XXL)
+</div>
+<div class="filter-albert_ table-wrapper" markdown="block">
 
 **Large, powerful, SotA model.**
 
-```
+```python
 reader = TransformersReader("ahotrod/albert_xxlargev1_squad2_512")
 ```
 
@@ -139,6 +158,8 @@ reader = TransformersReader("ahotrod/albert_xxlargev1_squad2_512")
 
 
 * **Con**: The computational power needed make it impractical for most use cases
+
+</div>
 
 **All-rounder**: In the class of base sized models trained on SQuAD, **RoBERTa** has shown better performance than BERT
 and can be capably handled by any machine equipped with a single NVidia V100 GPU.
@@ -162,45 +183,60 @@ While models are comparatively more performant on English,
 thanks to a wealth of available English training data,
 there are a couple QA models that are directly usable in Haystack.
 
-FARM
+**FARM**
 
-French
+<div class="filter">
+<a href="#french">French</a> <a href="#italian">Italian</a> <a href="#zeroshot">Zero-shot</a>
+</div>
+<div class="filter-french table-wrapper" markdown="block">
 
-```
+```python
 reader = FARMReader("illuin/camembert-base-fquad")
 ```
 
-Italian
+</div>
+<div class="filter-italian table-wrapper" markdown="block">
 
-```
+```python
 reader = FARMReader("mrm8488/bert-italian-finedtuned-squadv1-it-alfa")
 ```
 
-Zero-shot
+</div>
+<div class="filter-zeroshot table-wrapper" markdown="block">
 
-```
+```python
 reader = FARMReader("deepset/xlm-roberta-large-squad2")
 ```
 
-Transformers
+</div>
 
-French
 
-```
+**Transformers**
+
+<div class="filter">
+<a href="#french_">French</a> <a href="#italian_">Italian</a> <a href="#zeroshot_">Zero-shot</a>
+</div>
+<div class="filter-french_ table-wrapper" markdown="block">
+
+```python
 reader = TransformersReader("illuin/camembert-base-fquad")
 ```
 
-Italian
+</div>
+<div class="filter-italian_ table-wrapper" markdown="block">
 
-```
+```python
 reader = TransformersReader("mrm8488/bert-italian-finedtuned-squadv1-it-alfa")
 ```
 
-Zero-shot
+</div>
+<div class="filter-zeroshot_ table-wrapper" markdown="block">
 
-```
+```python
 reader = TransformersReader("deepset/xlm-roberta-large-squad2")
 ```
+
+</div>
 
 The **French** and **Italian models** are both monolingual langauge models trained on French and Italian versions of the SQuAD dataset
 and their authors report decent results in their model cards
@@ -245,7 +281,7 @@ but we at deepset can more easily update and optimise the FARM pipeline for spee
 Haystack also has a close integration with FARM which means that you can further fine-tune your Readers on labelled data using a FARMReader.
 See our tutorials for an end-to-end example or below for a shortened example.
 
-```
+```python
 # Initialise Reader
 model = "deepset/roberta-base-squad2"
 reader = FARMReader(model)
@@ -281,17 +317,23 @@ This functions by slicing the document into overlapping passages of (approximate
 that are each offset by `doc_stride` number of tokens.
 These can be set when the Reader is initialized.
 
-FARM
+<div class="filter">
+<a href="#farm">FARM</a> <a href="#transformers">Transformers</a>
+</div>
+<div class="filter-farm table-wrapper" markdown="block">
 
-```
+```python
 reader = FARMReader(... max_seq_len=384, doc_stride=128 ...)
 ```
 
-Transformers
+</div>
+<div class="filter-transformers table-wrapper" markdown="block">
 
-```
+```python
 reader = TransformersReader(... max_seq_len=384, doc_stride=128 ...
 ```
+
+</div>
 
 Predictions are made on each individual passage and the process of aggregation picks the best candidates across all passages.
 If you’d like to learn more about what is happening behind the scenes, have a look at [this](https://medium.com/deepset-ai/modern-question-answering-systems-explained-4d0913744097) article.

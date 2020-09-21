@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import LocalizeLink from "../localizedLink/localizedLink";
 import { useMobileScreen } from "../../hooks";
 import "./index.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 /* eslint-disable */
 const findItem = (key, value, arr) => {
   let find = undefined;
@@ -211,7 +214,7 @@ const Menu = (props) => {
             toggleMenu(true);
           }}
         >
-          <i className="fas fa-bars"></i>
+          <FontAwesomeIcon icon={faBars} />
         </div>
       ) : null}
     </>

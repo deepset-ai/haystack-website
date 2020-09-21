@@ -25,8 +25,7 @@ export default function Template({
   } = pageContext;
   //versions = versions.sort(sortVersions);
   const screenWidth = useMobileScreen();
-
-  const [showBack, setShowBack] = useState(false);
+  
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -174,21 +173,6 @@ export default function Template({
       match.replace(/[？|、|，]/g, "")
     );
   }
-
-  const ifrmLoad = () => {
-    const ifrmContainer = document.querySelector(".iframe-container");
-    const ifrm = document.querySelector("#benchmarkIframe");
-    // const size = ifrm.contentWindow.document.body.getBoundingClientRect();
-    ifrm.style.height = "100%";
-    ifrmContainer.style.height = "100%";
-    setShowBack(!/index\.html/.test(ifrm.contentWindow.location.href));
-  };
-  const handleRefresh = () => {
-    const ifrm = document.querySelector("#benchmarkIframe");
-    if (ifrm) {
-      ifrm.contentWindow.location.href = ifrm.src;
-    }
-  };
 
   const getRequestAsCURL = (code) => {
     const [header, ...data] = code.split("\n");

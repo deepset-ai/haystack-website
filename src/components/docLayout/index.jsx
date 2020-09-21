@@ -3,9 +3,7 @@ import Menu from "../menu";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import "./index.scss";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
-import GithubLogo from "../../images/icon/GitHub-Mark-32px.png"; 
+import { GithubLogo } from "../../images/icon/GitHub-Mark-32px.png"; 
 
 export default (props) => {
   const {
@@ -102,7 +100,7 @@ export default (props) => {
   const generateAnchorMenu = (headings, className) => {
     return headings.map((v) => {
       /* eslint-disable-next-line */
-      const normalVal = v.value.replace(/[.｜,｜\/｜\'｜\?｜？｜、|，]/g, "");
+      const normalVal = v.value.replace(/[.｜,｜\/｜\'｜\?｜？｜、|，|\(|\)|:|&|!]/g, "");
       const anchor = normalVal.split(" ").join("-");
       let childDom = null;
       if (v.children && v.children.length) {

@@ -1,7 +1,7 @@
-//@import "../include_media";
+@import "../include_media";
 
 .full-header-wrapper {
-  background: #fff;
+  background: #08415D;
   width: 100%;
   position: fixed;
   height: 60px;
@@ -20,7 +20,7 @@
   padding: 10px 0;
   z-index: 100;
   box-sizing: border-box;
-  background: #fff;
+  background: #08415D;
   max-width: 1600px;
   // overflow: hidden;
   margin: 0 auto;
@@ -40,6 +40,11 @@
       height: 1rem;
       margin-left: 1rem;
     }
+  }
+
+  .fontawsome-icon {
+    height: 2rem;
+    color: #fff;
   }
 
   .language {
@@ -91,19 +96,19 @@
       top: 4px;
     }
 
-    //@include media("<=1000px") {
-    //  margin-left: 10px;
-    //  margin-right: 18px;
+    @include media("<=1000px") {
+      margin-left: 10px;
+      margin-right: 18px;
 
-    //  .language-list {
-    //    display: block;
-    //  }
+      .language-list {
+        display: block;
+      }
 
-    //  &::after {
-    //    left: 20px;
-    //    border-width: 4px;
-    //  }
-    //}
+      &::after {
+        left: 20px;
+        border-width: 4px;
+      }
+    }
   }
 
   .right {
@@ -114,8 +119,8 @@
 
 
     .link {
-      color: #000;
-      font-weight: normal;
+      color: #fff;
+      font-weight: bold;
       margin: 0 1rem;
       // border-bottom: 2px solid #fff;
       // padding-bottom: 8px;
@@ -125,10 +130,10 @@
     }
   }
 
-  /*@include media("<=1000px") {
+  @include media("<=1000px") {
     padding: 10px 20px;
     box-shadow: none;
-    background: #fff;
+    background: #08415D;
     padding: 0 10px 0 10px;
     max-width: 100%;
 
@@ -152,7 +157,7 @@
     .right {
       padding-right: 8px;
     }
-  }*/
+  }
 }
 
 .mobile-nav {

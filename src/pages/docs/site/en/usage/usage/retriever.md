@@ -46,7 +46,7 @@ TF-IDF is a commonly used baseline for information retrieval that exploits two k
 
 Given a query, a tf-idf score is computed for each document as follows:
 
-```
+```python
 score = tf * idf
 ```
 
@@ -59,11 +59,11 @@ Where:
 * `idf` is the inverse of the fraction of documents containing the word.
 
 In practice, both terms are usually log normalised. If you’d like to learn more about the exact details of the algorithm,
-have a look at [this video](https://www.youtube.com/watch?v=hNXwhF0OZ_o)
+have a look at [this video](https://www.youtube.com/watch?v=hNXwhF0OZ_o).
 
 ### Initialisation
 
-```
+```python
 document_store = InMemoryDocumentStore()
 ...
 retriever = TfidfRetriever(document_store)
@@ -86,7 +86,7 @@ It improves upon its predecessor in two main aspects:
 
 ### Initialisation
 
-```
+```python
 document_store = ElasticsearchDocumentStore()
 ...
 retriever = ElasticsearchRetriever(document_store)
@@ -131,7 +131,7 @@ If you’d like to learn how to set up a DPR based system, have a look at our tu
 
 ### Initialisation
 
-```
+```python
 document_store = FAISSDocumentStore()
 ...
 retriever = DensePassageRetriever(
@@ -159,7 +159,7 @@ This is not inherently suited to query based search where the length, language a
 
 ### Initialisation
 
-```
+```python
 document_store = ElasticsearchDocumentStore()
 ...
 retriever = EmbeddingRetriever(document_store=document_store,

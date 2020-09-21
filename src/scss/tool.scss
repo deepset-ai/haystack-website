@@ -1,21 +1,21 @@
-//@import '../components/include_media.scss'; // hero image
+@import '../components/include_media.scss'; // hero image
 
 .tool-wrapper {
   display: flex;
 
-  /*@include media("<=1000px") {
+  @include media("<=1000px") {
     flex-direction: column;
-  }*/
+  }
 
   .left-container {
     flex: 0 0 300px;
     height: 100vh;
     background: #333;
 
-    /*@include media("<=1000px") {
+    @include media("<=1000px") {
       height: auto;
       flex: 1;
-    }*/
+    }
 
     .logo {
       margin-top: 1rem;

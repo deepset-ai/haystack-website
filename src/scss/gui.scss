@@ -1,4 +1,4 @@
-//@import '../components/include_media.scss'; // hero image
+@import '../components/include_media.scss'; // hero image
 
 .gui-wrapper {
 
@@ -78,13 +78,13 @@
         line-height: 30px;
       }
 
-      /*@include media("<=1000px") {
+      @include media("<=1000px") {
         padding: 10px;
 
         p {
           font-size: 14px;
         }
-      }*/
+      }
 
     }
 
@@ -123,10 +123,10 @@
         &.right-margin {
           margin-right: 2rem;
 
-          /*@include media(">1400px") {
+          @include media(">1400px") {
             margin-left: 0;
 
-          }*/
+          }
         }
 
         h2 {
@@ -154,7 +154,7 @@
         }
       }
 
-      /*@include media("<=1000px") {
+      @include media("<=1000px") {
         display: block;
 
         img {
@@ -175,7 +175,7 @@
             font-size: 14px;
           }
         }
-      }*/
+      }
     }
   }
 
