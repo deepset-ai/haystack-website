@@ -1,10 +1,10 @@
 ---
-title: "Document Store"
-metaTitle: "Database"
-metaDescription: ""
-slug: "/docs/apidatabase"
-date: "2020-09-03"
-id: "apidatabasemd"
+title: Document Store
+metaTitle: Database
+metaDescription: 
+slug: /docs/apidatabase
+date: 2020-09-03
+id: apidatabasemd
 ---
 
 # Document Store
@@ -407,4 +407,3 @@ Save FAISS Index to the specified file.
 ```
 
 Load a saved FAISS index from a file and connect to the SQL database.
-

@@ -113,7 +113,7 @@ reader = FARMReader("ahotrod/albert_xxlargev1_squad2_512")
 **Transformers**
 
 <div class="filter">
-<a href="#roberta_">FRoBERTa (base)</a> <a href="#minilm_">MiniLM</a> <a href="#albert_">ALBERT (XXL)</a>
+<a href="#roberta_">RoBERTa (base)</a> <a href="#minilm_">MiniLM</a> <a href="#albert_">ALBERT (XXL)</a>
 </div>
 <div class="filter-roberta_ table-wrapper" markdown="block">
 
@@ -238,9 +238,9 @@ reader = TransformersReader("deepset/xlm-roberta-large-squad2")
 
 </div>
 
-The **French** and **Italian models** are both monolingual langauge models trained on French and Italian versions of the SQuAD dataset
+The **French** and **Italian models** are both monolingual language models trained on French and Italian versions of the SQuAD dataset
 and their authors report decent results in their model cards
-[here](https://huggingface.co/illuin/camembert-base-fquad) and [here](https://huggingface.co/illuin/camembert-base-fquad) .
+[here](https://huggingface.co/illuin/camembert-base-fquad) and [here](https://huggingface.co/mrm8488/bert-italian-finedtuned-squadv1-it-alfa) .
 Note that there is also a [large variant](https://huggingface.co/illuin/camembert-large-fquad) of the French model available on the model hub.
 There also exist Korean QA models on the model hub but their performance is not reported.
 

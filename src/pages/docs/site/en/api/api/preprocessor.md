@@ -1,10 +1,10 @@
 ---
-title: "Preprocessor"
-metaTitle: "Preprocessor"
-metaDescription: ""
-slug: "/docs/apiindexing"
-date: "2020-09-03"
-id: "apiindexingmd"
+title: Preprocessor
+metaTitle: Preprocessor
+metaDescription: 
+slug: /docs/apiindexing
+date: 2020-09-03
+id: apiindexingmd
 ---
 
 # Preprocessor
@@ -94,4 +94,3 @@ Fetch an archive (zip or tar.gz) from a url via http and extract content to an o
 **Returns**:
 
 bool if anything got fetched
-

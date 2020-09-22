@@ -71,5 +71,6 @@ Deployment
 
 1. Push changes to branch **source**
 2. Merge changes to branch **gh-pages**
-3. Run **npm run deploy**
+3. Option 1 without updating the documentation files: Run `npm run deploy`<br>
+   Option 2 with updating the documentation files: Run `npm run update_deploy` (need to be run from the directory **haystack-website**)
 4. Documentation gets deployed to **haystack.deepset.ai**
