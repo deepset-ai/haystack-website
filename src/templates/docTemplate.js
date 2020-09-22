@@ -224,7 +224,7 @@ export default function Template({
             />
             <a
                 className="edit-page-link btn"
-                href={`https://github.com/deepset-ai/haystack/tree/documentation/docs/_src/${editPath}`}
+                href={`https://github.com/deepset-ai/haystack/tree/master/docs/_src/${editPath}`}
                 target="_blank"
                 rel="noreferrer noopener"
               >

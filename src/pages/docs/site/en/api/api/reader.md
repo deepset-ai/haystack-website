@@ -1,10 +1,10 @@
 ---
-title: "Reader"
-metaTitle: "Reader"
-metaDescription: ""
-slug: "/docs/apireadermd"
-date: "2020-09-03"
-id: "apireadermd"
+title: Reader
+metaTitle: Reader
+metaDescription: 
+slug: /docs/apireadermd
+date: 2020-09-03
+id: apireadermd
 ---
 
 # Reader
@@ -362,3 +362,6 @@ Example:
 **Returns**:
 
 Dict containing question and answers
+
+<a name="base"></a>
+# base

@@ -1,10 +1,10 @@
 ---
-title: "Retriever"
-metaTitle: "Retriever"
-metaDescription: ""
-slug: "/docs/apiretrievermd"
-date: "2020-09-03"
-id: "apiretrievermd"
+title: Retriever
+metaTitle: Retriever
+metaDescription: 
+slug: /docs/apiretrievermd
+date: 2020-09-03
+id: apiretrievermd
 ---
 
 # Retriever
@@ -245,6 +245,9 @@ Create embeddings for a list of passages. For this Retriever type: The same as c
 
 Embeddings, one per input passage
 
+<a name="base"></a>
+# base
+
 <a name="base.BaseRetriever"></a>
 ## BaseRetriever
 
@@ -296,4 +299,3 @@ documents a higher rank.
 contained in the retrieved docs (common approach in open-domain QA).
 If ``False``, retrieval uses a stricter evaluation that checks if the retrieved document ids
 are within ids explicitly stated in the labels.
-
