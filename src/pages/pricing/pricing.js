@@ -15,36 +15,54 @@ const PricingPage = () => {
 
     const tiers = [
         {
-          title: 'Basic',
-          price: '100',
-          description: ['Lunch', 'Drinks', 'Styx music', 'Sailing'],
-          buttonText: 'Let me sail',
-          buttonVariant: 'outlined',
-        },
-        {
-          title: 'Premium',
-          subheader: 'Most popular',
-          price: '500',
-          description: [
-            'Basic items',
-            'Top Shelf drinks',
-            'Steer the boat for 30min',
-            'Enjoy priority seating',
-          ],
-          buttonText: 'Sail away',
+          title: 'Haystack Open Source',
+          price: 'Free',
+          description: ['bla', 'bla', 'bla', 'bla'],
+          buttonText: 'Get Started',
           buttonVariant: 'contained',
         },
         {
-          title: 'Luxury',
-          price: '1000',
+          title: 'Neural Search',
+          subheader: 'Starter',
+          price: '500€ per month',
           description: [
-            'Private boat',
-            'Top shelf drinks',
-            'More rock music',
-            'Upgraded food',
+            '2,000 pages or 10 Documents',
+            '100 requests per day',
           ],
-          buttonText: 'Living my best life',
-          buttonVariant: 'outlined',
+          buttonText: 'Free Trial',
+          buttonVariant: 'contained',
+        },
+        {
+          title: 'Neural Search',
+          subheader: 'Basic',
+          price: '1000€ per month',
+          description: [
+            '20,000 pages or 100 Documents',
+            '1000 requests per day',
+          ],
+          buttonText: 'Contact Us',
+          buttonVariant: 'contained',
+        },
+        {
+          title: 'Neural Search',
+          subheader: 'Premium',
+          price: '5000€ per month',
+          description: [
+            '400,000 pages or 2000 Documents',
+            '5000 requests per day',
+          ],
+          buttonText: 'Contact Us',
+          buttonVariant: 'contained',
+        },
+        {
+          title: 'Neural Search',
+          subheader: 'Enterprise',
+          price: '1000€ per month',
+          description: [
+            'Custom',
+          ],
+          buttonText: 'Contact Us',
+          buttonVariant: 'contained',
         },
       ];
 
@@ -55,7 +73,7 @@ const PricingPage = () => {
             <Grid container spacing={5} alignItems="flex-end">
               {tiers.map(tier => (
                 // Enterprise card is full width at sm breakpoint
-                <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
+                <Grid item key={tier.title} md={4}>
                   <Card>
                     <CardHeader
                       title={tier.title}

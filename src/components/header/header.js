@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { Link } from "gatsby";
 
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
 
@@ -11,12 +12,20 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import Button from "../landing-page/Button";
 
-import Logo from "../../images/HaystackLogo.png"
-
 const Header = ({ siteTitle, menuLinks }) => {
 
   const screenWidth = useMobileScreen();
   const [mobileNav, setMobileNav] = useState(null);
+  const [solutionList, setSolutionList] = useState(false);
+  const [docsList, setDocsList] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("click", () => {
+      setMobileNav(false);
+      setSolutionList(false);
+      setDocsList(false);
+    });
+  }, []);
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -43,37 +52,110 @@ const Header = ({ siteTitle, menuLinks }) => {
               >
                 Overview
               </LocalizedLink>
-              
-              <LocalizedLink
-                locale="en"
-                to="/en/docs/tutorial1md"
-                className="link"
+            
+              <span
+                role="button"
+                tabIndex={0}
+                className="solutions"
+                onMouseOver={() => {
+                  setSolutionList(!solutionList);
+                }}
+                onMouseOut={() => {
+                  setSolutionList(!solutionList);
+                }}
               >
-                Use Cases
-              </LocalizedLink>
+                Solutions
+                {solutionList && (
+                  <div className="solutions-list">
+                    <LocalizedLink
+                      locale="en"
+                      to=""
+                      className="active"
+                    >
+                      <span
+                        tabIndex={0}
+                        role="button"
+                      >
+                        Financial Governance
+                      </span>
+                    </LocalizedLink>
+                    <LocalizedLink
+                      locale="en"
+                      to=""
+                      className=""
+                    >
+                      <span
+                        tabIndex={0}
+                        role="button"
+                      >
+                        Portal Search
+                      </span>
+                    </LocalizedLink>
+                    <LocalizedLink
+                      locale="en"
+                      to=""
+                      className=""
+                    >
+                      <span
+                        tabIndex={0}
+                        role="button"
+                      >
+                        Market & Competitor Intelligence
+                      </span>
+                    </LocalizedLink>
+                  </div>
+                )}
+              </span>
 
-              <Link
+              <LocalizedLink
                 to="/pricing/pricing"
                 className="link"
+                locale="en"
               >
                 Pricing
-              </Link>
-
-              <LocalizedLink
-                locale="en"
-                className="link"
-                to="/en/docs/get_startedmd"
-              >
-                Quick Start
               </LocalizedLink>
-              
-                <LocalizedLink
-                  locale="en"
-                  className="link"
-                  to="/en/docs/intromd"
-                >
-                  Docs
-                </LocalizedLink>
+
+              <span
+                role="button"
+                tabIndex={0}
+                className="solutions"
+                onMouseOver={() => {
+                  setDocsList(!docsList);
+                }}
+                onMouseOut={() => {
+                  setDocsList(!docsList);
+                }}
+              >
+                Docs
+                {docsList && (
+                  <div className="solutions-list">
+                    <LocalizedLink
+                      locale="en"
+                      to="/en/docs/intromd"
+                      className="active"
+                    >
+                      <span
+                        tabIndex={0}
+                        role="button"
+                      >
+                        Haystack Open Source
+                      </span>
+                    </LocalizedLink>
+                    <LocalizedLink
+                      locale="en"
+                      to=""
+                      className=""
+                    >
+                      <span
+                        tabIndex={0}
+                        role="button"
+                      >
+                        Haystack Hub
+                      </span>
+                    </LocalizedLink>
+                  </div>
+                )}
+              </span>
 
                 <LocalizedLink
                   locale="en"
@@ -83,7 +165,6 @@ const Header = ({ siteTitle, menuLinks }) => {
                   Talk to us
                 </LocalizedLink>
 
-                <Button label="Login" />
                 <Button label="Try Free" />
             </div>
           ) : ( 

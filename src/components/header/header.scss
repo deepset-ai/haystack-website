@@ -47,19 +47,22 @@
     color: #fff;
   }
 
-  .language {
+  .solutions {
     position: relative;
     display: inline-block;
     margin-left: 16px;
+    color: #fff;
+    font-weight: bold;
     cursor: pointer;
 
-    .language-list {
+    .solutions-list {
       background-color: #fff;
       border-radius: 10px;
       position: absolute;
       top: 150%;
       right: -20px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      width: 20rem;
 
       a {
         display: block;
@@ -76,24 +79,11 @@
 
     &:before {
       position: absolute;
-      width: 40px;
-      height: 40px;
+      width: 100px;
+      height: 100px;
       top: -10px;
       left: 0;
       content: "";
-    }
-
-    &:after {
-      display: block;
-      content: '';
-      border-width: 6px;
-      border-style: solid;
-      border-color: #333 transparent transparent transparent;
-
-      /* 定位 */
-      position: absolute;
-      left: 26px;
-      top: 4px;
     }
 
     @include media("<=1000px") {
@@ -116,7 +106,6 @@
     justify-content: space-between;
     align-items: center;
     padding-right: 30px;
-
 
     .link {
       color: #fff;
