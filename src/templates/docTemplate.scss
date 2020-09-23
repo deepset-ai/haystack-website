@@ -1094,18 +1094,21 @@
   font-weight: 700;
   color: var(--color-highlight);
   border-bottom: 2px solid var(--color-highlight);
-  z-index: 4;
+  z-index: 5;
 }
 [type=radio]:checked ~ .labelouter ~ .tabcontent {
-  z-index: 2;
+  z-index: 4;
 }
 [type=radio]:checked ~ .labelinner {
   background: white;
   font-weight: 700;
   color: var(--color-highlight);
   border-bottom: 2px solid var(--color-highlight);
-  z-index: 1;
+  z-index: 2;
 }
 [type=radio]:checked ~ .labelinner ~ .tabcontentinner {
-  z-index: 1;
+  z-index: 2;
+}
+.doc-post-content p {
+  z-index: 1 !important;
 }

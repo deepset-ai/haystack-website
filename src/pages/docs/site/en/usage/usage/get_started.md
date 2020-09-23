@@ -17,7 +17,7 @@ id: "get_startedmd"
 <input type="radio" id="tab-1" name="tab-group-1" checked>
 <label class="labelouter" for="tab-1">Basic</label>
 <div class="tabcontent">
-<br/>The most straightforward way to install Haystack is through pip.<br/><br/>
+The most straightforward way to install Haystack is through pip.<br/><br/>
 
 ```python
 $ pip install farm-haystack
@@ -32,7 +32,7 @@ $ pip install farm-haystack
 <div class="tabcontent">
 If you’d like to run a specific, unreleased version of Haystack, or make edits to the way Haystack runs,
 you’ll want to install it using `git` and `pip --editable`.
-This clones a copy of the repo to a local directory and runs Haystack from there.<br/>
+This clones a copy of the repo to a local directory and runs Haystack from there. <br/><br/>
 
 ```python
 $ git clone https://github.com/deepset-ai/haystack.git
@@ -40,8 +40,7 @@ $ cd haystack
 $ pip install --editable .
 ```
 
-By default, this will give you the latest version of the master branch.
-Use regular git commands to switch between different branches and commits.  
+By default, this will give you the latest version of the master branch. Use regular git commands to switch between different branches and commits.
 </div> 
 </div>
 
