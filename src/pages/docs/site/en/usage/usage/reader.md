@@ -183,7 +183,7 @@ While models are comparatively more performant on English,
 thanks to a wealth of available English training data,
 there are a couple QA models that are directly usable in Haystack.
 
-**FARM**
+**FARM** 
 
 <div class="filter">
 <a href="#french">French</a> <a href="#italian">Italian</a> <a href="#zeroshot">Zero-shot</a>

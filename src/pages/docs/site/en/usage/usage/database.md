@@ -148,7 +148,7 @@ The Document stores have different characteristics. You should choose one depend
 
 **Cons:**
 - No efficient sparse retrieval
-
+ 
 </div>
 <div class="filter-sql table-wrapper" markdown="block">
 
