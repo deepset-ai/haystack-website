@@ -972,3 +972,143 @@
   background-color: hsla(0, 0%, 100%, 0.8);
   z-index: 5;
 }
+
+
+.tabs {
+  margin-bottom: 0.75rem;
+  position: relative; 
+  clear: both;
+  margin: 25px 0;
+}
+.tabsgetstarted {  
+  min-height: 300px; /* This part sucks */
+}
+.tabsreaderreader {
+  min-height: 230px; /* This part sucks */
+}
+.tabsreader {
+  min-height: 400px; /* This part sucks */
+}
+.tabsreaderdeep {
+  min-height: 185px; /* This part sucks */
+}
+.tabsreaderlanguage{
+  min-height: 285px; /* This part sucks */
+}
+.innertabslanguage { 
+  min-height: 185px; /* This part sucks */
+}
+.tabsdsinstall { 
+  min-height: 190px; /* This part sucks */
+}
+.tabsdschoose {
+  min-height: 300px; /* This part sucks */
+}
+.innertabs {  
+  min-height: 300px; /* This part sucks */
+}
+.tab {
+  float: left;
+}
+.tabinner {
+  float: left;
+}
+.tabinner2 {
+  float: left;
+}
+.tab label {
+  padding: 10px; 
+  border-bottom: 2px solid #eee;
+  margin-left: -1px; 
+  position: relative;
+  left: 1px; 
+
+  &:before {
+    background: #e1e2e6;
+    bottom: 0;
+    content: "";
+    height: 3px;
+    position: absolute;
+    transition: none;
+    width: 0px;
+  }
+  &:before {
+    left: 50%;
+    right: 0;
+  }
+
+  &.checked {
+    font-weight: 700;
+    color: var(--color-highlight);
+    border-bottom: 2px solid var(--color-highlight);
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: var(-color-highlight);
+    cursor: pointer;
+  }
+
+  &:hover:not(.active) {
+    color: var(-color-highlight);
+    text-decoration: none;
+    &:after,
+    &:before {
+      transition: all 0.2s;
+      width: 100%;
+    }
+    &:before {
+      left: 0%;
+    }
+  }
+}
+.tab [type=radio] {
+  display: none;   
+}
+.tabinner [type=radio] {
+  display: none;   
+}
+.tabinner2 [type=radio] {
+  display: none;   
+}
+.tabcontent {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  background: white;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+}
+.tabcontentinner {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  background: white;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+}
+[type=radio]:checked ~ .labelouter {
+  background: white;
+  font-weight: 700;
+  color: var(--color-highlight);
+  border-bottom: 2px solid var(--color-highlight);
+  z-index: 5;
+}
+[type=radio]:checked ~ .labelouter ~ .tabcontent {
+  z-index: 4;
+}
+[type=radio]:checked ~ .labelinner {
+  background: white;
+  font-weight: 700;
+  color: var(--color-highlight);
+  border-bottom: 2px solid var(--color-highlight);
+  z-index: 2;
+}
+[type=radio]:checked ~ .labelinner ~ .tabcontentinner {
+  z-index: 2;
+}
+.doc-post-content p {
+  z-index: 1 !important;
+}
