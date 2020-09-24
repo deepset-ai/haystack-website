@@ -14,12 +14,12 @@ import "react-github-button/assets/style.css";
 import { useMobileScreen } from "../hooks";
 import "../scss/index.scss";
 
-import ValueProp from "../components/landing-page/ValueProp";
-import SocialProof from "../components/landing-page/SocialProof";
-import ProductBenefits from "../components/landing-page/ProductBenefits";
-import ProductFeatures from "../components/landing-page/ProductFeatures";
-import Testimonials from "../components/landing-page/Testimonials";
-import CallToAction from "../components/landing-page/CallToAction";
+import ValueProp from "../components/landing-page/valueProp";
+import SocialProof from "../components/landing-page/socialProof";
+import ProductBenefits from "../components/landing-page/productBenefits";
+import ProductFeatures from "../components/landing-page/productFeatures";
+import Testimonials from "../components/landing-page/testimonials";
+import CallToAction from "../components/landing-page/callToAction";
 
 const IndexPage = () => {
 

@@ -1,16 +1,15 @@
 import PropTypes from "prop-types"
 import React, { useState, useEffect } from "react"
-import { Link } from "gatsby";
 
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
 
 import "./header.scss";
-import Logo from "../../images/Haystack_White_Text.png"
+import Logo from "../../images/HaystackLogo.png"
 import { useMobileScreen } from "../../hooks";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import Button from "../landing-page/Button";
+import Button from "../landing-page/button";
 
 const Header = ({ siteTitle, menuLinks }) => {
 
@@ -53,59 +52,13 @@ const Header = ({ siteTitle, menuLinks }) => {
                 Overview
               </LocalizedLink>
             
-              <span
-                role="button"
-                tabIndex={0}
-                className="solutions"
-                onMouseOver={() => {
-                  setSolutionList(!solutionList);
-                }}
-                onMouseOut={() => {
-                  setSolutionList(!solutionList);
-                }}
+              <LocalizedLink
+                locale="en"
+                to="/"
+                className="link"
               >
-                Solutions
-                {solutionList && (
-                  <div className="solutions-list">
-                    <LocalizedLink
-                      locale="en"
-                      to=""
-                      className="active"
-                    >
-                      <span
-                        tabIndex={0}
-                        role="button"
-                      >
-                        Financial Governance
-                      </span>
-                    </LocalizedLink>
-                    <LocalizedLink
-                      locale="en"
-                      to=""
-                      className=""
-                    >
-                      <span
-                        tabIndex={0}
-                        role="button"
-                      >
-                        Portal Search
-                      </span>
-                    </LocalizedLink>
-                    <LocalizedLink
-                      locale="en"
-                      to=""
-                      className=""
-                    >
-                      <span
-                        tabIndex={0}
-                        role="button"
-                      >
-                        Market & Competitor Intelligence
-                      </span>
-                    </LocalizedLink>
-                  </div>
-                )}
-              </span>
+                Use Cases
+              </LocalizedLink>
 
               <LocalizedLink
                 to="/pricing/pricing"
@@ -115,57 +68,24 @@ const Header = ({ siteTitle, menuLinks }) => {
                 Pricing
               </LocalizedLink>
 
-              <span
-                role="button"
-                tabIndex={0}
-                className="solutions"
-                onMouseOver={() => {
-                  setDocsList(!docsList);
-                }}
-                onMouseOut={() => {
-                  setDocsList(!docsList);
-                }}
+              <LocalizedLink
+                to="/pricing/pricing"
+                className="link"
+                locale="en"
               >
                 Docs
-                {docsList && (
-                  <div className="solutions-list">
-                    <LocalizedLink
-                      locale="en"
-                      to="/en/docs/intromd"
-                      className="active"
-                    >
-                      <span
-                        tabIndex={0}
-                        role="button"
-                      >
-                        Haystack Open Source
-                      </span>
-                    </LocalizedLink>
-                    <LocalizedLink
-                      locale="en"
-                      to=""
-                      className=""
-                    >
-                      <span
-                        tabIndex={0}
-                        role="button"
-                      >
-                        Haystack Hub
-                      </span>
-                    </LocalizedLink>
-                  </div>
-                )}
-              </span>
+              </LocalizedLink>
 
-                <LocalizedLink
-                  locale="en"
-                  className="link"
-                  to="/contact/contact"
-                >
-                  Talk to us
-                </LocalizedLink>
-
-                <Button label="Try Free" />
+              <LocalizedLink
+                locale="en"
+                className="link"
+                to="/contact/contact"
+              >
+                Benchmarks
+              </LocalizedLink>
+              
+              <Button label="Login" />
+              <Button label="Try For Free" />
             </div>
           ) : ( 
              <FontAwesomeIcon class="fontawsome-icon" icon={faBars} onKeyDown={handleClick}

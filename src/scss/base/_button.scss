@@ -1,10 +1,12 @@
 .button {
-    //padding: 0.75em 1.25em;
-    //background-color: $buttonColor;
-    //color: $backgroundColor;
-    //border-radius: 1rem;
-    border: 1;
-    font-size: 1.25rem;
-    font-weight: 700;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #009BAA;
+    text-align: center;
     cursor: pointer;
   }

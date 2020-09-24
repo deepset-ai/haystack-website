@@ -1,7 +1,7 @@
 @import "../include_media";
 
 .full-header-wrapper {
-  background: #08415D;
+  background: #ffffff;
   width: 100%;
   position: fixed;
   height: 60px;
@@ -20,12 +20,18 @@
   padding: 10px 0;
   z-index: 100;
   box-sizing: border-box;
-  background: #08415D;
+  background: #ffffff;
   max-width: 1600px;
   // overflow: hidden;
   margin: 0 auto;
   // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   text-transform: uppercase;
+
+  .button {
+    height: 40px;
+    width: 150px;
+    margin-left: 20px;
+  }
 
   .logo-wrapper {
     display: flex;
@@ -51,7 +57,7 @@
     position: relative;
     display: inline-block;
     margin-left: 16px;
-    color: #fff;
+    color: #009BAA;
     font-weight: bold;
     cursor: pointer;
 
@@ -108,7 +114,7 @@
     padding-right: 30px;
 
     .link {
-      color: #fff;
+      color: #009BAA;
       font-weight: bold;
       margin: 0 1rem;
       // border-bottom: 2px solid #fff;
