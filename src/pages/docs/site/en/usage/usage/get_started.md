@@ -8,7 +8,7 @@ id: "get_startedmd"
 ---
 
 # Get Started
- 
+
 ## Installation
 
 <div class="tabs tabsgetstarted">
