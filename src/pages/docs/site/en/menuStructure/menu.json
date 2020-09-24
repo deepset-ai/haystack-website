@@ -66,6 +66,14 @@
         "order": 6
       },
       {
+        "id": "roadmapmd",
+        "title": "Roadmap",
+        "label1": "usage_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 7
+      },
+      {
         "id": "tutorials_haystack",
         "title": "Tutorials",
         "label1": "",
