@@ -1,5 +1,5 @@
 .product-features {
-    background-color: $productFeatureColor;
+    background-color: #ffffff;
     margin: 3.5rem auto;
     text-align: center;
     h3 {
@@ -9,10 +9,10 @@
       font-size: 1.25rem;
       color: black;
     }
-    svg-inline--fa-local {
-      width: 10em !important;
-      color: black !important;
-      height: 10em !important;
+    .svg-inline--fa {
+      width: 5em;
+      color: #009BAA;
+      height: 5em;
     }
   }
 

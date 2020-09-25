@@ -15,10 +15,9 @@ import { useMobileScreen } from "../hooks";
 import "../scss/index.scss";
 
 import ValueProp from "../components/landing-page/valueProp";
-import SocialProof from "../components/landing-page/socialProof";
-import ProductBenefits from "../components/landing-page/productBenefits";
 import ProductFeatures from "../components/landing-page/productFeatures";
-import Testimonials from "../components/landing-page/testimonials";
+import Products from "../components/landing-page/products";
+import UseCases from "../components/landing-page/useCases";
 import CallToAction from "../components/landing-page/callToAction";
 
 const IndexPage = () => {
@@ -30,7 +29,8 @@ const IndexPage = () => {
       <SEO title="Haystack" />
         <ValueProp />
         <ProductFeatures />
-        <Testimonials />
+        <Products />
+        <UseCases />
         <CallToAction />
     </Layout>
   );

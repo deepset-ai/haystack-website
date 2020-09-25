@@ -1,0 +1,42 @@
+.products {
+    background-color: #F5F6FA;
+    margin: 3.5rem auto;
+    text-align: center;
+    .h3-products {
+        color: black;
+        margin-bottom: 30px;
+    }
+    p {
+        font-size: 1.25rem;
+        color: black;
+    }
+    .products-options {
+        float: left;
+    }
+    .products-options-empty {
+        width: 10%;
+    }
+    .prodcuts-header {
+        border-bottom: 1px solid grey;
+    }
+    .products-opensource {
+        background: #ffffff;
+        padding: 20px;
+        width: 40%;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px, rgba(0, 0, 0, 0.08) 3px 10px 30px;
+    }
+    .products-enterprise {
+        padding: 20px;
+        width: 40%;
+    } 
+    .products-actions {
+        display: flex;
+        justify-content: center;
+        .button {
+            height: 50px;
+            width: 205px;
+            margin-left: 10px;
+        }
+    }
+  }
