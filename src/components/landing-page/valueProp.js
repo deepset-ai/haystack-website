@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from "./button";
-import "./landingPage.scss";
 import Logo from "../../images/HaystackIcon.png"
 import LocalizedLink from "../localizedLink/localizedLink"; 
 
