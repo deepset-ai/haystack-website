@@ -1,0 +1,22 @@
+.benchmarking {
+    display: flex;
+    max-width: 900;
+    justify-content: center;
+    justify-items: center;
+    padding-top: 100px;
+    align-content: center;
+
+    h1 {
+        text-align: center;
+        color: #000;
+        font-size: 3rem;
+        margin-bottom: 4rem;
+    }
+
+    h2 {
+        text-align: left;
+        color: #000;
+        font-size: 2rem;
+
+    }
+}
