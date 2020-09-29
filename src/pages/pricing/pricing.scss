@@ -1,0 +1,22 @@
+.pricing-products{
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 50px;
+}
+
+.pricing {
+    align-content: center;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.card-item {
+    height: 100%;
+    .card-action {
+        display: flex;
+        justify-content: center;
+    }
+    button {
+        height: 50px;
+        width: 205px;
+    }
+}

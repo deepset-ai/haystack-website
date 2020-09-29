@@ -1,10 +1,10 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-// import LocalizeLink from "../localizedLink/localizedLink"
-// import { globalHistory } from "@reach/router";
-// import GithubIcon from "../../images/icon/github-normal.svg";
+import LocalizedLink from "../localizedLink/localizedLink"
 import "./footer.scss";
+import { Link } from "gatsby";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Footer = ({ locale, style }) => {
   // const l = locale === "cn" ? "en" : "cn";
@@ -13,9 +13,27 @@ const Footer = ({ locale, style }) => {
   //   .replace("/cn/", "/");
   return (
     <footer className="footer-wrapper" style={style}>
+      <div className="follow">Social networks 
+      <Link></Link>
+      <Link></Link>
+      <Link></Link></div>
       <div className="copy-right">
         <span>© 2020 - {new Date().getFullYear()} deepset. All rights reserved.</span>
-      </div>
+          <LocalizedLink
+            locale="en"
+            className="link"
+            to=""
+          >
+            TERMS OF SERVICE
+          </LocalizedLink>
+          <LocalizedLink
+            locale="en"
+            className="link"
+            to=""
+          >
+            PRIVACY POLICY
+          </LocalizedLink>
+        </div>
     </footer>
   );
 };

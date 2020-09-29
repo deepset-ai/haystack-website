@@ -11,6 +11,7 @@ const ProductFeatures = props => {
 
   return (
     <section className="product-features">
+      <div className="all-product-features">
       <h2>Neural Question Answering Powered by Open Source</h2>
       <h3>Haystack lets you scale QA models to large collections of documents.</h3>
       <div className="githubicon">
@@ -22,41 +23,42 @@ const ProductFeatures = props => {
             />
           </div>
       <div className="core-features">
-        <a href="/en/docs/tutorial1md">
+        <a href="/en/docs/readermd#Choosing-the-Right-Model">
             <div className="core-feature-1">
             <FontAwesomeIcon icon={faBrain}/>
             <h3>Latest NLP models</h3>
             <p>Utilize all transformer based models (BERT, RoBERTa, MiniLM, DPR ...) and smoothly switch when new ones get published</p>
             </div>
         </a>
-        <a href="/en/docs/tutorial2md">
+        <a href="/en/docs/databasemd">
           <div className="core-feature-3">
           <FontAwesomeIcon icon={faDatabase}/>
             <h3>Flexible databases</h3>
             <p>Load data into and query from a range of databases such as Elasticsearch, FAISS, SQL and more</p>
           </div>
         </a>
-        <a href="/en/docs/tutorial3md">
+        <a href="/en/docs/databasemd#Choosing-the-right-document-store">
           <div className="core-feature-2">
           <FontAwesomeIcon icon={faServer}/>
             <h3>Scalability</h3>
             <p>Production-ready deployments that scale to millions of documents</p>
           </div>
         </a>
-        <a href="/en/docs/tutorial3md">
+        <a href="/en/docs/tutorial1md">
           <div className="core-feature-2">
             <FontAwesomeIcon icon={faUndoAlt}/>
             <h3>End-to-End</h3>
             <p>All tooling you need to implement, evaluate, improve and run a QA system</p>
           </div>
         </a>
-        <a href="/en/docs/tutorial3md">
+        <a href="/en/docs/domain_adaptationmd">
           <div className="core-feature-2">
             <FontAwesomeIcon icon={faAssistiveListeningSystems}/>
             <h3>Domain adaptation</h3>
             <p>Fine-tune models to your own domain & improve them continuously via user feedback</p>
           </div>
         </a>
+      </div>
       </div>
     </section>
   )

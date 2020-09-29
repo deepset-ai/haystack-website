@@ -1,68 +1,63 @@
 .usecases {
-    background-color: #ffffff;
-    margin: 3.5rem auto;
-    text-align: center;
-    h1 {
-      padding: 1em;
-    }
-    p {
-      font-weight: 600;
-      margin: 0 auto;
-      width: 80%;
-    }
-    blockquote {
-      margin-top: 0.5em;
-      padding: 0.25em;
-      font-weight: 400;
-    }
+  background-color: #ffffff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .all-usecases {
+    display: inline-block;
   }
-  
-  .testimonial-group {
+  p {
+    font-weight: 600;
+    margin: 0 auto;
+    width: 80%;
+  }
+  blockquote {
+    margin-top: 0.5em;
+    padding: 0.25em;
+    font-weight: 400;
+  }
+}
+
+.usecase-group {
+  display: flex;
+  justify-content: center;
+  max-width: $maxContainerWidth;
+  .uc-description {
+    font-size: 1.1em;
+    line-height: 1.2em;
+    border-bottom: 1px solid grey;
+  }
+  .uc-values{
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    max-width: $maxContainerWidth;
-  }
-  
-  .testimonial-card-1,
-  .testimonial-card-2,
-  .testimonial-card-3  {
-    background-color: $backgroundColor;
-    max-width: 16rem;
-    height: 35rem;
-    margin: 1rem auto;
-    border-radius: 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    &:hover {
-      box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    font-size: 1.1em;
+    line-height: 2em;
+    text-align: left;
+    .ul-examples, .li-examples {
+      list-style-type: circle; 
     }
   }
-  
-  @include breakpoint('from-tablet-p') {
-    .testimonial-group {
-      margin: 0 auto;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: space-around;
-    }
-    .testimonial-card-1,
-    .testimonial-card-2,
-    .testimonial-card-3  {
-      max-width: 14rem;
-      height: 40rem;
-    }  
-  }
-  
-  @include breakpoint('from-tablet-l') {
-    .testimonial-card-1,
-    .testimonial-card-2,
-    .testimonial-card-3  {
-      max-width: 16rem;
-      height: 35rem;
-    }    
-  }
+}
+
+.usecase-card-1,
+.usecase-card-2,
+.usecase-card-3  {
+  background-color: $backgroundColor;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  width: 50rem;
+  margin-left: 100px;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px, rgba(0, 0, 0, 0.08) 3px 10px 30px;
+}
+ 

@@ -1,7 +1,12 @@
 .products {
+    display: flex;
     background-color: #F5F6FA;
-    margin: 3.5rem auto;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    .all-products{
+        display: inline-block;
+    }
     .h3-products {
         color: black;
         margin-bottom: 30px;
@@ -15,9 +20,26 @@
     }
     .products-options-empty {
         width: 10%;
+        height: 470px;
+        background-color: #F5F6FA;
     }
     .prodcuts-header {
         border-bottom: 1px solid grey;
+        font-size: 1.5em;
+        line-height: 1.5em;
+    }
+    .product-description {
+        margin-top: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+    .products-features {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 30px;
+        font-size: 1.1em;
+        line-height: 2em;
+        text-align: left;
     }
     .products-opensource {
         background: #ffffff;
@@ -29,6 +51,7 @@
     .products-enterprise {
         padding: 20px;
         width: 40%;
+        background-color: #F5F6FA;
     } 
     .products-actions {
         display: flex;

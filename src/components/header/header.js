@@ -54,7 +54,7 @@ const Header = ({ siteTitle, menuLinks }) => {
             
               <LocalizedLink
                 locale="en"
-                to="/"
+                to="/#main-use-cases"
                 className="link"
               >
                 Use Cases
@@ -69,7 +69,7 @@ const Header = ({ siteTitle, menuLinks }) => {
               </LocalizedLink>
 
               <LocalizedLink
-                to="/pricing/pricing"
+                to="/en/docs/intromd"
                 className="link"
                 locale="en"
               >
@@ -79,13 +79,13 @@ const Header = ({ siteTitle, menuLinks }) => {
               <LocalizedLink
                 locale="en"
                 className="link"
-                to="/contact/contact"
+                to=""
               >
                 Benchmarks
               </LocalizedLink>
               
               <Button label="Login" />
-              <Button label="Try For Free" />
+              <Button label="Free Trial" />
             </div>
           ) : ( 
              <FontAwesomeIcon class="fontawsome-icon" icon={faBars} onKeyDown={handleClick}
