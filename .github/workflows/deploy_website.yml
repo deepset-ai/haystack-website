@@ -17,10 +17,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out branch gh-pages in order to use it for the deployment
+      # Checks-out master in order to use it for the deployment
       - uses: actions/checkout@v2
-        with:
-          ref: gh-pages
 
       # Install packages and run custom deployment (update all files and push to github pages)
       - name: Install and deploy
