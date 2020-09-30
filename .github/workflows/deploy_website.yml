@@ -21,8 +21,17 @@ jobs:
       - uses: actions/checkout@v2
 
       # Install packages and run custom deployment (update all files and push to github pages)
-      - name: Install and deploy
+      - name: Install and update
         run: |
           npm install
-          git remote set-url origin https://PIFFPAFFM:${{ secrets.TOKEN_FOR_DEPLOYMENT }}@github.com/deepset-ai/haystack-website.git
-          npm run update_deploy
+          npm run update_img
+          npm run update_apidocs
+          npm run header_apidocs
+          npm run update_tutorialsdocs
+          npm run header_tutorialsdocs
+          npm run update_usagedocs
+          npm run header_usagedocs
+          
+      - uses: enriikke/gatsby-gh-pages-action@v2
+        with:
+          access-token: ${{ secrets.TOKEN_FOR_DEPLOYMENT }}
