@@ -24,4 +24,5 @@ jobs:
       - name: Install and deploy
         run: |
           npm install
+          git remote set-url origin https://PIFFPAFFM:${{ secrets.TOKEN_FOR_DEPLOYMENT }}@github.com/deepset-ai/haystack-website.git
           npm run update_deploy
