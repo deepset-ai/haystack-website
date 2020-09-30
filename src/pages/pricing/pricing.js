@@ -38,7 +38,7 @@ const PricingPage = () => {
             '20,000 pages or 100 Documents',
             '1000 requests per day',
           ],
-          buttonText: 'Contact Us',
+          buttonText: 'Free Trial',
           buttonVariant: 'contained',
         },
         {
@@ -49,19 +49,9 @@ const PricingPage = () => {
             '400,000 pages or 2000 Documents',
             '5000 requests per day',
           ],
-          buttonText: 'Contact Us',
+          buttonText: 'Free Trial',
           buttonVariant: 'contained',
-        },
-        {
-          title: 'Neural Search',
-          subheader: 'Enterprise',
-          price: 'Starting at 20,000€ per month',
-          description: [
-          ],
-          buttonText: 'Contact Us',
-          buttonVariant: 'contained',
-          to: '/contact/contact'
-        },
+        }
       ];
 
   return (
@@ -72,10 +62,10 @@ const PricingPage = () => {
         <div className="pricing">
         <h2>Haystack Hub Pricing</h2>
         <Container component="main" maxWidth="xl">
-            <Grid container spacing={4}>
+            <Grid container spacing={5}>
               {tiers.map(tier => (
                 // Enterprise card is full width at sm breakpoint
-                <Grid item key={tier.title} md={3}>
+                <Grid item key={tier.title} md={4}>
                     <Card className="card-item">
                       <CardHeader
                         title={tier.title}
@@ -106,6 +96,13 @@ const PricingPage = () => {
               ))}
             </Grid>
           </Container>
+          <div className="product-enterprise">
+            <div>
+              <h2>Neural Search Enterprise</h2>
+              <h4>If the options above do not fit to your business needs, feel free to contact us</h4>
+            </div>
+            <Button className="item-button" label="Contanct Us" />
+          </div>
           </div>
       </Layout>
   );

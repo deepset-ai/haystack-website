@@ -20,3 +20,33 @@
         width: 205px;
     }
 }
+
+.product-enterprise {
+    background: #ffffff;
+    border-radius: 10px;
+    width: 94%;
+    margin-left: 3%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px, rgba(0, 0, 0, 0.08) 3px 10px 30px;
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+    h2 {
+        display: flex;
+        justify-content: left; 
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-bottom: 0;
+    }
+    h4 {
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+    }
+    button {
+        height: 50px;
+        width: 205px;
+        margin-top: 25px;
+        margin-left: 1000px;
+    }
+}
