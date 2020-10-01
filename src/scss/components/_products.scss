@@ -6,6 +6,7 @@
     text-align: center;
     .all-products{
         display: inline-block;
+        padding-bottom: 90px;
     }
     .h3-products {
         color: black;
@@ -17,6 +18,7 @@
     }
     .products-options {
         float: left;
+        padding-bottom: 20px;
     }
     .products-options-empty {
         width: 10%;
@@ -43,13 +45,11 @@
     }
     .products-opensource {
         background: #ffffff;
-        padding: 20px;
         width: 40%;
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px, rgba(0, 0, 0, 0.08) 3px 10px 30px;
     }
     .products-enterprise {
-        padding: 20px;
         width: 40%;
         background-color: #F5F6FA;
     } 

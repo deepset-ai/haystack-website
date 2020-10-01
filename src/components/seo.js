@@ -19,6 +19,8 @@ function SEO({ description, lang, meta, title }) {
             title
             description
             author
+            titleTemplate
+            twitterUsername
           }
         }
       }
@@ -33,7 +35,7 @@ function SEO({ description, lang, meta, title }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`${site.siteMetadata.titleTemplate}`}
       meta={[
         {
           name: `description`,
@@ -57,7 +59,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: site.siteMetadata.twitterUsername,
         },
         {
           name: `twitter:title`,
@@ -75,7 +77,8 @@ function SEO({ description, lang, meta, title }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  description: ``,
+  description: `Haystack enables Question Answering at Scale`,
+  title: `Haystack`,
 }
 
 SEO.propTypes = {

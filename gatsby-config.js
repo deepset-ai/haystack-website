@@ -1,20 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: ``,
+    title: `Haystack`,
+    titleTemplate: "%s - Qestion Answering",
     siteUrl: `https://haystack.deepset.ai`,
-    menuLinks:[
-      {
-        name: `home`,
-        link:`/`
-      },
-      {
-        name: `usage`,
-        link: `/documentation/usage`
-
-      }
-    ],
-    description: `haystack homepage`,
-    author: `@deepset`,
+    description: `Haystack enables Question Answering at Scale`,
+    author: "deepset",
+    twitterUsername: "@deepset_ai",
   },
   plugins: [
     'gatsby-plugin-cname',
@@ -24,21 +15,6 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-json`,
-    /*{
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: `Roboto Mono`,
-            variants: [`400`, `700`]
-          },
-          {
-            family: `Roboto`,
-            subsets: [`latin`]
-          },
-        ],
-      },
-    },*/
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -115,7 +91,38 @@ module.exports = {
         //   injectFirst: true,
         // },
       }
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/haystack-sitemap.xml`,
+        // Exclude specific pages or groups of pages using glob parameters
+        // See: https://github.com/isaacs/minimatch
+        // The example below will exclude the single `path/to/page` and all routes beginning with `category`
+        //exclude: [`/category/*`, `/path/to/page`],
+        query: `
+          {  
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+        }`,
+        resolveSiteUrl: ({site, allSitePage}) => {
+          //Alternatively, you may also pass in an environment variable (or any location) at the beginning of your `gatsby-config.js`.
+          return `https://haystack.deepset.ai`
+        },
+        serialize: ({ site, allSitePage }) =>
+          allSitePage.nodes.map(node => {
+            return {
+              url: `https://haystack.deepset.ai${node.path}`,
+              changefreq: `daily`,
+              priority: 0.7,
+            }
+          })
+      }
     }
+
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

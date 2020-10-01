@@ -15,14 +15,10 @@ const Header = ({ siteTitle, menuLinks }) => {
 
   const screenWidth = useMobileScreen();
   const [mobileNav, setMobileNav] = useState(null);
-  const [solutionList, setSolutionList] = useState(false);
-  const [docsList, setDocsList] = useState(false);
 
   useEffect(() => {
     window.addEventListener("click", () => {
       setMobileNav(false);
-      setSolutionList(false);
-      setDocsList(false);
     });
   }, []);
 
@@ -69,7 +65,7 @@ const Header = ({ siteTitle, menuLinks }) => {
               </LocalizedLink>
 
               <LocalizedLink
-                to="/en/docs/intromd"
+                to="/en/docs/overviewmd"
                 className="link"
                 locale="en"
               >
@@ -84,8 +80,8 @@ const Header = ({ siteTitle, menuLinks }) => {
                 Benchmarks
               </LocalizedLink>
               
-              <Button label="Login" />
-              <Button label="Free Trial" />
+              <Button label="Login" to="http://haystackhub-service.s3-website.eu-central-1.amazonaws.com/login" />
+              <Button label="Free Trial" to="http://haystackhub-service.s3-website.eu-central-1.amazonaws.com/signup/step-1"/>
             </div>
           ) : ( 
              <FontAwesomeIcon class="fontawsome-icon" icon={faBars} onKeyDown={handleClick}

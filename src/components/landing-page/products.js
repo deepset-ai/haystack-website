@@ -62,7 +62,7 @@ const Products = props => {
             </div>
             <div className="products-actions">
                 <Button label="Free Trial" />
-                <Button label="Learn More" to="/pricing/pricing" />
+                <Button label="Learn More" to="/en/docs/introhubmd" />
             </div>
         </div>
         <div className="products-options products-options-empty">

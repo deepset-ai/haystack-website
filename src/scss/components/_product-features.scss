@@ -1,6 +1,9 @@
 .product-features {
     background-color: #ffffff;
     text-align: center;
+    h2 {
+      padding-top: 60px;
+    }
     h3 {
       color: black;
     }
@@ -27,207 +30,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    vertical-align: top;
     justify-content: center;
+    padding-bottom: 60px;
     p {
       line-height: 1.2;
     }
   }
-  
-  /*.core-feature-1,
-  .core-feature-2,
-  .core-feature-3 {
-  
+
+  .core-feature-2 {
+    height: 350px
   }
-  
-  .core-feature-1-image,
-  .core-feature-2-image,
-  .core-feature-3-image {
-  
-  }*/
-  
-  .core-feature-1-image {
-    position: relative;
+
+  .svg-inline--fa.fa-w-14 {
+    width: 5em !important;
   }
-  
-  .icon-hearbeat {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    z-index: 100;
-    -webkit-animation-name: heartbeat2;
-    animation-name: heartbeat2;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    -webkit-transform-origin: center center;
-    transform-origin: center center;
-  }
-  
-  @-webkit-keyframes heartbeat2 {
-    from {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-      -webkit-transform-origin: center center;
-      transform-origin: center center;
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-  
-    10% {
-      -webkit-transform: scale(0.91);
-      transform: scale(0.91);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-  
-    17% {
-      -webkit-transform: scale(0.98);
-      transform: scale(0.98);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-  
-    33% {
-      -webkit-transform: scale(0.87);
-      transform: scale(0.87);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-  
-    45% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-  }
-  
-  @keyframes heartbeat2 {
-    from {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-      -webkit-transform-origin: center center;
-      transform-origin: center center;
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-  
-    10% {
-      -webkit-transform: scale(0.91);
-      transform: scale(0.91);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-  
-    17% {
-      -webkit-transform: scale(0.98);
-      transform: scale(0.98);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-  
-    33% {
-      -webkit-transform: scale(0.87);
-      transform: scale(0.87);
-      -webkit-animation-timing-function: ease-in;
-      animation-timing-function: ease-in;
-    }
-  
-    45% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-      -webkit-animation-timing-function: ease-out;
-      animation-timing-function: ease-out;
-    }
-  }
-  
-  .icon-paint {
-    position: absolute;
-    top: 35%;
-    left: 25%;
-    z-index: 100;
-    -webkit-animation: painting 3s alternate infinite ease-in-out;
-    animation: painting 3s alternate infinite ease-in-out;
-  }
-  
-  .core-feature-2-image {
-    position: relative;
-  }
-  
-  .icon-wrench {
-    position: absolute;
-    top: 40%;
-    left: 35%;
-    z-index: 100;
-    -webkit-animation: wrench-rotate 1s steps(3) alternate infinite;
-    animation: wrench-rotate 1s steps(3) alternate infinite;
-    -webkit-transform-origin: right;
-    transform-origin: right;
-  }
-  
-  @-webkit-keyframes wrench-rotate {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-  
-    100% {
-      -webkit-transform: rotate(35deg);
-      transform: rotate(35deg);
-    }
-  }
-  
-  @keyframes wrench-rotate {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-  
-    100% {
-      -webkit-transform: rotate(35deg);
-      transform: rotate(35deg);
-    }
-  }
-  
-  .core-feature-3-image {
-    position: relative;
-  }
-  
-  @-webkit-keyframes painting {
-    0% {
-      -webkit-transform: translate(0px, 0px);
-      transform: translate(0px, 0px);
-    }
-  
-    50% {
-      -webkit-transform: translate(0px, 20px);
-      transform: translate(0px, 20px);
-    }
-  
-    100% {
-      -webkit-transform: translate(0px, -10px);
-      transform: translate(0px, -10px);
-    }
-  }
-  
-  @keyframes painting {
-    0% {
-      -webkit-transform: translate(0px, 0px);
-      transform: translate(0px, 0px);
-    }
-  
-    50% {
-      -webkit-transform: translate(0px, 20px);
-      transform: translate(0px, 20px);
-    }
-  
-    100% {
-      -webkit-transform: translate(0px, -10px);
-      transform: translate(0px, -10px);
-    }
+
+  .feature-icon {
+    height: 5em !important;
+    width: 5em !important;
   }
   
   @include breakpoint('from-tablet-p') {
