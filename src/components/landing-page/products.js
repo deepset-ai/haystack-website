@@ -2,6 +2,11 @@ import React from 'react';
 import Button from "./button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import Logo from "../../images/HaystackIcon.png"
+import Search from "../../images/HaystackSearch.png"
+
 
 const Products = props => {
 
@@ -15,6 +20,9 @@ const Products = props => {
         </div>
         <div className="products-options products-opensource">
             <div className="prodcuts-header">
+                <img className="logo-icon" src={Logo} alt="Haystack Icon"></img>
+                <FontAwesomeIcon className="fa fa-heart" icon={faHeart}/>
+                <FontAwesomeIcon className="fa fa-github" icon={faGithub}/>
                 <h3>Haystack Open Source</h3>
                 Open source framework to scale QA models to large collections of documents.<br/><br/>
             </div>
@@ -40,6 +48,7 @@ const Products = props => {
         </div>
         <div className="products-options products-enterprise">
             <div className="prodcuts-header">
+                <img className="logo-search" src={Search} alt="Haystack Icon"></img>
                 <h3>Haystack Hub</h3>
                 Enterprise-ready subsription with full service to enable neural search.<br/><br/>
             </div>
