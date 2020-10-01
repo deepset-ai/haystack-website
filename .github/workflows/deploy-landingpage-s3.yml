@@ -1,37 +1,33 @@
-# This is a basic workflow to help you get started with Actions
+name: Deploy
 
-name: Repository Dispatch
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the source branch
 on:
-  repository_dispatch:
-    types: [deploy-website]
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  push:
+    branches:
+      - landing-page
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  deploy:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out master in order to use it for the deployment
-      - uses: actions/checkout@v2
-
-      # Install packages and run custom deployment (update all files and push to github pages)
-      - name: Install and update
-        run: |
-          npm install
-          npm run update_img
-          npm run update_apidocs
-          npm run header_apidocs
-          npm run update_tutorialsdocs
-          npm run header_tutorialsdocs
-          npm run update_usagedocs
-          npm run header_usagedocs
-          
-      - uses: enriikke/gatsby-gh-pages-action@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          access-token: ${{ secrets.TOKEN_FOR_DEPLOYMENT }}
+          ref: landing-page
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
+      - name: Deploy
+        uses: jonelantha/gatsby-s3-action@v1
+        with:
+          dest-s3-bucket: haystackhub-website
