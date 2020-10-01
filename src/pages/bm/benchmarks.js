@@ -1,13 +1,20 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import JSONDataReader from "../benchmarks/site/en/reader_performance.json"
 import JSONDataRetriever from "../benchmarks/site/en/retriever_performance.json"
 import Layout from "../../components/layout/layout";
 
 import { Chart } from "react-google-charts";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
+
 import "./benchmarking.scss";
 
 const BenchMarks = () => {
+
+    const [showReaderDesc, setShowReaderDesc] = useState(false);
+    const [showRetrieverDesc, setShowRetrieverDesc] = useState(false);
 
     let dataReader = new Array(JSONDataReader.columns);
     for (let i=0; i<JSONDataReader.data.length; i++) {
@@ -19,32 +26,53 @@ const BenchMarks = () => {
         dataRetriever[i+1] = [JSONDataRetriever.data[i].model, JSONDataRetriever.data[i].recall, JSONDataRetriever.data[i].index_time, JSONDataRetriever.data[i].query_time];
     } 
 
+    useEffect(()=>  {
+      window.addEventListener("click", () => {
+        setShowReaderDesc(false);
+        setShowRetrieverDesc(false);
+      })
+    })
+
     return (
         <Layout>
             <section1 className="benchmarking">
-            <div>
+            <div className="benchmarking-content">
             <h1>Haystack Benchmarking</h1>
-            <h2>{JSONDataReader.title}</h2>
+            <button className="h-button" onKeyDown={() => {setShowReaderDesc(!showReaderDesc);}}
+                    onClick={(e) => { e.stopPropagation(); setShowReaderDesc(!showReaderDesc);}}>
+              <h2>{JSONDataReader.title} {showReaderDesc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
+            </button>
+            {showReaderDesc && (
+              <div className="desc-details">{JSONDataReader.description}</div>
+            )}
             <Chart
-                width={1000}
+                width={1200}
                 height={600}
                 chartType={JSONDataReader.chart_type}
                 loader={<div>Loading Chart</div>}
                 data={dataReader}
                 options={{
+                colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
                 subTitle: JSONDataReader.subtitle,
                 bars: JSONDataReader.bars
                 }}
             />
-            <h2>{JSONDataRetriever.title}</h2>
+            <button className="h-button" onKeyDown={() => {setShowRetrieverDesc(!showRetrieverDesc);}}
+                    onClick={(e) => { e.stopPropagation(); setShowRetrieverDesc(!showRetrieverDesc);}}>
+            <h2>{JSONDataRetriever.title} {showRetrieverDesc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
+            </button>
+            {showRetrieverDesc && (
+              <div className="desc-details">{JSONDataRetriever.description}</div>
+            )}
             <Chart
-                width={1000}
+                width={1200}
                 height={600}
                 chartType={JSONDataReader.chart_type}
                 loader={<div>Loading Chart</div>}
                 data={dataRetriever}
                 options={{
                     subtitle: JSONDataRetriever.subtitle,
+                    colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
                     bars: JSONDataRetriever.bars, // Required for Material Bar Charts.
                       series: {
                         0: { axis: JSONDataRetriever.series.s0 }, // Bind series 0 to an axis named 'distance'.

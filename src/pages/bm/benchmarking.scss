@@ -5,7 +5,20 @@
     justify-items: center;
     padding-top: 100px;
     align-content: center;
-
+    background-color: #ffffff;
+    .benchmarking-content {
+        width:80%;
+        .h-button {
+            cursor: pointer;
+            border: none;
+            background-color: #ffffff;
+        }
+        .desc-details {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            line-height: 1.5rem;
+        }
+    }
     h1 {
         text-align: center;
         color: #000;
@@ -17,6 +30,14 @@
         text-align: left;
         color: #000;
         font-size: 2rem;
-
+        .fontawsome-icon {
+            width: 20px;
+            color: #000000;
+        }
+    }
+    .setup {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        line-height: 1.5rem;
     }
 }
