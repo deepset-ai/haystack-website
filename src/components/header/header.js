@@ -39,7 +39,7 @@ const Header = ({ siteTitle, menuLinks }) => {
           <div className="logo-wrapper">
             <LocalizedLink locale="en" to={"/"}>
               <img src={Logo} alt="Haystack Logo">
-              </img>
+              </img> 
             </LocalizedLink>
           </div>
           {screenWidth > 1000 ? (
