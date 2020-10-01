@@ -79,7 +79,7 @@ const Header = ({ siteTitle, menuLinks }) => {
               <LocalizedLink
                 locale="en"
                 className="link"
-                to=""
+                to="/bm/benchmarks"
               >
                 Benchmarks
               </LocalizedLink>
