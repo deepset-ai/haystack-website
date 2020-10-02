@@ -11,10 +11,21 @@ id: "getstartedhhadminmd"
 
 ## Login
 
-## Upload Documents
+## The Dashboard
+
+## Manage Documents
 
 ## Configure your Retriever
 
 ## Configure your Reader
 
 ## Update your Settings
+
+### Organisation Settings
+
+### Workspace Settings
+
+### Personal Details
+
+### Upgrade your account
+

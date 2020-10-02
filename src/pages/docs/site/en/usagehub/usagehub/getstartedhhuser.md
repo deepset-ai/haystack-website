@@ -13,10 +13,6 @@ id: "getstartedhhusermd"
 
 ## Login
 
-## Upload Documents
+## Search your Documents
 
-## Configure your Retriever
-
-## Configure your Reader
-
-## Update your Settings
+## Update your Account
