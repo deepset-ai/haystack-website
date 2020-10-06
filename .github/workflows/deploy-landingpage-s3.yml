@@ -19,6 +19,14 @@ jobs:
           node-version: 12.x
       - name: Build
         run: |
+          npm run update_img
+          npm run update_apidocs
+          npm run header_apidocs
+          npm run update_tutorialsdocs
+          npm run header_tutorialsdocs
+          npm run update_usagedocs
+          npm run header_usagedocs
+          npm run update_benchmarks
           npm ci
           npm run build
       - name: Configure AWS Credentials

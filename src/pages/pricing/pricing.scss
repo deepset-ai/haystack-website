@@ -4,20 +4,31 @@
 }
 
 .pricing {
-    align-content: center;
-    text-align: center;
+    display: flex;
+    justify-content: center;
     padding-bottom: 50px;
-}
 
-.card-item {
-    height: 100%;
-    .card-action {
-        display: flex;
-        justify-content: center;
+    .pricing-options {
+        background: #ffffff;
+        width: 30%;
+        margin-left: 20px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px, rgba(0, 0, 0, 0.08) 3px 10px 30px;
+        align-content: center;
+        text-align: center;
+        
+        .h3-starter {
+
+        }
     }
-    button {
-        height: 50px;
-        width: 205px;
+    .pricing-starter {
+
+    }
+    .pricing-basic {
+
+    }
+    .pricing-premium {
+
     }
 }
 
