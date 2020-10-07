@@ -56,7 +56,7 @@ const Products = props => {
             <div className="products-features">
                 <ul>
                     <li>
-                        <FontAwesomeIcon icon={faCheck}/> Web interface for uploading your documents, configuring your models
+                        <FontAwesomeIcon icon={faCheck}/> Web interface for configuring and operating your QA system
                     </li>
                     <li>
                         <FontAwesomeIcon icon={faCheck}/> Search UI for end users

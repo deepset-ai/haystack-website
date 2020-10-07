@@ -20,6 +20,7 @@
     "gatsby-plugin-material-ui": "^2.1.10",
     "gatsby-plugin-offline": "^3.2.30",
     "gatsby-plugin-react-helmet": "^3.3.12",
+    "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-robots-txt": "^1.5.3",
     "gatsby-plugin-sass": "^2.3.14",
     "gatsby-plugin-sharp": "^2.6.38",

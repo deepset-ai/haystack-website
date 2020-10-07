@@ -13,7 +13,7 @@ const ProductFeatures = props => {
     <section className="product-features">
       <div className="all-product-features">
       <h2>Neural Question Answering Powered by Open Source</h2>
-      <h3>Haystack lets you scale QA models to large collections of documents.</h3>
+      <h3>Haystack lets you scale QA models to millions of documents.</h3>
       <div className="githubicon">
             <GithubButton
               type="stargazers"
@@ -40,14 +40,14 @@ const ProductFeatures = props => {
         <a href="/en/docs/databasemd#Choosing-the-right-document-store">
           <div className="core-feature-2">
           <FontAwesomeIcon className="feature-icon" icon={faServer}/>
-            <h3>Scalability</h3>
+            <h3>Scalability<br/><br/></h3>
             <p>Production-ready deployments that scale to millions of documents</p>
           </div>
         </a>
         <a href="/en/docs/tutorial1md">
           <div className="core-feature-2">
             <FontAwesomeIcon className="feature-icon" icon={faUndoAlt}/>
-            <h3>End-to-End</h3>
+            <h3>End-to-End<br/><br/></h3>
             <p>All tooling you need to implement, evaluate, improve and run a QA system</p>
           </div>
         </a>
