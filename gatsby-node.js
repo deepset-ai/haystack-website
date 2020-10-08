@@ -1,14 +1,55 @@
 const path = require("path");
 const fs = require("fs");
+const ReadVersionJson = require("./walkFile");
 const locales = require("./src/consts/locales");
 const express = require("express");
 const env = process.env.IS_PREVIEW;
 console.log(env);
+const getNewestVersion = (versionInfo) => {
+  const keys = Object.keys(versionInfo).filter(
+    (v) =>
+      v !== "master" && (versionInfo[v].released === "yes" || env === "preview")
+  );
+  return keys.reduce((pre, cur) => {
+    const curVersion = cur
+      .substring(1)
+      .split(".")
+      .map((v) => Number(v));
+    const preVersion = pre
+      .substring(1)
+      .split(".")
+      .map((v) => Number(v));
+
+    if (curVersion[0] !== preVersion[0]) {
+      pre = curVersion[0] < preVersion[0] ? pre : cur;
+    } else if (curVersion[1] !== preVersion[1]) {
+      pre = curVersion[1] < preVersion[1] ? pre : cur;
+    } else if (curVersion[2] !== preVersion[2]) {
+      pre = curVersion[2] < preVersion[2] ? pre : cur;
+    } else {
+      pre = cur;
+    }
+
+    return pre;
+  }, "v0.0.0");
+};
 
 exports.onCreateDevServer = ({ app }) => {
   app.use(express.static("public"));
 };
 
+
+// the version is same for different lang, so we only need one
+const DOC_ROOT = "src/pages/docs/versions";
+const versionInfo = ReadVersionJson(DOC_ROOT);
+const newestVersion = getNewestVersion(versionInfo);
+console.log(versionInfo);
+if (env === "preview") {
+  versionInfo.preview = {
+    version: "preview",
+    released: "no",
+  };
+}
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions;
   return new Promise((resolve) => {
@@ -23,7 +64,7 @@ exports.onCreatePage = ({ page, actions }) => {
         path: localizedPath,
         context: {
           locale: lang,
-          //newestVersion,
+          newestVersion,
         },
       });
     });
@@ -80,17 +121,30 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors);
     }
 
+    const findVersion = (str) => {
+      const regx = /versions\/([v\d\.]*)/;
+      const match = str.match(regx);
+      return match
+        ? match[1]
+          ? match[1]
+          : env === "preview" && str.includes("preview")
+          ? "preview"
+          : match[1]
+        : "";
+    };
+    
     // get all menuStructures
     const allMenus = result.data.allFile.edges.map(
       ({ node: { absolutePath, childMenuStructureJson } }) => {
         let lang = "en";
-        //const version = findVersion(absolutePath) || "master";
+        const version = findVersion(absolutePath) || "master";
         const menuStructureList =
           (childMenuStructureJson && [...childMenuStructureJson.menuList]) ||
           [];
         const menuList = [...menuStructureList];
         return {
           lang,
+          version,
           menuList,
           absolutePath,
         };
@@ -112,15 +166,26 @@ exports.createPages = ({ actions, graphql }) => {
     const generatePath = (
       id,
       lang,
+      version,
       needLocal = true,
     ) => {
       const findMenu = allMenus.find(
-        (v) => v.lang === lang //&& v.version === version
+        (v) => v.lang === lang && v.version === version
       );
 
       const menuList = findMenu ? findMenu.menuList : [];
       const doc = menuList.find((v) => v.id === id);
-      let localizedPath = `${lang}/docs/`;
+      let localizedPath = "";
+      if (version && version !== "master") {
+        localizedPath =
+          lang === defaultLang
+            ? `/docs/${version}/`
+            : `${lang}/docs/${version}/`;
+      } else {
+        // for master branch version -> false
+        localizedPath = lang === defaultLang ? `/docs/` : `${lang}/docs/`;
+      }
+
       return needLocal ? `${localizedPath}${id}` : `${id}`;
     };
 
@@ -133,7 +198,7 @@ exports.createPages = ({ actions, graphql }) => {
       arr.map(({ node: { frontmatter, fileAbsolutePath, headings } }) => {
         const fileLang = "en";
 
-        //const version = findVersion(fileAbsolutePath) || "master";
+        const version = findVersion(fileAbsolutePath) || "master";
         const headingVals = headings.map((v) => v.value);
         return {
           ...frontmatter,
@@ -142,6 +207,7 @@ exports.createPages = ({ actions, graphql }) => {
           path: generatePath(
             frontmatter.id,
             fileLang,
+            version,
             false
           ),
           // the value we need compare with search query
@@ -149,23 +215,70 @@ exports.createPages = ({ actions, graphql }) => {
         };
       });
 
+    // get all version
+    const versions = new Set();
+    legalMd.forEach(({ node }) => {
+      const fileAbsolutePath = node.fileAbsolutePath;
+      console.log(fileAbsolutePath);
+      const version = findVersion(fileAbsolutePath);
+      console.log(version);
+      console.log("------------------------");
+
+      // released: no -> not show , yes -> show
+      // when env is preview ignore released
+      if (
+        versionInfo[version] &&
+        (versionInfo[version].released === "yes" || env === "preview")
+      ) {
+        versions.add(version);
+      }
+    });
+
     return legalMd.forEach(({ node }) => {
       const fileAbsolutePath = node.fileAbsolutePath;
       const fileId = node.frontmatter.id;
+      let version = findVersion(fileAbsolutePath);
 
       const fileLang = "en";
 
       let editPath = fileAbsolutePath.split(
         fileLang === "en" ? "/en/" : "/zh-CN/"
       )[1];
-      //editPath = editPath.replace(".md", ".rst");
       
       const localizedPath = generatePath(
         fileId,
         fileLang,
+        version,
         true
       );
       const newHtml = node.html;
+
+      // the newest doc version is master so we need to make route without version.
+      // for easy link to the newest doc
+      if (version === newestVersion) {
+        const masterPath = generatePath(fileId, fileLang, "master");
+        createPage({
+          path: masterPath,
+          component: docTemplate,
+          context: {
+            locale: fileLang,
+            version: newestVersion, // get master version
+            versions: Array.from(versions),
+            newestVersion,
+            old: fileId,
+            headings: node.headings.filter((v) => v.depth < 4 && v.depth >= 1),
+            fileAbsolutePath,
+            isBlog,
+            editPath,
+            allMenus,
+            newHtml,
+          }, // additional data can be passed via context
+        });
+      }
+
+      console.log(version);
+      console.log(versions);
+      console.log(localizedPath);
 
       //  normal pages
       isBlog=false;
@@ -174,9 +287,12 @@ exports.createPages = ({ actions, graphql }) => {
         component: docTemplate,
         context: {
           locale: fileLang,
+          version: version,
+          versions: Array.from(versions),
           old: fileId,
           headings: node.headings.filter((v) => v.depth < 4 && v.depth >= 1),
           fileAbsolutePath,
+          newestVersion,
           editPath,
           allMenus,
           newHtml,

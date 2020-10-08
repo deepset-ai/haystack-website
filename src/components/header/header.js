@@ -57,7 +57,7 @@ const Header = ({ siteTitle, menuLinks }) => {
                 </LocalizedLink>
             </div>
           ) : ( 
-             <FontAwesomeIcon class="fontawsome-icon" icon={faBars} onKeyDown={handleClick}
+             <FontAwesomeIcon className="fontawsome-icon" icon={faBars} onKeyDown={handleClick}
              onClick={handleClick}/>
           )}
         </header>
