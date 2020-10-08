@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - landing-page
+  repository_dispatch:
+    types: [deploy-website]
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
