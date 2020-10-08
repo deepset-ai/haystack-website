@@ -27,7 +27,7 @@ const BenchMarks = () => {
 
     let dataRetriever = new Array(JSONDataRetriever.columns);
     for (let i=0; i<JSONDataRetriever.data.length; i++) {
-        dataRetriever[i+1] = [JSONDataRetriever.data[i].model, JSONDataRetriever.data[i].n_docs, JSONDataRetriever.data[i].index_speed, JSONDataRetriever.data[i].query_speed, JSONDataRetriever.data[i].map];
+      dataRetriever[i+1] = [JSONDataRetriever.data[i].model, JSONDataRetriever.data[i].n_docs, JSONDataRetriever.data[i].index_speed, JSONDataRetriever.data[i].query_speed, JSONDataRetriever.data[i].map];
     } 
 
     let dataRetrieverSpeed = new Array(JSONRetrieverSpeed.columns);
