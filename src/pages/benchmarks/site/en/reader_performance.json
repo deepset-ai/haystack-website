@@ -2,38 +2,18 @@
     "chart_type": "BarChart",
     "title": "Reader Performance",
     "subtitle": "Time and Accuracy Benchmarks",
-    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
+    "description": "",
     "bars": "horizontal",
     "columns": [
         "Model", 
-        "Top 10 Accuracy", 
-        "Time"
+        "F1",
+        "Speed"
     ],
     "data": [
-        {
-            "model": "RoBERTa",
-            "accuracy": 72.22222222222222,
-            "time": 56.033346766999784
-        },
-        {
-            "model": "MiniLM",
-            "accuracy": 38.88888888888889,
-            "time": 49.28621050500078
-        },
-        {
-            "model": "BERT base",
-            "accuracy": 31.48148148148148,
-            "time": 42.67899718899935
-        },
-        {
-            "model": "BERT large",
-            "accuracy": 53.70370370370371,
-            "time": 74.21550956300052
-        },
-        {
-            "model": "XLMR large",
-            "accuracy": 72.22222222222222,
-            "time": 76.56486266000047
-        }
+        {"Model": "RoBERTa", "F1": 0.8067985794671885, "Speed": 92.3039712094936},
+        {"Model": "MiniLM","F1": 0.7823306265318686, "Speed": 98.62387044489223},
+        {"Model": "BERT base", "F1": 0.7490271600053505, "Speed": 99.92750782409666},
+        {"Model": "BERT large", "F1": 0.8264545708097472, "Speed": 39.529824033964466},
+        {"Model": "XLM-RoBERTa", "F1": 0.8526275190954586, "Speed": 39.29142006004379}
     ]
 }

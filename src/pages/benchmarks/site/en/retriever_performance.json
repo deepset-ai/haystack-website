@@ -2,36 +2,63 @@
     "chart_type": "BarChart",
     "title": "Retriever Performance",
     "subtitle": "Time and Accuracy Benchmarks",
-    "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
+    "description": "",
     "bars": "horizontal",
     "columns": [
         "Model", 
         "Recall", 
-        "Index Time",
-        "Query Time"
+        "Index Speed",
+        "Query Speed",
+        "Map"
     ],
     "series": {
         "s0": "recall",
         "s1": "time",
-        "s2": "time"
+        "s2": "time",
+        "s3": "map"
     },
     "axes": {
         "label": "recall",
         "time_side": "top",
-        "time_label": "seconds"
+        "time_label": "seconds",
+        "map_label": "map"
     },
-    "data": [
-        {
-                "model": "BM24 (Elasticsearch)",
-                "recall": 1.0,
-                "index_time": 3.868239733,
-                "query_time": 0.47588522500000074
-        },
-        {
-                "model": "DPR (FAISS)",
-                "recall": 0.9629629629629629,
-                "index_time": 18.181850872000723,
-                "query_time": 1.358759985992947
-        }
+    "data":
+    [
+      {
+        "model": "DPR / ElasticSearch",
+        "n_docs": 100000,
+        "index_speed": 80.47998463197479,
+        "query_speed": 6.444,
+        "map": 0.821
+      },
+      {
+        "model": "DPR / ElasticSearch",
+        "n_docs": 100000,
+        "index_speed": 80.47998463197479,
+        "query_speed": 6.5360000000000005,
+        "map": 0.863
+      },
+      {
+        "model": "BM25 / ElasticSearch",
+        "n_docs": 100000,
+        "index_speed": 481.050489498422,
+        "query_speed": 162.996,
+        "map": 0.56
+      },
+      {
+        "model": "DPR / FAISS (flat)",
+        "n_docs": 100000,
+        "index_speed": 0,
+        "query_speed": 5.044,
+        "map": 0.863
+      },
+      {
+        "model": "DPR / FAISS (HSNW)",
+        "n_docs": 100000,
+        "index_speed": 0,
+        "query_speed": 11.988,
+        "map": 0.862
+      }
     ]
   }
