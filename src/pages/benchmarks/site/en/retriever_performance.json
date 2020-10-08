@@ -23,21 +23,6 @@
         "time_label": "seconds",
         "map_label": "map"
     },
-<<<<<<< HEAD
-    "data": [
-        {
-                "model": "BM25 (Elasticsearch)",
-                "recall": 1.0,
-                "index_time": 3.868239733,
-                "query_time": 0.47588522500000074
-        },
-        {
-                "model": "DPR (FAISS)",
-                "recall": 0.9629629629629629,
-                "index_time": 18.181850872000723,
-                "query_time": 1.358759985992947
-        }
-=======
     "data":
     [
       {
@@ -75,6 +60,5 @@
         "query_speed": 11.988,
         "map": 0.862
       }
->>>>>>> add_benchmarking
     ]
   }
