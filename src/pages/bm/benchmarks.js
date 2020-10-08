@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import JSONDataReader from "../benchmarks/site/en/reader_performance.json"
 import JSONDataRetriever from "../benchmarks/site/en/retriever_performance.json"
+import JSONLineChart1 from "../benchmarks/site/en/lineChart1.json"
+import JSONLineChart2 from "../benchmarks/site/en/lineChart2.json"
 import Layout from "../../components/layout/layout";
 
 import { Chart } from "react-google-charts";
@@ -15,6 +17,8 @@ const BenchMarks = () => {
 
     const [showReaderDesc, setShowReaderDesc] = useState(false);
     const [showRetrieverDesc, setShowRetrieverDesc] = useState(false);
+    const [showLineChart1Desc, setLineChart1Desc] = useState(false);
+    const [showLineChart2Desc, setLineChart2Desc] = useState(false);
 
     let dataReader = new Array(JSONDataReader.columns);
     for (let i=0; i<JSONDataReader.data.length; i++) {
@@ -30,6 +34,8 @@ const BenchMarks = () => {
       window.addEventListener("click", () => {
         setShowReaderDesc(false);
         setShowRetrieverDesc(false);
+        setLineChart1Desc(false);
+        setLineChart2Desc(false);
       })
     })
 
@@ -64,6 +70,7 @@ const BenchMarks = () => {
             {showRetrieverDesc && (
               <div className="desc-details">{JSONDataRetriever.description}</div>
             )}
+
             <Chart
                 width={1200}
                 height={600}
@@ -87,6 +94,45 @@ const BenchMarks = () => {
                       }
                 }}
             />
+
+            <button className="h-button" onKeyDown={() => {setLineChart1Desc(!showLineChart1Desc);}}
+                    onClick={(e) => { e.stopPropagation(); setLineChart1Desc(!showLineChart1Desc);}}>
+            <h2>{JSONLineChart1.title} {showLineChart1Desc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
+            </button>
+            {showLineChart1Desc && (
+              <div className="desc-details">{JSONLineChart1.description}</div>
+            )}
+            <Chart
+                width={1200}
+                height={600}
+                chartType={JSONLineChart1.chart_type}
+                loader={<div>Loading Chart</div>}
+                data={JSONLineChart1.data}
+                options={{
+                    subtitle: JSONLineChart1.subtitle,
+                    colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                }}
+            />
+
+            <button className="h-button" onKeyDown={() => {setLineChart2Desc(!showLineChart2Desc);}}
+                    onClick={(e) => { e.stopPropagation(); setLineChart2Desc(!showLineChart2Desc);}}>
+            <h2>{JSONLineChart2.title} {showLineChart2Desc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
+            </button>
+            {showLineChart2Desc && (
+              <div className="desc-details">{JSONLineChart2.description}</div>
+            )}
+            <Chart
+                width={1200}
+                height={600}
+                chartType={JSONLineChart2.chart_type}
+                loader={<div>Loading Chart</div>}
+                data={JSONLineChart2.data}
+                options={{
+                    subtitle: JSONLineChart2.subtitle,
+                    colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                }}
+            />
+
             </div>
             </section1>
         </Layout>
