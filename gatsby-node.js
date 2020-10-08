@@ -43,7 +43,6 @@ exports.onCreateDevServer = ({ app }) => {
 const DOC_ROOT = "src/pages/docs/versions";
 const versionInfo = ReadVersionJson(DOC_ROOT);
 const newestVersion = getNewestVersion(versionInfo);
-console.log(versionInfo);
 if (env === "preview") {
   versionInfo.preview = {
     version: "preview",
@@ -122,7 +121,7 @@ exports.createPages = ({ actions, graphql }) => {
     }
 
     const findVersion = (str) => {
-      const regx = /versions\/([v\d\.]*)/;
+      const regx = /versions\/master\/([v\d\.]*)/;
       const match = str.match(regx);
       return match
         ? match[1]
@@ -219,20 +218,16 @@ exports.createPages = ({ actions, graphql }) => {
     const versions = new Set();
     legalMd.forEach(({ node }) => {
       const fileAbsolutePath = node.fileAbsolutePath;
-      console.log(fileAbsolutePath);
       const version = findVersion(fileAbsolutePath);
-      console.log(version);
-      console.log("------------------------");
 
       // released: no -> not show , yes -> show
       // when env is preview ignore released
-      if (
-        versionInfo[version] &&
-        (versionInfo[version].released === "yes" || env === "preview")
-      ) {
+      if (version != '') {
         versions.add(version);
-      }
+        console.log(versions);
+      //}
     });
+    console.log(versions);
 
     return legalMd.forEach(({ node }) => {
       const fileAbsolutePath = node.fileAbsolutePath;
