@@ -27,17 +27,33 @@ const BenchMarks = () => {
 
     let dataRetriever = new Array(JSONDataRetriever.columns);
     for (let i=0; i<JSONDataRetriever.data.length; i++) {
-        dataRetriever[i+1] = [JSONDataRetriever.data[i].model, JSONDataRetriever.data[i].n_docs, JSONDataRetriever.data[i].index_speed, JSONDataRetriever.data[i].query_speed, JSONDataRetriever.data[i].map];
+        dataRetriever[i+1] = [JSONDataRetriever.data[i].model, JSONDataRetriever.data[i].recall, JSONDataRetriever.data[i].index_speed, JSONDataRetriever.data[i].query_speed];
     } 
 
+    const n_docs = [1000, 10000, 100000, 500000];
+
     let dataRetrieverSpeed = new Array(JSONRetrieverSpeed.columns);
-    for (let i=0; i<JSONRetrieverSpeed.data.length; i++) {
-      dataRetrieverSpeed[i+1] = JSONRetrieverSpeed.data[i];
+    for(let z=0; z<n_docs.length; z++) {
+      dataRetrieverSpeed[z+1] = new Array(JSONRetrieverSpeed.columns.length);
+      dataRetrieverSpeed[z+1][0] = n_docs[z];
+      for(let j=1; j<JSONRetrieverSpeed.columns.length; j++) {
+        for (let i=1; i<JSONRetrieverSpeed.data.length; i++) {
+          if(JSONRetrieverSpeed.columns[j] === JSONRetrieverSpeed.data[i][0] && n_docs[z] == JSONRetrieverSpeed.data[i][1])
+          dataRetrieverSpeed[z+1][j] = JSONRetrieverSpeed.data[i][2];
+        }
+      }
     }
-    
+
     let dataRetrieverMap = new Array(JSONRetrieverMap.columns);
-    for (let i=0; i<JSONRetrieverMap.data.length; i++) {
-      dataRetrieverMap[i+1] = JSONRetrieverMap.data[i];
+    for(let z=0; z<n_docs.length; z++) {
+      dataRetrieverMap[z+1] = new Array(JSONRetrieverMap.columns.length);
+      dataRetrieverMap[z+1][0] = n_docs[z];
+      for(let j=1; j<JSONRetrieverMap.columns.length; j++) {
+        for (let i=1; i<JSONRetrieverMap.data.length; i++) {
+          if(JSONRetrieverMap.columns[j] === JSONRetrieverMap.data[i][0] && n_docs[z] == JSONRetrieverSpeed.data[i][1])
+          dataRetrieverMap[z+1][j] = JSONRetrieverMap.data[i][2];
+        }
+      }
     }
     
 
