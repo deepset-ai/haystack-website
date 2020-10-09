@@ -4,7 +4,6 @@ const ReadVersionJson = require("./walkFile");
 const locales = require("./src/consts/locales");
 const express = require("express");
 const env = process.env.IS_PREVIEW;
-console.log(env);
 const getNewestVersion = (versionInfo) => {
   const keys = Object.keys(versionInfo).filter(
     (v) =>
@@ -57,7 +56,7 @@ exports.onCreatePage = ({ page, actions }) => {
       let localizedPath = locales[lang].default
         ? page.path
         : locales[lang].path + page.path;
-        
+
       return createPage({
         ...page,
         path: localizedPath,
@@ -224,10 +223,8 @@ exports.createPages = ({ actions, graphql }) => {
       // when env is preview ignore released
       if (version != '') {
         versions.add(version);
-        console.log(versions);
-      //}
+      }
     });
-    console.log(versions);
 
     return legalMd.forEach(({ node }) => {
       const fileAbsolutePath = node.fileAbsolutePath;
@@ -270,10 +267,6 @@ exports.createPages = ({ actions, graphql }) => {
           }, // additional data can be passed via context
         });
       }
-
-      console.log(version);
-      console.log(versions);
-      console.log(localizedPath);
 
       //  normal pages
       isBlog=false;

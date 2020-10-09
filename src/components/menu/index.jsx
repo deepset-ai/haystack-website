@@ -44,7 +44,7 @@ const Menu = (props) => {
           return copyMenu;
         }
         const generatePath = (doc) => {
-          return `/en/docs/${version}/${doc.id}`;
+          return `/docs/${version}/${doc.id}`;
         };
         // find top menu by current label
         const topMenu = list.filter((v) => {

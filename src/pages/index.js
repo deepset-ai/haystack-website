@@ -33,9 +33,9 @@ const IndexPage = () => {
           </div>
           <div className="deepset-banner">
           {screenWidth > 1000 ? (
-            <img  claccName="img-deepset-banner" src={Banner} alt="Deepset Banner"></img>
+            <img  className="img-deepset-banner" src={Banner} alt="Deepset Banner"></img>
           ) : (
-            <img  claccName="img-deepset-banner" src={Icon} alt="Deepset Banner"></img>
+            <img  className="img-deepset-banner" src={Icon} alt="Deepset Banner"></img>
           )}
           </div>
           <div className="btn-wrapper">
