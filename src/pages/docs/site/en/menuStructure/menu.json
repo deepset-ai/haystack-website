@@ -6,32 +6,72 @@
         "label1": "",
         "label2": "",
         "label3": "",
-        "order": 0
-      },
-      {
-        "id": "usage_haystack",
-        "title": "Usage Haystack",
-        "label1": "",
-        "label2": "",
-        "label3": "",
-        "order": 1,
-        "isMenu": true
+        "order": 0,
+        "isMenu": true,
+        "showChildren": true,
+        "isSeparator": false
       },
       {
         "id": "intromd",
         "title": "What is Haystack",
-        "label1": "usage_haystack",
+        "label1": "overviewmd",
         "label2": "",
         "label3": "",
         "order": 0
       },
       {
-        "id": "get_startedmd",
-        "title": "Get Started",
-        "label1": "usage_haystack",
+        "id": "usecasesoverviewmd",
+        "title": "Use cases",
+        "label1": "overviewmd",
         "label2": "",
         "label3": "",
         "order": 1
+      },
+      {
+        "id": "basicsoverviewmd",
+        "title": "Basic concepts",
+        "label1": "overviewmd",
+        "label2": "",
+        "label3": "",
+        "order": 2
+      },
+      {
+        "id": "glossaryoverviewmd",
+        "title": "Glossary",
+        "label1": "overviewmd",
+        "label2": "",
+        "label3": "",
+        "order": 3
+      },
+      {
+        "id": "haystack_core",
+        "title": "Haystack Core",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 1,
+        "isMenu": true,
+        "showChildren": false,
+        "isSeparator": true
+      },
+      {
+        "id": "usage_haystack",
+        "title": "Usage",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 2,
+        "isMenu": true,
+        "showChildren": false,
+        "isSeparator": false
+      },
+      {
+        "id": "get_startedmd",
+        "title": "Quickstart",
+        "label1": "usage_haystack",
+        "label2": "",
+        "label3": "",
+        "order": 0
       },
       {
         "id": "databasemd",
@@ -39,7 +79,7 @@
         "label1": "usage_haystack",
         "label2": "",
         "label3": "",
-        "order": 2
+        "order": 1
       },
       {
         "id": "retrievermd",
@@ -47,7 +87,7 @@
         "label1": "usage_haystack",
         "label2": "",
         "label3": "",
-        "order": 3
+        "order": 2
       },
       {
         "id": "readermd",
@@ -55,7 +95,7 @@
         "label1": "usage_haystack",
         "label2": "",
         "label3": "",
-        "order": 4
+        "order": 3
       },
       {
         "id": "domain_adaptationmd",
@@ -63,7 +103,7 @@
         "label1": "usage_haystack",
         "label2": "",
         "label3": "",
-        "order": 5
+        "order": 4
       },
       {
         "id": "termsmd",
@@ -71,7 +111,7 @@
         "label1": "usage_haystack",
         "label2": "",
         "label3": "",
-        "order": 6
+        "order": 5
       },
       {
         "id": "roadmapmd",
@@ -79,48 +119,7 @@
         "label1": "usage_haystack",
         "label2": "",
         "label3": "",
-        "order": 7
-      },
-      {
-        "id": "usage_haystack_hub",
-        "title": "Usage Haystack Hub",
-        "label1": "",
-        "label2": "",
-        "label3": "",
-        "order": 2,
-        "isMenu": true
-      },
-      {
-        "id": "introhubmd",
-        "title": "What is Haystack Hub",
-        "label1": "usage_haystack_hub",
-        "label2": "",
-        "label3": "",
-        "order": 0
-      },
-      {
-        "id": "signuphubmd",
-        "title": "Sign up for a free Haystack Hub Trial",
-        "label1": "usage_haystack_hub",
-        "label2": "",
-        "label3": "",
-        "order": 1
-      },
-      {
-        "id": "getstartedhhadminmd",
-        "title": "Get Started as Admin",
-        "label1": "usage_haystack_hub",
-        "label2": "",
-        "label3": "",
-        "order": 2
-      },
-      {
-        "id": "getstartedhhusermd",
-        "title": "Get Started as User",
-        "label1": "usage_haystack_hub",
-        "label2": "",
-        "label3": "",
-        "order": 3
+        "order": 6
       },
       {
         "id": "tutorials_haystack",
@@ -129,7 +128,9 @@
         "label2": "",
         "label3": "",
         "order": 3,
-        "isMenu": true
+        "isMenu": true,
+        "showChildren": false,
+        "isSeparator": false
       },
       {
         "id": "tutorial1md",
@@ -186,7 +187,9 @@
         "label2": "",
         "label3": "",
         "order": 4,
-        "isMenu": true
+        "isMenu": true,
+        "showChildren": false,
+        "isSeparator": false
       },
       {
         "id": "apidatabasemd",
@@ -227,6 +230,109 @@
         "label2": "",
         "label3": "",
         "order": 5
+      },
+      {
+        "id": "faq_haystack",
+        "title": "FAQ",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 5,
+        "isMenu": true,
+        "showChildren": false,
+        "isSeparator": false
+      },
+      {
+        "id": "haystack_hub",
+        "title": "Haystack Hub",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 5,
+        "isMenu": true,
+        "showChildren": false,
+        "isSeparator": true
+      },
+      {
+        "id": "usage_haystack_hub",
+        "title": "Usage ",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 6,
+        "isMenu": true,
+        "showChildren": false,
+        "isSeparator": false
+      },
+      {
+        "id": "signuphubmd",
+        "title": "Sign up for a free Haystack Hub Trial",
+        "label1": "usage_haystack_hub",
+        "label2": "",
+        "label3": "",
+        "order": 0
+      },
+      {
+        "id": "quickstarthubmd",
+        "title": "Quickstart",
+        "label1": "usage_haystack_hub",
+        "label2": "",
+        "label3": "",
+        "order": 1
+      },
+      {
+        "id": "documentshubmd",
+        "title": "Documents",
+        "label1": "usage_haystack_hub",
+        "label2": "",
+        "label3": "",
+        "order": 2
+      },
+      {
+        "id": "configurationhubmd",
+        "title": "Configuration",
+        "label1": "usage_haystack_hub",
+        "label2": "",
+        "label3": "",
+        "order": 3
+      },
+      {
+        "id": "searchhubmd",
+        "title": "Search",
+        "label1": "usage_haystack_hub",
+        "label2": "",
+        "label3": "",
+        "order": 4
+      },
+      {
+        "id": "settingshubmd",
+        "title": "Settings",
+        "label1": "usage_haystack_hub",
+        "label2": "",
+        "label3": "",
+        "order": 5
+      },
+      {
+        "id": "rest_haystack_hub",
+        "title": "Rest API ",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 7,
+        "isMenu": true,
+        "showChildren": false,
+        "isSeparator": false
+      },
+      {
+        "id": "rest_haystack_hub",
+        "title": "FAQ ",
+        "label1": "",
+        "label2": "",
+        "label3": "",
+        "order": 8,
+        "isMenu": true,
+        "showChildren": false,
+        "isSeparator": false
       }
     ]
   }

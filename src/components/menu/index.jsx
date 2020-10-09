@@ -54,10 +54,11 @@ const Menu = (props) => {
         });
 
         topMenu.forEach((v) => {
+          console.log(v);
           const item = {
             ...v,
             children: [],
-            showChildren: false,
+            showChildren: v.showChildren,
             isActive: false,
             isLast: !labelKeys[index + 1],
             isBlog,
@@ -154,8 +155,10 @@ const Menu = (props) => {
               <i className="fas fa-external-link-alt"></i>
               {doc.title}
             </a>
-          ) : doc.isMenu === true ? (
+          ) : doc.isMenu === true && doc.isSeparator === false ? (
             <span className="text">{doc.title}</span>
+          ) : doc.isMenu === true && doc.isSeparator === true ? (
+            <div className="line-separator"><span className="separator">{doc.title}</span></div>          
           ) : (
             <LocalizeLink locale={locale} className="text" to={doc.path}>
               {doc.title}

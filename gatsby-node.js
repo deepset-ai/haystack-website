@@ -69,6 +69,8 @@ exports.createPages = ({ actions, graphql }) => {
                 label3
                 order
                 isMenu
+                showChildren
+                isSeparator
               }
             }
           }

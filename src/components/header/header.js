@@ -65,7 +65,7 @@ const Header = ({ siteTitle, menuLinks }) => {
               </LocalizedLink>
 
               <LocalizedLink
-                to="/en/docs/overviewmd"
+                to="/en/docs/intromd"
                 className="link"
                 locale="en"
               >
