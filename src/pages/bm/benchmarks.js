@@ -137,7 +137,7 @@ const BenchMarks = () => {
                 data={dataRetrieverMap}
                 options={{
                     subtitle: JSONRetrieverMap.subtitle,
-                    colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                    colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'], 
                 }}
             />
 
