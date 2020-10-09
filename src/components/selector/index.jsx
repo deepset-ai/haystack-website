@@ -3,13 +3,18 @@ import LocalizeLink from "../localizedLink/localizedLink";
 import "./index.scss";
 /* eslint-disable */
 const Selector = (props) => {
-  const {
+  let {
     selected,
     options,
     locale,
     isVersion = false,
     setSelected = () => {},
   } = props;
+
+  if (!selected || selected === "") {
+    selected = options[0];
+  } 
+
   const [listStatus, setListStatus] = useState(false);
   const toggleList = (e) => {
     e.stopPropagation();
@@ -47,7 +52,7 @@ const Selector = (props) => {
               <LocalizeLink
                 locale={locale}
                 className="text"
-                to={`/docs/${v}/overview.md`}
+                to={`/docs/${v}/intromd.md`}
               >
                 {v}
               </LocalizeLink>

@@ -25,7 +25,12 @@ const findItem = (key, value, arr) => {
 };
 
 const Menu = (props) => {
-  const { menuList, activeDoc, version, versions, locale } = props;
+  let { menuList, activeDoc, version, versions, locale } = props;
+
+  if (!version || version === "") {
+    version = versions[0];
+  } 
+
   const [menuStatus, setMenuStatus] = useState(false);
   const { isBlog } = menuList || {};
   const [realMenuList, setRealMenuList] = useState([]);
