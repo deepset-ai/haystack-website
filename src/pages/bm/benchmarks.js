@@ -38,7 +38,7 @@ const BenchMarks = () => {
       dataRetrieverSpeed[z+1][0] = n_docs[z];
       for(let j=1; j<JSONRetrieverSpeed.columns.length; j++) {
         for (let i=1; i<JSONRetrieverSpeed.data.length; i++) {
-          if(JSONRetrieverSpeed.columns[j] === JSONRetrieverSpeed.data[i][0] && n_docs[z] == JSONRetrieverSpeed.data[i][1])
+          if(JSONRetrieverSpeed.columns[j] === JSONRetrieverSpeed.data[i][0] && n_docs[z] === JSONRetrieverSpeed.data[i][1])
           dataRetrieverSpeed[z+1][j] = JSONRetrieverSpeed.data[i][2];
         }
       }
@@ -50,7 +50,7 @@ const BenchMarks = () => {
       dataRetrieverMap[z+1][0] = n_docs[z];
       for(let j=1; j<JSONRetrieverMap.columns.length; j++) {
         for (let i=1; i<JSONRetrieverMap.data.length; i++) {
-          if(JSONRetrieverMap.columns[j] === JSONRetrieverMap.data[i][0] && n_docs[z] == JSONRetrieverSpeed.data[i][1])
+          if(JSONRetrieverMap.columns[j] === JSONRetrieverMap.data[i][0] && n_docs[z] === JSONRetrieverSpeed.data[i][1])
           dataRetrieverMap[z+1][j] = JSONRetrieverMap.data[i][2];
         }
       }
@@ -138,6 +138,13 @@ const BenchMarks = () => {
                 options={{
                     subtitle: JSONRetrieverMap.subtitle,
                     colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                    hAxis: {
+                      title: 'X'
+                    },
+                    vAxis: {
+                      title: 'Y'
+                    },
+                    pointSize: 5,
                 }}
             />
 
@@ -157,6 +164,13 @@ const BenchMarks = () => {
                 options={{
                     subtitle: JSONRetrieverSpeed.subtitle,
                     colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                    hAxis: {
+                      title: 'X'
+                    },
+                    vAxis: {
+                      title: 'Y'
+                    },
+                    pointSize: 5,
                 }}
             />
 

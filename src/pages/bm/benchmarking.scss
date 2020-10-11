@@ -6,6 +6,7 @@
     padding-top: 100px;
     align-content: center;
     background-color: #ffffff;
+    text-align: justify;
     .benchmarking-content {
         width:80%;
         .h-button {
@@ -39,5 +40,8 @@
         margin-top: 20px;
         margin-bottom: 20px;
         line-height: 1.5rem;
+    }
+    *,*:focus,*:hover{
+        outline:none;
     }
 }
