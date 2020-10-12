@@ -15,10 +15,10 @@ import "./benchmarking.scss";
 
 const BenchMarks = () => {
 
-    const [showReaderDesc, setShowReaderDesc] = useState(false);
-    const [showRetrieverDesc, setShowRetrieverDesc] = useState(false);
-    const [showLineChart1Desc, setLineChart1Desc] = useState(false);
-    const [showLineChart2Desc, setLineChart2Desc] = useState(false);
+    const [showReaderDesc, setShowReaderDesc] = useState(true);
+    const [showRetrieverDesc, setShowRetrieverDesc] = useState(true);
+    const [showLineChart1Desc, setLineChart1Desc] = useState(true);
+    const [showLineChart2Desc, setLineChart2Desc] = useState(true);
 
     let dataReader = new Array(JSONDataReader.columns);
     for (let i=0; i<JSONDataReader.data.length; i++) {
@@ -87,7 +87,8 @@ const BenchMarks = () => {
                 options={{
                 colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
                 subTitle: JSONDataReader.subtitle,
-                bars: JSONDataReader.bars
+                bars: JSONDataReader.bars,
+                legend: "bottom"
                 }}
             />
 
@@ -118,7 +119,8 @@ const BenchMarks = () => {
                           recall: {label: JSONDataRetriever.axes.label}, // Bottom x-axis.
                           time: {side: JSONDataRetriever.axes.time_side, label: JSONDataRetriever.axes.time_label} // Top x-axis.
                         }
-                      }
+                      },
+                      legend: "bottom"
                 }}
             />
 
@@ -145,6 +147,7 @@ const BenchMarks = () => {
                       title: 'Y'
                     },
                     pointSize: 5,
+                    legend: "bottom"
                 }}
             />
 
@@ -171,6 +174,7 @@ const BenchMarks = () => {
                       title: 'Y'
                     },
                     pointSize: 5,
+                    legend: "bottom"
                 }}
             />
 
