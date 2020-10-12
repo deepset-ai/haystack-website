@@ -1,20 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: ``,
+    title: `Haystack`,
+    titleTemplate: "%s - Qestion Answering",
     siteUrl: `https://haystack.deepset.ai`,
-    menuLinks:[
-      {
-        name: `home`,
-        link:`/`
-      },
-      {
-        name: `usage`,
-        link: `/documentation/usage`
-
-      }
-    ],
-    description: `haystack homepage`,
-    author: `@deepset`,
+    description: `Haystack enables Question Answering at Scale`,
+    author: "deepset",
+    twitterUsername: "@deepset_ai",
   },
   plugins: [
     'gatsby-plugin-cname',
