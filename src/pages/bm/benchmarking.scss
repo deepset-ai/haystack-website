@@ -10,6 +10,7 @@
     .benchmarking-content {
         width:80%;
         .h-button {
+            margin-top: 20px;
             cursor: pointer;
             border: none;
             background-color: #ffffff;
@@ -18,6 +19,9 @@
             margin-top: 10px;
             margin-bottom: 10px;
             line-height: 1.5rem;
+            a {
+                color: #08415D;
+            }
         }
     }
     h1 {

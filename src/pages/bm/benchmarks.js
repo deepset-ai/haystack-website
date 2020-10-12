@@ -66,6 +66,8 @@ const BenchMarks = () => {
       })
     })
 
+    function createMarkup(desc) { return {__html: desc}; };
+
     return (
         <Layout>
             <section1 className="benchmarking">
@@ -76,7 +78,7 @@ const BenchMarks = () => {
               <h2>{JSONDataReader.title} {showReaderDesc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showReaderDesc && (
-              <div className="desc-details">{JSONDataReader.description}</div>
+              <div dangerouslySetInnerHTML={createMarkup(JSONDataReader.description)} className="desc-details"></div>
             )}
             <Chart
                 width={1200}
@@ -97,7 +99,7 @@ const BenchMarks = () => {
             <h2>{JSONDataRetriever.title} {showRetrieverDesc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showRetrieverDesc && (
-              <div className="desc-details">{JSONDataRetriever.description}</div>
+              <div dangerouslySetInnerHTML={createMarkup(JSONDataRetriever.description)} className="desc-details"></div>
             )}
             <Chart
                 width={1200}
@@ -129,7 +131,7 @@ const BenchMarks = () => {
             <h2>{JSONRetrieverMap.title} {showLineChart1Desc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showLineChart1Desc && (
-              <div className="desc-details">{JSONRetrieverMap.description}</div>
+              <div dangerouslySetInnerHTML={createMarkup(JSONRetrieverMap.description)} className="desc-details"></div>
             )}
             <Chart
                 width={1200}
@@ -141,10 +143,10 @@ const BenchMarks = () => {
                     subtitle: JSONRetrieverMap.subtitle,
                     colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
                     hAxis: {
-                      title: 'X'
+                      title: JSONRetrieverMap.axis[0].x
                     },
                     vAxis: {
-                      title: 'Y'
+                      title: JSONRetrieverMap.axis[0].y
                     },
                     pointSize: 5,
                     legend: "bottom"
@@ -156,7 +158,7 @@ const BenchMarks = () => {
             <h2>{JSONRetrieverSpeed.title} {showLineChart2Desc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showLineChart2Desc && (
-              <div className="desc-details">{JSONRetrieverSpeed.description}</div>
+              <div dangerouslySetInnerHTML={createMarkup(JSONRetrieverSpeed.description)} className="desc-details"></div>
             )}
             <Chart
                 width={1200}
@@ -168,10 +170,10 @@ const BenchMarks = () => {
                     subtitle: JSONRetrieverSpeed.subtitle,
                     colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
                     hAxis: {
-                      title: 'X'
+                      title: JSONRetrieverSpeed.axis[0].x
                     },
                     vAxis: {
-                      title: 'Y'
+                      title: JSONRetrieverSpeed.axis[0].y
                     },
                     pointSize: 5,
                     legend: "bottom"
