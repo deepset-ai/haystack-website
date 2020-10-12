@@ -14,7 +14,7 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import "./benchmarking.scss";
 
 import SEO from "../../components/seo"
-import thumbnail from "../../images/thumbnails/thumbnail_benchmarking.jpg"; 
+import thumbnail from "../../images/thumbnails/thumbnail_benchmarking.jpeg"; 
 
 const BenchMarks = () => {
 
