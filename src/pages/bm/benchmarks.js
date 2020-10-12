@@ -74,7 +74,6 @@ const BenchMarks = () => {
     return (
         <Layout>
             <SEO title="Haystack Benchmarks" image={thumbnail} />
-            
             <section1 className="benchmarking">
             <div className="benchmarking-content">
             <h1>Haystack Benchmarking</h1>
