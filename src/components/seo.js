@@ -21,6 +21,7 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname  }) {
             author
             titleTemplate
             twitterUsername
+            siteUrl
           }
         }
       }
@@ -78,7 +79,7 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname  }) {
         },
         {
           name: `twitter:card`,
-          content: `summary_large_image`,
+          content: `summary`,
         },
         {
           name: `twitter:creator`,
@@ -94,7 +95,7 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname  }) {
         },
         {
           name: `twitter:image`,
-          content: image,
+          content: `${site.siteMetadata.siteUrl}${image}`,
         },
       ]
       .concat(meta)}
