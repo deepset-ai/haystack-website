@@ -71,11 +71,11 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname  }) {
         },
         {
           property: `og:url`,
-          content: site.siteMetadata.siteUrl,
+          content: canonical,
         },
         {
           property: `og:image`,
-          content: image,
+          content: `${site.siteMetadata.siteUrl}${image}`,
         },
         {
           name: `twitter:card`,
