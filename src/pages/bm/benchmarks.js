@@ -13,6 +13,8 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 import "./benchmarking.scss";
 
+import thumbnail from "../../images/thumbnails/thumbnail_benchmarking.png"; 
+
 const BenchMarks = () => {
 
     const [showReaderDesc, setShowReaderDesc] = useState(true);
@@ -70,6 +72,10 @@ const BenchMarks = () => {
 
     return (
         <Layout>
+            <div className="thumbnail">
+              <img src={thumbnail} alt=""/>
+            </div>
+
             <section1 className="benchmarking">
             <div className="benchmarking-content">
             <h1>Haystack Benchmarking</h1>
