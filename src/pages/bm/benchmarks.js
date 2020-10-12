@@ -14,7 +14,7 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import "./benchmarking.scss";
 
 import SEO from "../../components/seo"
-import thumbnail from "../../images/thumbnails/thumbnail_benchmarking.png"; 
+import thumbnail from "../../images/thumbnails/thumbnail_benchmarking.jpg"; 
 
 const BenchMarks = () => {
 
@@ -73,7 +73,7 @@ const BenchMarks = () => {
 
     return (
         <Layout>
-            <SEO title="Haystack Benchmarks" image={thumbnail} />
+            <SEO title="Haystack Benchmarks" image={thumbnail} pathname="/bm/benchmarks" />
             
             <section1 className="benchmarking">
             <div className="benchmarking-content">

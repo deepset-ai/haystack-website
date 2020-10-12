@@ -6,6 +6,7 @@ import SEO from "../components/seo"
 import GithubLogo from "../images/icon/GitHub-Mark-32px.png"; 
 import Banner from "../images/haystack_logo_blue_banner.png";
 import Icon from "../images/HaystackIcon.png"
+import IconJPG from "../images/HaystackIcon.jpg"
 
 import LocalizedLink from "../components/localizedLink/localizedLink";  
 
@@ -20,7 +21,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Haystack" />
+      <SEO title="Haystack" image={IconJPG}  />
       <main className="home-wrapper">
         <section className="section1">
           <div className="githubicon">
