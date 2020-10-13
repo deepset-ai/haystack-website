@@ -13,12 +13,15 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 import "./benchmarking.scss";
 
+import SEO from "../../components/seo"
+import thumbnail from "../../images/thumbnails/thumbnail_benchmarking.jpeg"; 
+
 const BenchMarks = () => {
 
-    const [showReaderDesc, setShowReaderDesc] = useState(false);
-    const [showRetrieverDesc, setShowRetrieverDesc] = useState(false);
-    const [showLineChart1Desc, setLineChart1Desc] = useState(false);
-    const [showLineChart2Desc, setLineChart2Desc] = useState(false);
+    const [showReaderDesc, setShowReaderDesc] = useState(true);
+    const [showRetrieverDesc, setShowRetrieverDesc] = useState(true);
+    const [showLineChart1Desc, setLineChart1Desc] = useState(true);
+    const [showLineChart2Desc, setLineChart2Desc] = useState(true);
 
     let dataReader = new Array(JSONDataReader.columns);
     for (let i=0; i<JSONDataReader.data.length; i++) {
@@ -27,17 +30,33 @@ const BenchMarks = () => {
 
     let dataRetriever = new Array(JSONDataRetriever.columns);
     for (let i=0; i<JSONDataRetriever.data.length; i++) {
-      dataRetriever[i+1] = [JSONDataRetriever.data[i].model, JSONDataRetriever.data[i].n_docs, JSONDataRetriever.data[i].index_speed, JSONDataRetriever.data[i].query_speed, JSONDataRetriever.data[i].map];
+        dataRetriever[i+1] = [JSONDataRetriever.data[i].model, JSONDataRetriever.data[i].recall, JSONDataRetriever.data[i].index_speed, JSONDataRetriever.data[i].query_speed];
     } 
 
+    const n_docs = [1000, 10000, 100000, 500000];
+
     let dataRetrieverSpeed = new Array(JSONRetrieverSpeed.columns);
-    for (let i=0; i<JSONRetrieverSpeed.data.length; i++) {
-      dataRetrieverSpeed[i+1] = JSONRetrieverSpeed.data[i];
+    for(let z=0; z<n_docs.length; z++) {
+      dataRetrieverSpeed[z+1] = new Array(JSONRetrieverSpeed.columns.length);
+      dataRetrieverSpeed[z+1][0] = n_docs[z];
+      for(let j=1; j<JSONRetrieverSpeed.columns.length; j++) {
+        for (let i=1; i<JSONRetrieverSpeed.data.length; i++) {
+          if(JSONRetrieverSpeed.columns[j] === JSONRetrieverSpeed.data[i][0] && n_docs[z] === JSONRetrieverSpeed.data[i][1])
+          dataRetrieverSpeed[z+1][j] = JSONRetrieverSpeed.data[i][2];
+        }
+      }
     }
-    
+
     let dataRetrieverMap = new Array(JSONRetrieverMap.columns);
-    for (let i=0; i<JSONRetrieverMap.data.length; i++) {
-      dataRetrieverMap[i+1] = JSONRetrieverMap.data[i];
+    for(let z=0; z<n_docs.length; z++) {
+      dataRetrieverMap[z+1] = new Array(JSONRetrieverMap.columns.length);
+      dataRetrieverMap[z+1][0] = n_docs[z];
+      for(let j=1; j<JSONRetrieverMap.columns.length; j++) {
+        for (let i=1; i<JSONRetrieverMap.data.length; i++) {
+          if(JSONRetrieverMap.columns[j] === JSONRetrieverMap.data[i][0] && n_docs[z] === JSONRetrieverSpeed.data[i][1])
+          dataRetrieverMap[z+1][j] = JSONRetrieverMap.data[i][2];
+        }
+      }
     }
     
 
@@ -50,8 +69,11 @@ const BenchMarks = () => {
       })
     })
 
+    function createMarkup(desc) { return {__html: desc}; };
+
     return (
         <Layout>
+            <SEO title="Haystack Benchmarks" image={thumbnail} pathname="/bm/benchmarks" />
             <section1 className="benchmarking">
             <div className="benchmarking-content">
             <h1>Haystack Benchmarking</h1>
@@ -60,7 +82,7 @@ const BenchMarks = () => {
               <h2>{JSONDataReader.title} {showReaderDesc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showReaderDesc && (
-              <div className="desc-details">{JSONDataReader.description}</div>
+              <div dangerouslySetInnerHTML={createMarkup(JSONDataReader.description)} className="desc-details"></div>
             )}
             <Chart
                 width={1200}
@@ -71,7 +93,8 @@ const BenchMarks = () => {
                 options={{
                 colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
                 subTitle: JSONDataReader.subtitle,
-                bars: JSONDataReader.bars
+                bars: JSONDataReader.bars,
+                legend: "bottom"
                 }}
             />
 
@@ -80,7 +103,7 @@ const BenchMarks = () => {
             <h2>{JSONDataRetriever.title} {showRetrieverDesc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showRetrieverDesc && (
-              <div className="desc-details">{JSONDataRetriever.description}</div>
+              <div dangerouslySetInnerHTML={createMarkup(JSONDataRetriever.description)} className="desc-details"></div>
             )}
             <Chart
                 width={1200}
@@ -102,7 +125,8 @@ const BenchMarks = () => {
                           recall: {label: JSONDataRetriever.axes.label}, // Bottom x-axis.
                           time: {side: JSONDataRetriever.axes.time_side, label: JSONDataRetriever.axes.time_label} // Top x-axis.
                         }
-                      }
+                      },
+                      legend: "bottom"
                 }}
             />
 
@@ -111,7 +135,7 @@ const BenchMarks = () => {
             <h2>{JSONRetrieverMap.title} {showLineChart1Desc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showLineChart1Desc && (
-              <div className="desc-details">{JSONRetrieverMap.description}</div>
+              <div dangerouslySetInnerHTML={createMarkup(JSONRetrieverMap.description)} className="desc-details"></div>
             )}
             <Chart
                 width={1200}
@@ -122,6 +146,14 @@ const BenchMarks = () => {
                 options={{
                     subtitle: JSONRetrieverMap.subtitle,
                     colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                    hAxis: {
+                      title: JSONRetrieverMap.axis[0].x
+                    },
+                    vAxis: {
+                      title: JSONRetrieverMap.axis[0].y
+                    },
+                    pointSize: 5,
+                    legend: "bottom"
                 }}
             />
 
@@ -130,7 +162,7 @@ const BenchMarks = () => {
             <h2>{JSONRetrieverSpeed.title} {showLineChart2Desc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showLineChart2Desc && (
-              <div className="desc-details">{JSONRetrieverSpeed.description}</div>
+              <div dangerouslySetInnerHTML={createMarkup(JSONRetrieverSpeed.description)} className="desc-details"></div>
             )}
             <Chart
                 width={1200}
@@ -141,6 +173,14 @@ const BenchMarks = () => {
                 options={{
                     subtitle: JSONRetrieverSpeed.subtitle,
                     colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                    hAxis: {
+                      title: JSONRetrieverSpeed.axis[0].x
+                    },
+                    vAxis: {
+                      title: JSONRetrieverSpeed.axis[0].y
+                    },
+                    pointSize: 5,
+                    legend: "bottom"
                 }}
             />
 

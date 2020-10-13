@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
+function SEO({ description, lang, meta, image: metaImage, title, pathname  }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -21,6 +21,7 @@ function SEO({ description, lang, meta, title }) {
             author
             titleTemplate
             twitterUsername
+            siteUrl
           }
         }
       }
@@ -28,6 +29,11 @@ function SEO({ description, lang, meta, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const image =
+    metaImage /*&& metaImage.src
+      ? `${site.siteMetadata.siteUrl}${metaImage.src}`
+      : null*/
+  const canonical = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : null
 
   return (
     <Helmet
@@ -36,6 +42,16 @@ function SEO({ description, lang, meta, title }) {
       }}
       title={title}
       titleTemplate={`${site.siteMetadata.titleTemplate}`}
+      link={
+        canonical
+          ? [
+              {
+                rel: "canonical",
+                href: canonical,
+              },
+            ]
+          : []
+      }
       meta={[
         {
           name: `description`,
@@ -54,6 +70,14 @@ function SEO({ description, lang, meta, title }) {
           content: `website`,
         },
         {
+          property: `og:url`,
+          content: canonical,
+        },
+        {
+          property: `og:image`,
+          content: `${site.siteMetadata.siteUrl}${image}`,
+        },
+        {
           name: `twitter:card`,
           content: `summary`,
         },
@@ -69,7 +93,12 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
-      ].concat(meta)}
+        {
+          name: `twitter:image`,
+          content: `${site.siteMetadata.siteUrl}${image}`,
+        },
+      ]
+      .concat(meta)}
     />
   )
 }
@@ -86,6 +115,12 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
+  image: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    height: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
+  }),
+  pathname: PropTypes.string,
 }
 
 export default SEO

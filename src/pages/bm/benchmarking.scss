@@ -1,3 +1,17 @@
+.thumbnail {
+    position : absolute;
+    top : 0 ;
+    z-index : -5000;
+    width : 0px;
+    height : 0px;
+
+    img {
+        object-fit : cover;
+        width : 0px;
+        height : 0px;
+    }
+}
+
 .benchmarking {
     display: flex;
     max-width: 900;
@@ -6,17 +20,25 @@
     padding-top: 100px;
     align-content: center;
     background-color: #ffffff;
+    text-align: justify;
     .benchmarking-content {
         width:80%;
         .h-button {
+            margin-top: 20px;
             cursor: pointer;
-            border: none !important;
+            border: none;
             background-color: #ffffff;
         }
         .desc-details {
             margin-top: 10px;
             margin-bottom: 10px;
             line-height: 1.5rem;
+            a {
+                color: #08415D;
+            }
+            i {
+                font-style: italic;
+            }
         }
     }
     h1 {
@@ -39,5 +61,8 @@
         margin-top: 20px;
         margin-bottom: 20px;
         line-height: 1.5rem;
+    }
+    *,*:focus,*:hover{
+        outline:none;
     }
 }

@@ -238,7 +238,7 @@
         "label2": "",
         "label3": "",
         "order": 5,
-        "isMenu": true,
+        "isMenu": false,
         "showChildren": false,
         "isSeparator": false
       },
@@ -324,13 +324,13 @@
         "isSeparator": false
       },
       {
-        "id": "rest_haystack_hub",
+        "id": "faq_haystack_hub",
         "title": "FAQ ",
         "label1": "",
         "label2": "",
         "label3": "",
         "order": 8,
-        "isMenu": true,
+        "isMenu": false,
         "showChildren": false,
         "isSeparator": false
       }
