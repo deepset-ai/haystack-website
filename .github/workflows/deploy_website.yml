@@ -31,7 +31,8 @@ jobs:
           npm run header_tutorialsdocs
           npm run update_usagedocs
           npm run header_usagedocs
-          
+          npm run update_benchmarks
+
       - uses: enriikke/gatsby-gh-pages-action@v2
         with:
           access-token: ${{ secrets.TOKEN_FOR_DEPLOYMENT }}

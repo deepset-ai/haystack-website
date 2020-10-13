@@ -93,6 +93,14 @@ const Header = ({ siteTitle, menuLinks }) => {
           >
           Docs
         </LocalizedLink>
+
+        <LocalizedLink
+          locale="en"
+          className="link"
+          to="/bm/benchmarks"
+          >
+          Benchmarks
+        </LocalizedLink>
       </div>
       </div>
     </>
