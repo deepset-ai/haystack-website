@@ -65,7 +65,7 @@ const Header = ({ siteTitle, menuLinks }) => {
               </LocalizedLink>
 
               <LocalizedLink
-                to="/en/docs/intromd"
+                to="/docs/intromd"
                 className="link"
                 locale="en"
               >
@@ -84,7 +84,7 @@ const Header = ({ siteTitle, menuLinks }) => {
               <Button label="Free Trial" to="http://haystackhub-service.s3-website.eu-central-1.amazonaws.com/signup/step-1"/>
             </div>
           ) : ( 
-             <FontAwesomeIcon class="fontawsome-icon" icon={faBars} onKeyDown={handleClick}
+             <FontAwesomeIcon className="fontawsome-icon" icon={faBars} onKeyDown={handleClick}
              onClick={handleClick}/>
           )}
         </header>

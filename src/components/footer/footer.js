@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
-const Footer = ({ locale, style }) => {
+const Footer = ({ style }) => {
   // const l = locale === "cn" ? "en" : "cn";
   // const to = globalHistory.location.pathname
   //   .replace("/en/", "/")

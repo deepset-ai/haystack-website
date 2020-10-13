@@ -12,7 +12,7 @@ import Footer from "../footer/footer";
 
 import "./layout.scss";
 import "../../reset.scss";
-const Layout = ({ children, language, locale }) => {
+const Layout = ({ children, language="en", locale="en" }) => {
   return (
     <>
       <Header language={language} locale={locale} />

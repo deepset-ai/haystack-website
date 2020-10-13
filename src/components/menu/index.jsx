@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import LocalizeLink from "../localizedLink/localizedLink";
+import VersionSelector from "../selector";
 import { useMobileScreen } from "../../hooks";
 import "./index.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,7 +25,12 @@ const findItem = (key, value, arr) => {
 };
 
 const Menu = (props) => {
-  const { menuList, activeDoc, version, versions, locale } = props;
+  let { menuList, activeDoc, version, versions, locale } = props;
+
+  if (!version || version === "") {
+    version = versions[0];
+  } 
+
   const [menuStatus, setMenuStatus] = useState(false);
   const { isBlog } = menuList || {};
   const [realMenuList, setRealMenuList] = useState([]);
@@ -43,7 +49,7 @@ const Menu = (props) => {
           return copyMenu;
         }
         const generatePath = (doc) => {
-          return `/en/docs/${doc.id}`;
+          return `/docs/${version}/${doc.id}`;
         };
         // find top menu by current label
         const topMenu = list.filter((v) => {
@@ -207,6 +213,16 @@ const Menu = (props) => {
             }}
           ></i>
         ) : null}
+
+        <div className="border-bottom select-wrapper">
+                    <VersionSelector
+                      options={versions}
+                      selected={version}
+                      locale={locale}
+                      isVersion={true}
+                    ></VersionSelector>
+                  
+        </div>
 
         {generageMenuDom(realMenuList, "menu-top-level border-bottom")}
       </section>
