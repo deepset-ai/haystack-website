@@ -72,6 +72,9 @@ const IndexPage = () => {
             </a>
           </div>
         </section>
+        <section className="section5">
+          <h2>Sign Up for Haystack Hub Beta</h2>
+        </section>
       </main>
     </Layout>
   );
