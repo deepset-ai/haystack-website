@@ -131,6 +131,19 @@ const IndexPage = () => {
         </section>
         <section className="section5">
           <h2>Sign Up for Haystack Hub Beta</h2>
+          <div className="contact-form">
+                <form method="post" action="#" className="inner-form">
+                    <div>
+                    <FormControl className="form-control">
+                    <InputLabel required htmlFor="email">Email address</InputLabel>
+                    <Input required id="email"/>
+                    </FormControl>
+                    </div>                    
+                <div>
+                <Button className="item-button" label="Send" />
+                </div>
+                </form>
+            </div>
         </section>
       </main>
     </Layout>
