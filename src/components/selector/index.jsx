@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LocalizeLink from "../localizedLink/localizedLink";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import "./index.scss";
 /* eslint-disable */
 const Selector = (props) => {
@@ -40,7 +42,7 @@ const Selector = (props) => {
     <div className={`selector-wrapper ${isVersion && "version-wrapper"}`}>
       <div className="selected" onClick={toggleList}>
         {selected}
-        <i className="fas fa-chevron-down arrow"></i>
+        <FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>
       </div>
       <ul
         className={`options-wrapper ${listStatus && "open"}`}
@@ -52,7 +54,7 @@ const Selector = (props) => {
               <LocalizeLink
                 locale={locale}
                 className="text"
-                to={`/docs/${v}/intromd.md`}
+                to={`/docs/${v}/intromd`}
               >
                 {v}
               </LocalizeLink>

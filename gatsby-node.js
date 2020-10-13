@@ -3,11 +3,11 @@ const fs = require("fs");
 const ReadVersionJson = require("./walkFile");
 const locales = require("./src/consts/locales");
 const express = require("express");
-const env = process.env.IS_PREVIEW;
+const env = "latest";
 const getNewestVersion = (versionInfo) => {
   const keys = Object.keys(versionInfo).filter(
     (v) =>
-      v !== "master" && (versionInfo[v].released === "yes" || env === "preview")
+      v !== "master" && (versionInfo[v].released === "yes" || env === "latest")
   );
   return keys.reduce((pre, cur) => {
     const curVersion = cur
@@ -42,9 +42,9 @@ exports.onCreateDevServer = ({ app }) => {
 const DOC_ROOT = "src/pages/docs/versions";
 const versionInfo = ReadVersionJson(DOC_ROOT);
 const newestVersion = getNewestVersion(versionInfo);
-if (env === "preview") {
+if (env === "latest") {
   versionInfo.preview = {
-    version: "preview",
+    version: "latest",
     released: "no",
   };
 }
@@ -125,8 +125,8 @@ exports.createPages = ({ actions, graphql }) => {
       return match
         ? match[1]
           ? match[1]
-          : env === "preview" && str.includes("preview")
-          ? "preview"
+          : env === "latest" && str.includes("latest")
+          ? "latest"
           : match[1]
         : "";
     };
@@ -154,8 +154,8 @@ exports.createPages = ({ actions, graphql }) => {
       ({ node: { fileAbsolutePath, frontmatter } }) =>
         (!!findVersion(fileAbsolutePath) ||
           fileAbsolutePath.includes("/blog/zh-CN") ||
-          (fileAbsolutePath.includes("/docs/versions/master/preview/") &&
-            env === "preview") ||
+          (fileAbsolutePath.includes("/docs/versions/master/latest/") &&
+            env === "latest") ||
           fileAbsolutePath.includes("/docs/versions/benchmarks/")) &&
         frontmatter.id
     );*/
@@ -220,7 +220,7 @@ exports.createPages = ({ actions, graphql }) => {
       const version = findVersion(fileAbsolutePath);
 
       // released: no -> not show , yes -> show
-      // when env is preview ignore released
+      // when env is latest ignore released
       if (version != '') {
         versions.add(version);
       }
