@@ -15,9 +15,20 @@ import "react-github-button/assets/style.css";
 import { useMobileScreen } from "../hooks";
 import "../scss/index.scss";
 
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+
 const IndexPage = () => {
 
-  function sendData(email, consentToProcess, communications) {
+  let state = {
+    email: "",
+    consentToProcess: false,
+    communications: false
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
     // Create the new request 
     var xhr = new XMLHttpRequest();
     var url = 'https://api.hsforms.com/submissions/v3/integration/submit/4561480/4bc48899-da35-491b-b881-ba73c0f40373';
@@ -28,7 +39,7 @@ const IndexPage = () => {
       "fields": [
         {
           "name": "email",
-          "value": email
+          "value": state.email
         }
       ],
       "context": {
@@ -37,11 +48,11 @@ const IndexPage = () => {
       },
       "legalConsentOptions":{ // Include this object when GDPR options are enabled
         "consent":{
-          "consentToProcess":consentToProcess,
+          "consentToProcess":state.consentToProcess,
           "text":"I agree to allow Example Company to store and process my personal data.",
           "communications":[
             {
-              "value":communications,
+              "value":state.communications,
               "subscriptionTypeId":999,
               "text":"I agree to receive marketing communications from Example Company."
             }
@@ -132,7 +143,7 @@ const IndexPage = () => {
         <section className="section5">
           <h2>Sign Up for Haystack Hub Beta</h2>
           <div className="contact-form">
-                <form method="post" action="#" className="inner-form">
+                <form onSubmit={handleSubmit}>
                     <div>
                     <FormControl className="form-control">
                     <InputLabel required htmlFor="email">Email address</InputLabel>
@@ -140,7 +151,7 @@ const IndexPage = () => {
                     </FormControl>
                     </div>                    
                 <div>
-                <Button className="item-button" label="Send" />
+                <Button className="item-button" label="Send" type="submit"/>
                 </div>
                 </form>
             </div>
