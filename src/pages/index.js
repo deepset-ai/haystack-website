@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 
 import Layout from "../components/layout/layout";
 import SEO from "../components/seo"
@@ -18,16 +18,17 @@ import "../scss/index.scss";
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const IndexPage = () => {
 
-  let state = {
-    email: "",
-    consentToProcess: false,
-    communications: false
-  }
+  const [email, setEmail] = useState('test');
+  const [consentToProcess, setConsentToProcess] = useState(false);
+  const [communications, setCommunications] = useState(false);
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) =>  {
     event.preventDefault();
     // Create the new request 
     var xhr = new XMLHttpRequest();
@@ -35,11 +36,11 @@ const IndexPage = () => {
     
     // Example request JSON:
     var data = {
-      "submittedAt": "1517927174000",
+      "submittedAt": new Date().getTime(),
       "fields": [
         {
           "name": "email",
-          "value": state.email
+          "value": email
         }
       ],
       "context": {
@@ -48,11 +49,11 @@ const IndexPage = () => {
       },
       "legalConsentOptions":{ // Include this object when GDPR options are enabled
         "consent":{
-          "consentToProcess":state.consentToProcess,
+          "consentToProcess":consentToProcess,
           "text":"I agree to allow Example Company to store and process my personal data.",
           "communications":[
             {
-              "value":state.communications,
+              "value":communications,
               "subscriptionTypeId":999,
               "text":"I agree to receive marketing communications from Example Company."
             }
@@ -83,6 +84,18 @@ const IndexPage = () => {
     // Sends the request 
     
     xhr.send(final_data);
+  };
+
+  const handleChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleChangeConsentToProcess = (event) => {
+    setConsentToProcess(event.target.checked);
+  };
+
+  const handleCommunication = (event) => {
+    setCommunications(event.target.checked);
   };
 
   const screenWidth = useMobileScreen();
@@ -145,13 +158,32 @@ const IndexPage = () => {
           <div className="contact-form">
                 <form onSubmit={handleSubmit}>
                     <div>
-                    <FormControl className="form-control">
+                    <div>
+                    <FormControl className="form-control" variant="filled">
                     <InputLabel required htmlFor="email">Email address</InputLabel>
-                    <Input required id="email"/>
+                    <Input required id="email" value={email} onChange={handleChange} />
                     </FormControl>
+                    </div>
+                    <div>
+                    <FormControlLabel className="form-checkbox"
+                      control={<Checkbox checked={consentToProcess} onChange={handleChangeConsentToProcess} name="consentToProcess" />}
+                      label="I agree to allow Example Company to store and process my personal data."
+                    />
+                    </div>
+                    <div>
+                    <FormControlLabel className="form-checkbox"
+                      control={<Checkbox checked={communications} onChange={handleCommunication} name="communications" />}
+                      label="I agree to receive marketing communications from Example Company."
+                    />
+                    </div>
                     </div>                    
                 <div>
-                <Button className="item-button" label="Send" type="submit"/>
+                <Button
+                        type="submit"
+                        className="form-button"
+                    >
+                        Sign Up for Beta
+                  </Button>
                 </div>
                 </form>
             </div>
