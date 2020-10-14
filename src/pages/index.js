@@ -70,7 +70,7 @@ const IndexPage = () => {
 
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4 && xhr.status === 200) { 
-            alert(xhr.responseText); // Returns a 200 response if the submission is successful.
+            alert("Thank you for joining the waiting list"); // Returns a 200 response if the submission is successful.
         } else if (xhr.readyState === 4 && xhr.status === 400){ 
             alert(xhr.responseText); // Returns a 400 error the submission is rejected.          
         } else if (xhr.readyState === 4 && xhr.status === 403){ 
