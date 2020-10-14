@@ -24,7 +24,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 const IndexPage = () => {
 
-  const [email, setEmail] = useState('test');
+  const [email, setEmail] = useState('');
   const [consentToProcess, setConsentToProcess] = useState(false);
   const [communications, setCommunications] = useState(false);
 
@@ -50,12 +50,12 @@ const IndexPage = () => {
       "legalConsentOptions":{ // Include this object when GDPR options are enabled
         "consent":{
           "consentToProcess":consentToProcess,
-          "text":"I agree to allow Example Company to store and process my personal data.",
+          "text":"I agree to allow deepset GmbH to store and process my personal data.",
           "communications":[
             {
               "value":communications,
               "subscriptionTypeId":999,
-              "text":"I agree to receive marketing communications from Example Company."
+              "text":"I agree to receive marketing communications from deepset GmbH."
             }
           ]
         }
@@ -167,13 +167,13 @@ const IndexPage = () => {
                     <div>
                     <FormControlLabel className="form-checkbox"
                       control={<Checkbox checked={consentToProcess} onChange={handleChangeConsentToProcess} name="consentToProcess" />}
-                      label="I agree to allow Example Company to store and process my personal data."
+                      label="I agree to allow deepset GmbH to store and process my personal data."
                     />
                     </div>
                     <div>
                     <FormControlLabel className="form-checkbox"
                       control={<Checkbox checked={communications} onChange={handleCommunication} name="communications" />}
-                      label="I agree to receive marketing communications from Example Company."
+                      label="I agree to receive marketing communications from deepset GmbH."
                     />
                     </div>
                     </div>                    

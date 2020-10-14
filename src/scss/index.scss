@@ -537,6 +537,9 @@
   .form-control {
     width: 600px;
     margin-top: 40px;
+    .MuiInputBase-input {
+      height: 40px;
+    }
   }
 
   .form-button {

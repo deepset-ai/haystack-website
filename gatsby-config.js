@@ -108,14 +108,14 @@ module.exports = {
         icon: `src/images/HaystackIcon.png`, // This path is relative to the root of the site.
       },
     },
-    {
+    /*{
       resolve: "gatsby-plugin-hubspot",
       options: {
           trackingCode: "4561480",
           respectDNT: true,
           productionOnly: false,
       },
-    },
+    },*/
     {
       resolve: `gatsby-plugin-material-ui`,
       // If you want to use styled components, in conjunction to Material-UI, you should:
