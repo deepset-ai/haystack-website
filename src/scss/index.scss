@@ -533,4 +533,37 @@
   .sdk-tools {
     margin-top: 5rem;
   }
+
+  .section5 {
+
+    p {
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    .form-control {
+      width: 600px;
+      margin-top: 20px;
+      .MuiInputBase-input {
+        height: 40px;
+      }
+    }
+
+    .form-button {
+      width: 600px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      background-color: #08415D;
+      color: #ffffff;
+      font-weight: bold;
+      &:hover {
+        background-color: #08415D;
+      }
+    }
+
+    .form-checkbox {
+      margin-top: 20px;
+      width: 600px;
+    }
+  }
 }

@@ -108,6 +108,25 @@ module.exports = {
         icon: `src/images/HaystackIcon.png`, // This path is relative to the root of the site.
       },
     },
+    /*{
+      resolve: "gatsby-plugin-hubspot",
+      options: {
+          trackingCode: "4561480",
+          respectDNT: true,
+          productionOnly: false,
+      },
+    },*/
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      // If you want to use styled components, in conjunction to Material-UI, you should:
+      // - Change the injection order
+      // - Add the plugin
+      options: {
+        // stylesProvider: {
+        //   injectFirst: true,
+        // },
+      }
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
