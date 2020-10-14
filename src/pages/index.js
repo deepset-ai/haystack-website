@@ -21,12 +21,15 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 const IndexPage = () => {
 
   const [email, setEmail] = useState('');
   const [consentToProcess, setConsentToProcess] = useState(false);
   const [communications, setCommunications] = useState(false);
+  const [success, setSuccess] = React.useState(false);
 
   const handleSubmit = (event) =>  {
     event.preventDefault();
@@ -70,7 +73,7 @@ const IndexPage = () => {
 
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4 && xhr.status === 200) { 
-          alert("Thank you for joining the waiting list!");// Returns a 200 response if the submission is successful.
+          setSuccess(true);// Returns a 200 response if the submission is successful.
         } else if (xhr.readyState === 4 && xhr.status === 400){ 
             alert(xhr.responseText.inlineMessage); // Returns a 400 error the submission is rejected.          
         } else if (xhr.readyState === 4 && xhr.status === 403){ 
@@ -100,9 +103,22 @@ const IndexPage = () => {
 
   const screenWidth = useMobileScreen();
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSuccess(false);
+  };
+
   return (
     <Layout>
       <SEO title="Haystack" image={IconJPG}  />
+      <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Thank you for joining the waiting list!
+        </Alert>
+      </Snackbar>
       <main className="home-wrapper">
         <section className="section1">
           <div className="githubicon">
