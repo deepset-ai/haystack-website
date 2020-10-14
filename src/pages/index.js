@@ -154,7 +154,8 @@ const IndexPage = () => {
           </div>
         </section>
         <section className="section5">
-          <h2>Sign Up for Haystack Hub Beta</h2>
+          <h2>Haystack Hub (Beta)</h2>
+          <p>Join the waiting list for our enterprise-ready SaaS platform for QA</p>
           <div className="contact-form">
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -182,7 +183,7 @@ const IndexPage = () => {
                         type="submit"
                         className="form-button"
                     >
-                        Sign Up for Beta
+                        Join the waiting list
                   </Button>
                 </div>
                 </form>
