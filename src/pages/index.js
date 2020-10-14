@@ -70,13 +70,13 @@ const IndexPage = () => {
 
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4 && xhr.status === 200) { 
-            alert("Thank you for joining the waiting list"); // Returns a 200 response if the submission is successful.
+          alert("Thank you for joining the waiting list!");// Returns a 200 response if the submission is successful.
         } else if (xhr.readyState === 4 && xhr.status === 400){ 
-            alert(xhr.responseText); // Returns a 400 error the submission is rejected.          
+            alert(xhr.responseText.inlineMessage); // Returns a 400 error the submission is rejected.          
         } else if (xhr.readyState === 4 && xhr.status === 403){ 
-            alert(xhr.responseText); // Returns a 403 error if the portal isn't allowed to post submissions.           
+            alert(xhr.responseText.inlineMessage); // Returns a 403 error if the portal isn't allowed to post submissions.           
         } else if (xhr.readyState === 4 && xhr.status === 404){ 
-            alert(xhr.responseText); //Returns a 404 error if the formGuid isn't found     
+            alert(xhr.responseText.inlineMessage); //Returns a 404 error if the formGuid isn't found     
         }
       }
 
@@ -167,8 +167,8 @@ const IndexPage = () => {
                     </div>
                     <div>
                     <FormControlLabel className="form-checkbox"
-                      control={<Checkbox checked={consentToProcess} onChange={handleChangeConsentToProcess} name="consentToProcess" />}
-                      label="I agree to allow deepset GmbH to store and process my personal data."
+                      control={<Checkbox required checked={consentToProcess} onChange={handleChangeConsentToProcess} name="consentToProcess" />}
+                      label="I agree to allow deepset GmbH to store and process my personal data.*"
                     />
                     </div>
                     <div>
