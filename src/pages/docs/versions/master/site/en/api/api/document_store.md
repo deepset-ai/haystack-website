@@ -1,6 +1,6 @@
 ---
 title: "Document Store"
--metaTitle: "Database"
+metaTitle: "Database"
 metaDescription: ""
 slug: "/docs/apidatabase"
 date: "2020-09-03"

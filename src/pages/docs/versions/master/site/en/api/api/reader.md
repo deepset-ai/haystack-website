@@ -1,6 +1,6 @@
 ---
 title: "Reader"
- metaTitle: "Reader"
+metaTitle: "Reader"
 metaDescription: ""
 slug: "/docs/apireadermd"
 date: "2020-09-03"

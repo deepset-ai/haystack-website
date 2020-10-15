@@ -1,6 +1,6 @@
 ---
 title: "Retriever"
- metaTitle: "Retriever"
+metaTitle: "Retriever"
 metaDescription: ""
 slug: "/docs/apiretrievermd"
 date: "2020-09-03"
