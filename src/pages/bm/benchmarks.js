@@ -109,7 +109,7 @@ const BenchMarks = ({data}) => {
         chartTypeRetriever[version] = fileObject.chart_type;
         let dataRetriever = new Array(fileObject.columns);
         for (let i=0; i<fileObject.data.length; i++) {
-            dataRetriever[i+1] = [fileObject.data[i].model, fileObject.data[i].recall, fileObject.data[i].index_speed, fileObject.data[i].query_speed];
+            dataRetriever[i+1] = [fileObject.data[i].model, fileObject.data[i].map, fileObject.data[i].index_speed, fileObject.data[i].query_speed];
         } 
         mapDataRetriever[version] = dataRetriever;
         subTitelRetriever[version] = fileObject.subtitle;
@@ -253,7 +253,7 @@ const BenchMarks = ({data}) => {
                       },
                       axes: {
                         x: {
-                          recall: {label: labelRetriever[selectedVersion]}, // Bottom x-axis.
+                          map: {label: labelRetriever[selectedVersion]}, // Bottom x-axis.
                           time: {side: time_sideRetriever[selectedVersion], label: time_labelRetriever[selectedVersion]} // Top x-axis.
                         }
                       },
@@ -378,7 +378,7 @@ export const query = graphql`
               model
               n_docs
               query_speed
-              recall
+              map
             }
             description
             series {
