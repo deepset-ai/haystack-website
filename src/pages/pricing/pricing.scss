@@ -1,17 +1,17 @@
 .pricing-products{
-    border-bottom: 1px solid lightgray;
     padding-bottom: 50px;
+    margin-top: 50px;
 }
 
 .pricing {
     display: flex;
     justify-content: center;
-    padding-bottom: 50px;
+    margin-top: 0;
 
     .pricing-options {
-        background: #ffffff;
+        background-color: #ffffff;
         width: 25%;
-        margin-left: 5%;
+        margin-left: 3%;
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px, rgba(0, 0, 0, 0.08) 3px 10px 30px;
         align-content: center;
@@ -108,8 +108,8 @@
     justify-content: left;  
     background: #ffffff;
     border-radius: 6px;
-    width: 85%;
-    margin-left: 10%;
+    width: 81%;
+    margin-left: 11%;
     margin-bottom: 30px;
     background-color: #FFFFFF;
     box-shadow: 0 5px 10px 0 rgba(39,51,92,0.15);

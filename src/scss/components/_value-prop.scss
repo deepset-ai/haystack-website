@@ -3,44 +3,45 @@
 
   .logo-icon {
     margin-top: 100px;
-    margin-left: 170px;
-    height: 35px;
-    width: 26px;
+    margin-left: 30px;
+    margin-bottom: 60px;
+    height: 55px;
+    width: 46px;
   }
 
   .main-subtitle {
-    margin-top: 30px;
-    margin-left: 170px;
+    margin-left: 30px;
     height: 104px;
-    width: 340px;
+    width: 500px;
     color: #1C2648;
-    font-size: 36px;
+    font-size: 42px;
     font-weight: bold;
     line-height: 52px;
   }
 
   .button {
       margin-top: 30px;
-      margin-left: 170px;
+      margin-left: 30px;
       height: 50px;
-      width: 205px;
+      width: 400px;
   }
 
   .link {
       display: inline-block;
-      margin-top: 40px;
-      margin-left: 175px;
+      margin-top: 30px;
+      margin-left: 30px;
       font-size: 1.2rem;
       color: #009BAA;
       font-weight: bold;
-      text-decoration: underline;
       cursor: pointer;
+      .span-ready {
+        color: #172633;
+      }
   }
 
   .value-prop-content {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
-      grid-template-rows: repeat(12, 1fr);
       row-gap: 0.25em;
       margin-bottom: 2em;
       padding: 2em;
@@ -68,13 +69,16 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: url("../images/animation/search.gif") no-repeat top;
+      //background: url("../images/animation/search.gif") no-repeat top;
       background-size: 100% 100%;
       height: 100%;
       padding: 0;
       width: 100%;
       max-width: 70rem;
       margin: 2em auto;
+      .img-main-photo {
+        width: 100%;
+      }
     }
     
     @include breakpoint("from-tablet-l") {

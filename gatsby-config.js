@@ -15,6 +15,7 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-json`,
+    `gatsby-plugin-smoothscroll`,
     //`gatsby-plugin-postcss`,
     { 
       resolve: `gatsby-plugin-purgecss`,

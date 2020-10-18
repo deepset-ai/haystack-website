@@ -3,7 +3,9 @@ import Button from "./button";
 import Logo from "../../images/HaystackIcon.png"
 import LocalizedLink from "../localizedLink/localizedLink"; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
+import HaystackHubSearch  from "../../images/05_1_b_search_results_copy3x.png"; 
+
 
 const ValueProp = props => {
 
@@ -19,10 +21,12 @@ const ValueProp = props => {
             to="/contact/contact"
             className="link"
           >
-            Ready for Haystack Hub? Get in touch <FontAwesomeIcon icon={faLongArrowAltRight}/>
+            <span className="span-ready">Ready for Haystack Hub?</span> Get in touch <FontAwesomeIcon icon={faAngleDoubleRight}/>
           </LocalizedLink>
         </div>
-        <div className="main-photo"></div>
+        <div className="main-photo">
+        <img src={HaystackHubSearch} className="img-main-photo" alt="Haystack-Hub"></img>
+        </div>
       </div>
     </section>
   )

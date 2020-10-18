@@ -21,12 +21,12 @@ const IndexPage = () => {
         <ProductFeatures />
         <Products />
         <UseCases />
-        <UserProof />
         <CallToAction />
     </Layout>
   );
 
 };
+//<UserProof />
   
 
 export default IndexPage

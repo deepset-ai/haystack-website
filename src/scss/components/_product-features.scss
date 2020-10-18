@@ -2,19 +2,33 @@
     background-color: #ffffff;
     text-align: center;
     h2 {
-      padding-top: 60px;
+      padding-top: 100px;
+      color: #182632;
+      font-size: 32px !important;
     }
     h3 {
-      color: black;
+      color: #182632;
+      font-size: 24px !important;
+      opacity: 0.7;
+    }
+    h4 {
+      font-size: 24px !important;
+      font-weight: bold;
+      color: #182632;
+      margin-top: 20px;
+      margin-bottom: 20px;;
     }
     p {
-      font-size: 1.25rem;
-      color: black;
+      font-size: 18px !important;
+      color: #182632 ;
     }
     .svg-inline--fa {
       width: 5em;
       color: #009BAA;
       height: 5em;
+    }    
+    .img-feature {
+      width: 35%
     }
   }
 
@@ -39,11 +53,7 @@
   }
 
   .core-feature-2 {
-    height: 350px
-  }
-
-  .svg-inline--fa.fa-w-14 {
-    width: 5em !important;
+    height: 260px
   }
 
   .feature-icon {

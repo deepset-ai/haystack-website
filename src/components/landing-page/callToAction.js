@@ -6,9 +6,13 @@ const CallToAction = props => {
 
   return (
     <section className="cta">
-      <h2>Get Startet with Neural Question Answering</h2>
+      <h2>Get Started with Neural Question Answering</h2>
+      <div>
       <Button label="Get Started"  to="/en/docs/overviewmd"/>
-      <Button label="Contact Us" to="/contact/contact" />
+      </div>
+      <div>
+      <Button label="Contact Us" className="button-contanct" to="/contact/contact" />
+      </div>
     </section>
   )
 };

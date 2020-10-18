@@ -51,7 +51,7 @@ const Header = ({ siteTitle, menuLinks }) => {
               <LocalizedLink
                 locale="en"
                 to="/#main-use-cases"
-                className="link"
+                scrollTo="link"
               >
                 Use Cases
               </LocalizedLink>
@@ -79,8 +79,10 @@ const Header = ({ siteTitle, menuLinks }) => {
               >
                 Benchmarks
               </LocalizedLink>
+
+              <div className="Rectangle "></div>
               
-              <Button label="Login" to="http://haystackhub-service.s3-website.eu-central-1.amazonaws.com/login" />
+              <Button label="Login" className="button-login" to="http://haystackhub-service.s3-website.eu-central-1.amazonaws.com/login" />
               <Button label="Free Trial" to="http://haystackhub-service.s3-website.eu-central-1.amazonaws.com/signup/step-1"/>
             </div>
           ) : ( 

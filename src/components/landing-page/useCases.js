@@ -1,97 +1,196 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import FinancialGovernance from "../../images/ico-ico-80-finance@3x.png"
+import KnowledgeBase from "../../images/ico-ico-80-search-grey@3x.png"
+import MCIngelliegence from "../../images/ico-ico-80-market@3x.png"
 
 const UseCases = props => {
 
   return (
-    <section className="usecases">
+    <section id="main-use-cases" className="usecases">
       <div className="all-usecases">
-      <h2 id="main-use-cases">Use Cases</h2>
       <div className="usecase-group">
         <div className="usecase-card-1">
-          <h3>Financial Governance</h3>
+        <img className="usecase-img" src={FinancialGovernance} alt="Financial Governance"></img>
+          <div className="uc-h3"><h3>Financial Governance</h3></div>
           <div className="uc-description">
             Gaining insights into financial data of company of of multiple companies within a market. 
-            Analysis mainly focuses on reducing risks e.g. credit decisions.<br/><br/>
+            Analysis mainly focuses on reducing risks e.g. credit decisions.
           </div>
           <div className="uc-values">
+          <div class="row">
+            <div class="column-left">
                 <ul>
-                  <li>
-                    <FontAwesomeIcon icon={faPlus}/> Faster and efficient insights
-                  </li>
-                  <li>
-                    <FontAwesomeIcon icon={faPlus}/> Comprehensive insights into the full data and therefore significantly less risk in the analysis
-                  </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faPlus}/>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faPlus}/>
+                    </li>
                 </ul>
+                </div>
+                <div class="column">
+                <ul>
+                    <li>
+                      Faster and efficient insights
+                    </li>
+                    <li>
+                      Comprehensive insights into the full data and therefore significantly less risk in the analysis
+                    </li>
+                </ul>
+                </div>
+            </div>
           </div>
-          <div className="uc-values">
-                <ul className="ul-examples">
-                  <li className="li-examples"> 
-                    Checking plausibility of accruals
-                  </li>
-                  <li className="li-examples">
-                    Checking of measures taken aganinst pandemic risks in a portfolio of companies
-                  </li>
+          <div className="uc-examples">
+          <div className="h-example"><h4>Examples:</h4></div> 
+          <div class="row">
+            <div class="column-left">
+                <ul>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faCircle}/>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faCircle}/>
+                    </li>
                 </ul>
+                </div>
+                <div class="column">
+                <ul>
+                    <li>
+                      Checking plausibility of accruals
+                    </li>
+                    <li>
+                    Checking of measures taken against pandemic risks in a portfolio of companies
+                    </li>
+                </ul>
+                </div>
+            </div>
           </div>
         </div>
         <div className="usecase-card-2">
-          <h3>Portal Search</h3>
+        <img className="usecase-img" src={KnowledgeBase} alt="knowledge Base Search"></img>
+        <div className="uc-h3"><h3>Knowledge Base Search</h3></div>
           <div className="uc-description">
-            Finding relevant information in infromation portals or wikis.<br/><br/>
+            Finding relevant information in infromation portals or wikis.
           </div>
           <div className="uc-values">
+          <div class="row">
+            <div class="column-left">
                 <ul>
-                  <li>
-                    <FontAwesomeIcon icon={faPlus}/> Direct resulotuion of tickets
-                  </li>
-                  <li>
-                    <FontAwesomeIcon icon={faPlus}/> Increase in customer satisfaction
-                  </li>
-                  <li>
-                    <FontAwesomeIcon icon={faPlus}/> More efficient onboarding and knowledge sharing in enterprises
-                  </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faPlus}/>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faPlus}/>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faPlus}/>
+                    </li>
                 </ul>
-          </div>
-          <div className="uc-values">
-                <ul className="ul-examples">
-                  <li className="li-examples"> 
-                    Customers looking for guidance on terms & conditions
-                  </li>
-                  <li className="li-examples">
-                    Employees interested in knowing about company policy on travel etc.
-                  </li>
+                </div>
+                <div class="column">
+                <ul>
+                    <li>
+                      Direct resolution of tickets
+                    </li>
+                    <li>
+                      Increased in customer satisfaction
+                    </li>
+                    <li>
+                      More efficient onboarding and knowledge sharing in enterprises
+                    </li>
                 </ul>
+                </div>
+            </div>
+            </div>
+          <div className="uc-examples">
+          <div className="h-example"><h4>Examples:</h4></div>
+          <div class="row">
+            <div class="column-left">
+                <ul>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faCircle}/>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faCircle}/>
+                    </li>
+                </ul>
+                </div>
+                <div class="column">
+                <ul>
+                    <li>
+                      Customers looking for guidance on terms & conditions
+                    </li>
+                    <li>
+                      Employees looking for company's travel policy etc.
+                    </li>
+                </ul>
+                </div>
+            </div>
           </div>
         </div>
         <div className="usecase-card-3">
-          <h3>Market & Competitor Intelligence</h3>
+        <img className="usecase-img" src={MCIngelliegence} alt="Market & Competitor Intelligence"></img>
+        <div className="uc-h3"><h3>Market & Competitor Intelligence</h3></div>
           <div className="uc-description">
-            Analyzing market trend and monitoring of competitive strategy.<br/><br/>
+            Analyzing market trend and monitoring of competitive strategy.
           </div>
           <div className="uc-values">
+          <div class="row">
+            <div class="column-left">
                 <ul>
-                  <li>
-                    <FontAwesomeIcon icon={faPlus}/> Comprehensive analysis of complete data sets
-                  </li>
-                  <li>
-                    <FontAwesomeIcon icon={faPlus}/> More effciency in research leaving more time for humans to create synthesis
-                  </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faPlus}/>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faPlus}/>
+                    </li>
                 </ul>
+                </div>
+                <div class="column">
+                <ul>
+                    <li>
+                      Comprehensive analysis of complete data sets
+                    </li>
+                    <li>
+                      More efficiency in research leaving more time for humans to create synthesis
+                    </li>
+                </ul>
+                </div>
+            </div>
           </div>
-          <div className="uc-values">
-                <ul className="ul-examples">
-                  <li className="li-examples"> 
-                    Analyzing the outlook of the growth of AI in Automotive
-                  </li>
-                  <li className="li-examples">
-                    Overview ofer all M&A activities
-                  </li>
-                  <li className="li-examples">
-                    Evaluation of growth rate for EMEA market from different sources
-                  </li>
+          <div className="uc-examples">
+          <div className="h-example"><h4>Examples:</h4></div>
+            <div class="row">
+            <div class="column-left">
+                <ul>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faCircle}/>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faCircle}/>
+                    </li>
+                    <li>
+                      <FontAwesomeIcon className="check-font" icon={faCircle}/>
+                    </li>
                 </ul>
+                </div>
+                <div class="column">
+                <ul>
+                    <li>
+                      Analyzing the outlook of the growth of AI in Automotive
+                    </li>
+                    <li>
+                      Overview over all M&A activities
+                    </li>
+                    <li>
+                      Evaluation of growth rate for EMEA market from different sources
+                    </li>
+                </ul>
+                </div>
+            </div>
           </div>
         </div>
       </div >

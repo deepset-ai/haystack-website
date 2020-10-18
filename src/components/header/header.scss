@@ -113,8 +113,14 @@
     align-items: center;
     padding-right: 30px;
 
+    .Rectangle {
+      width: 2px;
+      height: 32px;
+      background-color: #009bab;
+    }
+
     .link {
-      color: #009BAA;
+      color: #60677e;;
       font-weight: bold;
       margin: 0 1rem;
       // border-bottom: 2px solid #fff;
@@ -122,6 +128,20 @@
       // &.current {
       //   border-bottom: 2px solid var(--color-highlight);
       // }
+    }
+
+    .button-login {
+      font-size: 16px;
+      font-weight: bold;
+      color: #009bab;
+      background-color: #ffffff;
+      border: 0;
+      height: 40px;
+      width: 150px;
+      cursor: pointer;
+    }
+    .button {
+      margin-left: 0;
     }
   }
 
