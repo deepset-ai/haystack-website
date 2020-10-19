@@ -19,9 +19,7 @@ const ContactPage = () => {
     const [lastName, setLastName] = useState('');
     const [company, setCompany] = useState('');
     const [message, setMessage] = useState('');
-    const [success, setSuccess] = React.useState(false);
-
-    console.log('test');
+    const [success, setSuccess] = useState(false);
 
     const handleSubmit = (event) =>  {
         event.preventDefault();
@@ -29,7 +27,6 @@ const ContactPage = () => {
         var xhr = new XMLHttpRequest();
         var url = 'https://api.hsforms.com/submissions/v3/integration/submit/4561480/944a26ce-ea3d-4a57-ba9b-c12c0b9198ce';
         
-        console.log(message);
         // Example request JSON:
         var data = {
         "submittedAt": new Date().getTime(),
@@ -73,13 +70,13 @@ const ContactPage = () => {
             }
         }
         };
-        console.log(data);
+        
         var final_data = JSON.stringify(data);
-        console.log(final_data);
+        
         xhr.open('POST', url);
         // Sets the value of the 'Content-Type' HTTP request headers to 'application/json'
         xhr.setRequestHeader('Content-Type', 'application/json');
-        console.log(xhr);
+       
         xhr.onreadystatechange = function() {
             if(xhr.readyState === 4 && xhr.status === 200) { 
                 setSuccess(true);// Returns a 200 response if the submission is successful.

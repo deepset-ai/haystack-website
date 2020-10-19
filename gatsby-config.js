@@ -15,19 +15,33 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-json`,
-    `gatsby-plugin-smoothscroll`,
     //`gatsby-plugin-postcss`,
-    { 
+    /*{ 
       resolve: `gatsby-plugin-purgecss`,
       options: {
         printRejected: true, // Print removed selectors and processed file names
         //develop: true, // Enable while using `gatsby develop`
         // tailwind: true, // Enable tailwindcss support
         // whitelist: ['whitelist'], // Don't remove this selector
-        // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
+        // ignore: ['/ignored.css'], // Ignore files/folders
         // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
       }
-    },
+    },*/
+    /*{
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Roboto Mono`,
+            variants: [`400`, `700`]
+          },
+          {
+            family: `Roboto`,
+            subsets: [`latin`]
+          },
+        ],
+      },
+    },*/
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -102,6 +116,14 @@ module.exports = {
         icon: `src/images/HaystackIcon.png`, // This path is relative to the root of the site.
       },
     },
+    /*{
+      resolve: "gatsby-plugin-hubspot",
+      options: {
+          trackingCode: "4561480",
+          respectDNT: true,
+          productionOnly: false,
+      },
+    },*/
     {
       resolve: `gatsby-plugin-material-ui`,
       // If you want to use styled components, in conjunction to Material-UI, you should:
