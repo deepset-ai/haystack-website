@@ -14,6 +14,9 @@
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px, rgba(0, 0, 0, 0.08) 3px 10px 30px;
         .inner-form {
+            h2 {
+                margin-top: 0;
+            }
             h3 {
                 margin-bottom: 40px;
             }
@@ -29,6 +32,11 @@
                 margin-top: 10px;
                 margin-bottom: 10px;
                 float: left;
+            }
+            .terms {
+                margin-top: 20px;
+                text-align: justify;
+                line-height: 1.5em;
             }
         }
     }
