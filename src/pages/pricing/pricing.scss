@@ -1,12 +1,16 @@
 .pricing-products{
-    padding-bottom: 50px;
-    margin-top: 50px;
+    background-color: #ffffff;
+    .products {
+        padding-top: 100px !important;
+        background-color: #ffffff;
+    }
 }
 
 .pricing {
     display: flex;
     justify-content: center;
     margin-top: 0;
+    padding-top: 100px;
 
     .pricing-options {
         background-color: #ffffff;

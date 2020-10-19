@@ -40,14 +40,21 @@
         height: 100%;
         margin-left: 7%;
     }
+    @include media("<=1000px") { 
+        .products-options {
+            width: 100%;
+            margin-left: 0%;
+        }
+    }
     .description-features {
-        background-color: grey !important;
+        padding-top: 5px;
+        background-color: #f6f9f9 ;
     }
     .prodcuts-header {
         font-size: 1.5em;
         line-height: 1.5em;
         text-align: left;
-        background-color: #ffffff;
+        padding-bottom: 10px;
     }
     .product-description {
         margin-left: 20px;
@@ -68,6 +75,7 @@
             width: 5%;
             li {
                 height: 80px;
+                padding-right: 5px;
             }
         }
         .column {
@@ -75,6 +83,7 @@
             width: 45%;
             li {
                 height: 80px;
+                padding-right: 5px;
             }
           }
           .row:after {
@@ -90,6 +99,7 @@
         width: 40%;
     } 
     .products-actions {
+        padding-top: 10px;
         display: flex;
         justify-content: center;
         .button {
@@ -157,4 +167,49 @@
         box-shadow: none;
         cursor: pointer;
     }
+    @include media("<=1000px") { 
+        .products-actions {
+            display: block;   
+        }
+        .learnmore-button {
+            width: 100%;
+            margin-left: 0;
+            padding-left: 5px;
+            padding-right: 5px;
+            margin-bottom: 5px;
+        }
+        .learnmore-button-os {
+            width: 100%;
+            margin-left: 0;
+            padding-left: 5px;
+            padding-right: 5px;
+            margin-bottom: 5px;
+        }
+        .trial-button {
+            width: 100%;
+            margin-left: 0;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .trial-button-os {
+            width: 100%;
+            margin-left: 0;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .products-opensource {
+            width: 100%;
+            margin-left: 0;
+        }
+        .products-enterprise {
+            width: 100%;
+            margin-left: 0;
+        } 
+    }
   }
+
+  @include media("<=1000px") { 
+    .products {
+        display: block;  
+    }
+}

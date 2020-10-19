@@ -30,12 +30,17 @@
     line-height: 2em;
     text-align: left;
     min-height: 270px;
+    background-color: #f6f9f9;
+    border-bottom: 1px;
+    border-bottom-color: #e7e9ed;
+    padding-top: 10px;
     .ul-examples, .li-examples {
       list-style-type: circle; 
     }
   }
   .uc-examples{
-    margin-bottom: 20px;
+    background-color: #f6f9f9;
+    padding-top: 10px;
     font-size: 1.1em;
     line-height: 2em;
     text-align: left;

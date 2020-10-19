@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Master data
-versions=('', 'latest/', 'v0.4.0/')  
+versions=("" "latest/" "v0.4.0/")  
 
 for i in "${versions[@]}"
 do
@@ -10,11 +10,11 @@ do
         j=''
     fi
 
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${i}_src/api/api/document_store.md -O ./src/pages/docs/versions/master/${j}site/en/api/api/document_store.md 
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${i}_src/api/api/file_converter.md -O ./src/pages/docs/versions/master/${j}site/en/api/api/file_converter.md
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${i}_src/api/api/preprocessor.md -O ./src/pages/docs/versions/master/${j}site/en/api/api/preprocessor.md 
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${i}_src/api/api/reader.md -O ./src/pages/docs/versions/master/${j}site/en/api/api/reader.md 
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${i}_src/api/api/retriever.md  -O ./src/pages/docs/versions/master/${j}site/en/api/api/retriever.md
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/document_store.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/file_converter.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/file_converter.md
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/preprocessor.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/preprocessor.md 
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/reader.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/reader.md 
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/retriever.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/retriever.md
 
     echo -e "---\ntitle: \"Document Store\"\nmetaTitle: \"Database\"\nmetaDescription: \"\"\nslug: \"/docs/apidatabase\"\ndate: \"2020-09-03\"\nid: \"apidatabasemd\"\n---\n\n# Document Store\n\n$(cat ./src/pages/docs/versions/master/site/en/api/api/document_store.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
     echo -e "---\ntitle: \"File Converters\"\nmetaTitle: \"File Converters\"\nmetaDescription: \"\"\nslug: \"/docs/file_converters\"\ndate: \"2020-09-03\"\nid: \"file_convertersmd\"\n---\n\n# File Converters\n\n$(cat ./src/pages/docs/versions/master/site/en/api/api/file_converter.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/file_converter.md  

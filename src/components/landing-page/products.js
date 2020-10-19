@@ -19,7 +19,7 @@ const Products = props => {
                 <h4>Haystack Open Source</h4>
                 <p>Open source framework to scale QA models to large collections of documents.</p>
             </div>
-            <div classname="description-features">
+            <div className="description-features">
             <div className="product-description">Feature higlights include:</div>
             <div className="products-features">
             <div class="row">
@@ -71,7 +71,7 @@ const Products = props => {
                 <h4>Haystack Hub</h4>
                 <p>Enterprise-ready subscription with full service to enable neural search.</p>
             </div>
-            <div classname="description-features">
+            <div className="description-features">
             <div className="product-description">Everything in Open Source plus:</div>
             <div className="products-features">
             <div class="row">

@@ -49,8 +49,12 @@
   }
 
   .fontawsome-icon {
-    height: 2rem;
-    color: #fff;
+    color: #009BAA;
+  }
+  .svg-inline--fa.fa-w-14  {
+    width: 4em;
+    height: 3em;
+    padding-right: 5px;
   }
 
   .solutions {
@@ -150,7 +154,7 @@
   @include media("<=1000px") {
     padding: 10px 20px;
     box-shadow: none;
-    background: #08415D;
+    background: #ffffff;;
     padding: 0 10px 0 10px;
     max-width: 100%;
 
@@ -213,6 +217,18 @@
     top: 60px;
     height: auto;
     opacity: 1;
+  }
+  .button-login {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    border-radius: 4px;
+    background-color: lightgray;
+    border: 0;
+    height: 40px;
+    width: 150px;
+    cursor: pointer;
   }
 }
 

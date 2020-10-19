@@ -61,6 +61,27 @@
         margin-top: 0;
       }
     }
+
+    @include media("<=1000px") {
+      .logo-icon {
+        margin-left: 0;
+      }
+      .main-message {
+        width: 100%;
+      }
+      .main-subtitle {
+        width: 100%;
+        font-size: 32px;
+        margin-left: 0;
+      }
+      a {
+        width: 100%;
+      }
+      .button {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
     
     .main-photo {
       grid-column: span 16;
@@ -104,6 +125,13 @@
 
     .beta-signup {
       text-align: center;
+
+      h2 {
+        margin-top: 0 !important;
+        color: #1C2648;
+        font-size: 42px;
+        font-weight: bold;
+      }
 
       p {
         margin-top: 20px;
@@ -150,5 +178,31 @@
         width: 600px;
         margin-top: 20px;
       }
+
+      @include media("<=1000px") {
+        .form-control {
+          width: 100%;
+          padding-right: 5px;
+          padding-left: 5px;
+        }
+        .form-button {
+          width: 100%;
+          padding-right: 5px;
+          padding-left: 5px;
+        }
+        .form-checkbox {
+          width: 100%;
+          padding-right: 5px;
+          padding-left: 5px;
+        }
+        .signup-beta {
+          width: 100%;
+        }
+        a {
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+      }
+
     }
   }

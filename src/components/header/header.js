@@ -93,25 +93,33 @@ const Header = ({ siteTitle, menuLinks }) => {
         <div className={`mobile-nav ${mobileNav && "open"}`}>
         <LocalizedLink
           locale="en"
-          to="/en/docs/intromd"
+          to="/"
           className="link"
-          >
+        >
           Overview
         </LocalizedLink>
 
         <LocalizedLink
           locale="en"
-          className="link"
-          to="/en/docs/get_startedmd"
-          >
-          Quick Start
+          to="/#main-use-cases"
+          scrollTo="link"
+        >
+          Use Cases
         </LocalizedLink>
               
         <LocalizedLink
-          locale="en"
-          className="link"
-          to="/en/docs/intromd"
-          >
+         to="/pricing/pricing"
+         className="link"
+         locale="en"
+        >
+         Pricing
+        </LocalizedLink>
+
+        <LocalizedLink
+         to="/docs/intromd"
+         className="link"
+         locale="en"
+        >
           Docs
         </LocalizedLink>
 
@@ -119,9 +127,12 @@ const Header = ({ siteTitle, menuLinks }) => {
           locale="en"
           className="link"
           to="/bm/benchmarks"
-          >
+        >
           Benchmarks
         </LocalizedLink>
+
+        <Button label="Login" className="button-login" title="Coming soon" />
+        <Button label="Free Trial" className="button-login" title="Coming soon"  />
       </div>
       </div>
     </>
