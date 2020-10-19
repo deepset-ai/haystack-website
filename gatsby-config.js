@@ -52,7 +52,7 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/pages/docs/site/en/img`,
+        path: `${__dirname}/src/pages/docs/versions`,
       },
     },
     {
@@ -67,6 +67,13 @@ module.exports = {
       options: {
         name: `docs`,
         path: `${__dirname}/src/pages/docs`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `benchmarks`,
+        path: `${__dirname}/src/pages/benchmarks/versions`,
       },
     },
     {

@@ -46,6 +46,20 @@
         color: #000;
         font-size: 3rem;
         margin-bottom: 4rem;
+        .version-formcontrol {
+            margin-left: 20px;
+            min-width: 150px;
+            //border: 1px solid grey;
+            //border-radius: 4px;
+            //box-shadow: 0 1px 0 rgba(27, 31, 35, 0.1);
+            .MuiInputBase-root {
+                font-size: 2rem;
+            }
+            .MuiSelect-select {
+                margin: 0;
+                padding-bottom: 0px;
+            }
+        }
     }
 
     h2 {

@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 // import GithubIcon from "../../images/icon/github-normal.svg";
 import "./footer.scss";
 
-const Footer = ({ locale, style }) => {
+const Footer = ({ style }) => {
   // const l = locale === "cn" ? "en" : "cn";
   // const to = globalHistory.location.pathname
   //   .replace("/en/", "/")

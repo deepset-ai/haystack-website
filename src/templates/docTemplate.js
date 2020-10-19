@@ -12,18 +12,37 @@ import QueryModal from "../components/query-modal/query-modal.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
+function sortVersions(a, b) {
+  const [v1, s1, m1] = a.split(".");
+  const [v2, s2, m2] = b.split(".");
+  const aValue = v1.split("")[1] * 100 + s1 * 10 + m1 * 1;
+  const bValue = v2.split("")[1] * 100 + s2 * 10 + m2 * 1;
+
+  if (aValue > bValue) {
+    return -1;
+  }
+  if (aValue === bValue) {
+    return 0;
+  }
+  if (aValue < bValue) {
+    return 1;
+  }
+}
+
 export default function Template({
   data,
   pageContext, // this prop will be injected by the GraphQL query below.
 }) {
   let {
     locale,
+    version,
+    versions,
     headings = [],
     allMenus,
     newHtml,
     editPath,
   } = pageContext;
-  //versions = versions.sort(sortVersions);
+  versions = versions.sort(sortVersions);
   const screenWidth = useMobileScreen();
   
   const [showModal, setShowModal] = useState(false);
@@ -159,6 +178,7 @@ export default function Template({
     : {};
   const menuList = allMenus.find(
     (v) =>
+      v.absolutePath.includes(version) &&
       locale === v.lang
   );
   const { markdownRemark } = data; // data.markdownRemark holds our post data
@@ -203,9 +223,9 @@ export default function Template({
       current="doc"
       pageContext={pageContext}
       menuList={menuList}
-      //version={version}
+      version={version}
       headings={headings.filter((h, i) => i > 0)}
-      //versions={versions}
+      versions={versions}
       id={frontmatter.id}
       showDoc={false}
 
