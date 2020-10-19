@@ -101,4 +101,54 @@
         text-align: left;
       }
     }
+
+    .beta-signup {
+      text-align: center;
+
+      p {
+        margin-top: 20px;
+        font-size: 1rem;
+      }
+  
+      .form-control {
+        width: 600px;
+        margin-top: 20px;
+        .MuiInputBase-input {
+          height: 40px;
+        }
+      }
+  
+      .form-button {
+        width: 600px;
+        margin-top: 20px;
+        margin-bottom: 40px;
+        background-color: #08415D;
+        color: #ffffff;
+        font-weight: bold;
+        &:hover {
+          background-color: #08415D;
+        }
+      }
+  
+      .form-checkbox {
+        margin-top: 20px;
+        width: 600px;
+      }
+
+      .signup-beta {
+        border: 0;
+        background: none;
+        box-shadow: none;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 4px;
+        color: #ffffff;
+        background-color: #009BAA;
+        text-align: center;
+        cursor: pointer;
+        height: 50px;
+        width: 600px;
+        margin-top: 20px;
+      }
+    }
   }

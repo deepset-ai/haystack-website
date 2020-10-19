@@ -82,8 +82,8 @@ const Header = ({ siteTitle, menuLinks }) => {
 
               <div className="Rectangle "></div>
               
-              <Button label="Login" className="button-login" to="http://haystackhub-service.s3-website.eu-central-1.amazonaws.com/login" />
-              <Button label="Free Trial" to="http://haystackhub-service.s3-website.eu-central-1.amazonaws.com/signup/step-1"/>
+              <Button label="Login" className="button-login" title="Coming soon" />
+              <Button label="Free Trial" className="button-login" title="Coming soon"  />
             </div>
           ) : ( 
              <FontAwesomeIcon className="fontawsome-icon" icon={faBars} onKeyDown={handleClick}

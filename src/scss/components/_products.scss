@@ -96,6 +96,7 @@
             height: 50px;
             width: 205px;
             margin-left: 10px;
+            cursor: pointer;
         }
     }
     .check-font {
@@ -108,6 +109,32 @@
         width: 270px;
         height: 50px;
         border-radius: 6px;
+        border: solid 1px lightgray;
+        background-color: #ffffff;
+        color: lightgray;
+        font-weight: bold;
+        font-size: 16px;
+        margin-left: 10px;
+        box-shadow: none;
+        cursor: pointer;
+    }
+    .trial-button {
+        width: 270px;
+        height: 50px;
+        border-radius: 6px;
+        border: solid 1px lightgray;
+        background-color: lightgray;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 16px;
+        margin-left: 10px;
+        box-shadow: none;
+        cursor: pointer;
+    }
+    .learnmore-button-os {
+        width: 270px;
+        height: 50px;
+        border-radius: 6px;
         border: solid 1px #009bab;
         background-color: #ffffff;
         color: #009bab;
@@ -115,8 +142,9 @@
         font-size: 16px;
         margin-left: 10px;
         box-shadow: none;
+        cursor: pointer;
     }
-    .trial-button {
+    .trial-button-os {
         width: 270px;
         height: 50px;
         border-radius: 6px;
@@ -127,5 +155,6 @@
         font-size: 16px;
         margin-left: 10px;
         box-shadow: none;
+        cursor: pointer;
     }
   }

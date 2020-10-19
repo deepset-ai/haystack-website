@@ -61,8 +61,8 @@ const Products = props => {
             </div>
             </div>
             <div className="products-actions">
-                <Button label="Learn More"  className="learnmore-button" to="/en/docs/intromd" />
-                <Button label="Get Started" className="trial-button" to="/en/docs/get_startedmd" />
+                <Button label="Learn More"  className="learnmore-button-os" to="/en/docs/intromd" />
+                <Button label="Get Started" className="trial-button-os" to="/en/docs/get_startedmd" />
             </div>
         </div>
         <div className="products-options products-enterprise">
@@ -119,8 +119,8 @@ const Products = props => {
             </div>
             </div>
             <div className="products-actions">
-                <Button label="Learn More" className="learnmore-button" to="/en/docs/introhubmd" />
-                <Button label="Free Trial" className="trial-button" />
+                <Button label="Learn More" className="learnmore-button" title="Coming soon" />
+                <Button label="Free Trial" className="trial-button" title="Coming soon" />
             </div>
         </div>
         </div>

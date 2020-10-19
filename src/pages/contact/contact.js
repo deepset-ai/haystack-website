@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../../components/layout/layout';
 import './contact.scss';
+import LocalizedLink from "../../components/localizedLink/localizedLink"; 
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -170,7 +171,7 @@ const ContactPage = () => {
                 <div>
                 <Button type="submit" label="Submit" />
                 <div className="terms">
-                    By submitting you agree to Elastic Terms of Service. Your personal data will be processed in accordance with Elastic's Privacy Statement.
+                    By submitting you agree to deepset's <LocalizedLink locale="en" to="/policies/terms" className="link" >Terms of Service</LocalizedLink>. Your personal data will be processed in accordance with deepset's <LocalizedLink locale="en" to="/policies/privacy" className="link" >Privacy Statement</LocalizedLink>.
                 </div>
                 </div>
                 </form>

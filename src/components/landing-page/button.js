@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from "gatsby";
 
-const Button = ({ label, to, className="button", type }) => (
+const Button = ({ label, to, className="button", type, title }) => (
   <Link to={to}>
-    <button className={className} type={type}>
+    <button className={className} type={type} title={title}>
       {label}
     </button>
   </Link>

@@ -131,10 +131,12 @@
     }
 
     .button-login {
+      margin-left: 10px;
       font-size: 16px;
       font-weight: bold;
-      color: #009bab;
-      background-color: #ffffff;
+      color: #ffffff;
+      border-radius: 4px;
+      background-color: lightgray;
       border: 0;
       height: 40px;
       width: 150px;
