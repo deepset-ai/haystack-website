@@ -49,6 +49,14 @@
       list-style-type: circle; 
     }
   }
+  @include media("<=1000px") {
+    .uc-values{
+      width: 100%;
+    }
+    .uc-examples {
+     width: 100%; 
+    }
+  }
 }
 
 .usecase-card-1,
@@ -124,5 +132,25 @@
       display: table;
       clear: both;
     }
+
+    @include media("<=1100px") {
+      .uc-description { 
+        min-height: 160px;
+      }
+    }
 }
  
+@include media("<=1000px") {
+  .usecases {
+    display: block;
+  }
+  .usecase-group {
+    display: block;
+  }
+  .usecase-card-1,
+  .usecase-card-2,
+  .usecase-card-3  {
+    width: 100%;
+    margin-left: 0;
+  }
+}

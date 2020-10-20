@@ -1,3 +1,5 @@
+@import "../../components/include_media";
+
 .thumbnail {
     position : absolute;
     top : 0 ;
@@ -78,5 +80,21 @@
     }
     *,*:focus,*:hover{
         outline:none;
+    }
+    @include media("<=1000px") {
+        .benchmarking-content {
+            width:94%;
+        }
+        h1 {
+            font-size: 2rem !important;
+            .version-formcontrol {
+                .MuiInputBase-root {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        h2 {
+            font-size: 1.6rem !important;;
+        }
     }
 }

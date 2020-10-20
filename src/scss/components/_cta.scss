@@ -23,4 +23,12 @@
       font-size: 1.5rem;
       font-weight: 500;
     }
+    @include media("<=1000px") {
+      button {
+        margin-left: 0;
+      }
+      .button-contanct {
+        margin-left: 0;
+      }
+    }
   }

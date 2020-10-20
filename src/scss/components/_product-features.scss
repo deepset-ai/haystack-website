@@ -32,7 +32,24 @@
     .img-feature {
       width: 35%
     }
+    @include media("<=1100px") {
+      h4 {
+        font-size: 20px !important;
+      }
+      p {
+        font-size: 14px !important;
+      }
+      .img-feature {
+        width:75%;
+      }
+    }
+    @include media("<=500px") {
+      .img-feature {
+        width:35%;
+      }
+    }
   }
+
 
   .githubicon {
     margin: 3em;

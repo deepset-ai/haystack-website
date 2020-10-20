@@ -181,6 +181,12 @@
   }
 }
 
+@include media("<=1000px") {
+  .header-wrapper {
+    padding: 0;
+  }
+}
+
 .mobile-nav {
   position: fixed;
   top: 0px;

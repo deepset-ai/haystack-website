@@ -1,3 +1,5 @@
+@import "../../components/include_media";
+
 .pricing-products{
     background-color: #ffffff;
     .products {
@@ -143,5 +145,44 @@
         font-weight: bold;
         cursor: pointer;
         border-style: none;
+    }
+}
+
+@include media("<=1000px") {
+    .pricing {
+        display: block;
+        .pricing-options {
+            width: 100%;
+            margin-left: 0;
+            .button-pricing {
+                width: 100%;
+            }
+            h4 {
+                padding-top: 20px;
+            }
+        }
+    }
+    .product-enterprise {
+        display: block;
+        width: 100%;
+        margin-left: 0;
+        align-items:center;
+        align-content:center;
+        justify-content: center;
+        text-align: center;  
+        .enterprise-headings {
+            width: 100%;
+        }
+        h2 {
+            padding-top: 40px !important;
+            padding-left: 0;
+        }
+        h4 {
+            margin-left: 0;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+        }
     }
 }

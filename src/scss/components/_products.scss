@@ -167,7 +167,7 @@
         box-shadow: none;
         cursor: pointer;
     }
-    @include media("<=1000px") { 
+    @include media("<=1100px") { 
         .products-actions {
             display: block;   
         }
