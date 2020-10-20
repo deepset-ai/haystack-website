@@ -565,5 +565,17 @@
       margin-top: 20px;
       width: 600px;
     }
+
+    @include media("<=1000px") {
+      .form-control {
+        width: 100%;
+      }
+      .form-checkbox {
+        width: 100%;
+      }
+      .form-button {
+        width: 100%;
+      }
+    }
   }
 }

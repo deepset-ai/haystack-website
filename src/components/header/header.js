@@ -72,7 +72,7 @@ const Header = ({ siteTitle, menuLinks }) => {
         <div className={`mobile-nav ${mobileNav && "open"}`}>
         <LocalizedLink
           locale="en"
-          to="/en/docs/intromd"
+          to="/"
           className="link"
           >
           Overview
@@ -81,7 +81,7 @@ const Header = ({ siteTitle, menuLinks }) => {
         <LocalizedLink
           locale="en"
           className="link"
-          to="/en/docs/get_startedmd"
+          to="/docs/get_startedmd"
           >
           Quick Start
         </LocalizedLink>
@@ -89,7 +89,7 @@ const Header = ({ siteTitle, menuLinks }) => {
         <LocalizedLink
           locale="en"
           className="link"
-          to="/en/docs/intromd"
+          to="/docs/intromd"
           >
           Docs
         </LocalizedLink>

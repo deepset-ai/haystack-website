@@ -9,17 +9,6 @@ id: "apiretrievermd"
 
 # Retriever
 
----
-title: "Retriever"
-metaTitle: "Retriever"
-metaDescription: ""
-slug: "/docs/apiretrievermd"
-date: "2020-09-03"
-id: "apiretrievermd"
----
-
-# Retriever
-
 <a name="sparse"></a>
 # sparse
 

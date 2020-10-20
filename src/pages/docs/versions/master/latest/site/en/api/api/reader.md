@@ -9,17 +9,6 @@ id: "apireadermd"
 
 # Reader
 
----
-title: "Reader"
-metaTitle: "Reader"
-metaDescription: ""
-slug: "/docs/apireadermd"
-date: "2020-09-03"
-id: "apireadermd"
----
-
-# Reader
-
 <a name="farm"></a>
 # farm
 

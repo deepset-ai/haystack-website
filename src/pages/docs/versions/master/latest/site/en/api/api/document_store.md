@@ -9,17 +9,6 @@ id: "apidatabasemd"
 
 # Document Store
 
----
-title: "Document Store"
-metaTitle: "Database"
-metaDescription: ""
-slug: "/docs/apidatabase"
-date: "2020-09-03"
-id: "apidatabasemd"
----
-
-# Document Store
-
 <a name="memory"></a>
 # memory
 
