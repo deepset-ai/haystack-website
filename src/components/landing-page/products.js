@@ -39,7 +39,7 @@ const Products = props => {
                         Latest NLP Models
                     </li>
                     <li>
-                        Flexibel databases
+                        Flexible databases
                     </li>
                 </ul>
                 </div>
@@ -119,8 +119,7 @@ const Products = props => {
             </div>
             </div>
             <div className="products-actions">
-                <Button label="Learn More" className="learnmore-button" title="Coming soon" />
-                <Button label="Free Trial" className="trial-button" title="Coming soon" />
+                <Button label="Join the Waiting List" className="trial-button" to="/signup/beta" />
             </div>
         </div>
         </div>

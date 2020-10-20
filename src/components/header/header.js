@@ -82,8 +82,11 @@ const Header = ({ siteTitle, menuLinks }) => {
 
               <div className="Rectangle "></div>
               
-              <Button label="Login" className="button-login" title="Coming soon" />
-              <Button label="Free Trial" className="button-login" title="Coming soon"  />
+              <Button
+                  to="signup/beta"
+                  label="Haystack Hub (BETA) Waiting List"
+                        >
+               </Button>
             </div>
           ) : ( 
              <FontAwesomeIcon className="fontawsome-icon" icon={faBars} onKeyDown={handleClick}
@@ -131,8 +134,11 @@ const Header = ({ siteTitle, menuLinks }) => {
           Benchmarks
         </LocalizedLink>
 
-        <Button label="Login" className="button-login" title="Coming soon" />
-        <Button label="Free Trial" className="button-login" title="Coming soon"  />
+        <Button
+          to="signup/beta"
+          label="Haystack Hub (BETA) Waiting List"
+                        >
+        </Button>
       </div>
       </div>
     </>

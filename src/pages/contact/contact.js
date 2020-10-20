@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../../components/layout/layout';
 import './contact.scss';
-import LocalizedLink from "../../components/localizedLink/localizedLink"; 
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -9,9 +8,10 @@ import Input from '@material-ui/core/Input';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import Button from "../../components/landing-page/button";
-//import Button from '@material-ui/core/Button';
 
 const ContactPage = () => {
 
@@ -20,6 +20,8 @@ const ContactPage = () => {
     const [lastName, setLastName] = useState('');
     const [company, setCompany] = useState('');
     const [message, setMessage] = useState('');
+    const [consentToProcess, setConsentToProcess] = useState(false);
+    const [communications, setCommunications] = useState(false);
     const [success, setSuccess] = useState(false);
 
     const handleSubmit = (event) =>  {
@@ -59,11 +61,11 @@ const ContactPage = () => {
         },
         "legalConsentOptions":{ // Include this object when GDPR options are enabled
             "consent":{
-            "consentToProcess":true,
+            "consentToProcess":consentToProcess,
             "text":"I agree to allow deepset GmbH to store and process my personal data.",
             "communications":[
                 {
-                "value":true,
+                "value":communications,
                 "subscriptionTypeId":999,
                 "text":"I agree to receive marketing communications from deepset GmbH."
                 }
@@ -114,6 +116,14 @@ const ContactPage = () => {
 
     const handleChangeMessage = (event) => {
         setMessage(event.target.value);
+    };
+
+    const handleChangeConsentToProcess = (event) => {
+        setConsentToProcess(event.target.checked);
+    };
+    
+    const handleCommunication = (event) => {
+        setCommunications(event.target.checked);
     };
 
     const handleClose = (event, reason) => {
@@ -167,12 +177,21 @@ const ContactPage = () => {
                         <TextareaAutosize required rows="10" id="textarea" value={message} onChange={handleChangeMessage}/>
                         </FormControl>
                     </div>
+                    <div className="div-checkbox">
+                    <FormControlLabel className="form-checkbox"
+                    control={<Checkbox required checked={consentToProcess} onChange={handleChangeConsentToProcess} name="consentToProcess" />}
+                    label="I agree to allow deepset GmbH to store and process my personal data.*"
+                    />
+                    </div>
+                    <div className="div-checkbox">
+                    <FormControlLabel className="form-checkbox"
+                    control={<Checkbox checked={communications} onChange={handleCommunication} name="communications" />}
+                    label="I agree to receive marketing communications from deepset GmbH."
+                    />
+                    </div>
                     
                 <div>
                 <Button type="submit" label="Submit" />
-                <div className="terms">
-                    By submitting you agree to deepset's <LocalizedLink locale="en" to="/policies/terms" className="link" >Terms of Service</LocalizedLink>. Your personal data will be processed in accordance with deepset's <LocalizedLink locale="en" to="/policies/privacy" className="link" >Privacy Statement</LocalizedLink>.
-                </div>
                 </div>
                 </form>
             </div>

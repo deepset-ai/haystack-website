@@ -3,7 +3,7 @@
 .full-header-wrapper {
   background: #ffffff;
   width: 100%;
-  position: fixed;
+  //position: fixed;
   height: 60px;
   top: 0;
   left: 0;
@@ -95,20 +95,6 @@
       left: 0;
       content: "";
     }
-
-    @include media("<=1000px") {
-      margin-left: 10px;
-      margin-right: 18px;
-
-      .language-list {
-        display: block;
-      }
-
-      &::after {
-        left: 20px;
-        border-width: 4px;
-      }
-    }
   }
 
   .right {
@@ -127,11 +113,6 @@
       color: #60677e;;
       font-weight: bold;
       margin: 0 1rem;
-      // border-bottom: 2px solid #fff;
-      // padding-bottom: 8px;
-      // &.current {
-      //   border-bottom: 2px solid var(--color-highlight);
-      // }
     }
 
     .button-login {
@@ -147,15 +128,14 @@
       cursor: pointer;
     }
     .button {
-      margin-left: 0;
+      margin-left: 10px;
+      width: 350px;
     }
   }
 
   @include media("<=1000px") {
-    padding: 10px 20px;
     box-shadow: none;
-    background: #ffffff;;
-    padding: 0 10px 0 10px;
+    background: #ffffff;
     max-width: 100%;
 
     .link {
@@ -163,20 +143,11 @@
     }
 
     .logo-wrapper {
-      padding-left: 0;
+      padding-left: 10px;
 
       img {
         height: 3rem;
       }
-
-      .lfai {
-        height: 0.7rem;
-        margin-left: 6px;
-      }
-    }
-
-    .right {
-      padding-right: 8px;
     }
   }
 }
@@ -189,6 +160,7 @@
 
 .mobile-nav {
   position: fixed;
+  width: 100%;
   top: 0px;
   left: 0;
   right: 0;
@@ -201,6 +173,7 @@
   box-sizing: border-box;
 
   a {
+    width: 100%;
     display: block;
     background: #fff;
     color: var(--color-primary);
@@ -228,7 +201,7 @@
     margin-left: 10px;
     font-size: 16px;
     font-weight: bold;
-    color: #ffffff;
+    color: #0e0101;
     border-radius: 4px;
     background-color: lightgray;
     border: 0;

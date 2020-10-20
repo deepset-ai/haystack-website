@@ -16,7 +16,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Haystack" />
+      <SEO title="Haystack Hub" />
         <ValueProp />
         <ProductFeatures />
         <Products />

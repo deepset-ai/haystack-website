@@ -28,20 +28,6 @@ const Footer = ({ style }) => {
           >
             IMPRINT
           </LocalizedLink>
-          <LocalizedLink
-            locale="en"
-            className="link"
-            to="/policies/terms"
-          >
-            TERMS OF SERVICE
-          </LocalizedLink>
-          <LocalizedLink
-            locale="en"
-            className="link"
-            to="/policies/privacy"
-          >
-            PRIVACY POLICY
-          </LocalizedLink>
         </div>
     </footer>
   );

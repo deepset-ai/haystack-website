@@ -1,3 +1,5 @@
+@import "../../components/include_media"; 
+
 .contact {
     display: flex;
     justify-content: center;
@@ -41,6 +43,16 @@
             .link {
                 color: #009BAA;
             }
+            .div-checkbox {
+                align-items: left;
+                text-align: left;
+            }
         }
     }
+    @include media("<=1000px") {
+        .contact-form {
+            width: 100%;
+        }
+    }
+    
 }
