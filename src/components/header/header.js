@@ -84,7 +84,7 @@ const Header = ({ siteTitle, menuLinks }) => {
               
               <Button
                   to="signup/beta"
-                  label="Haystack Hub (BETA) Waiting List"
+                  label="Try Haystack Hub"
                         >
                </Button>
             </div>

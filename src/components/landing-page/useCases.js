@@ -16,7 +16,7 @@ const UseCases = props => {
         <img className="usecase-img" src={FinancialGovernance} alt="Financial Governance"></img>
           <div className="uc-h3"><h3>Financial Governance</h3></div>
           <div className="uc-description">
-            Gaining insights into financial data of company of of multiple companies within a market. 
+            Gaining insights into financial data of multiple companies within a market. 
             Analysis mainly focuses on reducing risks e.g. credit decisions.
           </div>
           <div className="uc-values">
@@ -96,7 +96,7 @@ const UseCases = props => {
                       Direct resolution of tickets
                     </li>
                     <li>
-                      Increased in customer satisfaction
+                      Increased customer satisfaction
                     </li>
                     <li>
                       More efficient onboarding and knowledge sharing in enterprises
@@ -135,7 +135,7 @@ const UseCases = props => {
         <img className="usecase-img" src={MCIngelliegence} alt="Market & Competitor Intelligence"></img>
         <div className="uc-h3"><h3>Market & Competitor Intelligence</h3></div>
           <div className="uc-description">
-            Analyzing market trend and monitoring of competitive strategy.
+            Analyzing market trends and monitoring of competitive strategy.
           </div>
           <div className="uc-values">
           <div class="row">
@@ -155,7 +155,7 @@ const UseCases = props => {
                       Comprehensive analysis of complete data sets
                     </li>
                     <li>
-                      More efficiency in research leaving more time for humans to create synthesis
+                      Higher efficiency in research leaving more time for humans to create synthesis
                     </li>
                 </ul>
                 </div>
