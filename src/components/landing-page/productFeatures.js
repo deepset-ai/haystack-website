@@ -1,7 +1,7 @@
 import React from 'react';
 import GithubButton from "react-github-button";
 import BertImg  from "../../images/ico-ico-80-bert-1@3x.png"; 
-import BertAdapt from "../../images/ico-ico-80-bert-2@3x.png";
+import BertAdapt from "../../images/svg/ico-ico-80-language.svg";
 import RocketSVG from "../../images/svg/ico-ico-80-rocket.svg"; 
 import InvinitySVG from "../../images/svg/ico-ico-80-infinity.svg"; 
 import DatabaseSVG from "../../images/svg/ico-ico-80-database.svg"; 
@@ -52,7 +52,7 @@ const ProductFeatures = props => {
         </a>
         <a href="/en/docs/domain_adaptationmd">
           <div className="core-feature-2">
-            <img src={BertAdapt} className="img-feature img-bertadapt" alt="Bert"></img>
+            <BertAdapt className="bertadap-svg" />
             <h4>Domain adaptation</h4>
             <p>Fine-tune models to your own domain & improve them continuously via user feedback</p>
           </div>

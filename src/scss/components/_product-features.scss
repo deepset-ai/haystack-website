@@ -40,7 +40,12 @@
         font-size: 14px !important;
       }
       .img-feature {
-        width:75%;
+        width:45%;
+      }
+    }
+    @include media("<=700px") {
+      .img-feature {
+        width:25%;
       }
     }
     @include media("<=500px") {

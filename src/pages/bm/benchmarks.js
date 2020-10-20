@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Layout from "../../components/layout/layout";
 import { graphql } from "gatsby"
 import { useMobileScreen } from "../../hooks";
