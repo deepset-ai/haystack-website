@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Layout from '../../components/layout/layout';
 import './beta.scss';
 import SEO from "../../components/seo";
-import IconJPG from "../../images/HaystackIcon.jpg"
+//import IconJPG from "../../images/HaystackIcon.jpg"
+import Logo from "../../images/HaystackLogo.png"
 
 
 import FormControl from '@material-ui/core/FormControl';
@@ -106,7 +107,7 @@ const BetaPage = () => {
 
   return (
       <Layout>
-        <SEO title="Haystack Hub (Beta)" pathname="/signup/beta" image={IconJPG} />
+        <SEO title="Haystack Hub (Beta)" pathname="/signup/beta" image={Logo} />
         <section className="contact">
             <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
