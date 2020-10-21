@@ -18,6 +18,8 @@
   min-height: 80vh;
   overflow: hidden;
   color: var(--color-primary);
+  text-align: justify;
+  line-height: 1.5rem;
 
   @include media("<=1000px") {
     padding: 1rem;

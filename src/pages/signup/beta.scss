@@ -1,0 +1,131 @@
+@import "../../components/include_media"; 
+
+.contact {
+    margin-top: 100px;
+    .beta-signup {
+        background-color: #F5F6FA;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: #ffffff;
+        padding: 20px;
+        width: 50%;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px, rgba(0, 0, 0, 0.08) 3px 10px 30px;
+  
+        .product-img {
+            width: 100%
+        }
+
+        h2 {
+          margin-top: 20px !important;
+          color: #1C2648;
+          font-size: 42px;
+          font-weight: bold;
+          width: 100%;
+        }
+
+        .description-features {
+            margin-top: 10px;
+            padding-top: 5px;
+            background-color: #f6f9f9 ;
+        }
+        .prodcuts-header {
+            font-size: 1.5em;
+            line-height: 1.5em;
+            text-align: left;
+            padding-bottom: 10px;
+        }
+        .product-description {
+            margin-left: 20px;
+            text-align: left;
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #009bab;
+        }
+        .products-features {
+            margin-top: 20px;
+            margin-left: 30px;
+            font-size: 1.1em;
+            line-height: 2em;
+            text-align: left;
+            .column-left {
+                float: left;
+                width: 5%;
+                li {
+                    height: 80px;
+                    padding-right: 5px;
+                }
+            }
+            .column {
+                float: left;
+                width: 45%;
+                li {
+                    height: 80px;
+                    padding-right: 5px;
+                }
+              }
+              .row:after {
+                content: "";
+                display: table;
+                clear: both;
+              }
+        }
+  
+        p {
+          margin-top: 20px;
+          font-size: 1rem;
+        }
+    
+        .form-control {
+          width: 100%;
+          margin-top: 20px;
+          .MuiInputBase-input {
+            height: 40px;
+          }
+        }
+    
+        .form-button {
+          width: 100%;
+          margin-top: 20px;
+          margin-bottom: 40px;
+          background-color: #08415D;
+          color: #ffffff;
+          font-weight: bold;
+          &:hover {
+            background-color: #08415D;
+          }
+        }
+    
+        .form-checkbox {
+          margin-top: 20px;
+          width: 100%;
+        }
+  
+        .signup-beta {
+          border: 0;
+          background: none;
+          box-shadow: none;
+          font-size: 16px;
+          font-weight: bold;
+          border-radius: 4px;
+          color: #ffffff;
+          background-color: #009BAA;
+          text-align: center;
+          cursor: pointer;
+          height: 50px;
+          width: 100%;
+          margin-top: 20px;
+        }
+        .check-font {
+            color: #009bab;
+        }
+  
+      }
+      @include media("<=1000px") {
+        .beta-signup {
+            width: 100%;
+        }
+    }
+}

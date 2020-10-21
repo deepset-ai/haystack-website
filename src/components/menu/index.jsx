@@ -31,7 +31,7 @@ const Menu = (props) => {
     version = versions[0];
   } 
 
-  const [menuStatus, setMenuStatus] = useState(false);
+  const [menuStatus, setMenuStatus] = useState(true);
   const { isBlog } = menuList || {};
   const [realMenuList, setRealMenuList] = useState([]);
   useEffect(() => {
@@ -60,6 +60,7 @@ const Menu = (props) => {
         });
 
         topMenu.forEach((v) => {
+          console.log(v);
           const item = {
             ...v,
             children: [],

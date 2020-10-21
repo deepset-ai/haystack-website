@@ -106,7 +106,8 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname  }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  description: ``,
+  description: `Haystack enables Question Answering at Scale`,
+  title: `Haystack`,
 }
 
 SEO.propTypes = {

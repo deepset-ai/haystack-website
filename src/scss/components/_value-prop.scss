@@ -1,0 +1,126 @@
+.value-prop {
+  background-color: #F5F6FA;
+
+  .logo-icon {
+    margin-top: 100px;
+    margin-left: 30px;
+    margin-bottom: 60px;
+    height: 55px;
+    width: 46px;
+  }
+
+  .main-subtitle {
+    margin-left: 30px;
+    height: 104px;
+    width: 500px;
+    color: #1C2648;
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 52px;
+  }
+
+  .button {
+      margin-top: 30px;
+      margin-left: 30px;
+      height: 50px;
+      width: 400px;
+  }
+
+  .link {
+      display: inline-block;
+      margin-top: 30px;
+      margin-left: 30px;
+      font-size: 1.2rem;
+      color: #009BAA;
+      font-weight: bold;
+      cursor: pointer;
+      .span-ready {
+        color: #172633;
+      }
+  }
+
+  .value-prop-content {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      row-gap: 0.25em;
+      margin-bottom: 2em;
+      padding: 2em;
+      max-width: $maxContainerWidth;
+      margin: 0 auto;
+    }
+    
+    .main-message {
+      grid-column: span 8;
+      grid-row: span 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      p {
+        margin-top: 0;
+      }
+    }
+
+    @include media("<=1000px") {
+      .logo-icon {
+        margin-left: 0;
+      }
+      .main-message {
+        width: 100%;
+      }
+      .main-subtitle {
+        width: 100%;
+        font-size: 32px;
+        margin-left: 0;
+      }
+      a {
+        width: 100%;
+      }
+      .button {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+    
+    .main-photo {
+      grid-column: span 16;
+      grid-row: span 16;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      //background: url("../images/animation/search.gif") no-repeat top;
+      background-size: 100% 100%;
+      height: 100%;
+      padding: 0;
+      width: 100%;
+      max-width: 70rem;
+      margin: 2em auto;
+      .img-main-photo {
+        width: 100%;
+      }
+    }
+    
+    @include breakpoint("from-tablet-l") {
+      .value-prop-content {
+        margin: 2rem auto 3rem auto;
+      }
+    
+      .main-message {
+        grid-column: span 4;
+        grid-row: span 8;
+      }
+    
+      .main-photo {
+        grid-column: span 4;
+        grid-row: span 8;
+      }
+    
+      .main-message {
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+
+  }

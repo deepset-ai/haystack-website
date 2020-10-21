@@ -1,8 +1,12 @@
 .footer-wrapper {
-    background: #FFF;
+    background: #F5F6FA;
     color: #60606F;
     padding: 22px;
   
+    .follow {
+      text-align: right;
+      margin-right: 30px;
+    }
     .copy-right {
       text-align: center;
   
@@ -13,6 +17,14 @@
   
     .link {
       color: #60606F;
-  
+      margin-left: 20px;
+    }
+    a {
+      color:#60606F;
+    }
+
+    .fontawsome-icon {
+      width: 20px;
+      margin-left: 20px;
     }
   }

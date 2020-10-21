@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Layout from "../../components/layout/layout";
 import { graphql } from "gatsby"
+import { useMobileScreen } from "../../hooks";
 
 import { Chart } from "react-google-charts";
 
@@ -19,6 +20,14 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 const BenchMarks = ({data}) => {
+
+  const screenWidth = useMobileScreen();
+  let graphWidth = 1200;
+  let graphHeight = 600;
+  console.log(screenWidth);
+  if(screenWidth <= 1000) {
+    graphWidth = "100%";
+  }
 
   // Parse versions from path
   const findVersion = (str) => {
@@ -216,8 +225,8 @@ const BenchMarks = ({data}) => {
               <div dangerouslySetInnerHTML={createMarkup(descReader[selectedVersion])} className="desc-details"></div>
             )}
             <Chart
-                width={1200}
-                height={600}
+                width={graphWidth}
+                height={graphHeight}
                 chartType={chartTypeReader[selectedVersion]}
                 loader={<div>Loading Chart</div>}
                 data={mapDataReader[selectedVersion]}
@@ -237,8 +246,8 @@ const BenchMarks = ({data}) => {
               <div dangerouslySetInnerHTML={createMarkup(descRetriever[selectedVersion])} className="desc-details"></div>
             )}
             <Chart
-                width={1200}
-                height={600}
+                width={graphWidth}
+                height={graphHeight}
                 chartType={chartTypeRetriever[selectedVersion]}
                 loader={<div>Loading Chart</div>}
                 data={mapDataRetriever[selectedVersion]}
@@ -269,8 +278,8 @@ const BenchMarks = ({data}) => {
               <div dangerouslySetInnerHTML={createMarkup(descMap[selectedVersion])} className="desc-details"></div>
             )}
             <Chart
-                width={1200}
-                height={600}
+                width={graphWidth}
+                height={graphHeight}
                 chartType={chartTypeMap[selectedVersion]}
                 loader={<div>Loading Chart</div>}
                 data={mapDataMap[selectedVersion]}
@@ -296,8 +305,8 @@ const BenchMarks = ({data}) => {
               <div dangerouslySetInnerHTML={createMarkup(descSpeed[selectedVersion])} className="desc-details"></div>
             )}
             <Chart
-                width={1200}
-                height={600}
+                width={graphWidth}
+                height={graphHeight}
                 chartType={chartTypeSpeed[selectedVersion]}
                 loader={<div>Loading Chart</div>}
                 data={mapDataSpeed[selectedVersion]}

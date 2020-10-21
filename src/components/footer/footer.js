@@ -1,10 +1,12 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-// import LocalizeLink from "../localizedLink/localizedLink"
-// import { globalHistory } from "@reach/router";
-// import GithubIcon from "../../images/icon/github-normal.svg";
+import LocalizedLink from "../localizedLink/localizedLink"
 import "./footer.scss";
+import { Link } from "gatsby";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = ({ style }) => {
   // const l = locale === "cn" ? "en" : "cn";
@@ -13,9 +15,20 @@ const Footer = ({ style }) => {
   //   .replace("/cn/", "/");
   return (
     <footer className="footer-wrapper" style={style}>
+      <div className="follow">Social networks: 
+      <Link to="https://twitter.com/deepset_ai/"><FontAwesomeIcon class="fontawsome-icon" icon={faTwitter}/></Link>
+      <Link to="https://www.linkedin.com/company/deepset/"><FontAwesomeIcon class="fontawsome-icon" icon={faLinkedin}/></Link>
+      </div>
       <div className="copy-right">
         <span>© 2020 - {new Date().getFullYear()} deepset. All rights reserved.</span>
-      </div>
+          <LocalizedLink
+            locale="en"
+            className="link"
+            to="https://deepset.ai/imprint"
+          >
+            IMPRINT
+          </LocalizedLink>
+        </div>
     </footer>
   );
 };

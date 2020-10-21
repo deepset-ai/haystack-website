@@ -34,7 +34,7 @@ h6 {
 
 body {
   font-size: 15px;
-  background-color: #fafafa !important;
+  background-color: #F5F6FA !important;
   color: #434548;
   @include media("<=1000px") {
     font-size: 14px;
@@ -75,16 +75,17 @@ a.btn {
   position: relative;
   display: flex;
   max-width: 1600px;
-  margin: 0 auto;
+  margin: 5px auto;
   background-color: #fff;
   min-height: calc(100vh);
   padding-top: 60px;
   @include media("<1600px") {
-     margin: 0;
+     margin: 5px;
   }
 
   .menu-container {
     top: 60px;
+    margin-top: 5px;
     padding-top: 20px;
     bottom: 0;
     width: 250px;

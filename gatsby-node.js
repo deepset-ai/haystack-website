@@ -150,15 +150,7 @@ exports.createPages = ({ actions, graphql }) => {
     );
 
     // filter useless md file blog has't version
-    const legalMd = result.data.allMarkdownRemark.edges;/*.filter(
-      ({ node: { fileAbsolutePath, frontmatter } }) =>
-        (!!findVersion(fileAbsolutePath) ||
-          fileAbsolutePath.includes("/blog/zh-CN") ||
-          (fileAbsolutePath.includes("/docs/versions/master/latest/") &&
-            env === "latest") ||
-          fileAbsolutePath.includes("/docs/versions/benchmarks/")) &&
-        frontmatter.id
-    );*/
+    const legalMd = result.data.allMarkdownRemark.edges;
 
     // we generate path by menu structure
     const generatePath = (

@@ -77,6 +77,22 @@
       line-height: 20px;
     }
 
+    .line-separator {
+      width: 100%; 
+      text-align: center; 
+      border-bottom: 1px solid grey; 
+      letter-spacing: 0;
+      line-height: 0em;
+      cursor: default;
+      .separator {
+        color: grey;
+        font-size: 16px;
+        font-weight: bold;
+        background:#f1f1f1; 
+        padding:0 10px;
+      }
+    }
+
     > .menu_name-wrapper {
       padding: 0 1rem 0.25rem 1rem;
       text-transform: uppercase;

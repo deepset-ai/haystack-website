@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Haystack`,
-    titleTemplate: "%s - Qestion Answering",
+    titleTemplate: "%s - Question Answering",
     siteUrl: `https://haystack.deepset.ai`,
     description: `Haystack enables Question Answering at Scale`,
     author: "deepset",
@@ -43,6 +43,43 @@ module.exports = {
       },
     },*/
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: "G-91GYG7G9X7",
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        //exclude: ["/preview/**"],
+        // Delays sending pageview hits on route update (in milliseconds)
+        pageTransitionDelay: 0,
+        // Enables Google Optimize using your container Id
+        //optimizeId: "YOUR_GOOGLE_OPTIMIZE_TRACKING_ID",
+        // Enables Google Optimize Experiment ID
+        //experimentId: "YOUR_GOOGLE_EXPERIMENT_ID",
+        // Set Variation ID. 0 for original 1,2,3....
+        //variationId: "YOUR_GOOGLE_OPTIMIZE_VARIATION_ID",
+        // Defers execution of google analytics script after page load
+        defer: false,
+        // Any additional optional fields
+        //sampleRate: 5,
+        //siteSpeedSampleRate: 10,
+        //cookieDomain: "example.com",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-hotjar`,
+      options: {
+        includeInDevelopment: true, // optional parameter to include script in development
+        id: 2051465,
+        sv: 6,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `data`,
@@ -54,6 +91,14 @@ module.exports = {
       options: {
         path: `${__dirname}/src/pages/docs/versions`,
       },
+    },
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: `${__dirname}/src/images/svg`,
+        }
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -134,6 +179,45 @@ module.exports = {
         // },
       }
     },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/haystack-sitemap.xml`,
+        // Exclude specific pages or groups of pages using glob parameters
+        // See: https://github.com/isaacs/minimatch
+        // The example below will exclude the single `path/to/page` and all routes beginning with `category`
+        //exclude: [`/category/*`, `/path/to/page`],
+        query: `
+          {  
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+        }`,
+        resolveSiteUrl: ({site, allSitePage}) => {
+          //Alternatively, you may also pass in an environment variable (or any location) at the beginning of your `gatsby-config.js`.
+          return `https://haystack.deepset.ai`
+        },
+        serialize: ({ site, allSitePage }) =>
+          allSitePage.nodes.map(node => {
+            return {
+              url: `https://haystack.deepset.ai${node.path}`,
+              changefreq: `daily`,
+              priority: 0.7,
+            }
+          })
+      }
+    },
+    {
+      resolve: "gatsby-plugin-hubspot",
+      options: {
+          trackingCode: "4561480",
+          respectDNT: true,
+          productionOnly: true,
+      },
+    },
+
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

@@ -1,18 +1,26 @@
 import PropTypes from "prop-types"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
 
 import "./header.scss";
-import Logo from "../../images/Haystack_White_Text.png"
+import Logo from "../../images/HaystackLogo.png"
 import { useMobileScreen } from "../../hooks";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
+import Button from "../landing-page/button";
+
 const Header = ({ siteTitle, menuLinks }) => {
 
   const screenWidth = useMobileScreen();
-  const [mobileNav, setMobileNav] = useState(null);
+  const [mobileNav, setMobileNav] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("click", () => {
+      setMobileNav(false);
+    });
+  }, []);
 
   const handleClick = (e) => {
     e.stopPropagation();
@@ -27,7 +35,7 @@ const Header = ({ siteTitle, menuLinks }) => {
           <div className="logo-wrapper">
             <LocalizedLink locale="en" to={"/"}>
               <img src={Logo} alt="Haystack Logo">
-              </img>
+              </img> 
             </LocalizedLink>
           </div>
           {screenWidth > 1000 ? (
@@ -39,30 +47,47 @@ const Header = ({ siteTitle, menuLinks }) => {
               >
                 Overview
               </LocalizedLink>
+            
+              <LocalizedLink
+                locale="en"
+                to="/#main-use-cases"
+                scrollTo="link"
+              >
+                Use Cases
+              </LocalizedLink>
+
+              <LocalizedLink
+                to="/pricing/pricing"
+                className="link"
+                locale="en"
+              >
+                Pricing
+              </LocalizedLink>
+
+              <LocalizedLink
+                to="/docs/intromd"
+                className="link"
+                locale="en"
+              >
+                Docs
+              </LocalizedLink>
 
               <LocalizedLink
                 locale="en"
                 className="link"
-                to="/docs/get_startedmd"
+                to="/bm/benchmarks"
               >
-                Quick Start
+                Benchmarks
               </LocalizedLink>
-              
-                <LocalizedLink
-                  locale="en"
-                  className="link"
-                  to="/docs/intromd"
-                >
-                  Docs
-                </LocalizedLink>
 
-                <LocalizedLink
-                  locale="en"
-                  className="link"
-                  to="/bm/benchmarks"
-                >
-                  Benchmarks
-                </LocalizedLink>
+              <div className="Rectangle "></div>
+              
+              <Button
+                  to="/signup/beta"
+                  label="Try Haystack Hub"
+                  className="beta-button"
+                        >
+               </Button>
             </div>
           ) : ( 
              <FontAwesomeIcon className="fontawsome-icon" icon={faBars} onKeyDown={handleClick}
@@ -74,23 +99,31 @@ const Header = ({ siteTitle, menuLinks }) => {
           locale="en"
           to="/"
           className="link"
-          >
+        >
           Overview
         </LocalizedLink>
 
         <LocalizedLink
           locale="en"
-          className="link"
-          to="/docs/get_startedmd"
-          >
-          Quick Start
+          to="/#main-use-cases"
+          scrollTo="link"
+        >
+          Use Cases
         </LocalizedLink>
               
         <LocalizedLink
-          locale="en"
-          className="link"
-          to="/docs/intromd"
-          >
+         to="/pricing/pricing"
+         className="link"
+         locale="en"
+        >
+         Pricing
+        </LocalizedLink>
+
+        <LocalizedLink
+         to="/docs/intromd"
+         className="link"
+         locale="en"
+        >
           Docs
         </LocalizedLink>
 
@@ -98,9 +131,15 @@ const Header = ({ siteTitle, menuLinks }) => {
           locale="en"
           className="link"
           to="/bm/benchmarks"
-          >
+        >
           Benchmarks
         </LocalizedLink>
+
+        <Button
+          to="/signup/beta"
+          label="Try Haystack Hub"
+                        >
+        </Button>
       </div>
       </div>
     </>
