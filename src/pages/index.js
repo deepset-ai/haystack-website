@@ -4,6 +4,7 @@ import Layout from "../components/layout/layout";
 import SEO from "../components/seo";
 import "react-github-button/assets/style.css";
 import "../scss/index.scss";
+import IconJPG from "../images/HaystackIcon.jpg"
 
 import ValueProp from "../components/landing-page/valueProp";
 import ProductFeatures from "../components/landing-page/productFeatures";
@@ -16,7 +17,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Haystack Hub" />
+      <SEO title="Haystack Hub" image={IconJPG} />
         <ValueProp />
         <ProductFeatures />
         <Products />
