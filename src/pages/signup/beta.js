@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../../components/layout/layout';
 import './beta.scss';
 import SEO from "../../components/seo";
-import IconJPG from "../images/HaystackIcon.jpg"
+import IconJPG from "../../images/HaystackIcon.jpg"
 
 
 import FormControl from '@material-ui/core/FormControl';
