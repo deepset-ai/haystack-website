@@ -103,6 +103,15 @@
         padding-top: 10px;
         display: flex;
         justify-content: center;
+        a {
+            width: 40%;
+        }
+        .trial-button-os-link {
+            margin-left: 10px;
+        }
+        .trial-button-link {
+            width: 80%;
+        }
         .button {
             height: 50px;
             width: 205px;
@@ -130,7 +139,7 @@
         cursor: pointer;
     }
     .trial-button {
-        width: 550px;
+        width: 100%;
         height: 50px;
         border-radius: 6px;
         border: solid 1px #009bab;
@@ -143,7 +152,7 @@
         cursor: pointer;
     }
     .learnmore-button-os {
-        width: 270px;
+        width: 100%;
         height: 50px;
         border-radius: 6px;
         border: solid 1px #009bab;
@@ -151,12 +160,11 @@
         color: #009bab;
         font-weight: bold;
         font-size: 16px;
-        margin-left: 10px;
         box-shadow: none;
         cursor: pointer;
     }
     .trial-button-os {
-        width: 270px;
+        width: 100%;
         height: 50px;
         border-radius: 6px;
         border: solid 1px #009bab;
@@ -164,7 +172,6 @@
         color: #ffffff;
         font-weight: bold;
         font-size: 16px;
-        margin-left: 10px;
         box-shadow: none;
         cursor: pointer;
     }
