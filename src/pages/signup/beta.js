@@ -3,7 +3,7 @@ import Layout from '../../components/layout/layout';
 import './beta.scss';
 import SEO from "../../components/seo";
 //import IconJPG from "../../images/HaystackIcon.jpg"
-import Logo from "../../images/HaystackLogo.png"
+import Logo from "../../images/haystack_logo_blue_banner_social.png"
 
 
 import FormControl from '@material-ui/core/FormControl';
@@ -17,7 +17,7 @@ import Button from "../../components/landing-page/button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-import HaystackHub from "../../images/haystack_logo_blue_banner_social.png"
+import HaystackHub from "../../images/im-card-2@3x.png"
 
 const BetaPage = () => {
 
