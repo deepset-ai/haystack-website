@@ -12,7 +12,7 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import "./benchmarking.scss";
 
 import SEO from "../../components/seo"
-import thumbnail from "../../images/thumbnails/thumbnail_benchmarking.jpeg"; 
+import thumbnail from "../../images/haystack_logo_blue_banner_social.png"; 
 
 import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';

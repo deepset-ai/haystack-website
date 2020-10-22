@@ -5,7 +5,7 @@ import SEO from "../components/seo";
 import "react-github-button/assets/style.css";
 import "../scss/index.scss";
 //import IconJPG from "../images/HaystackIcon.jpg"
-import Logo from "../images/HaystackLogo.png"
+import Logo from "../images/haystack_logo_blue_banner_social.png"
 
 import ValueProp from "../components/landing-page/valueProp";
 import ProductFeatures from "../components/landing-page/productFeatures";
