@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Layout from '../../components/layout/layout';
 import './contact.scss';
+import thumbnail from "../../images/haystack_logo_blue_banner_social.png"; 
+import SEO from "../../components/seo"
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -137,6 +139,7 @@ const ContactPage = () => {
 
   return (
       <Layout>
+          <SEO title="Haystack Contact" image={thumbnail} pathname="/contact/contact" />
         <section className="contact">
             <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success">

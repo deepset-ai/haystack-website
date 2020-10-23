@@ -1,5 +1,7 @@
 import React from 'react';
 import Layout from '../../components/layout/layout';
+import thumbnail from "../../images/haystack_logo_blue_banner_social.png"; 
+import SEO from "../../components/seo"
 
 import './pricing.scss';
 
@@ -13,6 +15,7 @@ const PricingPage = () => {
 
   return (
       <Layout>
+        <SEO title="Haystack Pricing" image={thumbnail} pathname="/pricing/pricing" />
         <div className="pricing-products">
         <Products />
         </div>

@@ -2,8 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import FinancialGovernance from "../../images/ico-ico-80-finance@3x.png"
-import KnowledgeBase from "../../images/ico-ico-80-search-grey@3x.png"
+import FinancialGovernance from "../../images/ico-ico-80-search-grey-finance.svg"
+import KnowledgeBase from "../../images/ico-ico-80-search-grey-2.svg"
 import MCIngelliegence from "../../images/ico-ico-80-market@3x.png"
 
 const UseCases = props => {
