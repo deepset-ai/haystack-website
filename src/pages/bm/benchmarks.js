@@ -24,7 +24,6 @@ const BenchMarks = ({data}) => {
   const screenWidth = useMobileScreen();
   let graphWidth = 1200;
   let graphHeight = 600;
-  console.log(screenWidth);
   if(screenWidth <= 1000) {
     graphWidth = "100%";
   }

@@ -60,7 +60,6 @@ const Menu = (props) => {
         });
 
         topMenu.forEach((v) => {
-          console.log(v);
           const item = {
             ...v,
             children: [],
