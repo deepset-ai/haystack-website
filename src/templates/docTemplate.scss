@@ -13,7 +13,7 @@
 }
 
 .doc-post-container {
-  padding: 4rem 2rem;
+  padding: 1rem 2rem;
   background: #fff;
   min-height: 80vh;
   overflow: hidden;
@@ -925,7 +925,7 @@
 
   .edit-page-link {
     position: absolute;
-    top: 5px;
+    top: 0px;
     right: 0;
     padding: 0.6rem;
     font-size: 0.8rem;
@@ -935,9 +935,9 @@
       color: #08415D;
     }
 
-    /*@include media("<=1000px") {
+    @include media("<=1100px") {
       display: none;
-    }*/
+    }
   }
 
   .table-wrapper {
