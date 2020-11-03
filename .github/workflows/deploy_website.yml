@@ -7,7 +7,7 @@ name: Repository Dispatch
 on:
   push:
     branches:
-      - master
+      - source
   repository_dispatch:
     types: [deploy-website]
 
