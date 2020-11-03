@@ -22,6 +22,7 @@ import HaystackHub from "../../images/im-card-2@3x.png"
 const BetaPage = () => {
 
   const [email, setEmail] = useState('');
+  const [usecase, setUsecase] = useState('');
   const [consentToProcess, setConsentToProcess] = useState(false);
   const [communications, setCommunications] = useState(false);
   const [success, setSuccess] = React.useState(false);
@@ -39,6 +40,10 @@ const BetaPage = () => {
         {
           "name": "email",
           "value": email
+        },
+        {
+          "name": "use_case",
+          "value": usecase
         }
       ],
       "context": {
@@ -86,6 +91,10 @@ const BetaPage = () => {
 
   const handleChange = (event) => {
     setEmail(event.target.value);
+  };
+   
+  const handleChangeUsecase = (event) => {
+    setUsecase(event.target.value);
   };
 
   const handleChangeConsentToProcess = (event) => {
@@ -173,6 +182,12 @@ const BetaPage = () => {
                         <FormControl className="form-control" variant="filled">
                         <InputLabel required htmlFor="email">Email address</InputLabel>
                         <Input required id="email" value={email} onChange={handleChange} />
+                        </FormControl>
+                        </div>
+                        <div>
+                        <FormControl className="form-control" variant="filled">
+                        <InputLabel htmlFor="usecase">Use case</InputLabel>
+                        <Input id="usecase" value={usecase} onChange={handleChangeUsecase} />
                         </FormControl>
                         </div>
                         <div>
