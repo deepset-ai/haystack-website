@@ -20,7 +20,7 @@ do
     wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/terms.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/terms.md 
     wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/tutorials.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/tutorials.md 
     wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/get_started.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/get_started.md
-    if [[ `wget --spider https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/annotation.md` ]]; then 
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/annotation.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
         wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/annotation.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/annotation.md
     fi
 
