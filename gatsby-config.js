@@ -1,3 +1,32 @@
+const fetch = require("node-fetch");
+
+const fs = require('fs')
+const path = require('path')
+
+const fromJson = filePath => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        reject(err)
+        return
+      }
+      console.log()
+      resolve(data)
+    })
+  })
+}
+
+const fetchSpec = async url => {
+  return fetch(url).then(response => {
+    if (response.status === 200) {
+      response.json().then(data => {console.log(data)});
+      return response.text();
+    }
+
+    throw new Error('There was an error retrieving document.')
+  })
+}
+
 module.exports = {
   siteMetadata: {
     title: `Haystack`,
@@ -234,6 +263,19 @@ module.exports = {
               priority: 0.7,
             }
           })
+      }
+    },
+    {
+      resolve: `gatsby-source-openapi-aggregate`,
+      options: {
+        specs: [                // specs collection is required, you can define as many specs as you want
+          {
+            name: 'openapispec',     // required, must be unique
+            resolve: () =>
+              //fetchSpec('https://haystack-hub.deepset.ai/openapi.json'),
+              fromJson(path.resolve(__dirname, './swagger.json'))
+          }
+        ]
       }
     },
     /*{
