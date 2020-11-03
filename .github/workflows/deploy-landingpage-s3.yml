@@ -3,9 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - landing-page
-  repository_dispatch:
-    types: [deploy-website]
+      - add_annotation_docs
     
 jobs:
   deploy:
@@ -15,18 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: landing-page
+          ref: add_annotation_docs
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
       - name: Build
         run: |
-          npm run update_img
-          npm run update_apidocs
-          npm run update_tutorialsdocs
-          npm run update_usagedocs
-          npm run update_benchmarks
           npm ci
           npm run build
       - name: Configure AWS Credentials
