@@ -48,8 +48,12 @@ const Menu = (props) => {
         if (index && !parentLabel) {
           return copyMenu;
         }
-        const generatePath = (doc) => {
-          return `/docs/${version}/${doc.id}`;
+        const generatePath = (doc, isDocAPI, isDocHub) => {
+          if(isDocAPI || isDocHub) {
+            return `${doc.id}`;
+          } else {
+            return `/docs/${version}/${doc.id}`;
+          }
         };
         // find top menu by current label
         const topMenu = list.filter((v) => {
@@ -67,7 +71,7 @@ const Menu = (props) => {
             isActive: false,
             isLast: !labelKeys[index + 1],
             isBlog,
-            path: generatePath(v),
+            path: generatePath(v, isDocAPI, isDocHub),
           };
           if (index === 0) {
             copyMenu.push(item);

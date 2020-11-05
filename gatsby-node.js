@@ -454,10 +454,6 @@ exports.createPages = ({ actions, graphql }) => {
 
         const fileLang = "en";
 
-        let editPath = fileAbsolutePath.split(
-          fileLang === "en" ? "/en/" : "/zh-CN/"
-        )[1];
-
         createPage({
           path: `apis/${node.name}`,
           component: docTemplate,
