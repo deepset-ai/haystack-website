@@ -1016,7 +1016,10 @@
   min-height: 190px; /* This part sucks */
 }
 .tabsdschoose {
-  min-height: 300px; /* This part sucks */
+  min-height: 320px; /* This part sucks */
+  @include media("<=600px") {
+    min-height: 350px;
+  }
 }
 .innertabs {  
   min-height: 300px; /* This part sucks */
