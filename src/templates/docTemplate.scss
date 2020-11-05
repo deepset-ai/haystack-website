@@ -983,7 +983,19 @@
   margin: 25px 0;
 }
 .tabsgetstarted {  
-  min-height: 300px; 
+  min-height: 340px; 
+  @include media("<=1500px") {
+    min-height: 370px;
+  }
+  @include media("<=1100px") {
+    min-height: 390px;
+  }
+  @include media("<=700px") {
+    min-height: 410px;
+  }
+  @include media("<=500px") {
+    min-height: 500px;
+  }
 }
 .tabsconverters {  
   min-height: 250px; 
@@ -1010,7 +1022,10 @@
   min-height: 190px; 
 }
 .tabsdschoose {
-  min-height: 300px; 
+  min-height: 320px; 
+  @include media("<=600px") {
+    min-height: 350px;
+  }
 }
 .innertabs {  
   min-height: 300px; 
