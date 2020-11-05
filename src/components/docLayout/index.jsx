@@ -4,6 +4,8 @@ import Header from "../header/header";
 import Footer from "../footer/footer";
 import "./index.scss";
 import { GithubLogo } from "../../images/icon/GitHub-Mark-32px.png"; 
+import thumbnail from "../../images/haystack_logo_blue_banner_social.png"; 
+import SEO from "../../components/seo"
 
 export default (props) => {
   const {
@@ -150,6 +152,7 @@ export default (props) => {
 
   return (
     <div>
+      <SEO title="Haystack Docs" image={thumbnail} pathname="/docs/intromd" />
       <Header
         language={language}
         current={current}
