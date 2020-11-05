@@ -15,6 +15,8 @@ const Header = ({ siteTitle, menuLinks }) => {
 
   const screenWidth = useMobileScreen();
   const [mobileNav, setMobileNav] = useState(false);
+  const [docList, setDocList] = useState(false);
+  let activeDoc = "core";
 
   useEffect(() => {
     window.addEventListener("click", () => {
@@ -25,6 +27,10 @@ const Header = ({ siteTitle, menuLinks }) => {
   const handleClick = (e) => {
     e.stopPropagation();
     setMobileNav((v) => !v);
+  };
+
+  const onChangeDoc = (activeDocLoc) => {
+    activeDoc = activeDocLoc;
   };
 
   return (
@@ -64,13 +70,52 @@ const Header = ({ siteTitle, menuLinks }) => {
                 Pricing
               </LocalizedLink>
 
-              <LocalizedLink
-                to="/docs/intromd"
-                className="link"
-                locale="en"
+              <span
+                role="button"
+                tabIndex={0}
+                className="docs"
+                onKeyDown={() => {
+                  setDocList(!docList);
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setDocList(!docList);
+                }}
               >
                 Docs
-              </LocalizedLink>
+                {docList && (
+                  <div className="docs-list">
+                    <LocalizedLink
+                      locale="en"
+                      to="/docs/intromd"
+                      className={activeDoc === "core" ? "active" : ""}
+                    >
+                      <span
+                        tabIndex={0}
+                        onKeyDown={onChangeDoc("core")}
+                        onClick={onChangeDoc("core")}
+                        role="button"
+                      >
+                      Haystack Core Docs
+                      </span>
+                    </LocalizedLink>
+                    <LocalizedLink
+                      locale="en"
+                      to="/docs_hub/get_startedmd"
+                      className={activeDoc === "hub" ? "active" : ""}
+                    >
+                      <span
+                        tabIndex={0}
+                        onKeyDown={onChangeDoc("hub")}
+                        onClick={onChangeDoc("hub")}
+                        role="button"
+                      >
+                      Haystack Hub Docs
+                      </span>
+                    </LocalizedLink>
+                  </div>
+                )}
+              </span>
 
               <LocalizedLink
                 locale="en"

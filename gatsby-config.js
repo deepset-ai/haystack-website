@@ -173,6 +173,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `docs`,
+        path: `${__dirname}/src/pages/docs_hub`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `benchmarks`,
         path: `${__dirname}/src/pages/benchmarks/versions`,
       },
@@ -273,7 +280,7 @@ module.exports = {
             name: 'openapispec',     // required, must be unique
             resolve: () =>
               //fetchSpec('https://haystack-hub.deepset.ai/openapi.json'),
-              fromJson(path.resolve(__dirname, './swagger.json'))
+              fromJson(path.resolve(__dirname, './src/pages/docs_api/swagger.json'))
           }
         ]
       }

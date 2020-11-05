@@ -25,7 +25,7 @@ const findItem = (key, value, arr) => {
 };
 
 const Menu = (props) => {
-  let { menuList, activeDoc, version, versions, locale } = props;
+  let { menuList, activeDoc, version, versions, locale, isDocAPI, isDocHub } = props;
 
   if (!version || version === "") {
     version = versions[0];
@@ -196,6 +196,9 @@ const Menu = (props) => {
     setMenuStatus(status);
   };
 
+  console.log(isDocHub);
+  console.log(isDocAPI)
+
   return (
     <>
       <section
@@ -210,8 +213,13 @@ const Menu = (props) => {
             }}
           ></i>
         ) : null}
-
+        {isDocHub ? (
+          <div className="border-bottom select-wrapper">
+          <div className="h-version">Haystack Hub </div>
+          </div>
+        ) : (
         <div className="border-bottom select-wrapper">
+        <div className="h-version">Core Version: </div>
                     <VersionSelector
                       options={versions}
                       selected={version}
@@ -220,6 +228,8 @@ const Menu = (props) => {
                     ></VersionSelector>
                   
         </div>
+        )}
+        
 
         {generageMenuDom(realMenuList, "menu-top-level border-bottom")}
       </section>

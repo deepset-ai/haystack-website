@@ -17,6 +17,8 @@ export default (props) => {
     headings,
     current,
     wrapperClass = "doc-wrapper",
+    isDocAPI = false,
+    isDocHub = false,
     isBenchMark = false,
     showDoc = true,
   } = props;
@@ -164,6 +166,8 @@ export default (props) => {
           version={version}
           locale={locale}
           isBenchMark={isBenchMark}
+          isDocAPI={isDocAPI}
+          isDocHub={isDocHub}
         ></Menu>
         <div
           className={`inner-container ${isBenchMark ? "fullwidth" : ""}`}

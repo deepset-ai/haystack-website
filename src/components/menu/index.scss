@@ -29,6 +29,15 @@
 
   .select-wrapper {
     padding-left: 1rem;
+    display: flex;
+    .h-version {
+      color: black;
+      font-weight: bold;
+      font-size: 18px;
+      margin-right: 10px;
+      padding-top: 5px;
+    }
+
   }
 
   .text {

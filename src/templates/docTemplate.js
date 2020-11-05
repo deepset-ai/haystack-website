@@ -35,10 +35,12 @@ export default function Template({
 }) {
   let {
     locale,
-    version,
-    versions,
+    version = "",
+    versions = [],
     headings = [],
     allMenus,
+    isDocAPI = false,
+    isDocHub = false,
     newHtml,
     editPath,
   } = pageContext;
@@ -228,7 +230,8 @@ export default function Template({
       versions={versions}
       id={frontmatter.id}
       showDoc={false}
-
+      isDocAPI={isDocAPI}
+      isDocHub={isDocHub}
     >
       
         <div className="doc-post-container">
