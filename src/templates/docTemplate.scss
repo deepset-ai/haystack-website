@@ -1008,6 +1008,9 @@
 }
 .tabsreader {
   min-height: 400px; 
+  @include media("<=1120px") {
+    min-height: 500px;
+  }
 }
 .tabsreaderdeep {
   min-height: 185px; 
@@ -1024,11 +1027,14 @@
 .tabsdschoose {
   min-height: 320px; 
   @include media("<=600px") {
-    min-height: 350px;
+    min-height: 400px;
   }
 }
 .innertabs {  
   min-height: 300px; 
+  @include media("<=1120px") {
+    min-height: 410px;
+  }
 }
 .tab {
   float: left;
