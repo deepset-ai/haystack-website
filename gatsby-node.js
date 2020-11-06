@@ -453,9 +453,8 @@ exports.createPages = ({ actions, graphql }) => {
       result.data.allOpenApiSpec.edges.map(({ node }) => {
 
         const fileLang = "en";
-
         createPage({
-          path: `apis/${node.name}`,
+          path: `docs_api/${node.name}`,
           component: docTemplate,
           context: {
             locale: fileLang,

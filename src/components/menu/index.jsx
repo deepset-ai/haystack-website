@@ -200,9 +200,6 @@ const Menu = (props) => {
     setMenuStatus(status);
   };
 
-  console.log(isDocHub);
-  console.log(isDocAPI)
-
   return (
     <>
       <section
@@ -217,7 +214,7 @@ const Menu = (props) => {
             }}
           ></i>
         ) : null}
-        {isDocHub ? (
+        {isDocHub || isDocAPI ? (
           <div className="border-bottom select-wrapper">
           <div className="h-version">Haystack Hub </div>
           </div>

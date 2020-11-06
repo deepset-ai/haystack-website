@@ -12,6 +12,12 @@ import QueryModal from "../components/query-modal/query-modal.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
+import Link from 'gatsby-link'
+import groupBy from 'lodash.groupby'
+import SpecInformation from '../components/spec/SpecInformation'
+import SpecPaths from '../components/spec/SpecPaths'
+import g from 'glamorous'
+
 function sortVersions(a, b) {
   const [v1, s1, m1] = a.split(".");
   const [v2, s2, m2] = b.split(".");
@@ -46,6 +52,20 @@ export default function Template({
   } = pageContext;
   versions = versions.sort(sortVersions);
   const screenWidth = useMobileScreen();
+
+  let api = null;
+  let paths = null;
+  let pathGroups = null;
+  let backStyle = null;
+
+  if(isDocAPI) {
+    api = data.openApiSpec;
+    paths = api.childrenOpenApiSpecPath;
+    pathGroups = groupBy(paths, p => p.tag);
+    backStyle = {
+      marginBottom: '1rem',
+    };
+  }
   
   const [showModal, setShowModal] = useState(false);
 
@@ -233,8 +253,22 @@ export default function Template({
       isDocAPI={isDocAPI}
       isDocHub={isDocHub}
     >
-      
-        <div className="doc-post-container">
+      {isDocAPI ? (
+        <div>
+          <g.Div css={backStyle}>
+            <Link to="/">Back</Link>
+          </g.Div>
+          <SpecInformation
+            title={api.title}
+            version={api.version}
+            description={api.description}
+          />
+          {Object.keys(pathGroups).map(t => (
+            <SpecPaths key={t} tag={t} paths={pathGroups[t]} />
+          ))}
+        </div>
+        ) : (
+          <div className="doc-post-container">
           <div className="doc-post">
             <div
               className="doc-post-content"
@@ -245,6 +279,7 @@ export default function Template({
               globalEventOff="click"
               className="md-tooltip"
             />
+            {!(isDocHub) ? (
             <a
                 className="edit-page-link btn"
                 href={`https://github.com/deepset-ai/haystack/tree/master/docs/_src/${editPath}`}
@@ -254,8 +289,10 @@ export default function Template({
                 <FontAwesomeIcon icon={faEdit}/>
                 Edit
               </a>
+              ) : null}
           </div>
         </div>
+        )}
       
 
       {showModal ? (
@@ -276,7 +313,7 @@ export default function Template({
 }
 
 export const pageQuery = graphql`
-  query($locale: String, $fileAbsolutePath: String) {
+  query($locale: String, $fileAbsolutePath: String, $id: String) {
     markdownRemark(
       fileAbsolutePath: { eq: $fileAbsolutePath }
     ) {
@@ -319,11 +356,6 @@ export const pageQuery = graphql`
         }
       }
     }
-  }
-`;
-
-/*export const apiQquery = graphql`
-  query ApiQuery($id: String!) {
     openApiSpec(id: { eq: $id }) {
       version
       title
@@ -360,4 +392,5 @@ export const pageQuery = graphql`
         }
       }
     }
-  }`*/
+  }
+`;
