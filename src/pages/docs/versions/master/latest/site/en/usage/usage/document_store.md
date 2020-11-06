@@ -7,6 +7,7 @@ date: "2020-09-03"
 id: "documentstoremd"
 ---
 
+
 # DocumentStores
 
 You can think of the DocumentStore as a "database" that:

@@ -7,6 +7,8 @@ date: "2020-09-03"
 id: "apiretrievermd"
 ---
 
+# Retriever
+
 <a name="sparse"></a>
 # sparse
 
@@ -103,7 +105,7 @@ Karpukhin, Vladimir, et al. (2020): "Dense Passage Retrieval for Open-Domain Que
 #### \_\_init\_\_
 
 ```python
- | __init__(document_store: BaseDocumentStore, query_embedding_model: str = "facebook/dpr-question_encoder-single-nq-base", passage_embedding_model: str = "facebook/dpr-ctx_encoder-single-nq-base", max_seq_len_query: int = 64, max_seq_len_passage: int = 256, use_gpu: bool = True, batch_size: int = 16, embed_title: bool = True, use_fast_tokenizers: bool = True, similarity_function: str = "dot_product")
+ | __init__(document_store: BaseDocumentStore, query_embedding_model: Union[Path, str] = "facebook/dpr-question_encoder-single-nq-base", passage_embedding_model: Union[Path, str] = "facebook/dpr-ctx_encoder-single-nq-base", max_seq_len_query: int = 64, max_seq_len_passage: int = 256, use_gpu: bool = True, batch_size: int = 16, embed_title: bool = True, use_fast_tokenizers: bool = True, similarity_function: str = "dot_product")
 ```
 
 Init the Retriever incl. the two encoder models from a local or remote model checkpoint.
@@ -336,8 +338,10 @@ position in the ranking of documents the correct document is.
 |  Returns a dict containing the following metrics:
 
 - "recall": Proportion of questions for which correct document is among retrieved documents
-- "mean avg precision": Mean of average precision for each question. Rewards retrievers that give relevant
-documents a higher rank.
+- "mrr": Mean of reciprocal rank. Rewards retrievers that give relevant documents a higher rank.
+Only considers the highest ranked relevant document.
+- "map": Mean of average precision for each question. Rewards retrievers that give relevant
+documents a higher rank. Considers all retrieved relevant documents. (only with ``open_domain=False``)
 
 **Arguments**:
 
@@ -350,4 +354,3 @@ If ``False``, retrieval uses a stricter evaluation that checks if the retrieved 
 are within ids explicitly stated in the labels.
 - `return_preds`: Whether to add predictions in the returned dictionary. If True, the returned dictionary
 contains the keys "predictions" and "metrics".
-

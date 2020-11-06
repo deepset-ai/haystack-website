@@ -1,206 +1,75 @@
 ---
-title: "Document Store"
-metaTitle: "Document Store"
+title: "Domain Adaptation"
+metaTitle: "Domain Adaptation"
 metaDescription: ""
-slug: "/docs/documentstore"
+slug: "/docs/domain_adaptation"
 date: "2020-09-03"
-id: "documentstoremd"
+id: "domain_adaptationmd"
 ---
 
+# Domain Adaptation
 
-# DocumentStores
+## Generalisation
 
-You can think of the DocumentStore as a "database" that:
-- stores your texts and meta data  
-- provides them to the retriever at query time 
+In our experience, language models trained on SQuAD show very strong general question answering capabilities.
+Though SQuAD is composed entirely of Wikipedia articles, these models are flexible enough to deal with many different styles of text.
 
-There are different DocumentStores in Haystack to fit different use cases and tech stacks. 
+Before trying to adapt these models to your domain, we’d recommend trying one of the off the shelf models.
+We’ve found that these models are often flexible enough for a wide range of use cases.
 
-## Initialisation
+**Intuition**: Most people probably don’t know what an HP Valve is.
+But you don’t always need to know what a HP Valve is to answer “What is connected to a HP Valve?”
+The answer might be there in plain language.
+In the same way, many QA models have a good enough grasp of language to answer questions about concepts in an unseen domain.
 
-Initialising a new DocumentStore is straight forward.
+## Finetuning
 
-<div class="tabs tabsdsinstall">
+Any model that can be loaded into Haystack can also be finetuned within Haystack.
+Simply provide the domain specific dataset and call `Reader.train()` on an initialised model.
 
-<div class="tab">
-<input type="radio" id="tab-1-1" name="tab-group-1" checked>
-<label class="labelouter" for="tab-1-1">Elasticsearch</label>
-<div class="tabcontent">
-
-```python
-document_store = ElasticsearchDocumentStore()
+```
+reader.train(data_dir=train_data,
+             train_filename="dev-v2.0.json",
+             n_epochs=1,
+             save_dir="my_model")
 ```
 
-</div>
-</div>
+At the end of training, the finetuned model will be saved in the specified `save_dir` and can be loaded as a `Reader`.
+See Tutorial 2 for a runnable example of this process.
+If you’re interested in measuring how much your model has improved,
+please also check out Tutorial 5 which walks through the steps needed to perform evaluation.
 
-<div class="tab">
-<input type="radio" id="tab-1-2" name="tab-group-1">
-<label class="labelouter" for="tab-1-2">FAISS</label>
-<div class="tabcontent">
+## Generating Labels
 
-```python
-document_store = FAISSDocumentStore()
-```
+Using our [Haystack Annotate tool](https://annotate.deepset.ai/login) (Beta),
+you can easily create a labelled dataset using your own documents featuring your own question/ answer pairs.
 
-</div>
-</div>
 
-<div class="tab">
-<input type="radio" id="tab-1-3" name="tab-group-1">
-<label class="labelouter" for="tab-1-3">In Memory</label>
-<div class="tabcontent">
 
-```python
-document_store = InMemoryDocumentStore()
-```
+![image](./../../img/annotation_tool.png)
 
-</div>
-</div>
+Features include:
 
-<div class="tab">
-<input type="radio" id="tab-1-4" name="tab-group-1">
-<label class="labelouter" for="tab-1-4">SQL</label>
-<div class="tabcontent">
 
-```python
-document_store = SQLDocumentStore()
-```
+* Structured workspaces via organisations, projects and users
 
-</div>
-</div>
 
-</div>
+* Easy upload of your own documents and labels in a variety of formats (txt, pdf, SQuAD style)
 
-Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
-See API documentation for more info.
 
-## Input Format
+* Export of labels to be used directly in Haystack
 
-DocumentStores expect Documents in dictionary form, like that below.
-They are loaded using the `DocumentStore.write_documents()` method.
-See [Preprocessing](/docs/latest/preprocessingmd) for more information on how to best prepare your data.
+Annotate also supports two different workflows:
 
-[//]: # (Add link to preprocessing section)
 
-```python
-document_store = ElasticsearchDocumentStore()
-dicts = [
-    {
-        'text': DOCUMENT_TEXT_HERE,
-        'meta': {'name': DOCUMENT_NAME, ...}
-    }, ...
-]
-document_store.write_documents(dicts)
-```
+* Think up questions and answers while reading passages (SQuAD style)
 
-## Writing Documents (Sparse Retrievers)
 
-Haystack allows for you to write store documents in an optimised fashion so that query times can be kept low.
-For **sparse**, keyword based retrievers such as BM25 and TF-IDF,
-you simply have to call `DocumentStore.write_documents()`.
-The creation of the inverted index which optimises querying speed is handled automatically.
+* Have a set of predefined questions and look for answers in the document (~ Natural Questions style)
 
-```python
-document_store.write_documents(dicts)
-```
+## User Feedback
 
-## Writing Documents (Dense Retrievers)
-
-For **dense** neural network based retrievers like Dense Passage Retrieval, or Embedding Retrieval,
-indexing involves computing the Document embeddings which will be compared against the Query embedding.
-
-The storing of the text is handled by `DocumentStore.write_documents()` and the computation of the
-embeddings is started by `DocumentStore.update_embeddings()`.
-
-```python
-document_store.write_documents(dicts)
-document_store.update_embeddings(retriever)
-```
-
-This step is computationally intensive since it will engage the transformer based encoders.
-Having GPU acceleration will significantly speed this up.
-
-<!-- _comment: !! Diagrams of inverted index / document embeds !! -->
-<!-- _comment: !! Make this a tab element to show how different datastores are initialized !! -->
-## Choosing the Right Document Store
-
-The Document Stores have different characteristics. You should choose one depending on the maturity of your project, the use case and technical environment: 
-
-<div class="tabs tabsdschoose">
-
-<div class="tab">
-<input type="radio" id="tab-2-1" name="tab-group-2" checked>
-<label class="labelouter" for="tab-2-1">Elasticsearch</label>
-<div class="tabcontent">
-
-**Pros:** 
-- Fast & accurate sparse retrieval
-- Basic support for dense retrieval
-- Production-ready 
-- Many options to tune sparse retrieval
-
-**Cons:** 
-- Slow for dense retrieval with more than ~ 1 Mio documents
-
-</div>
-</div>
-
-<div class="tab">
-<input type="radio" id="tab-2-2" name="tab-group-2">
-<label class="labelouter" for="tab-2-2">FAISS</label>
-<div class="tabcontent">
-
-**Pros:** 
-- Fast & accurate dense retrieval
-- Highly scalable due to approximate nearest neighbour algorithms (ANN)
-- Many options to tune dense retrieval via different index types 
-
-**Cons:**
-- No efficient sparse retrieval
-
-</div>
-</div>
-
-<div class="tab">
-<input type="radio" id="tab-2-3" name="tab-group-2">
-<label class="labelouter" for="tab-2-3">In Memory</label>
-<div class="tabcontent">
-
-**Pros:**
-- Simple
-- Exists already in many environments
-
-**Cons:**
-- Only compatible with minimal TF-IDF Retriever
-- Bad retrieval performance
-- Not recommended for production
-
-</div>
-</div>
-
-<div class="tab">
-<input type="radio" id="tab-2-4" name="tab-group-2">
-<label class="labelouter" for="tab-2-4">SQL</label>
-<div class="tabcontent">
-
-**Pros:**
-- Simple & fast to test
-- No database requirements
-
-**Cons:** 
-- Not scalable
-- Not persisting your data on disk
-
-</div>
-</div>
-
-</div>
-
-#### Our Recommendations
-
-**Restricted environment:** Use the `InMemoryDocumentStore`, if you are just giving Haystack a quick try on a small sample and are working in a restricted environment that complicates running Elasticsearch or other databases  
-
-**Allrounder:** Use the `ElasticSearchDocumentStore`, if you want to evaluate the performance of different retrieval options (dense vs. sparse) and are aiming for a smooth transition from PoC to production
-
-**Vector Specialist:** Use the `FAISSDocumentStore`, if you want to focus on dense retrieval and possibly deal with larger datasets
+A simpler and faster process to retrain models is to utilise user feedback.
+Users can give thumbs up or thumbs down to search results through the Rest API
+and these labels will be stored in the `DocumentStore`
+where they can already be used to retrain the `Reader`.
