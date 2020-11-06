@@ -12,6 +12,8 @@ import Products from "../components/landing-page/products";
 import UseCases from "../components/landing-page/useCases";
 import CallToAction from "../components/landing-page/callToAction";
 
+//import { RedocStandalone } from 'redoc';
+//<RedocStandalone specUrl="http://api.haystack-hub.com/openapi.json"/>
 const IndexPage = () => {
 
   return (
@@ -22,6 +24,7 @@ const IndexPage = () => {
         <Products />
         <UseCases />
         <CallToAction />
+        
     </Layout>
   );
 

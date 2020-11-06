@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const ReadVersionJson = require("./walkFile");
+const GenerateOpenAPI = require("./openapi-aggregate");
 const locales = require("./src/consts/locales");
 const express = require("express");
 const env = "latest";
@@ -69,6 +70,18 @@ exports.onCreatePage = ({ page, actions }) => {
     resolve();
   });
 };
+
+exports.sourceNodes = ({ actions }) => {
+
+  const { createNode } = actions;
+
+  const nodes = GenerateOpenAPI('https://api.haystack-hub.com/openapi.json');
+  console.log(nodes);
+
+  nodes.forEach(n => {
+    createNode(n);
+  })
+}
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -379,7 +392,6 @@ exports.createPages = ({ actions, graphql }) => {
       const newHtml = node.html;
 
       //  normal pages
-      console.log(localizedPath);
       isBlog=false;
       createPage({
         path: localizedPath,
@@ -398,9 +410,9 @@ exports.createPages = ({ actions, graphql }) => {
       });
     });
   });
+  
 
-
-  const docsAPI = graphql(`
+  /*const docsAPI = graphql(`
       {
         allOpenApiSpec {
           edges {
@@ -465,10 +477,10 @@ exports.createPages = ({ actions, graphql }) => {
           }, // additional data can be passed via context
         });
       });
-    });
+    });*/
 
   // Return a Promise which would wait for both the queries to resolve
-	return Promise.all([docsCore, docsHub, docsAPI]);
+	return Promise.all([docsCore, docsHub, /*docsAPI*/]);
 };
 
 
