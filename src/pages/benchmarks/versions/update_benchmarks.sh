@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Master data
-versions=("latest/" "v0.4.0/") 
+versions=("latest/" "v0.4.0/" "v0.5.0/") 
 
 for i in "${versions[@]}"
 do

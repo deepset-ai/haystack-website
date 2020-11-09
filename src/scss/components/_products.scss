@@ -98,6 +98,14 @@
     }
     .products-enterprise {
         width: 40%;
+        .products-features {
+            li {
+                @include media("<=500px") { 
+                    height: 130px;
+                    padding-right: 10px;
+                }
+            }
+        }
     } 
     .products-actions {
         padding-top: 10px;

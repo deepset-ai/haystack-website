@@ -983,31 +983,58 @@
   margin: 25px 0;
 }
 .tabsgetstarted {  
-  min-height: 300px; /* This part sucks */
+  min-height: 340px; 
+  @include media("<=1500px") {
+    min-height: 370px;
+  }
+  @include media("<=1100px") {
+    min-height: 390px;
+  }
+  @include media("<=700px") {
+    min-height: 410px;
+  }
+  @include media("<=500px") {
+    min-height: 500px;
+  }
+}
+.tabsconverters {  
+  min-height: 250px; 
+  @include media("<=600px") {
+    min-height: 330px;
+  }
 }
 .tabsreaderreader {
-  min-height: 230px; /* This part sucks */
+  min-height: 230px; 
 }
 .tabsreader {
-  min-height: 400px; /* This part sucks */
+  min-height: 400px; 
+  @include media("<=1120px") {
+    min-height: 500px;
+  }
 }
 .tabsreaderdeep {
-  min-height: 185px; /* This part sucks */
+  min-height: 185px; 
 }
 .tabsreaderlanguage{
-  min-height: 285px; /* This part sucks */
+  min-height: 285px; 
 }
 .innertabslanguage { 
-  min-height: 185px; /* This part sucks */
+  min-height: 185px; 
 }
 .tabsdsinstall { 
-  min-height: 190px; /* This part sucks */
+  min-height: 190px; 
 }
 .tabsdschoose {
-  min-height: 300px; /* This part sucks */
+  min-height: 320px; 
+  @include media("<=600px") {
+    min-height: 400px;
+  }
 }
 .innertabs {  
-  min-height: 300px; /* This part sucks */
+  min-height: 300px; 
+  @include media("<=1120px") {
+    min-height: 410px;
+  }
 }
 .tab {
   float: left;

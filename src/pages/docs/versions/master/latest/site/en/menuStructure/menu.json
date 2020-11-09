@@ -26,7 +26,7 @@
       "order": 1
     },
     {
-      "id": "databasemd",
+      "id": "documentstoremd",
       "title": "Document Store",
       "label1": "usage_haystack",
       "label2": "",
@@ -50,12 +50,28 @@
       "order": 4
     },
     {
+      "id": "preprocessingmd",
+      "title": "Preprocessing",
+      "label1": "usage_haystack",
+      "label2": "",
+      "label3": "",
+      "order": 5
+    },
+    {
+      "id": "languagesmd",
+      "title": "Languages Other Than English",
+      "label1": "usage_haystack",
+      "label2": "",
+      "label3": "",
+      "order": 6
+    },
+    {
       "id": "domain_adaptationmd",
       "title": "Domain Adaptation",
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 7
     },
     {
       "id": "termsmd",
@@ -63,7 +79,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 8
     },
     {
       "id": "roadmapmd",
@@ -71,7 +87,15 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order": 9
+    },
+    {
+      "id": "annotationmd",
+      "title": "Annotation Tool",
+      "label1": "usage_haystack",
+      "label2": "",
+      "label3": "",
+      "order": 10
     },
     {
       "id": "tutorials_haystack",
