@@ -1,9 +1,26 @@
+h2 {
+    font-size: 1.5rem;
+    letter-spacing: 0.03rem;
+}
+h3 {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
 .method-area {
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin-top: 20px;
     .request-desc-endpoint {
+        font-size: 16px;
+        font-weight: bold;
         width: 50%;
+        .request-desc-endpoint-attributes {
+            font-size: 14px;
+            font-weight: bold;
+            padding-top: 20px;
+            padding-right: 20px;
+        }
     }
     .request-endpoint {
         background: #f7fafc;
@@ -19,10 +36,29 @@
                 border-radius: 8px 8px 0px 0px;
                 .method-example-response-title-text {
                     padding: 10px 12px;
+                    font-weight: bold;
                 }
             }
             .ResourceSectionEndpoints-endpoints{
-                padding: 20px 12px;
+                padding: 10px 30px;
+                .get {
+                    text-transform: uppercase;
+                    color: #61affe;
+                    font-weight: bold;
+                }
+                .post {
+                    text-transform: uppercase;
+                    color: #49cc90;
+                    font-weight: bold;
+                }
+                .put {
+                    text-transform: uppercase;
+                    color: #fca130;
+                    font-weight: bold;
+                }
+                .box {
+                    background-color: #f7fafc;
+                }
             }
         }
     }

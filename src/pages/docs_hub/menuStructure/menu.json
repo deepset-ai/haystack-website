@@ -11,7 +11,55 @@
     },
     {
       "id": "/docs_hub/get_startedmd",
-      "title": "Get Started",
+      "title": "Quickstart",
+      "label1": "usage_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "/docs_hub/conf_workspacemd",
+      "title": "Configure Workspace",
+      "label1": "usage_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "/docs_hub/upload_documentsmd",
+      "title": "Upload Documents",
+      "label1": "usage_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "/docs_hub/conf_modelmd",
+      "title": "Configure Model",
+      "label1": "usage_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "/docs_hub/searchmd",
+      "title": "Search",
+      "label1": "usage_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "/docs_hub/dashboardmd",
+      "title": "Dashboard",
+      "label1": "usage_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "/docs_hub/user_settingsmd",
+      "title": "User Settings",
       "label1": "usage_haystackhub",
       "label2": "",
       "label3": "",
@@ -19,7 +67,7 @@
     },
     {
       "id": "api_haystackhub",
-      "title": "Haystack Hub API",
+      "title": "REST API",
       "label1": "",
       "label2": "",
       "label3": "",

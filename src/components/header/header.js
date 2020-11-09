@@ -29,13 +29,9 @@ const Header = ({ siteTitle, menuLinks }) => {
     setMobileNav((v) => !v);
   };
 
-  const onChangeDoc = (activeDocLoc) => {
-    activeDoc = activeDocLoc;
-  };
-
   return (
     <>
-      <div className="full-header-wrapper">
+      <div className="full-header-wrapper" >
       
         <header className="header-wrapper">
           <div className="logo-wrapper">
@@ -69,18 +65,17 @@ const Header = ({ siteTitle, menuLinks }) => {
               >
                 Pricing
               </LocalizedLink>
-
+            
               <span
                 role="button"
                 tabIndex={0}
                 className="docs"
-                onKeyDown={() => {
-                  setDocList(!docList);
+                onMouseOver={() => {
+                  setDocList(true);
                 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setDocList(!docList);
-                }}
+                onMouseLeave={() => {
+                            setDocList(false);
+                          }}
               >
                 Docs
                 {docList && (
@@ -88,12 +83,10 @@ const Header = ({ siteTitle, menuLinks }) => {
                     <LocalizedLink
                       locale="en"
                       to="/docs/intromd"
-                      className={activeDoc === "core" ? "active" : ""}
+                      className="core"
                     >
                       <span
                         tabIndex={0}
-                        onKeyDown={onChangeDoc("core")}
-                        onClick={onChangeDoc("core")}
                         role="button"
                       >
                       Haystack Core Docs
@@ -102,12 +95,10 @@ const Header = ({ siteTitle, menuLinks }) => {
                     <LocalizedLink
                       locale="en"
                       to="/docs_hub/get_startedmd"
-                      className={activeDoc === "hub" ? "active" : ""}
+                      className="hub"
                     >
                       <span
                         tabIndex={0}
-                        onKeyDown={onChangeDoc("hub")}
-                        onClick={onChangeDoc("hub")}
                         role="button"
                       >
                       Haystack Hub Docs

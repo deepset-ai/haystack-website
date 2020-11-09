@@ -136,6 +136,29 @@ function openApiAggregate(url, nodes = []) {
                 responses.push(r)
             })
 
+            let ref = "";
+            if(path.requestBody !== undefined) {
+              if(path.requestBody.content["application/json"] !== undefined 
+                  && path.requestBody.content["application/json"]["schema"] !== undefined
+                  && path.requestBody.content["application/json"]["schema"]["$ref"] !== undefined) {
+                    ref = path.requestBody.content["application/json"]["schema"]["$ref"];
+              } else if (path.requestBody.content["application/x-www-form-urlencoded"] !== undefined 
+                  && path.requestBody.content["application/x-www-form-urlencoded"]["schema"] !== undefined
+                  && path.requestBody.content["application/x-www-form-urlencoded"]["schema"]["$ref"] !== undefined) {
+                    ref = path.requestBody.content["application/x-www-form-urlencoded"]["schema"]["$ref"];
+              } else if (path.requestBody.content["multipart/form-data"] !== undefined 
+                  && path.requestBody.content["multipart/form-data"]["schema"] !== undefined
+                  && path.requestBody.content["multipart/form-data"]["schema"]["$ref"] !== undefined) {
+                    ref = path.requestBody.content["multipart/form-data"]["schema"]["$ref"];
+              }
+            }
+
+            let example = "";
+            if(ref !== "") {
+              let res = ref.split("/");
+              example = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2);
+            }
+
             paths.push({
                 id: `${rootId}.path.${p}.verb.${v}`,
                 parent: rootId,
@@ -154,7 +177,7 @@ function openApiAggregate(url, nodes = []) {
                     consumes: path.consumes,
                     produces: path.produces,
                     schemes: path.schemes,
-                    deprecated: path.deprecated,
+                    example: example,
                 },
                 getXFields(path),
                 ),
@@ -184,6 +207,9 @@ function openApiAggregate(url, nodes = []) {
         })
         responses.forEach(r => {
             nodes.push(toNode(r, 'OpenApiSpecResponse'))
+        })
+        responses.forEach(r => {
+          nodes.push(toNode(r, 'OpenApiSpecComponents'))
         })
 
     });

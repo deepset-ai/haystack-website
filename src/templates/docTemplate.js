@@ -363,6 +363,7 @@ export const pageQuery = graphql`
         summary
         description
         fullPath
+        example
         parameters {
           name
           in
