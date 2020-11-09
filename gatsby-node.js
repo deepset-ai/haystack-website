@@ -71,16 +71,15 @@ exports.onCreatePage = ({ page, actions }) => {
   });
 };
 
+const nodes = GenerateOpenAPI("https://api.haystack-hub.com/openapi.json");
+
 exports.sourceNodes = ({ actions }) => {
 
   const { createNode } = actions;
 
-  const nodes = GenerateOpenAPI('https://api.haystack-hub.com/openapi.json');
-  console.log(nodes);
-
   nodes.forEach(n => {
     createNode(n);
-  })
+  });
 }
 
 exports.createPages = ({ actions, graphql }) => {
@@ -412,7 +411,7 @@ exports.createPages = ({ actions, graphql }) => {
   });
   
 
-  /*const docsAPI = graphql(`
+  const docsAPI = graphql(`
       {
         allOpenApiSpec {
           edges {
@@ -477,10 +476,10 @@ exports.createPages = ({ actions, graphql }) => {
           }, // additional data can be passed via context
         });
       });
-    });*/
+    });
 
   // Return a Promise which would wait for both the queries to resolve
-	return Promise.all([docsCore, docsHub, /*docsAPI*/]);
+	return Promise.all([docsCore, docsHub, docsAPI]);
 };
 
 

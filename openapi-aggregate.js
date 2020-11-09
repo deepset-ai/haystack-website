@@ -87,20 +87,18 @@ const fetchSpec = async url => {
   })
 }
 
-const openApiAggregate= url => {
+function openApiAggregate(url, nodes = []) {
     fetchSpec(url).then((result) => {
         const json = JSON.parse(result)
-
-        const rootId = 'spec.openapi';
+        const name = 'openapispec'
+        const rootId = `spec.${name}`;
         
 
         const paths = [];
         const responses = [];
         Object.keys(json.paths).forEach(p => {
-            console.log(p);
             Object.keys(json.paths[p]).forEach(v => {
             const path = json.paths[p][v]
-            console.log(path);
             const pathResponses = Object.keys(path.responses).map(r => {
                 const response = path.responses[r]
 
@@ -152,7 +150,7 @@ const openApiAggregate= url => {
                     tags: path.tags,
                     tag: path.tags ? path.tags.join(',') : null,
                     operationId: path.operationId,
-                    fullPath: spec.basePath + p,
+                    fullPath: p,
                     consumes: path.consumes,
                     produces: path.produces,
                     schemes: path.schemes,
@@ -167,32 +165,30 @@ const openApiAggregate= url => {
         const information = {
             id: rootId,
             parent: null,
-            children: [...paths.map(p => p.id), ...definitions.map(d => d.id)],
+            children: [...paths.map(p => p.id), undefined],
             fields: {
               name,
-              version: spec.info.version,
-              title: spec.info.title,
-              description: spec.info.description,
-              host: spec.host,
-              schemes: spec.schemes,
-              basePath: spec.basePath,
-              produces: spec.produces,
+              version: json.info.version,
+              title: json.info.title,
+              description: json.info.description,
+              host: json.host,
+              schemes: json.schemes,
+              basePath: json.basePath,
+              produces: json.produces,
             },
         }
 
-        const nodes = [];
-
-        nodes.push(toNode)(information, 'OpenApiSpec');
+        nodes.push(toNode(information, 'OpenApiSpec'));
         paths.forEach(p => {
             nodes.push(toNode(p, 'OpenApiSpecPath'))
         })
         responses.forEach(r => {
             nodes.push(toNode(r, 'OpenApiSpecResponse'))
         })
-        console.log(nodes);
-        return nodes;
 
     });
+
+    return nodes;
 }
 
 module.exports = openApiAggregate;

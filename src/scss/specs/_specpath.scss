@@ -1,0 +1,29 @@
+.method-area {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    .request-desc-endpoint {
+        width: 50%;
+    }
+    .request-endpoint {
+        background: #f7fafc;
+        border-radius: 0px 0px 8px 8px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+        font-weight: 400;
+        color: #4f566b;
+        width: 50%;
+        .method-example-response-topbar {
+            .method-example-response-title {
+                background: #e3e8ee;
+                border-radius: 8px 8px 0px 0px;
+                .method-example-response-title-text {
+                    padding: 10px 12px;
+                }
+            }
+            .ResourceSectionEndpoints-endpoints{
+                padding: 20px 12px;
+            }
+        }
+    }
+}

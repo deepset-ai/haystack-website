@@ -253,46 +253,43 @@ export default function Template({
       isDocAPI={isDocAPI}
       isDocHub={isDocHub}
     >
-      {isDocAPI ? (
-        <div>
-          <g.Div css={backStyle}>
-            <Link to="/">Back</Link>
-          </g.Div>
-          <SpecInformation
-            title={api.title}
-            version={api.version}
-            description={api.description}
-          />
-          {Object.keys(pathGroups).map(t => (
-            <SpecPaths key={t} tag={t} paths={pathGroups[t]} />
-          ))}
-        </div>
-        ) : (
           <div className="doc-post-container">
-          <div className="doc-post">
-            <div
-              className="doc-post-content"
-              dangerouslySetInnerHTML={{ __html: newHtml }}
-            />
-            <ReactTooltip
-              type="info"
-              globalEventOff="click"
-              className="md-tooltip"
-            />
-            {!(isDocHub) ? (
-            <a
-                className="edit-page-link btn"
-                href={`https://github.com/deepset-ai/haystack/tree/master/docs/_src/${editPath}`}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <FontAwesomeIcon icon={faEdit}/>
-                Edit
-              </a>
-              ) : null}
-          </div>
-        </div>
-        )}
+          {isDocAPI ? (
+            <div>
+              <SpecInformation
+                title={api.title}
+                version={api.version}
+                description={api.description}
+              />
+              {Object.keys(pathGroups).map(t => (
+                <SpecPaths key={t} tag={t} paths={pathGroups[t]} />
+              ))}
+            </div>
+            ) : (
+              <div className="doc-post">
+                <div
+                  className="doc-post-content"
+                  dangerouslySetInnerHTML={{ __html: newHtml }}
+                />
+                <ReactTooltip
+                  type="info"
+                  globalEventOff="click"
+                  className="md-tooltip"
+                />
+                {!(isDocHub) ? (
+                <a
+                    className="edit-page-link btn"
+                    href={`https://github.com/deepset-ai/haystack/tree/master/docs/_src/${editPath}`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <FontAwesomeIcon icon={faEdit}/>
+                    Edit
+                  </a>
+                  ) : null}
+              </div>
+              )}
+            </div>
       
 
       {showModal ? (
@@ -363,7 +360,6 @@ export const pageQuery = graphql`
       childrenOpenApiSpecPath {
         name
         verb
-        operationId
         summary
         description
         fullPath
@@ -372,23 +368,12 @@ export const pageQuery = graphql`
           in
           description
           required
-          type
-          format
         }
         tag
         childrenOpenApiSpecResponse {
           id
           statusCode
           description
-          childrenOpenApiSpecDefinition {
-            name
-            properties {
-              name
-              type
-              description
-              format
-            }
-          }
         }
       }
     }

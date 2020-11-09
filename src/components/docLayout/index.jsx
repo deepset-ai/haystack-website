@@ -170,7 +170,7 @@ export default (props) => {
           isDocHub={isDocHub}
         ></Menu>
         <div
-          className={`inner-container ${isBenchMark ? "fullwidth" : ""}`}
+          className={`inner-container ${isBenchMark || isDocAPI ? "fullwidth" : ""}`}
           ref={docContainer}
         >
           {children}
@@ -178,7 +178,7 @@ export default (props) => {
             <Footer locale={locale} style={{ background: "#fff" }}></Footer>
           )}
         </div>
-        {formatHeadings && !isBenchMark && (
+        {formatHeadings && !isBenchMark && !isDocAPI && (
           <div className="anchor-wrapper">
             <section>
               {generateAnchorMenu(formatHeadings, "parent-item")} 

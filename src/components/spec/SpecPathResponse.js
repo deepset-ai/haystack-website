@@ -21,15 +21,15 @@ const SpecPathResponse = ({ verb, statusCode, description, definitions }) => {
         <g.H4 flex="1 1 50%">{statusCode}</g.H4>
         <g.P flex="1 1 50%">{description}</g.P>
       </g.Div>
-      {definitions.length === 1 ? (
-        <g.Div css={getInsetStyle('#ccc')}>
-          <SpecDefinition definition={definitions[0]} />
-        </g.Div>
-      ) : null}
     </g.Div>
   )
 }
 
+/**{definitions.length === 1 ? (
+        <g.Div css={getInsetStyle('#ccc')}>
+          <SpecDefinition definition={definitions[0]} />
+        </g.Div>
+      ) : null} */
 SpecPathResponse.propTypes = {
   verb: PropTypes.string.isRequired,
   statusCode: PropTypes.string.isRequired,

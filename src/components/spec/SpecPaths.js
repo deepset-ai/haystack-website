@@ -6,6 +6,8 @@ import Verb, { verbColor } from './Verb'
 import SpecPathResponse from './SpecPathResponse'
 import SpecPathParameters from './SpecPathParameters'
 
+import "../../scss/specs/_specpath.scss";
+
 const pathStyle = verb => ({
   padding: '1rem',
   borderRadius: '4px',
@@ -48,14 +50,32 @@ SpecPath.propTypes = {
 
 const SpecPaths = ({ tag, paths }) => (
   <div>
-    <h2>{tag}</h2>
+    <h2 id={tag}>{tag}</h2>
     {paths.map(p => (
-      <g.Div key={`${p.name}-${p.verb}`} marginBottom="1rem">
-        <SpecPath path={p} />
-      </g.Div>
+      <div>
+      <h2>{p.summary}</h2>
+      <div  className="method-area">
+        <div className="request-desc-endpoint">Endpoint</div>
+        <div className="request-endpoint">
+          <div className="method-example-response-topbar">
+            <div className="method-example-response-title">
+              <div className="method-example-response-title-text">
+                Endpoint
+              </div>
+            </div>
+            <div className="ResourceSectionEndpoints-endpoints">
+              {p.verb} {p.fullPath}
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     ))}
   </div>
 )
+/*<g.Div key={`${p.name}-${p.verb}`} marginBottom="1rem">
+        <SpecPath path={p} />
+      </g.Div>*/
 
 SpecPaths.propTypes = {
   tag: PropTypes.string.isRequired,

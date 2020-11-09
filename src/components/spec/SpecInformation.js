@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Markdown from '../markdown/Markdown'
+import "../../scss/specs/_specinformation.scss";
 
 const SpecInformation = ({ title, version, description }) => (
   <div>
     <h1>{title}</h1>
-    <p>Version: {version}</p>
-    <Markdown markdown={description} />
+    <p>{description}</p>
   </div>
 )
 
