@@ -8,3 +8,9 @@ id: "user_settingsmd"
 ---
 
 # User Settings
+
+## Personal Details
+
+## Organization
+
+## Subscription

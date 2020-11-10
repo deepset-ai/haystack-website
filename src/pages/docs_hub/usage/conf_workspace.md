@@ -8,3 +8,7 @@ id: "conf_workspacemd"
 ---
 
 # Configure Workspace
+
+## Workspace Languages
+
+## Invite People to your Workspace
