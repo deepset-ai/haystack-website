@@ -150,6 +150,7 @@ function openApiAggregate(url, nodes = []) {
             })
 
             let ref = "";
+            let example = "";
             if(path.requestBody !== undefined) {
               if(path.requestBody.content["application/json"] !== undefined 
                   && path.requestBody.content["application/json"]["schema"] !== undefined
@@ -163,10 +164,13 @@ function openApiAggregate(url, nodes = []) {
                   && path.requestBody.content["multipart/form-data"]["schema"] !== undefined
                   && path.requestBody.content["multipart/form-data"]["schema"]["$ref"] !== undefined) {
                     ref = path.requestBody.content["multipart/form-data"]["schema"]["$ref"];
+              } else if (path.requestBody.content["application/json"] !== undefined 
+                    && path.requestBody.content["application/json"]["schema"] !== undefined
+                    && path.requestBody.content["application/json"]["schema"]["properties"] !== undefined) {
+                    example = JSON.stringify(path.requestBody.content["application/json"]["schema"]["properties"], undefined, 2).replace(/\s*\"type\": \".*\",/g, '');;
               }
             }
 
-            let example = "";
             if(ref !== "") {
               let res = ref.split("/");
               example = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2).replace(/\s*\"type\": \".*\",/g, ''); 
@@ -206,7 +210,7 @@ function openApiAggregate(url, nodes = []) {
               name,
               version: json.info.version,
               title: json.info.title,
-              description: json.info.description,
+              description: json.info.description.replace("\\n\\n", "<br/><br/>"),
               host: json.host,
               schemes: json.schemes,
               basePath: json.basePath,

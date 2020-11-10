@@ -12,11 +12,9 @@ import QueryModal from "../components/query-modal/query-modal.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import Link from 'gatsby-link'
 import groupBy from 'lodash.groupby'
 import SpecInformation from '../components/spec/SpecInformation'
 import SpecPaths from '../components/spec/SpecPaths'
-import g from 'glamorous'
 
 function sortVersions(a, b) {
   const [v1, s1, m1] = a.split(".");
@@ -56,15 +54,11 @@ export default function Template({
   let api = null;
   let paths = null;
   let pathGroups = null;
-  let backStyle = null;
 
   if(isDocAPI) {
     api = data.openApiSpec;
     paths = api.childrenOpenApiSpecPath;
     pathGroups = groupBy(paths, p => p.tag);
-    backStyle = {
-      marginBottom: '1rem',
-    };
   }
   
   const [showModal, setShowModal] = useState(false);

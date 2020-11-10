@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "gatsby";
 import locales from "../../consts/locales.js";
 import "./localizedLink.scss";
-import scrollTo from 'gatsby-plugin-smoothscroll';
 
 export default ({ locale, to, children, className = "link", scrollTo }) => {
   const language = locales[locale];

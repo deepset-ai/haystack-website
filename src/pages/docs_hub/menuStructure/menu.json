@@ -131,6 +131,14 @@
       "order": 0
     },
     {
+      "id": "/docs_api/openapispec#Files",
+      "title": "Files",
+      "label1": "api_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
       "id": "/docs_api/openapispec#Search",
       "title": "Search",
       "label1": "api_haystackhub",

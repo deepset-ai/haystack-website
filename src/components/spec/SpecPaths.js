@@ -41,7 +41,7 @@ const SpecPaths = ({ tag, paths }) => (
         </div>
       </div>
 
-      {p.verb === "post" | p.verb === "put" ? (
+      {p.verb === "post" | p.verb === "put" | p.verb === "patch" ? (
       <div className="method-area">
         <div className="request-desc-endpoint">
         <div className="request-desc-endpoint-attributes">
@@ -67,7 +67,7 @@ const SpecPaths = ({ tag, paths }) => (
       </div>
       ) : ( null ) }
 
-      {p.verb == "get" && (
+      {p.verb === "get" | p.verb === "delete" ? (
       <div  className="method-area">
         <div className="request-desc-endpoint"></div>
         <div className="request-endpoint">
@@ -87,7 +87,7 @@ const SpecPaths = ({ tag, paths }) => (
           </div>
         </div>
       </div>
-      )}
+      ) : ( null ) }
       </div>
     ))}
   </div>

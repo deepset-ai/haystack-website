@@ -6,8 +6,12 @@ h1 {
     color: black;
 }
 table {
-    td {
-        background-color: none;
-        border: none !important;
+    background-color: #f7fafc !important;
+    tr {
+        background-color: #f7fafc !important;
+        td {
+            background-color: #f7fafc !important;
+            border: none !important;
+        }
     }
 }

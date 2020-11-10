@@ -5,7 +5,6 @@ import "../../scss/specs/_specinformation.scss";
 const SpecInformation = ({ title, version, description }) => (
   <div>
     <h1>{title}</h1>
-    <p>{description}</p>
 
     <h2>Errors</h2>
     <div className="method-area">

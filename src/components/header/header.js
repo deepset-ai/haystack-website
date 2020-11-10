@@ -16,7 +16,6 @@ const Header = ({ siteTitle, menuLinks }) => {
   const screenWidth = useMobileScreen();
   const [mobileNav, setMobileNav] = useState(false);
   const [docList, setDocList] = useState(false);
-  let activeDoc = "core";
 
   useEffect(() => {
     window.addEventListener("click", () => {
