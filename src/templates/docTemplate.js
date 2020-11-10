@@ -369,12 +369,17 @@ export const pageQuery = graphql`
           in
           description
           required
+          schema {
+            example
+            type
+          }
         }
         tag
         childrenOpenApiSpecResponse {
           id
           statusCode
           description
+          response
         }
       }
     }

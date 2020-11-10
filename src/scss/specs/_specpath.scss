@@ -13,11 +13,13 @@ h3 {
     margin-top: 20px;
     .request-desc-endpoint {
         font-size: 16px;
-        font-weight: bold;
         width: 50%;
+        padding-right: 20px;
+        .parameters {
+            font-weight: bold;
+        }
         .request-desc-endpoint-attributes {
             font-size: 14px;
-            font-weight: bold;
             padding-top: 20px;
             padding-right: 20px;
         }

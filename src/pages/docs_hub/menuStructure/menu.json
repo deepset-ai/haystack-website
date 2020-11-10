@@ -76,7 +76,23 @@
     },
     {
       "id": "/docs_api/openapispec",
-      "title": "Get Started",
+      "title": "Introdution",
+      "label1": "api_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "/docs_api/openapispec#Auth",
+      "title": "Authentication",
+      "label1": "api_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
+      "id": "/docs_api/openapispec",
+      "title": "Errors",
       "label1": "api_haystackhub",
       "label2": "",
       "label3": "",
@@ -117,14 +133,6 @@
     {
       "id": "/docs_api/openapispec#Search",
       "title": "Search",
-      "label1": "api_haystackhub",
-      "label2": "",
-      "label3": "",
-      "order": 0
-    },
-    {
-      "id": "/docs_api/openapispec#Auth",
-      "title": "Auth",
       "label1": "api_haystackhub",
       "label2": "",
       "label3": "",

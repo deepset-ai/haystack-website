@@ -10,7 +10,23 @@ const SpecPaths = ({ tag, paths }) => (
       <div>
       <h3>{p.summary}</h3>
       <div  className="method-area">
-        <div className="request-desc-endpoint">Endpoint</div>
+        <div className="request-desc-endpoint">
+          <span className="parameters">Parameters</span>
+          {p.parameters && ( 
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Example</th>  
+            </tr> 
+            {p.parameters.map(parameter => (
+              <tr>
+                <td>{parameter.name} {parameter.required && (<span>*</span>)} ({parameter.schema.type})</td>
+                <td>{parameter.schema.example}</td>  
+              </tr>  
+            ))}
+          </table>
+          )}  
+        </div>
         <div className="request-endpoint">
           <div className="method-example-response-topbar">
             <div className="method-example-response-title">
@@ -25,23 +41,11 @@ const SpecPaths = ({ tag, paths }) => (
         </div>
       </div>
 
-      <div  className="method-area">
-        <div className="request-desc-endpoint">Request Body
+      {p.verb === "post" | p.verb === "put" ? (
+      <div className="method-area">
+        <div className="request-desc-endpoint">
         <div className="request-desc-endpoint-attributes">
-          Attributes
-          <hr/>
-          <div>
-          email<br/>
-          blablabla
-          </div>
-          <div>
-          workspaces<br/>
-          blablabla
-          </div>
-          <div>
-          is_super_admin<br/>
-          blablabla
-          </div>
+          
         </div>
         </div>
         <div className="request-endpoint">
@@ -61,33 +65,33 @@ const SpecPaths = ({ tag, paths }) => (
           </div>
         </div>
       </div>
+      ) : ( null ) }
 
+      {p.verb == "get" && (
       <div  className="method-area">
-        <div className="request-desc-endpoint">Responses</div>
+        <div className="request-desc-endpoint"></div>
         <div className="request-endpoint">
           <div className="method-example-response-topbar">
             <div className="method-example-response-title">
               <div className="method-example-response-title-text">
-                Responses
+                Response
               </div>
             </div>
             <div className="ResourceSectionEndpoints-endpoints">
               <pre class="box">
                 <code class="language-json">
-                  {p.example}
+                  {p.childrenOpenApiSpecResponse[0].response}
                 </code>
               </pre>
             </div>
           </div>
         </div>
       </div>
+      )}
       </div>
     ))}
   </div>
 )
-/*<g.Div key={`${p.name}-${p.verb}`} marginBottom="1rem">
-        <SpecPath path={p} />
-      </g.Div>*/
 
 SpecPaths.propTypes = {
   tag: PropTypes.string.isRequired,

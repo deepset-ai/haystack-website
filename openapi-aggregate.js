@@ -103,16 +103,28 @@ function openApiAggregate(url, nodes = []) {
                 const response = path.responses[r]
 
                 let ref = null
-
-                if (response.schema) {
-                ref =
-                    response.schema.type === 'array'
-                    ? response.schema.items.$ref
-                    : response.schema.$ref
+                if (response["content"]["application/json"]["schema"] !== undefined) {
+                  ref = response["content"]["application/json"]["schema"]["$ref"];
                 }
-
                 const definitionId = ref ? ref.replace('#/definitions/', '') : null
-
+                
+                let responseJSON = "";
+                if(ref) {
+                  let res = ref.split("/");
+                  
+                  if(json[res[1]][res[2]][res[3]]["properties"] 
+                    && json[res[1]][res[2]][res[3]]["properties"]["data"]
+                    && json[res[1]][res[2]][res[3]]["properties"]["data"]["items"]["$ref"]) {
+                      ref = json[res[1]][res[2]][res[3]]["properties"]["data"]["items"]["$ref"];
+                    if(ref) {
+                      res = ref.split("/");
+                      responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2).replace(/\s*\"type\": \".*\",/g, '');
+                    } 
+                  } else {
+                    res = ref.split("/");
+                    responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2).replace(/\s*\"type\": \".*\",/g, '');
+                  }
+                }
                 return {
                 id: `${rootId}.path.${p}.verb.${v}.response.${r}`,
                 parent: `${rootId}.path.${p}.verb.${v}`,
@@ -126,6 +138,7 @@ function openApiAggregate(url, nodes = []) {
                     schema: response.schema,
                     headers: response.headers,
                     examples: response.examples,
+                    response: responseJSON
                     },
                     getXFields(response),
                 ),
@@ -156,7 +169,7 @@ function openApiAggregate(url, nodes = []) {
             let example = "";
             if(ref !== "") {
               let res = ref.split("/");
-              example = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2);
+              example = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2).replace(/\s*\"type\": \".*\",/g, ''); 
             }
 
             paths.push({
@@ -177,7 +190,7 @@ function openApiAggregate(url, nodes = []) {
                     consumes: path.consumes,
                     produces: path.produces,
                     schemes: path.schemes,
-                    example: example,
+                    example: example
                 },
                 getXFields(path),
                 ),
