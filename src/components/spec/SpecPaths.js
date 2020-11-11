@@ -45,7 +45,7 @@ const SpecPaths = ({ tag, paths }) => (
       <div className="method-area">
         <div className="request-desc-endpoint">
         <div className="request-desc-endpoint-attributes">
-          
+        <span className="parameters">Attributes</span>
         </div>
         </div>
         <div className="request-endpoint">
@@ -69,7 +69,11 @@ const SpecPaths = ({ tag, paths }) => (
 
       {p.verb === "get" | p.verb === "delete" ? (
       <div  className="method-area">
-        <div className="request-desc-endpoint"></div>
+        <div className="request-desc-endpoint">
+        <div className="request-desc-endpoint-attributes">
+        <span className="parameters">Returns</span>
+        </div>
+        </div>
         <div className="request-endpoint">
           <div className="method-example-response-topbar">
             <div className="method-example-response-title">
