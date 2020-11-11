@@ -6,6 +6,9 @@ module.exports = {
     description: `Haystack enables Question Answering at Scale`,
     author: "deepset",
     twitterUsername: "@deepset_ai",
+    keywords: ["haystack deepset","haystack question answering","haystack deep set",
+              "deepset ai haystack","haystack qa","deepset haystack","deepset/roberta-base-squad2",
+              "dense passage retrieval","haystack nlp", "dense passage retriever", "deepset ai"],
   },
   plugins: [
     'gatsby-plugin-cname',
