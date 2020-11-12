@@ -118,11 +118,11 @@ function openApiAggregate(url, nodes = []) {
                       ref = json[res[1]][res[2]][res[3]]["properties"]["data"]["items"]["$ref"];
                     if(ref) {
                       res = ref.split("/");
-                      responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2).replace(/\s*\"type\": \".*\",/g, '');
+                      responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2);//.replace(/\s*\"type\": \".*\",/g, '');
                     } 
                   } else {
                     res = ref.split("/");
-                    responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2).replace(/\s*\"type\": \".*\",/g, '');
+                    responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2);//.replace(/\s*\"type\": \".*\",/g, '');
                   }
                 }
                 return {
@@ -167,13 +167,17 @@ function openApiAggregate(url, nodes = []) {
               } else if (path.requestBody.content["application/json"] !== undefined 
                     && path.requestBody.content["application/json"]["schema"] !== undefined
                     && path.requestBody.content["application/json"]["schema"]["properties"] !== undefined) {
-                    example = JSON.stringify(path.requestBody.content["application/json"]["schema"]["properties"], undefined, 2).replace(/\s*\"type\": \".*\",/g, '');;
+                    exampleDef = JSON.stringify(path.requestBody.content["application/json"]["schema"]["properties"], undefined, 2);
+                    example = JSON.stringify(path.requestBody.content["application/json"]["schema"]["properties"], undefined, 2);
               }
             }
 
             if(ref !== "") {
               let res = ref.split("/");
-              example = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2).replace(/\s*\"type\": \".*\",/g, ''); 
+              exampleDef = JSON.stringify(json[res[1]][res[2]][res[3]]["properties"], undefined, 2);
+              if(json[res[1]][res[2]][res[3]]["example"] !== undefined) {
+                example = JSON.stringify(json[res[1]][res[2]][res[3]]["example"], undefined, 2);
+              }
             }
 
             paths.push({
@@ -194,6 +198,7 @@ function openApiAggregate(url, nodes = []) {
                     consumes: path.consumes,
                     produces: path.produces,
                     schemes: path.schemes,
+                    exampleDef: exampleDef,
                     example: example
                 },
                 getXFields(path),

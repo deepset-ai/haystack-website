@@ -357,6 +357,7 @@ export const pageQuery = graphql`
         summary
         description
         fullPath
+        exampleDef
         example
         parameters {
           name

@@ -1,17 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'; 
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 import "../../scss/specs/_specpath.scss";
 
-const SpecPaths = ({ tag, paths }) => (
-  <div>
+const SpecPaths = ({ tag, paths }) => {
+
+  const [showChild, setShowChild] = useState(false);
+
+  function iterateJSON(jsonObject= {}) {
+    let type = "";
+    let elementArray = null;
+    let element = null;
+    for (let prop in jsonObject) {
+      type = jsonObject[prop].type;
+      if(type === "array") {
+        elementArray = <div>
+                      <button className="child-button" onKeyDown={() => {setShowChild(!showChild);}}
+                        onMouseDown={(e) => { e.stopPropagation(); setShowChild(!showChild);}}>
+                       <div className="child-button-div">Show child attributes{showChild? (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/></div>) : (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/></div>)}</div>
+                     </button> 
+                     {showChild && ( <div className="child-element">{iterateJSON(jsonObject[prop]["items"]["properties"])}</div>)}</div>;
+      }
+      element = <div>{element}<div><span className="prop-name">{prop}</span> <span>{type}</span></div><div>{jsonObject[prop].description}</div><hr/>{elementArray}</div>;
+      elementArray = null;
+    }
+    return <div className="parent-element">{element}</div>;
+  }
+
+  return (<div>
     <h2 id={tag}>{tag}</h2>
     {paths.map(p => (
       <div>
       <h3>{p.summary}</h3>
       <div  className="method-area">
         <div className="request-desc-endpoint">
-          <span className="parameters">Parameters</span>
+          <div className="parameters">Parameters</div>
           {p.parameters && ( 
           <table>
             <tr>
@@ -44,15 +71,14 @@ const SpecPaths = ({ tag, paths }) => (
       {p.verb === "post" | p.verb === "put" | p.verb === "patch" ? (
       <div className="method-area">
         <div className="request-desc-endpoint">
-        <div className="request-desc-endpoint-attributes">
-        <span className="parameters">Attributes</span>
-        </div>
-        </div>
+          <div className="parameters">Attributes</div>
+          {iterateJSON(JSON.parse(p.exampleDef))}
+          </div>
         <div className="request-endpoint">
           <div className="method-example-response-topbar">
             <div className="method-example-response-title">
               <div className="method-example-response-title-text">
-                Request Body
+                Request Body Example
               </div>
             </div>
             <div className="ResourceSectionEndpoints-endpoints">
@@ -72,6 +98,7 @@ const SpecPaths = ({ tag, paths }) => (
         <div className="request-desc-endpoint">
         <div className="request-desc-endpoint-attributes">
         <span className="parameters">Returns</span>
+        <p>{p.childrenOpenApiSpecResponse[0].description}</p>
         </div>
         </div>
         <div className="request-endpoint">
@@ -95,7 +122,10 @@ const SpecPaths = ({ tag, paths }) => (
       </div>
     ))}
   </div>
-)
+);
+
+};
+//{iterateJSON(p.exampleDef)}
 
 SpecPaths.propTypes = {
   tag: PropTypes.string.isRequired,

@@ -6,6 +6,10 @@ const SpecInformation = ({ title, version, description }) => (
   <div>
     <h1>{title}</h1>
 
+    <p>We also provide a Swagger UI: <a href="https://api.haystack-hub.com/docs" target="_blank" rel="noreferrer">
+        Haystack Hub REST API
+      </a></p>
+
     <h2>Errors</h2>
     <div className="method-area">
         <div className="request-desc-endpoint">

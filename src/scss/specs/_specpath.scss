@@ -6,6 +6,11 @@ h3 {
     font-weight: bold;
     font-size: 1.25rem;
 }
+.fontawsome-icon {
+    padding-top: 5px;
+    padding-left: 2px;
+    width: 13px;
+  }
 .method-area {
     display: flex;
     flex-direction: row;
@@ -15,8 +20,29 @@ h3 {
         font-size: 16px;
         width: 50%;
         padding-right: 20px;
+        .prop-name {
+            font-weight: bold;
+        }
+        .child-button {
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background-color: white;
+            .child-button-div {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+        .parent-element{
+            padding-left: 10px
+        }
+        .child-element {
+            padding-left: 20px;
+        }
         .parameters {
             font-weight: bold;
+            border-bottom: 1px solid lightgray;
+            margin-bottom: 20px;
         }
         .request-desc-endpoint-attributes {
             font-size: 14px;

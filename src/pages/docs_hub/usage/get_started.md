@@ -52,14 +52,25 @@ There are 4 easy steps to start with **Haystack Hub**. As soon as you are [logge
 
 ### Step 1 Choose Workspace Languge
 
-Click **Choose Language** in the **Getting Started** section or choose the **Gear Button** next to **Your Worksapce**. You will be redirected to **Workspace Settings**. By default, Haystack Hub comes with **English** as workspace language. You can selected mutlitple language for your workspace. The selected languages define which kind of documents Haystack Hub can work with. the language of the documents you want to search need to have the selected language. Currently, **English** and **German** is supported.
+Click **Choose Language** in the **Getting Started** section or choose the **Gear Button** next to **Your Worksapce**. You will be redirected to **Workspace Settings**. By default, Haystack Hub comes with **English** as workspace language. You can selected mutlitple language for your workspace. The selected languages define which kind of documents Haystack Hub can work with. the language of the documents you want to search need to have the selected language. Currently, **English** and **German** is supported. For more information click [here](/docs_hub/conf_workspacemd).
 
 ![image](../img/HaystackHub_workspace.png)
 
 ### Step 2 Upload Documents
 
+Go back to your [dashboard](https://app.haystack-hub.com/dashboard) and choose **Go to Documents** or click **Dashboard** on the left in order to upload documents which you want to search. Choose **Upload Files** and follow the process. Make sure that you configured the correct language for you files in [Step 1](/docs_hub/get_startedmd#Step-1-Choose-Workspace-Languge). We support **pdf** and **txt** files, for knwo in Haystack Hub. You will find a detailed description of the upload process [here](/docs_hub/upload_documentsmd).
+
+![image](../img/HaystackHub_uploaddocuments.png)
 
 
 ### Step 3 Configure Model
 
+Starting from your [dashboard](https://app.haystack-hub.com/dashboard) you can choose **Go to Configuration** or click **Configuration** on the left. Haystack Hub comes with a default configuration for **Retriever** and **Reader**. If you want to learn more about rhe model configuration click [here](http://localhost:8000/docs_hub/conf_modelmd).
+
+![image](../img/HaystackHub_confmodel.png)
+
 ### Step 4 Your Search is ready!
+
+If you followed **Step 1** to **Step 2** successfully, your search is ready. Start to ask questions and click **Search**. Haystack will list the most relevant answers depending on your model configuration. You can find more details [here](/docs_hub/searchmd).
+
+![image](../img/HaystackHub_search.png)
