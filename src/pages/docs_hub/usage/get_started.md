@@ -11,7 +11,7 @@ id: "get_startedmd"
 
 To help you get to know [**Haystack Hub**](https://app.haystack-hub.com/), you can try it out for free in the **Starter** version for **14 days**. You will find more information regarding the pricing [here](https://haystack.deepset.ai/pricing/pricing/).
 
-You can cancle your subscription at any time via email (<haystack@deepset.ai>).
+You can cancle your subscription at any time via email (<info@haystack-hub.com>).
 
 This article describes how to sign up for a subscription.
 

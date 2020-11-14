@@ -17,7 +17,7 @@ const SpecPaths = ({ tag, paths }) => {
     let element = null;
     for (let prop in jsonObject) {
       type = jsonObject[prop].type;
-      if(type === "array") {
+      if(type === "array" && jsonObject[prop]["items"] !== undefined && jsonObject[prop]["items"]["properties"] !== undefined) {
         elementArray = <div>
                       <button className="child-button" onKeyDown={() => {setShowChild(!showChild);}}
                         onMouseDown={(e) => { e.stopPropagation(); setShowChild(!showChild);}}>
@@ -96,10 +96,8 @@ const SpecPaths = ({ tag, paths }) => {
       {p.verb === "get" | p.verb === "delete" ? (
       <div  className="method-area">
         <div className="request-desc-endpoint">
-        <div className="request-desc-endpoint-attributes">
-        <span className="parameters">Returns</span>
+        <div className="parameters">Returns</div>
         <p>{p.childrenOpenApiSpecResponse[0].description}</p>
-        </div>
         </div>
         <div className="request-endpoint">
           <div className="method-example-response-topbar">
