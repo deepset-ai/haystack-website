@@ -11,4 +11,8 @@ id: "conf_modelmd"
 
 ## Retriever
 
+![image](../img/HaystackHub_confretriever_1.png)
+
 ## Reader
+
+![image](../img/HaystackHub_confreader_1.png)

@@ -11,6 +11,14 @@ id: "user_settingsmd"
 
 ## Personal Details
 
+![image](../img/HaystackHub_personaldetails.png)
+
 ## Organization
 
+![image](../img/HaystackHub_organization.png)
+
+![image](../img/HaystackHub_invitepeople.png)
+
 ## Subscription
+
+![image](../img/HaystackHub_subscription.png)

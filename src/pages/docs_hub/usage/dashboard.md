@@ -9,6 +9,10 @@ id: "dashboardmd"
 
 # Dashboard
 
+## Getting Started
+
+![image](../img/HaystackHub_gettingstarted.png)
+
 ## Health Analysis
 
 ## Workspace Statistic

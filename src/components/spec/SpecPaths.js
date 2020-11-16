@@ -68,7 +68,7 @@ const SpecPaths = ({ tag, paths }) => {
         </div>
       </div>
 
-      {p.verb === "post" | p.verb === "put" | p.verb === "patch" ? (
+      {p.verb === "post" | p.verb === "patch" ? (
       <div className="method-area">
         <div className="request-desc-endpoint">
           <div className="parameters">Attributes</div>
@@ -93,12 +93,13 @@ const SpecPaths = ({ tag, paths }) => {
       </div>
       ) : ( null ) }
 
-      {p.verb === "get" | p.verb === "delete" ? (
+      {p.verb === "get" | p.verb === "delete" | p.verb === "put"  ? (
       <div  className="method-area">
         <div className="request-desc-endpoint">
         <div className="parameters">Returns</div>
         <p>{p.childrenOpenApiSpecResponse[0].description}</p>
         </div>
+        {p.verb !== "delete" ? (
         <div className="request-endpoint">
           <div className="method-example-response-topbar">
             <div className="method-example-response-title">
@@ -115,6 +116,7 @@ const SpecPaths = ({ tag, paths }) => {
             </div>
           </div>
         </div>
+        ) : ( null )}
       </div>
       ) : ( null ) }
       </div>
