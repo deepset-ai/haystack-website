@@ -26,6 +26,14 @@
       "order": 1
     },
     {
+      "id": "use_casesmd",
+      "title": "Use Cases",
+      "label1": "overview",
+      "label2": "",
+      "label3": "",
+      "order": 1
+    },
+    {
       "id": "roadmapmd",
       "title": "Roadmap",
       "label1": "overview",
