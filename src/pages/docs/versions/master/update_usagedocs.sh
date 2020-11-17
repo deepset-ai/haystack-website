@@ -34,6 +34,15 @@ do
     if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/annotation.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
         wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/annotation.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/annotation.md
     fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/generator.md   2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/generator.md   -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/generator.md 
+    fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/optimization.md 2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/optimization.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/optimization.md
+    fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/use_cases.md 2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/usage/usage/use_cases.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/use_cases.md
+    fi
 
     sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/roadmap.md
     sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/roadmap.md 
@@ -69,5 +78,17 @@ do
     sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/get_started.md
     if [[ -f "./src/pages/docs/versions/master/${i}site/en/usage/usage/annotation.md" ]]; then
         echo -e "---\ntitle: \"Annotation Tool\"\nmetaTitle: \"Annotation Tool\"\nmetaDescription: \"\"\nslug: \"/docs/annotation\"\ndate: \"2020-09-03\"\nid: \"annotationmd\"\n---\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/usage/usage/annotation.md )" > ./src/pages/docs/versions/master/${i}site/en/usage/usage/annotation.md 
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/usage/usage/generator.md" ]]; then
+        sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/generator.md 
+        sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/generator.md
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/usage/usage/optimization.md" ]]; then
+        sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/optimization.md 
+        sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/optimization.md
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/usage/usage/use_cases.md" ]]; then
+        sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/use_cases.md 
+        sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/use_cases.md
     fi
 done

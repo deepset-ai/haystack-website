@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - update_documentation2
+      - more_documentation
     
 jobs:
   deploy:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: update_documentation2
+          ref: more_documentation
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
