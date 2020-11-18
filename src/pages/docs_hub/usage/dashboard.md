@@ -27,14 +27,14 @@ Haystack Hub provides statistics regarding your search. This helps to analyze th
 
 ### Number of Requests for the Last Month
 
-The section workspace statistics consists of 4 key figures which summarizes the most important numbers:
+The section workspace statistics consist of 4 key figures which summarizes the most important numbers:
 
 * **Number of files** which you uploaded to your workspace
 * **Number of docs** after preprocessing
 * **Average Response Time** of your requests 
 * **Number of Requests today** within your workspace
 
-These figures helps you to keep track of your workspace performance and subsription boundries.
+These figures help you to keep track of your workspace performance and subscription boundaries.
 
 ![image](../img/HaystackHub_workspacestatistics.png)
 

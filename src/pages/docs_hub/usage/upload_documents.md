@@ -9,11 +9,11 @@ id: "upload_documentsmd"
 
 # Upload Documents
 
-In Haystack Hub, the user can upload documents which he would like to search. If you click in the menu on the left **Documents** or on the dashboard **Go to Documents** in the **Getting Started** section, you will be redirected to the following page. This page will be empty if you enter it the first time. 
+In Haystack Hub, the user can upload documents which he would like to search. If you click **Documents** in the menu on the left or on the dashboard **Go to Documents** in the **Getting Started** section, you will be redirected to the following page. This page will be empty if you enter it the first time. 
 
 ![image](../img/HaystackHub_documentsempty.png)
 
-In order to start your search, you need to upload documents. You can start the workflow by clicking on **+ Upload files**. It will forward you to next view. You can drag and drop files here or open a new window to load them from you file system. Haystack Hub supports the **pdf** and **txt** formats.
+In order to start your search, you need to upload documents. You can start the workflow by clicking on **+ Upload files**. It will forward you to the next page. You can drag and drop files here or open a new window to load them from your file system. Haystack Hub supports the **pdf** and **txt** formats.
 
 ![image](../img/HaystackHub_documentsstep1.png)
 
@@ -55,7 +55,7 @@ On the right side of the preprocessing view you will find a preview in order to 
 
 ## Warnings
 
-You can configure one or multiple languages for your workspace ([more details](/docs_hub/conf_workspacemd#Workspace-Languages)). Haystack Hub will check for each file, if the language match to your configuration. For all files, which do not have these languages, Haystack Hub will show a warning. 
+You can configure one or multiple languages for your workspace ([more details](/docs_hub/conf_workspacemd#Workspace-Languages)). Haystack Hub will check for each file, if the language matches to your configuration. For all files, which do not have these languages, Haystack Hub will show a warning. 
 
 ![image](../img/HaystackHub_documentswarning.png)
 

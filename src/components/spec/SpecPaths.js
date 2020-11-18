@@ -8,10 +8,10 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import "../../scss/specs/_specpath.scss";
 
 const SpecPaths = ({ tag, paths }) => {
-
+  
   const [showChild, setShowChild] = useState(false);
 
-  function iterateJSON(jsonObject= {}) {
+  function IterateJSON(jsonObject= {}) {
     let type = "";
     let elementArray = null;
     let element = null;
@@ -23,7 +23,14 @@ const SpecPaths = ({ tag, paths }) => {
                         onMouseDown={(e) => { e.stopPropagation(); setShowChild(!showChild);}}>
                        <div className="child-button-div">Show child attributes{showChild? (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/></div>) : (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/></div>)}</div>
                      </button> 
-                     {showChild && ( <div className="child-element">{iterateJSON(jsonObject[prop]["items"]["properties"])}</div>)}</div>;
+                     {showChild && ( <div className="child-element">{IterateJSON(jsonObject[prop]["items"]["properties"])}</div>)}</div>;
+      } else if (type === "object" &&  jsonObject[prop]["properties"] !== undefined) {
+        elementArray = <div>
+                      <button className="child-button" onKeyDown={() => {setShowChild(!showChild);}}
+                        onMouseDown={(e) => { e.stopPropagation(); setShowChild(!showChild);}}>
+                       <div className="child-button-div">Show child attributes{showChild? (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/></div>) : (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/></div>)}</div>
+                     </button> 
+                     {showChild && ( <div className="child-element">{IterateJSON(jsonObject[prop]["properties"])}</div>)}</div>;
       }
       element = <div>{element}<div><span className="prop-name">{prop}</span> <span>{type}</span></div><div>{jsonObject[prop].description}</div><hr/>{elementArray}</div>;
       elementArray = null;
@@ -72,7 +79,7 @@ const SpecPaths = ({ tag, paths }) => {
       <div className="method-area">
         <div className="request-desc-endpoint">
           <div className="parameters">Attributes</div>
-          {iterateJSON(JSON.parse(p.exampleDef))}
+          {IterateJSON(JSON.parse(p.exampleDef))}
           </div>
         <div className="request-endpoint">
           <div className="method-example-response-topbar">
