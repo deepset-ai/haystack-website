@@ -109,28 +109,58 @@ function openApiAggregate(url, nodes = []) {
                 const definitionId = ref ? ref.replace('#/definitions/', '') : null
                 
                 let responseJSON = "";
+                let responseJSONObject = null;
                 if(ref) {
                   let res = ref.split("/");
+
+                  isArray = false;
                   
                   if(json[res[1]][res[2]][res[3]]["properties"] 
                     && json[res[1]][res[2]][res[3]]["properties"]["data"]
                     && json[res[1]][res[2]][res[3]]["properties"]["data"]["items"]["$ref"]) {
+
+                      if(json[res[1]][res[2]][res[3]]["properties"]["data"]["type"] === "array") {
+                        isArray = true;
+                      }
+
                       ref = json[res[1]][res[2]][res[3]]["properties"]["data"]["items"]["$ref"];
                       res = ref.split("/");
                     if(ref && json[res[1]][res[2]][res[3]]["example"] !== undefined) {
-                      responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]]["example"], undefined, 2);
+                      if(isArray) {
+                        responseJSONObject = {data: [json[res[1]][res[2]][res[3]]["example"]]};
+                        responseJSON = JSON.stringify(responseJSONObject, undefined, 2);
+                      } else  {
+                        responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]]["example"], undefined, 2);
+                      }
                     }  else if (ref) {
-                      responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2);
+                      if(isArray) {
+                        responseJSONObject = {data: [json[res[1]][res[2]][res[3]]]};
+                        responseJSON = JSON.stringify(responseJSONObject, undefined, 2);
+                      } else  {
+                        responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2);
+                      }
                     }
                   } else {
                     res = ref.split("/");
                     if (json[res[1]][res[2]][res[3]]["example"] !== undefined) {
-                      responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]]["example"], undefined, 2);
+                      if(isArray) {
+                        responseJSONObject = {data: [json[res[1]][res[2]][res[3]]["example"]]};
+                        responseJSON = JSON.stringify(responseJSONObject, undefined, 2);
+                      } else  {
+                        responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]]["example"], undefined, 2);
+                      }
                     } else {
-                      responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2);
+                      if(isArray) {
+                        responseJSONObject = {data: [json[res[1]][res[2]][res[3]]]};
+                        responseJSON = JSON.stringify(responseJSONObject, undefined, 2);
+                      } else  {
+                        responseJSON = JSON.stringify(json[res[1]][res[2]][res[3]], undefined, 2);
+                      }
                     }
                   }
                 }
+
+
                 return {
                 id: `${rootId}.path.${p}.verb.${v}.response.${r}`,
                 parent: `${rootId}.path.${p}.verb.${v}`,

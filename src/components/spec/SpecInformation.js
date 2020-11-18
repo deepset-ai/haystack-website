@@ -6,9 +6,9 @@ const SpecInformation = ({ title, version, description }) => (
   <div>
     <h1>{title}</h1>
 
-    <p>We also provide a Swagger UI: <a href="https://api.haystack-hub.com/docs" target="_blank" rel="noreferrer">
-        Haystack Hub REST API
-      </a></p>
+    <p>We also provide a <a href="https://api.haystack-hub.com/docs" target="_blank" rel="noreferrer">
+      Swagger UI 
+      </a>. Please feel free to check it out.</p>
 
     <h2>Errors</h2>
     <div className="method-area">
@@ -16,7 +16,7 @@ const SpecInformation = ({ title, version, description }) => (
           <p>Haystack Hub Rest API uses conventional HTTP response codes to indicate the success 
             or failure of an API request. In general: Codes in the 2xx range indicate 
             success. Codes in the 4xx range indicate an error that failed given the 
-            information provided. Codes in the 5xx range indicate an error with Haystack's servers.</p>
+            information provided. Codes in the 5xx range indicate an error with Haystack Hub's servers.</p>
           </div>
           <div className="request-endpoint">
           <div className="method-example-response-topbar">
@@ -61,7 +61,7 @@ const SpecInformation = ({ title, version, description }) => (
                   </tr>
                   <tr>
                     <td>500, 502, 503, 504 - Server Errors</td>
-                    <td>Something went wrong on Stripe's end. (These are rare.)</td>
+                    <td>Something went wrong on Haystack Hub's end.</td>
                   </tr>
                 </table>
             </div>
