@@ -230,7 +230,7 @@ const BenchMarks = ({data}) => {
                 loader={<div>Loading Chart</div>}
                 data={mapDataReader[selectedVersion]}
                 options={{
-                colors: ['#22BA99', '#FBB14B', '#49B0E4'],
+                colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
                 subTitle: subTitelReader[selectedVersion],
                 bars: barsReader[selectedVersion],
                 legend: "bottom"
@@ -284,7 +284,7 @@ const BenchMarks = ({data}) => {
                 data={mapDataMap[selectedVersion]}
                 options={{
                     subtitle: subTitleMap[selectedVersion],
-                    colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                    colors: ['#22BA99', '#FBB14B', '#63C7CA', '#49B0E4'],
                     hAxis: {
                       title: axisXMap[selectedVersion]
                     },
