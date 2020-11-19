@@ -18,6 +18,14 @@
       "order": 0
     },
     {
+      "id": "/docs_hub/signupmd",
+      "title": "Sign up for a Subscription",
+      "label1": "usage_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 0
+    },
+    {
       "id": "/docs_hub/conf_workspacemd",
       "title": "Configure Workspace",
       "label1": "usage_haystackhub",

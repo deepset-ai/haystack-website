@@ -9,9 +9,9 @@ id: "conf_workspacemd"
 
 # Configure Workspace
 
-Your organization has one workspace which needs to be configured before you can start to search.
+Your organization a one workspace which needs to be configured before you can start to search.
 
-![image](../img/HaystackHub_workspace.png)
+![image](../img/HaystackHub_workspace_.png)
 
 ## Workspace Languages
 

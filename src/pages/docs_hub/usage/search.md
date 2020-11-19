@@ -18,3 +18,9 @@ In order to search your question, enter it in the search bar and click **enter**
 The answer is always provided together with the context and is marked in bold. The title above the text is the file name in which the answer was found. You can download the file by clicking **Download the File**.
 
 ![image](../img/HaystackHub_search_1.png)
+
+## What’s next
+
+The Haystack Hub documentation describes how to configure the service so that you can easily start searching your documents. If you want to know what is happening under the hood, please check out the following resources:
+
+* [Haystack: Questions Answering at Scale](https://medium.com/deepset-ai/haystack-question-answering-at-scale-c2c980e7c657)

@@ -15,6 +15,8 @@ The Retriever is a lightweight filter that can quickly go through the full docum
 
 You can configure the Haystack Hub Retriever either by clicking on **Configuration** in the menu or by choosing **Configure Model** on the Dashboard. Currently, we are only supporting an **ElasticsearchRetriever**. In the future, you can switch between different retrievers by using the dropdown. For more information about the retriever click [here](/docs/latest/retrievermd#BM25-Recommended).
 
+The Top-K configures how many documents are returned per query.
+
 ![image](../img/HaystackHub_confretriever_1.png)
 
 ## Reader
@@ -29,3 +31,13 @@ The Reader, also known as Open-Domain QA systems in Machine Learning speak, is t
 You will find more details regarding the Reader [here](/docs/latest/readermd).
 
 ![image](../img/HaystackHub_confreader_1.png)
+
+## What’s next
+
+We explained in this section how to configure the Reader and Retriever in Haystack Hub. If you want to know more about the pro and cons as well as the functionality, we recommend the following docs:
+
+* [Retriever Usage](/docs/latest/retrievermd)
+* [Reader Usage](/docs/latest/readermd)
+* [XLM-RoBERTa](https://medium.com/deepset-ai/xlm-roberta-the-multilingual-alternative-for-non-english-nlp-cf0b889ccbbf)
+* [Benchmarking of different models](/bm/benchmarks)
+

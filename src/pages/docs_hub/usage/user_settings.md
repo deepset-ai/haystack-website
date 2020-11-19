@@ -15,7 +15,7 @@ The user can update and change his user settings. He can enter the menu by click
 * **Documentation**: The user will be forwarded to the [Haystack Hub website](https://haystack.deepset.ai/docs_hub/get_startedmd) where he can find the documentation for Haystack.
 * **Sign Out**: The user will be signed out from Haystack Hub and will be forwarded to the [login page](https://app.haystack-hub).
 
-![image](../img/HaystackHub_menuusersettings.png)
+![image](../img/HaystackHub_menuusersettings_.png)
 
 ## Personal Details
 
