@@ -9,7 +9,7 @@ module.exports = {
     keywords: ["haystack deepset","haystack question answering","haystack deep set",
               "deepset ai haystack","haystack qa","deepset haystack","deepset/roberta-base-squad2",
               "dense passage retrieval","haystack nlp", "dense passage retriever", "deepset ai",
-            "question answering", "neural search", "semantic search"],
+            "question answering open source", "neural search open source", "semantic search open source"],
   },
   plugins: [
     'gatsby-plugin-cname',
