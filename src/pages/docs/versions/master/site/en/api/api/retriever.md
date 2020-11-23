@@ -10,10 +10,10 @@ id: "apiretrievermd"
 # Retriever
 
 <a name="sparse"></a>
-# sparse
+# Module sparse
 
 <a name="sparse.ElasticsearchRetriever"></a>
-## ElasticsearchRetriever
+## ElasticsearchRetriever Objects
 
 ```python
 class ElasticsearchRetriever(BaseRetriever)
@@ -63,7 +63,7 @@ self.retrieve(query="Why did the revenue increase?",
 ```
 
 <a name="sparse.ElasticsearchFilterOnlyRetriever"></a>
-## ElasticsearchFilterOnlyRetriever
+## ElasticsearchFilterOnlyRetriever Objects
 
 ```python
 class ElasticsearchFilterOnlyRetriever(ElasticsearchRetriever)
@@ -73,7 +73,7 @@ Naive "Retriever" that returns all documents that match the given filters. No im
 Helpful for benchmarking, testing and if you want to do QA on small documents without an "active" retriever.
 
 <a name="sparse.TfidfRetriever"></a>
-## TfidfRetriever
+## TfidfRetriever Objects
 
 ```python
 class TfidfRetriever(BaseRetriever)
@@ -87,10 +87,10 @@ computations when text is passed on to a Reader for QA.
 It uses sklearn's TfidfVectorizer to compute a tf-idf matrix.
 
 <a name="dense"></a>
-# dense
+# Module dense
 
 <a name="dense.DensePassageRetriever"></a>
-## DensePassageRetriever
+## DensePassageRetriever Objects
 
 ```python
 class DensePassageRetriever(BaseRetriever)
@@ -212,7 +212,7 @@ train a DensePassageRetrieval model
 - `passage_encoder_save_dir`: directory inside save_dir where passage_encoder model files are saved
 
 <a name="dense.EmbeddingRetriever"></a>
-## EmbeddingRetriever
+## EmbeddingRetriever Objects
 
 ```python
 class EmbeddingRetriever(BaseRetriever)
@@ -297,10 +297,10 @@ Create embeddings for a list of passages. For this Retriever type: The same as c
 Embeddings, one per input passage
 
 <a name="base"></a>
-# base
+# Module base
 
 <a name="base.BaseRetriever"></a>
-## BaseRetriever
+## BaseRetriever Objects
 
 ```python
 class BaseRetriever(ABC)
@@ -341,7 +341,10 @@ position in the ranking of documents the correct document is.
 - "mrr": Mean of reciprocal rank. Rewards retrievers that give relevant documents a higher rank.
 Only considers the highest ranked relevant document.
 - "map": Mean of average precision for each question. Rewards retrievers that give relevant
-documents a higher rank. Considers all retrieved relevant documents. (only with ``open_domain=False``)
+documents a higher rank. Considers all retrieved relevant documents. If ``open_domain=True``,
+average precision is normalized by the number of retrieved relevant documents per query.
+If ``open_domain=False``, average precision is normalized by the number of all relevant documents
+per query.
 
 **Arguments**:
 

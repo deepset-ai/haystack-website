@@ -22,7 +22,9 @@ export default (props) => {
     isBenchMark = false,
     showDoc = true,
   } = props;
-  const formatHeadings =
+  let formatHeadings = null;
+  console.log(headings);
+  formatHeadings =
     headings &&
     headings.reduce((pre, cur) => {
       const copyCur = JSON.parse(JSON.stringify(cur));
@@ -39,6 +41,7 @@ export default (props) => {
         pre[pre.length-1].children[pre[pre.length-1].children.length-1].children = [];
       } else if (preHead && preHead.depth < cur.depth) {
         pre[pre.length - 1].children.push(cur);
+        pre[pre.length - 1].children[pre[pre.length-1].children.length-1].children = [];
       } else {
         copyCur.children = [];
         pre = [...pre, copyCur];
@@ -109,17 +112,26 @@ export default (props) => {
     });
   }, []);
 
-  const generateAnchorMenu = (headings, className) => {
-    console.log(headings);
+  const generateAnchorMenu = (headings, className, anchors = []) => {
     return headings.map((v) => {
       /* eslint-disable-next-line */
       const normalVal = v.value.replace(/[.｜,｜\/｜\'｜\?｜？｜、|，|\(|\)|:|&|!]/g, "");
-      const anchor = normalVal.split(" ").join("-");
-      console.log(anchor);
-      let childDom = null;
-      if (v.children && v.children.length) {
-        childDom = generateAnchorMenu(v.children, "child-item");
+      let anchor = normalVal.split(" ").join("-");
+      if (anchors.includes(anchor)) {
+        let filteredAnchors = anchors.filter(element => element === anchor);
+        anchor = `${anchor}-${filteredAnchors.length}`
+        anchors.push(anchor);
+      } else {
+        anchors.push(anchor);
       }
+      let childDom = null;
+      let childchildDom = null;
+      if (v.children && v.children.length && v.children[0].depth === 2) {
+        childDom = generateAnchorMenu(v.children, "child-item", anchors);
+      } else if (v.children && v.children.length && v.children[0].depth === 4) {
+        childchildDom = generateAnchorMenu(v.children, "child-child-item", anchors);
+      }
+      console.log(childchildDom);
       return (
         <div className={`item ${className}`} key={v.value}>
           <a
@@ -131,6 +143,7 @@ export default (props) => {
             {v.value}
           </a>
           {childDom}
+          {childchildDom}
         </div>
       );
     });
@@ -161,6 +174,8 @@ export default (props) => {
       behavior: "smooth",
     });
   };
+
+  console.log(formatHeadings);
 
   return (
     <div>
