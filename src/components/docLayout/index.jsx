@@ -27,7 +27,17 @@ export default (props) => {
     headings.reduce((pre, cur) => {
       const copyCur = JSON.parse(JSON.stringify(cur));
       const preHead = pre[pre.length - 1];
-      if (preHead && preHead.depth < cur.depth) {
+      if (preHead && preHead.depth < cur.depth 
+        && pre[pre.length-1].children
+        && pre[pre.length-1].children.length > 0
+        && pre[pre.length-1].children[pre[pre.length-1].children.length-1].children !== undefined) {
+          pre[pre.length - 1].children[pre[pre.length - 1].children.length-1].children.push(cur);
+      } else if (pre.length > 0 
+        && pre[pre.length-1].children
+        && pre[pre.length-1].children.length > 0
+      && pre[pre.length-1].children[pre[pre.length-1].children.length-1].depth <  cur.depth) {
+        pre[pre.length-1].children[pre[pre.length-1].children.length-1].children = [];
+      } else if (preHead && preHead.depth < cur.depth) {
         pre[pre.length - 1].children.push(cur);
       } else {
         copyCur.children = [];
@@ -100,10 +110,12 @@ export default (props) => {
   }, []);
 
   const generateAnchorMenu = (headings, className) => {
+    console.log(headings);
     return headings.map((v) => {
       /* eslint-disable-next-line */
       const normalVal = v.value.replace(/[.｜,｜\/｜\'｜\?｜？｜、|，|\(|\)|:|&|!]/g, "");
       const anchor = normalVal.split(" ").join("-");
+      console.log(anchor);
       let childDom = null;
       if (v.children && v.children.length) {
         childDom = generateAnchorMenu(v.children, "child-item");
