@@ -22,6 +22,7 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname  }) {
             titleTemplate
             twitterUsername
             siteUrl
+            keywords
           }
         }
       }
@@ -56,6 +57,10 @@ function SEO({ description, lang, meta, image: metaImage, title, pathname  }) {
         {
           name: `description`,
           content: metaDescription,
+        },
+        {
+          name: "keywords",
+          content: site.siteMetadata.keywords.join(","),
         },
         {
           property: `og:title`,

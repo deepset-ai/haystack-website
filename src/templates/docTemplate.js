@@ -362,7 +362,6 @@ export const pageQuery = graphql`
         parameters {
           name
           in
-          description
           required
           schema {
             example
