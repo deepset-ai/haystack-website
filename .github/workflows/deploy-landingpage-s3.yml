@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - remove_column
+      - clean_api_docs
     
 jobs:
   deploy:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: remove_column
+          ref: clean_api_docs
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:

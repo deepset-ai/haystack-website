@@ -22,13 +22,26 @@ export default (props) => {
     isBenchMark = false,
     showDoc = true,
   } = props;
-  const formatHeadings =
+  let formatHeadings = null;
+
+  formatHeadings =
     headings &&
     headings.reduce((pre, cur) => {
       const copyCur = JSON.parse(JSON.stringify(cur));
       const preHead = pre[pre.length - 1];
-      if (preHead && preHead.depth < cur.depth) {
+      if (preHead && preHead.depth < cur.depth 
+        && pre[pre.length-1].children
+        && pre[pre.length-1].children.length > 0
+        && pre[pre.length-1].children[pre[pre.length-1].children.length-1].children !== undefined) {
+          pre[pre.length - 1].children[pre[pre.length - 1].children.length-1].children.push(cur);
+      } else if (pre.length > 0 
+        && pre[pre.length-1].children
+        && pre[pre.length-1].children.length > 0
+      && pre[pre.length-1].children[pre[pre.length-1].children.length-1].depth <  cur.depth) {
+        pre[pre.length-1].children[pre[pre.length-1].children.length-1].children = [];
+      } else if (preHead && preHead.depth < cur.depth) {
         pre[pre.length - 1].children.push(cur);
+        pre[pre.length - 1].children[pre[pre.length-1].children.length-1].children = [];
       } else {
         copyCur.children = [];
         pre = [...pre, copyCur];
@@ -99,15 +112,26 @@ export default (props) => {
     });
   }, []);
 
-  const generateAnchorMenu = (headings, className) => {
+  const generateAnchorMenu = (headings, className, anchors = []) => {
     return headings.map((v) => {
       /* eslint-disable-next-line */
-      const normalVal = v.value.replace(/[.｜,｜\/｜\'｜\?｜？｜、|，|\(|\)|:|&|!]/g, "");
-      const anchor = normalVal.split(" ").join("-");
-      let childDom = null;
-      if (v.children && v.children.length) {
-        childDom = generateAnchorMenu(v.children, "child-item");
+      const normalVal = v.value.replace(/[.｜,｜\/｜\'｜\?｜？｜、|，|\(|\)|:|&|!|;|:]/g, "");
+      let anchor = normalVal.split(" ").join("-");
+      if (anchors.includes(anchor)) {
+        let filteredAnchors = anchors.filter(element => element === anchor);
+        anchor = `${anchor}-${filteredAnchors.length}`
+        anchors.push(anchor);
+      } else {
+        anchors.push(anchor);
       }
+      let childDom = null;
+      let childchildDom = null;
+      if (v.children && v.children.length && v.children[0].depth === 2) {
+        childDom = generateAnchorMenu(v.children, "child-item", anchors);
+      } else if (v.children && v.children.length && v.children[0].depth === 4) {
+        childchildDom = generateAnchorMenu(v.children, "child-child-item", anchors);
+      }
+      
       return (
         <div className={`item ${className}`} key={v.value}>
           <a
@@ -119,6 +143,7 @@ export default (props) => {
             {v.value}
           </a>
           {childDom}
+          {childchildDom}
         </div>
       );
     });
