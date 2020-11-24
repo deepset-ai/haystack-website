@@ -39,7 +39,7 @@ const SpecPaths = ({ tag, paths }) => {
   }
 
   return (<div>
-    <h2 id={tag}>{tag}</h2>
+    {tag !== "Auth" && (<h2 id={tag}>{tag}</h2>)}
     {paths.map(p => (
       <div>
       <h3>{p.summary}</h3>
