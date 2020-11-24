@@ -536,6 +536,15 @@
     padding-right: 80px;
   }
 
+  h1:after {
+    content: ""; /* This is necessary for the pseudo element to work. */ 
+    display: block; /* This will put the pseudo element on its own line. */
+    margin: 0 0; /* This will center the border. */
+    width: 20%; /* Change this to whatever width you want. */
+    padding-top: 20px; /* This creates some space between the element and the border. */
+    border-bottom: 4px solid #009BAA; /* This creates the border. Replace black with whatever color you want. */
+}
+
   h2 {
     color: var(--color-primary);
     // border-bottom: 1px solid var(--color-gray);
@@ -1156,4 +1165,16 @@
   z-index: 1 !important;
   line-height: 1.5em;
   text-align: justify;
+}
+.recommendation {
+  border-left: 10px solid #FBB14B;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 8px;
+  background: #fcefdd;
+  h4 {
+    margin: 10px 0px 20px 5px;
+  }
 }
