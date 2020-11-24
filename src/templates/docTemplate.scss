@@ -765,7 +765,7 @@
   }
 
   li {
-    margin-bottom: calc(1.45rem / 2);
+    margin-bottom: calc(1.3rem / 2);
 
     &:lang(en) {
       line-height: 1.5;
@@ -786,13 +786,13 @@
 
   li > ol {
     margin-left: 1.45rem;
-    margin-bottom: calc(1.45rem / 2);
-    margin-top: calc(1.45rem / 2);
+    margin-bottom: calc(1.3rem / 2);
+    margin-top: calc(1.3rem / 2);
   }
 
   li > ul {
     margin-left: 1.45rem;
-    margin-bottom: calc(1.45rem / 2);
+    margin-bottom: calc(1.3rem / 2);
     margin-top: calc(1.45rem / 2);
   }
 
@@ -809,7 +809,7 @@
   }
 
   li > p {
-    margin-bottom: calc(1.45rem / 2);
+    margin-bottom: calc(1.3rem / 2);
   }
 
   code {
@@ -1109,6 +1109,11 @@
   right: 0;
   bottom: 0;
   padding: 20px;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+  border-left: 1px solid #999;
+  border-radius: 4px;
 }
 .tabcontentinner {
   position: absolute;
@@ -1118,6 +1123,14 @@
   right: 0;
   bottom: 0;
   padding: 20px;
+}
+.labelouter {
+  background: white;
+  border-top: 1px solid #999;
+  border-right: 1px solid #999;
+  border-left: 1px solid #999;
+  border-radius: 4px;
+  z-index: 5;
 }
 [type=radio]:checked ~ .labelouter {
   background: white;
