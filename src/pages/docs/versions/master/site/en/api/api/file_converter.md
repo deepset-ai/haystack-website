@@ -10,10 +10,10 @@ id: "file_convertersmd"
 # File Converters
 
 <a name="txt"></a>
-# Module; txt
+# Module: txt
 
 <a name="txt.TextConverter"></a>
-## Class; TextConverter
+## Class: TextConverter
 
 ```python
 class TextConverter(BaseConverter)
@@ -59,10 +59,10 @@ Reads text from a txt file and executes optional preprocessing steps.
 Dict of format {"text": "The text from file", "meta": meta}}
 
 <a name="docx"></a>
-# Module; docx
+# Module: docx
 
 <a name="docx.DocxToTextConverter"></a>
-## Class; DocxToTextConverter
+## Class: DocxToTextConverter
 
 ```python
 class DocxToTextConverter(BaseConverter)
@@ -84,10 +84,10 @@ For compliance with other converters we nevertheless opted for keeping the metho
 - `file_path`: Path to the .docx file you want to convert
 
 <a name="tika"></a>
-# Module; tika
+# Module: tika
 
 <a name="tika.TikaConverter"></a>
-## Class; TikaConverter
+## Class: TikaConverter
 
 ```python
 class TikaConverter(BaseConverter)
@@ -130,10 +130,10 @@ in garbled text.
 a list of pages and the extracted meta data of the file.
 
 <a name="base"></a>
-# Module; base
+# Module: base
 
 <a name="base.BaseConverter"></a>
-## Class; BaseConverter
+## Class: BaseConverter
 
 ```python
 class BaseConverter()
@@ -189,10 +189,10 @@ supplied meta data like author, url, external IDs can be supplied as a dictionar
 Validate if the language of the text is one of valid languages.
 
 <a name="pdf"></a>
-# Module; pdf
+# Module: pdf
 
 <a name="pdf.PDFToTextConverter"></a>
-## Class; PDFToTextConverter
+## Class: PDFToTextConverter
 
 ```python
 class PDFToTextConverter(BaseConverter)
