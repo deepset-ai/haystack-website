@@ -9,17 +9,17 @@ id: "user_settingsmd"
 
 # User Settings
 
-The user can update and change his user settings. He can enter the menu by clicking on his name on the top right. This will open a dropdown with different options. The first three options are going to be described in the following sections. Furthermore, he can choose between the following options:
+The user can update and change the user settings. The menu can be entered by clicking on the user's name on the top right. This will open a dropdown with different options. The first three options are going to be described in the following sections. Furthermore, the following options can be chosen:
 
 * **Contact Us**: The user will be forwarded to a [contact formular](https://haystack.deepset.ai/contact/contact). If you have any questions regarding Haystack, feel free to contact our support team there.
-* **Documentation**: The user will be forwarded to the [Haystack Hub website](https://haystack.deepset.ai/docs_hub/get_startedmd) where he can find the documentation for Haystack.
+* **Documentation**: The user will be forwarded to the [Haystack Hub website](https://haystack.deepset.ai/docs_hub/get_startedmd) where the documentation for Haystack can be found.
 * **Sign Out**: The user will be signed out from Haystack Hub and will be forwarded to the [login page](https://app.haystack-hub).
 
 ![image](../img/HaystackHub_menuusersettings_.png)
 
 ## Personal Details
 
-The user can change his personal details like **First Name**, **Last name** and **Password**. The role of the user is shown, but cannot be changed. This can only be done by the admin in the **Organization** tab. 
+The user can change the personal details like **First Name**, **Last name** and **Password**. The role of the user is shown, but cannot be changed. This can only be done by the admin in the **Organization** tab. 
 
 ![image](../img/HaystackHub_personaldetails.png)
 

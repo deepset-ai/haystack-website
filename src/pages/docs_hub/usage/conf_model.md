@@ -21,11 +21,11 @@ The Top-K configures how many documents are returned per query.
 
 ## Reader
 
-The Reader, also known as Open-Domain QA systems in Machine Learning speak, is the core component that enables Haystack to find the answers that you need. Haystack Hub only supports the **FarmReader** at the moment and two QA models [**deepset/roberta-base-squad2**](https://huggingface.co/deepset/roberta-base-squad2) [**deepset/ert-base-cased-squad2**](https://huggingface.co/deepset/bert-base-cased-squad2). You can switch between the models by using the dropdown. Furthermore, you can fine tune your Reader with the following options:
+The Reader, also known as Open-Domain QA systems in Machine Learning speak, is the core component that enables Haystack to find the answers that you need. Haystack Hub only supports the **FarmReader** at the moment and two QA models [**deepset/roberta-base-squad2**](https://huggingface.co/deepset/roberta-base-squad2) [**deepset/bert-base-cased-squad2**](https://huggingface.co/deepset/bert-base-cased-squad2). You can switch between the models by using the dropdown. Furthermore, you can fine tune your Reader with the following options:
 
-* **No answer boost**: How much the noanswer logit is boosted/increased. If set to None (default), disables returning "no answer" predictions. If a negative number, there is a lower chance of "noanswer" being predicted. If a positive number, there is an increased chance of "no_answer"
-* **Default Top-K**: How many answers to extract for each candidate doc that is coming from the retrieve.
-* **Doc Stride**: Length of striding window for splitting long texts (used if len(text) > max_seq_len.
+* **No answer boost**: How much the noanswer logit is boosted/increased. If set to None (default), disables returning "no answer" predictions. If a negative number, there is a lower chance of "no answer" being predicted. If a positive number, there is an increased chance of "no answer"
+* **Default Top-K**: How many answers to extract for each candidate doc that is coming from the retriever.
+* **Doc Stride**: Length of striding window for splitting long texts (used if len(text) > max_seq_len).
 * **Max sequence length**: Max sequence length of one input text for the model.
 
 You will find more details regarding the Reader [here](/docs/latest/readermd).

@@ -254,9 +254,12 @@ export default function Template({
                 title={api.title}
                 version={api.version}
                 description={api.description}
+                pathGroups={pathGroups}
               />
               {Object.keys(pathGroups).map(t => (
-                <SpecPaths key={t} tag={t} paths={pathGroups[t]} />
+                <div>
+                  {t !== "Auth" && (<SpecPaths key={t} tag={t} paths={pathGroups[t]} />)}
+                </div>
               ))}
             </div>
             ) : (

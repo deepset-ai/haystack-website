@@ -9,7 +9,7 @@ id: "upload_documentsmd"
 
 # Upload Documents
 
-In Haystack Hub, the user can upload documents which he would like to search. If you click **Documents** in the menu on the left or on the dashboard **Go to Documents** in the **Getting Started** section, you will be redirected to the following page. This page will be empty if you enter it the first time. 
+In Haystack Hub, the user can upload documents which they would like to search. If you click **Documents** in the menu on the left or on the dashboard **Go to Documents** in the **Getting Started** section, you will be redirected to the following page. This page will be empty if you enter it the first time. 
 
 ![image](../img/HaystackHub_documentsempty_.png)
 

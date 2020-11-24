@@ -9,7 +9,7 @@ id: "conf_workspacemd"
 
 # Configure Workspace
 
-Your organization a one workspace which needs to be configured before you can start to search.
+Haystack Hub comes with a default configuration for your workspace. If you want to change it, please follow the following steps.
 
 ![image](../img/HaystackHub_workspace_.png)
 

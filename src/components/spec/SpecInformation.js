@@ -2,13 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import "../../scss/specs/_specinformation.scss";
 
-const SpecInformation = ({ title, version, description }) => (
+import SpecPaths from './SpecPaths'
+
+const SpecInformation = ({ title, version, description, pathGroups }) => (
   <div>
     <h1>{title}</h1>
 
     <p>We also provide a <a href="https://api.haystack-hub.com/docs" target="_blank" rel="noreferrer">
       Swagger UI 
       </a>. Please feel free to check it out.</p>
+
+    <h2>API Reference</h2>
+    <p>The Haystack Hub API is organized around REST. Our API has predictable resource-oriented URLs, 
+      accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP 
+      response codes, authentication, and verbs.</p>
+
+    <h2>Authentication</h2>
+    <SpecPaths key="Auth" tag="Auth" paths={pathGroups["Auth"]} />
 
     <h2>Errors</h2>
     <div className="method-area">

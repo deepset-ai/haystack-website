@@ -40,6 +40,6 @@ These figures help you to keep track of your workspace performance and subscript
 
 ### Latest Requests
 
-The table **Latest Requests** shows the last 5 requests within your workspace. This way, the user has an overview about the workspace search history. He can come back to former requests.
+The table **Latest Requests** shows the last 5 requests within your workspace. This way, the user has an overview about the workspace search history and can come back to former requests.
 
 ![image](../img/HaystackHub_latestrequests.png)
