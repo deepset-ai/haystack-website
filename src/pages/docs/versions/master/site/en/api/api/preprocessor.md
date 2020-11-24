@@ -10,10 +10,10 @@ id: "apiindexingmd"
 # Preprocessor
 
 <a name="preprocessor"></a>
-# Module preprocessor
+# Module; preprocessor
 
 <a name="preprocessor.PreProcessor"></a>
-## PreProcessor Objects
+## Class; PreProcessor
 
 ```python
 class PreProcessor(BasePreProcessor)
@@ -46,10 +46,10 @@ to True, the individual split will always have complete sentences &
 the number of words will be <= split_length.
 
 <a name="cleaning"></a>
-# Module cleaning
+# Module; cleaning
 
 <a name="utils"></a>
-# Module utils
+# Module; utils
 
 <a name="utils.eval_data_from_file"></a>
 #### eval\_data\_from\_file
@@ -135,4 +135,4 @@ Fetch an archive (zip or tar.gz) from a url via http and extract content to an o
 bool if anything got fetched
 
 <a name="base"></a>
-# Module base
+# Module; base

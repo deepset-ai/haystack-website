@@ -10,10 +10,10 @@ id: "apireadermd"
 # Reader
 
 <a name="farm"></a>
-# Module farm
+# Module; farm
 
 <a name="farm.FARMReader"></a>
-## FARMReader Objects
+## Class; FARMReader
 
 ```python
 class FARMReader(BaseReader)
@@ -290,10 +290,10 @@ float32 could still be be more performant.
 - `opset_version`: ONNX opset version
 
 <a name="transformers"></a>
-# Module transformers
+# Module; transformers
 
 <a name="transformers.TransformersReader"></a>
-## TransformersReader Objects
+## Class; TransformersReader
 
 ```python
 class TransformersReader(BaseReader)
@@ -379,4 +379,4 @@ Example:
 Dict containing question and answers
 
 <a name="base"></a>
-# Module base
+# Module; base

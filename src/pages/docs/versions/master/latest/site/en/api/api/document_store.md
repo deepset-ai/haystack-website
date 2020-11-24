@@ -10,10 +10,10 @@ id: "apidatabasemd"
 # Document Store
 
 <a name="elasticsearch"></a>
-# Module elasticsearch
+# Module; elasticsearch
 
 <a name="elasticsearch.ElasticsearchDocumentStore"></a>
-## ElasticsearchDocumentStore Objects
+## Class; ElasticsearchDocumentStore
 
 ```python
 class ElasticsearchDocumentStore(BaseDocumentStore)
@@ -156,10 +156,10 @@ Delete documents in an index. All documents are deleted if no filters are passed
 None
 
 <a name="memory"></a>
-# Module memory
+# Module; memory
 
 <a name="memory.InMemoryDocumentStore"></a>
-## InMemoryDocumentStore Objects
+## Class; InMemoryDocumentStore
 
 ```python
 class InMemoryDocumentStore(BaseDocumentStore)
@@ -247,10 +247,10 @@ Delete documents in an index. All documents are deleted if no filters are passed
 None
 
 <a name="sql"></a>
-# Module sql
+# Module; sql
 
 <a name="sql.SQLDocumentStore"></a>
-## SQLDocumentStore Objects
+## Class; SQLDocumentStore
 
 ```python
 class SQLDocumentStore(BaseDocumentStore)
@@ -348,10 +348,10 @@ Delete documents in an index. All documents are deleted if no filters are passed
 None
 
 <a name="base"></a>
-# Module base
+# Module; base
 
 <a name="base.BaseDocumentStore"></a>
-## BaseDocumentStore Objects
+## Class; BaseDocumentStore
 
 ```python
 class BaseDocumentStore(ABC)
@@ -384,10 +384,10 @@ If None, the DocumentStore's default index (self.index) will be used.
 None
 
 <a name="faiss"></a>
-# Module faiss
+# Module; faiss
 
 <a name="faiss.FAISSDocumentStore"></a>
-## FAISSDocumentStore Objects
+## Class; FAISSDocumentStore
 
 ```python
 class FAISSDocumentStore(SQLDocumentStore)
@@ -556,6 +556,3 @@ make sure to use the same SQL DB that you used when calling `save()`.
 smaller chunks to reduce memory footprint.
 
 **Returns**:
-
-
-

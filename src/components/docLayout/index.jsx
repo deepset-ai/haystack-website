@@ -23,7 +23,7 @@ export default (props) => {
     showDoc = true,
   } = props;
   let formatHeadings = null;
-  console.log(headings);
+
   formatHeadings =
     headings &&
     headings.reduce((pre, cur) => {
@@ -115,7 +115,7 @@ export default (props) => {
   const generateAnchorMenu = (headings, className, anchors = []) => {
     return headings.map((v) => {
       /* eslint-disable-next-line */
-      const normalVal = v.value.replace(/[.｜,｜\/｜\'｜\?｜？｜、|，|\(|\)|:|&|!]/g, "");
+      const normalVal = v.value.replace(/[.｜,｜\/｜\'｜\?｜？｜、|，|\(|\)|:|&|!|;]/g, "");
       let anchor = normalVal.split(" ").join("-");
       if (anchors.includes(anchor)) {
         let filteredAnchors = anchors.filter(element => element === anchor);
@@ -131,7 +131,7 @@ export default (props) => {
       } else if (v.children && v.children.length && v.children[0].depth === 4) {
         childchildDom = generateAnchorMenu(v.children, "child-child-item", anchors);
       }
-      console.log(childchildDom);
+      
       return (
         <div className={`item ${className}`} key={v.value}>
           <a
@@ -174,8 +174,6 @@ export default (props) => {
       behavior: "smooth",
     });
   };
-
-  console.log(formatHeadings);
 
   return (
     <div>

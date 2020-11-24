@@ -10,10 +10,10 @@ id: "apiretrievermd"
 # Retriever
 
 <a name="sparse"></a>
-# Module sparse
+# Module; sparse
 
 <a name="sparse.ElasticsearchRetriever"></a>
-## ElasticsearchRetriever Objects
+## Class; ElasticsearchRetriever
 
 ```python
 class ElasticsearchRetriever(BaseRetriever)
@@ -63,7 +63,7 @@ self.retrieve(query="Why did the revenue increase?",
 ```
 
 <a name="sparse.ElasticsearchFilterOnlyRetriever"></a>
-## ElasticsearchFilterOnlyRetriever Objects
+## Class; ElasticsearchFilterOnlyRetriever
 
 ```python
 class ElasticsearchFilterOnlyRetriever(ElasticsearchRetriever)
@@ -73,7 +73,7 @@ Naive "Retriever" that returns all documents that match the given filters. No im
 Helpful for benchmarking, testing and if you want to do QA on small documents without an "active" retriever.
 
 <a name="sparse.TfidfRetriever"></a>
-## TfidfRetriever Objects
+## Class; TfidfRetriever
 
 ```python
 class TfidfRetriever(BaseRetriever)
@@ -87,10 +87,10 @@ computations when text is passed on to a Reader for QA.
 It uses sklearn's TfidfVectorizer to compute a tf-idf matrix.
 
 <a name="dense"></a>
-# Module dense
+# Module; dense
 
 <a name="dense.DensePassageRetriever"></a>
-## DensePassageRetriever Objects
+## Class; DensePassageRetriever
 
 ```python
 class DensePassageRetriever(BaseRetriever)
@@ -212,7 +212,7 @@ train a DensePassageRetrieval model
 - `passage_encoder_save_dir`: directory inside save_dir where passage_encoder model files are saved
 
 <a name="dense.EmbeddingRetriever"></a>
-## EmbeddingRetriever Objects
+## Class; EmbeddingRetriever
 
 ```python
 class EmbeddingRetriever(BaseRetriever)
@@ -297,10 +297,10 @@ Create embeddings for a list of passages. For this Retriever type: The same as c
 Embeddings, one per input passage
 
 <a name="base"></a>
-# Module base
+# Module; base
 
 <a name="base.BaseRetriever"></a>
-## BaseRetriever Objects
+## Class; BaseRetriever
 
 ```python
 class BaseRetriever(ABC)
