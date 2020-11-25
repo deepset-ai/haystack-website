@@ -1,19 +1,11 @@
----
-title: "Reader"
-metaTitle: "Reader"
-metaDescription: ""
-slug: "/docs/apireadermd"
-date: "2020-09-03"
-id: "apireadermd"
----
-
-# Reader
+<a name="base"></a>
+# Module base
 
 <a name="farm"></a>
-# Module: farm
+# Module farm
 
 <a name="farm.FARMReader"></a>
-## Class: FARMReader
+## FARMReader Objects
 
 ```python
 class FARMReader(BaseReader)
@@ -157,20 +149,21 @@ Use loaded QA model to find answers for a question in the supplied list of Docum
 
 Returns dictionaries containing answers sorted by (desc.) probability.
 Example:
-
-{'question': 'Who is the father of Arya Stark?',
-'answers': [
-{'answer': 'Eddard,',
-'context': " She travels with her father, Eddard, to King's Landing when he is ",
-'offset_answer_start': 147,
-'offset_answer_end': 154,
-'probability': 0.9787139466668613,
-'score': None,
-'document_id': '1337'
-},
-...
-]
-}
+```python
+|{
+|    'question': 'Who is the father of Arya Stark?',
+|    'answers':[
+|                 {'answer': 'Eddard,',
+|                 'context': " She travels with her father, Eddard, to King's Landing when he is ",
+|                 'offset_answer_start': 147,
+|                 'offset_answer_end': 154,
+|                 'probability': 0.9787139466668613,
+|                 'score': None,
+|                 'document_id': '1337'
+|                 },...
+|              ]
+|}
+```
 
 **Arguments**:
 
@@ -234,20 +227,21 @@ Returns a dict containing the following metrics:
 Use loaded QA model to find answers for a question in the supplied list of Document.
 Returns dictionaries containing answers sorted by (desc.) probability.
 Example:
-
-{
-'question': 'Who is the father of Arya Stark?',
-'answers':[
-{'answer': 'Eddard,',
-'context': " She travels with her father, Eddard, to King's Landing when he is ",
-'offset_answer_start': 147,
-'offset_answer_end': 154,
-'probability': 0.9787139466668613,
-'score': None,
-'document_id': '1337'
-},...
-]
-}
+```python
+|{
+|    'question': 'Who is the father of Arya Stark?',
+|    'answers':[
+|                 {'answer': 'Eddard,',
+|                 'context': " She travels with her father, Eddard, to King's Landing when he is ",
+|                 'offset_answer_start': 147,
+|                 'offset_answer_end': 154,
+|                 'probability': 0.9787139466668613,
+|                 'score': None,
+|                 'document_id': '1337'
+|                 },...
+|              ]
+|}
+```
 
 **Arguments**:
 
@@ -290,10 +284,10 @@ float32 could still be be more performant.
 - `opset_version`: ONNX opset version
 
 <a name="transformers"></a>
-# Module: transformers
+# Module transformers
 
 <a name="transformers.TransformersReader"></a>
-## Class: TransformersReader
+## TransformersReader Objects
 
 ```python
 class TransformersReader(BaseReader)
@@ -302,10 +296,7 @@ class TransformersReader(BaseReader)
 Transformer based model for extractive Question Answering using the HuggingFace's transformers framework
 (https://github.com/huggingface/transformers).
 While the underlying model can vary (BERT, Roberta, DistilBERT ...), the interface remains the same.
-
-|  With the reader, you can:
-
-    - directly get predictions via predict()
+With this reader, you can directly get predictions via predict()
 
 <a name="transformers.TransformersReader.__init__"></a>
 #### \_\_init\_\_
@@ -354,19 +345,21 @@ Use loaded QA model to find answers for a question in the supplied list of Docum
 Returns dictionaries containing answers sorted by (desc.) probability.
 Example:
 
-{'question': 'Who is the father of Arya Stark?',
-'answers': [
-{'answer': 'Eddard,',
-'context': " She travels with her father, Eddard, to King's Landing when he is ",
-'offset_answer_start': 147,
-'offset_answer_end': 154,
-'probability': 0.9787139466668613,
-'score': None,
-'document_id': '1337'
-},
-...
-]
-}
+```python
+|{
+|    'question': 'Who is the father of Arya Stark?',
+|    'answers':[
+|                 {'answer': 'Eddard,',
+|                 'context': " She travels with her father, Eddard, to King's Landing when he is ",
+|                 'offset_answer_start': 147,
+|                 'offset_answer_end': 154,
+|                 'probability': 0.9787139466668613,
+|                 'score': None,
+|                 'document_id': '1337'
+|                 },...
+|              ]
+|}
+```
 
 **Arguments**:
 
@@ -378,5 +371,3 @@ Example:
 
 Dict containing question and answers
 
-<a name="base"></a>
-# Module: base

@@ -1,25 +1,14 @@
----
-title: "File Converters"
-metaTitle: "File Converters"
-metaDescription: ""
-slug: "/docs/file_converters"
-date: "2020-09-03"
-id: "file_convertersmd"
----
+<a name="pdf"></a>
+# Module pdf
 
-# File Converters
-
-<a name="txt"></a>
-# Module: txt
-
-<a name="txt.TextConverter"></a>
-## Class: TextConverter
+<a name="pdf.PDFToTextConverter"></a>
+## PDFToTextConverter Objects
 
 ```python
-class TextConverter(BaseConverter)
+class PDFToTextConverter(BaseConverter)
 ```
 
-<a name="txt.TextConverter.__init__"></a>
+<a name="pdf.PDFToTextConverter.__init__"></a>
 #### \_\_init\_\_
 
 ```python
@@ -39,101 +28,24 @@ This option can be used to add test for encoding errors. If the extracted text i
 not one of the valid languages, then it might likely be encoding error resulting
 in garbled text.
 
-<a name="txt.TextConverter.convert"></a>
-#### convert
-
-```python
- | convert(file_path: Path, meta: Optional[Dict[str, str]] = None, encoding: str = "utf-8") -> Dict[str, Any]
-```
-
-Reads text from a txt file and executes optional preprocessing steps.
-
-**Arguments**:
-
-- `file_path`: Path of the file to convert
-- `meta`: Optional meta data that should be associated with the the document (e.g. name)
-- `encoding`: Encoding of the file
-
-**Returns**:
-
-Dict of format {"text": "The text from file", "meta": meta}}
-
-<a name="docx"></a>
-# Module: docx
-
-<a name="docx.DocxToTextConverter"></a>
-## Class: DocxToTextConverter
-
-```python
-class DocxToTextConverter(BaseConverter)
-```
-
-<a name="docx.DocxToTextConverter.convert"></a>
+<a name="pdf.PDFToTextConverter.convert"></a>
 #### convert
 
 ```python
  | convert(file_path: Path, meta: Optional[Dict[str, str]] = None) -> Dict[str, Any]
 ```
 
-Extract text from a .docx file.
-Note: As docx doesn't contain "page" information, we actually extract and return a list of paragraphs here.
-For compliance with other converters we nevertheless opted for keeping the methods name.
+Extract text from a .pdf file.
 
 **Arguments**:
 
-- `file_path`: Path to the .docx file you want to convert
-
-<a name="tika"></a>
-# Module: tika
-
-<a name="tika.TikaConverter"></a>
-## Class: TikaConverter
-
-```python
-class TikaConverter(BaseConverter)
-```
-
-<a name="tika.TikaConverter.__init__"></a>
-#### \_\_init\_\_
-
-```python
- | __init__(tika_url: str = "http://localhost:9998/tika", remove_numeric_tables: Optional[bool] = False, valid_languages: Optional[List[str]] = None)
-```
-
-**Arguments**:
-
-- `tika_url`: URL of the Tika server
-- `remove_numeric_tables`: This option uses heuristics to remove numeric rows from the tables.
-The tabular structures in documents might be noise for the reader model if it
-does not have table parsing capability for finding answers. However, tables
-may also have long strings that could possible candidate for searching answers.
-The rows containing strings are thus retained in this option.
-- `valid_languages`: validate languages from a list of languages specified in the ISO 639-1
-(https://en.wikipedia.org/wiki/ISO_639-1) format.
-This option can be used to add test for encoding errors. If the extracted text is
-not one of the valid languages, then it might likely be encoding error resulting
-in garbled text.
-
-<a name="tika.TikaConverter.convert"></a>
-#### convert
-
-```python
- | convert(file_path: Path, meta: Optional[Dict[str, str]] = None) -> Dict[str, Any]
-```
-
-**Arguments**:
-
-- `file_path`: Path of file to be converted.
-
-**Returns**:
-
-a list of pages and the extracted meta data of the file.
+- `file_path`: Path to the .pdf file you want to convert
 
 <a name="base"></a>
-# Module: base
+# Module base
 
 <a name="base.BaseConverter"></a>
-## Class: BaseConverter
+## BaseConverter Objects
 
 ```python
 class BaseConverter()
@@ -188,17 +100,88 @@ supplied meta data like author, url, external IDs can be supplied as a dictionar
 
 Validate if the language of the text is one of valid languages.
 
-<a name="pdf"></a>
-# Module: pdf
+<a name="docx"></a>
+# Module docx
 
-<a name="pdf.PDFToTextConverter"></a>
-## Class: PDFToTextConverter
+<a name="docx.DocxToTextConverter"></a>
+## DocxToTextConverter Objects
 
 ```python
-class PDFToTextConverter(BaseConverter)
+class DocxToTextConverter(BaseConverter)
 ```
 
-<a name="pdf.PDFToTextConverter.__init__"></a>
+<a name="docx.DocxToTextConverter.convert"></a>
+#### convert
+
+```python
+ | convert(file_path: Path, meta: Optional[Dict[str, str]] = None) -> Dict[str, Any]
+```
+
+Extract text from a .docx file.
+Note: As docx doesn't contain "page" information, we actually extract and return a list of paragraphs here.
+For compliance with other converters we nevertheless opted for keeping the methods name.
+
+**Arguments**:
+
+- `file_path`: Path to the .docx file you want to convert
+
+<a name="tika"></a>
+# Module tika
+
+<a name="tika.TikaConverter"></a>
+## TikaConverter Objects
+
+```python
+class TikaConverter(BaseConverter)
+```
+
+<a name="tika.TikaConverter.__init__"></a>
+#### \_\_init\_\_
+
+```python
+ | __init__(tika_url: str = "http://localhost:9998/tika", remove_numeric_tables: Optional[bool] = False, valid_languages: Optional[List[str]] = None)
+```
+
+**Arguments**:
+
+- `tika_url`: URL of the Tika server
+- `remove_numeric_tables`: This option uses heuristics to remove numeric rows from the tables.
+The tabular structures in documents might be noise for the reader model if it
+does not have table parsing capability for finding answers. However, tables
+may also have long strings that could possible candidate for searching answers.
+The rows containing strings are thus retained in this option.
+- `valid_languages`: validate languages from a list of languages specified in the ISO 639-1
+(https://en.wikipedia.org/wiki/ISO_639-1) format.
+This option can be used to add test for encoding errors. If the extracted text is
+not one of the valid languages, then it might likely be encoding error resulting
+in garbled text.
+
+<a name="tika.TikaConverter.convert"></a>
+#### convert
+
+```python
+ | convert(file_path: Path, meta: Optional[Dict[str, str]] = None) -> Dict[str, Any]
+```
+
+**Arguments**:
+
+- `file_path`: Path of file to be converted.
+
+**Returns**:
+
+a list of pages and the extracted meta data of the file.
+
+<a name="txt"></a>
+# Module txt
+
+<a name="txt.TextConverter"></a>
+## TextConverter Objects
+
+```python
+class TextConverter(BaseConverter)
+```
+
+<a name="txt.TextConverter.__init__"></a>
 #### \_\_init\_\_
 
 ```python
@@ -217,3 +200,23 @@ The rows containing strings are thus retained in this option.
 This option can be used to add test for encoding errors. If the extracted text is
 not one of the valid languages, then it might likely be encoding error resulting
 in garbled text.
+
+<a name="txt.TextConverter.convert"></a>
+#### convert
+
+```python
+ | convert(file_path: Path, meta: Optional[Dict[str, str]] = None, encoding: str = "utf-8") -> Dict[str, Any]
+```
+
+Reads text from a txt file and executes optional preprocessing steps.
+
+**Arguments**:
+
+- `file_path`: Path of the file to convert
+- `meta`: Optional meta data that should be associated with the the document (e.g. name)
+- `encoding`: Encoding of the file
+
+**Returns**:
+
+Dict of format {"text": "The text from file", "meta": meta}}
+
