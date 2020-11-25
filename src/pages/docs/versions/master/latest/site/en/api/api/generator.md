@@ -1,3 +1,12 @@
+---
+title: "Generator"
+metaTitle: "Generator"
+metaDescription: ""
+slug: "/docs/generator"
+date: "2020-09-03"
+id: "apigeneratormd"
+---
+
 <a name="base"></a>
 # Module base
 

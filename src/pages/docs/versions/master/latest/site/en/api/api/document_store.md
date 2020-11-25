@@ -1,3 +1,12 @@
+---
+title: "Document Store"
+metaTitle: "Database"
+metaDescription: ""
+slug: "/docs/apidatabase"
+date: "2020-09-03"
+id: "apidatabasemd"
+---
+
 <a name="base"></a>
 # Module base
 
