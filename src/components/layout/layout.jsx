@@ -21,8 +21,8 @@ const Layout = ({ children, language="en", locale="en" }) => {
       <CookieConsent
         location="bottom"
         buttonText="OK, DON'T SHOW AGAIN"
-        style={{ background: "#08415D", width: "40%", "text-align": "center", 
-          "border-radius": "8px", "margin-left": "30%", "margin-bottom": "10px", }}
+        style={{ background: "#08415D", width: "330px", "text-align": "center", 
+          "border-radius": "8px", "margin-left": "5%", "margin-bottom": "10px", }}
         buttonWrapperClasses="cookies-button-wrapper"
         buttonStyle={{ background: "#009BAA", fontSize: "13px", color: "#ffffff", "border-radius": "4px"}}
         expires={150}
