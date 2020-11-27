@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - clean_api
-    
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
