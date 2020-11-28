@@ -74,12 +74,20 @@
       "order": 7
     },
     {
+      "id": "/docs_hub/optimizemd",
+      "title": "Optimize Your Search",
+      "label1": "usage_haystackhub",
+      "label2": "",
+      "label3": "",
+      "order": 8
+    },
+    {
       "id": "/docs_hub/dashboardmd",
       "title": "Dashboard",
       "label1": "usage_haystackhub",
       "label2": "",
       "label3": "",
-      "order": 8
+      "order": 9
     },
     {
       "id": "/docs_hub/user_settingsmd",
@@ -87,7 +95,7 @@
       "label1": "usage_haystackhub",
       "label2": "",
       "label3": "",
-      "order": 9
+      "order": 10
     },
     {
       "id": "api_haystackhub",
