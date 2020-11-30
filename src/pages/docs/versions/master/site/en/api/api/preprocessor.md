@@ -7,13 +7,30 @@ date: "2020-09-03"
 id: "apiindexingmd"
 ---
 
-# Preprocessor
+<a name="base"></a>
+# Module base
+
+<a name="base.BasePreProcessor"></a>
+## BasePreProcessor Objects
+
+```python
+class BasePreProcessor()
+```
+
+<a name="base.BasePreProcessor.process"></a>
+#### process
+
+```python
+ | process(document: dict) -> List[dict]
+```
+
+Perform document cleaning and splitting. Takes a single document as input and returns a list of documents.
 
 <a name="preprocessor"></a>
-# Module: preprocessor
+# Module preprocessor
 
 <a name="preprocessor.PreProcessor"></a>
-## Class: PreProcessor
+## PreProcessor Objects
 
 ```python
 class PreProcessor(BasePreProcessor)
@@ -45,11 +62,29 @@ Set the value to None to disable striding behaviour.
 to True, the individual split will always have complete sentences &
 the number of words will be <= split_length.
 
-<a name="cleaning"></a>
-# Module: cleaning
+<a name="preprocessor.PreProcessor.clean"></a>
+#### clean
+
+```python
+ | clean(document: dict) -> dict
+```
+
+Perform document cleaning on a single document and return a single document. This method will deal with whitespaces, headers, footers
+and empty lines. Its exact functionality is defined by the parameters passed into PreProcessor.__init__().
+
+<a name="preprocessor.PreProcessor.split"></a>
+#### split
+
+```python
+ | split(document: dict) -> List[dict]
+```
+
+Perform document splitting on a single document. This method can split on different units, at different lengths,
+with different strides. It can also respect sectence boundaries. Its exact functionality is defined by
+the parameters passed into PreProcessor.__init__(). Takes a single document as input and returns a list of documents.
 
 <a name="utils"></a>
-# Module: utils
+# Module utils
 
 <a name="utils.eval_data_from_file"></a>
 #### eval\_data\_from\_file
@@ -134,5 +169,16 @@ Fetch an archive (zip or tar.gz) from a url via http and extract content to an o
 
 bool if anything got fetched
 
-<a name="base"></a>
-# Module: base
+<a name="cleaning"></a>
+# Module cleaning
+
+<a name="cleaning.clean_wiki_text"></a>
+#### clean\_wiki\_text
+
+```python
+clean_wiki_text(text: str) -> str
+```
+
+Clean wikipedia text by removing multiple new lines, removing extremely short lines,
+adding paragraph breaks and removing empty paragraphs
+
