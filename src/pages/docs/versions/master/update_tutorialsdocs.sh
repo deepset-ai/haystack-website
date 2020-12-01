@@ -32,7 +32,7 @@ do
     sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/5.md 
     sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/6.md 
     sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/6.md
-    if [[ -f "./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/7.md " ]]; then
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/7.md" ]]; then
         sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/7.md 
         sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/7.md
     fi

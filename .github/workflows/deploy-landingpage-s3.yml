@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - add-api-documentation
-    
 jobs:
   deploy:
     runs-on: ubuntu-latest

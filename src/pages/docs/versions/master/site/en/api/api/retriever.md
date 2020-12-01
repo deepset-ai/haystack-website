@@ -7,13 +7,82 @@ date: "2020-09-03"
 id: "apiretrievermd"
 ---
 
-# Retriever
+<a name="base"></a>
+# Module base
+
+<a name="base.BaseRetriever"></a>
+## BaseRetriever Objects
+
+```python
+class BaseRetriever(ABC)
+```
+
+<a name="base.BaseRetriever.retrieve"></a>
+#### retrieve
+
+```python
+ | @abstractmethod
+ | retrieve(query: str, filters: dict = None, top_k: int = 10, index: str = None) -> List[Document]
+```
+
+Scan through documents in DocumentStore and return a small number documents
+that are most relevant to the query.
+
+**Arguments**:
+
+- `query`: The query
+- `filters`: A dictionary where the keys specify a metadata field and the value is a list of accepted values for that field
+- `top_k`: How many documents to return per query.
+- `index`: The name of the index in the DocumentStore from which to retrieve documents
+
+<a name="base.BaseRetriever.timing"></a>
+#### timing
+
+```python
+ | timing(fn)
+```
+
+Wrapper method used to time functions.
+
+<a name="base.BaseRetriever.eval"></a>
+#### eval
+
+```python
+ | eval(label_index: str = "label", doc_index: str = "eval_document", label_origin: str = "gold_label", top_k: int = 10, open_domain: bool = False, return_preds: bool = False) -> dict
+```
+
+Performs evaluation on the Retriever.
+Retriever is evaluated based on whether it finds the correct document given the question string and at which
+position in the ranking of documents the correct document is.
+
+|  Returns a dict containing the following metrics:
+
+- "recall": Proportion of questions for which correct document is among retrieved documents
+- "mrr": Mean of reciprocal rank. Rewards retrievers that give relevant documents a higher rank.
+Only considers the highest ranked relevant document.
+- "map": Mean of average precision for each question. Rewards retrievers that give relevant
+documents a higher rank. Considers all retrieved relevant documents. If ``open_domain=True``,
+average precision is normalized by the number of retrieved relevant documents per query.
+If ``open_domain=False``, average precision is normalized by the number of all relevant documents
+per query.
+
+**Arguments**:
+
+- `label_index`: Index/Table in DocumentStore where labeled questions are stored
+- `doc_index`: Index/Table in DocumentStore where documents that are used for evaluation are stored
+- `top_k`: How many documents to return per question
+- `open_domain`: If ``True``, retrieval will be evaluated by checking if the answer string to a question is
+contained in the retrieved docs (common approach in open-domain QA).
+If ``False``, retrieval uses a stricter evaluation that checks if the retrieved document ids
+are within ids explicitly stated in the labels.
+- `return_preds`: Whether to add predictions in the returned dictionary. If True, the returned dictionary
+contains the keys "predictions" and "metrics".
 
 <a name="sparse"></a>
-# Module: sparse
+# Module sparse
 
 <a name="sparse.ElasticsearchRetriever"></a>
-## Class: ElasticsearchRetriever
+## ElasticsearchRetriever Objects
 
 ```python
 class ElasticsearchRetriever(BaseRetriever)
@@ -38,32 +107,49 @@ names must match with the filters dict supplied in self.retrieve().
 
 **An example custom_query:**
 ```python
-{
->    "size": 10,
->    "query": {
->        "bool": {
->            "should": [{"multi_match": {
->                "query": "${question}",                 // mandatory $question placeholder
->                "type": "most_fields",
->                "fields": ["text", "title"]}}],
->            "filter": [                                 // optional custom filters
->                {"terms": {"year": "${years}"}},
->                {"terms": {"quarter": "${quarters}"}},
->                {"range": {"date": {"gte": "${date}"}}}
->                ],
->        }
->    },
-}
+|    {
+|        "size": 10,
+|        "query": {
+|            "bool": {
+|                "should": [{"multi_match": {
+|                    "query": "${question}",                 // mandatory $question placeholder
+|                    "type": "most_fields",
+|                    "fields": ["text", "title"]}}],
+|                "filter": [                                 // optional custom filters
+|                    {"terms": {"year": "${years}"}},
+|                    {"terms": {"quarter": "${quarters}"}},
+|                    {"range": {"date": {"gte": "${date}"}}}
+|                    ],
+|            }
+|        },
+|    }
 ```
 
 **For this custom_query, a sample retrieve() could be:**
 ```python
-self.retrieve(query="Why did the revenue increase?",
->          filters={"years": ["2019"], "quarters": ["Q1", "Q2"]})
+|    self.retrieve(query="Why did the revenue increase?",
+|                  filters={"years": ["2019"], "quarters": ["Q1", "Q2"]})
 ```
 
+<a name="sparse.ElasticsearchRetriever.retrieve"></a>
+#### retrieve
+
+```python
+ | retrieve(query: str, filters: dict = None, top_k: int = 10, index: str = None) -> List[Document]
+```
+
+Scan through documents in DocumentStore and return a small number documents
+that are most relevant to the query.
+
+**Arguments**:
+
+- `query`: The query
+- `filters`: A dictionary where the keys specify a metadata field and the value is a list of accepted values for that field
+- `top_k`: How many documents to return per query.
+- `index`: The name of the index in the DocumentStore from which to retrieve documents
+
 <a name="sparse.ElasticsearchFilterOnlyRetriever"></a>
-## Class: ElasticsearchFilterOnlyRetriever
+## ElasticsearchFilterOnlyRetriever Objects
 
 ```python
 class ElasticsearchFilterOnlyRetriever(ElasticsearchRetriever)
@@ -72,8 +158,25 @@ class ElasticsearchFilterOnlyRetriever(ElasticsearchRetriever)
 Naive "Retriever" that returns all documents that match the given filters. No impact of query at all.
 Helpful for benchmarking, testing and if you want to do QA on small documents without an "active" retriever.
 
+<a name="sparse.ElasticsearchFilterOnlyRetriever.retrieve"></a>
+#### retrieve
+
+```python
+ | retrieve(query: str, filters: dict = None, top_k: int = 10, index: str = None) -> List[Document]
+```
+
+Scan through documents in DocumentStore and return a small number documents
+that are most relevant to the query.
+
+**Arguments**:
+
+- `query`: The query
+- `filters`: A dictionary where the keys specify a metadata field and the value is a list of accepted values for that field
+- `top_k`: How many documents to return per query.
+- `index`: The name of the index in the DocumentStore from which to retrieve documents
+
 <a name="sparse.TfidfRetriever"></a>
-## Class: TfidfRetriever
+## TfidfRetriever Objects
 
 ```python
 class TfidfRetriever(BaseRetriever)
@@ -86,11 +189,37 @@ computations when text is passed on to a Reader for QA.
 
 It uses sklearn's TfidfVectorizer to compute a tf-idf matrix.
 
+<a name="sparse.TfidfRetriever.retrieve"></a>
+#### retrieve
+
+```python
+ | retrieve(query: str, filters: dict = None, top_k: int = 10, index: str = None) -> List[Document]
+```
+
+Scan through documents in DocumentStore and return a small number documents
+that are most relevant to the query.
+
+**Arguments**:
+
+- `query`: The query
+- `filters`: A dictionary where the keys specify a metadata field and the value is a list of accepted values for that field
+- `top_k`: How many documents to return per query.
+- `index`: The name of the index in the DocumentStore from which to retrieve documents
+
+<a name="sparse.TfidfRetriever.fit"></a>
+#### fit
+
+```python
+ | fit()
+```
+
+Performing training on this class according to the TF-IDF algorithm.
+
 <a name="dense"></a>
-# Module: dense
+# Module dense
 
 <a name="dense.DensePassageRetriever"></a>
-## Class: DensePassageRetriever
+## DensePassageRetriever Objects
 
 ```python
 class DensePassageRetriever(BaseRetriever)
@@ -114,14 +243,14 @@ The checkpoint format matches huggingface transformers' model format
 **Example:**
 
 ```python
-# remote model from FAIR
-DensePassageRetriever(document_store=your_doc_store,
->                    query_embedding_model="facebook/dpr-question_encoder-single-nq-base",
->                    passage_embedding_model="facebook/dpr-ctx_encoder-single-nq-base")
-# or from local path
-DensePassageRetriever(document_store=your_doc_store,
->                    query_embedding_model="model_directory/question-encoder",
->                   passage_embedding_model="model_directory/context-encoder")
+|    # remote model from FAIR
+|    DensePassageRetriever(document_store=your_doc_store,
+|                          query_embedding_model="facebook/dpr-question_encoder-single-nq-base",
+|                          passage_embedding_model="facebook/dpr-ctx_encoder-single-nq-base")
+|    # or from local path
+|    DensePassageRetriever(document_store=your_doc_store,
+|                          query_embedding_model="model_directory/question-encoder",
+|                          passage_embedding_model="model_directory/context-encoder")
 ```
 
 **Arguments**:
@@ -143,6 +272,23 @@ titles contain meaningful information for retrieval (topic, entities etc.) .
 The title is expected to be present in doc.meta["name"] and can be supplied in the documents
 before writing them to the DocumentStore like this:
 {"text": "my text", "meta": {"name": "my title"}}.
+
+<a name="dense.DensePassageRetriever.retrieve"></a>
+#### retrieve
+
+```python
+ | retrieve(query: str, filters: dict = None, top_k: int = 10, index: str = None) -> List[Document]
+```
+
+Scan through documents in DocumentStore and return a small number documents
+that are most relevant to the query.
+
+**Arguments**:
+
+- `query`: The query
+- `filters`: A dictionary where the keys specify a metadata field and the value is a list of accepted values for that field
+- `top_k`: How many documents to return per query.
+- `index`: The name of the index in the DocumentStore from which to retrieve documents
 
 <a name="dense.DensePassageRetriever.embed_queries"></a>
 #### embed\_queries
@@ -211,8 +357,35 @@ train a DensePassageRetrieval model
 - `query_encoder_save_dir`: directory inside save_dir where query_encoder model files are saved
 - `passage_encoder_save_dir`: directory inside save_dir where passage_encoder model files are saved
 
+<a name="dense.DensePassageRetriever.save"></a>
+#### save
+
+```python
+ | save(save_dir: Union[Path, str])
+```
+
+Save DensePassageRetriever to the specified directory.
+
+**Arguments**:
+
+- `save_dir`: Directory to save to.
+
+**Returns**:
+
+None
+
+<a name="dense.DensePassageRetriever.load"></a>
+#### load
+
+```python
+ | @classmethod
+ | load(cls, load_dir: Union[Path, str], document_store: BaseDocumentStore, max_seq_len_query: int = 64, max_seq_len_passage: int = 256, use_gpu: bool = True, batch_size: int = 16, embed_title: bool = True, use_fast_tokenizers: bool = True, similarity_function: str = "dot_product")
+```
+
+Load DensePassageRetriever from the specified directory.
+
 <a name="dense.EmbeddingRetriever"></a>
-## Class: EmbeddingRetriever
+## EmbeddingRetriever Objects
 
 ```python
 class EmbeddingRetriever(BaseRetriever)
@@ -244,6 +417,23 @@ Options:
 - ``'per_token'`` (individual token vectors)
 - `emb_extraction_layer`: Number of layer from which the embeddings shall be extracted (for farm / transformers models only).
 Default: -1 (very last layer).
+
+<a name="dense.EmbeddingRetriever.retrieve"></a>
+#### retrieve
+
+```python
+ | retrieve(query: str, filters: dict = None, top_k: int = 10, index: str = None) -> List[Document]
+```
+
+Scan through documents in DocumentStore and return a small number documents
+that are most relevant to the query.
+
+**Arguments**:
+
+- `query`: The query
+- `filters`: A dictionary where the keys specify a metadata field and the value is a list of accepted values for that field
+- `top_k`: How many documents to return per query.
+- `index`: The name of the index in the DocumentStore from which to retrieve documents
 
 <a name="dense.EmbeddingRetriever.embed"></a>
 #### embed
@@ -296,64 +486,3 @@ Create embeddings for a list of passages. For this Retriever type: The same as c
 
 Embeddings, one per input passage
 
-<a name="base"></a>
-# Module: base
-
-<a name="base.BaseRetriever"></a>
-## Class: BaseRetriever
-
-```python
-class BaseRetriever(ABC)
-```
-
-<a name="base.BaseRetriever.retrieve"></a>
-#### retrieve
-
-```python
- | @abstractmethod
- | retrieve(query: str, filters: dict = None, top_k: int = 10, index: str = None) -> List[Document]
-```
-
-Scan through documents in DocumentStore and return a small number documents
-that are most relevant to the query.
-
-**Arguments**:
-
-- `query`: The query
-- `filters`: A dictionary where the keys specify a metadata field and the value is a list of accepted values for that field
-- `top_k`: How many documents to return per query.
-- `index`: The name of the index in the DocumentStore from which to retrieve documents
-
-<a name="base.BaseRetriever.eval"></a>
-#### eval
-
-```python
- | eval(label_index: str = "label", doc_index: str = "eval_document", label_origin: str = "gold_label", top_k: int = 10, open_domain: bool = False, return_preds: bool = False) -> dict
-```
-
-Performs evaluation on the Retriever.
-Retriever is evaluated based on whether it finds the correct document given the question string and at which
-position in the ranking of documents the correct document is.
-
-|  Returns a dict containing the following metrics:
-
-- "recall": Proportion of questions for which correct document is among retrieved documents
-- "mrr": Mean of reciprocal rank. Rewards retrievers that give relevant documents a higher rank.
-Only considers the highest ranked relevant document.
-- "map": Mean of average precision for each question. Rewards retrievers that give relevant
-documents a higher rank. Considers all retrieved relevant documents. If ``open_domain=True``,
-average precision is normalized by the number of retrieved relevant documents per query.
-If ``open_domain=False``, average precision is normalized by the number of all relevant documents
-per query.
-
-**Arguments**:
-
-- `label_index`: Index/Table in DocumentStore where labeled questions are stored
-- `doc_index`: Index/Table in DocumentStore where documents that are used for evaluation are stored
-- `top_k`: How many documents to return per question
-- `open_domain`: If ``True``, retrieval will be evaluated by checking if the answer string to a question is
-contained in the retrieved docs (common approach in open-domain QA).
-If ``False``, retrieval uses a stricter evaluation that checks if the retrieved document ids
-are within ids explicitly stated in the labels.
-- `return_preds`: Whether to add predictions in the returned dictionary. If True, the returned dictionary
-contains the keys "predictions" and "metrics".
