@@ -12,6 +12,10 @@ import QueryModal from "../components/query-modal/query-modal.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
+import groupBy from 'lodash.groupby'
+import SpecInformation from '../components/spec/SpecInformation'
+import SpecPaths from '../components/spec/SpecPaths'
+
 function sortVersions(a, b) {
   const [v1, s1, m1] = a.split(".");
   const [v2, s2, m2] = b.split(".");
@@ -35,15 +39,27 @@ export default function Template({
 }) {
   let {
     locale,
-    version,
-    versions,
+    version = "",
+    versions = [],
     headings = [],
     allMenus,
+    isDocAPI = false,
+    isDocHub = false,
     newHtml,
     editPath,
   } = pageContext;
   versions = versions.sort(sortVersions);
   const screenWidth = useMobileScreen();
+
+  let api = null;
+  let paths = null;
+  let pathGroups = null;
+
+  if(isDocAPI) {
+    api = data.openApiSpec;
+    paths = api.childrenOpenApiSpecPath;
+    pathGroups = groupBy(paths, p => p.tag);
+  }
   
   const [showModal, setShowModal] = useState(false);
 
@@ -228,31 +244,49 @@ export default function Template({
       versions={versions}
       id={frontmatter.id}
       showDoc={false}
-
+      isDocAPI={isDocAPI}
+      isDocHub={isDocHub}
     >
-      
-        <div className="doc-post-container">
-          <div className="doc-post">
-            <div
-              className="doc-post-content"
-              dangerouslySetInnerHTML={{ __html: newHtml }}
-            />
-            <ReactTooltip
-              type="info"
-              globalEventOff="click"
-              className="md-tooltip"
-            />
-            <a
-                className="edit-page-link btn"
-                href={`https://github.com/deepset-ai/haystack/tree/master/docs/_src/${editPath}`}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                <FontAwesomeIcon icon={faEdit}/>
-                Edit
-              </a>
-          </div>
-        </div>
+          <div className="doc-post-container">
+          {isDocAPI ? (
+            <div>
+              <SpecInformation
+                title={api.title}
+                version={api.version}
+                description={api.description}
+                pathGroups={pathGroups}
+              />
+              {Object.keys(pathGroups).map(t => (
+                <div>
+                  {t !== "Auth" && (<SpecPaths key={t} tag={t} paths={pathGroups[t]} />)}
+                </div>
+              ))}
+            </div>
+            ) : (
+              <div className="doc-post">
+                <div
+                  className="doc-post-content"
+                  dangerouslySetInnerHTML={{ __html: newHtml }}
+                />
+                <ReactTooltip
+                  type="info"
+                  globalEventOff="click"
+                  className="md-tooltip"
+                />
+                {!(isDocHub) ? (
+                <a
+                    className="edit-page-link btn"
+                    href={`https://github.com/deepset-ai/haystack/tree/master/docs/_src/${editPath}`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <FontAwesomeIcon icon={faEdit}/>
+                    Edit
+                  </a>
+                  ) : null}
+              </div>
+              )}
+            </div>
       
 
       {showModal ? (
@@ -273,7 +307,7 @@ export default function Template({
 }
 
 export const pageQuery = graphql`
-  query($locale: String, $fileAbsolutePath: String) {
+  query($locale: String, $fileAbsolutePath: String, $id: String) {
     markdownRemark(
       fileAbsolutePath: { eq: $fileAbsolutePath }
     ) {
@@ -313,6 +347,36 @@ export const pageQuery = graphql`
               }
             }
           }
+        }
+      }
+    }
+    openApiSpec(id: { eq: $id }) {
+      version
+      title
+      description
+      childrenOpenApiSpecPath {
+        name
+        verb
+        summary
+        description
+        fullPath
+        exampleDef
+        example
+        parameters {
+          name
+          in
+          required
+          schema {
+            example
+            type
+          }
+        }
+        tag
+        childrenOpenApiSpecResponse {
+          id
+          statusCode
+          description
+          response
         }
       }
     }

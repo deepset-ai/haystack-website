@@ -3,8 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - clean_api
-
+      - add-api-documentation
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: clean_api
+          ref: add-api-documentation
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:

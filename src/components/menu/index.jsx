@@ -25,7 +25,7 @@ const findItem = (key, value, arr) => {
 };
 
 const Menu = (props) => {
-  let { menuList, activeDoc, version, versions, locale } = props;
+  let { menuList, activeDoc, version, versions, locale, isDocAPI, isDocHub } = props;
 
   if (!version || version === "") {
     version = versions[0];
@@ -48,8 +48,12 @@ const Menu = (props) => {
         if (index && !parentLabel) {
           return copyMenu;
         }
-        const generatePath = (doc) => {
-          return `/docs/${version}/${doc.id}`;
+        const generatePath = (doc, isDocAPI, isDocHub) => {
+          if(isDocAPI || isDocHub) {
+            return `${doc.id}`;
+          } else {
+            return `/docs/${version}/${doc.id}`;
+          }
         };
         // find top menu by current label
         const topMenu = list.filter((v) => {
@@ -67,7 +71,7 @@ const Menu = (props) => {
             isActive: false,
             isLast: !labelKeys[index + 1],
             isBlog,
-            path: generatePath(v),
+            path: generatePath(v, isDocAPI, isDocHub),
           };
           if (index === 0) {
             copyMenu.push(item);
@@ -83,6 +87,7 @@ const Menu = (props) => {
     };
 
     const checkActive = (list) => {
+      activeDoc = `/docs_hub/${activeDoc}`;
       const findDoc = findItem("id", activeDoc, list);
       if (!findDoc) {
         return;
@@ -210,8 +215,13 @@ const Menu = (props) => {
             }}
           ></i>
         ) : null}
-
+        {isDocHub || isDocAPI ? (
+          <div className="border-bottom select-wrapper">
+          <div className="h-version">Haystack Hub </div>
+          </div>
+        ) : (
         <div className="border-bottom select-wrapper">
+        <div className="h-version">Core Version: </div>
                     <VersionSelector
                       options={versions}
                       selected={version}
@@ -220,6 +230,8 @@ const Menu = (props) => {
                     ></VersionSelector>
                   
         </div>
+        )}
+        
 
         {generageMenuDom(realMenuList, "menu-top-level border-bottom")}
       </section>

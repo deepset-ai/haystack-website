@@ -57,31 +57,34 @@
     padding-right: 5px;
   }
 
-  .solutions {
+  .docs {
     position: relative;
     display: inline-block;
-    margin-left: 16px;
-    color: #009BAA;
+    margin: 0 1rem;
+    color: #60677e;
     font-weight: bold;
     cursor: pointer;
 
-    .solutions-list {
+    .docs-list {
       background-color: #fff;
       border-radius: 10px;
       position: absolute;
       top: 150%;
       right: -20px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      width: 20rem;
+      width: 10rem;
 
       a {
         display: block;
         margin: 10px 0;
-        margin-left: 20px;
         padding: 10px;
         color: #333;
 
-        &.active {
+        &.core:hover {
+          background-color: #3f9cd1;
+          color: #fff;
+        }
+        &.hub:hover {
           background-color: #3f9cd1;
           color: #fff;
         }

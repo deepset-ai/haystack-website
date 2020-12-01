@@ -15,6 +15,7 @@ const Header = ({ siteTitle, menuLinks }) => {
 
   const screenWidth = useMobileScreen();
   const [mobileNav, setMobileNav] = useState(false);
+  const [docList, setDocList] = useState(false);
 
   useEffect(() => {
     window.addEventListener("click", () => {
@@ -29,7 +30,7 @@ const Header = ({ siteTitle, menuLinks }) => {
 
   return (
     <>
-      <div className="full-header-wrapper">
+      <div className="full-header-wrapper" >
       
         <header className="header-wrapper">
           <div className="logo-wrapper">
@@ -63,14 +64,48 @@ const Header = ({ siteTitle, menuLinks }) => {
               >
                 Pricing
               </LocalizedLink>
-
-              <LocalizedLink
-                to="/docs/intromd"
-                className="link"
-                locale="en"
+            
+              <span
+                role="button"
+                tabIndex={0}
+                className="docs"
+                onMouseOver={() => {
+                  setDocList(true);
+                }}
+                onMouseLeave={() => {
+                            setDocList(false);
+                          }}
               >
                 Docs
-              </LocalizedLink>
+                {docList && (
+                  <div className="docs-list">
+                    <LocalizedLink
+                      locale="en"
+                      to="/docs/intromd"
+                      className="core"
+                    >
+                      <span
+                        tabIndex={0}
+                        role="button"
+                      >
+                      Haystack
+                      </span>
+                    </LocalizedLink>
+                    <LocalizedLink
+                      locale="en"
+                      to="/docs_hub/intromd"
+                      className="hub"
+                    >
+                      <span
+                        tabIndex={0}
+                        role="button"
+                      >
+                      Haystack Hub
+                      </span>
+                    </LocalizedLink>
+                  </div>
+                )}
+              </span>
 
               <LocalizedLink
                 locale="en"

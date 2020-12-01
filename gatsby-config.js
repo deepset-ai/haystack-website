@@ -1,3 +1,4 @@
+
 module.exports = {
   siteMetadata: {
     title: `Haystack`,
@@ -114,6 +115,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `docs`,
+        path: `${__dirname}/src/pages/docs_hub`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `benchmarks`,
         path: `${__dirname}/src/pages/benchmarks/versions`,
       },
@@ -205,7 +213,7 @@ module.exports = {
             }
           })
       }
-    },
+    }
     /*{
       resolve: "gatsby-plugin-hubspot",
       options: {
