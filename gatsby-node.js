@@ -71,7 +71,7 @@ exports.onCreatePage = ({ page, actions }) => {
   });
 };
 
-const nodes = GenerateOpenAPI("https://staging-api.haystack-hub.com/openapi.json");
+const nodes =  GenerateOpenAPI("https://staging-api.haystack-hub.com/openapi.json");//GenerateOpenAPI("./src/pages/docs_hub/open_api.json");
 
 exports.sourceNodes = ({ actions }) => {
 

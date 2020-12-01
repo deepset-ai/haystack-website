@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
-const crypto = require(`crypto`)
+const crypto = require(`crypto`);
+const fs = require("fs");
 
 const getXFields = obj => {
     let xfields = {}
@@ -87,8 +88,14 @@ const fetchSpec = async url => {
   })
 }
 
+/*const fetchSpecFile = async path => {
+  const doc = fs.readFileSync(path);
+  return doc.toString();
+}*/
+
 function openApiAggregate(url, nodes = []) {
     fetchSpec(url).then((result) => {
+      //fetchSpecFile(url).then((result) => {
         const json = JSON.parse(result)
         const name = 'openapispec'
         const rootId = `spec.${name}`;
@@ -159,7 +166,6 @@ function openApiAggregate(url, nodes = []) {
                     }
                   }
                 }
-
 
                 return {
                 id: `${rootId}.path.${p}.verb.${v}.response.${r}`,
