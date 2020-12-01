@@ -88,7 +88,7 @@ const Header = ({ siteTitle, menuLinks }) => {
                         tabIndex={0}
                         role="button"
                       >
-                      Haystack Core Docs
+                      Haystack
                       </span>
                     </LocalizedLink>
                     <LocalizedLink
@@ -100,7 +100,7 @@ const Header = ({ siteTitle, menuLinks }) => {
                         tabIndex={0}
                         role="button"
                       >
-                      Haystack Hub Docs
+                      Haystack Hub
                       </span>
                     </LocalizedLink>
                   </div>
