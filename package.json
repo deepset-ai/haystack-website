@@ -37,6 +37,7 @@
     "gatsby-plugin-sitemap": "^2.4.14",
     "gatsby-plugin-smoothscroll": "^1.2.0",
     "gatsby-remark-autolink-headers": "^2.3.14",
+    "gatsby-remark-check-links": "^2.1.0",
     "gatsby-remark-images": "^3.3.32",
     "gatsby-source-filesystem": "^2.3.32",
     "gatsby-source-openapi-aggregate": "^0.3.0",

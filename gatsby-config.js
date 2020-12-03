@@ -148,6 +148,9 @@ module.exports = {
               isIconAfterHeader: true,
             },
           },
+          {
+            resolve: "gatsby-remark-check-links",
+          },
         ],
       },
     },

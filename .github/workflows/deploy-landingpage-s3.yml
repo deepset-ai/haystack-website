@@ -37,3 +37,11 @@ jobs:
         uses: jonelantha/gatsby-s3-action@v1
         with:
           dest-s3-bucket: haystackhub-website
+      - name: Sleep for 30 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '30s'
+      - name: Check links
+          run: |
+            npm install broken-link-checker -g
+            blc http://haystackhub-website.s3-website.eu-central-1.amazonaws.com -ro
