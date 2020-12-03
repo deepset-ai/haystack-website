@@ -87,7 +87,11 @@ const Menu = (props) => {
     };
 
     const checkActive = (list) => {
-      activeDoc = `/docs_hub/${activeDoc}`;
+      if(isDocHub) {
+        activeDoc = `/docs_hub/${activeDoc}`;
+      } else {
+        activeDoc = `${activeDoc}`;
+      }
       const findDoc = findItem("id", activeDoc, list);
       if (!findDoc) {
         return;
