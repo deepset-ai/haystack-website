@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - add-api-documentation
+      - clean_mkfiles_upload
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,13 +12,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: add-api-documentation
+          ref: clean_mkfiles_upload
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
       - name: Build
         run: |
+          npm install
+          npm run update_img
+          npm run update_apidocs
+          npm run update_tutorialsdocs
+          npm run update_usagedocs
+          npm run update_benchmarks
           npm ci
           npm run build
       - name: Configure AWS Credentials
@@ -31,3 +37,11 @@ jobs:
         uses: jonelantha/gatsby-s3-action@v1
         with:
           dest-s3-bucket: haystackhub-website
+      - name: Sleep for 30 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '30s'
+      - name: Check links
+        run: |
+          npm install broken-link-checker -g
+          blc http://haystackhub-website.s3-website.eu-central-1.amazonaws.com -ro --exclude https://www.linkedin.com/company/deepset-ai/

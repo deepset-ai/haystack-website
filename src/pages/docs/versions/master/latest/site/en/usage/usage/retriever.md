@@ -14,11 +14,9 @@ It is an tool for sifting out the obvious negative cases, saving the Reader from
 
 <div class="recommendation">
 
-Recommendations:
-
+**Recommendations**
 
 * BM25 (sparse)
-
 
 * Dense Passage Retrieval (dense)
 
@@ -35,6 +33,8 @@ Here are the combinations which are supported:
 | TF-IDF | Y | Y | Y | N |
 | Embedding | Y | Y | N | Y |
 | DPR | Y | Y | N | Y |
+
+See [Optimization](/docs/latest/optimizationmd) for suggestions on how to choose top-k values.
 
 ## TF-IDF
 

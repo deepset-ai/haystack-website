@@ -93,7 +93,7 @@ const Header = ({ siteTitle, menuLinks }) => {
                     </LocalizedLink>
                     <LocalizedLink
                       locale="en"
-                      to="/docs_hub/intromd"
+                      to="/docs_hub/intro_hubmd"
                       className="hub"
                     >
                       <span

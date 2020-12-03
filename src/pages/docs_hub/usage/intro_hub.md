@@ -2,9 +2,9 @@
 title: "What is Haystack Hub?"
 metaTitle: "What is Haystack Hub?"
 metaDescription: ""
-slug: "/docs/intromd"
+slug: "/docs/intromd_hub"
 date: "2020-09-03"
-id: "intromd"
+id: "intro_hubmd"
 ---
 
 # What is Haystack Hub?

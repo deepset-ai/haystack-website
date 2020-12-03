@@ -2,9 +2,9 @@
 title: "Upload Documents"
 metaTitle: "Upload Documents"
 metaDescription: ""
-slug: "/docs/upload_documents"
+slug: "/docs/upload_documents_hub"
 date: "2020-09-03"
-id: "upload_documentsmd"
+id: "upload_documents_hubmd"
 ---
 
 # Upload Documents
@@ -21,7 +21,7 @@ After uploading the files, you can review them and upload even more files by cli
 
 ![image](../img/HaystackHub_documentsstep2_.png)
 
-The preprocessing is separated into two parts **Splitting** and **Basic cleaning**. Please check the section [preprocessing](/docs_hub/upload_documentsmd#Preprocessing) for more details. Select **Upload** for uploading your documents.
+The preprocessing is separated into two parts **Splitting** and **Basic cleaning**. Please check the section [preprocessing](/docs_hub/upload_documents_hubmd#Preprocessing) for more details. Select **Upload** for uploading your documents.
 
 ![image](../img/HaystackHub_documentspreprocessing_.png)
 
@@ -55,7 +55,7 @@ On the right side of the preprocessing view you will find a preview in order to 
 
 ## Warnings
 
-You can configure one or multiple languages for your workspace ([more details](/docs_hub/conf_workspacemd#Workspace-Languages)). Haystack Hub will check for each file, if the language matches to your configuration. For all files, which do not have these languages, Haystack Hub will show a warning. 
+You can configure one or multiple languages for your workspace ([more details](/docs_hub/conf_workspace_hubmd#Workspace-Languages)). Haystack Hub will check for each file, if the language matches to your configuration. For all files, which do not have these languages, Haystack Hub will show a warning. 
 
 ![image](../img/HaystackHub_documentswarning_.png)
 

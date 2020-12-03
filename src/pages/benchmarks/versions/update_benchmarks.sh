@@ -5,6 +5,13 @@ versions=("latest/" "v0.4.0/" "v0.5.0/")
 
 for i in "${versions[@]}"
 do
+    rm ./src/pages/benchmarks/versions/${i}site/en/performance/*
+    rm ./src/pages/benchmarks/versions/${i}site/en/map/*
+    rm ./src/pages/benchmarks/versions/${i}site/en/speed/*
+done
+
+for i in "${versions[@]}"
+do
     j=$i
     if [ "$i" = "latest/" ]; then
         j=''

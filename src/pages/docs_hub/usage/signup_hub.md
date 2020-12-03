@@ -2,9 +2,9 @@
 title: "Sign up for a Subscription"
 metaTitle: "Sign up for a Subscription"
 metaDescription: ""
-slug: "/docs/signup"
+slug: "/docs/signup_hub"
 date: "2020-09-03"
-id: "signupmd"
+id: "signup_hubmd"
 ---
 
 # Sign up for a Subscription
@@ -22,6 +22,6 @@ To subscribe to one of these levels you have the following options:
 * Send an email to info@haystack-hub.com
 * Use our [contact form](/contact/contact)
 * Choose your subscription level and click **Contact Us** on our [pricing page](/pricing/pricing) 
-* Within Haystack Hub choose [Subscrirption](/docs_hub/user_settingsmd#Subscription) and **Contact Us**
+* Within Haystack Hub choose [Subscrirption](/docs_hub/user_settings_hubmd#Subscription) and **Contact Us**
 
 ![image](../img/HaystackHub_subscription_1.png)

@@ -5,6 +5,11 @@ versions=("" "latest/" "v0.4.0/" "v0.5.0/")
 
 for i in "${versions[@]}"
 do
+    rm ./src/pages/docs/versions/master/${i}site/en/img/*
+done 
+
+for i in "${versions[@]}"
+do
 
     j=$i
     if [ "$i" = "latest/" ]; then
@@ -26,6 +31,9 @@ do
     wget https://github.com/deepset-ai/haystack/raw/master/docs/${j}_src/img/zenhub_board.png -O ./src/pages/docs/versions/master/${i}site/en/img/zenhub_board.png 
     wget https://github.com/deepset-ai/haystack/raw/master/docs/${j}_src/img/zenhub_issue.png -O ./src/pages/docs/versions/master/${i}site/en/img/zenhub_issue.png 
     wget https://github.com/deepset-ai/haystack/raw/master/docs/${j}_src/img/zenhub_roadmap.png -O ./src/pages/docs/versions/master/${i}site/en/img/zenhub_roadmap.png
+    if [[ `wget -S --spider https://github.com/deepset-ai/haystack/raw/master/docs/${j}_src/img/colab_gpu_runtime.jpg 2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
+        wget https://github.com/deepset-ai/haystack/raw/master/docs/${j}_src/img/colab_gpu_runtime.jpg -O ./src/pages/docs/versions/master/${i}site/en/img/colab_gpu_runtime.jpg
+    fi
 done
 
 
