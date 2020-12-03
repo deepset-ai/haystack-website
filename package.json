@@ -87,7 +87,6 @@
     "update_usagedocs": "./src/pages/docs/versions/master/update_usagedocs.sh",
     "update_img": "./src/pages/docs/versions/master/update_img.sh",
     "update_benchmarks": "./src/pages/benchmarks/versions/update_benchmarks.sh",
-    "update_swagger": "./src/pages/docs_api/update.swagger.sh",
     "update_deploy": "npm run update_benchmarks && npm run update_img && npm run update_apidocs && npm run update_tutorialsdocs && npm run update_usagedocs && gatsby build && gh-pages -d public -b master"
   },
   "repository": {

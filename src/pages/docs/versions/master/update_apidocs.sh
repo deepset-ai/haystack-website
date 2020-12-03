@@ -5,6 +5,11 @@ versions=("" "latest/" "v0.4.0/" "v0.5.0/")
 
 for i in "${versions[@]}"
 do
+    rm ./src/pages/docs/versions/master/${i}site/en/api/api/*
+done
+
+for i in "${versions[@]}"
+do
     j=$i
     if [ "$i" = "latest/" ]; then
         j=''
