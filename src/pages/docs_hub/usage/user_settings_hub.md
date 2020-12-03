@@ -2,9 +2,9 @@
 title: "User Settings"
 metaTitle: "DashboUser Settingsard"
 metaDescription: ""
-slug: "/docs/user_settings"
+slug: "/docs/user_settings_hub"
 date: "2020-09-03"
-id: "user_settingsmd"
+id: "user_settings_hubmd"
 ---
 
 # User Settings
@@ -12,7 +12,7 @@ id: "user_settingsmd"
 The user can update and change the user settings. The menu can be entered by clicking on the user's name on the top right. This will open a dropdown with different options. The first three options are going to be described in the following sections. Furthermore, the following options can be chosen:
 
 * **Contact Us**: The user will be forwarded to a [contact formular](https://haystack.deepset.ai/contact/contact). If you have any questions regarding Haystack, feel free to contact our support team there.
-* **Documentation**: The user will be forwarded to the [Haystack Hub website](https://haystack.deepset.ai/docs_hub/get_startedmd) where the documentation for Haystack can be found.
+* **Documentation**: The user will be forwarded to the [Haystack Hub website](https://haystack.deepset.ai/docs_hub/get_started_hubmd) where the documentation for Haystack can be found.
 * **Sign Out**: The user will be signed out from Haystack Hub and will be forwarded to the [login page](https://app.haystack-hub).
 
 ![image](../img/HaystackHub_menuusersettings_.png)

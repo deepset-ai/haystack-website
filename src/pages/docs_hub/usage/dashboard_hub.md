@@ -2,22 +2,22 @@
 title: "Dashboard"
 metaTitle: "Dashboard"
 metaDescription: ""
-slug: "/docs/dashboard"
+slug: "/docs/dashboard_hub"
 date: "2020-09-03"
-id: "dashboardmd"
+id: "dashboard_hubmd"
 ---
 
 # Dashboard
 
 ## Getting Started
 
-Haystack Hub supports you with your first steps. You will find a detailed description [here](/docs_hub/get_startedmd#First-steps)
+Haystack Hub supports you with your first steps. You will find a detailed description [here](/docs_hub/get_started_hubmd#First-steps)
 
 ![image](../img/HaystackHub_gettingstarted.png)
 
 ## Health Analysis
 
-Haystack Hub checks if your uploaded files match the configured workspace language. You find a list of warnings in [Documents view](/docs_hub/upload_documentsmd#Warnings) and on the dashboard in the section **Health Analysis**. In order to use the files in your search, you need to resolve the issues.
+Haystack Hub checks if your uploaded files match the configured workspace language. You find a list of warnings in [Documents view](/docs_hub/upload_documents_hubmd#Warnings) and on the dashboard in the section **Health Analysis**. In order to use the files in your search, you need to resolve the issues.
 
 ![image](../img/HaystackHub_health.png)
 

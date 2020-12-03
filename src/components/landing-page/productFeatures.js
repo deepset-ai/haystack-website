@@ -22,35 +22,35 @@ const ProductFeatures = props => {
             />
           </div>
       <div className="core-features">
-        <a href="/en/docs/readermd#Choosing-the-Right-Model">
+        <a href="/docs/readermd#Choosing-the-Right-Model">
             <div className="core-feature-2">
             <img src={BertImg} className="img-feature img-bert" alt="Bert"></img>
             <h4>Latest NLP models</h4>
             <p>Utilize all transformer based models (BERT & co.) and smoothly switch when new ones get published</p>
             </div>
         </a>
-        <a href="/en/docs/databasemd">
+        <a href="/docs/documentstoremd">
           <div className="core-feature-2">
             <DatabaseSVG className="database-svg" />
             <h4>Flexible databases</h4>
             <p>Load data into and query from a range of databases such as Elasticsearch, FAISS, SQL and more</p>
           </div>
         </a>
-        <a href="/en/docs/databasemd#Choosing-the-right-document-store">
+        <a href="/docs/documentstoremd#Choosing-the-Right-Document-Store">
           <div className="core-feature-2">
             <RocketSVG className="rocket-svg" />
             <h4>Scalability</h4>
             <p>Production-ready deployments that scale to millions of documents</p>
           </div>
         </a>
-        <a href="/en/docs/tutorial1md">
+        <a href="/docs/tutorial1md">
           <div className="core-feature-2">
             <InvinitySVG className="endtoend-svg" />
             <h4>End-to-End</h4>
             <p>All tooling you need to implement, evaluate, improve and operate your QA system</p>
           </div>
         </a>
-        <a href="/en/docs/domain_adaptationmd">
+        <a href="/docs/domain_adaptationmd">
           <div className="core-feature-2">
             <BertAdapt className="bertadap-svg" />
             <h4>Domain adaptation</h4>

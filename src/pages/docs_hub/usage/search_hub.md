@@ -2,14 +2,14 @@
 title: "Search"
 metaTitle: "Search"
 metaDescription: ""
-slug: "/docs/search"
+slug: "/docs/search_hub"
 date: "2020-09-03"
-id: "searchmd"
+id: "search_hubmd"
 ---
 
 # Search
 
-Haystack Hub enables you to search your text documents. After you uploaded your [documents](/docs_hub/upload_documentsmd), you can start searching. Either you click **Search**  in the menu or **Your Search is ready** on the dashboard. When you enter the page, you will find a search bar where you can **ask your question**.
+Haystack Hub enables you to search your text documents. After you uploaded your [documents](/docs_hub/upload_documents_hubmd), you can start searching. Either you click **Search**  in the menu or **Your Search is ready** on the dashboard. When you enter the page, you will find a search bar where you can **ask your question**.
 
 ![image](../img/HaystackHub_searchempty.png)
 

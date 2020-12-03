@@ -2,9 +2,9 @@
 title: "What is Haystack Hub?"
 metaTitle: "What is Haystack Hub?"
 metaDescription: ""
-slug: "/docs/optimizemd"
+slug: "/docs/optimize_hub"
 date: "2020-09-03"
-id: "optimizemd"
+id: "optimize_hubmd"
 ---
 
 # Optimize Your Search
@@ -15,7 +15,7 @@ We have several options to configure your workspace. Most of these options have 
 
 ### Document Length
 
-Document length has a very direct impact on the speed of the Reader, which is why we recommend using the [**Preprocessor** configuration](/docs_hub/upload_documentsmd#Preprocessing) to clean and split your documents. If you halve the length of your documents, you will halve the workload placed onto your Reader.
+Document length has a very direct impact on the speed of the Reader, which is why we recommend using the [**Preprocessor** configuration](/docs_hub/upload_documents_hubmd#Preprocessing) to clean and split your documents. If you halve the length of your documents, you will halve the workload placed onto your Reader.
 
 ![image](../img/HaystackHub_optimizepreprocessing.png)
 

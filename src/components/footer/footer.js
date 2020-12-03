@@ -17,7 +17,7 @@ const Footer = ({ style }) => {
     <footer className="footer-wrapper" style={style}>
       <div className="follow">Social networks: 
       <Link to="https://twitter.com/deepset_ai/"><FontAwesomeIcon class="fontawsome-icon" icon={faTwitter}/></Link>
-      <Link to="https://www.linkedin.com/company/deepset/"><FontAwesomeIcon class="fontawsome-icon" icon={faLinkedin}/></Link>
+      <Link to="https://www.linkedin.com/company/deepset-ai/"><FontAwesomeIcon class="fontawsome-icon" icon={faLinkedin}/></Link>
       </div>
       <div className="copy-right">
         <span>© 2020 - {new Date().getFullYear()} deepset. All rights reserved.</span>

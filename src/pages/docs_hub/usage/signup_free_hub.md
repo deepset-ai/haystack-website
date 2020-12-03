@@ -2,9 +2,9 @@
 title: "Sign up for Free Trial"
 metaTitle: "Sign up for Free Trial"
 metaDescription: ""
-slug: "/docs/signup_free"
+slug: "/docs/signup_free_hub"
 date: "2020-09-03"
-id: "signup_freemd"
+id: "signup_free_hubmd"
 ---
 
 # Sign up for a Free Haystack Hub Trial
