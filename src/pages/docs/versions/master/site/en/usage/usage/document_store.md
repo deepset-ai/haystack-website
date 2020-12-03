@@ -40,7 +40,7 @@ document_store = ElasticsearchDocumentStore()
 <div class="tabcontent">
 
 ```python
-document_store = FAISSDocumentStore()
+document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
 ```
 
 </div>
@@ -79,7 +79,7 @@ See API documentation for more info.
 
 DocumentStores expect Documents in dictionary form, like that below.
 They are loaded using the `DocumentStore.write_documents()` method.
-See [Preprocessing](/docs/latest/preprocessingmd) for more information on how to best prepare your data.
+See [Preprocessing](/docs/latest/preprocessingmd) for more information on the cleaning and splitting steps that will help you maximize Haystack's performance.
 
 [//]: # (Add link to preprocessing section)
 
@@ -154,7 +154,7 @@ The Document Stores have different characteristics. You should choose one depend
 **Pros:** 
 - Fast & accurate dense retrieval
 - Highly scalable due to approximate nearest neighbour algorithms (ANN)
-- Many options to tune dense retrieval via different index types 
+- Many options to tune dense retrieval via different index types (more info [here](https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index))
 
 **Cons:**
 - No efficient sparse retrieval
