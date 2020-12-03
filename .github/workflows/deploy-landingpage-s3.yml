@@ -25,6 +25,8 @@ jobs:
           npm run update_tutorialsdocs
           npm run update_usagedocs
           npm run update_benchmarks
+          npm ci
+          npm run build
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
