@@ -155,8 +155,6 @@ export default (props) => {
     event.stopPropagation();
     event.preventDefault();
 
-    console.log(anchor);
-
     setHash(anchor);
 
     const element = document.querySelector(`#${anchor}`);

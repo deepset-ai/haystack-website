@@ -92,8 +92,6 @@ const Menu = (props) => {
       } else {
         activeDoc = `${activeDoc}`;
       }
-      console.log(activeDoc);
-      console.log(list);
       const findDoc = findItem("id", activeDoc, list);
       if (!findDoc) {
         return;
