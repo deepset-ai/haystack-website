@@ -42,7 +42,6 @@ jobs:
         with:
           time: '30s'
       - name: Check links
-          run: |
-            npm install broken-link-checker -g
-            blc http://haystackhub-website.s3-website.eu-central-1.amazonaws.com -ro
-            
+        run: |
+          npm install broken-link-checker -g
+          blc http://haystackhub-website.s3-website.eu-central-1.amazonaws.com -ro
