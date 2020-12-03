@@ -36,7 +36,7 @@ jobs:
       - uses: enriikke/gatsby-gh-pages-action@v2
         with:
           access-token: ${{ secrets.TOKEN_FOR_DEPLOYMENT }}
-          
+
       - name: Sleep for 30 seconds
         uses: jakejarvis/wait-action@master
         with:
@@ -44,4 +44,4 @@ jobs:
       - name: Check links
         run: |
           npm install broken-link-checker -g
-          blc http://haystackhub-website.s3-website.eu-central-1.amazonaws.com -ro --exclude https://www.linkedin.com/company/deepset-ai/
+          blc https://haystack.deepset.ai/ -ro --exclude https://www.linkedin.com/company/deepset-ai/
