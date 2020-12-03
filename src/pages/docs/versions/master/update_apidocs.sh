@@ -20,6 +20,9 @@ do
     wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/preprocessor.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/preprocessor.md 
     wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/reader.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/reader.md 
     wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/retriever.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/retriever.md
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/generator.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/generator.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
+    fi
 
     echo -e "---\ntitle: \"Document Store\"\nmetaTitle: \"Database\"\nmetaDescription: \"\"\nslug: \"/docs/apidatabase\"\ndate: \"2020-09-03\"\nid: \"apidatabasemd\"\n---\n\n# Document Store\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
     sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
@@ -36,4 +39,9 @@ do
     echo -e "---\ntitle: \"Retriever\"\nmetaTitle: \"Retriever\"\nmetaDescription: \"\"\nslug: \"/docs/apiretrievermd\"\ndate: \"2020-09-03\"\nid: \"apiretrievermd\"\n---\n\n# Retriever\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/retriever.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/retriever.md
     sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/retriever.md 
     sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/retriever.md 
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/generator.md" ]]; then
+        echo -e "---\ntitle: \"Generator\"\nmetaTitle: \"Generator\"\nmetaDescription: \"\"\nslug: \"/docs/apigeneratormd\"\ndate: \"2020-09-03\"\nid: \"apigeneratormd\"\n---\n\n# Generator\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
+        sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
+        sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
+    fi
 done
