@@ -9,12 +9,15 @@ id: "intro_hubmd"
 
 # What is Haystack Hub?
 
-We are providing Haystack as [**Open source framework**](/docs/intromd) to scale QA models to large collections of documents and Haystack Hub as **Enterprise-ready** subscription model with full service to enable neural search.
+Haystack Hub is a complementary platform to our [**open source framework**](/docs/intromd). Haystack Hub enables faster proof of concepts, smooths the transition to production and helps to operate & monitor your search pipelines in the enterprise context. As we offer Haystack Hub via an **enterprise-ready** SaaS model, you don't have to worry about scaling if your search traffic grows. Just focus on building your pipeline and integrating it into your application. 
 
-**Everything in Open Source plus**
-* Web interface for configuring and operating your QA system
-* API access
-* Search UI for end users
+**Core features**
+* Web interface for configuring and operating your search pipeline(s)
+* REST API access
+* Automatic scaling of models and infrastructure by us
+* Monitoring of models & requests
+* Continuous improvements of models via user feedback
+* Search UI for end users 
 * Support
   
 ![image](../../../images/HaystackSearch.png)
