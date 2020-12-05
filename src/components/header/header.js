@@ -159,7 +159,15 @@ const Header = ({ siteTitle, menuLinks }) => {
          className="link"
          locale="en"
         >
-          Docs
+          Haystack Docs
+        </LocalizedLink>
+
+        <LocalizedLink
+         to="/docs_hub/intro_hubmd"
+         className="link"
+         locale="en"
+        >
+          Haystack Hub Docs
         </LocalizedLink>
 
         <LocalizedLink

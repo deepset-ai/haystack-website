@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - clean_mkfiles_upload
+      - add_link_checker
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: clean_mkfiles_upload
+          ref: add_link_checker
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
@@ -44,5 +44,4 @@ jobs:
       - name: Check links
         run: |
           npm install broken-link-checker -g
-          blc http://haystackhub-website.s3-website.eu-central-1.amazonaws.com -ro --exclude https://www.linkedin.com/company/deepset-ai/
-          blc http://haystackhub-website.s3-website.eu-central-1.amazonaws.com/docs_hub/intro_hubmd -ro --exclude https://www.linkedin.com/company/deepset-ai/ --exclude http://127.0.0.1:8000/docs
+          ./broken-link-checker.sh
