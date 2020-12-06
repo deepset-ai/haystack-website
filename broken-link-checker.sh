@@ -13,5 +13,3 @@ do
     fi
     blc $url -ro --exclude https://www.linkedin.com/company/deepset-ai/ --exclude http://127.0.0.1:8000/docs --firlter-level 1
 done
-
-echo $duration
