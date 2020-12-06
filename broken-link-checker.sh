@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [ "$1" = "dev" ]; then
-   urls=$(curl http://haystackhub-website.s3-website.eu-central-1.amazonaws.com/sitemap.xml  | tac | tac | sitemap-urls)
+   urls=$(curl http://haystackhub-website.s3-website.eu-central-1.amazonaws.com/sitemap.xml | sitemap-urls)
 else 
-   urls=$(curl https://haystack.deepset.ai/sitemap.xml  | tac | tac | sitemap-urls) 
+   urls=$(curl https://haystack.deepset.ai/sitemap.xml | sitemap-urls) 
 fi
 
 for url in $(echo $urls | tr " " "\n")
