@@ -44,4 +44,4 @@ jobs:
       - name: Check links
         run: |
           npm install broken-link-checker -g
-          npm run check_links
+          npm run check_links_dev
