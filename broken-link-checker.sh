@@ -1,6 +1,10 @@
 #!/bin/bash
 
-urls=$(curl http://haystackhub-website.s3-website.eu-central-1.amazonaws.com/sitemap.xml  | tac | tac | sitemap-urls)
+if [ "$1" = "dev" ]; then
+   urls=$(curl http://haystackhub-website.s3-website.eu-central-1.amazonaws.com/sitemap.xml  | tac | tac | sitemap-urls)
+else 
+   urls=$(curl https://haystack.deepset.ai/sitemap.xml  | tac | tac | sitemap-urls) 
+fi
 
 for url in $(echo $urls | tr " " "\n")
 do
