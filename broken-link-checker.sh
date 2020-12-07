@@ -14,7 +14,7 @@ do
     if [ $url == *"v0.4.0"* ] || [ $url == *"v0.5.0"* ]; then
         continue
     fi
-    blc $url -ro --exclude https://www.linkedin.com/company/deepset-ai/ --exclude http://127.0.0.1:8000/docs --firlter-level 1 --host-requests 4
+    blc $url -ro --exclude https://www.linkedin.com/company/deepset-ai/ --exclude http://127.0.0.1:8000/docs --exclude https://medium.com/deepset-ai/modern-question-answering-systems-explained-4d0913744097 --firlter-level 1 --host-requests 4
     status=$?
     
     if [ "$status" != "0" ]; then
