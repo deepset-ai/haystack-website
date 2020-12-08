@@ -10,6 +10,7 @@ import "../../scss/specs/_specpath.scss";
 const SpecPaths = ({ tag, paths }) => {
   
   const [showChild, setShowChild] = useState(false);
+  const [codeType, setCodeType] = useState("Example");
 
   function IterateJSON(jsonObject= {}) {
     let type = "";
@@ -85,15 +86,22 @@ const SpecPaths = ({ tag, paths }) => {
           <div className="method-example-response-topbar">
             <div className="method-example-response-title">
               <div className="method-example-response-title-text">
-                Request Body Example
+              <div class="tab">
+                <button class="tablinks" onMouseDown={(e) => { e.stopPropagation(); setCodeType("Example");}}>Example</button>
+                <button class="tablinks" onMouseDown={(e) => { e.stopPropagation(); setCodeType("cURL");}}>cURL</button>
+              </div>
               </div>
             </div>
             <div className="ResourceSectionEndpoints-endpoints">
-              <pre class="box">
-                <code class="language-json">
-                  {p.example}
-                </code>
-              </pre>
+              <div id="Example" class={`tabcontent ${codeType === "Example" ? "active" : ""}`}>
+                <pre class="box">
+                  <code class="language-json">
+                    {p.example}
+                  </code>
+                </pre>
+              </div>
+              <div id="cURL" class={`tabcontent ${codeType === "cURL" ? "active" : ""}`}>
+              </div>
             </div>
           </div>
         </div>
