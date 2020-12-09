@@ -12,6 +12,8 @@ const SpecPaths = ({ tag, paths }) => {
   const [showChild, setShowChild] = useState(false);
   const [codeType, setCodeType] = useState("Example");
 
+  console.log(codeType);
+
   function IterateJSON(jsonObject= {}) {
     let type = "";
     let elementArray = null;
@@ -85,7 +87,7 @@ const SpecPaths = ({ tag, paths }) => {
         <div className="request-endpoint">
           <div className="method-example-response-topbar">
             <div className="method-example-response-title">
-              <div className="method-example-response-title-text">
+              <div className="method-example-response-title-text-button">
               <div class="tab">
                 <button class="tablinks" onMouseDown={(e) => { e.stopPropagation(); setCodeType("Example");}}>Example</button>
                 <button class="tablinks" onMouseDown={(e) => { e.stopPropagation(); setCodeType("cURL");}}>cURL</button>
@@ -93,15 +95,16 @@ const SpecPaths = ({ tag, paths }) => {
               </div>
             </div>
             <div className="ResourceSectionEndpoints-endpoints">
-              <div id="Example" class={`tabcontent ${codeType === "Example" ? "active" : ""}`}>
+                {codeType==="Example" ? (
                 <pre class="box">
                   <code class="language-json">
                     {p.example}
                   </code>
-                </pre>
-              </div>
-              <div id="cURL" class={`tabcontent ${codeType === "cURL" ? "active" : ""}`}>
-              </div>
+                </pre>) : (
+                <pre class="box">
+                  <code class="language-shell">
+                  </code>
+                </pre>)}
             </div>
           </div>
         </div>
