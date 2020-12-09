@@ -23,6 +23,7 @@ const BetaPage = () => {
 
   const [email, setEmail] = useState('');
   const [usecase, setUsecase] = useState('');
+  const [company, setCompany] = useState('');
   const [consentToProcess, setConsentToProcess] = useState(false);
   const [communications, setCommunications] = useState(false);
   const [success, setSuccess] = React.useState(false);
@@ -44,6 +45,10 @@ const BetaPage = () => {
         {
           "name": "use_case",
           "value": usecase
+        },
+        {
+          "name": "company",
+          "value": company
         }
       ],
       "context": {
@@ -97,6 +102,10 @@ const BetaPage = () => {
     setUsecase(event.target.value);
   };
 
+  const handleChangeCompany = (event) => {
+    setCompany(event.target.value);
+  };
+
   const handleChangeConsentToProcess = (event) => {
     setConsentToProcess(event.target.checked);
   };
@@ -118,7 +127,7 @@ const BetaPage = () => {
       <Layout>
         <SEO title="Haystack Hub (Beta)" pathname="/signup/beta" image={Logo} />
         <section className="contact">
-            <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar open={success} autoHideDuration={6000} onClose={handleClose} >
             <Alert onClose={handleClose} severity="success">
             Thank you for joining the waiting list!
             </Alert>
@@ -182,6 +191,12 @@ const BetaPage = () => {
                         <FormControl className="form-control" variant="filled">
                         <InputLabel required htmlFor="email">Email address</InputLabel>
                         <Input required id="email" value={email} onChange={handleChange} />
+                        </FormControl>
+                        </div>
+                        <div>
+                        <FormControl className="form-control" variant="filled">
+                        <InputLabel htmlFor="company">Company/ Organization</InputLabel>
+                        <Input id="company" value={company} onChange={handleChangeCompany} />
                         </FormControl>
                         </div>
                         <div>
