@@ -80,12 +80,12 @@ const toNode = (data, type) => {
 
 const fetchSpec = async url => {
   return fetch(url).then(response => {
-    console.log(esponse.status)
+    console.log(response.status);
     if (response.status === 200) {
       return response.text();
     }
 
-    console.log('There was an error retrieving document.')
+    throw new Error('There was an error retrieving document.')
   })
 }
 
