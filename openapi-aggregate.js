@@ -93,7 +93,7 @@ const fetchSpec = async url => {
   return doc.toString();
 }*/
 
-function openApiAggregate(url, nodes = []) {
+function openApiAggregate(url="https://api.haystack-hub.com/openapi.json", nodes = []) {
     fetchSpec(url).then((result) => {
       //fetchSpecFile(url).then((result) => {
         const json = JSON.parse(result)

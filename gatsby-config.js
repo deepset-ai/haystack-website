@@ -216,7 +216,7 @@ module.exports = {
             }
           })
       }
-    }
+    },
     /*{
       resolve: "gatsby-plugin-hubspot",
       options: {
