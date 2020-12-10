@@ -80,7 +80,6 @@ const toNode = (data, type) => {
 
 const fetchSpec = async url => {
   return fetch(url).then(response => {
-    console.log(response.status);
     if (response.status === 200) {
       return response.text();
     }

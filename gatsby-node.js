@@ -1,14 +1,20 @@
+const GenerateOpenAPI = require("./openapi-aggregate");
+const nodes = GenerateOpenAPI("https://api.haystack-hub.com/openapi.json");//GenerateOpenAPI("./src/pages/docs_hub/open_api.json");
 const path = require("path");
 const fs = require("fs");
 const ReadVersionJson = require("./walkFile");
-const GenerateOpenAPI = require("./openapi-aggregate");
-const nodes = GenerateOpenAPI("https://api.haystack-hub.com/openapi.json");//GenerateOpenAPI("./src/pages/docs_hub/open_api.json");
+
+
 exports.sourceNodes = ({ actions }) => {
   const { createNode } = actions;
+  if(nodes.length == 0) {
+    console.log("no api");
+  }
   nodes.forEach(n => {
     createNode(n);
   });
 }
+
 const locales = require("./src/consts/locales");
 const express = require("express");
 const env = "latest";
