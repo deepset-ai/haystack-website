@@ -4,7 +4,6 @@ const ReadVersionJson = require("./walkFile");
 const GenerateOpenAPI = require("./openapi-aggregate");
 const nodes = GenerateOpenAPI("https://api.haystack-hub.com/openapi.json");//GenerateOpenAPI("./src/pages/docs_hub/open_api.json");
 exports.sourceNodes = ({ actions }) => {
-  console.log(nodes);
   const { createNode } = actions;
   nodes.forEach(n => {
     createNode(n);
