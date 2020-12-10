@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - add_company_field
+      - update_benchmarks
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: add_company_field
+          ref: update_benchmarks
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
