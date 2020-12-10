@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - add_company_field
+      - add_link_checker
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: add_company_field
+          ref: add_link_checker
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
@@ -37,12 +37,12 @@ jobs:
         uses: jonelantha/gatsby-s3-action@v1
         with:
           dest-s3-bucket: haystackhub-website
-      #- name: Sleep for 30 seconds
-      #  uses: jakejarvis/wait-action@master
-      #  with:
-      #    time: '30s'
-      #- name: Check links
-      #  run: |
-      #    npm install broken-link-checker -g
-      #    blc http://haystackhub-website.s3-website.eu-central-1.amazonaws.com -ro --exclude https://www.linkedin.com/company/deepset-ai/
-      #    blc http://haystackhub-website.s3-website.eu-central-1.amazonaws.com/docs_hub/intro_hubmd -ro --exclude https://www.linkedin.com/company/deepset-ai/ --exclude http://127.0.0.1:8000/docs
+      - name: Sleep for 30 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '30s'
+      - name: Check links
+        run: |
+          npm install broken-link-checker -g
+          npm install sitemap-urls
+          npm run check_links_dev

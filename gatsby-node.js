@@ -91,7 +91,7 @@ exports.createPages = ({ actions, graphql }) => {
   const docsCore = graphql(`
     {
       allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/(?:site)/" } }
+        filter: { fileAbsolutePath: { regex: "/(?:site/en)/" } }
       ) {
         edges {
           node {
@@ -107,7 +107,7 @@ exports.createPages = ({ actions, graphql }) => {
           }
         }
       }
-      allFile(filter: { absolutePath: { regex: "/(?:en/menuStructure)/" } }) {
+      allFile(filter: { absolutePath: { regex: "/(?:site/en/menuStructure)/" } }) {
         edges {
           node {
             absolutePath

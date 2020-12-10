@@ -37,11 +37,12 @@ jobs:
         with:
           access-token: ${{ secrets.TOKEN_FOR_DEPLOYMENT }}
 
-      #- name: Sleep for 30 seconds
-      #  uses: jakejarvis/wait-action@master
-      #  with:
-      #    time: '30s'
-      #- name: Check links
-      #  run: |
-      #    npm install broken-link-checker -g
-      #    blc https://haystack.deepset.ai/ -ro --exclude https://www.linkedin.com/company/deepset-ai/
+      - name: Sleep for 30 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '30s'
+      - name: Check links
+        run: |
+          npm install broken-link-checker -g
+          npm install sitemap-urls
+          npm run check_links_prod

@@ -2,7 +2,7 @@
 title: "Configure Model"
 metaTitle: "Configure Model"
 metaDescription: ""
-slug: "/docs/conf_model_hub"
+slug: "/docs_hub/conf_model_hub"
 date: "2020-09-03"
 id: "conf_model_hubmd"
 ---

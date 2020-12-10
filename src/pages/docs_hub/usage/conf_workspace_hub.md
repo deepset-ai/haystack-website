@@ -15,7 +15,7 @@ Haystack Hub comes with a default configuration for your workspace. If you want 
 
 ## Workspace Languages
 
-Every workspace has one or multiple languages. For now, Haystack Hub only supports **English** and **German**. The selected language defines which languages are allowed for your documents. E.g. if you select **English**, you can only upload documents written in English. Haystack Hub will support you and check the language of the documents during the [upload process](/docs_hub/upload_documentsmd).
+Every workspace has one or multiple languages. For now, Haystack Hub only supports **English** and **German**. The selected language defines which languages are allowed for your documents. E.g. if you select **English**, you can only upload documents written in English. Haystack Hub will support you and check the language of the documents during the [upload process](/docs_hub/upload_documents_hubmd).
 
 ![image](../img/HaystackHub_workspacelanguage.png)
 
