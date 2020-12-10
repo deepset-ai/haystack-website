@@ -43,6 +43,6 @@ jobs:
           time: '30s'
       - name: Check links
         run: |
-          npm install broken-link-checker -g
+          sudo npm install broken-link-checker -g
           npm install sitemap-urls
           npm run check_links_prod
