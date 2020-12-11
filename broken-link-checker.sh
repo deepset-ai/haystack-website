@@ -11,10 +11,7 @@ do
     if [ "$1" = "dev" ]; then
         url="${url/https:\/\/haystack.deepset.ai/http:\/\/haystackhub-website.s3-website.eu-central-1.amazonaws.com}"
     fi
-    if [ $url == *"v0.4.0"* ] || [ $url == *"v0.5.0"* ]; then
-        continue
-    fi
-    blc $url -ro --exclude https://www.linkedin.com/company/deepset-ai/ \
+    blc $url -o --exclude https://www.linkedin.com/company/deepset-ai/ \
     --exclude http://127.0.0.1:8000/docs \
     --exclude https://medium.com/deepset-ai/modern-question-answering-systems-explained-4d0913744097 \
     --exclude http://haystackhub-website.s3-website.eu-central-1.amazonaws.com/docs/v0.4.0/tutorial2md \
