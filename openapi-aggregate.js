@@ -93,11 +93,10 @@ const fetchSpec = async url => {
   return doc.toString();
 }*/
 
-function openApiAggregate(url="https://api.haystack-hub.com/openapi.json", nodes = []) {
+function openApiAggregate(url, nodes = []) {
     fetchSpec(url).then((result) => {
       //fetchSpecFile(url).then((result) => {
-        console.log("Start generate api spec");
-        const json = JSON.parse(result);
+        const json = JSON.parse(result)
         const name = 'openapispec'
         const rootId = `spec.${name}`;
         
@@ -278,8 +277,6 @@ function openApiAggregate(url="https://api.haystack-hub.com/openapi.json", nodes
         })
 
     });
-
-    console.log("Finish generate api spec");
 
     return nodes;
 }
