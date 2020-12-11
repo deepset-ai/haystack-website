@@ -71,9 +71,9 @@ exports.onCreatePage = ({ page, actions }) => {
   });
 };
 
-const nodes =  GenerateOpenAPI("https://api.haystack-hub.com/openapi.json");//GenerateOpenAPI("./src/pages/docs_hub/open_api.json");
+exports.sourceNodes = async ({ actions }) => {
 
-exports.sourceNodes = ({ actions }) => {
+  const nodes = await GenerateOpenAPI("https://api.haystack-hub.com/openapi.json");//GenerateOpenAPI("./src/pages/docs_hub/open_api.json");
 
   const { createNode } = actions;
 
