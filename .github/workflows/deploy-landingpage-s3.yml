@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - add_link_checker
+      - fix_async_api_docs
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: add_link_checker
+          ref: fix_async_api_docs
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:

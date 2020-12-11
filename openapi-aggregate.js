@@ -94,7 +94,7 @@ const fetchSpec = async url => {
 }*/
 
 function openApiAggregate(url, nodes = []) {
-    fetchSpec(url).then((result) => {
+    return fetchSpec(url).then((result) => {
       //fetchSpecFile(url).then((result) => {
         const json = JSON.parse(result)
         const name = 'openapispec'
@@ -276,9 +276,9 @@ function openApiAggregate(url, nodes = []) {
           nodes.push(toNode(r, 'OpenApiSpecComponents'))
         })
 
-    });
+        return nodes;
 
-    return nodes;
+    });
 }
 
 module.exports = openApiAggregate;
