@@ -28,4 +28,5 @@ do
     if [ "$status" != "0" ]; then
         exit 1
     fi
+    sleep 1
 done
