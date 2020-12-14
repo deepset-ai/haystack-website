@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Used branch
+echo "Haystack branch: $1"
+
 # Master data
 versions=("" "latest/" "v0.4.0/" "v0.5.0/")  
 
@@ -15,13 +18,13 @@ do
         j=''
     fi
 
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/document_store.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/file_converter.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/file_converter.md
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/preprocessor.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/preprocessor.md 
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/reader.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/reader.md 
-    wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/retriever.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/retriever.md
-    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/generator.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
-        wget https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${j}_src/api/api/generator.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/document_store.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/file_converter.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/file_converter.md
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/preprocessor.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/preprocessor.md 
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/reader.md -O ./src/pages/docs/versions/master/${i}site/en/api/api/reader.md 
+    wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/retriever.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/retriever.md
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/generator.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/generator.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
     fi
 
     echo -e "---\ntitle: \"Document Store\"\nmetaTitle: \"Database\"\nmetaDescription: \"\"\nslug: \"/docs/apidatabase\"\ndate: \"2020-09-03\"\nid: \"apidatabasemd\"\n---\n\n# Document Store\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
