@@ -217,6 +217,14 @@ module.exports = {
           })
       }
     },
+    {
+      resolve: "@sentry/gatsby",
+      options: {
+        dsn: "https://d837502349244a4289584f23df6bd79b@o485100.ingest.sentry.io/5556528",
+        autoSessionTracking: true,
+        sampleRate: 0.7,
+      },
+    },
     /*{
       resolve: "gatsby-plugin-hubspot",
       options: {
