@@ -2,9 +2,9 @@
   background-color: #F5F6FA;
 
   .logo-icon {
-    margin-top: 100px;
+    margin-top: 80px;
     margin-left: 30px;
-    margin-bottom: 60px;
+    margin-bottom: 45px;
     height: 55px;
     width: 46px;
   }
@@ -43,8 +43,11 @@
       display: grid;
       grid-template-columns: repeat(8, 1fr);
       row-gap: 0.25em;
-      margin-bottom: 2em;
-      padding: 2em;
+      margin-bottom: 1.8em;
+      padding-left: 2em;
+      padding-right: 2em;
+      padding-top: 5em;
+      padding-bottom: 5em;
       max-width: $maxContainerWidth;
       margin: 0 auto;
     }
