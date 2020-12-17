@@ -42,7 +42,7 @@ do
     if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/annotation.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
         wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/annotation.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/annotation.md
     fi
-    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/mast${1}er/docs/${j}_src/usage/usage/generator.md   2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/generator.md   2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
         wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/generator.md   -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/generator.md 
     fi
     if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/optimization.md 2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
