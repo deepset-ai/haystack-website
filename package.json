@@ -12,6 +12,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/styles": "^4.10.0",
+    "@sentry/gatsby": "^5.29.0",
     "core-js": "^3.7.0",
     "filesystem": "^1.0.1",
     "gatsby": "^2.24.67",
@@ -63,6 +64,7 @@
     "react-tooltip": "^4.2.9",
     "redoc": "^2.0.0-rc.45",
     "remark-react": "^8.0.0",
+    "sitemap-urls": "^3.0.0",
     "source": "0.0.3",
     "styled-components": "^5.2.1"
   },
@@ -88,6 +90,8 @@
     "update_usagedocs": "./src/pages/docs/versions/master/update_usagedocs.sh",
     "update_img": "./src/pages/docs/versions/master/update_img.sh",
     "update_benchmarks": "./src/pages/benchmarks/versions/update_benchmarks.sh",
+    "check_links_dev": "./broken-link-checker.sh dev",
+    "check_links_prod": "./broken-link-checker.sh prod",
     "update_deploy": "npm run update_benchmarks && npm run update_img && npm run update_apidocs && npm run update_tutorialsdocs && npm run update_usagedocs && gatsby build && gh-pages -d public -b master"
   },
   "repository": {

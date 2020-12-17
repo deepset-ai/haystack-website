@@ -40,6 +40,6 @@ This article describes how to sign up for a subscription.
 
 ![image](../img/HaystackHub_signup5_.png)
 
-8. Enjoy using **Haystack Hub**. To get started check out the section [**Quickstart**](docs_hub/get_startedmd)
+8. Enjoy using **Haystack Hub**. To get started check out the section [**Quickstart**](/docs_hub/get_started_hubmd)
 
 ![image](../img/HaystackHub_signup6_.png)

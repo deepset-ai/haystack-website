@@ -27,7 +27,7 @@ When splitting documents, it is generally not a good idea to let document bounda
 
 ## Retriever and Reader Configuration
 
-The **Top-K** parameter in both the [**Retriever**](/configuration/retriever) and [**Reader**](/configuration/reader) determine how many results they return. More specifically, Retriever Top-K dictates how many retrieved documents are passed on to the next stage, while Reader Top-K determines how many answer candidates to show.
+The **Top-K** parameter in both the [**Retriever**](https://app.haystack-hub.com/configuration/retriever) and [**Reader**](https://app.haystack-hub.com/configuration/reader) determine how many results they return. More specifically, Retriever Top-K dictates how many retrieved documents are passed on to the next stage, while Reader Top-K determines how many answer candidates to show.
 
 In our experiments, we have found that Retriever **Top-K=10** gives decent overall performance and so we have set this as the default in Haystack Hub.
 

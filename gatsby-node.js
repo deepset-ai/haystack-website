@@ -71,9 +71,9 @@ exports.onCreatePage = ({ page, actions }) => {
   });
 };
 
-const nodes =  GenerateOpenAPI("https://api.haystack-hub.com/openapi.json");//GenerateOpenAPI("./src/pages/docs_hub/open_api.json");
+exports.sourceNodes = async ({ actions }) => {
 
-exports.sourceNodes = ({ actions }) => {
+  const nodes = await GenerateOpenAPI("https://api.haystack-hub.com/openapi.json");//GenerateOpenAPI("./src/pages/docs_hub/open_api.json");
 
   const { createNode } = actions;
 
@@ -91,7 +91,7 @@ exports.createPages = ({ actions, graphql }) => {
   const docsCore = graphql(`
     {
       allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/(?:site)/" } }
+        filter: { fileAbsolutePath: { regex: "/(?:site/en)/" } }
       ) {
         edges {
           node {
@@ -107,7 +107,7 @@ exports.createPages = ({ actions, graphql }) => {
           }
         }
       }
-      allFile(filter: { absolutePath: { regex: "/(?:en/menuStructure)/" } }) {
+      allFile(filter: { absolutePath: { regex: "/(?:site/en/menuStructure)/" } }) {
         edges {
           node {
             absolutePath

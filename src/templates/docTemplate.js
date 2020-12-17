@@ -274,7 +274,9 @@ export default function Template({
                   className="md-tooltip"
                 />
                 {!(isDocHub) ? (
-                <a
+                <div>
+                  {version==="latest" ? (
+                    <a
                     className="edit-page-link btn"
                     href={`https://github.com/deepset-ai/haystack/tree/master/docs/_src/${editPath}`}
                     target="_blank"
@@ -283,6 +285,18 @@ export default function Template({
                     <FontAwesomeIcon icon={faEdit}/>
                     Edit
                   </a>
+                  ) : 
+                  <a
+                  className="edit-page-link btn"
+                  href={`https://github.com/deepset-ai/haystack/tree/master/docs/${version}/_src/${editPath}`}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <FontAwesomeIcon icon={faEdit}/>
+                  Edit
+                </a>
+                  }
+                  </div>
                   ) : null}
               </div>
               )}
