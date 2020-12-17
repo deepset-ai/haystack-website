@@ -22,7 +22,8 @@ do
     --exclude https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/img/colab_gpu_runtime.jpg \
     --exclude http://github.com/deepset-ai/haystack/ \
     --exclude http://github.com/deepset-ai/haystack/stargazers/ \
-    --firlter-level 1 --host-requests 1
+    --exclude https://twitter.com/deepset_ai/ \
+    --filter-level 1 --host-requests 1 
     status=$?
     
     if [ "$status" != "0" ]; then
