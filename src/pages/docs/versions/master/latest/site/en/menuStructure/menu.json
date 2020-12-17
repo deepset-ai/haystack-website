@@ -99,12 +99,20 @@
       "order": 4
     },
     {
+      "id": "pipelinesmd",
+      "title": "Pipelines",
+      "label1": "usage_haystack",
+      "label2": "",
+      "label3": "",
+      "order": 5
+    },
+    {
       "id": "languagesmd",
       "title": "Languages Other Than English",
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 6
     },
     {
       "id": "domain_adaptationmd",
@@ -112,7 +120,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 7
     },
     {
       "id": "optimizationmd",
@@ -120,7 +128,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order": 8
     },
     {
       "id": "annotationmd",
@@ -128,7 +136,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 8
+      "order": 9
     },
     {
       "id": "tutorials_haystack",

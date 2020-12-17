@@ -55,6 +55,9 @@ do
     if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/use_cases.md 2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
         wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/use_cases.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/use_cases.md
     fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/pipelines.md 2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/pipelines.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/pipelines.md
+    fi
 
     sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/roadmap.md
     sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/roadmap.md 
@@ -102,5 +105,9 @@ do
     if [[ -f "./src/pages/docs/versions/master/${i}site/en/usage/usage/use_cases.md" ]]; then
         sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/use_cases.md 
         sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/use_cases.md
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/usage/usage/pipelines.md" ]]; then
+        sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/pipelines.md 
+        sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/pipelines.md
     fi
 done
