@@ -278,7 +278,7 @@ export default function Template({
                   {version==="latest" ? (
                     <a
                     className="edit-page-link btn"
-                    href={`https://github.com/deepset-ai/haystack/tree/master/docs/_src/${editPath}`}
+                    href={`https://github.com/deepset-ai/haystack/tree/relase_docs_060/docs/_src/${editPath}`}
                     target="_blank"
                     rel="noreferrer noopener"
                   >
@@ -288,7 +288,7 @@ export default function Template({
                   ) : 
                   <a
                   className="edit-page-link btn"
-                  href={`https://github.com/deepset-ai/haystack/tree/master/docs/${version}/_src/${editPath}`}
+                  href={`https://github.com/deepset-ai/haystack/tree/relase_docs_060/docs/${version}/_src/${editPath}`}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
