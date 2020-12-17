@@ -7,12 +7,16 @@ echo "Haystack branch: $1"
 echo "Haystack branch: $1"
 
 # Master data
-versions=("" "latest/" "v0.4.0/" "v0.5.0/") 
+versions=("" "latest/" "v0.4.0/" "v0.5.0/" "v0.6.0/") 
 
 for i in "${versions[@]}"
 do
     rm ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/*
 done
+
+if [ ! -d "./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/" ]; then
+    mkdir -p ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials
+fi
 
 for i in "${versions[@]}"
 do
