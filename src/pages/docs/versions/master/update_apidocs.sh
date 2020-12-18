@@ -4,12 +4,16 @@
 echo "Haystack branch: $1"
 
 # Master data
-versions=("" "latest/" "v0.4.0/" "v0.5.0/")  
+versions=("" "latest/" "v0.4.0/" "v0.5.0/" "v0.6.0/")  
 
 for i in "${versions[@]}"
 do
     rm ./src/pages/docs/versions/master/${i}site/en/api/api/*
 done
+
+if [ ! -d "./src/pages/docs/versions/master/${i}site/en/api/api/" ]; then
+    mkdir -p ./src/pages/docs/versions/master/${i}site/en/api/api
+fi
 
 for i in "${versions[@]}"
 do
@@ -25,6 +29,9 @@ do
     wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/retriever.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/retriever.md
     if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/generator.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
         wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/generator.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
+    fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/pipelines.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/pipelines.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
     fi
 
     echo -e "---\ntitle: \"Document Store\"\nmetaTitle: \"Database\"\nmetaDescription: \"\"\nslug: \"/docs/apidatabase\"\ndate: \"2020-09-03\"\nid: \"apidatabasemd\"\n---\n\n# Document Store\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
@@ -46,5 +53,10 @@ do
         echo -e "---\ntitle: \"Generator\"\nmetaTitle: \"Generator\"\nmetaDescription: \"\"\nslug: \"/docs/apigeneratormd\"\ndate: \"2020-09-03\"\nid: \"apigeneratormd\"\n---\n\n# Generator\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
         sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/generator.md
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md" ]]; then
+        echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/apipipelinesmd\"\ndate: \"2020-09-03\"\nid: \"apipipelinesmd\"\n---\n\n# Pipelines\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
+        sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
+        sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
     fi
 done

@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - flexibel_scripts
+      - relase_docs_060
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: flexibel_scripts
+          ref: relase_docs_060
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
@@ -24,7 +24,7 @@ jobs:
           npm run update_apidocs_dev
           npm run update_tutorialsdocs_dev
           npm run update_usagedocs_dev
-          npm run update_benchmarks
+          npm run update_benchmarks_dev
           npm ci
           npm run build
       - name: Configure AWS Credentials
