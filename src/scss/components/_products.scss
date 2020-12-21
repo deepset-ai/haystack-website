@@ -1,5 +1,4 @@
 .products {
-    display: flex;
     background-color: #F5F6FA;
     justify-content: center;
     align-items: center;
@@ -224,6 +223,21 @@
             width: 100%;
             margin-left: 0;
         } 
+    }
+    .product-video {
+        width: 100%;
+        border: none;
+        video {
+            width: 60%    !important;
+            height: auto   !important;
+            padding-bottom: 100px;
+            border: none;
+        }
+        @include media("<=1000px") { 
+            video { 
+                width: 100% !important;
+            }
+        }
     }
   }
 
