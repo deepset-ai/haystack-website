@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import OpenSource from "../../images/im-card-1@3x.png"
 import HaystackHub from "../../images/im-card-2@3x.png"
-import ProductVideo from "../../video/HaystackHubVideo.mp4"
-import ProductVideoOGG from "../../video/HaystackHubVideo.webm"
+import ProductVideo from "../../video/HaystackHubVideo_new.mp4"
+import ProductVideoOGG from "../../video/HaystackHubVideo_new.webm"
 import Captions from "file-loader!../../video/captions_en.vtt"
 
 
