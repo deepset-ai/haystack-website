@@ -35,7 +35,7 @@ const Layout = ({ children, language="en", locale="en" }) => {
 };
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  language: PropTypes.object.isRequired,
-  locale: PropTypes.string.isRequired
+  language: PropTypes.object,
+  locale: PropTypes.string
 };
 export default Layout;
