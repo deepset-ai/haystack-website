@@ -227,11 +227,13 @@
     .product-video {
         width: 100%;
         border: none;
+        outline: none;
         video {
             width: 60%    !important;
             height: auto   !important;
             padding-bottom: 100px;
             border: none;
+            outline:none;
         }
         @include media("<=1000px") { 
             video { 
