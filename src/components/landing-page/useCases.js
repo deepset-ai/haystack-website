@@ -20,8 +20,8 @@ const UseCases = props => {
             Analysis mainly focuses on reducing risks e.g. credit decisions.
           </div>
           <div className="uc-values">
-          <div class="row">
-            <div class="column-left">
+          <div className="row">
+            <div className="column-left">
                 <ul>
                     <li>
                       <FontAwesomeIcon className="check-font" icon={faPlus}/>
@@ -31,7 +31,7 @@ const UseCases = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                       Faster and efficient insights
@@ -45,8 +45,8 @@ const UseCases = props => {
           </div>
           <div className="uc-examples">
           <div className="h-example"><h4>Examples:</h4></div> 
-          <div class="row">
-            <div class="column-left">
+          <div className="row">
+            <div className="column-left">
                 <ul>
                     <li>
                       <FontAwesomeIcon className="check-font" icon={faCircle}/>
@@ -56,7 +56,7 @@ const UseCases = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                       Checking plausibility of accruals
@@ -76,8 +76,8 @@ const UseCases = props => {
             Finding relevant information in infromation portals or wikis.
           </div>
           <div className="uc-values">
-          <div class="row">
-            <div class="column-left">
+          <div className="row">
+            <div className="column-left">
                 <ul>
                     <li>
                       <FontAwesomeIcon className="check-font" icon={faPlus}/>
@@ -90,7 +90,7 @@ const UseCases = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                       Direct resolution of tickets
@@ -107,8 +107,8 @@ const UseCases = props => {
             </div>
           <div className="uc-examples">
           <div className="h-example"><h4>Examples:</h4></div>
-          <div class="row">
-            <div class="column-left">
+          <div className="row">
+            <div className="column-left">
                 <ul>
                     <li>
                       <FontAwesomeIcon className="check-font" icon={faCircle}/>
@@ -118,7 +118,7 @@ const UseCases = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                       Customers looking for guidance on terms & conditions
@@ -138,8 +138,8 @@ const UseCases = props => {
             Analyzing market trends and monitoring of competitive strategy.
           </div>
           <div className="uc-values">
-          <div class="row">
-            <div class="column-left">
+          <div className="row">
+            <div className="column-left">
                 <ul>
                     <li>
                       <FontAwesomeIcon className="check-font" icon={faPlus}/>
@@ -149,7 +149,7 @@ const UseCases = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                       Comprehensive analysis of complete data sets
@@ -163,8 +163,8 @@ const UseCases = props => {
           </div>
           <div className="uc-examples">
           <div className="h-example"><h4>Examples:</h4></div>
-            <div class="row">
-            <div class="column-left">
+            <div className="row">
+            <div className="column-left">
                 <ul>
                     <li>
                       <FontAwesomeIcon className="check-font" icon={faCircle}/>
@@ -177,7 +177,7 @@ const UseCases = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                       Analyzing the outlook of the growth of AI in Automotive

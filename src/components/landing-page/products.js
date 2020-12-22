@@ -22,8 +22,8 @@ const Products = props => {
             <div className="description-features">
             <div className="product-description">Feature higlights include:</div>
             <div className="products-features">
-            <div class="row">
-                <div class="column-left">
+            <div className="row">
+                <div className="column-left">
                     <ul>
                         <li>
                             <FontAwesomeIcon className="check-font" icon={faCheck}/>
@@ -33,7 +33,7 @@ const Products = props => {
                         </li>
                     </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                         Latest NLP Models
@@ -43,14 +43,14 @@ const Products = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column-left">
+                <div className="column-left">
                 <ul>
                     <li>
                         <FontAwesomeIcon className="check-font" icon={faCheck}/> 
                     </li>
                 </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                         Scalability 
@@ -74,8 +74,8 @@ const Products = props => {
             <div className="description-features">
             <div className="product-description">Everything in Open Source plus:</div>
             <div className="products-features">
-            <div class="row">
-            <div class="column-left">
+            <div className="row">
+            <div className="column-left">
                 <ul>
                     <li>
                         <FontAwesomeIcon className="check-font" icon={faCheck}/>
@@ -85,7 +85,7 @@ const Products = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                         Web interface for configuring and operating your QA system
@@ -95,7 +95,7 @@ const Products = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column-left">
+                <div className="column-left">
                 <ul>
                     <li>
                         <FontAwesomeIcon className="check-font" icon={faCheck}/>
@@ -105,7 +105,7 @@ const Products = props => {
                     </li>
                 </ul>
                 </div>
-                <div class="column">
+                <div className="column">
                 <ul>
                     <li>
                         API access
