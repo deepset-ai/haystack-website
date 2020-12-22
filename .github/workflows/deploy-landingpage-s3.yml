@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - update_benchmarks
+      - bug_fixing_sentry
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: update_benchmarks
+          ref: bug_fixing_sentry
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
