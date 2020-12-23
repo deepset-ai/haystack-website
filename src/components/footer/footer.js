@@ -1,9 +1,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import LocalizedLink from "../localizedLink/localizedLink"
 import "./footer.scss";
-import { Link } from "gatsby";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -16,25 +14,19 @@ const Footer = ({ style }) => {
   return (
     <footer className="footer-wrapper" style={style}>
       <div className="follow">Social networks: 
-      <Link to="https://twitter.com/deepset_ai/"><FontAwesomeIcon class="fontawsome-icon" icon={faTwitter}/></Link>
-      <Link to="https://www.linkedin.com/company/deepset-ai/"><FontAwesomeIcon class="fontawsome-icon" icon={faLinkedin}/></Link>
+      <a className="link" href="https://twitter.com/deepset_ai/" target="_blank" rel="noreferrer noopener"><FontAwesomeIcon className="fontawsome-icon" aria-label="twitter" icon={faTwitter}/></a>
+      <a className="link" href="https://www.linkedin.com/company/deepset-ai/" target="_blank" rel="noreferrer noopener"><FontAwesomeIcon className="fontawsome-icon" aria-label="linkedin" icon={faLinkedin}/></a>
       </div>
       <div className="copy-right">
         <span>© 2020 - {new Date().getFullYear()} deepset. All rights reserved.</span>
-          <LocalizedLink
-            locale="en"
-            className="link"
-            to="https://deepset.ai/imprint"
-          >
-            IMPRINT
-          </LocalizedLink>
+          <a className="link" href="https://deepset.ai/imprint"  target="_blank" rel="noreferrer noopener">Imprint</a>
         </div>
     </footer>
   );
 };
 
 Footer.propTypes = {
-  language: PropTypes.object,
+  language: PropTypes.string,
   locale: PropTypes.string.isRequired
 };
 
