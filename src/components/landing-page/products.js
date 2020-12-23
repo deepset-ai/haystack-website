@@ -7,9 +7,22 @@ import HaystackHub from "../../images/im-card-2@3x.png"
 import ProductVideo from "../../video/HaystackHubVideo_new.mp4"
 import ProductVideoOGG from "../../video/HaystackHubVideo_new.webm"
 import Captions from "file-loader!../../video/captions_en.vtt"
-
+import firebase from 'gatsby-plugin-firebase';
 
 const Products = props => {
+
+    const incrementViews = async () => {
+        const ref = firebase.database().ref(`views`).child(`haystack-hub-video-views-default-rtdb`);
+      
+        ref.transaction((currentViews) => {
+          return currentViews + 1;
+        });
+      };
+
+    const onPlayVideo = () => {
+          
+              incrementViews();
+    };
 
   return (
     <section className="products">
@@ -127,7 +140,7 @@ const Products = props => {
         </div>
         </div>
         <div className="product-video">
-            <video controls>
+            <video controls onPlay={onPlayVideo}>
                 <source src={ProductVideo} type="video/mp4" />
                 <source src={ProductVideoOGG} type="video/webm" />
                 Your browser does not support the video tag.

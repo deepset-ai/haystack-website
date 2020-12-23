@@ -70,6 +70,20 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        credentials: {
+          apiKey: "AIzaSyDdNTrQNqHP6_UNtlZ0CLYAT2H3U9lVX8Y",
+          authDomain: "haystack-hub-video-views.firebaseapp.com",
+          databaseURL: "https://haystack-hub-video-views-default-rtdb.europe-west1.firebasedatabase.app/",
+          projectId: "haystack-hub-video-views",
+          storageBucket: "haystack-hub-video-views.appspot.com",
+          messagingSenderId: "391319291902",
+          appId: "1:391319291902:web:ecc541bd86ec1bbab662af"
+        }
+      }
+    },
+    {
       resolve: `gatsby-plugin-hotjar`,
       options: {
         includeInDevelopment: true, // optional parameter to include script in development
