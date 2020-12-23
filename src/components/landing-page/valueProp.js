@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from "./button";
 import Logo from "../../images/HaystackIcon.png"
-import HaystackHubSearch  from "../../images/05_1_b_search_results_copy3x.png"; 
+import HaystackHubSearch  from "../../images/gifs/ScreencastHaystackHub_new.gif"; 
 
 
 const ValueProp = props => {

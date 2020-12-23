@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - bug_fixing_sentry
+      - add_gif
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: bug_fixing_sentry
+          ref: add_gif
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
