@@ -12,7 +12,10 @@ const ValueProp = props => {
         <div className="main-message">
           <img className="logo-icon" src={Logo} alt="Haystack Icon"></img>
           <p className="main-subtitle">Neural Question Answering at Scale</p>
+          <div>
           <Button label="Get Started" to="/docs/intromd"/>
+          <Button label="Join Our Community" to="/community/join"/>
+          </div>
         </div>
         <div className="main-photo">
         <img src={HaystackHubSearch} className="img-main-photo" alt="Haystack-Hub"></img>

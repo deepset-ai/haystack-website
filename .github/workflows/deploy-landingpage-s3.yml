@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - add_gif
+      - slack_integration
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: add_gif
+          ref: slack_integration
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:

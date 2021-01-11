@@ -116,6 +116,13 @@ const Header = ({ siteTitle, menuLinks }) => {
               </LocalizedLink>
 
               <div className="Rectangle "></div>
+
+              <Button
+                to="/community/join"
+                label="Join Our Community"
+                className="beta-button"
+                              >
+              </Button>
               
               <Button
                   to="/signup/beta"
