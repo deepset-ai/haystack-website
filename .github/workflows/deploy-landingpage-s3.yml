@@ -4,7 +4,9 @@ on:
   push:
     branches-ignore:
       - source
+  repository_dispatch:
     types: [deploy-website-staging]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
