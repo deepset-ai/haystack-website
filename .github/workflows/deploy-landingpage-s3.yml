@@ -2,9 +2,8 @@ name: Deploy
 
 on:
   push:
-    branches:
-      - '**'        # matches every branch
-      - '!master'   # excludes master
+    branches-ignore:
+      - source
     types: [deploy-website-staging]
 jobs:
   deploy:
