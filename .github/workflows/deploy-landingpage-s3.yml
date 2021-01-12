@@ -23,11 +23,11 @@ jobs:
       - name: Build
         run: |
           npm install
-          npm run update_img_dev
-          npm run update_apidocs_dev
-          npm run update_tutorialsdocs_dev
-          npm run update_usagedocs_dev
-          npm run update_benchmarks_dev
+          [[ ! -z "$github.event.client_payload.ref" ]] && npm run update_img_dev ${{ github.event.client_payload.ref }} || npm run update_img_dev ${{ github.ref }}
+          [[ ! -z "$github.event.client_payload.ref" ]] && npm run update_apidocs_dev ${{ github.event.client_payload.ref }} || npm run update_apidocs_dev ${{ github.ref }}
+          [[ ! -z "$github.event.client_payload.ref" ]] && npm run update_tutorialsdocs_dev ${{ github.event.client_payload.ref }} || npm run update_tutorialsdocs_dev ${{ github.ref }}
+          [[ ! -z "$github.event.client_payload.ref" ]] && npm run update_usagedocs_dev ${{ github.event.client_payload.ref }} || npm run update_usagedocs_dev ${{ github.ref }}
+          [[ ! -z "$github.event.client_payload.ref" ]] && npm run update_benchmarks_dev ${{ github.event.client_payload.ref }} || npm run update_benchmarks_dev ${{ github.ref }}
           npm ci
           npm run build
       - name: Configure AWS Credentials
