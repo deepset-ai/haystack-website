@@ -204,22 +204,6 @@
       "order": 6
     },
     {
-      "id": "tutorial8md",
-      "title": "Preprocessing your Documents",
-      "label1": "tutorials_haystack",
-      "label2": "",
-      "label3": "",
-      "order": 7
-    },
-    {
-      "id": "tutorial9md",
-      "title": "How to Train DPR",
-      "label1": "tutorials_haystack",
-      "label2": "",
-      "label3": "",
-      "order": 8
-    },
-    {
       "id": "api_haystack",
       "title": "API reference",
       "label1": "",
