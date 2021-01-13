@@ -23,6 +23,7 @@ do
     --exclude http://github.com/deepset-ai/haystack/ \
     --exclude http://github.com/deepset-ai/haystack/stargazers/ \
     --exclude https://twitter.com/deepset_ai/ \
+    --exclude https://huggingface.co/illuin/camembert-large-fquad \
     --filter-level 1 --host-requests 1 
     status=$?
     
