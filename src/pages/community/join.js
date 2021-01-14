@@ -13,6 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import Button from "../../components/landing-page/button";
+//import axios from 'axios';
 
 const BetaPage = () => {
 
@@ -29,11 +30,13 @@ const BetaPage = () => {
 
   const handleSubmit = (event) =>  {
     event.preventDefault();
+
+    // Hubspot integration
     // Create the new request 
     var xhr = new XMLHttpRequest();
     var url = 'https://api.hsforms.com/submissions/v3/integration/submit/4561480/28f3118d-1c2b-4a93-9c8f-f11e4454f1ac';
     
-    // Example request JSON:
+    // JSON:
     var data = {
       "submittedAt": new Date().getTime(),
       "fields": [
@@ -97,8 +100,33 @@ const BetaPage = () => {
 
 
     // Sends the request 
-    
     xhr.send(final_data);
+
+    // Send invite
+    // Create the new request 
+    //var xhrInvite = new XMLHttpRequest();
+    var urlInvite = 'https://p3e3737mri.execute-api.eu-central-1.amazonaws.com/default/haystack-slack-invite';
+    var dataInvite = {
+      "email": email
+    }
+    var final_dataInvite = JSON.stringify(dataInvite);
+
+    xhrInvite.open('POST', urlInvite);
+    // Sets the value of the 'Content-Type' HTTP request headers to 'application/json'
+    xhrInvite.setRequestHeader('Content-Type', 'application/json');
+
+    xhrInvite.onreadystatechange = function() {
+     console.log(xhrInvite);
+    }
+
+    // Sends the request 
+    xhrInvite.send(final_dataInvite);
+
+    //const headers = {
+    //  'Content-Type': 'application/json',
+    //};
+    //const inviteResponse = axios.post('https://p3e3737mri.execute-api.eu-central-1.amazonaws.com/default/haystack-slack-invite', final_dataInvite, { headers });
+    //console.log(inviteResponse);
   };
 
   const handleChangeEmail = (event) => {
