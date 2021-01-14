@@ -104,7 +104,7 @@ const BetaPage = () => {
 
     // Send invite
     // Create the new request 
-    //var xhrInvite = new XMLHttpRequest();
+    var xhrInvite = new XMLHttpRequest();
     var urlInvite = 'https://p3e3737mri.execute-api.eu-central-1.amazonaws.com/default/haystack-slack-invite';
     var dataInvite = {
       "email": email
