@@ -14,7 +14,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import Button from "../../components/landing-page/button";
 
-import axios from 'axios';
+import OpenSource from "../../images/haystack_logo_blue_banner.png"
 
 const BetaPage = () => {
 
@@ -181,9 +181,10 @@ const BetaPage = () => {
             </Alert>
             </Snackbar>
 
-            <div className="beta-signup">
-            <h2>Haystack Community</h2>
-            <p>Join our Haystack Community</p>
+            <div className="community-signup">
+            <img className="product-img haystackos-img" src={OpenSource} alt="Haystack Open Source"></img>
+            <h2>Join the Haystack Community</h2>
+            <p>Get in touch with the Haystack team and other Haystack users<br/><br/>Keep up to date with upcoming events, community-build projects, and helpful resources.</p>
             <div className="beta-form">
                     <form onSubmit={handleSubmit}>
                         <div>

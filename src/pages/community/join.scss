@@ -2,7 +2,7 @@
 
 .contact {
     margin-top: 100px;
-    .beta-signup {
+    .community-signup {
         background-color: #F5F6FA;
         justify-content: center;
         align-items: center;
@@ -14,7 +14,8 @@
         box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px, rgba(0, 0, 0, 0.08) 3px 10px 30px;
   
         .product-img {
-            width: 100%
+            width: 100%;
+            border-radius: 10px 10px 0px 0px;
         }
 
         h2 {
