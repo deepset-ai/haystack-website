@@ -186,6 +186,12 @@ const Header = ({ siteTitle, menuLinks }) => {
         </LocalizedLink>
 
         <Button
+          to="/community/join"
+          label="Join Our Community"
+                        >
+        </Button>
+
+        <Button
           to="/signup/beta"
           label="Try Haystack Hub"
                         >

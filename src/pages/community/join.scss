@@ -126,8 +126,14 @@
   
       }
       @include media("<=1000px") {
-        .beta-signup {
+        .community-signup {
             width: 100%;
+            h2 {
+              font-size: 32px;
+            }
+            p {
+              font-size: 1.0rem;
+            }
         }
     }
 }
