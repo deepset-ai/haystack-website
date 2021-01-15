@@ -26,6 +26,8 @@ const BetaPage = () => {
   const [consentToProcess, setConsentToProcess] = useState(false);
   const [communications, setCommunications] = useState(false);
   const [success, setSuccess] = React.useState(false);
+  const [message, setMessage] = React.useState("Thank you for joining our community!");
+  const [severity, setSeverity] = React.useState("success");
   const vertical='top'; 
   const horizontal='center';
 
@@ -89,34 +91,47 @@ const BetaPage = () => {
 
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4 && xhr.status === 200) { 
+          setMessage("Thank you for joining our community!");
+          setSeverity("success");
           setSuccess(true);// Returns a 200 response if the submission is successful.
+
+          // Send invite
+          // Create the new request 
+          var xhrInvite = new XMLHttpRequest();
+          var urlInvite = 'https://p3e3737mri.execute-api.eu-central-1.amazonaws.com/default/haystack-slack-invite';
+          var dataInvite = {email: email};
+          var final_dataInvite = JSON.stringify(dataInvite);
+
+          xhrInvite.open('POST', urlInvite);
+
+          xhrInvite.onreadystatechange = function() {
+            //console.log(xhrInvite);
+          }
+
+          // Sends the request 
+          xhrInvite.send(final_dataInvite);
         } else if (xhr.readyState === 4 && xhr.status === 400){ 
-            alert(xhr.responseText.inlineMessage); // Returns a 400 error the submission is rejected.          
+          setMessage("An error occurred. Please check your details.");
+          setSeverity("error");
+          setSuccess(true);// Returns Error         
         } else if (xhr.readyState === 4 && xhr.status === 403){ 
-            alert(xhr.responseText.inlineMessage); // Returns a 403 error if the portal isn't allowed to post submissions.           
+          setMessage("An error occurred. Please check your details.");
+          setSeverity("error");
+          setSuccess(true);// Returns Error                   
         } else if (xhr.readyState === 4 && xhr.status === 404){ 
-            alert(xhr.responseText.inlineMessage); //Returns a 404 error if the formGuid isn't found     
+          setMessage("An error occurred. Please check your details.");
+          setSeverity("error");
+          setSuccess(true);// Returns Error             
+        } else {
+          setMessage("An error occurred. Please check your details.");
+          setSeverity("error");
+          setSuccess(true);// Returns Error  
         }
       }
 
-    // Sends the request 
-    xhr.send(final_data);
+      // Sends the request 
+      xhr.send(final_data);
 
-    // Send invite
-    // Create the new request 
-    var xhrInvite = new XMLHttpRequest();
-    var urlInvite = 'https://p3e3737mri.execute-api.eu-central-1.amazonaws.com/default/haystack-slack-invite';
-    var dataInvite = {email: email};
-    var final_dataInvite = JSON.stringify(dataInvite);
-
-    xhrInvite.open('POST', urlInvite);
-
-    xhrInvite.onreadystatechange = function() {
-     console.log(xhrInvite);
-    }
-
-    // Sends the request 
-    xhrInvite.send(final_dataInvite);
   };
 
   const handleChangeEmail = (event) => {
@@ -161,8 +176,8 @@ const BetaPage = () => {
         <SEO title="Haystack Community" pathname="/community/join" image={Logo} />
         <section className="contact">
             <Snackbar open={success} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical, horizontal}} >
-            <Alert onClose={handleClose} severity="success">
-            Thank you for joining our community!
+            <Alert onClose={handleClose} severity={severity}>
+            {message}
             </Alert>
             </Snackbar>
 
