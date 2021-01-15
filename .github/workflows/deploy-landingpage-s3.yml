@@ -2,8 +2,11 @@ name: Deploy
 
 on:
   push:
-    branches:
-      - slack_integration
+    branches-ignore:
+      - source
+  repository_dispatch:
+    types: [deploy-website-staging]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: slack_integration
+          ref: ${{ github.ref }}
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
@@ -20,11 +23,13 @@ jobs:
       - name: Build
         run: |
           npm install
-          npm run update_img_dev
-          npm run update_apidocs_dev
-          npm run update_tutorialsdocs_dev
-          npm run update_usagedocs_dev
-          npm run update_benchmarks_dev
+          githubRef=$(echo '${{ github.event.client_payload.ref }}' | sed 's/refs\/heads\///g')
+          echo $githubRef
+          [[ ! -z "${githubRef}" ]] && npm run update_img_dev $githubRef || npm run update_img_dev master
+          [[ ! -z "${githubRef}" ]] && npm run update_apidocs_dev $githubRef || npm run update_apidocs_dev master
+          [[ ! -z "${githubRef}" ]] && npm run update_tutorialsdocs_dev $githubRef || npm run update_tutorialsdocs_dev master
+          [[ ! -z "${githubRef}" ]] && npm run update_usagedocs_dev $githubRef || npm run update_usagedocs_dev master
+          [[ ! -z "${githubRef}" ]] && npm run update_benchmarks_dev $githubRef || npm run update_benchmarks_dev master
           npm ci
           npm run build
       - name: Configure AWS Credentials
