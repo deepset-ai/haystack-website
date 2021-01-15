@@ -183,8 +183,8 @@ const BetaPage = () => {
 
             <div className="community-signup">
             <img className="product-img haystackos-img" src={OpenSource} alt="Haystack Open Source"></img>
-            <h2>Join the Haystack Community</h2>
-            <p>Get in touch with the Haystack team and other Haystack users<br/><br/>Keep up to date with upcoming events, community-build projects, and helpful resources.</p>
+            <h2>Join the Haystack Community on Slack</h2>
+            <p>Learn more about what people are building with Haystack, ask questions, share knowledge, track events, meet collaborators.</p>
             <div className="beta-form">
                     <form onSubmit={handleSubmit}>
                         <div>
@@ -235,7 +235,7 @@ const BetaPage = () => {
                     <Button
                             type="submit"
                             className="signup-beta"
-                            label="Join the Haystack Community"
+                            label="Join the Haystack Community on Slack"
                         >
                     </Button>
                     </div>
