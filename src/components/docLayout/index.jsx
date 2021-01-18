@@ -5,7 +5,8 @@ import Footer from "../footer/footer";
 import "./index.scss";
 import { GithubLogo } from "../../images/icon/GitHub-Mark-32px.png"; 
 import thumbnail from "../../images/haystack_logo_blue_banner_social.png"; 
-import SEO from "../../components/seo"
+import SEO from "../../components/seo";
+import { Link } from 'gatsby-plugin-modal-routing'
 
 export default (props) => {
   const {
@@ -209,6 +210,11 @@ export default (props) => {
         {formatHeadings && !isBenchMark && !isDocAPI && (
           <div className="anchor-wrapper">
             <section>
+            <Link className="search-button" to="/searchbar/searchbar" asModal>
+              <button className="button">
+                "Search Docs"
+              </button>
+            </Link>
               {generateAnchorMenu(formatHeadings, "parent-item")} 
               <div className="button-container">
                 <a
