@@ -214,7 +214,7 @@ const BetaPage = () => {
                         </div>
                         <div>
                         <FormControl className="form-control" variant="filled">
-                        <InputLabel htmlFor="github">Github handle</InputLabel>
+                        <InputLabel htmlFor="github">GitHub username</InputLabel>
                         <Input id="github" value={github} onChange={handleChangeGithub} />
                         </FormControl>
                         </div>
