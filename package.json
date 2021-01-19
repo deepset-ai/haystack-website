@@ -69,7 +69,7 @@
     "react-tooltip": "^4.2.9",
     "redoc": "^2.0.0-rc.45",
     "remark-react": "^8.0.0",
-    "save": "^2.4.0",
+    "sharp": "^0.27.0",
     "sitemap-urls": "^3.0.0",
     "source": "0.0.3",
     "styled-components": "^5.2.1"
