@@ -177,6 +177,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `material-ui-search-bar`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -257,7 +258,7 @@ module.exports = {
         // Object of props that will be passed to the react-modal container
         // See http://reactcommunity.org/react-modal/#usage
         modalProps: {
-          style: { zIndex: 1001 }
+          style: { overlay: { zIndex: '1001' }, content: { height: "100px" }}
         },
       }
     },

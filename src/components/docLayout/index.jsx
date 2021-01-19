@@ -210,9 +210,9 @@ export default (props) => {
         {formatHeadings && !isBenchMark && !isDocAPI && (
           <div className="anchor-wrapper">
             <section>
-            <Link className="search-button" to="/searchbar/searchbar" asModal>
+            <Link className="search-button" to="/searchbar/searchdocs" asModal>
               <button className="button">
-                "Search Docs"
+                Search Docs
               </button>
             </Link>
               {generateAnchorMenu(formatHeadings, "parent-item")} 
