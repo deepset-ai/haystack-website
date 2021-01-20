@@ -11,6 +11,9 @@ on:
   repository_dispatch:
     types: [deploy-website]
 
+env:
+  GATSBY_HAYSTACK_HUB_TOKEN: ${{ secrets.HAYSTACK_HUB_TOKEN }}
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"

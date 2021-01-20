@@ -258,7 +258,7 @@ module.exports = {
         // Object of props that will be passed to the react-modal container
         // See http://reactcommunity.org/react-modal/#usage
         modalProps: {
-          style: { overlay: { zIndex: '1001' }, content: { height: "100px" }}
+          style: { overlay: { zIndex: '1001' }, content: { height: "500px", inset: "100px" }}
         },
       }
     },

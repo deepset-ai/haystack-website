@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@fortawesome/fontawesome-common-types": "^0.2.34",
     "@fortawesome/fontawesome-svg-core": "^1.2.31",
     "@fortawesome/free-brands-svg-icons": "^5.15.0",
     "@fortawesome/free-solid-svg-icons": "^5.15.0",

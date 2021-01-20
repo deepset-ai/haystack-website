@@ -291,9 +291,10 @@ a.btn {
   }
 }
 
-.search-button {
-  padding-top: 10px;
+.search-docs-button {
+  padding-top: 8px;
   margin-bottom: 10px;
+  padding-left: 5px;
   margin-left: 0px;
   font-size: 16px;
   font-weight: bold;
@@ -304,4 +305,8 @@ a.btn {
   height: 40px;
   width: 150px;
   cursor: pointer;
+}
+
+.fontawsome-icon {
+  margin-left: 0px !important;
 }
