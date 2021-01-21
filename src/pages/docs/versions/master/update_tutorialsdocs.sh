@@ -7,7 +7,8 @@ echo "Haystack branch: $1"
 echo "Haystack branch: $1"
 
 # Master data
-versions=("" "latest/" "v0.4.0/" "v0.5.0/" "v0.6.0/") 
+versionstxt=$(cat src/pages/docs/versions/master/versions.txt)
+versions=("" $versionstxt)  
 
 for i in "${versions[@]}"
 do
