@@ -290,3 +290,33 @@ a.btn {
     bottom: 80px;
   }
 }
+
+.search-docs-button {
+  padding-top: 8px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  margin-left: 0px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  border-radius: 4px;
+  background-color: #009BAA;
+  border: 0;
+  height: 40px;
+  width: 150px;
+  outline: none;
+  cursor: pointer;
+  &:active {
+    outline: none;
+  }
+  .button {
+    outline: none;
+    &:active {
+      outline: none;
+    }
+  }
+}
+
+.fontawsome-icon {
+  margin-left: 0px !important;
+}

@@ -177,6 +177,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `material-ui-search-bar`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -245,6 +246,21 @@ module.exports = {
         autoSessionTracking: true,
         sampleRate: 0.7,
       },
+    },
+    //`gatsby-plugin-modal-routing`,
+    {
+      resolve: `gatsby-plugin-modal-routing`,
+      options: {
+        // A selector to set react-modal's app root to, default is `#___gatsby`
+        // See http://reactcommunity.org/react-modal/accessibility/#app-element
+        appElement: '#___gatsby',
+
+        // Object of props that will be passed to the react-modal container
+        // See http://reactcommunity.org/react-modal/#usage
+        modalProps: {
+          style: { overlay: { zIndex: '1001' }, content: { height: "500px", inset: "100px" }}
+        },
+      }
     },
     /*{
       resolve: "gatsby-plugin-hubspot",

@@ -7,6 +7,9 @@ on:
   repository_dispatch:
     types: [deploy-website-staging]
 
+env:
+  GATSBY_HAYSTACK_HUB_TOKEN: ${{ secrets.HAYSTACK_HUB_TOKEN }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

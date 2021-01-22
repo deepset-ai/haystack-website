@@ -5,7 +5,10 @@ import Footer from "../footer/footer";
 import "./index.scss";
 import { GithubLogo } from "../../images/icon/GitHub-Mark-32px.png"; 
 import thumbnail from "../../images/haystack_logo_blue_banner_social.png"; 
-import SEO from "../../components/seo"
+import SEO from "../../components/seo";
+import { Link } from 'gatsby-plugin-modal-routing'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default (props) => {
   const {
@@ -209,6 +212,11 @@ export default (props) => {
         {formatHeadings && !isBenchMark && !isDocAPI && (
           <div className="anchor-wrapper">
             <section>
+            <Link className="search-docs-button" to="/searchbar/searchdocs" asModal>
+              <button className="button">
+              <FontAwesomeIcon className="fontawsome-icon" aria-label="search" icon={faSearch}/> Search Docs
+              </button>
+            </Link>
               {generateAnchorMenu(formatHeadings, "parent-item")} 
               <div className="button-container">
                 <a
