@@ -11,8 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
 
-//import ReactMarkdown from "react-markdown";
-
 const SearchDocs = () => {
 
   const [query, setQuery] = useState("What is Haystack?");
@@ -67,17 +65,16 @@ const SearchDocs = () => {
     let elementArray = null;
     let markdown = '';
     array.forEach(element => {
-      //markdown = `<div>${element.context.slice(0, element.offset_start)} <span className="answer">{element.answer}</span> ${element.context.slice(element.offset_end, element.context.length)}</div>`;
-      //console.log(markdown);
-      //<ReactMarkdown source={markdown} />
+      markdown = `<div> ${element.context.slice(0, element.offset_start)} <span class="answer"> ${element.answer} </span> ${element.context.slice(element.offset_end, element.context.length)} </div>`;
       elementArray = <div>
                         <div>{elementArray}</div>
                         <LocalizedLink locale="en" to={`/docs/latest/${element.filename}`}>
                           <div className="docs-page">/docs/latest/{element.filename}</div>
                           <div className="context">
-                            {element.context.slice(0, element.offset_start)} 
-                            <span className="answer">{element.answer}</span> 
-                            {element.context.slice(element.offset_end, element.context.length)}
+                          <div
+                            className="content"
+                            dangerouslySetInnerHTML={{ __html: markdown }}
+                          ></div>
                           </div>
                           <div>
                             <br></br><hr></hr><br></br>
@@ -105,7 +102,17 @@ const SearchDocs = () => {
       <div className="powered-haystack">* Powered by <span>Haystack</span></div>
       </div>
       ) : (
-        null
+        <div>
+        <div className="search-form">
+        <FormControl className="form-control" variant="outlined">
+        <OutlinedInput required id="query" classsName="query" value={query} onChange={handleChange} onKeyPress={handleKeyPress} />
+        </FormControl>
+        <Button className="search-button" onClick={() => {handleSubmit()}}> 
+        <FontAwesomeIcon className="fontawsome-icon-search" aria-label="search" icon={faSearch}/> Search
+        </Button>
+      </div>
+      <div className="powered-haystack">* Powered by <span>Haystack</span></div>
+      </div>
       )}
         <div className="results">
         {items.length > 0 ? (
