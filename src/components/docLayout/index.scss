@@ -306,6 +306,9 @@ a.btn {
   width: 150px;
   outline: none;
   cursor: pointer;
+  &:active {
+    outline: none;
+  }
 }
 
 .fontawsome-icon {
