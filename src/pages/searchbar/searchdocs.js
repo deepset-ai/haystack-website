@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
 
+import ReactMarkdown from "react-markdown";
+
 const SearchDocs = () => {
 
   const [query, setQuery] = useState("What is Haystack?");
@@ -64,7 +66,19 @@ const SearchDocs = () => {
   function IterateArray(array = []) {
     let elementArray = null;
     array.forEach(element => {
-      elementArray = <div><div>{elementArray}</div><LocalizedLink locale="en" to={`/docs/latest/${element.filename}`}><div className="context">{element.context.slice(0, element.offset_start)} <span className="answer">{element.answer}</span> {element.context.slice(element.offset_end, element.context.length)}</div><div><br></br><hr></hr><br></br></div></LocalizedLink></div>;
+      elementArray = <div>
+                        <div>{elementArray}</div>
+                        <LocalizedLink locale="en" to={`/docs/latest/${element.filename}`}>
+                          <div className="context">
+                          <ReactMarkdown source={element.context.slice(0, element.offset_start)} />
+                            <span className="answer">{element.answer}</span> 
+                            {element.context.slice(element.offset_end, element.context.length)}
+                          </div>
+                          <div>
+                            <br></br><hr></hr><br></br>
+                          </div>
+                        </LocalizedLink>
+                      </div>;
     })
     return elementArray;
   }
