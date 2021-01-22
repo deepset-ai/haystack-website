@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
 
-import ReactMarkdown from "react-markdown";
+//import ReactMarkdown from "react-markdown";
 
 const SearchDocs = () => {
 
@@ -65,12 +65,17 @@ const SearchDocs = () => {
 
   function IterateArray(array = []) {
     let elementArray = null;
+    let markdown = '';
     array.forEach(element => {
+      //markdown = `<div>${element.context.slice(0, element.offset_start)} <span className="answer">{element.answer}</span> ${element.context.slice(element.offset_end, element.context.length)}</div>`;
+      //console.log(markdown);
+      //<ReactMarkdown source={markdown} />
       elementArray = <div>
                         <div>{elementArray}</div>
                         <LocalizedLink locale="en" to={`/docs/latest/${element.filename}`}>
+                          <div className="docs-page">/docs/latest/{element.filename}</div>
                           <div className="context">
-                          <ReactMarkdown source={element.context.slice(0, element.offset_start)} />
+                            {element.context.slice(0, element.offset_start)} 
                             <span className="answer">{element.answer}</span> 
                             {element.context.slice(element.offset_end, element.context.length)}
                           </div>
