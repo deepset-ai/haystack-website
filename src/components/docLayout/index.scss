@@ -309,6 +309,12 @@ a.btn {
   &:active {
     outline: none;
   }
+  .button {
+    outline: none;
+    &:active {
+      outline: none;
+    }
+  }
 }
 
 .fontawsome-icon {
