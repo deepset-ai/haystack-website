@@ -20,11 +20,12 @@ const BetaPage = () => {
 
   const [email, setEmail] = useState('');
   const [github, setGithub] = useState('');
+  const [twitter, setTwitter] = useState('');
   const [company, setCompany] = useState('');
   const [fname, setFName] = useState('');
   const [lname, setLName] = useState('');
   const [consentToProcess, setConsentToProcess] = useState(false);
-  const [communications, setCommunications] = useState(false);
+  const [communications, setCommunications] = useState(true);
   const [success, setSuccess] = React.useState(false);
   const [message, setMessage] = React.useState("Thank you for joining our community!");
   const [severity, setSeverity] = React.useState("success");
@@ -50,6 +51,10 @@ const BetaPage = () => {
         {
           "name": "github",
           "value": github
+        },
+        {
+          "name": "twitter",
+          "value": twitter
         },
         {
           "name": "company",
@@ -142,6 +147,10 @@ const BetaPage = () => {
     setGithub(event.target.value);
   };
 
+  const handleChangeTwitter = (event) => {
+    setTwitter(event.target.value);
+  };
+
   const handleChangeCompany = (event) => {
     setCompany(event.target.value);
   };
@@ -219,6 +228,12 @@ const BetaPage = () => {
                         </FormControl>
                         </div>
                         <div>
+                        <FormControl className="form-control" variant="filled">
+                        <InputLabel htmlFor="twitter">Twitter handle</InputLabel>
+                        <Input id="twitter" value={twitter} onChange={handleChangeTwitter} />
+                        </FormControl>
+                        </div>
+                        <div>
                         <FormControlLabel className="form-checkbox"
                         control={<Checkbox required checked={consentToProcess} onChange={handleChangeConsentToProcess} name="consentToProcess" />}
                         label="I agree to allow deepset GmbH to store and process my personal data.*"
@@ -227,7 +242,7 @@ const BetaPage = () => {
                         <div>
                         <FormControlLabel className="form-checkbox"
                         control={<Checkbox checked={communications} onChange={handleCommunication} name="communications" />}
-                        label="I agree to receive marketing communications from deepset GmbH."
+                        label="I agree to receive information, product updates and commercial offers from deepset GmbH."
                         />
                         </div>
                         </div>                    
