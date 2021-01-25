@@ -242,9 +242,7 @@ export default (props) => {
 
         {screenWidth <= 1000 ? (
           <Link className="search-docs-button" to="/searchbar/searchdocs" asModal>
-            <button className="button">
             <FontAwesomeIcon className="fontawsome-icon" aria-label="search" icon={faSearch}/>
-            </button>
           </Link>
         ) : null}
 
