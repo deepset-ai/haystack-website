@@ -1,9 +1,10 @@
+@import '../../components/include_media';
 .search-button {
     padding-top: 5px !important;
     border: 0 !important;
     background: none !important;
     box-shadow: none !important;
-    font-size: 20px !important;
+    font-size: 17px !important;
     font-weight: bold !important;
     border-radius: 0px 4px 4px 0px !important;
     color: #ffffff !important;
@@ -17,6 +18,9 @@
 
 .form-control {
     width: 88%;
+    @include media('<=1000px') {
+      width: 70%;
+    }
 }
 
 .fontawsome-icon-search {
@@ -61,4 +65,10 @@ hr {
   padding-bottom: 10px;
   color: #2380BB;
   font-weight: bold;
+}
+
+.ReactModal__Content {
+  @include media('<=1000px') {
+    inset: 10px !important;
+  }
 }

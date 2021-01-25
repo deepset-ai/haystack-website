@@ -1,4 +1,4 @@
-import React, { useState }  from "react"
+import React, { useState, useEffect }  from "react"
 
 
 import "./searchdocs.scss";
@@ -10,11 +10,19 @@ import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import LocalizedLink from "../../components/localizedLink/localizedLink";  
+import { useMobileScreen } from "../../hooks";
 
 const SearchDocs = () => {
 
   const [query, setQuery] = useState("What is Haystack?");
   const [items, setItems] = useState([]);
+  const screenWidth = useMobileScreen();
+  const [searchStatus, setSearchStatus] = useState(true);
+
+  useEffect(() => {
+    setSearchStatus(screenWidth > 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenWidth]);
 
   const handleSubmit = (event) =>  {
     fetch('https://api.haystack-hub.com/api/v1/workspaces/default/search', {
@@ -96,7 +104,11 @@ const SearchDocs = () => {
         <OutlinedInput required id="query" classsName="query" value={query} onChange={handleChange} onKeyPress={handleKeyPress} />
         </FormControl>
         <Button className="search-button" onClick={() => {handleSubmit()}}> 
-        <FontAwesomeIcon className="fontawsome-icon-search" aria-label="search" icon={faSearch}/> Search
+        {screenWidth > 1000 ? (
+          <span><FontAwesomeIcon className="fontawsome-icon-search" aria-label="search" icon={faSearch}/> Search</span>
+          ) : (
+          <FontAwesomeIcon className="fontawsome-icon-search" aria-label="search" icon={faSearch}/>
+          )}
         </Button>
       </div>
       <div className="powered-haystack">* Powered by <span>Haystack</span></div>
@@ -111,7 +123,7 @@ const SearchDocs = () => {
         <FontAwesomeIcon className="fontawsome-icon-search" aria-label="search" icon={faSearch}/> Search
         </Button>
       </div>
-      <div className="powered-haystack">* Powered by <span>Haystack</span></div>
+      <div className="powered-haystack">* Powered by <span>Haystack</span> </div>
       </div>
       )}
         <div className="results">
