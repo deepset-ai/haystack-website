@@ -9,6 +9,7 @@ import SEO from "../../components/seo";
 import { Link } from 'gatsby-plugin-modal-routing'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useMobileScreen } from "../../hooks";
 
 export default (props) => {
   const {
@@ -56,6 +57,13 @@ export default (props) => {
   const [hash, setHash] = useState(null);
   const docContainer = useRef(null);
   const [showToTopButton, setShowToTopButton] = useState(false);
+  const screenWidth = useMobileScreen();
+  const [searchStatus, setSearchStatus] = useState(true);
+
+  useEffect(() => {
+    setSearchStatus(screenWidth > 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screenWidth]);
 
   // star reference
   const star = useRef(null);
@@ -231,6 +239,14 @@ export default (props) => {
             </section>
           </div>
         )}
+
+        {screenWidth <= 1000 ? (
+          <Link className="search-docs-button" to="/searchbar/searchdocs" asModal>
+            <button className="button">
+            <FontAwesomeIcon className="fontawsome-icon" aria-label="search" icon={faSearch}/>
+            </button>
+          </Link>
+        ) : null}
 
         {showToTopButton && (
           <div

@@ -315,6 +315,16 @@ a.btn {
       outline: none;
     }
   }
+  @include media("<1000px") {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    z-index: 1001;
+    border-radius: 50%;
+    padding-left: 2px;
+  }
 }
 
 .fontawsome-icon {
