@@ -534,6 +534,9 @@
     letter-spacing: 0.1rem;
     text-rendering: optimizeLegibility;
     padding-right: 80px;
+    @include media("<=1000px") {
+      text-align: left;
+    }
   }
 
   h1:after {
