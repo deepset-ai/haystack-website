@@ -123,7 +123,7 @@ const SearchDocs = () => {
         <FontAwesomeIcon className="fontawsome-icon-search" aria-label="search" icon={faSearch}/> Search
         </Button>
       </div>
-      <div className="powered-haystack">* Powered by <span>Haystack</span></div>
+      <div className="powered-haystack">* Powered by <span>Haystack</span> </div>
       </div>
       )}
         <div className="results">
