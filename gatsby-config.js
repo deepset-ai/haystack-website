@@ -177,7 +177,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `material-ui-search-bar`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
