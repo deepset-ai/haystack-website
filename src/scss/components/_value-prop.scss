@@ -51,6 +51,13 @@
       max-width: $maxContainerWidth;
       margin: 0 auto;
     }
+
+    .search {
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
     
     .main-message {
       grid-column: span 8;
