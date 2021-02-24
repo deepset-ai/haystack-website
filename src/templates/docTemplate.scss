@@ -1036,6 +1036,12 @@
 }
 .tabsdsinstall { 
   min-height: 550px; 
+  @include media("<=1120px") {
+    min-height: 590px;
+  }
+  @include media("<=450px") {
+    min-height: 730px;
+  }
 }
 .tabsdschoose {
   min-height: 320px; 
