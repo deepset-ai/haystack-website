@@ -15,6 +15,7 @@ import Alert from '@material-ui/lab/Alert';
 import Button from "../../components/landing-page/button";
 
 import OpenSource from "../../images/haystack_logo_blue_banner.png"
+import { navigate } from "gatsby"
 
 const BetaPage = () => {
 
@@ -102,19 +103,19 @@ const BetaPage = () => {
 
           // Send invite
           // Create the new request 
-          var xhrInvite = new XMLHttpRequest();
-          var urlInvite = 'https://p3e3737mri.execute-api.eu-central-1.amazonaws.com/default/haystack-slack-invite';
-          var dataInvite = {email: email};
-          var final_dataInvite = JSON.stringify(dataInvite);
+          //var xhrInvite = new XMLHttpRequest();
+          //var urlInvite = 'https://p3e3737mri.execute-api.eu-central-1.amazonaws.com/default/haystack-slack-invite';
+          //var dataInvite = {email: email};
+          //var final_dataInvite = JSON.stringify(dataInvite);
 
-          xhrInvite.open('POST', urlInvite);
+          //xhrInvite.open('POST', urlInvite);
 
-          xhrInvite.onreadystatechange = function() {
+          //xhrInvite.onreadystatechange = function() {
             //console.log(xhrInvite);
-          }
+          //}
 
           // Sends the request 
-          xhrInvite.send(final_dataInvite);
+          //xhrInvite.send(final_dataInvite);
         } else if (xhr.readyState === 4 && xhr.status === 400){ 
           setMessage("An error occurred. Please check your details.");
           setSeverity("error");
@@ -136,6 +137,10 @@ const BetaPage = () => {
 
       // Sends the request 
       xhr.send(final_data);
+      window.open(
+        'https://join.slack.com/t/haystack-community/shared_invite/zt-n9pgt0w1-J7YB_FM4dFeubQI2t6WD8w',
+        '_blank'
+      );
 
   };
 
