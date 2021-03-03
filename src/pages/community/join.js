@@ -138,7 +138,7 @@ const BetaPage = () => {
       // Sends the request 
       xhr.send(final_data);
       window.open(
-        'https://haystack-community.slack.com/archives/C01J3TZM9HT/p1614692123035300',
+        'https://join.slack.com/t/haystack-community/shared_invite/zt-n9pgt0w1-J7YB_FM4dFeubQI2t6WD8w',
         '_blank'
       );
 
