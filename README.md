@@ -1,5 +1,7 @@
 *******************************************************
 # Haystack — Documentation
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdeepset-ai%2Fhaystack-website.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdeepset-ai%2Fhaystack-website?ref=badge_shield)
+
 *******************************************************
 
 
@@ -74,3 +76,7 @@ Deployment
 3. Option 1 without updating the documentation files: Run `npm run deploy`<br>
    Option 2 with updating the documentation files: Run `npm run update_deploy` (need to be run from the directory **haystack-website**)
 4. Documentation gets deployed to **haystack.deepset.ai**
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdeepset-ai%2Fhaystack-website.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdeepset-ai%2Fhaystack-website?ref=badge_large)
