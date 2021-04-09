@@ -41,6 +41,9 @@ do
     if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/tutorials/tutorials/9.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
         wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/tutorials/tutorials/9.md -O ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/9.md
     fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/tutorials/tutorials/10.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/tutorials/tutorials/10.md -O ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/10.md
+    fi
 
     sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/1.md 
     sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/1.md 
@@ -65,5 +68,9 @@ do
     if [[ -f "./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/9.md" ]]; then
         sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/9.md
         sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/9.md
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/10.md" ]]; then
+        sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/10.md
+        sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/tutorials/tutorials/10.md
     fi
 done
