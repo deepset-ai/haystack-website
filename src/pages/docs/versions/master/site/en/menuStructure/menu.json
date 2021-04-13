@@ -220,6 +220,14 @@
       "order": 8
     },
     {
+      "id": "tutorial10md",
+      "title": "Question Answering on a Knowledge Graph",
+      "label1": "tutorials_haystack",
+      "label2": "",
+      "label3": "",
+      "order": 9
+    },
+    {
       "id": "api_haystack",
       "title": "API reference",
       "label1": "",
