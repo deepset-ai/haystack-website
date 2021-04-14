@@ -1045,8 +1045,8 @@
 }
 .tabsdschoose {
   min-height: 320px; 
-  @include media("<=600px") {
-    min-height: 400px;
+  @include media("<=850px") {
+    min-height: 460px;
   }
 }
 .innertabs {  
