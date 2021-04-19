@@ -293,7 +293,7 @@
       "order": 4
     },
     {
-      "id": "translatormd",
+      "id": "apitranslatormd",
       "title": "Translator",
       "label1": "api_haystack",
       "label2": "",
