@@ -34,6 +34,18 @@ do
     if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/pipelines.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then 
         wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/pipelines.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
     fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/translator.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/translator.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md
+    fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/summarizer.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/summarizer.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md
+    fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/crawler.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/crawler.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md
+    fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/evaluation.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/evaluation.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
+    fi
 
     echo -e "---\ntitle: \"Document Store\"\nmetaTitle: \"Database\"\nmetaDescription: \"\"\nslug: \"/docs/apidatabase\"\ndate: \"2020-09-03\"\nid: \"apidatabasemd\"\n---\n\n# Document Store\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
     sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
