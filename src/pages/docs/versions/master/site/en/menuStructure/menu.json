@@ -31,7 +31,7 @@
       "label1": "overview",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "roadmapmd",
@@ -39,7 +39,7 @@
       "label1": "overview",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "termsmd",
@@ -47,7 +47,7 @@
       "label1": "overview",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "usage_haystack",
@@ -72,7 +72,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 0
+      "order": 1
     },
     {
       "id": "documentstoremd",
@@ -80,7 +80,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 1
+      "order": 2
     },
     {
       "id": "retrievermd",
@@ -88,7 +88,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 2
+      "order": 3
     },
     {
       "id": "readermd",
@@ -96,7 +96,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "generatormd",
@@ -104,7 +104,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 5
     },
     {
       "id": "summarizermd",
@@ -112,7 +112,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 6
     },
         {
       "id": "translatormd",
@@ -120,7 +120,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 7
     },
     {
       "id": "languagesmd",
@@ -128,7 +128,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 8
     },
     {
       "id": "domain_adaptationmd",
@@ -136,7 +136,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 7
+      "order": 9
     },
     {
       "id": "optimizationmd",
@@ -144,7 +144,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 8
+      "order": 10
     },
     {
       "id": "annotationmd",
@@ -152,7 +152,7 @@
       "label1": "usage_haystack",
       "label2": "",
       "label3": "",
-      "order": 9
+      "order": 11
     },
     {
       "id": "tutorials_haystack",
@@ -241,7 +241,7 @@
       "label1": "tutorials_haystack",
       "label2": "",
       "label3": "",
-      "order": 8
+      "order": 9
     },
     {
       "id": "api_haystack",
@@ -272,7 +272,7 @@
       "id": "apireadermd",
       "title": "Reader",
       "label1": "api_haystack",
-      "label2": "api_haystack",
+      "label2": "",
       "label3": "",
       "order": 2
     },
@@ -290,7 +290,7 @@
       "label1": "api_haystack",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 4
     },
     {
       "id": "translatormd",
@@ -298,7 +298,7 @@
       "label1": "api_haystack",
       "label2": "",
       "label3": "",
-      "order": 3
+      "order": 5
     },
     {
       "id": "apiindexingmd",
@@ -306,7 +306,7 @@
       "label1": "api_haystack",
       "label2": "",
       "label3": "",
-      "order": 4
+      "order": 6
     },
     {
       "id": "file_convertersmd",
@@ -314,15 +314,15 @@
       "label1": "api_haystack",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 7
     },
     {
-      "id": "apicrawler_md",
+      "id": "apicrawlermd",
       "title": "Crawler",
       "label1": "api_haystack",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 8
     },
     {
       "id": "apievaluationmd",
@@ -330,7 +330,7 @@
       "label1": "api_haystack",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 9
     },
     {
       "id": "apipipelinesmd",
@@ -338,7 +338,7 @@
       "label1": "api_haystack",
       "label2": "",
       "label3": "",
-      "order": 6
+      "order": 10
     }
   ]
 }

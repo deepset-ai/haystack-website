@@ -73,22 +73,22 @@ do
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
     fi
     if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/translator.md" ]]; then
-        echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/translatormd\"\ndate: \"2020-09-03\"\nid: \"apitranslatormd\"\n---\n\n# Translator\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md
+        echo -e "---\ntitle: \"Translator\"\nmetaTitle: \"Translator\"\nmetaDescription: \"\"\nslug: \"/docs/translatormd\"\ndate: \"2020-09-03\"\nid: \"apitranslatormd\"\n---\n\n# Translator\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md
         sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md
     fi
     if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md" ]]; then
-        echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/summarizermd\"\ndate: \"2020-09-03\"\nid: \"apisummarizermd\"\n---\n\n# Summarizer\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md
+        echo -e "---\ntitle: \"Summarizer\"\nmetaTitle: \"Summarizer\"\nmetaDescription: \"\"\nslug: \"/docs/summarizermd\"\ndate: \"2020-09-03\"\nid: \"apisummarizermd\"\n---\n\n# Summarizer\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md
         sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md
     fi
     if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md" ]]; then
-        echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/crawlermd\"\ndate: \"2020-09-03\"\nid: \"apicrawlermd\"\n---\n\n# Pipelines\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md
+        echo -e "---\ntitle: \"Crawler\"\nmetaTitle: \"Crawler\"\nmetaDescription: \"\"\nslug: \"/docs/crawlermd\"\ndate: \"2020-09-03\"\nid: \"apicrawlermd\"\n---\n\n# Pipelines\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md
         sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md
     fi
     if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md" ]]; then
-        echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/evaluationmd\"\ndate: \"2020-09-03\"\nid: \"apievaluationmd\"\n---\n\n# Pipelines\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
+        echo -e "---\ntitle: \"Evaluation\"\nmetaTitle: \"Evaluation\"\nmetaDescription: \"\"\nslug: \"/docs/evaluationmd\"\ndate: \"2020-09-03\"\nid: \"apievaluationmd\"\n---\n\n# Pipelines\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
         sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
     fi
