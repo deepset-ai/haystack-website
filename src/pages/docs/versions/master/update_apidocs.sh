@@ -60,19 +60,24 @@ do
         sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
     fi
-        if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/translator.md" ]]; then
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/translator.md" ]]; then
         echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/translatormd\"\ndate: \"2020-09-03\"\nid: \"translatormd\"\n---\n\n# Translator\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md
         sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/translator.md
     fi
-        if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md" ]]; then
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md" ]]; then
         echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/summarizermd\"\ndate: \"2020-09-03\"\nid: \"summarizermd\"\n---\n\n# Summarizer\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md
         sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/summarizer.md
     fi
     if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md" ]]; then
-        echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/crawlermd\"\ndate: \"2020-09-03\"\nid: \"crawlermd\"\n---\n\n# Pipelines\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
-        sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
-        sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/pipelines.md
+        echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/crawlermd\"\ndate: \"2020-09-03\"\nid: \"crawlermd\"\n---\n\n# Pipelines\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md
+        sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md
+        sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/crawler.md
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md" ]]; then
+        echo -e "---\ntitle: \"Pipelines\"\nmetaTitle: \"Pipelines\"\nmetaDescription: \"\"\nslug: \"/docs/evaluationmd\"\ndate: \"2020-09-03\"\nid: \"evaluationmd\"\n---\n\n# Pipelines\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
+        sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
+        sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
     fi
 done
