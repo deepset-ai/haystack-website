@@ -4,7 +4,7 @@ metaTitle: "Pipelines"
 metaDescription: ""
 slug: "/docs/translatormd"
 date: "2020-09-03"
-id: "translatormd"
+id: "apitranslatormd"
 ---
 
 # Translator

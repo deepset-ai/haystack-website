@@ -4,7 +4,7 @@ metaTitle: "Pipelines"
 metaDescription: ""
 slug: "/docs/summarizermd"
 date: "2020-09-03"
-id: "summarizermd"
+id: "apisummarizermd"
 ---
 
 # Summarizer

@@ -285,7 +285,7 @@
       "order": 3
     },
     {
-      "id": "summarizermd",
+      "id": "apisummarizermd",
       "title": "Summarizer",
       "label1": "api_haystack",
       "label2": "",
@@ -317,7 +317,7 @@
       "order": 5
     },
     {
-      "id": "crawler_md",
+      "id": "apicrawler_md",
       "title": "Crawler",
       "label1": "api_haystack",
       "label2": "",
@@ -325,7 +325,7 @@
       "order": 5
     },
     {
-      "id": "evaluation_md",
+      "id": "apievaluationmd",
       "title": "Evaluation",
       "label1": "api_haystack",
       "label2": "",
