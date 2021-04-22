@@ -1020,7 +1020,7 @@
   min-height: 230px; 
 }
 .tabsreader {
-  min-height: 400px; 
+  min-height: 420px; 
   @include media("<=1120px") {
     min-height: 500px;
   }
@@ -1035,7 +1035,7 @@
   min-height: 185px; 
 }
 .tabsdsinstall { 
-  min-height: 550px; 
+  min-height: 570px; 
   @include media("<=1120px") {
     min-height: 590px;
   }
@@ -1050,7 +1050,7 @@
   }
 }
 .innertabs {  
-  min-height: 300px; 
+  min-height: 320px; 
   @include media("<=1120px") {
     min-height: 410px;
   }
