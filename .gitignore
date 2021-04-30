@@ -68,3 +68,8 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
+# Editor files
+.idea
+
+# Logs from wget
+wget-log*
