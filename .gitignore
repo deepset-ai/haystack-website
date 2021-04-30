@@ -71,5 +71,5 @@ yarn-error.log
 # Editor files
 .idea
 
-# Logs from wget
+# Log files from wget
 wget-log*
