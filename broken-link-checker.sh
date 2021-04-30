@@ -25,6 +25,8 @@ do
     --exclude https://twitter.com/deepset_ai/ \
     --exclude https://huggingface.co/illuin/camembert-large-fquad \
     --exclude https://deepset.ai/imprint \
+    --exclude https://deepset.ai/harry_potter/ \
+    --exclude https://graphdb.ontotext.com/documentation/free/configuring-a-repository.html#configure-a-repository-programmatically \
     --filter-level 1 --host-requests 1 
     status=$?
     

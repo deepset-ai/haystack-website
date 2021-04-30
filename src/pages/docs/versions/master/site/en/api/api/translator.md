@@ -1,6 +1,6 @@
 ---
-title: "Pipelines"
-metaTitle: "Pipelines"
+title: "Translator"
+metaTitle: "Translator"
 metaDescription: ""
 slug: "/docs/translatormd"
 date: "2020-09-03"
@@ -108,8 +108,5 @@ Run the actual translation. You can supply a query or a list of documents. Whate
 **Arguments**:
 
 - `query`: The query string to translate
-:type query: str
 - `documents`: The documents to translate
-:type documents: List[Document] or List[Dict]
 - `dict_key`: 
-:type dict_key:

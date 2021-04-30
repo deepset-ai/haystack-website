@@ -46,6 +46,12 @@ do
     if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/evaluation.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
         wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/evaluation.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
     fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/graph_retriever.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/graph_retriever.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/graph_retriever.md
+    fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/knowledge_graph.md  2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/api/api/knowledge_graph.md  -O ./src/pages/docs/versions/master/${i}site/en/api/api/knowledge_graph.md
+    fi
 
     echo -e "---\ntitle: \"Document Store\"\nmetaTitle: \"Database\"\nmetaDescription: \"\"\nslug: \"/docs/apidatabase\"\ndate: \"2020-09-03\"\nid: \"apidatabasemd\"\n---\n\n# Document Store\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
     sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/document_store.md 
@@ -91,5 +97,15 @@ do
         echo -e "---\ntitle: \"Evaluation\"\nmetaTitle: \"Evaluation\"\nmetaDescription: \"\"\nslug: \"/docs/evaluationmd\"\ndate: \"2020-09-03\"\nid: \"apievaluationmd\"\n---\n\n# Evaluation\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
         sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
         sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/evaluation.md
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/graph_retriever.md" ]]; then
+        echo -e "---\ntitle: \"Graph Retriever\"\nmetaTitle: \"Graph Retriever\"\nmetaDescription: \"\"\nslug: \"/docs/graph_retrievermd\"\ndate: \"2020-09-03\"\nid: \"apigraphretrievermd\"\n---\n\n# Graph Retriever\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/graph_retriever.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/graph_retriever.md
+        sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/graph_retriever.md
+        sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/graph_retriever.md
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/api/api/knowledge_graph.md" ]]; then
+        echo -e "---\ntitle: \"Knowledge Graph\"\nmetaTitle: \"Knowledge Graph\"\nmetaDescription: \"\"\nslug: \"/docs/knowledge_graphmd\"\ndate: \"2020-09-03\"\nid: \"apiknowledgegraphmd\"\n---\n\n# Knowledge Graph\n\n$(cat ./src/pages/docs/versions/master/${i}site/en/api/api/knowledge_graph.md)" > ./src/pages/docs/versions/master/${i}site/en/api/api/knowledge_graph.md
+        sed -i 's/# Module /# Module: /g' ./src/pages/docs/versions/master/${i}site/en/api/api/knowledge_graph.md
+        sed -i 's/## \(.*\) Objects/## Class: \1/g' ./src/pages/docs/versions/master/${i}site/en/api/api/knowledge_graph.md
     fi
 done

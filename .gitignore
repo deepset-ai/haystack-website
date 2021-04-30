@@ -68,3 +68,8 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
+# Pycharm files
+.idea
+
+# Log files from wget
+wget-log*

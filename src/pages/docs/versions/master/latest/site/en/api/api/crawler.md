@@ -1,13 +1,13 @@
 ---
-title: "Pipelines"
-metaTitle: "Pipelines"
+title: "Crawler"
+metaTitle: "Crawler"
 metaDescription: ""
 slug: "/docs/crawlermd"
-date: "2021-04-20"
+date: "2020-09-03"
 id: "apicrawlermd"
 ---
 
-# Pipelines
+# Crawler
 
 <a name="crawler"></a>
 # Module: crawler
