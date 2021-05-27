@@ -220,11 +220,6 @@ export default (props) => {
         {formatHeadings && !isBenchMark && !isDocAPI && (
           <div className="anchor-wrapper">
             <section>
-            <Link className="search-docs-button" to="/searchbar/searchdocs" asModal>
-              <button className="button">
-              <FontAwesomeIcon className="fontawsome-icon" aria-label="search" icon={faSearch}/> Search Docs
-              </button>
-            </Link>
               {generateAnchorMenu(formatHeadings, "parent-item")} 
               <div className="button-container">
                 <a
@@ -239,12 +234,6 @@ export default (props) => {
             </section>
           </div>
         )}
-
-        {screenWidth <= 1000 ? (
-          <Link className="search-docs-button" to="/searchbar/searchdocs" asModal>
-            <FontAwesomeIcon className="fontawsome-icon" aria-label="search" icon={faSearch}/>
-          </Link>
-        ) : null}
 
         {showToTopButton && (
           <div
