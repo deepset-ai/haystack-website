@@ -42,20 +42,12 @@
       "order": 3
     },
     {
-      "id": "faqmd",
-      "title": "FAQ",
-      "label1": "overview",
-      "label2": "",
-      "label3": "",
-      "order": 4
-    },
-    {
       "id": "termsmd",
       "title": "Glossary",
       "label1": "overview",
       "label2": "",
       "label3": "",
-      "order": 5
+      "order": 4
     },
     {
       "id": "usage_haystack",
