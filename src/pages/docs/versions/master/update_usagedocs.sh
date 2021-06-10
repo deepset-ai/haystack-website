@@ -146,3 +146,4 @@ do
         sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/faq.md
         sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/faq.md
     fi
+done    
