@@ -139,4 +139,9 @@ do
         sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/ranker.md
         sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/ranker.md
     fi
-done
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/usage/usage/faq.md" ]]; then
+        sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/faq.md
+        sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/faq.md
+    fi
+done    
+
