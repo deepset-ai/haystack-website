@@ -30,7 +30,6 @@ do
     --exclude https://deepset.ai/ \
     --exclude https://deepset.ai/german-bert \
     --exclude https://deepset.ai/germanquad \
-
     --filter-level 1 --host-requests 1 
     status=$?
     
