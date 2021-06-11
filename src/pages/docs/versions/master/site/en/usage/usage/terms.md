@@ -62,4 +62,4 @@ The documents are paragraphs from Wikipedia and the question / answer pairs are 
 **Transformers** - Originally refers to the deep learning architecture that is composed of stacked self-attention layers
 (first conceptualised [here](https://arxiv.org/pdf/1706.03762.pdf)).
 Can also refer to HuggingFace’s [repository](https://github.com/huggingface/transformers)
-which contains implementations of popular model architectures. 
+which contains implementations of popular model architectures.
