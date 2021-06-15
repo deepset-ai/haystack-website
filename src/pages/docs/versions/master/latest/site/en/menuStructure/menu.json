@@ -379,6 +379,14 @@
       "label2": "",
       "label3": "",
       "order": 12
+    },
+    {
+      "id": "apirankermd",
+      "title": "Ranker",
+      "label1": "api_haystack",
+      "label2": "",
+      "label3": "",
+      "order": 13
     }
   ]
 }

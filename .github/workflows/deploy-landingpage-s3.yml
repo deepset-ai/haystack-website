@@ -28,11 +28,11 @@ jobs:
           npm install
           githubRef=$(echo '${{ github.event.client_payload.ref }}' | sed 's/refs\/heads\///g')
           echo $githubRef
-          [[ ! -z "${githubRef}" ]] && npm run update_img_dev $githubRef || npm run update_img_dev master
-          [[ ! -z "${githubRef}" ]] && npm run update_apidocs_dev $githubRef || npm run update_apidocs_dev master
-          [[ ! -z "${githubRef}" ]] && npm run update_tutorialsdocs_dev $githubRef || npm run update_tutorialsdocs_dev master
-          [[ ! -z "${githubRef}" ]] && npm run update_usagedocs_dev $githubRef || npm run update_usagedocs_dev master
-          [[ ! -z "${githubRef}" ]] && npm run update_benchmarks_dev $githubRef || npm run update_benchmarks_dev master
+          [[ ! -z "${githubRef}" ]] && npm run update_img_dev $githubRef || npm run update_img_dev add_pydoc_ranker
+          [[ ! -z "${githubRef}" ]] && npm run update_apidocs_dev $githubRef || npm run update_apidocs_dev add_pydoc_ranker
+          [[ ! -z "${githubRef}" ]] && npm run update_tutorialsdocs_dev $githubRef || npm run update_tutorialsdocs_dev add_pydoc_ranker
+          [[ ! -z "${githubRef}" ]] && npm run update_usagedocs_dev $githubRef || npm run update_usagedocs_dev add_pydoc_ranker
+          [[ ! -z "${githubRef}" ]] && npm run update_benchmarks_dev $githubRef || npm run update_benchmarks_dev add_pydoc_ranker
           npm ci
           npm run build
       - name: Configure AWS Credentials
