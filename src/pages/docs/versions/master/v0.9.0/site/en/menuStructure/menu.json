@@ -276,6 +276,14 @@
       "order": 10
     },
     {
+      "id": "tutorial12md",
+      "title": "How to use Pipelines",
+      "label1": "tutorials_haystack",
+      "label2": "",
+      "label3": "",
+      "order": 12
+    },
+    {
       "id": "api_haystack",
       "title": "API reference",
       "label1": "",
