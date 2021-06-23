@@ -249,7 +249,7 @@ Karpukhin, Vladimir, et al. (2020): "Dense Passage Retrieval for Open-Domain Que
 #### \_\_init\_\_
 
 ```python
- | __init__(document_store: BaseDocumentStore, query_embedding_model: Union[Path, str] = "facebook/dpr-question_encoder-single-nq-base", passage_embedding_model: Union[Path, str] = "facebook/dpr-ctx_encoder-single-nq-base", single_model_path: Optional[Union[Path, str]] = None, model_version: Optional[str] = None, max_seq_len_query: int = 64, max_seq_len_passage: int = 256, top_k: int = 10, use_gpu: bool = True, batch_size: int = 16, embed_title: bool = True, use_fast_tokenizers: bool = True, infer_tokenizer_classes: bool = False, similarity_function: str = "dot_product", progress_bar: bool = True)
+ | __init__(document_store: BaseDocumentStore, query_embedding_model: Union[Path, str] = "facebook/dpr-question_encoder-single-nq-base", passage_embedding_model: Union[Path, str] = "facebook/dpr-ctx_encoder-single-nq-base", model_version: Optional[str] = None, max_seq_len_query: int = 64, max_seq_len_passage: int = 256, top_k: int = 10, use_gpu: bool = True, batch_size: int = 16, embed_title: bool = True, use_fast_tokenizers: bool = True, infer_tokenizer_classes: bool = False, similarity_function: str = "dot_product", progress_bar: bool = True)
 ```
 
 Init the Retriever incl. the two encoder models from a local or remote model checkpoint.
@@ -277,9 +277,6 @@ The checkpoint format matches huggingface transformers' model format
 - `passage_embedding_model`: Local path or remote name of passage encoder checkpoint. The format equals the
                                 one used by hugging-face transformers' modelhub models
                                 Currently available remote names: ``"facebook/dpr-ctx_encoder-single-nq-base"``
-- `single_model_path`: Local path or remote name of a query and passage embedder in one single model. Those
-                          models are typically trained within FARM.
-                          Currently available remote names: TODO add FARM DPR model to HF modelhub
 - `model_version`: The version of model to use from the HuggingFace model hub. Can be tag name, branch name, or commit hash.
 - `max_seq_len_query`: Longest length of each query sequence. Maximum number of tokens for the query text. Longer ones will be cut down."
 - `max_seq_len_passage`: Longest length of each passage/context sequence. Maximum number of tokens for the passage text. Longer ones will be cut down."
@@ -355,7 +352,7 @@ Embeddings of documents / passages shape (batch_size, embedding_dim)
 #### train
 
 ```python
- | train(data_dir: str, train_filename: str, dev_filename: str = None, test_filename: str = None, max_processes: int = 128, dev_split: float = 0, batch_size: int = 2, embed_title: bool = True, num_hard_negatives: int = 1, num_positives: int = 1, n_epochs: int = 3, evaluate_every: int = 1000, n_gpu: int = 1, learning_rate: float = 1e-5, epsilon: float = 1e-08, weight_decay: float = 0.0, num_warmup_steps: int = 100, grad_acc_steps: int = 1, optimizer_name: str = "TransformersAdamW", optimizer_correct_bias: bool = True, save_dir: str = "../saved_models/dpr", query_encoder_save_dir: str = "query_encoder", passage_encoder_save_dir: str = "passage_encoder")
+ | train(data_dir: str, train_filename: str, dev_filename: str = None, test_filename: str = None, max_sample: int = None, max_processes: int = 128, dev_split: float = 0, batch_size: int = 2, embed_title: bool = True, num_hard_negatives: int = 1, num_positives: int = 1, n_epochs: int = 3, evaluate_every: int = 1000, n_gpu: int = 1, learning_rate: float = 1e-5, epsilon: float = 1e-08, weight_decay: float = 0.0, num_warmup_steps: int = 100, grad_acc_steps: int = 1, use_amp: str = None, optimizer_name: str = "TransformersAdamW", optimizer_correct_bias: bool = True, save_dir: str = "../saved_models/dpr", query_encoder_save_dir: str = "query_encoder", passage_encoder_save_dir: str = "passage_encoder")
 ```
 
 train a DensePassageRetrieval model
@@ -366,6 +363,7 @@ train a DensePassageRetrieval model
 - `train_filename`: training filename
 - `dev_filename`: development set filename, file to be used by model in eval step of training
 - `test_filename`: test set filename, file to be used by model in test step after training
+- `max_sample`: maximum number of input samples to convert. Can be used for debugging a smaller dataset.
 - `max_processes`: the maximum number of processes to spawn in the multiprocessing.Pool used in DataSilo.
                       It can be set to 1 to disable the use of multiprocessing or make debugging easier.
 - `dev_split`: The proportion of the train set that will sliced. Only works if dev_filename is set to None
@@ -380,6 +378,12 @@ train a DensePassageRetrieval model
 - `epsilon`: epsilon parameter of optimizer
 - `weight_decay`: weight decay parameter of optimizer
 - `grad_acc_steps`: number of steps to accumulate gradient over before back-propagation is done
+- `use_amp`: Whether to use automatic mixed precision (AMP) or not. The options are:
+            "O0" (FP32)
+            "O1" (Mixed Precision)
+            "O2" (Almost FP16)
+            "O3" (Pure FP16).
+            For more information, refer to: https://nvidia.github.io/apex/amp.html
 - `optimizer_name`: what optimizer to use (default: TransformersAdamW)
 - `num_warmup_steps`: number of warmup steps
 - `optimizer_correct_bias`: Whether to correct bias in optimizer
@@ -411,7 +415,7 @@ None
 
 ```python
  | @classmethod
- | load(cls, load_dir: Union[Path, str], document_store: BaseDocumentStore, max_seq_len_query: int = 64, max_seq_len_passage: int = 256, use_gpu: bool = True, batch_size: int = 16, embed_title: bool = True, use_fast_tokenizers: bool = True, similarity_function: str = "dot_product", query_encoder_dir: str = "query_encoder", passage_encoder_dir: str = "passage_encoder")
+ | load(cls, load_dir: Union[Path, str], document_store: BaseDocumentStore, max_seq_len_query: int = 64, max_seq_len_passage: int = 256, use_gpu: bool = True, batch_size: int = 16, embed_title: bool = True, use_fast_tokenizers: bool = True, similarity_function: str = "dot_product", query_encoder_dir: str = "query_encoder", passage_encoder_dir: str = "passage_encoder", infer_tokenizer_classes: bool = False)
 ```
 
 Load DensePassageRetriever from the specified directory.
@@ -427,7 +431,7 @@ class EmbeddingRetriever(BaseRetriever)
 #### \_\_init\_\_
 
 ```python
- | __init__(document_store: BaseDocumentStore, embedding_model: str, model_version: Optional[str] = None, use_gpu: bool = True, model_format: str = "farm", pooling_strategy: str = "reduce_mean", emb_extraction_layer: int = -1, top_k: int = 10)
+ | __init__(document_store: BaseDocumentStore, embedding_model: str, model_version: Optional[str] = None, use_gpu: bool = True, model_format: str = "farm", pooling_strategy: str = "reduce_mean", emb_extraction_layer: int = -1, top_k: int = 10, progress_bar: bool = True)
 ```
 
 **Arguments**:
@@ -451,6 +455,7 @@ class EmbeddingRetriever(BaseRetriever)
 - `emb_extraction_layer`: Number of layer from which the embeddings shall be extracted (for farm / transformers models only).
                              Default: -1 (very last layer).
 - `top_k`: How many documents to return per query.
+- `progress_bar`: If true displays progress bar during embedding.
 
 <a name="dense.EmbeddingRetriever.retrieve"></a>
 #### retrieve
@@ -469,23 +474,6 @@ that are most relevant to the query.
 - `top_k`: How many documents to return per query.
 - `index`: The name of the index in the DocumentStore from which to retrieve documents
 
-<a name="dense.EmbeddingRetriever.embed"></a>
-#### embed
-
-```python
- | embed(texts: Union[List[List[str]], List[str], str]) -> List[np.ndarray]
-```
-
-Create embeddings for each text in a list of texts using the retrievers model (`self.embedding_model`)
-
-**Arguments**:
-
-- `texts`: Texts to embed
-
-**Returns**:
-
-List of embeddings (one per input text). Each embedding is a list of floats.
-
 <a name="dense.EmbeddingRetriever.embed_queries"></a>
 #### embed\_queries
 
@@ -493,7 +481,7 @@ List of embeddings (one per input text). Each embedding is a list of floats.
  | embed_queries(texts: List[str]) -> List[np.ndarray]
 ```
 
-Create embeddings for a list of queries. For this Retriever type: The same as calling .embed()
+Create embeddings for a list of queries.
 
 **Arguments**:
 
@@ -507,10 +495,53 @@ Embeddings, one per input queries
 #### embed\_passages
 
 ```python
- | embed_passages(docs: List[Document]) -> Union[List[str], List[List[str]]]
+ | embed_passages(docs: List[Document]) -> List[np.ndarray]
 ```
 
-Create embeddings for a list of passages. For this Retriever type: The same as calling .embed()
+Create embeddings for a list of passages.
+
+**Arguments**:
+
+- `docs`: List of documents to embed
+
+**Returns**:
+
+Embeddings, one per input passage
+
+<a name="dense._EmbeddingEncoder"></a>
+## Class: \_EmbeddingEncoder
+
+```python
+class _EmbeddingEncoder()
+```
+
+<a name="dense._EmbeddingEncoder.embed_queries"></a>
+#### embed\_queries
+
+```python
+ | @abstractmethod
+ | embed_queries(texts: List[str]) -> List[np.ndarray]
+```
+
+Create embeddings for a list of queries.
+
+**Arguments**:
+
+- `texts`: Queries to embed
+
+**Returns**:
+
+Embeddings, one per input queries
+
+<a name="dense._EmbeddingEncoder.embed_passages"></a>
+#### embed\_passages
+
+```python
+ | @abstractmethod
+ | embed_passages(docs: List[Document]) -> List[np.ndarray]
+```
+
+Create embeddings for a list of passages.
 
 **Arguments**:
 

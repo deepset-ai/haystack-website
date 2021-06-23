@@ -30,6 +30,7 @@ do
     --exclude https://deepset.ai/ \
     --exclude https://deepset.ai/german-bert \
     --exclude https://deepset.ai/germanquad \
+    --exclude https://ext-models-haystack.s3.eu-central-1.amazonaws.com/ \
     --filter-level 1 --host-requests 1 
     status=$?
     
