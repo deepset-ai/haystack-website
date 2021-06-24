@@ -277,11 +277,11 @@
     },
     {
       "id": "tutorial12md",
-      "title": "How to use Pipelines",
+      "title": "Generative QA with \"LFQA\"",
       "label1": "tutorials_haystack",
       "label2": "",
       "label3": "",
-      "order": 12
+      "order": 11
     },
     {
       "id": "api_haystack",
