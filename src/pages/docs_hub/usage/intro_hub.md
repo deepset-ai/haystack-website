@@ -20,7 +20,7 @@ Haystack Hub is a complementary platform to our [**open source framework**](/doc
 * Search UI for end users 
 * Support
   
-![image](../../../images/HaystackSearch.png)
+![image](../img/HaystackSearch.png)
 
 ## Use cases
 
