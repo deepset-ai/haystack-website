@@ -15,7 +15,6 @@ const Header = ({ siteTitle, menuLinks }) => {
 
   const screenWidth = useMobileScreen();
   const [mobileNav, setMobileNav] = useState(false);
-  const [docList, setDocList] = useState(false);
 
   useEffect(() => {
     window.addEventListener("click", () => {
@@ -34,7 +33,7 @@ const Header = ({ siteTitle, menuLinks }) => {
       
         <header className="header-wrapper">
           <div className="logo-wrapper">
-            <LocalizedLink locale="en" to={"/"}>
+            <LocalizedLink locale="en" to={"/docs/intromd"}>
               <img src={Logo} alt="Haystack Logo">
               </img> 
             </LocalizedLink>

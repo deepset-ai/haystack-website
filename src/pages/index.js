@@ -5,25 +5,20 @@ import SEO from "../components/seo";
 import "react-github-button/assets/style.css";
 import "../scss/index.scss";
 import Logo from "../images/haystack_logo_blue_banner_social.png"
-
-import ValueProp from "../components/landing-page/valueProp";
-import ProductFeatures from "../components/landing-page/productFeatures";
-import Products from "../components/landing-page/products";
-import UseCases from "../components/landing-page/useCases";
-import CallToAction from "../components/landing-page/callToAction";
+import { useEffect } from 'react';
+import { navigate } from 'gatsby';
 
 //import { RedocStandalone } from 'redoc';
 //<RedocStandalone specUrl="http://api.haystack-hub.com/openapi.json"/>
 const IndexPage = () => {
 
+  useEffect(() => {
+    navigate('/docs/intromd');
+  }, []);
+
   return (
     <Layout>
       <SEO title="Haystack" image={Logo} />
-        <ValueProp />
-        <ProductFeatures />
-        <Products />
-        <UseCases />
-        <CallToAction />
         
     </Layout>
   );
