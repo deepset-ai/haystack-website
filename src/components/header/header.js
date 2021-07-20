@@ -41,71 +41,22 @@ const Header = ({ siteTitle, menuLinks }) => {
           </div>
           {screenWidth > 1000 ? (
             <div className="right">
+
               <LocalizedLink
-                locale="en"
-                to="/"
+                to="/docs/intromd"
                 className="link"
-              >
-                Overview
-              </LocalizedLink>
-            
-              <LocalizedLink
                 locale="en"
-                to="/#main-use-cases"
-                scrollTo="link"
               >
-                Use Cases
+                Haystack Docs
               </LocalizedLink>
 
               <LocalizedLink
-                to="/pricing/pricing"
+                to="/docs_hub/intro_hubmd"
                 className="link"
                 locale="en"
               >
-                Pricing
+                Haystack Hub Docs
               </LocalizedLink>
-            
-              <span
-                role="button"
-                tabIndex={0}
-                className="docs"
-                onMouseOver={() => {
-                  setDocList(true);
-                }}
-                onMouseLeave={() => {
-                            setDocList(false);
-                          }}
-              >
-                Docs
-                {docList && (
-                  <div className="docs-list">
-                    <LocalizedLink
-                      locale="en"
-                      to="/docs/intromd"
-                      className="core"
-                    >
-                      <span
-                        tabIndex={0}
-                        role="button"
-                      >
-                      Haystack
-                      </span>
-                    </LocalizedLink>
-                    <LocalizedLink
-                      locale="en"
-                      to="/docs_hub/intro_hubmd"
-                      className="hub"
-                    >
-                      <span
-                        tabIndex={0}
-                        role="button"
-                      >
-                      Haystack Hub
-                      </span>
-                    </LocalizedLink>
-                  </div>
-                )}
-              </span>
 
               <LocalizedLink
                 locale="en"
@@ -122,14 +73,8 @@ const Header = ({ siteTitle, menuLinks }) => {
                 label="Join Our Community"
                 className="beta-button"
                               >
-              </Button>
-              
-              <Button
-                  to="/signup/beta"
-                  label="Try Haystack Hub"
-                  className="beta-button"
-                        >
-               </Button>
+              </Button>.
+
             </div>
           ) : ( 
              <FontAwesomeIcon className="fontawsome-icon" icon={faBars} onKeyDown={handleClick}
@@ -137,30 +82,6 @@ const Header = ({ siteTitle, menuLinks }) => {
           )}
         </header>
         <div className={`mobile-nav ${mobileNav && "open"}`}>
-        <LocalizedLink
-          locale="en"
-          to="/"
-          className="link"
-        >
-          Overview
-        </LocalizedLink>
-
-        <LocalizedLink
-          locale="en"
-          to="/#main-use-cases"
-          scrollTo="link"
-        >
-          Use Cases
-        </LocalizedLink>
-              
-        <LocalizedLink
-         to="/pricing/pricing"
-         className="link"
-         locale="en"
-        >
-         Pricing
-        </LocalizedLink>
-
         <LocalizedLink
          to="/docs/intromd"
          className="link"
@@ -188,12 +109,6 @@ const Header = ({ siteTitle, menuLinks }) => {
         <Button
           to="/community/join"
           label="Join Our Community"
-                        >
-        </Button>
-
-        <Button
-          to="/signup/beta"
-          label="Try Haystack Hub"
                         >
         </Button>
       </div>
