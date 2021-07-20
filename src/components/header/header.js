@@ -74,6 +74,15 @@ const Header = ({ siteTitle, menuLinks }) => {
                               >
               </Button>.
 
+              <a
+                    className="beta-button-link"
+                    href={`https://www.meetup.com/de-DE/open-nlp-meetup/`}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                Join Our Open NLP Group
+              </a>
+
             </div>
           ) : ( 
              <FontAwesomeIcon className="fontawsome-icon" icon={faBars} onKeyDown={handleClick}
@@ -110,6 +119,15 @@ const Header = ({ siteTitle, menuLinks }) => {
           label="Join Our Community"
                         >
         </Button>
+
+        <a
+          className="beta-button-link"
+          href={`https://www.meetup.com/de-DE/open-nlp-meetup/`}
+          target="_blank"
+          rel="noreferrer noopener"
+          >
+          Join Our Open NLP Group
+        </a>
       </div>
       </div>
     </>

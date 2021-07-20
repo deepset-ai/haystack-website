@@ -118,6 +118,11 @@
       font-weight: bold;
       margin: 0 1rem;
     }
+    
+    .a {
+      color: #60677e;;
+      font-weight: bold;
+    }
 
     .beta-button {
       margin-left: 20px;
@@ -133,7 +138,27 @@
     }
     .beta-button {
       margin-left: 20px;
-      width: 200px;
+      width: 230px;
+    }
+    .beta-button-link {
+      margin-left: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffffff;
+      border-radius: 4px;
+      background-color: #009BAA;
+      border: 0;
+      height: 40px;
+      width: 150px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none; 
+      padding-top: 10px;
+      text-transform: none; 
+    }
+    .beta-button-link {
+      margin-left: 20px;
+      width: 230px;
     }
   }
 
@@ -210,7 +235,7 @@
     background-color: lightgray;
     border: 0;
     height: 40px;
-    width: 150px;
+    width: 230px;
     cursor: pointer;
   }
   .button {
