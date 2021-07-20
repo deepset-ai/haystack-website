@@ -69,7 +69,7 @@ const Header = ({ siteTitle, menuLinks }) => {
 
               <Button
                 to="/community/join"
-                label="Join Our Community"
+                label="Join Slack"
                 className="beta-button"
                               >
               </Button>.
@@ -80,7 +80,7 @@ const Header = ({ siteTitle, menuLinks }) => {
                     target="_blank"
                     rel="noreferrer noopener"
                   >
-                Join Our Open NLP Group
+                Join Open NLP
               </a>
 
             </div>
@@ -116,7 +116,7 @@ const Header = ({ siteTitle, menuLinks }) => {
 
         <Button
           to="/community/join"
-          label="Join Our Community"
+          label="Join Slack"
                         >
         </Button>
 
@@ -126,7 +126,7 @@ const Header = ({ siteTitle, menuLinks }) => {
           target="_blank"
           rel="noreferrer noopener"
           >
-          Join Our Open NLP Group
+          Join Open NLP
         </a>
       </div>
       </div>
