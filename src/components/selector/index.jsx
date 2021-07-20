@@ -42,7 +42,7 @@ const Selector = (props) => {
     <div className={`selector-wrapper ${isVersion && "version-wrapper"}`}>
       <div className="selected" onClick={toggleList}>
         {selected}
-        <FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>
+        <FontAwesomeIcon className="fontawsome-icon" icon={faChevronDown}/>
       </div>
       <ul
         className={`options-wrapper ${listStatus && "open"}`}

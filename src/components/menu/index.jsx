@@ -67,7 +67,7 @@ const Menu = (props) => {
           const item = {
             ...v,
             children: [],
-            showChildren: true,
+            showChildren: false,
             isActive: false,
             isLast: !labelKeys[index + 1],
             isBlog,

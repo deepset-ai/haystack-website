@@ -6,9 +6,6 @@ import "./index.scss";
 import { GithubLogo } from "../../images/icon/GitHub-Mark-32px.png"; 
 import thumbnail from "../../images/haystack_logo_blue_banner_social.png"; 
 import SEO from "../../components/seo";
-import { Link } from 'gatsby-plugin-modal-routing'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useMobileScreen } from "../../hooks";
 
 export default (props) => {
@@ -58,10 +55,8 @@ export default (props) => {
   const docContainer = useRef(null);
   const [showToTopButton, setShowToTopButton] = useState(false);
   const screenWidth = useMobileScreen();
-  const [searchStatus, setSearchStatus] = useState(true);
 
   useEffect(() => {
-    setSearchStatus(screenWidth > 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screenWidth]);
 

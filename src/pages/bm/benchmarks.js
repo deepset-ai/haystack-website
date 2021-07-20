@@ -218,7 +218,7 @@ const BenchMarks = ({data}) => {
             </div>
             <button className="h-button" onKeyDown={() => {setShowReaderDesc(!showReaderDesc);}}
                     onMouseDown={(e) => { e.stopPropagation(); setShowReaderDesc(!showReaderDesc);}}>
-              <h2>{titleReader[selectedVersion]} {showReaderDesc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
+              <h2>{titleReader[selectedVersion]} {showReaderDesc ? (<FontAwesomeIcon className="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon className="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showReaderDesc && (
               <div dangerouslySetInnerHTML={createMarkup(descReader[selectedVersion])} className="desc-details"></div>
@@ -239,7 +239,7 @@ const BenchMarks = ({data}) => {
 
             <button className="h-button" onKeyDown={() => {setShowRetrieverDesc(!showRetrieverDesc);}}
                     onMouseDown={(e) => { e.stopPropagation(); setShowRetrieverDesc(!showRetrieverDesc);}}>
-            <h2>{titleRetriever[selectedVersion]} {showRetrieverDesc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
+            <h2>{titleRetriever[selectedVersion]} {showRetrieverDesc ? (<FontAwesomeIcon className="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon className="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showRetrieverDesc && (
               <div dangerouslySetInnerHTML={createMarkup(descRetriever[selectedVersion])} className="desc-details"></div>
@@ -271,7 +271,7 @@ const BenchMarks = ({data}) => {
 
             <button className="h-button" onKeyDown={() => {setLineChart1Desc(!showLineChart1Desc);}}
                     onMouseDown={(e) => { e.stopPropagation(); setLineChart1Desc(!showLineChart1Desc);}}>
-            <h2>{titleMap[selectedVersion]} {showLineChart1Desc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
+            <h2>{titleMap[selectedVersion]} {showLineChart1Desc ? (<FontAwesomeIcon className="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon className="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showLineChart1Desc && (
               <div dangerouslySetInnerHTML={createMarkup(descMap[selectedVersion])} className="desc-details"></div>
@@ -298,7 +298,7 @@ const BenchMarks = ({data}) => {
 
             <button className="h-button" onKeyDown={() => {setLineChart2Desc(!showLineChart2Desc);}}
                     onMouseDown={(e) => { e.stopPropagation(); setLineChart2Desc(!showLineChart2Desc);}}>
-            <h2>{titleSpeed[selectedVersion]} {showLineChart2Desc ? (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/>)}</h2>
+            <h2>{titleSpeed[selectedVersion]} {showLineChart2Desc ? (<FontAwesomeIcon className="fontawsome-icon" icon={faChevronUp}/>) : (<FontAwesomeIcon className="fontawsome-icon" icon={faChevronDown}/>)}</h2>
             </button>
             {showLineChart2Desc && (
               <div dangerouslySetInnerHTML={createMarkup(descSpeed[selectedVersion])} className="desc-details"></div>

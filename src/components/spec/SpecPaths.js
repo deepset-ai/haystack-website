@@ -21,14 +21,14 @@ const SpecPaths = ({ tag, paths }) => {
         elementArray = <div>
                       <button className="child-button" onKeyDown={() => {setShowChild(!showChild);}}
                         onMouseDown={(e) => { e.stopPropagation(); setShowChild(!showChild);}}>
-                       <div className="child-button-div">Show child attributes{showChild? (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/></div>) : (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/></div>)}</div>
+                       <div className="child-button-div">Show child attributes{showChild? (<div><FontAwesomeIcon className="fontawsome-icon" icon={faChevronUp}/></div>) : (<div><FontAwesomeIcon className="fontawsome-icon" icon={faChevronDown}/></div>)}</div>
                      </button> 
                      {showChild && ( <div className="child-element">{IterateJSON(jsonObject[prop]["items"]["properties"])}</div>)}</div>;
       } else if (type === "object" &&  jsonObject[prop]["properties"] !== undefined) {
         elementArray = <div>
                       <button className="child-button" onKeyDown={() => {setShowChild(!showChild);}}
                         onMouseDown={(e) => { e.stopPropagation(); setShowChild(!showChild);}}>
-                       <div className="child-button-div">Show child attributes{showChild? (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronUp}/></div>) : (<div><FontAwesomeIcon class="fontawsome-icon" icon={faChevronDown}/></div>)}</div>
+                       <div className="child-button-div">Show child attributes{showChild? (<div><FontAwesomeIcon className="fontawsome-icon" icon={faChevronUp}/></div>) : (<div><FontAwesomeIcon className="fontawsome-icon" icon={faChevronDown}/></div>)}</div>
                      </button> 
                      {showChild && ( <div className="child-element">{IterateJSON(jsonObject[prop]["properties"])}</div>)}</div>;
       }
@@ -89,8 +89,8 @@ const SpecPaths = ({ tag, paths }) => {
               </div>
             </div>
             <div className="ResourceSectionEndpoints-endpoints">
-              <pre class="box">
-                <code class="language-json">
+              <pre className="box">
+                <code className="language-json">
                   {p.example}
                 </code>
               </pre>
@@ -115,8 +115,8 @@ const SpecPaths = ({ tag, paths }) => {
               </div>
             </div>
             <div className="ResourceSectionEndpoints-endpoints">
-              <pre class="box">
-                <code class="language-json">
+              <pre className="box">
+                <code className="language-json">
                   {p.childrenOpenApiSpecResponse[0].response}
                 </code>
               </pre>

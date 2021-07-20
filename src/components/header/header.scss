@@ -118,6 +118,11 @@
       font-weight: bold;
       margin: 0 1rem;
     }
+    
+    .a {
+      color: #60677e;;
+      font-weight: bold;
+    }
 
     .beta-button {
       margin-left: 20px;
@@ -133,7 +138,27 @@
     }
     .beta-button {
       margin-left: 20px;
-      width: 200px;
+      width: 170px;
+    }
+    .beta-button-link {
+      margin-left: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffffff;
+      border-radius: 4px;
+      background-color: #009BAA;
+      border: 0;
+      height: 40px;
+      width: 150px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none; 
+      padding-top: 10px;
+      text-transform: none; 
+    }
+    .beta-button-link {
+      margin-left: 20px;
+      width: 170px;
     }
   }
 
@@ -189,6 +214,10 @@
     &:hover {
       background-color: var(--color-highlight);
       color: #000;
+      .button {
+        background-color: var(--color-highlight);
+        color: #000;
+      }
     }
 
     &:last-child {
@@ -203,18 +232,26 @@
   }
   .beta-button {
     margin-left: 20px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: #0e0101;
     border-radius: 4px;
     background-color: lightgray;
     border: 0;
     height: 40px;
-    width: 150px;
+    width: 170px;
     cursor: pointer;
   }
   .button {
+    font-size: 14px;
     padding: 5px;
+    background-color: white;
+    color: var(--color-primary);
+    font-weight: normal;
+    &:hover {
+      background-color: var(--color-highlight);
+      color: #000;
+    }
   }
 }
 
