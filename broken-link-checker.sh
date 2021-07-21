@@ -32,6 +32,7 @@ do
     --exclude https://deepset.ai/germanquad \
     --exclude https://ext-models-haystack.s3.eu-central-1.amazonaws.com/ \
     --exclude https://github.com/deepset-ai/haystack/blob/master/rest_api/pipelines.yaml \
+    --exclude https://www.meetup.com/de-DE/open-nlp-meetup/ \
     --filter-level 1 --host-requests 1 
     status=$?
     

@@ -15,7 +15,6 @@ import Alert from '@material-ui/lab/Alert';
 import Button from "../../components/landing-page/button";
 
 import OpenSource from "../../images/haystack_logo_blue_banner.png"
-import { navigate } from "gatsby"
 
 const BetaPage = () => {
 
