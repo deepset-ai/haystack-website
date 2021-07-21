@@ -9,14 +9,6 @@ id: "signup_free_hubmd"
 
 # Sign up for a Free Haystack Hub Trial
 
-To help you get to know [**Haystack Hub**](https://app.haystack-hub.com/), you can try it out for free in the **Starter** version for **14 days**. You will find more information regarding the pricing [here](https://haystack.deepset.ai/pricing/pricing/).
-
-You can cancel your subscription at any time via email (<info@haystack-hub.com>).
-
-This article describes how to sign up for a subscription.
-
-## Haystack Hub Free Trail
-
 1. Click [Try Haystack Hub](https://app.haystack-hub.com/signup/step-1) here or at the top right of this page.
 2. You will be forwarded to the **Haystack Hub Sign Up** page.
 
