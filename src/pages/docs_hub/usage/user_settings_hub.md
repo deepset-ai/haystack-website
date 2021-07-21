@@ -11,7 +11,6 @@ id: "user_settings_hubmd"
 
 The user can update and change the user settings. The menu can be entered by clicking on the user's name on the top right. This will open a dropdown with different options. The first three options are going to be described in the following sections. Furthermore, the following options can be chosen:
 
-* **Contact Us**: The user will be forwarded to a [contact formular](https://haystack.deepset.ai/contact/contact). If you have any questions regarding Haystack, feel free to contact our support team there.
 * **Documentation**: The user will be forwarded to the [Haystack Hub website](https://haystack.deepset.ai/docs_hub/get_started_hubmd) where the documentation for Haystack can be found.
 * **Sign Out**: The user will be signed out from Haystack Hub and will be forwarded to the [login page](https://app.haystack-hub.com).
 
@@ -33,8 +32,3 @@ Inviting people is done via a popup. The admin needs to specify the email addres
 
 ![image](../img/HaystackHub_invitepeople.png)
 
-## Subscription
-
-Haystack Hub provides 4 subscription levels, which are defined by pages of documents and requests per day. For more information, please feel free to contact us via our [Contact Form](https://haystack.deepset.ai/contact/contact) or info@haystack-hub.com.
-
-![image](../img/HaystackHub_subscription.png)
