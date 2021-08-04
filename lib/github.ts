@@ -1,25 +1,37 @@
 import { Octokit } from "octokit";
 
-type Version = "v0.9.0" | "v0.8.0" | "v0.7.0" | "v0.6.0" | "v0.5.0" | "v0.4.0";
-type DocsType = "tutorials" | "api" | "usage";
+export const octokit = new Octokit({
+  auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+});
 
-export const octokit = new Octokit();
-
-export const getDownloadUrls = async ({
-  type,
+export const getDownloadUrl = async ({
+  filename,
+  repoPath,
   version,
 }: {
-  type: DocsType;
-  version?: Version;
+  filename: string;
+  repoPath: string;
+  version?: string;
 }) => {
-  const res = await octokit.rest.repos.getContent({
+  try {
+    const res = await octokit.rest.repos.getContent({
+      owner: "deepset-ai",
+      repo: "haystack",
+      path: `docs${version ? `/${version}` : ""}${repoPath}${filename}`,
+    });
+    if (Array.isArray(res.data)) return;
+    if (!res.data.download_url) return;
+    return res.data.download_url;
+  } catch (e) {
+    console.log(e);
+    return;
+  }
+};
+
+export const getStargazersCount = async () => {
+  const res = await octokit.rest.repos.get({
     owner: "deepset-ai",
     repo: "haystack",
-    path: `docs/${version ? `${version}/` : ""}_src/${type}/${type}`,
   });
-  if (Array.isArray(res.data)) {
-    return res.data.map((item) => item.download_url);
-  } else {
-    return res.data.download_url;
-  }
+  return res.data.stargazers_count;
 };

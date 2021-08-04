@@ -9,13 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.0",
+    "@heroicons/react": "^1.0.3",
+    "@pondorasti/remark-img-links": "^1.0.8",
     "gray-matter": "^4.0.3",
     "next": "11.0.1",
     "octokit": "^1.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "remark": "^13.0.0",
-    "remark-html": "^13.0.1"
+    "remark-html": "^13.0.1",
+    "remark-prism": "^1.3.6"
   },
   "devDependencies": {
     "@types/react": "17.0.15",

@@ -1,6 +1,8 @@
 import remark from "remark";
 import html from "remark-html";
 import matter from "gray-matter";
+import prism from "remark-prism";
+import imgLinks from "@pondorasti/remark-img-links";
 
 export const markdownToHtml = async (downloadUrl: string) => {
   const res = await fetch(downloadUrl);
@@ -13,7 +15,13 @@ export const markdownToHtml = async (downloadUrl: string) => {
 
   const { content, data } = matter(fileContentWithFrontMatter);
 
-  const result = await remark().use(html).process(content);
+  const result = await remark()
+    .use(imgLinks, {
+      absolutePath: downloadUrl,
+    })
+    .use(html)
+    .use(prism)
+    .process(content);
 
   return {
     frontMatter: data,

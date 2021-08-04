@@ -16,3 +16,5 @@
 //   }
 //  },
 // ]
+
+// 1. test case: gracefully handle 404 octokit request
