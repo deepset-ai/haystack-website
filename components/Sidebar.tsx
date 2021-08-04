@@ -10,6 +10,8 @@ export default function Sidebar() {
   useEffect(() => {
     if (router.query.slug && router.query.slug.length > 1) {
       setVersionPath(`${router.query.slug[0]}/`);
+    } else {
+      setVersionPath(undefined);
     }
   }, [router.query]);
 
