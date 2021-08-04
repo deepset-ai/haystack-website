@@ -9,7 +9,7 @@ import {
 import Header from "components/Header";
 import Sidebar from "components/Sidebar";
 import { getDownloadUrl, getStargazersCount } from "lib/github";
-import { markdownToHtml } from "lib/utils";
+import { markdownToHtml } from "lib/markdown";
 import { menu, versions } from "lib/constants";
 
 export const getStaticPaths: GetStaticPaths = async () => {

@@ -8,26 +8,45 @@ import {
 } from "next";
 import Header from "components/Header";
 import Sidebar from "components/Sidebar";
-import { getDownloadUrl, getStargazersCount } from "lib/github";
-import { markdownToHtml } from "lib/utils";
-import { menu, versions } from "lib/constants";
+import { getStargazersCount } from "lib/github";
+import {
+  getSlugsFromLocalMarkdownFiles,
+  localMarkdownToHtml,
+  getVersionFromParams,
+  getDirectory,
+  getDocBySlug,
+  getDocsVersions,
+  getLatestVersion,
+} from "lib/markdown";
+import { useRouter } from "next/router";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = [
-    ...menu[0].items.map((item) => ({ params: { slug: [item.slug] } })),
-    ...menu[0].items
-      .map((item) =>
-        versions.map((version) => ({
-          params: {
-            slug: [version, item.slug],
-          },
-        }))
-      )
-      .flat(),
-  ];
+  // we want to get all versions, apart from the latest one
+  const latestVersion = getLatestVersion();
+  const versions = getDocsVersions().filter((v) => v !== latestVersion);
+
+  // params: {
+  //   slug: [version, item.slug],
+  // }
+
+  // we initialize the paths array with the paths that will be used for the latest version (i.e. without a version in the url)
+  let paths = getSlugsFromLocalMarkdownFiles("overview").map((param) => ({
+    params: { slug: [param] },
+  }));
+
+  // we loop over all versions other than the latest one, to create paths that will include the version and the slug in the url
+  for (const version of versions) {
+    const slugs = getSlugsFromLocalMarkdownFiles("overview", version);
+    paths = [
+      ...paths,
+      ...slugs.map((param) => ({
+        params: { slug: [version, param] },
+      })),
+    ];
+  }
 
   return {
-    paths,
+    paths: paths.flat(),
     fallback: true,
   };
 };
@@ -35,72 +54,32 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  const stars = await getStargazersCount();
-
   if (!params?.slug || !Array.isArray(params.slug)) {
     return {
-      props: { stars },
+      notFound: true,
     };
   }
 
-  if (params.slug.length < 2) {
-    const slug = params.slug[0];
-    const item = menu[0].items.find((item) => item.slug === slug);
-
-    if (!item) {
-      return {
-        props: { stars },
-      };
-    }
-
-    const downloadUrl = await getDownloadUrl({
-      repoPath: menu[0].repoPath,
-      filename: item.filename,
-    });
-
-    if (!downloadUrl) {
-      return { props: { stars } };
-    }
-
-    const { markup } = await markdownToHtml(downloadUrl);
+  try {
+    const stars = await getStargazersCount();
+    const titleSlug = params.slug?.[params.slug?.length - 1];
+    const directory = getDirectory(
+      "overview",
+      getVersionFromParams(params.slug)
+    );
+    const { markup } = await getDocBySlug(titleSlug, directory);
 
     return {
       props: {
-        markup,
         stars,
+        markup,
       },
       revalidate: 1,
     };
-  } else {
-    const version = params.slug[0];
-    const slug = params.slug[1];
-
-    const item = menu[0].items.find((item) => item.slug === slug);
-
-    if (!item) {
-      return {
-        props: { stars },
-      };
-    }
-
-    const downloadUrl = await getDownloadUrl({
-      repoPath: menu[0].repoPath,
-      filename: item.filename,
-      version: versions.includes(version) ? version : undefined,
-    });
-
-    if (!downloadUrl) {
-      return { props: { stars } };
-    }
-
-    const { markup } = await markdownToHtml(downloadUrl);
-
+  } catch (e) {
+    console.log(e);
     return {
-      props: {
-        markup,
-        stars,
-      },
-      revalidate: 1,
+      notFound: true,
     };
   }
 };
@@ -109,6 +88,8 @@ export default function OverviewDoc({
   markup,
   stars,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter();
+
   return (
     <div className="xl:max-w-8xl mx-auto">
       <Head>
@@ -119,10 +100,14 @@ export default function OverviewDoc({
       <Header stars={stars} />
       <Sidebar />
       <main className="sm:pl-60 text-black">
-        <div
-          className={markdownStyles["markdown"]}
-          dangerouslySetInnerHTML={{ __html: markup }}
-        />
+        {router.isFallback ? (
+          <div>Loading...</div>
+        ) : (
+          <div
+            className={markdownStyles["markdown"]}
+            dangerouslySetInnerHTML={{ __html: markup }}
+          />
+        )}
       </main>
       <footer>
         <a
