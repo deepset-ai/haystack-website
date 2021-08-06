@@ -1,9 +1,6 @@
 import matter from "gray-matter";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import dynamic from "next/dynamic";
-import Head from "next/head";
-import Markdown from "markdown-to-jsx";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -13,7 +10,6 @@ import {
 import { join } from "path";
 import fs from "fs";
 import Layout from "components/Layout";
-import { Pre } from "components/Pre";
 import {
   getSlugsFromLocalMarkdownFiles,
   getVersionFromParams,
@@ -22,20 +18,7 @@ import {
   getLatestVersion,
   getMenu,
 } from "lib/utils";
-
-// Custom components/renderers to pass to MDX.
-// Since the MDX files aren't loaded by webpack, they have no knowledge of how
-// to handle import statements. Instead, you must include components in scope
-// here.
-const components = {
-  // It also works with dynamically-imported components, which is especially
-  // useful for conditionally loading components for certain routes.
-  // See the notes in README.md for more details.
-  Disclosures: dynamic(() => import("components/Disclosures")),
-  Tabs: dynamic(() => import("components/Tabs")),
-  Head,
-  pre: Pre,
-};
+import { components } from "lib/mdx";
 
 export default function UsageDoc({
   menu,
