@@ -24,6 +24,8 @@ p.draw(path="custom_pipe.png")
 
 ![image](https://user-images.githubusercontent.com/1563902/102451716-54813700-4039-11eb-881e-f3c01b47ca15.png)
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### Arguments
 
 Whatever keyword arguments are passed into the `Pipeline.run()` method will be passed on to each node in the pipeline.
@@ -38,6 +40,8 @@ res = pipeline.run(
     top_k_reader=5
 )
 ```
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### YAML File Definitions
 
@@ -86,6 +90,8 @@ pipeline.load_from_yaml(Path("sample.yaml"))
 
 For another example YAML config, check out [this file](https://github.com/deepset-ai/haystack/blob/master/rest_api/pipelines.yaml).
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### Multiple retrievers
 
 You can now also use multiple Retrievers and join their results:
@@ -103,6 +109,8 @@ res = p.run(query="What did Einstein work on?", top_k_retriever=1)
 
 ![image](https://user-images.githubusercontent.com/1563902/102451782-7bd80400-4039-11eb-9046-01b002a783f8.png)
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### Custom nodes
 
 You can easily build your own custom nodes. Just respect the following requirements:
@@ -111,6 +119,8 @@ You can easily build your own custom nodes. Just respect the following requireme
 2. Do whatever you want within `run()` (e.g. reformatting the query)
 3. Return a tuple that contains your output data (for the next node) and the name of the outgoing edge `output_dict, "output_1`
 4. Add a class attribute `outgoing_edges = 1` that defines the number of output options from your node. You only need a higher number here if you have a decision node (see below).
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### Decision nodes
 
@@ -138,10 +148,14 @@ Or you can add decision nodes where only one "branch" is executed afterwards. Th
     res = p.run(query="What did Einstein work on?", top_k_retriever=1)
 ```
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### Evaluation nodes
 
 There are nodes in Haystack that are used to evaluate the performance of readers, retrievers and combine systems.
 To get hands on with this kind of node, have a look at the [evaluation tutorial](/docs/v0.9.0/tutorial5md).
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### Default Pipelines (replacing the "Finder")
 

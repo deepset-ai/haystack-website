@@ -11,59 +11,9 @@ There are different DocumentStores in Haystack to fit different use cases and te
 
 Initialising a new DocumentStore within Haystack is straight forward.
 
-<Disclosures
-  options={[
-    {
-      title: "Elasticsearch",
-      content: (
-        <div>
-          <p>
-            The most straightforward way to install Haystack is through pip.
-          </p>
-          <pre>
-            <code>pip install farm-haystack</code>
-          </pre>
-        </div>
-      ),
-    },
-    {
-      title: "Milvus",
-      content: (
-        <div>
-          <p>
-            If you’d like to run a specific, unreleased version of Haystack, or
-            make edits to the way Haystack runs, you’ll want to install it using
-            `git` and `pip --editable`. This clones a copy of the repo to a
-            local directory and runs Haystack from there.
-          </p>
-          <pre>
-            <code>git clone https://github.com/deepset-ai/haystack.git</code>
-            <code>cd haystack</code>
-            <code>pip install --editable .</code>
-          </pre>
-          <p>
-            By default, this will give you the latest version of the master
-            branch. Use regular git commands to switch between different
-            branches and commits.
-          </p>
-        </div>
-      ),
-    },
-  ]}
-/>
+<div style={{ marginBottom: "3rem" }} />
 
 ### Elasticsearch
-
-[Install](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
-Elasticsearch and then [start](https://www.elastic.co/guide/en/elasticsearch/reference/current/starting-elasticsearch.html)
-an instance.
-
-If you have Docker set up, we recommend pulling the Docker image and running it.
-
-```bash
-docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.2
-docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.9.2
-```
 
 Next you can initialize the Haystack object that will connect to this instance.
 
@@ -74,6 +24,8 @@ document_store = ElasticsearchDocumentStore()
 Note that we also support [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch-docs/).
 Follow [their documentation](https://opendistro.github.io/for-elasticsearch-docs/docs/install/)
 to run it and connect to it using Haystack's `OpenDistroElasticsearchDocumentStore` class.
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### Milvus
 
@@ -88,6 +40,8 @@ from haystack.document_store import MilvusDocumentStore
 document_store = MilvusDocumentStore()
 ```
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### FAISS
 
 The `FAISSDocumentStore` requires no external setup. Start it by simply using this line.
@@ -97,6 +51,8 @@ from haystack.document_store import FAISSDocumentStore
 
 document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
 ```
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### In Memory
 
@@ -108,6 +64,8 @@ from haystack.document_store import InMemoryDocumentStore
 document_store = InMemoryDocumentStore()
 ```
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### SQL
 
 The `SQLDocumentStore` requires SQLite, PostgresQL or MySQL to be installed and started.
@@ -118,6 +76,8 @@ from haystack.document_store import SQLDocumentStore
 
 document_store = SQLDocumentStore()
 ```
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### Weaviate
 
@@ -138,6 +98,8 @@ document_store = WeaviateDocumentStore()
 
 Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
 See API documentation for more info.
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Input Format
 
@@ -160,6 +122,8 @@ dicts = [
 document_store.write_documents(dicts)
 ```
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## Writing Documents (Sparse Retrievers)
 
 Haystack allows for you to write store documents in an optimised fashion so that query times can be kept low.
@@ -170,6 +134,8 @@ The creation of the inverted index which optimises querying speed is handled aut
 ```python
 document_store.write_documents(dicts)
 ```
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Writing Documents (Dense Retrievers)
 
@@ -190,6 +156,8 @@ Having GPU acceleration will significantly speed this up.
 <!-- _comment: !! Diagrams of inverted index / document embeds !! -->
 <!-- _comment: !! Make this a tab element to show how different datastores are initialized !! -->
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## Choosing the Right Document Store
 
 The Document Stores have different characteristics. You should choose one depending on the maturity of your project, the use case and technical environment:
@@ -207,6 +175,8 @@ The Document Stores have different characteristics. You should choose one depend
 
 - Slow for dense retrieval with more than ~ 1 Mio documents
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### Milvus
 
 **Pros:**
@@ -220,6 +190,8 @@ The Document Stores have different characteristics. You should choose one depend
 
 - No efficient sparse retrieval
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### FAISS
 
 **Pros:**
@@ -231,6 +203,8 @@ The Document Stores have different characteristics. You should choose one depend
 **Cons:**
 
 - No efficient sparse retrieval
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### In Memory
 
@@ -247,6 +221,8 @@ The Document Stores have different characteristics. You should choose one depend
 
 ### SQL
 
+<div style={{ marginBottom: "3rem" }} />
+
 **Pros:**
 
 - Simple & fast to test
@@ -257,6 +233,8 @@ The Document Stores have different characteristics. You should choose one depend
 
 - Not scalable
 - Not persisting your data on disk
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### Weaviate
 

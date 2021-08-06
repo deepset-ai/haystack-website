@@ -1,11 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
-import {
-  AiFillGithub,
-  AiFillTwitterCircle,
-  AiFillYoutube,
-  AiOutlineTwitter,
-} from "react-icons/ai";
+import { AiFillGithub, AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 
 const Footer: FC = () => {
   const year = new Date().getFullYear();

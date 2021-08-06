@@ -3,11 +3,11 @@ import Link from "next/link";
 import { Transition } from "@headlessui/react";
 import { useState, useEffect, useRef } from "react";
 import { XIcon, MenuAlt3Icon } from "@heroicons/react/solid";
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from "body-scroll-lock";
+// import {
+//   disableBodyScroll,
+//   enableBodyScroll,
+//   clearAllBodyScrollLocks,
+// } from "body-scroll-lock";
 
 export default function TWMobileNav({ menu = [] }: { menu: any }) {
   const router = useRouter();
@@ -21,17 +21,21 @@ export default function TWMobileNav({ menu = [] }: { menu: any }) {
     } else {
       setVersionPath(undefined);
     }
+    if (isShowing) {
+      setIsShowing(false);
+    }
   }, [router.query]);
 
-  useEffect(() => {
-    if (!containerRef.current) return;
-    if (isShowing) {
-      disableBodyScroll(containerRef.current);
-    } else {
-      enableBodyScroll(containerRef.current);
-    }
-    return () => clearAllBodyScrollLocks();
-  }, [isShowing]);
+  // TODO: uncomment again, once we identified the issue on iOS Safari
+  // useEffect(() => {
+  //   if (!containerRef.current) return;
+  //   if (isShowing) {
+  //     disableBodyScroll(containerRef.current);
+  //   } else {
+  //     enableBodyScroll(containerRef.current);
+  //   }
+  //   return () => clearAllBodyScrollLocks();
+  // }, [isShowing]);
 
   return (
     <div className="sm:hidden" ref={containerRef}>

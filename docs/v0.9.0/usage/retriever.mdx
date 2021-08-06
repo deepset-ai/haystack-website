@@ -28,6 +28,8 @@ Here are the combinations which are supported:
 
 See [Optimization](/docs/v0.9.0/optimizationmd) for suggestions on how to choose top-k values.
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## TF-IDF
 
 ### Description
@@ -52,6 +54,8 @@ Where:
 
 In practice, both terms are usually log normalised.
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### Initialisation
 
 ```python
@@ -66,6 +70,8 @@ retriever = TfidfRetriever(document_store)
 p = ExtractiveQAPipeline(reader, retriever)
 ```
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## BM25 (Recommended)
 
 ### Description
@@ -76,6 +82,8 @@ It improves upon its predecessor in two main aspects:
 - It saturates `tf` after a set number of occurrences of the given term in the document
 
 - It normalises by document length so that short documents are favoured over long documents if they have the same amount of word overlap with the query
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### Initialisation
 
@@ -94,6 +102,8 @@ p = ExtractiveQAPipeline(reader, retriever)
 See [this](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables) blog post for more details about the algorithm.
 
 <!-- _comment: !! Diagram showing TFIDF vs BM25 !! -->
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Dense Passage Retrieval (Recommended)
 
@@ -122,6 +132,8 @@ There are two design decisions that have made DPR particularly performant.
 
 In Haystack, you can simply download the pretrained encoders needed to start using DPR.
 If you’d like to learn how to set up a DPR based system, have a look at the [tutorial](/docs/v0.9.0/tutorial6md)!
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### Initialisation
 
@@ -160,6 +172,8 @@ finder = ExtractiveQAPipeline(reader, retriever)
 <!-- _comment: !! Training in future? !! -->
 <!-- _comment: !! Talk more about benchmarks, SoTA, results !! -->
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## Embedding Retrieval
 
 ### Description
@@ -182,6 +196,8 @@ as is done in the code example below.
 
 </div>
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### Initialisation
 
 ```python
@@ -196,6 +212,8 @@ retriever = EmbeddingRetriever(document_store=document_store,
 ...
 p = ExtractiveQAPipeline(reader, retriever)
 ```
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Deeper Dive: Dense vs Sparse
 
@@ -221,6 +239,8 @@ They are:
 
 - language specific
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### Qualitative Differences
 
 Between these two types there are also some qualitative differences too.
@@ -236,6 +256,8 @@ As such, **they handle out-of-vocabulary words with no problem**.
 
 <!-- _comment: !! Show example from DPR paper? !! -->
 
+<div style={{ marginBottom: "3rem" }} />
+
 ### Indexing
 
 Dense methods perform indexing by processing all the documents through a neural network and storing the resulting vectors.
@@ -243,6 +265,8 @@ This is a much more expensive operation than the creation of the inverted-index 
 and will require significant computational power and time.
 
 <!-- _comment: !!See their individual sections (!! link !!) for more details on this point. Benchmarks too !! -->
+
+<div style={{ marginBottom: "3rem" }} />
 
 ### Terminology
 

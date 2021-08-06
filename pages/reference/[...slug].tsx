@@ -12,15 +12,30 @@ import {
   getMenu,
   getVersionFromParams,
   getDocsVersions,
-} from "lib/markdown";
-import { menu } from "lib/constants";
+} from "lib/utils";
+import { referenceFiles } from "lib/constants";
 
+export default function ReferenceDoc({
+  markup,
+  menu,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <Layout menu={menu}>
+      <div
+        className={styles["tutorial"]}
+        dangerouslySetInnerHTML={{ __html: markup }}
+      />
+    </Layout>
+  );
+}
+
+// TODO: This function can be shorter and cleaner, similar to how it's written for overview and usage pages
 export const getStaticPaths: GetStaticPaths = async () => {
   const versions = getDocsVersions();
 
   const paths = [
-    ...menu[3].items.map((item) => ({ params: { slug: [item.slug] } })),
-    ...menu[3].items
+    ...referenceFiles.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...referenceFiles.items
       .map((item) =>
         versions.map((version) => ({
           params: {
@@ -37,6 +52,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+// TODO: This function can be shorter and cleaner, similar to how it's written for overview and usage pages
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
@@ -50,7 +66,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   if (params.slug.length < 2) {
     const slug = params.slug[0];
-    const item = menu[3].items.find((item) => item.slug === slug);
+    const item = referenceFiles.items.find((item) => item.slug === slug);
 
     if (!item) {
       return {
@@ -59,7 +75,7 @@ export const getStaticProps: GetStaticProps = async ({
     }
 
     const downloadUrl = await getDownloadUrl({
-      repoPath: menu[3].repoPath,
+      repoPath: referenceFiles.repoPath,
       filename: item.filename,
     });
 
@@ -83,7 +99,7 @@ export const getStaticProps: GetStaticProps = async ({
     const version = params.slug[0];
     const slug = params.slug[1];
 
-    const item = menu[3].items.find((item) => item.slug === slug);
+    const item = referenceFiles.items.find((item) => item.slug === slug);
 
     if (!item) {
       return {
@@ -92,7 +108,7 @@ export const getStaticProps: GetStaticProps = async ({
     }
 
     const downloadUrl = await getDownloadUrl({
-      repoPath: menu[3].repoPath,
+      repoPath: referenceFiles.repoPath,
       filename: item.filename,
       version: versions.includes(version) ? version : undefined,
     });
@@ -115,17 +131,3 @@ export const getStaticProps: GetStaticProps = async ({
     };
   }
 };
-
-export default function ReferenceDoc({
-  markup,
-  menu,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-  return (
-    <Layout menu={menu}>
-      <div
-        className={styles["tutorial"]}
-        dangerouslySetInnerHTML={{ __html: markup }}
-      />
-    </Layout>
-  );
-}

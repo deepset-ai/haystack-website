@@ -9,6 +9,8 @@ Haystack allows loading and querying knowledge graphs. In particular, Haystack c
 Haystack's knowledge graph functionalities are still in a very early stage. Thus, don't expect our [exemplary tutorial](https://github.com/deepset-ai/haystack/blob/master/tutorials/Tutorial10_Knowledge_Graph.py) to work on your custom dataset out-of-the-box.
 Two classes implement the functionalities: GraphDBKnowledgeGraph and Text2SparqlRetriever.
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## GraphDBKnowledgeGraph
 
 GraphDBKnowledgeGraph is a triple store similar to Haystack's document stores. Currently, it is the only implementation of the BaseKnowledgeGraph class.
@@ -60,6 +62,8 @@ hp:Gryffindor hp:founder hp:Godric_gryffindor .
 
 `GraphDBKnowledgeGraph.query(sparql_query)` executes SPARQL queries on the knowledge graph. However, we usually do not want to use this method directly but use it through a retriever.
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## Text2SparqlRetriever
 
 Text2SparqlRetriever can execute SPARQL queries translated from text but also any other custom SPARQL queries. Currently, it is the only implementation of the BaseGraphRetriever class.
@@ -68,6 +72,8 @@ Internally, Text2SparqlRetriever uses a pre-trained BART model to translate text
 `Text2SparqlRetriever.retrieve(query)` can be called with a text query, which is then automatically translated to a SPARQL query.
 
 `Text2SparqlRetriever._query_kg(sparql_query)` can be called with a SPARQL query.
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Trying Question Answering on Knowledge Graphs with Custom Data
 

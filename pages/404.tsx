@@ -2,7 +2,7 @@ import Head from "next/head";
 import Header from "components/Header";
 import DesktopNav from "components/DesktopNav";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { getMenu } from "lib/markdown";
+import { getMenu } from "lib/utils";
 
 export default function Custom404({
   menu,

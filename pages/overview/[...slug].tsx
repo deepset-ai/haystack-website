@@ -20,7 +20,7 @@ import {
   getDocsVersions,
   getLatestVersion,
   getMenu,
-} from "lib/markdown";
+} from "lib/utils";
 import { Pre } from "components/Pre";
 
 // Custom components/renderers to pass to MDX.
@@ -40,10 +40,11 @@ const components = {
 
 export default function OverviewDoc({
   menu,
+  editOnGitHubLink,
   source,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Layout menu={menu}>
+    <Layout menu={menu} editOnGitHubLink={editOnGitHubLink}>
       {source && <MDXRemote {...source} components={components} />}
     </Layout>
   );
@@ -78,6 +79,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 type Props = {
   menu: any;
+  editOnGitHubLink: string;
   source: MDXRemoteSerializeResult;
 };
 
@@ -122,12 +124,17 @@ export const getStaticProps: GetStaticProps<Props> = async ({
       scope: data,
     });
 
-    const menu = getMenu(getVersionFromParams(params.slug));
+    const version = getVersionFromParams(params.slug) || getLatestVersion();
+    const menu = getMenu(version);
 
     return {
       props: {
         menu,
         source: mdxSource,
+        editOnGitHubLink: `https://github.com/deepset-ai/haystack-website/blob/source/docs/${version}/${docTitleSlug.replace(
+          "-",
+          "_"
+        )}.mdx`,
       },
       revalidate: 1,
     };

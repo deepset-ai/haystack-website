@@ -3,7 +3,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Link from "next/link";
+import Markdown from "markdown-to-jsx";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -21,7 +21,7 @@ import {
   getDocsVersions,
   getLatestVersion,
   getMenu,
-} from "lib/markdown";
+} from "lib/utils";
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -39,10 +39,11 @@ const components = {
 
 export default function UsageDoc({
   menu,
+  editOnGitHubLink,
   source,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Layout menu={menu}>
+    <Layout menu={menu} editOnGitHubLink={editOnGitHubLink}>
       {source && <MDXRemote {...source} components={components} />}
     </Layout>
   );
@@ -77,6 +78,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 type Props = {
   menu: any;
+  editOnGitHubLink: string;
   source: MDXRemoteSerializeResult;
 };
 
@@ -118,12 +120,17 @@ export const getStaticProps: GetStaticProps<Props> = async ({
       scope: data,
     });
 
-    const menu = getMenu(getVersionFromParams(params.slug));
+    const version = getVersionFromParams(params.slug) || getLatestVersion();
+    const menu = getMenu(version);
 
     return {
       props: {
         menu,
         source: mdxSource,
+        editOnGitHubLink: `https://github.com/deepset-ai/haystack-website/blob/source/docs/${version}/${docTitleSlug.replace(
+          "-",
+          "_"
+        )}.mdx`,
       },
       revalidate: 1,
     };

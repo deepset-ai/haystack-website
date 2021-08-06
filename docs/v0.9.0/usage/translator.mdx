@@ -31,6 +31,8 @@ translator = TransformersTranslator(model_name_or_path="Helsinki-NLP/opus-mt-en-
 res = translator.translate(documents=DOCS, query=None)
 ```
 
+<div style={{ marginBottom: "3rem" }} />
+
 **Example (Wrapping another Pipeline)**
 
 You can also wrap one of your existing pipelines and "add" the translation nodes at the beginning and at the end of your pipeline.

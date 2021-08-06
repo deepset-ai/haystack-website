@@ -24,7 +24,7 @@ export default function Disclosures({
                   } w-5 h-5 text-off-white`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2 text-gray-500 bg-light-grey-BG mb-3 rounded-bl-lg rounded-br-lg">
+              <Disclosure.Panel className="px-4 pt-4 pb-2 text-gray-500 bg-light-grey mb-3 rounded-bl-lg rounded-br-lg">
                 {option.content}
               </Disclosure.Panel>
             </>

@@ -3,7 +3,6 @@ import { join } from "path";
 import remark from "remark";
 import html from "remark-html";
 import matter from "gray-matter";
-import prism from "remark-prism";
 import imgLinks from "@pondorasti/remark-img-links";
 import semverCompare from "semver-compare";
 
@@ -23,7 +22,6 @@ export const markdownToHtml = async (downloadUrl: string) => {
       absolutePath: downloadUrl,
     })
     .use(html)
-    .use(prism)
     .process(content);
 
   return {
@@ -68,30 +66,3 @@ export function getSlugsFromLocalMarkdownFiles(
   const filenames = fs.readdirSync(directory);
   return filenames.map((file) => file.replace(/\.mdx$/, "").replace("_", "-"));
 }
-
-export function getAllDocs(category: "overview" | "usage", version?: string) {
-  const directory = getDirectory(category, version);
-  const slugs = getSlugsFromLocalMarkdownFiles(category, version);
-  return slugs.map((slug) => getDocBySlug(slug, directory));
-}
-
-export async function getDocBySlug(slug: string, directory: string) {
-  const fullPath = join(directory, `${slug.replace("-", "_")}.mdx`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  return await localMarkdownToHtml(fileContents);
-}
-
-export const localMarkdownToHtml = async (fileContent: string) => {
-  // remove once all markdown files have correctly formatted front matter:
-  const fileContentWithFrontMatter = fileContent
-    .replace("<!---", "---")
-    .replace("--->", "---");
-
-  const { content, data } = matter(fileContentWithFrontMatter);
-  const result = await remark().use(html).use(prism).process(content);
-
-  return {
-    frontMatter: data,
-    markup: result.toString(),
-  };
-};

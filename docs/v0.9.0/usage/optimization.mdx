@@ -11,6 +11,8 @@ many of the common model architectures. While our default recommendation is RoBE
 MiniLM offers much faster processing for only a minimal drop in accuracy.
 You can find the models that we've trained on [the HuggingFace Model Hub](https://huggingface.co/deepset)
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## GPU acceleration
 
 The transformer based models used in Haystack are designed to be run on a GPU enabled machine.
@@ -24,6 +26,8 @@ INFO - farm.utils -   Number of GPUs: 1
 
 You can track the work load on your CUDA enabled Nvidia GPU by tracking the output of `nvidia-smi -l` on the command line
 while your Haystack program is running.
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Document Length
 
@@ -48,6 +52,8 @@ When splitting documents, it is generally not a good idea to let document bounda
 Doing so means that each document will contain incomplete sentence fragments
 which maybe be hard for both retriever and reader to interpret.
 It is therefore recommended to set `split_respect_sentence_boundary=True` when initializing your `PreProcessor`.
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Choosing the Right top-k Values
 
@@ -75,6 +81,8 @@ or like this if directly calling the `Retriever`:
 ```python
 retrieved_docs = retriever.retrieve(top_k=10)
 ```
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Metadata Filtering
 
