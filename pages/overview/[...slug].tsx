@@ -96,8 +96,13 @@ export const getStaticProps: GetStaticProps<Props> = async ({
       "overview",
       getVersionFromParams(params.slug)
     );
-
     const fullPath = join(directory, `${docTitleSlug.replace("-", "_")}.mdx`);
+
+    if (!fs.existsSync(directory) || !fs.existsSync(fullPath)) {
+      return {
+        notFound: true,
+      };
+    }
 
     const fileContents = fs.readFileSync(fullPath, "utf8");
 

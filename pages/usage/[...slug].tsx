@@ -14,7 +14,6 @@ import { join } from "path";
 import fs from "fs";
 import Layout from "components/Layout";
 import { Pre } from "components/Pre";
-import { getStargazersCount } from "lib/github";
 import {
   getSlugsFromLocalMarkdownFiles,
   getVersionFromParams,
@@ -77,7 +76,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 type Props = {
-  stars: number;
   menu: any;
   source: MDXRemoteSerializeResult;
 };
@@ -92,12 +90,16 @@ export const getStaticProps: GetStaticProps<Props> = async ({
   }
 
   try {
-    const stars = await getStargazersCount();
-
     const docTitleSlug = params.slug?.[params.slug?.length - 1];
     const directory = getDirectory("usage", getVersionFromParams(params.slug));
-
     const fullPath = join(directory, `${docTitleSlug.replace("-", "_")}.mdx`);
+
+    if (!fs.existsSync(directory) || !fs.existsSync(fullPath)) {
+      return {
+        notFound: true,
+      };
+    }
+
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     // remove once all markdown files have correctly formatted front matter:
@@ -120,7 +122,6 @@ export const getStaticProps: GetStaticProps<Props> = async ({
 
     return {
       props: {
-        stars,
         menu,
         source: mdxSource,
       },

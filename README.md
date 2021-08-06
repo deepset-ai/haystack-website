@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Environment Variables
+
+Create a `.env.local` file and add this:
+
+```bash
+GITHUB_PERSONAL_ACCESS_TOKEN="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"
+```
+
 ## Getting Started
 
 First, run the development server:

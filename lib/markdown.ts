@@ -64,6 +64,7 @@ export function getSlugsFromLocalMarkdownFiles(
   version?: string
 ) {
   const directory = getDirectory(category, version);
+  if (!fs.existsSync(directory)) return [];
   const filenames = fs.readdirSync(directory);
   return filenames.map((file) => file.replace(/\.mdx$/, "").replace("_", "-"));
 }
