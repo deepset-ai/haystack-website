@@ -1,8 +1,12 @@
 import Head from "next/head";
 import Header from "components/Header";
-import Sidebar from "components/Sidebar";
+import DesktopNav from "components/DesktopNav";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { getMenu } from "lib/markdown";
 
-export default function Custom404() {
+export default function Custom404({
+  menu,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className="xl:max-w-8xl mx-auto">
       <Head>
@@ -11,9 +15,9 @@ export default function Custom404() {
         <link rel="icon" href="/images/HaystackIcon.png" />
       </Head>
       <Header />
-      <Sidebar />
+      <DesktopNav menu={menu} />
       <main className="sm:pl-60 text-black">
-        <div>404 - There's no doc for the page you requested.</div>
+        <div>404 - There&apos;s no doc for the page you requested.</div>
       </main>
       <footer>
         <a
@@ -27,3 +31,12 @@ export default function Custom404() {
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps = () => {
+  const menu = getMenu();
+  return {
+    props: {
+      menu,
+    },
+  };
+};

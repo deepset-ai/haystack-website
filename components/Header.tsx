@@ -1,10 +1,10 @@
 import Link from "next/link";
 import VersionSelect from "./VersionSelect";
 
-export default function Header({ stars }: { stars?: number }) {
+export default function Header() {
   return (
     <header className="sticky top-0 p-2 sm:px-6 sm:py-3 z-10 w-full xl:max-w-8xl mx-auto flex items-center justify-between bg-dark-blue border-b border-medium-grey">
-      <Link href="/">
+      <Link href="/" passHref>
         <div className="w-44">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,50 +1,36 @@
-import { useState, Fragment } from "react";
+import { Fragment } from "react";
 import { useRouter } from "next/router";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Listbox, Transition } from "@headlessui/react";
 
-const versions = [
-  "latest",
-  "v0.9.0",
-  "v0.8.0",
-  "v0.7.0",
-  "v0.6.0",
-  "v0.5.0",
-  "v0.4.0",
-];
+const versionRoutes: { [key: string]: string } = {
+  "v0.9.0": "/overview/intro",
+  "v0.8.0": "/overview/v0.8.0/intro",
+  "v0.7.0": "/overview/v0.7.0/intro",
+  "v0.6.0": "/overview/v0.6.0/intro",
+  "v0.5.0": "/usage/v0.5.0/intro",
+  "v0.4.0": "/usage/v0.4.0/intro",
+};
 
 export default function VersionSelect() {
   const router = useRouter();
-  const versionInUrl = versions.find(
-    (v) => router.asPath.includes(v) && v !== "latest"
-  );
+  const versions = Object.keys(versionRoutes);
+  const versionInUrl = versions?.find((v) => router.asPath.includes(v));
 
   const handleVersionChange = (version: string) => {
-    const versionInUrl = versions.find((v) => router.asPath.includes(v));
-    const page = router.asPath.split("/").pop();
-    if (version === "latest") {
-      return router.push(`${page}`);
-    }
-    if (!versionInUrl) {
-      const pathSplit = router.asPath.split("/");
-      const page = pathSplit.pop();
-      return router.push(`${version}/${page}`);
-    }
-    if (versionInUrl && version !== versionInUrl) {
-      return router.push(router.asPath.replace(versionInUrl, version));
-    }
+    return router.push(versionRoutes[`${version}`]);
   };
 
   return (
     <div className="w-28">
       <Listbox
-        value={versionInUrl ?? versions[0]}
+        value={versionInUrl || versions[0]}
         onChange={handleVersionChange}
       >
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
             <span className="block truncate">
-              {versionInUrl ?? versions[0]}
+              {versionInUrl || versions[0]}
             </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
               <SelectorIcon
@@ -60,9 +46,9 @@ export default function VersionSelect() {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {versions.map((version, personIdx) => (
+              {versions.map((version, versionIdx) => (
                 <Listbox.Option
-                  key={personIdx}
+                  key={versionIdx}
                   className={({ active }) =>
                     `${
                       active

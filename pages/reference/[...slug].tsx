@@ -1,18 +1,23 @@
-import markdownStyles from "../../components/markdown-styles.module.css";
-import Head from "next/head";
+import styles from "components/tutorial.module.css";
 import {
   GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import Header from "components/Header";
-import Sidebar from "components/Sidebar";
-import { getDownloadUrl, getStargazersCount } from "lib/github";
-import { markdownToHtml } from "lib/markdown";
-import { menu, versions } from "lib/constants";
+import Layout from "components/Layout";
+import { getDownloadUrl } from "lib/github";
+import {
+  markdownToHtml,
+  getMenu,
+  getVersionFromParams,
+  getDocsVersions,
+} from "lib/markdown";
+import { menu } from "lib/constants";
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const versions = getDocsVersions();
+
   const paths = [
     ...menu[3].items.map((item) => ({ params: { slug: [item.slug] } })),
     ...menu[3].items
@@ -35,11 +40,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {
-  const stars = await getStargazersCount();
+  const versions = getDocsVersions();
 
   if (!params?.slug || !Array.isArray(params.slug)) {
     return {
-      props: { stars },
+      notFound: true,
     };
   }
 
@@ -49,7 +54,7 @@ export const getStaticProps: GetStaticProps = async ({
 
     if (!item) {
       return {
-        props: { stars },
+        notFound: true,
       };
     }
 
@@ -59,15 +64,18 @@ export const getStaticProps: GetStaticProps = async ({
     });
 
     if (!downloadUrl) {
-      return { props: { stars } };
+      return {
+        notFound: true,
+      };
     }
 
+    const sidebarMenu = getMenu(getVersionFromParams(params.slug));
     const { markup } = await markdownToHtml(downloadUrl);
 
     return {
       props: {
         markup,
-        stars,
+        menu: sidebarMenu,
       },
       revalidate: 1,
     };
@@ -79,7 +87,7 @@ export const getStaticProps: GetStaticProps = async ({
 
     if (!item) {
       return {
-        props: { stars },
+        notFound: true,
       };
     }
 
@@ -90,15 +98,18 @@ export const getStaticProps: GetStaticProps = async ({
     });
 
     if (!downloadUrl) {
-      return { props: { stars } };
+      return {
+        notFound: true,
+      };
     }
 
+    const sidebarMenu = getMenu(getVersionFromParams(params.slug));
     const { markup } = await markdownToHtml(downloadUrl);
 
     return {
       props: {
         markup,
-        stars,
+        menu: sidebarMenu,
       },
       revalidate: 1,
     };
@@ -107,32 +118,14 @@ export const getStaticProps: GetStaticProps = async ({
 
 export default function ReferenceDoc({
   markup,
-  stars,
+  menu,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className="xl:max-w-8xl mx-auto">
-      <Head>
-        <title>Haystack Docs</title>
-        <meta name="description" content="Haystack Docs" />
-        <link rel="icon" href="/images/HaystackIcon.png" />
-      </Head>
-      <Header stars={stars} />
-      <Sidebar />
-      <main className="sm:pl-60 text-black">
-        <div
-          className={markdownStyles["markdown"]}
-          dangerouslySetInnerHTML={{ __html: markup }}
-        />
-      </main>
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <span></span>
-        </a>
-      </footer>
-    </div>
+    <Layout menu={menu}>
+      <div
+        className={styles["tutorial"]}
+        dangerouslySetInnerHTML={{ __html: markup }}
+      />
+    </Layout>
   );
 }

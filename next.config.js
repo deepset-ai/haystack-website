@@ -1,8 +1,5 @@
-const withMDX = require("@next/mdx")({
-  extension: /\.mdx$/,
-});
+const withTM = require("next-transpile-modules")(["rehype-remark"]);
 
-module.exports = withMDX({
-  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+module.exports = withTM({
   reactStrictMode: true,
 });

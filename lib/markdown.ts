@@ -32,6 +32,15 @@ export const markdownToHtml = async (downloadUrl: string) => {
   };
 };
 
+export const getMenu = (version?: string) => {
+  const latestVersion = getLatestVersion();
+  const menuPath = join(
+    process.cwd(),
+    `docs/${version || latestVersion}/menu.json`
+  );
+  return JSON.parse(fs.readFileSync(menuPath, "utf8"));
+};
+
 export function getDocsVersions() {
   return fs.readdirSync(join(process.cwd(), "docs"));
 }
@@ -56,7 +65,7 @@ export function getSlugsFromLocalMarkdownFiles(
 ) {
   const directory = getDirectory(category, version);
   const filenames = fs.readdirSync(directory);
-  return filenames.map((file) => file.replace(/\.md$/, "").replace("_", "-"));
+  return filenames.map((file) => file.replace(/\.mdx$/, "").replace("_", "-"));
 }
 
 export function getAllDocs(category: "overview" | "usage", version?: string) {
@@ -66,7 +75,7 @@ export function getAllDocs(category: "overview" | "usage", version?: string) {
 }
 
 export async function getDocBySlug(slug: string, directory: string) {
-  const fullPath = join(directory, `${slug.replace("-", "_")}.md`);
+  const fullPath = join(directory, `${slug.replace("-", "_")}.mdx`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   return await localMarkdownToHtml(fileContents);
 }

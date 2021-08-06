@@ -23,7 +23,6 @@ export const getDownloadUrl = async ({
     if (!res.data.download_url) return;
     return res.data.download_url;
   } catch (e) {
-    console.log(e);
     return;
   }
 };
