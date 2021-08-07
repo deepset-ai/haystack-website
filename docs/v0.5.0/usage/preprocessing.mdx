@@ -1,12 +1,3 @@
-<!---
-title: "Preprocessing"
-metaTitle: "Preprocessing"
-metaDescription: ""
-slug: "/docs/preprocessing"
-date: "2020-09-03"
-id: "preprocessingmd"
---->
-
 # Preprocessing
 
 Haystack includes a suite of tools to:
@@ -30,6 +21,8 @@ docs = [
 ]
 ```
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## File Conversion
 
 There are a range of different file converters in Haystack that
@@ -37,50 +30,56 @@ can extract text from files and cast them into the unified dictionary format sho
 Haystack features support for txt, pdf and docx files and there is even a converter that leverages Apache Tika.
 Please refer to [the API docs](/docs/v0.5.0/file_convertersmd) to see which converter best suits you.
 
-<div class="tabs tabsconverters">
+<Tabs
+  options={[
+    {
+      title: "PDF",
+      content: (
+        <pre>
+          <code>from haystack.file_converter import PDFToTextConverter</code>
+          <code>
+            converter = PDFToTextConverter(remove_numeric_tables=True,
+            valid_languages=["de","en"])
+          </code>
+          <code>doc = converter.convert(file_path=file, meta=None)</code>
+        </pre>
+      ),
+    },
+    {
+      title: "DOCX",
+      content: (
+        <pre>
+          <code>from haystack.file_converter import DocxToTextConverter</code>
+          <code>
+            converter = DocxToTextConverter(remove_numeric_tables=True,
+            valid_languages=["de","en"])
+          </code>
+          <code>doc = converter.convert(file_path=file, meta=None)</code>
+        </pre>
+      ),
+    },
+    {
+      title: "From a Directory",
+      content: (
+        <div>
+          <p>
+            Haystack also has a`convert_files_to_dicts()` utility function that
+            will convert all txt or pdf files in a given folder into this
+            dictionary format.
+          </p>
+          <pre>
+            <code>
+              from haystack.preprocessor.utils import convert_files_to_dicts
+            </code>
+            <code>docs = convert_files_to_dicts(dir_path=doc_dir)</code>
+          </pre>
+        </div>
+      ),
+    },
+  ]}
+/>
 
-<div class="tab">
-<input type="radio" id="tab-1" name="tab-group-1" checked />
-<label class="labelouter" for="tab-1">PDF</label>
-<div class="tabcontent">
-
-```python
-converter = PDFToTextConverter(remove_numeric_tables=True, valid_languages=["de","en"])
-doc = converter.convert(file_path=file, meta=None)
-```
-
-</div>
-</div>
-
-<div class="tab">
-<input type="radio" id="tab-2" name="tab-group-1" />
-<label class="labelouter" for="tab-2">DOCX</label>
-<div class="tabcontent">
-
-```python
-converter = DocxToTextConverter(remove_numeric_tables=True, valid_languages=["de","en"])
-doc = converter.convert(file_path=file, meta=None)
-```
-
-</div>
-</div>
-
-<div class="tab">
-<input type="radio" id="tab-3" name="tab-group-1" />
-<label class="labelouter" for="tab-3">From a Directory</label>
-<div class="tabcontent">
-
-Haystack also has a `convert_files_to_dicts()` utility function that will convert
-all txt or pdf files in a given folder into this dictionary format.
-
-```python
-docs = convert_files_to_dicts(dir_path=doc_dir)
-```
-
-</div>
-</div>
-
-</div>
+<div style={{ marginBottom: "3rem" }} />
 
 ## PreProcessor
 
@@ -106,6 +105,8 @@ docs = processor.process(d)
 - `split_by` determines what unit the document is split by: `'word'`, `'sentence'` or `'passage'`
 - `split_length` sets a maximum number of `'word'`, `'sentence'` or `'passage'` units per output document
 - `split_respect_sentence_boundary` ensures that document boundaries do not fall in the middle of sentences
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Impact of Document Splitting
 

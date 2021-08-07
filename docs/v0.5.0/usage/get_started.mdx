@@ -11,46 +11,53 @@ id: "get_startedmd"
 
 ## Installation
 
-<div class="tabs tabsgetstarted">
-
-<div class="tab">
-<input type="radio" id="tab-1" name="tab-group-1" checked />
-<label class="labelouter" for="tab-1">Basic</label>
-<div class="tabcontent">
-The most straightforward way to install Haystack is through pip.<br/><br/>
-
-```python
-$ pip install farm-haystack
-```
-
-</div> 
-</div>
-
-<div class="tab">
-<input type="radio" id="tab-2" name="tab-group-1" />
-<label class="labelouter" for="tab-2">Editable</label>
-<div class="tabcontent">
-If you’d like to run a specific, unreleased version of Haystack, or make edits to the way Haystack runs,
-you’ll want to install it using `git` and `pip --editable`.
-This clones a copy of the repo to a local directory and runs Haystack from there. <br/><br/>
-
-```python
-$ git clone https://github.com/deepset-ai/haystack.git
-$ cd haystack
-$ pip install --editable .
-```
-
-By default, this will give you the latest version of the master branch. Use regular git commands to switch between different branches and commits.
-
-</div> 
-</div>
-
-</div>
+<Tabs
+  options={[
+    {
+      title: "Basic",
+      content: (
+        <div>
+          <p>
+            The most straightforward way to install Haystack is through pip.
+          </p>
+          <pre>
+            <code>pip install farm-haystack</code>
+          </pre>
+        </div>
+      ),
+    },
+    {
+      title: "Editable",
+      content: (
+        <div>
+          <p>
+            If you’d like to run a specific, unreleased version of Haystack, or
+            make edits to the way Haystack runs, you’ll want to install it using
+            `git` and `pip --editable`. This clones a copy of the repo to a
+            local directory and runs Haystack from there.
+          </p>
+          <pre>
+            <code>git clone https://github.com/deepset-ai/haystack.git</code>
+            <code>cd haystack</code>
+            <code>pip install --editable .</code>
+          </pre>
+          <p>
+            By default, this will give you the latest version of the master
+            branch. Use regular git commands to switch between different
+            branches and commits.
+          </p>
+        </div>
+      ),
+    },
+  ]}
+/>
 
 Note: On Windows add the arg `-f https://download.pytorch.org/whl/torch_stable.html` to install PyTorch correctly
 
 <!-- _comment: !! Have a tab for docker!! -->
 <!-- -comment: !! Have a hello world example!! -->
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## The Building Blocks of Haystack
 
@@ -83,6 +90,8 @@ prediction = finder.get_answers(question)
 print_answers(prediction)
 ```
 
+<div style={{ marginBottom: "3rem" }} />
+
 ## Loading Documents into the DocumentStore
 
 In Haystack, DocumentStores expect Documents in a dictionary format. They are loaded as follows:
@@ -104,6 +113,8 @@ This splitting can have a big impact on speed and performance.
 
 **General Guide**: If Haystack is running very slowly, you might want to try splitting your text into smaller Documents.
 If you want an improvement to performance, you might want to try concatenating text to make larger Documents.
+
+<div style={{ marginBottom: "3rem" }} />
 
 ## Running Queries
 
