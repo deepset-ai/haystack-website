@@ -3,7 +3,7 @@
 The Retriever is a lightweight filter that can quickly go through the full document store and pass a set of candidate documents to the Reader.
 It is an tool for sifting out the obvious negative cases, saving the Reader from doing more work than it needs to and speeding up the querying process.
 
-<div class="recommendation">
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md">
 
 **Recommendations**
 
@@ -67,7 +67,7 @@ retriever = TfidfRetriever(document_store)
 finder = Finder(reader, retriever)
 ```
 
-<div class="recommendation">
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md">
 
 **Tip:** The Finder class is being deprecated and has been replaced by a more powerful [Pipelines class](/docs/latest/pipelinesmd).
 
@@ -98,7 +98,7 @@ retriever = ElasticsearchRetriever(document_store)
 finder = Finder(reader, retriever)
 ```
 
-<div class="recommendation">
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md">
 
 **Tip:** The Finder class is being deprecated and has been replaced by a more powerful [Pipelines class](/docs/latest/pipelinesmd).
 
@@ -129,7 +129,7 @@ Indexing using DPR is comparatively expensive in terms of required computation s
 The embeddings that are created in this step can be stored in FAISS, a database optimized for vector similarity.
 DPR can also work with the ElasticsearchDocumentStore or the InMemoryDocumentStore.
 
-<div class="recommendation">
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md">
 
 **Tip**
 
@@ -164,13 +164,13 @@ retriever = DensePassageRetriever(
 finder = Finder(reader, retriever)
 ```
 
-<div class="recommendation">
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md">
 
 **Tip:** The Finder class is being deprecated and has been replaced by a more powerful [Pipelines class](/docs/latest/pipelinesmd).
 
 </div>
 
-<div class="recommendation">
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md">
 
 **Tip:** Haystack supports training of your own DPR model! Tutorial coming soon!
 
@@ -193,7 +193,7 @@ They are particular suited to cases where your query input is similar in style t
 i.e. when you are searching for most similar documents.
 This is not inherently suited to query based search where the length, language and format of the query usually significantly differs from the searched for text.
 
-<div class="recommendation">
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md">
 
 **Tip**
 
@@ -216,7 +216,7 @@ retriever = EmbeddingRetriever(document_store=document_store,
 finder = Finder(reader, retriever)
 ```
 
-<div class="recommendation">
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md">
 
 **Tip:** The Finder class is being deprecated and has been replaced by a more powerful [Pipelines class](/docs/latest/pipelinesmd).
 

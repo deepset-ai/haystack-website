@@ -1,5 +1,5 @@
 .markdown h1 {
-  @apply text-4xl sm:text-5xl mb-4 sm:mb-10 font-semibold pr-16;
+  @apply text-4xl sm:text-5xl mb-4 sm:mb-10 font-semibold pr-28;
 }
 
 .markdown h2 {
@@ -72,8 +72,4 @@
 .markdown td,
 .markdown th {
   @apply w-full text-center p-2 border-l border-r;
-}
-
-.markdown .recommendation {
-  @apply bg-yellow-light-theme border-l-4 border-yellow-dark-theme;
 }
