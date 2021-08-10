@@ -39,6 +39,15 @@ export const getMenu = (version?: string) => {
   return JSON.parse(fs.readFileSync(menuPath, "utf8"));
 };
 
+export const getBenchmarks = (type: string, name: string, version?: string) => {
+  const latestVersion = getLatestVersion();
+  const benchmarksPath = join(
+    process.cwd(),
+    `benchmarks/${version || latestVersion}/${type}/${name}.json`
+  );
+  return JSON.parse(fs.readFileSync(benchmarksPath, "utf8"));
+};
+
 export function getDocsVersions() {
   return fs.readdirSync(join(process.cwd(), "docs"));
 }
@@ -57,6 +66,11 @@ export function getDirectory(category: "overview" | "usage", version?: string) {
   return join(process.cwd(), `docs/${version || latestVersion}/${category}`);
 }
 
+export function getDirectoryBenchmarks(category: "map" | "performance" | "speed", version?: string) {
+  const latestVersion = getLatestVersion();
+  return join(process.cwd(), `benchmarks/${version || latestVersion}/${category}`);
+}
+
 export function getSlugsFromLocalMarkdownFiles(
   category: "overview" | "usage",
   version?: string
@@ -65,4 +79,14 @@ export function getSlugsFromLocalMarkdownFiles(
   if (!fs.existsSync(directory)) return [];
   const filenames = fs.readdirSync(directory);
   return filenames.map((file) => file.replace(/\.mdx$/, "").replace("_", "-"));
+}
+
+export function getSlugsFromLocalBenchmarksFiles(
+  category: "map" | "performance" | "speed",
+  version?: string
+) {
+  const directory = getDirectoryBenchmarks(category, version);
+  if (!fs.existsSync(directory)) return [];
+  const filenames = fs.readdirSync(directory);
+  return filenames;
 }

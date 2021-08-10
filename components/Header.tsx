@@ -61,6 +61,56 @@ export default function Header() {
           </div>
         </a>
       </Link> */}
+      <div className="flex w-full justify-end">
+        <div className="w-44 mr-4">
+          <Link href="/overview/get-started">
+            <div
+              className="text-white mt-1 font-bold text-2xl cursor-pointer"
+              >
+              Haystack Docs
+            </div>
+          </Link>
+        </div>
+        {/* <div className="w-56 mr-4">
+          <Link href="/overview/get-started">
+            <div
+              className="text-white mt-1 font-bold text-2xl cursor-pointer"
+              >
+              Haystack Hub Docs
+            </div>
+          </Link>
+        </div> */}
+        <div className="w-36 mr-4">
+          <Link href="/benchmarks/v0.9.0">
+            <div
+              className="text-white mt-1 font-bold text-2xl cursor-pointer"
+              >
+              Benchmarks
+            </div>
+          </Link>
+        </div>
+        <div className="w-32 mr-4">
+          <Link href="/community/join">
+            <div
+              className="text-white mt-1 font-bold text-2xl cursor-pointer"
+              >
+              Join Slack
+            </div>
+          </Link>
+        </div>
+        <div className="w-44 mr-4 flex">
+          <Link href="https://www.meetup.com/de-DE/open-nlp-meetup/">
+            <a
+              target="_blank"
+              href="https://www.meetup.com/de-DE/open-nlp-meetup/"
+              className="text-white mt-1 font-bold text-2xl cursor-pointer"
+              rel="noopener noreferrer"
+            >
+              Join Open NLP
+            </a>
+          </Link>
+        </div>
+      </div>
       <VersionSelect />
     </header>
   );
