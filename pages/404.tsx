@@ -14,7 +14,7 @@ export default function Custom404({
         <meta name="description" content="Haystack Docs" />
         <link rel="icon" href="/images/HaystackIcon.png" />
       </Head>
-      <Header />
+      <Header  docsType={"haystack"}/>
       <DesktopNav menu={menu} />
       <main className="sm:pl-60 text-black">
         <div>404 - There&apos;s no doc for the page you requested.</div>
