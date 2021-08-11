@@ -7,36 +7,43 @@
     "columns": [
         "Model",
         "F1",
+        "{type: \"number\", role: \"annotation\"}",
         "Speed (passages/sec)"
     ],
     "data": [
         {
             "F1": 82.58860575299658,
+            "lable": 82.0,
             "Speed": 125.81040525892848,
             "Model": "RoBERTa"
         },
         {
             "F1": 78.87858491007042,
+            "lable": 82.0,
             "Speed": 260.6443097981493,
             "Model": "MiniLM"
         },
         {
             "F1": 74.31182400443286,
+            "lable": 82.0,
             "Speed": 121.08066567525722,
             "Model": "BERT base"
         },
         {
             "F1": 83.26306774734308,
+            "lable": 82,
             "Speed": 42.21949937744112,
             "Model": "BERT large"
         },
         {
             "F1": 84.50422699207468,
+            "lable": 82.0,
             "Speed": 42.07400844838985,
             "Model": "XLM-RoBERTa"
         },
         {
             "F1": 42.31925844723574,
+            "lable": 82.0,
             "Speed": 222.91207128366702,
             "Model": "DistilBERT"
         }

@@ -98,14 +98,17 @@ const BenchMarks = ({data}) => {
       fileObject = node.childPerformanceJson;
 
       if(fileAbsolutePath.includes("reader")) {
+        console.log(fileAbsolutePath)
 
         titleReader[version] = fileObject.title;
         descReader[version] = fileObject.description;
         chartTypeReader[version] = fileObject.chart_type;
         let dataReader = new Array(fileObject.columns);
+        console.log(fileObject.data)
         for (let i=0; i<fileObject.data.length; i++) {
-          dataReader[i+1] = [fileObject.data[i].Model, fileObject.data[i].F1, fileObject.data[i].Speed];
+          dataReader[i+1] = [fileObject.data[i].Model, fileObject.data[i].F1, fileObject.data[i].lable, fileObject.data[i].Speed];
         } 
+        console.log(dataReader)
         mapDataReader[version] = dataReader;
         subTitelReader[version] = fileObject.subtitle;
         barsReader[version] = fileObject.bars;
@@ -233,7 +236,15 @@ const BenchMarks = ({data}) => {
                 colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
                 subTitle: subTitelReader[selectedVersion],
                 bars: barsReader[selectedVersion],
-                legend: "bottom"
+                legend: "bottom",
+                displayAnnotations: true,
+                annotations: {
+                  textStyle: {
+                  // The color of the text.
+                      color: '#000000',
+                      fontSize: 15
+                  },
+              },
                 }}
             />
 
@@ -380,6 +391,7 @@ export const query = graphql`
             columns
             data {
               F1
+              lable
               Model
               index_speed
               Speed
