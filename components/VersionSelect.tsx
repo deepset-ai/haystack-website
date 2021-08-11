@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Listbox, Transition } from "@headlessui/react";
 
-const versionRoutes: { [key: string]: string } = {
+const versionRoutesHaystack: { [key: string]: string } = {
   "v0.9.0": "/overview/intro",
   "v0.8.0": "/overview/v0.8.0/intro",
   "v0.7.0": "/overview/v0.7.0/intro",
@@ -12,13 +12,35 @@ const versionRoutes: { [key: string]: string } = {
   "v0.4.0": "/usage/v0.4.0/intro",
 };
 
-export default function VersionSelect() {
+const versionRoutesBenchmarks: { [key: string]: string } = {
+  "v0.9.0": "/benchmarks/v0.9.0",
+  "v0.8.0": "/benchmarks/v0.8.0",
+  "v0.7.0": "/benchmarks/v0.7.0",
+  "v0.6.0": "/benchmarks/v0.6.0",
+  "v0.5.0": "/benchmarks/v0.5.0",
+  "v0.4.0": "/benchmarks/v0.4.0",
+};
+
+type Props = {
+  docsType: string;
+};
+
+export default function VersionSelect({ docsType = "haystack" }: Props) {
   const router = useRouter();
-  const versions = Object.keys(versionRoutes);
-  const versionInUrl = versions?.find((v) => router.asPath.includes(v));
+  let versions: any = [];
+  if(docsType === "haystack") {
+    versions = Object.keys(versionRoutesHaystack);
+  } else if(docsType == "benchmarks") {
+    versions = Object.keys(versionRoutesBenchmarks);
+  }
+  const versionInUrl = versions?.find((v: string) => router.asPath.includes(v));
 
   const handleVersionChange = (version: string) => {
-    return router.push(versionRoutes[`${version}`]);
+    if(docsType === "haystack") {
+      return router.push(versionRoutesHaystack[`${version}`]);
+    } else if(docsType == "benchmarks") {
+      return router.push(versionRoutesBenchmarks[`${version}`]);
+    }
   };
 
   return (
@@ -46,7 +68,7 @@ export default function VersionSelect() {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {versions.map((version, versionIdx) => (
+              {versions.map((version: string, versionIdx: string) => (
                 <Listbox.Option
                   key={versionIdx}
                   className={({ active }) =>

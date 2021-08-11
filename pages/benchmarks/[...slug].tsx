@@ -25,7 +25,9 @@ export default function LatestBenchmark({
   reader_performance,
   retriever_speed
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(map)
+  
+  function createMarkup(desc: string) { return {__html: desc}; };
+
   return (
     <div>
         <Head>
@@ -33,90 +35,119 @@ export default function LatestBenchmark({
             <meta name="description" content="Haystack Benchmarks" />
             <link rel="icon" href="/images/HaystackIcon.png" />
         </Head>
-        <Header />
-        <Chart
-                width={1200}
-                height={600}
-                chartType={reader_performance.chartType}
-                loader={<div>Loading Chart</div>}
-                data={reader_performance.dataReader}
-                options={{
-                colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
-                subTitle: reader_performance.subTitle,
-                bars: reader_performance.bars,
-                legend: "bottom",
-                displayAnnotations: true,
-                annotations: {
-                  textStyle: {
-                  // The color of the text.
-                      color: '#000000',
-                      fontSize: 15
-                  },
-              },
-                }}
-            />
-        <Chart
-                width={1200}
-                height={600}
-                chartType={retriever_performance.chartType}
-                loader={<div>Loading Chart</div>}
-                data={retriever_performance.dataRetriever}
-                options={{
-                    subtitle: retriever_performance.subTitle,
-                    colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
-                    bars: retriever_performance.bars, // Required for Material Bar Charts.
-                      series: {
-                        0: { axis: retriever_performance.seriesS0 }, // Bind series 0 to an axis named 'distance'.
-                        1: { axis: retriever_performance.seriesS1 }, // Bind series 1 to an axis named 'brightness'.
-                        2: { axis: retriever_performance.seriesS2 } // Bind series 1 to an axis named 'brightness'.
-                      },
-                      axes: {
-                        x: {
-                          map: {label: retriever_performance.label}, // Bottom x-axis.
-                          time: {side: retriever_performance.time_side, label: retriever_performance.time_label} // Top x-axis.
-                        }
-                      },
-                      legend: "bottom"
-                }}
-            />
-        <Chart
-                width={1200}
-                height={600}
-                chartType={map.chartType}
-                loader={<div>Loading Chart</div>}
-                data={map.dataRetriever}
-                options={{
-                    subtitle: map.subTitle,
-                    colors: ['#22BA99', '#FBB14B', '#63C7CA', '#49B0E4'],
-                    hAxis: {
-                      title: map.axisX
+        <Header docsType={"benchmarks"}/>
+        <div className="justify-center relative w-full p-8">
+          <div className="flex justify-center mb-10">
+              <h1 className="text-5xl font-semibold max-w-4xl">Haystack Benchmarks</h1>
+          </div>
+          <div className="flex mb-4 ml-16">
+            <h2 className="text-3xl font-semibold max-w-4xl">{reader_performance.title}</h2>
+          </div>
+          <div className="mb-3 mr-16 ml-16 text-justify" dangerouslySetInnerHTML={createMarkup(reader_performance.desc)}></div>
+          <div className="mb-16 ml-16">
+          <Chart
+                  width={1200}
+                  height={600}
+                  chartType={reader_performance.chartType}
+                  loader={<div>Loading Chart</div>}
+                  data={reader_performance.dataReader}
+                  options={{
+                  colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                  subTitle: reader_performance.subTitle,
+                  bars: reader_performance.bars,
+                  legend: "bottom",
+                  displayAnnotations: true,
+                  annotations: {
+                    textStyle: {
+                    // The color of the text.
+                        color: '#000000',
+                        fontSize: 15
                     },
-                    vAxis: {
-                      title: map.axisY
-                    },
-                    pointSize: 5,
-                    legend: "bottom"
-                }}
-            />
-        <Chart
-                width={1200}
-                height={600}
-                chartType={retriever_speed.chartType}
-                loader={<div>Loading Chart</div>}
-                data={retriever_speed.dataRetrieverSpeed}
-                options={{
-                    subtitle: retriever_speed.subTitle,
-                    colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
-                    hAxis: {
-                      title: retriever_speed.axisX
-                    },
-                    vAxis: {
-                      title: retriever_speed.axisY
-                    },
-                    pointSize: 5,
-                    legend: "bottom"
-                }}
-            />
+                },
+                  }}
+              />
+          </div>
+          <div className="flex mb-4 ml-16">
+            <h2 className="text-3xl font-semibold max-w-4xl">{retriever_performance.title}</h2>
+          </div>
+          <div className="mb-3 mr-16 ml-16 text-justify" dangerouslySetInnerHTML={createMarkup(retriever_performance.desc)}></div>
+          <div className="mb-16 ml-16">
+            <Chart
+                    width={1200}
+                    height={600}
+                    chartType={retriever_performance.chartType}
+                    loader={<div>Loading Chart</div>}
+                    data={retriever_performance.dataRetriever}
+                    options={{
+                        subtitle: retriever_performance.subTitle,
+                        colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                        bars: retriever_performance.bars, // Required for Material Bar Charts.
+                          series: {
+                            0: { axis: retriever_performance.seriesS0 }, // Bind series 0 to an axis named 'distance'.
+                            1: { axis: retriever_performance.seriesS1 }, // Bind series 1 to an axis named 'brightness'.
+                            2: { axis: retriever_performance.seriesS2 } // Bind series 1 to an axis named 'brightness'.
+                          },
+                          axes: {
+                            x: {
+                              map: {label: retriever_performance.label}, // Bottom x-axis.
+                              time: {side: retriever_performance.time_side, label: retriever_performance.time_label} // Top x-axis.
+                            }
+                          },
+                          legend: "bottom"
+                    }}
+                />
+          </div>
+          <div className="flex mb-4 ml-16">
+            <h2 className="text-3xl font-semibold max-w-4xl">{map.title}</h2>
+          </div>
+          <div className="mb-3 mr-16 ml-16 text-justify" dangerouslySetInnerHTML={createMarkup(map.desc)}></div>
+          <div className="mb-16 ml-16">
+            <Chart
+                    width={1200}
+                    height={600}
+                    chartType={map.chartType}
+                    loader={<div>Loading Chart</div>}
+                    data={map.dataRetriever}
+                    options={{
+                        subtitle: map.subTitle,
+                        colors: ['#22BA99', '#FBB14B', '#63C7CA', '#49B0E4'],
+                        hAxis: {
+                          title: map.axisX
+                        },
+                        vAxis: {
+                          title: map.axisY
+                        },
+                        pointSize: 5,
+                        legend: "bottom"
+                    }}
+                />
+          </div>
+          <div className="flex mb-4 ml-16">
+            <h2 className="text-3xl font-semibold max-w-4xl">{retriever_speed.title}</h2>
+          </div>
+          <div className="mb-3 mr-16 ml-16 text-justify" dangerouslySetInnerHTML={createMarkup(retriever_speed.desc)}></div>
+          <div className="mb-16 ml-16">
+            <Chart
+                    width={1200}
+                    height={600}
+                    chartType={retriever_speed.chartType}
+                    loader={<div>Loading Chart</div>}
+                    data={retriever_speed.dataRetrieverSpeed}
+                    options={{
+                        subtitle: retriever_speed.subTitle,
+                        colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
+                        hAxis: {
+                          title: retriever_speed.axisX
+                        },
+                        vAxis: {
+                          title: retriever_speed.axisY
+                        },
+                        pointSize: 5,
+                        legend: "bottom"
+                    }}
+                />
+          </div>
+        </div>
         <Footer />
     </div>
   );

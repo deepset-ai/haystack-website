@@ -20,7 +20,7 @@ const Layout: FC<Props> = ({ menu, editOnGitHubLink, children }) => {
         <meta name="description" content="Haystack Docs" />
         <link rel="icon" href="/images/HaystackIcon.png" />
       </Head>
-      <Header />
+      <Header docsType={"haystack"}/>
       <DesktopNav menu={menu} />
       <MobileNav menu={menu} />
       <main className="relative max-w-3xl 2xl:max-w-4xl sm:ml-60 px-3 sm:px-8 py-6 lg:py-8 min-h-screen">

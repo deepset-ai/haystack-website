@@ -180,12 +180,11 @@ const handleSubmit = (event: any) =>  {
     </Snackbar>
 
     <div className="justify-center relative w-full p-8">
-        {/*<img className="product-img haystackos-img" src={OpenSource} alt="Haystack Open Source"></img>*/}
         <div className="flex justify-center mb-10">
-            <h2 className="text-5xl font-semibold max-w-4xl">Join the Haystack Community on Slack</h2>
+            <h1 className="text-5xl font-semibold max-w-4xl">Join the Haystack Community on Slack</h1>
         </div>
         <div className="flex justify-center mb-4">
-            <p className="text-3xl font-semibold max-w-4xl text-center">Learn more about what people are building with Haystack, ask questions, share knowledge, track events, meet collaborators.</p>
+            <h2 className="text-3xl font-semibold max-w-4xl text-center">Learn more about what people are building with Haystack, ask questions, share knowledge, track events, meet collaborators.</h2>
         </div>
         <div className="flex justify-center">
             <form onSubmit={handleSubmit}>
