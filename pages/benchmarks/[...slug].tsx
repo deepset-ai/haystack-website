@@ -177,46 +177,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 type Props = {
-  map: {
-    title: string,
-    desc: string,
-    chartType: any,
-    subTitle: string,
-    axisX: string,
-    axisY: string,
-    dataRetriever: any[]
-  },
-  retriever_performance: {
-    title: string,
-    desc: string,
-    chartType: any,
-    dataRetriever: any[],
-    subTitle: string,
-    bars: string,
-    seriesS0: string,
-    seriesS1: string,
-    seriesS2: string,
-    label: string,
-    time_side: string,
-    time_label: string
-  },
-  reader_performance: {
-    title: string,
-    desc: string,
-    chartType: any,
-    dataReader: any[],
-    subTitle: string,
-    bars: string
-  },
-  retriever_speed: {
-    title: string,
-    desc: string,
-    chartType: any,
-    dataRetrieverSpeed: any[],
-    subTitle: string,
-    axisX: string,
-    axisY: string
-  }
+  map: any,
+  retriever_performance: any,
+  reader_performance: any,
+  retriever_speed: any
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({
@@ -241,7 +205,10 @@ export const getStaticProps: GetStaticProps<Props> = async ({
     );
     let filenames = [];
     let fileContent = null;
-    if (!fs.existsSync(directory)) return [];
+    if (!fs.existsSync(directory)) 
+      return {
+        notFound: true,
+      }; 
       filenames = fs.readdirSync(directory);
     
     for (const filename of filenames) {
@@ -260,8 +227,11 @@ export const getStaticProps: GetStaticProps<Props> = async ({
       "performance",
       getVersionFromParams(params.slug)
     );
-    if (!fs.existsSync(directory)) return [];
-      filenames = fs.readdirSync(directory);
+    if (!fs.existsSync(directory)) 
+      return {
+        notFound: true,
+      };
+    filenames = fs.readdirSync(directory);
       
     for (const filename of filenames) {
       const fullPath = join(directory, filename);
@@ -283,8 +253,11 @@ export const getStaticProps: GetStaticProps<Props> = async ({
       "speed",
       getVersionFromParams(params.slug)
     );
-    if (!fs.existsSync(directory)) return [];
-      filenames = fs.readdirSync(directory);
+    if (!fs.existsSync(directory)) 
+      return {
+        notFound: true,
+      };
+    filenames = fs.readdirSync(directory);
       
     for (const filename of filenames) {
       const fullPath = join(directory, filename);
@@ -302,8 +275,9 @@ export const getStaticProps: GetStaticProps<Props> = async ({
         retriever_performance,
         reader_performance,
         retriever_speed
-      }
-    }
+      },
+      revalidate: 1,
+    };
 
   } catch (e) {
     console.log(e);
@@ -348,21 +322,21 @@ export function getRetrieverMapData(
 export function getRetrieverPerformanceData(
   fileContent: any
 ) {
-  const title = fileContent.title;
-  const desc = fileContent.description;
-  const chartType = fileContent.chart_type;
+  const title: string = fileContent.title;
+  const desc: string = fileContent.description;
+  const chartType: any = fileContent.chart_type;
   let dataRetriever = new Array(fileContent.columns);
   for (let i=0; i<fileContent.data.length; i++) {
     dataRetriever[i+1] = [fileContent.data[i].model, fileContent.data[i].map, fileContent.data[i].index_speed, fileContent.data[i].query_speed];
   } 
-  const subTitle = fileContent.subtitle;
-  const bars= fileContent.bars;
-  const seriesS0= fileContent.series.s0;
-  const seriesS1 = fileContent.series.s1;
-  const seriesS2 = fileContent.series.s2;
-  const label = fileContent.axes.label;
-  const time_side = fileContent.axes.time_side; 
-  const time_label = fileContent.axes.time_label;
+  const subTitle: string = fileContent.subtitle;
+  const bars: string = fileContent.bars;
+  const seriesS0: string= fileContent.series.s0;
+  const seriesS1: string = fileContent.series.s1;
+  const seriesS2: string = fileContent.series.s2;
+  const label: string = fileContent.axes.label;
+  const time_side: string = fileContent.axes.time_side; 
+  const time_label: string = fileContent.axes.time_label;
   return {
     title: title,
     desc: desc,
@@ -382,15 +356,15 @@ export function getRetrieverPerformanceData(
 export function getReaderPerformanceData(
   fileContent: any
 ) {
-  const title = fileContent.title;
-  const desc = fileContent.description;
-  const chartType = fileContent.chart_type;
+  const title: string = fileContent.title;
+  const desc: string = fileContent.description;
+  const chartType: any = fileContent.chart_type;
   let dataReader = new Array(fileContent.columns);
   for (let i=0; i<fileContent.data.length; i++) {
     dataReader[i+1] = [fileContent.data[i].Model, fileContent.data[i].F1, fileContent.data[i].Speed];
   } 
-  const subTitle = fileContent.subtitle;
-  const bars = fileContent.bars;
+  const subTitle: string = fileContent.subtitle;
+  const bars: string = fileContent.bars;
   return {
     title: title,
     desc: desc,
@@ -405,9 +379,9 @@ export function getRetrieverSpeedData(
   fileContent: any
 ) {
   const n_docs = [1000, 10000, 100000, 500000];
-  const title= fileContent.title;
-  const desc = fileContent.description;
-  const chartType = fileContent.chart_type;
+  const title: string = fileContent.title;
+  const desc: string = fileContent.description;
+  const chartType: any = fileContent.chart_type;
   let dataRetrieverSpeed = new Array(fileContent.columns);
   for(let z=0; z<n_docs.length; z++) {
     dataRetrieverSpeed[z+1] = new Array(fileContent.columns.length);
@@ -420,9 +394,9 @@ export function getRetrieverSpeedData(
       }
     }
   }
-  const subTitle = fileContent.subtitle;
-  const axisX = fileContent.axis[0].x;
-  const axisY = fileContent.axis[0].y;  
+  const subTitle: string = fileContent.subtitle;
+  const axisX: string = fileContent.axis[0].x;
+  const axisY: string = fileContent.axis[0].y;  
   return {
     title: title,
     desc: desc,
