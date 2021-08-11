@@ -1,0 +1,75 @@
+.markdown h1 {
+  @apply text-4xl sm:text-5xl mb-4 sm:mb-10 font-semibold pr-28;
+}
+
+.markdown h2 {
+  @apply text-2xl sm:text-3xl mb-4 font-semibold;
+}
+
+.markdown h3 {
+  @apply text-xl sm:text-2xl mb-4 font-semibold;
+}
+
+.markdown h4 {
+  @apply text-lg mb-2 font-bold;
+}
+
+.markdown p {
+  @apply mb-3;
+}
+
+.markdown ul,
+.markdown ol,
+.markdown blockquote,
+.markdown img {
+  @apply mb-6;
+}
+
+.markdown ul {
+  @apply list-disc list-inside;
+}
+
+.markdown ol {
+  @apply list-decimal list-inside;
+}
+
+.markdown a {
+  @apply text-blue-600 underline;
+}
+
+.markdown li {
+  @apply mb-1;
+}
+
+.markdown li p {
+  @apply inline;
+}
+
+.markdown li div {
+  @apply my-6;
+}
+
+.markdown code {
+  @apply bg-light-grey-BG text-dark-blue py-1 px-2 mr-1 text-sm rounded break-words;
+}
+
+.markdown pre code {
+  @apply bg-transparent text-off-white p-0 m-0 block mb-2;
+}
+
+.markdown table {
+  @apply table-auto w-full mb-4;
+}
+
+.markdown thead {
+  @apply w-full;
+}
+
+.markdown tr {
+  @apply flex w-full justify-evenly bg-light-grey-BG border;
+}
+
+.markdown td,
+.markdown th {
+  @apply w-full text-center p-2 border-l border-r;
+}
