@@ -16,7 +16,7 @@ export default function Header({ docsType = "haystack" }: Props) {
   const handleChange = () => {
     setDarkMode(!darkMode);
     if(localStorage.theme === undefined){
-      localStorage.theme = 'dark';
+      localStorage.theme = 'light';
     }
     localStorage.theme === 'light' ? localStorage.theme = 'dark' : localStorage.theme = 'light';
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
