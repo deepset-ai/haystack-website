@@ -44,7 +44,7 @@ export default function VersionSelect({ docsType = "haystack" }: Props) {
   };
 
   return (
-    <div className="w-28">
+    <div className="w-32">
       <Listbox
         value={versionInUrl || versions[0]}
         onChange={handleVersionChange}

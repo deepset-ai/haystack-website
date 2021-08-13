@@ -1,6 +1,6 @@
 import Link from "next/link";
 import VersionSelect from "./VersionSelect";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
@@ -27,6 +27,14 @@ export default function Header({ docsType = "haystack" }: Props) {
       setDarkMode(false);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  });
 
   return (
     <header className="sticky top-0 p-2 sm:px-6 sm:py-3 z-10 w-full xl:max-w-8xl mx-auto flex items-center justify-between bg-dark-blue border-b border-medium-grey dark:bg-black">

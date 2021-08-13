@@ -58,11 +58,11 @@
 }
 
 .markdown table {
-  @apply table-auto w-full mb-4 dark:bg-gray-800;
+  @apply table-auto w-full mb-4;
 }
 
 .markdown thead {
-  @apply w-full dark:bg-gray-800;
+  @apply w-full;
 }
 
 .markdown tr {
@@ -71,5 +71,5 @@
 
 .markdown td,
 .markdown th {
-  @apply w-full text-center p-2 border-l border-r dark:bg-gray-800;
+  @apply w-full text-center p-2 border-l border-r;
 }
