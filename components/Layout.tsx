@@ -14,7 +14,7 @@ type Props = {
 
 const Layout: FC<Props> = ({ menu, editOnGitHubLink, children }) => {
   return (
-    <div className="dark:bg-gray-900">
+    <div className="dark:bg-gray-800">
       <Head>
         <title>Haystack Docs</title>
         <meta name="description" content="Haystack Docs" />

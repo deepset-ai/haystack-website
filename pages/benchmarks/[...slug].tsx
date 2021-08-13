@@ -36,7 +36,7 @@ export default function LatestBenchmark({
             <link rel="icon" href="/images/HaystackIcon.png" />
         </Head>
         <Header docsType={"benchmarks"}/>
-        <div className="justify-center relative w-full p-8">
+        <div className="justify-center relative w-full p-8 dark:bg-gray-800 dark:text-white">
           <div className="flex justify-center mb-10">
               <h1 className="text-5xl font-semibold max-w-4xl">Haystack Benchmarks</h1>
           </div>
@@ -53,17 +53,17 @@ export default function LatestBenchmark({
                   data={reader_performance.dataReader}
                   options={{
                   colors: ['#22BA99', '#63C7CA', '#49B0E4', '#FBB14B'],
-                  subTitle: reader_performance.subTitle,
-                  bars: reader_performance.bars,
-                  legend: "bottom",
-                  displayAnnotations: true,
-                  annotations: {
-                    textStyle: {
-                    // The color of the text.
-                        color: '#000000',
-                        fontSize: 15
+                    subTitle: reader_performance.subTitle,
+                    bars: reader_performance.bars,
+                    legend: "bottom",
+                    displayAnnotations: true,
+                    annotations: {
+                      textStyle: {
+                      // The color of the text.
+                          color: '#000000',
+                          fontSize: 15
+                      },
                     },
-                },
                   }}
               />
           </div>

@@ -179,7 +179,7 @@ const handleSubmit = (event: any) =>  {
         </Alert>
     </Snackbar>
 
-    <div className="justify-center relative w-full p-8">
+    <div className="justify-center relative w-full p-8 dark:bg-gray-800 dark:text-white">
         <div className="flex justify-center mb-10">
             <h1 className="text-5xl font-semibold max-w-4xl">Join the Haystack Community on Slack</h1>
         </div>
