@@ -14,7 +14,7 @@ type Props = {
 
 const Layout: FC<Props> = ({ menu, editOnGitHubLink, children }) => {
   return (
-    <div>
+    <div className="dark:bg-gray-900">
       <Head>
         <title>Haystack Docs</title>
         <meta name="description" content="Haystack Docs" />
@@ -23,7 +23,7 @@ const Layout: FC<Props> = ({ menu, editOnGitHubLink, children }) => {
       <Header docsType={"haystack"}/>
       <DesktopNav menu={menu} />
       <MobileNav menu={menu} />
-      <main className="relative max-w-3xl 2xl:max-w-4xl sm:ml-60 px-3 sm:px-8 py-6 lg:py-8 min-h-screen">
+      <main className="relative max-w-3xl 2xl:max-w-4xl sm:ml-60 px-3 sm:px-8 py-6 lg:py-8 min-h-screen dark:text-white">
         {editOnGitHubLink && (
           <div className="absolute top-7 sm:top-8 right-5">
             <a

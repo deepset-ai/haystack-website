@@ -6,7 +6,7 @@ const Footer: FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-light-grey-BG text-medium-grey w-full px-3 py-6 sm:pl-64 sm:pr-8 sm:py-8">
+    <footer className="bg-light-grey-BG text-medium-grey w-full px-3 py-6 sm:pl-64 sm:pr-8 sm:py-8 dark:bg-gray-800">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between">
         <div className="flex mb-5 sm:m-0">
           <Link href="https://www.deepset.ai/imprint">

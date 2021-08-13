@@ -19,7 +19,7 @@ export default function Sidebar({ menu = [] }: Props) {
   }, [router.query]);
 
   return (
-    <div className="fixed inset-0 p-6 pt-24 w-60 bg-dark-blue sm:block hidden overflow-y-scroll text-medium-grey">
+    <div className="fixed inset-0 p-6 pt-24 w-60 bg-dark-blue sm:block hidden overflow-y-scroll text-medium-grey dark:bg-black">
       <ol>
         {menu.map((submenu: any) => (
           <li key={submenu.subMenuTitle}>

@@ -7,7 +7,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./docs/**/*.mdx",
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or false
   theme: {
     extend: {
       colors: {

@@ -8,13 +8,13 @@
 }
 
 .tutorial code {
-  @apply bg-light-grey-BG text-dark-blue py-1 px-2 mr-1 text-sm rounded break-words;
+  @apply bg-light-grey-BG text-dark-blue py-1 px-2 mr-1 text-sm rounded break-words dark:bg-black;
 }
 
 .tutorial pre code {
-  @apply bg-transparent text-off-white p-0 m-0;
+  @apply bg-transparent text-off-white p-0 m-0 dark:bg-black;
 }
 
 .tutorial pre {
-  @apply bg-dark-blue p-4 mb-4 overflow-x-auto rounded;
+  @apply bg-dark-blue p-4 mb-4 overflow-x-auto rounded dark:bg-black;
 }

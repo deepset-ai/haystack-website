@@ -32,7 +32,7 @@ export default function Tabs({
         </Tab.List>
         <Tab.Panels className="mt-2">
           {options?.map((option, idx) => (
-            <Tab.Panel key={idx} className="bg-white rounded-xl px-3 pb-3 pt-6">
+            <Tab.Panel key={idx} className="bg-white rounded-xl px-3 pb-3 pt-6 dark:bg-gray-900">
               {option.content}
             </Tab.Panel>
           ))}
