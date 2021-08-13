@@ -58,18 +58,18 @@
 }
 
 .markdown table {
-  @apply table-auto w-full mb-4;
+  @apply table-auto w-full mb-4 dark:bg-gray-800;
 }
 
 .markdown thead {
-  @apply w-full;
+  @apply w-full dark:bg-gray-800;
 }
 
 .markdown tr {
-  @apply flex w-full justify-evenly bg-light-grey-BG border;
+  @apply flex w-full justify-evenly bg-light-grey-BG border dark:bg-gray-800;
 }
 
 .markdown td,
 .markdown th {
-  @apply w-full text-center p-2 border-l border-r;
+  @apply w-full text-center p-2 border-l border-r dark:bg-gray-800;
 }

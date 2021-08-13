@@ -14,15 +14,17 @@ export default function Header({ docsType = "haystack" }: Props) {
   const [darkMode, setDarkMode] = useState(false);
 
   const handleChange = () => {
-    setDarkMode(!darkMode);
     if(localStorage.theme === undefined){
       localStorage.theme = 'light';
+      setDarkMode(false);
     }
     localStorage.theme === 'light' ? localStorage.theme = 'dark' : localStorage.theme = 'light';
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add('dark');
+      setDarkMode(true);
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
+      setDarkMode(false);
     }
   };
 
@@ -87,7 +89,7 @@ export default function Header({ docsType = "haystack" }: Props) {
       </Link> */}
       <div className="flex w-full justify-end">
         <div className="w-44 mr-4">
-          <Link href="/overview/get-started">
+          <Link href="/overview/intro">
             <div
               className="text-white mt-1 font-bold text-2xl cursor-pointer"
               >
