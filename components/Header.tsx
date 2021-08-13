@@ -11,7 +11,7 @@ type Props = {
 
 export default function Header({ docsType = "haystack" }: Props) {
 
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleChange = () => {
     setDarkMode(!darkMode);
