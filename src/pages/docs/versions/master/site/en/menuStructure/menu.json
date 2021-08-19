@@ -179,6 +179,14 @@
       "order": 13
     },
     {
+      "id": "query_classifiermd",
+      "title": "Query Classifier",
+      "label1": "usage_haystack",
+      "label2": "",
+      "label3": "",
+      "order": 14
+    },
+    {
       "id": "tutorials_haystack",
       "title": "Tutorials",
       "label1": "",
