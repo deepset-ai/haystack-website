@@ -143,5 +143,15 @@ export const tutorialFiles: Meta = {
       filename: "12.md",
       title: 'Generative QA with "LFQA"',
     },
+    {
+      slug: "question-generation",
+      filename: "13.md",
+      title: 'Question Generation',
+    },
+    {
+      slug: "query-classifier",
+      filename: "14.md",
+      title: 'Query Classifier',
+    },
   ],
 };
