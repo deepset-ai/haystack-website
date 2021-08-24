@@ -74,6 +74,9 @@ do
     if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/faq.md 2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
         wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/faq.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/faq.md
     fi
+    if [[ `wget -S --spider https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/query_classifier.md 2>&1 | grep 'HTTP/1.1 200 OK'` ]]; then
+        wget https://raw.githubusercontent.com/deepset-ai/haystack/${1}/docs/${j}_src/usage/usage/query_classifier.md  -O ./src/pages/docs/versions/master/${i}site/en/usage/usage/query_classifier.md
+    fi
 
     sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/roadmap.md
     sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/roadmap.md 
@@ -145,6 +148,10 @@ do
     if [[ -f "./src/pages/docs/versions/master/${i}site/en/usage/usage/faq.md" ]]; then
         sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/faq.md
         sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/faq.md
+    fi
+    if [[ -f "./src/pages/docs/versions/master/${i}site/en/usage/usage/query_classifier.md" ]]; then
+        sed -i 's/<!---/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/query_classifier.md
+        sed -i 's/--->/---/' ./src/pages/docs/versions/master/${i}site/en/usage/usage/query_classifier.md
     fi
 done    
 
