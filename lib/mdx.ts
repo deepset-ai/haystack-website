@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { Pre } from "components/Pre";
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -8,5 +7,5 @@ import { Pre } from "components/Pre";
 export const components = {
   Disclosures: dynamic(() => import("components/Disclosures")),
   Tabs: dynamic(() => import("components/Tabs")),
-  pre: Pre,
+  pre: dynamic(() => import("components/Pre")),
 };

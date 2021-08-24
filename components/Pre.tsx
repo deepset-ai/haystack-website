@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, FC } from "react";
 import classNames from "classnames";
 import { copyToClipboard } from "lib/copyToClipboard";
 
 type Props = {
-  children: JSX.Element;
   className: string;
 };
 
-export const Pre = ({ children, className, ...props }: Props): JSX.Element => {
+const Pre: FC<Props> = ({ children, className, ...props }) => {
   const preRef = useRef<HTMLPreElement>(null);
 
   const [copied, setCopied] = useState(false);
@@ -26,8 +25,8 @@ export const Pre = ({ children, className, ...props }: Props): JSX.Element => {
   };
 
   return (
-    <div className="relative group shadow-lg bg-dark-blue p-4 mb-4 rounded">
-      <div className="absolute bg-dark-blue flex items-center space-x-2 top-0 right-0 m-2">
+    <div className="relative group shadow-lg bg-monokai-dark-grey p-4 mb-4 rounded">
+      <div className="absolute bg-monokai-dark-grey flex items-center space-x-2 top-0 right-0 m-2">
         <span
           className={`${
             copied ? "flex" : "hidden"
@@ -88,3 +87,5 @@ export const Pre = ({ children, className, ...props }: Props): JSX.Element => {
     </div>
   );
 };
+
+export default Pre;

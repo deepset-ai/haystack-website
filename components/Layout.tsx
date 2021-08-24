@@ -1,18 +1,25 @@
 import { FC } from "react";
 import styles from "./markdown.module.css";
 import Head from "next/head";
-import { PencilAltIcon } from "@heroicons/react/solid";
 import Header from "components/Header";
 import DesktopNav from "components/DesktopNav";
 import MobileNav from "components/MobileNav";
 import Footer from "components/Footer";
+import Toc from "components/Toc";
+import { StaticPageProps } from "lib/utils";
 
-type Props = {
-  menu: any;
-  editOnGitHubLink?: string;
-};
+type LayoutProps = Pick<
+  StaticPageProps,
+  "menu" | "toc" | "editOnGitHubLink" | "stars"
+>;
 
-const Layout: FC<Props> = ({ menu, editOnGitHubLink, children }) => {
+const Layout: FC<LayoutProps> = ({
+  menu,
+  toc,
+  editOnGitHubLink,
+  stars,
+  children,
+}) => {
   return (
     <div className="dark:bg-gray-800">
       <Head>
@@ -20,24 +27,14 @@ const Layout: FC<Props> = ({ menu, editOnGitHubLink, children }) => {
         <meta name="description" content="Haystack Docs" />
         <link rel="icon" href="/images/HaystackIcon.png" />
       </Head>
-      <Header docsType={"haystack"}/>
+      <Header docsType={"haystack"} />
       <DesktopNav menu={menu} />
       <MobileNav menu={menu} />
-      <main className="relative max-w-3xl 2xl:max-w-4xl sm:ml-60 px-3 sm:px-8 py-6 lg:py-8 min-h-screen dark:text-white">
-        {editOnGitHubLink && (
-          <div className="absolute top-7 sm:top-8 right-5">
-            <a
-              href={editOnGitHubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm flex items-center hover:underline hover:cursor-pointer"
-            >
-              <PencilAltIcon className="hidden h-5 w-5 mr-1 sm:block" />
-              <span className="hidden sm:block">Edit on GitHub</span>
-            </a>
-          </div>
-        )}
+      <main className="grid grid-cols-12 sm:ml-60 px-3 sm:px-8 py-6 lg:py-8 min-h-screen dark:text-white">
         <div className={styles["markdown"]}>{children}</div>
+        <div>
+          <Toc toc={toc} editOnGitHubLink={editOnGitHubLink} stars={stars} />
+        </div>
       </main>
       <Footer />
     </div>

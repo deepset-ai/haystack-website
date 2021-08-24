@@ -1,35 +1,43 @@
 import Link from "next/link";
 import VersionSelect from "./VersionSelect";
 import { useState, useEffect } from "react";
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import Switch from "@material-ui/core/Switch";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 type Props = {
   docsType: string;
 };
 
 export default function Header({ docsType = "haystack" }: Props) {
-
   const [darkMode, setDarkMode] = useState(false);
 
   const handleChange = () => {
-    if(localStorage.theme === undefined){
-      localStorage.theme = 'light';
+    if (localStorage.theme === undefined) {
+      localStorage.theme = "light";
       setDarkMode(false);
     }
-    localStorage.theme === 'light' ? localStorage.theme = 'dark' : localStorage.theme = 'light';
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
+    localStorage.theme === "light"
+      ? (localStorage.theme = "dark")
+      : (localStorage.theme = "light");
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
       setDarkMode(true);
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
       setDarkMode(false);
     }
   };
 
   useEffect(() => {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
       setDarkMode(true);
     } else {
       setDarkMode(false);
@@ -68,39 +76,10 @@ export default function Header({ docsType = "haystack" }: Props) {
           <span className="sr-only">Haystack docs home page</span>
         </div>
       </Link>
-      {/* <Link href="https://github.com/deepset-ai/haystack">
-        <a
-          href="https://github.com/deepset-ai/haystack"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <div className="flex items-center text-medium-grey">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              role="img"
-              aria-label="GitHub logo"
-              focusable="false"
-              className="w-6 fill-current mr-2"
-            >
-              <path
-                d="M10 0C4.48 0 0 4.59 0 10.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.5l-.01-1.74c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .08 1.53 1.06 1.53 1.06.89 1.57 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.25-4.55-1.13-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.09-2.71 0 0 .84-.28 2.75 1.05a9.43 9.43 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71a4.02 4.02 0 011.03 2.75c0 3.94-2.34 4.8-4.57 5.06.36.31.68.94.68 1.9l-.01 2.81c0 .28.18.59.69.49a10.23 10.23 0 006.83-9.72A10.12 10.12 0 0010 0z"
-                fillRule="evenodd"
-                clipRule="evenodd"
-              />
-            </svg>
-            <p className="text-lg mr-2 font-bold">Stars</p>
-            <span className="mr-2 text-2xl text-dark-grey">|</span>
-            <p className="text-lg font-light">{stars}</p>
-          </div>
-        </a>
-      </Link> */}
       <div className="flex w-full justify-end">
         <div className="w-44 mr-4">
           <Link href="/overview/intro">
-            <div
-              className="text-white mt-1 font-bold text-2xl cursor-pointer"
-              >
+            <div className="text-white mt-1 font-bold text-2xl cursor-pointer">
               Haystack Docs
             </div>
           </Link>
@@ -116,18 +95,14 @@ export default function Header({ docsType = "haystack" }: Props) {
         </div> */}
         <div className="w-36 mr-4">
           <Link href="/benchmarks/v0.9.0">
-            <div
-              className="text-white mt-1 font-bold text-2xl cursor-pointer"
-              >
+            <div className="text-white mt-1 font-bold text-2xl cursor-pointer">
               Benchmarks
             </div>
           </Link>
         </div>
         <div className="w-32 mr-4">
           <Link href="/community/join">
-            <div
-              className="text-white mt-1 font-bold text-2xl cursor-pointer"
-              >
+            <div className="text-white mt-1 font-bold text-2xl cursor-pointer">
               Join Slack
             </div>
           </Link>
@@ -146,19 +121,20 @@ export default function Header({ docsType = "haystack" }: Props) {
         </div>
       </div>
       <div className="w-52 mr-4 flex">
-      <FormControlLabel className="text-white mt-1 font-bold text-2xl cursor-pointer"
-        control={
-          <Switch
-            checked={darkMode}
-            onChange={handleChange}
-            color="primary"
-            inputProps={{ 'aria-label': 'primary checkbox' }}
-          />
-        }
-        label="Dark Mode"
-      />
+        <FormControlLabel
+          className="text-white mt-1 font-bold text-2xl cursor-pointer"
+          control={
+            <Switch
+              checked={darkMode}
+              onChange={handleChange}
+              color="primary"
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
+          }
+          label="Dark Mode"
+        />
       </div>
-      <VersionSelect docsType={docsType}/>
+      <VersionSelect docsType={docsType} />
     </header>
   );
 }
