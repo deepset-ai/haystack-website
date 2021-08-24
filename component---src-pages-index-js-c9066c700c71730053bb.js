@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{RXBc:function(n,t,e){"use strict";e.r(t);var a=e("q1tI"),c=e.n(a),i=e("JMja"),o=e("vrFN"),r=(e("zrgH"),e("hZTp"),e("SQpZ")),u=e.n(r),f=e("Wbzz");t.default=function(){return Object(a.useEffect)((function(){Object(f.navigate)("/docs/intromd")}),[]),c.a.createElement(i.a,null,c.a.createElement(o.a,{title:"Haystack",image:u.a}))}},hZTp:function(n,t,e){},zrgH:function(n,t,e){}}]);
+//# sourceMappingURL=component---src-pages-index-js-c9066c700c71730053bb.js.map
