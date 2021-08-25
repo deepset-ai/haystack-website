@@ -1,8 +1,8 @@
 import Link from "next/link";
 import VersionSelect from "./VersionSelect";
 import { useState, useEffect } from "react";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { Switch } from "@headlessui/react";
+import { SunIcon, MoonIcon } from "@heroicons/react/outline";
 
 type Props = {
   docsType: string;
@@ -118,19 +118,26 @@ export default function Header({ docsType = "haystack" }: Props) {
           </Link>
         </div>
       </div>
-      <div className="hidden lg:flex mr-8 xl:mr-12 2xl:mr-16">
-        <FormControlLabel
-          className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer"
-          control={
-            <Switch
-              checked={darkMode}
-              onChange={handleChange}
-              color="primary"
-              inputProps={{ "aria-label": "primary checkbox" }}
-            />
-          }
-          label="Dark Mode"
-        />
+      <div className="hidden lg:flex items-center mr-8 xl:mr-12 2xl:mr-16">
+        <Switch
+          checked={darkMode}
+          onChange={handleChange}
+          className={`${darkMode ? "border-white" : "border-white"}
+          relative flex-shrink-0 flex items-center h-8 w-16 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+        >
+          <span className="sr-only">Toggle dark mode</span>
+          <span
+            aria-hidden="true"
+            className={`${darkMode ? "translate-x-8" : "translate-x-0"}
+            p-1 bg-white border border-white pointer-events-none inline-block h-7 w-7 rounded-full shadow-lg transform ring-0 transition ease-in-out duration-200`}
+          >
+            {darkMode ? (
+              <SunIcon className="h-full w-full text-black" />
+            ) : (
+              <MoonIcon className="h-full w-full text-dark-blue" />
+            )}
+          </span>
+        </Switch>
       </div>
       <VersionSelect docsType={docsType} />
     </header>
