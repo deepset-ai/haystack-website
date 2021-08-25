@@ -42,8 +42,11 @@ These docs live in the `docs` directory, in the given version directory. The doc
 
 ### Tutorial & Reference Docs
 
-These docs live in the [Haystack repository](https://github.com/deepset-ai/haystack/tree/master/docs), in the given version directory. The docs are generated markdown files and we fetch these **at build time** using the GitHub API. Thanks to Vercel's [Incremental Static Regeneration](https://vercel.com/docs/next.js/incremental-static-regeneration), the static pages we create for these docs are always up-to-date, because Vercel kicks off a new build process in the background every time one of these pages is opened by a user. This means that we don't have to manually kick off a build whenever new tutorial and reference docs get generated, as long as they belong to a version for which there is a directory within our local `/docs` directory.
-If new Tutorials and Reference Docs were created in the haystack repository, we just need to extend to files. Vercel needs to know the name of the new file which can be added to the object `tutorialFiles` or `referenceFile` in `lib/contstants.ts`. Furthermore, we need to release the new files to the menu. You will find a `menu.json` file in the folder `docs/vX.X.X`. Please make sure to follow the structure of the file. 
+These docs live in the [Haystack repository](https://github.com/deepset-ai/haystack/tree/master/docs), in the given version directory. The docs are generated markdown files and we fetch these **at build time** using the GitHub API. Thanks to Vercel's [Incremental Static Regeneration](https://vercel.com/docs/next.js/incremental-static-regeneration), the static pages we create for these docs are always up-to-date. This means that if existing tutorials or references are changed, the changes will be visible on the docs website automatically.
+
+#### Preview from non-master branches
+
+To preview docs that are on a non-master branch of the Haystack repo, you run this project locally and navigate to `lib/github.ts`, where you have to add a `ref` parameter to the `octokit.rest.repos.getContent` function call with the value of the branch name that you would like to preview. You also need to add the tutorials/references you would like to preview to `docs/{GIVEN_VERSION}/menu.json` and `lib/constants.ts`.
 
 ### Updating docs after a release
 
@@ -59,8 +62,4 @@ This application gets deployed on [Vercel](https://vercel.com). In the dashboard
 
 ## Future Work
 
-This project can be optimized indefinitely, but here are the most important tasks for future work
-
-- convert the remote markdown files for references and tutorials to .mdx, so that we can inject React components into these
-- add autolinks to the headings on each page so that we can have a on-page menu for long pages.
-- right now we still rely on constants in mutliple places (`components/VersionSelect`, `menu.json`, `lib/constants`). Ideally this need gets eliminated by solely relying on directory structures and directory names
+Convert the remote markdown files for references and tutorials to .mdx, so that we can inject React components into these. This would also allow for more code sharing between the overview+usage pages and tutorial+reference pages.

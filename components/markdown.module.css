@@ -1,17 +1,45 @@
+.markdown {
+  @apply col-span-12 lg:col-span-8 xl:col-span-9;
+}
+
 .markdown h1 {
-  @apply text-4xl sm:text-5xl mb-4 sm:mb-10 font-semibold pr-28;
+  @apply text-4xl sm:text-5xl mb-4 font-semibold pr-28;
 }
 
 .markdown h2 {
   @apply text-2xl sm:text-3xl mb-4 font-semibold;
 }
 
+.markdown h2::before {
+  content: "";
+  display: block;
+  height: 75px;
+  margin-top: -75px;
+  visibility: hidden;
+}
+
 .markdown h3 {
   @apply text-xl sm:text-2xl mb-4 font-semibold;
 }
 
+.markdown h3::before {
+  content: "";
+  display: block;
+  height: 75px;
+  margin-top: -75px;
+  visibility: hidden;
+}
+
 .markdown h4 {
   @apply text-lg mb-2 font-bold;
+}
+
+.markdown h4::before {
+  content: "";
+  display: block;
+  height: 75px;
+  margin-top: -75px;
+  visibility: hidden;
 }
 
 .markdown p {

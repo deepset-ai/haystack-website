@@ -7,7 +7,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./docs/**/*.mdx",
   ],
-  darkMode: 'class', // or 'media' or false
+  darkMode: "class", // or 'media' or false
   theme: {
     extend: {
       colors: {
@@ -25,6 +25,7 @@ module.exports = {
         "yellow-dark-theme": "#FFD78F",
         "green-dark-theme": "#06C2A0",
         "red-dark-theme": "#ED6A5E",
+        "monokai-dark-grey": "#272822",
       },
       fontFamily: {
         sans: ["Greycliff CF", ...defaultTheme.fontFamily.sans],

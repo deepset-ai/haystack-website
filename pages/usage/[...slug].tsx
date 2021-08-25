@@ -1,6 +1,8 @@
 import matter from "gray-matter";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import remarkSlug from "remark-slug";
+import remarkAutolinkHeadings from "remark-autolink-headings";
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -16,18 +18,31 @@ import {
   getDirectory,
   getDocsVersions,
   getLatestVersion,
-  getMenu,
+  getStaticLayoutProps,
+  StaticPageProps,
 } from "lib/utils";
 import { components } from "lib/mdx";
 
 export default function UsageDoc({
   menu,
+  toc,
   editOnGitHubLink,
+  stars,
   source,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Layout menu={menu} editOnGitHubLink={editOnGitHubLink}>
-      {source && <MDXRemote {...source} components={components} />}
+    <Layout
+      menu={menu}
+      editOnGitHubLink={editOnGitHubLink}
+      stars={stars}
+      toc={toc}
+    >
+      {source && (
+        <MDXRemote
+          {...(source as MDXRemoteSerializeResult)}
+          components={components}
+        />
+      )}
     </Layout>
   );
 }
@@ -59,13 +74,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-type Props = {
-  menu: any;
-  editOnGitHubLink: string;
-  source: MDXRemoteSerializeResult;
-};
-
-export const getStaticProps: GetStaticProps<Props> = async ({
+export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
   params,
 }: GetStaticPropsContext) => {
   if (!params?.slug || !Array.isArray(params.slug)) {
@@ -97,23 +106,25 @@ export const getStaticProps: GetStaticProps<Props> = async ({
     const mdxSource = await serialize(content, {
       // Optionally pass remark/rehype plugins
       mdxOptions: {
-        remarkPlugins: [],
+        // @ts-ignore
+        remarkPlugins: [remarkSlug, remarkAutolinkHeadings],
         rehypePlugins: [],
       },
       scope: data,
     });
 
     const version = getVersionFromParams(params.slug) || getLatestVersion();
-    const menu = getMenu(version);
+
+    const layoutProps = await getStaticLayoutProps({
+      content,
+      version,
+      docTitleSlug,
+    });
 
     return {
       props: {
-        menu,
+        ...layoutProps,
         source: mdxSource,
-        editOnGitHubLink: `https://github.com/deepset-ai/haystack-website/blob/source/docs/${version}/${docTitleSlug.replace(
-          "-",
-          "_"
-        )}.mdx`,
       },
       revalidate: 1,
     };

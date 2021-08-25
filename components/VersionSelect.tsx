@@ -28,17 +28,17 @@ type Props = {
 export default function VersionSelect({ docsType = "haystack" }: Props) {
   const router = useRouter();
   let versions: any = [];
-  if(docsType === "haystack") {
+  if (docsType === "haystack") {
     versions = Object.keys(versionRoutesHaystack);
-  } else if(docsType == "benchmarks") {
+  } else if (docsType == "benchmarks") {
     versions = Object.keys(versionRoutesBenchmarks);
   }
   const versionInUrl = versions?.find((v: string) => router.asPath.includes(v));
 
   const handleVersionChange = (version: string) => {
-    if(docsType === "haystack") {
+    if (docsType === "haystack") {
       return router.push(versionRoutesHaystack[`${version}`]);
-    } else if(docsType == "benchmarks") {
+    } else if (docsType == "benchmarks") {
       return router.push(versionRoutesBenchmarks[`${version}`]);
     }
   };
@@ -49,7 +49,7 @@ export default function VersionSelect({ docsType = "haystack" }: Props) {
         value={versionInUrl || versions[0]}
         onChange={handleVersionChange}
       >
-        <div className="relative mt-1">
+        <div className="relative">
           <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
             <span className="block truncate">
               {versionInUrl || versions[0]}

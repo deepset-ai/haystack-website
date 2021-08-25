@@ -1,0 +1,28 @@
+.nonMdx h1 {
+  @apply mt-12;
+}
+
+.nonMdx h1:first-of-type {
+  @apply mt-0;
+}
+
+.nonMdx h2,
+.nonMdx h3 {
+  @apply pt-6;
+}
+
+.nonMdx img {
+  @apply mb-4;
+}
+
+.nonMdx code {
+  @apply bg-light-grey-BG text-dark-blue py-1 px-2 mr-1 text-sm rounded break-words dark:bg-black;
+}
+
+.nonMdx pre code {
+  @apply bg-transparent text-off-white p-0 m-0 dark:bg-black;
+}
+
+.nonMdx pre {
+  @apply bg-monokai-dark-grey p-4 mb-4 overflow-x-auto rounded dark:bg-black;
+}

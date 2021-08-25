@@ -4,26 +4,36 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import styles from "components/tutorial.module.css";
+import styles from "components/non-mdx.module.css";
 import Layout from "components/Layout";
 import { getDownloadUrl } from "lib/github";
 import {
   markdownToHtml,
-  getMenu,
   getVersionFromParams,
   getDocsVersions,
+  getStaticLayoutProps,
+  StaticPageProps,
 } from "lib/utils";
 import { tutorialFiles } from "lib/constants";
+import matter from "gray-matter";
 
-export default function ReferenceDoc({
-  markup,
+export default function TutorialDoc({
   menu,
+  toc,
+  editOnGitHubLink,
+  stars,
+  source,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <Layout menu={menu}>
+    <Layout
+      menu={menu}
+      editOnGitHubLink={editOnGitHubLink}
+      stars={stars}
+      toc={toc}
+    >
       <div
-        dangerouslySetInnerHTML={{ __html: markup }}
-        className={styles["tutorial"]}
+        dangerouslySetInnerHTML={{ __html: source as string }}
+        className={styles["nonMdx"]}
       />
     </Layout>
   );
@@ -52,21 +62,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-// TODO: This function can be shorter and cleaner, similar to how it's written for overview and usage pages
-export const getStaticProps: GetStaticProps = async ({
+export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
   params,
 }: GetStaticPropsContext) => {
-  const versions = getDocsVersions();
-
   if (!params?.slug || !Array.isArray(params.slug)) {
     return {
       notFound: true,
     };
   }
 
-  if (params.slug.length < 2) {
-    const slug = params.slug[0];
-    const item = tutorialFiles.items.find((item) => item.slug === slug);
+  try {
+    const docTitleSlug = params.slug?.[params.slug?.length - 1];
+    const item = tutorialFiles.items.find((item) => item.slug === docTitleSlug);
 
     if (!item) {
       return {
@@ -74,9 +81,12 @@ export const getStaticProps: GetStaticProps = async ({
       };
     }
 
+    const version = getVersionFromParams(params.slug);
+
     const downloadUrl = await getDownloadUrl({
       repoPath: tutorialFiles.repoPath,
       filename: item.filename,
+      version,
     });
 
     if (!downloadUrl) {
@@ -85,49 +95,34 @@ export const getStaticProps: GetStaticProps = async ({
       };
     }
 
-    const sidebarMenu = getMenu(getVersionFromParams(params.slug));
-    const { markup } = await markdownToHtml(downloadUrl);
+    const res = await fetch(downloadUrl);
+    const fileContent = await res.text();
+
+    // remove once all markdown files have correctly formatted front matter:
+    const fileContentWithFrontMatter = fileContent
+      .replace("<!---", "---")
+      .replace("--->", "---");
+
+    const { content } = matter(fileContentWithFrontMatter);
+    const { markup } = await markdownToHtml({ content, downloadUrl });
+
+    const layoutProps = await getStaticLayoutProps({
+      content,
+      version,
+      docTitleSlug,
+    });
 
     return {
       props: {
-        markup,
-        menu: sidebarMenu,
+        ...layoutProps,
+        source: markup,
       },
       revalidate: 1,
     };
-  } else {
-    const version = params.slug[0];
-    const slug = params.slug[1];
-
-    const item = tutorialFiles.items.find((item) => item.slug === slug);
-
-    if (!item) {
-      return {
-        notFound: true,
-      };
-    }
-
-    const downloadUrl = await getDownloadUrl({
-      repoPath: tutorialFiles.repoPath,
-      filename: item.filename,
-      version: versions.includes(version) ? version : undefined,
-    });
-
-    if (!downloadUrl) {
-      return {
-        notFound: true,
-      };
-    }
-
-    const sidebarMenu = getMenu(getVersionFromParams(params.slug));
-    const { markup } = await markdownToHtml(downloadUrl);
-
+  } catch (e) {
+    console.log(e);
     return {
-      props: {
-        markup,
-        menu: sidebarMenu,
-      },
-      revalidate: 1,
+      notFound: true,
     };
   }
 };
