@@ -12,7 +12,7 @@ export default function Custom404({
       <Head>
         <title>Haystack Docs</title>
         <meta name="description" content="Haystack Docs" />
-        <link rel="icon" href="/images/HaystackIcon.png" />
+        <link rel="icon" href="/img/HaystackIcon.png" />
       </Head>
       <Header  docsType={"haystack"}/>
       <DesktopNav menu={menu} />

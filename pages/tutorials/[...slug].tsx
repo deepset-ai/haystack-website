@@ -27,7 +27,7 @@ export default function TutorialDoc({
   return (
     <Layout
       menu={menu}
-      editOnGitHubLink={editOnGitHubLink}
+      editOnGitHubLink=""
       stars={stars}
       toc={toc}
     >

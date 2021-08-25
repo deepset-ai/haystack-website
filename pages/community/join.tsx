@@ -170,7 +170,7 @@ const handleSubmit = (event: any) =>  {
     <Head>
         <title>Haystack Benchmarks</title>
         <meta name="description" content="Haystack Slack" />
-        <link rel="icon" href="/images/HaystackIcon.png" />
+        <link rel="icon" href="/img/HaystackIcon.png" />
     </Head>
     <Header docsType={"haystack"}/>
     <Snackbar open={success} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical, horizontal}} >

@@ -33,7 +33,7 @@ export default function LatestBenchmark({
         <Head>
             <title>Haystack Benchmarks</title>
             <meta name="description" content="Haystack Benchmarks" />
-            <link rel="icon" href="/images/HaystackIcon.png" />
+            <link rel="icon" href="/img/HaystackIcon.png" />
         </Head>
         <Header docsType={"benchmarks"}/>
         <div className="justify-center relative w-full p-8 dark:bg-gray-800 dark:text-white">

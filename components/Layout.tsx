@@ -30,8 +30,6 @@ const Layout: FC<LayoutProps> = ({
     type: "website",
   };
 
-  console.log(router);
-
   return (
     <div className="dark:bg-gray-800">
       <Head>
@@ -49,7 +47,7 @@ const Layout: FC<LayoutProps> = ({
           rel="canonical"
           href={`https://haystack.deepset.ai${router.asPath}`}
         />
-        <link rel="icon" href="/images/HaystackIcon.png" />
+        <link rel="icon" href="/img/HaystackIcon.png" />
         <meta property="og:type" content={meta.type} />
         <meta property="og:site_name" content="Haystack Docs" />
         <meta property="og:description" content={meta.description} />
