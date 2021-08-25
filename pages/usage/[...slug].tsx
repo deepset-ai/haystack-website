@@ -106,11 +106,8 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     const mdxSource = await serialize(content, {
       // Optionally pass remark/rehype plugins
       mdxOptions: {
-        remarkPlugins: [
-          remarkSlug,
-          remarkAutolinkHeadings,
-          require("remark-prism"),
-        ],
+        // @ts-ignore
+        remarkPlugins: [remarkSlug, remarkAutolinkHeadings],
         rehypePlugins: [],
       },
       scope: data,

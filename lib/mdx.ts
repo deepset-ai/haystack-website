@@ -8,4 +8,5 @@ export const components = {
   Disclosures: dynamic(() => import("components/Disclosures")),
   Tabs: dynamic(() => import("components/Tabs")),
   pre: dynamic(() => import("components/Pre")),
+  code: dynamic(() => import("components/Code")),
 };

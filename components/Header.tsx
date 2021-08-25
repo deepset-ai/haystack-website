@@ -47,7 +47,7 @@ export default function Header({ docsType = "haystack" }: Props) {
   return (
     <header className="sticky top-0 p-2 sm:px-6 sm:py-3 z-10 w-full xl:max-w-8xl mx-auto flex items-center justify-between bg-dark-blue border-b border-medium-grey dark:bg-black">
       <Link href="/" passHref>
-        <div className="w-44">
+        <div className="w-44 lg:w-60">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 184 47"
@@ -76,43 +76,41 @@ export default function Header({ docsType = "haystack" }: Props) {
           <span className="sr-only">Haystack docs home page</span>
         </div>
       </Link>
-      <div className="flex w-full justify-end">
-        <div className="w-44 mr-4">
+      <div className="hidden lg:flex w-full justify-end">
+        <div className="mr-8 xl:mr-12 2xl:mr-16">
           <Link href="/overview/intro">
-            <div className="text-white mt-1 font-bold text-2xl cursor-pointer">
+            <div className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer">
               Haystack Docs
             </div>
           </Link>
         </div>
-        {/* <div className="w-56 mr-4">
+        {/* <div className="mr-8 xl:mr-12 2xl:mr-16">
           <Link href="/overview/get-started">
-            <div
-              className="text-white mt-1 font-bold text-2xl cursor-pointer"
-              >
+            <div className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer">
               Haystack Hub Docs
             </div>
           </Link>
         </div> */}
-        <div className="w-36 mr-4">
+        <div className="mr-8 xl:mr-12 2xl:mr-16">
           <Link href="/benchmarks/v0.9.0">
-            <div className="text-white mt-1 font-bold text-2xl cursor-pointer">
+            <div className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer">
               Benchmarks
             </div>
           </Link>
         </div>
-        <div className="w-32 mr-4">
+        <div className="mr-8 xl:mr-12 2xl:mr-16">
           <Link href="/community/join">
-            <div className="text-white mt-1 font-bold text-2xl cursor-pointer">
+            <div className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer">
               Join Slack
             </div>
           </Link>
         </div>
-        <div className="w-44 mr-4 flex">
+        <div className="mr-8 xl:mr-12 2xl:mr-16 flex">
           <Link href="https://www.meetup.com/de-DE/open-nlp-meetup/">
             <a
               target="_blank"
               href="https://www.meetup.com/de-DE/open-nlp-meetup/"
-              className="text-white mt-1 font-bold text-2xl cursor-pointer"
+              className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer"
               rel="noopener noreferrer"
             >
               Join Open NLP
@@ -120,9 +118,9 @@ export default function Header({ docsType = "haystack" }: Props) {
           </Link>
         </div>
       </div>
-      <div className="w-52 mr-4 flex">
+      <div className="hidden lg:flex mr-8 xl:mr-12 2xl:mr-16">
         <FormControlLabel
-          className="text-white mt-1 font-bold text-2xl cursor-pointer"
+          className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer"
           control={
             <Switch
               checked={darkMode}
