@@ -58,7 +58,8 @@
         "slug": "annotation",
         "title": "Annotation Tool"
       },
-      { "slug": "ranker", "title": "Ranker" }
+      { "slug": "ranker", "title": "Ranker" },
+      { "slug": "query-classifier", "title": "Query Classifier" }
     ]
   },
   {
