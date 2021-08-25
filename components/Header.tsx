@@ -122,14 +122,13 @@ export default function Header({ docsType = "haystack" }: Props) {
         <Switch
           checked={darkMode}
           onChange={handleChange}
-          className={`${darkMode ? "border-white" : "border-white"}
-          relative flex-shrink-0 flex items-center h-8 w-16 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+          className="relative flex-shrink-0 flex items-center h-8 w-16 border-2 border-white rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75"
         >
           <span className="sr-only">Toggle dark mode</span>
           <span
             aria-hidden="true"
             className={`${darkMode ? "translate-x-8" : "translate-x-0"}
-            p-1 bg-white border border-white pointer-events-none inline-block h-7 w-7 rounded-full shadow-lg transform ring-0 transition ease-in-out duration-200`}
+            p-1 bg-white border border-white pointer-events-none inline-block h-7 w-7 rounded-full shadow-lg transform transition ease-in-out duration-200`}
           >
             {darkMode ? (
               <SunIcon className="h-full w-full text-black" />
