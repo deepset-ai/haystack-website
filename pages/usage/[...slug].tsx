@@ -129,7 +129,6 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
         ...layoutProps,
         source: mdxSource,
       },
-      revalidate: 1,
     };
   } catch (e) {
     console.log(e);
