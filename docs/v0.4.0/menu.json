@@ -1,0 +1,75 @@
+[
+  {
+    "subMenuTitle": "Usage",
+    "pathPrefix": "/usage/",
+    "items": [
+      { "slug": "intro", "title": "What is Haystack?" },
+      {
+        "slug": "get-started",
+        "title": "Get Started"
+      },
+      {
+        "slug": "document-store",
+        "title": "DocumentStore"
+      },
+      { "slug": "retriever", "title": "Retriever" },
+      { "slug": "reader", "title": "Reader" },
+      {
+        "slug": "domain-adaptation",
+        "title": "Domain Adaptation"
+      },
+      { "slug": "glossary", "title": "Glossary" },
+      { "slug": "roadmap", "title": "Roadmap" }
+    ]
+  },
+  {
+    "subMenuTitle": "Tutorials",
+    "pathPrefix": "/tutorials/",
+    "items": [
+      {
+        "slug": "first-qa-system",
+        "title": "Build Your First QA System"
+      },
+      {
+        "slug": "fine-tuning-a-model",
+        "title": "Fine-tuning a Model on Your Own Data"
+      },
+      {
+        "slug": "without-elasticsearch",
+        "title": "Build a QA System Without Elasticsearch"
+      },
+      {
+        "slug": "existing-faqs",
+        "title": "Utilizing existing FAQs for Question Answering"
+      },
+      {
+        "slug": "evaluation",
+        "title": "Evaluation of a QA System"
+      },
+      {
+        "slug": "dense-passage-retrieval",
+        "title": "Better Retrieval via \"Dense Passage Retrieval\""
+      }
+    ]
+  },
+  {
+    "subMenuTitle": "API Reference",
+    "pathPrefix": "/reference/",
+    "items": [
+      {
+        "slug": "document-store",
+        "title": "Document Store"
+      },
+      { "slug": "retriever", "title": "Retriever" },
+      { "slug": "reader", "title": "Reader" },
+      {
+        "slug": "preprocessor",
+        "title": "Preprocessor"
+      },
+      {
+        "slug": "file-converters",
+        "title": "File Converters"
+      }
+    ]
+  }
+]

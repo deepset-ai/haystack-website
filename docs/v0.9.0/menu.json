@@ -1,0 +1,167 @@
+[
+  {
+    "subMenuTitle": "Overview",
+    "pathPrefix": "/overview/",
+    "items": [
+      {
+        "slug": "get-started",
+        "title": "Get Started"
+      },
+      { "slug": "intro", "title": "What is Haystack?" },
+      { "slug": "use-cases", "title": "Use Cases" },
+      { "slug": "roadmap", "title": "Roadmap" },
+      { "slug": "faq", "title": "FAQ" },
+      { "slug": "glossary", "title": "Glossary" }
+    ]
+  },
+  {
+    "subMenuTitle": "Usage",
+    "pathPrefix": "/usage/",
+    "items": [
+      {
+        "slug": "preprocessing",
+        "title": "Preprocessing"
+      },
+      { "slug": "pipelines", "title": "Pipelines" },
+      {
+        "slug": "document-store",
+        "title": "DocumentStore"
+      },
+      { "slug": "retriever", "title": "Retriever" },
+      { "slug": "reader", "title": "Reader" },
+      { "slug": "generator", "title": "Generator" },
+      {
+        "slug": "summarizer",
+        "title": "Summarizer"
+      },
+      {
+        "slug": "translator",
+        "title": "Translator"
+      },
+      {
+        "slug": "knowledge-graph",
+        "title": "Knowledge Graph"
+      },
+      {
+        "slug": "languages",
+        "title": "Languages Other Than English"
+      },
+      {
+        "slug": "domain-adaptation",
+        "title": "Domain Adaptation"
+      },
+      {
+        "slug": "optimization",
+        "title": "Optimization"
+      },
+      {
+        "slug": "annotation",
+        "title": "Annotation Tool"
+      },
+      { "slug": "ranker", "title": "Ranker" },
+      { "slug": "query-classifier", "title": "Query Classifier" }
+    ]
+  },
+  {
+    "subMenuTitle": "Tutorials",
+    "pathPrefix": "/tutorials/",
+    "items": [
+      {
+        "slug": "first-qa-system",
+        "title": "Build Your First QA System"
+      },
+      {
+        "slug": "fine-tuning-a-model",
+        "title": "Fine-tuning a Model on Your Own Data"
+      },
+      {
+        "slug": "without-elasticsearch",
+        "title": "Build a QA System Without Elasticsearch"
+      },
+      {
+        "slug": "existing-faqs",
+        "title": "Utilizing existing FAQs for Question Answering"
+      },
+      {
+        "slug": "evaluation",
+        "title": "Evaluation of a QA System"
+      },
+      {
+        "slug": "dense-passage-retrieval",
+        "title": "Better Retrieval via \"Dense Passage Retrieval\""
+      },
+      {
+        "slug": "retrieval-augmented-generation",
+        "title": "Generative QA with \"Retrieval-Augmented Generation\""
+      },
+      {
+        "slug": "preprocessing",
+        "title": "Preprocessing your Documents"
+      },
+      { "slug": "train-dpr", "title": "How to Train DPR" },
+      {
+        "slug": "knowledge-graph",
+        "title": "Question Answering on a Knowledge Graph"
+      },
+      {
+        "slug": "pipelines",
+        "title": "How to use Pipelines"
+      },
+      {
+        "slug": "lfqa",
+        "title": "Generative QA with \"LFQA\""
+      },
+      {
+        "slug": "question-generation",
+        "title": "Question Generation"
+      },
+      {
+        "slug": "query-classifier",
+        "title": "Query Classifier"
+      }
+    ]
+  },
+  {
+    "subMenuTitle": "API Reference",
+    "pathPrefix": "/reference/",
+    "items": [
+      {
+        "slug": "document-store",
+        "title": "Document Store"
+      },
+      { "slug": "retriever", "title": "Retriever" },
+      { "slug": "reader", "title": "Reader" },
+      { "slug": "generator", "title": "Generator" },
+      {
+        "slug": "summarizer",
+        "title": "Summarizer"
+      },
+      {
+        "slug": "translator",
+        "title": "Translator"
+      },
+      {
+        "slug": "preprocessor",
+        "title": "Preprocessor"
+      },
+      {
+        "slug": "file-converters",
+        "title": "File Converters"
+      },
+      { "slug": "crawler", "title": "Crawler" },
+      {
+        "slug": "evaluation",
+        "title": "Evaluation"
+      },
+      { "slug": "pipelines", "title": "Pipelines" },
+      {
+        "slug": "knowledge-graph",
+        "title": "Knowledge Graph"
+      },
+      {
+        "slug": "graph-retriever",
+        "title": "Graph Retriever"
+      }
+    ]
+  }
+]

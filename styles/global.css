@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 900;
+    src: url("/fonts/greycliff-CF/woff/heavy.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 900;
+    font-style: italic;
+    src: url("/fonts/greycliff-CF/woff/heavy-oblique.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 800;
+    src: url("/fonts/greycliff-CF/woff/extra-bold.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 800;
+    font-style: italic;
+    src: url("/fonts/greycliff-CF/woff/extra-bold-oblique.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 700;
+    src: url("/fonts/greycliff-CF/woff/bold.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 700;
+    font-style: italic;
+    src: url("/fonts/greycliff-CF/woff/bold-oblique.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 600;
+    src: url("/fonts/greycliff-CF/woff/demi-bold.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 600;
+    font-style: italic;
+    src: url("/fonts/greycliff-CF/woff/demi-bold-oblique.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 500;
+    src: url("/fonts/greycliff-CF/woff/medium.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 500;
+    font-style: italic;
+    src: url("/fonts/greycliff-CF/woff/medium-oblique.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 400;
+    src: url("/fonts/greycliff-CF/woff/regular.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 400;
+    font-style: italic;
+    src: url("/fonts/greycliff-CF/woff/regular-oblique.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 300;
+    src: url("/fonts/greycliff-CF/woff/light.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 300;
+    font-style: italic;
+    src: url("/fonts/greycliff-CF/woff/light-oblique.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 200;
+    src: url("/fonts/greycliff-CF/woff/extra-light.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 200;
+    font-style: italic;
+    src: url("/fonts/greycliff-CF/woff/extra-light-oblique.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 100;
+    src: url("/fonts/greycliff-CF/woff/thin.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Greycliff CF";
+    font-weight: 100;
+    font-style: italic;
+    src: url("/fonts/greycliff-CF/woff/thin-oblique.woff") format("woff");
+  }
+}
