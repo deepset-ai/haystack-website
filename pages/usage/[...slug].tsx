@@ -115,10 +115,13 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
 
     const version = getVersionFromParams(params.slug) || getLatestVersion();
 
+    const type = "usage";
+
     const layoutProps = await getStaticLayoutProps({
       content,
       version,
       docTitleSlug,
+      type,
     });
 
     return {

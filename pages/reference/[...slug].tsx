@@ -27,7 +27,7 @@ export default function ReferenceDoc({
   return (
     <Layout
       menu={menu}
-      editOnGitHubLink=""
+      editOnGitHubLink="https://github.com/deepset-ai/haystack/tree/master/haystack"
       stars={stars}
       toc={toc}
     >
@@ -108,10 +108,13 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     const { content } = matter(fileContentWithFrontMatter);
     const { markup } = await markdownToHtml({ content, downloadUrl });
 
+    const type = "";
+
     const layoutProps = await getStaticLayoutProps({
       content,
       version,
       docTitleSlug,
+      type,
     });
 
     return {

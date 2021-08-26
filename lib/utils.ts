@@ -50,10 +50,12 @@ export const getStaticLayoutProps = async ({
   content,
   version,
   docTitleSlug,
+  type,
 }: {
   content: string;
   version?: string;
   docTitleSlug: string;
+  type: string;
 }) => {
   const getHeadings = () => {
     const headingLines = content
@@ -73,7 +75,7 @@ export const getStaticLayoutProps = async ({
   const latestVersion = getLatestVersion();
   const editOnGitHubLink = `https://github.com/deepset-ai/haystack-website/blob/source/docs/${
     version || latestVersion
-  }/${docTitleSlug.replace("-", "_")}.mdx`;
+  }/${type}/${docTitleSlug.replace("-", "_")}.mdx`;
 
   const stars = await getStargazersCount();
 
