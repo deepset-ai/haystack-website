@@ -6,7 +6,7 @@ type TocProps = Pick<StaticPageProps, "toc" | "editOnGitHubLink" | "stars">;
 
 export default function Toc({ stars, editOnGitHubLink, toc }: TocProps) {
   return (
-    <div className="top-20 lg:block hidden w-60 2xl:w-80 pl-10 break-words">
+    <div className="sticky top-20 lg:block hidden w-60 2xl:w-80 pl-10 break-words">
       <Link href="https://github.com/deepset-ai/haystack">
         <a
           href="https://github.com/deepset-ai/haystack"
