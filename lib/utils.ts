@@ -8,7 +8,7 @@ import prism from "remark-prism";
 import GitHubSlugger from "github-slugger";
 import imgLinks from "@pondorasti/remark-img-links";
 import semverCompare from "semver-compare";
-import { getStargazersCount } from "./github";
+import { getHaystackReleaseTagNames, getStargazersCount } from "./github";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 export const markdownToHtml = async ({
@@ -68,11 +68,11 @@ export const getStaticLayoutProps = async ({
     });
   };
 
-  const menu = getMenu(version);
+  const menu = await getMenu(version);
 
   const toc = getHeadings();
 
-  const latestVersion = getLatestVersion();
+  const latestVersion = await getLatestVersion();
   const editOnGitHubLink = `https://github.com/deepset-ai/haystack-website/blob/source/docs/${
     version || latestVersion
   }/${type}/${docTitleSlug.replace("-", "_")}.mdx`;
@@ -82,69 +82,54 @@ export const getStaticLayoutProps = async ({
   return { menu, toc, editOnGitHubLink, stars };
 };
 
-export const getMenu = (version?: string) => {
-  const latestVersion = getLatestVersion();
-  const menuPath = join(
-    process.cwd(),
-    `docs/${version || latestVersion}/menu.json`
-  );
-  return JSON.parse(fs.readFileSync(menuPath, "utf8"));
+export const getMenu = async (version?: string) => {
+  const latestVersion = await getLatestVersion();
+  const menu = await import(`../docs/${version || latestVersion}/menu.json`);
+  // JSON files don’t have a default export, so we have to explicitly return the default property
+  return menu.default;
 };
 
-export const getBenchmarks = (type: string, name: string, version?: string) => {
-  const latestVersion = getLatestVersion();
-  const benchmarksPath = join(
-    process.cwd(),
-    `benchmarks/${version || latestVersion}/${type}/${name}.json`
-  );
-  return JSON.parse(fs.readFileSync(benchmarksPath, "utf8"));
-};
-
-export function getDocsVersions() {
-  return fs.readdirSync(join(process.cwd(), "docs"));
+export async function getDocsVersions() {
+  const tagNames = await getHaystackReleaseTagNames();
+  return tagNames.filter((tagName) => tagName.startsWith("v"));
 }
 
-export function getVersionFromParams(params: string[]) {
-  const versions = getDocsVersions();
-  return versions.find((version) => params.includes(version));
+export async function getVersionFromParams(params: string[]) {
+  const versions = await getDocsVersions();
+  const latestVersion = versions.sort(semverCompare).pop();
+  return versions.find((version) => params.includes(version)) ?? latestVersion;
 }
 
-export function getLatestVersion() {
-  return getDocsVersions().sort(semverCompare).pop();
+export async function getLatestVersion() {
+  const versions = await getDocsVersions();
+  return versions.sort(semverCompare).pop();
 }
 
-export function getDirectory(category: "overview" | "usage", version?: string) {
-  const latestVersion = getLatestVersion();
+export async function getDirectory(
+  category: "overview" | "usage",
+  version?: string
+) {
+  const latestVersion = await getLatestVersion();
   return join(process.cwd(), `docs/${version || latestVersion}/${category}`);
 }
 
-export function getDirectoryBenchmarks(
+export async function getDirectoryBenchmarks(
   category: "map" | "performance" | "speed",
   version?: string
 ) {
-  const latestVersion = getLatestVersion();
+  const latestVersion = await getLatestVersion();
   return join(
     process.cwd(),
     `benchmarks/${version || latestVersion}/${category}`
   );
 }
 
-export function getSlugsFromLocalMarkdownFiles(
+export async function getSlugsFromLocalMarkdownFiles(
   category: "overview" | "usage",
   version?: string
 ) {
-  const directory = getDirectory(category, version);
+  const directory = await getDirectory(category, version);
   if (!fs.existsSync(directory)) return [];
   const filenames = fs.readdirSync(directory);
   return filenames.map((file) => file.replace(/\.mdx$/, "").replace("_", "-"));
-}
-
-export function getSlugsFromLocalBenchmarksFiles(
-  category: "map" | "performance" | "speed",
-  version?: string
-) {
-  const directory = getDirectoryBenchmarks(category, version);
-  if (!fs.existsSync(directory)) return [];
-  const filenames = fs.readdirSync(directory);
-  return filenames;
 }

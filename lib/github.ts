@@ -34,3 +34,11 @@ export const getStargazersCount = async () => {
   });
   return res.data.stargazers_count;
 };
+
+export const getHaystackReleaseTagNames = async () => {
+  const res = await octokit.rest.repos.listReleases({
+    owner: "deepset-ai",
+    repo: "haystack",
+  });
+  return res.data.map((release) => release.tag_name);
+};
