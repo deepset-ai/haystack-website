@@ -26,7 +26,7 @@ const Layout: FC<LayoutProps> = ({
   const meta = {
     title: "Haystack Docs",
     description: "Haystack enables Question Answering at Scale",
-    image: "./img/haystack-logo-colored.png",
+    image: "/img/haystack-logo-colored.png",
     type: "website",
   };
 
