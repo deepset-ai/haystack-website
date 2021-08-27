@@ -55,6 +55,7 @@ export default function Toc({ stars, editOnGitHubLink, toc }: TocProps) {
       {toc && (
       <ul className="border-l-4 pl-4">
         {toc?.map((c) => (
+          c.level < 3 && (
           <li
             key={c.text}
             className={`mb-3 text-gray-400 hover:text-gray-700 ${
@@ -63,6 +64,7 @@ export default function Toc({ stars, editOnGitHubLink, toc }: TocProps) {
           >
             <a href={`#${c.link}`}>{c.text}</a>
           </li>
+          )
         ))}
       </ul>
       )}
