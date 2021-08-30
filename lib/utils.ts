@@ -3,13 +3,17 @@ import { join } from "path";
 import remark from "remark";
 import html from "remark-html";
 import slug from "remark-slug";
+import remarkPrism from "remark-prism";
 import autolink from "remark-autolink-headings";
-import prism from "remark-prism";
 import GitHubSlugger from "github-slugger";
 import imgLinks from "@pondorasti/remark-img-links";
 import semverCompare from "semver-compare";
 import { getHaystackReleaseTagNames, getStargazersCount } from "./github";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
+
+// we have to explicitly require prismjs and loadLanguages so that they're available during revalidation on Vercel
+const Prism = require("prismjs");
+const loadLanguages = require("prismjs/components/index");
 
 export const markdownToHtml = async ({
   content,
@@ -18,6 +22,8 @@ export const markdownToHtml = async ({
   content: string;
   downloadUrl: string;
 }) => {
+  loadLanguages();
+
   const result = await remark()
     .use(imgLinks, {
       absolutePath: downloadUrl,
@@ -28,7 +34,7 @@ export const markdownToHtml = async ({
     .use(slug)
     // @ts-ignore
     .use(autolink)
-    .use(prism)
+    .use(remarkPrism)
     .process(content);
 
   return {
