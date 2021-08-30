@@ -4,7 +4,8 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Listbox, Transition } from "@headlessui/react";
 
 const versionRoutesHaystack: { [key: string]: string } = {
-  "v0.9.0": "/overview/intro",
+  "latest": "/overview/intro",
+  "v0.9.0": "/overview/v0.9.0/intro",
   "v0.8.0": "/overview/v0.8.0/intro",
   "v0.7.0": "/overview/v0.7.0/intro",
   "v0.6.0": "/overview/v0.6.0/intro",
@@ -13,6 +14,7 @@ const versionRoutesHaystack: { [key: string]: string } = {
 };
 
 const versionRoutesBenchmarks: { [key: string]: string } = {
+  "latest": "/benchmarks/latest",
   "v0.9.0": "/benchmarks/v0.9.0",
   "v0.8.0": "/benchmarks/v0.8.0",
   "v0.7.0": "/benchmarks/v0.7.0",
