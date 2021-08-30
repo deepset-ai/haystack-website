@@ -92,7 +92,7 @@ export default function Header({ docsType = "haystack" }: Props) {
           </Link>
         </div> */}
         <div className="mr-8 xl:mr-12 2xl:mr-16">
-          <Link href="/benchmarks/v0.9.0">
+          <Link href="/benchmarks/latest">
             <div className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer">
               Benchmarks
             </div>
