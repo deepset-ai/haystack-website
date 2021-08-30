@@ -42,19 +42,19 @@ export default function LatestBenchmark({
             Haystack Benchmarks
           </h1>
         </div>
-        <div className="flex mb-4 ml-16">
+        <div className="flex mb-4 sm:ml-16">
           <h2 className="text-3xl font-semibold max-w-4xl">
             {reader_performance.title}
           </h2>
         </div>
         <div
-          className="mb-3 mr-16 ml-16 text-justify"
+          className="mb-3 sm:mr-16 sm:ml-16 text-justify"
           dangerouslySetInnerHTML={createMarkup(reader_performance.desc)}
         ></div>
-        <div className="mb-16 ml-16">
+        <div className="mb-16 sm:ml-16">
           <Chart
-            width={1200}
-            height={600}
+            width="100%"
+            height="100%"
             chartType={reader_performance.chartType}
             loader={<div>Loading Chart</div>}
             data={reader_performance.dataReader}
@@ -74,19 +74,19 @@ export default function LatestBenchmark({
             }}
           />
         </div>
-        <div className="flex mb-4 ml-16">
+        <div className="flex mb-4 sm:ml-16">
           <h2 className="text-3xl font-semibold max-w-4xl">
             {retriever_performance.title}
           </h2>
         </div>
         <div
-          className="mb-3 mr-16 ml-16 text-justify"
+          className="mb-3 sm:mr-16 sm:ml-16 text-justify"
           dangerouslySetInnerHTML={createMarkup(retriever_performance.desc)}
         ></div>
-        <div className="mb-16 ml-16">
+        <div className="mb-16 sm:ml-16">
           <Chart
-            width={1200}
-            height={600}
+            width="100%"
+            height="100%"
             chartType={retriever_performance.chartType}
             loader={<div>Loading Chart</div>}
             data={retriever_performance.dataRetriever}
@@ -112,17 +112,17 @@ export default function LatestBenchmark({
             }}
           />
         </div>
-        <div className="flex mb-4 ml-16">
+        <div className="flex sm:mb-4 sm:ml-16">
           <h2 className="text-3xl font-semibold max-w-4xl">{map.title}</h2>
         </div>
         <div
-          className="mb-3 mr-16 ml-16 text-justify"
+          className="mb-3 sm:mr-16 sm:ml-16 text-justify"
           dangerouslySetInnerHTML={createMarkup(map.desc)}
         ></div>
-        <div className="mb-16 ml-16">
+        <div className="mb-16 sm:ml-16">
           <Chart
-            width={1200}
-            height={600}
+            width="100%"
+            height="100%"
             chartType={map.chartType}
             loader={<div>Loading Chart</div>}
             data={map.dataRetriever}
@@ -140,19 +140,19 @@ export default function LatestBenchmark({
             }}
           />
         </div>
-        <div className="flex mb-4 ml-16">
+        <div className="flex mb-4 sm:ml-16">
           <h2 className="text-3xl font-semibold max-w-4xl">
             {retriever_speed.title}
           </h2>
         </div>
         <div
-          className="mb-3 mr-16 ml-16 text-justify"
+          className="mb-3 sm:mr-16 sm:ml-16 text-justify"
           dangerouslySetInnerHTML={createMarkup(retriever_speed.desc)}
         ></div>
-        <div className="mb-16 ml-16">
+        <div className="mb-16 sm:ml-16">
           <Chart
-            width={1200}
-            height={600}
+            width="100%"
+            height="100%"
             chartType={retriever_speed.chartType}
             loader={<div>Loading Chart</div>}
             data={retriever_speed.dataRetrieverSpeed}
