@@ -62,7 +62,7 @@ const Layout: FC<LayoutProps> = ({
       <Header docsType={"haystack"} />
       <DesktopNav menu={menu} />
       <MobileNav menu={menu} />
-      <main className="grid grid-cols-12 sm:ml-60 px-3 sm:px-8 py-6 lg:py-8 min-h-screen dark:text-white">
+      <main className="grid grid-cols-12 sm:ml-60 px-3 sm:px-8 py-6 lg:py-8 min-h-screen dark:text-white break-words">
         <div className={styles["markdown"]}>{children}</div>
         <div>
           <Toc toc={toc} editOnGitHubLink={editOnGitHubLink} stars={stars} />
