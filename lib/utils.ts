@@ -110,7 +110,7 @@ export function getVersionFromParams(params: string[]) {
 }
 
 export function getLatestVersion() {
-  return getDocsVersions().sort(semverCompare).pop();
+  return "latest";
 }
 
 export function getDirectory(category: "overview" | "usage", version?: string) {

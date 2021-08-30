@@ -7,7 +7,6 @@ import { Chart } from "react-google-charts";
 import {
   getLatestVersion,
   getDocsVersions,
-  getSlugsFromLocalBenchmarksFiles,
   getDirectoryBenchmarks,
   getVersionFromParams,
 } from "lib/utils";
@@ -51,7 +50,7 @@ export default function LatestBenchmark({
           className="mb-3 sm:mr-16 sm:ml-16 text-justify"
           dangerouslySetInnerHTML={createMarkup(reader_performance.desc)}
         ></div>
-        <div className="mb-16 sm:ml-16">
+        <div className="mb-16 sm:ml-16 h-96">
           <Chart
             width="100%"
             height="100%"
@@ -83,7 +82,7 @@ export default function LatestBenchmark({
           className="mb-3 sm:mr-16 sm:ml-16 text-justify"
           dangerouslySetInnerHTML={createMarkup(retriever_performance.desc)}
         ></div>
-        <div className="mb-16 sm:ml-16">
+        <div className="mb-16 sm:ml-16 h-96">
           <Chart
             width="100%"
             height="100%"
@@ -119,7 +118,7 @@ export default function LatestBenchmark({
           className="mb-3 sm:mr-16 sm:ml-16 text-justify"
           dangerouslySetInnerHTML={createMarkup(map.desc)}
         ></div>
-        <div className="mb-16 sm:ml-16">
+        <div className="mb-16 sm:ml-16 h-96">
           <Chart
             width="100%"
             height="100%"
@@ -149,7 +148,7 @@ export default function LatestBenchmark({
           className="mb-3 sm:mr-16 sm:ml-16 text-justify"
           dangerouslySetInnerHTML={createMarkup(retriever_speed.desc)}
         ></div>
-        <div className="mb-16 sm:ml-16">
+        <div className="mb-16 sm:ml-16 h-96">
           <Chart
             width="100%"
             height="100%"
