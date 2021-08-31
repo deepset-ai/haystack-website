@@ -41,7 +41,7 @@ export default function ReferenceDoc({
 
 // TODO: This function can be shorter and cleaner, similar to how it's written for overview and usage pages
 export const getStaticPaths: GetStaticPaths = async () => {
-  const versions = getDocsVersions();
+  const versions = await getDocsVersions();
 
   const paths = [
     ...referenceFiles.items.map((item) => ({ params: { slug: [item.slug] } })),
@@ -83,7 +83,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
       };
     }
 
-    const version = getVersionFromParams(params.slug);
+    const version = await getVersionFromParams(params.slug);
 
     const downloadUrl = await getDownloadUrl({
       repoPath: referenceFiles.repoPath,
@@ -122,6 +122,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
         ...layoutProps,
         source: markup,
       },
+      revalidate: 30,
     };
   } catch (e) {
     console.log(e);
