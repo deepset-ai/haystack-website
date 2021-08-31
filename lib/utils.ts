@@ -107,8 +107,7 @@ export async function getVersionFromParams(params: string[]) {
 }
 
 export async function getLatestVersion() {
-  const versions = await getDocsVersions();
-  return versions.sort(semverCompare).pop();
+  return "latest";
 }
 
 export async function getDirectory(

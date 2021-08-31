@@ -86,7 +86,6 @@ const handleSubmit = (event: any) =>  {
     };
 
     var final_data = JSON.stringify(data);
-    console.log(final_data)
 
     xhr.open('POST', url);
     // Sets the value of the 'Content-Type' HTTP request headers to 'application/json'
