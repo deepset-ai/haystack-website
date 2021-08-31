@@ -47,7 +47,7 @@ export default function Header({ docsType = "haystack" }: Props) {
   return (
     <header className="sticky top-0 p-2 sm:px-6 sm:py-3 z-10 w-full xl:max-w-8xl mx-auto flex items-center justify-between bg-dark-blue border-b border-medium-grey dark:bg-black">
       <Link href="/" passHref>
-        <div className="w-44 lg:w-60">
+        <div className="w-44 lg:w-60 cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 184 47"
@@ -100,17 +100,17 @@ export default function Header({ docsType = "haystack" }: Props) {
         </div>
         <div className="mr-8 xl:mr-12 2xl:mr-16">
           <Link href="/community/join">
-            <div className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer">
+            <div className="font-bold lg:text-xl xl:text-2xl cursor-pointer text-green-dark-theme">
               Join Slack
             </div>
           </Link>
         </div>
-        <div className="mr-8 xl:mr-12 2xl:mr-16 flex">
+        <div className="mr-8 xl:mr-12 2xl:mr-16">
           <Link href="https://www.meetup.com/de-DE/open-nlp-meetup/">
             <a
               target="_blank"
               href="https://www.meetup.com/de-DE/open-nlp-meetup/"
-              className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer"
+              className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer text-green-dark-theme"
               rel="noopener noreferrer"
             >
               Join Open NLP
