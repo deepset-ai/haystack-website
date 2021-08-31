@@ -110,14 +110,6 @@
       {
         "slug": "lfqa",
         "title": "Generative QA with \"LFQA\""
-      },
-      {
-        "slug": "question-generation",
-        "title": "Question Generation"
-      },
-      {
-        "slug": "query-classifier",
-        "title": "Query Classifier"
       }
     ]
   },

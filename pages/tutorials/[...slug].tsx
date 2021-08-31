@@ -80,7 +80,6 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
         notFound: true,
       };
     }
-
     const version = await getVersionFromParams(params.slug);
 
     const downloadUrl = await getDownloadUrl({
