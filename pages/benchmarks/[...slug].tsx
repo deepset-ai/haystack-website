@@ -178,10 +178,11 @@ export default function LatestBenchmark({
 export const getStaticPaths: GetStaticPaths = async () => {
   // we want to get all versions, apart from the latest one
   let paths: any = [];
-  const latestVersion = getLatestVersion();
+  const latestVersion = await getLatestVersion();
   paths = [...paths, { params: { slug: [latestVersion] } }];
-  const versions = getDocsVersions().filter((v) => v !== latestVersion);
-  for (const version of versions) {
+  const versions = await getDocsVersions();
+  const versionsOtherThanLatest = versions.filter((v) => v !== latestVersion);
+  for (const version of versionsOtherThanLatest) {
     paths = [
       ...paths,
       {
@@ -217,12 +218,11 @@ export const getStaticProps: GetStaticProps<Props> = async ({
   let reader_performance: any;
   let retriever_speed: any;
 
+  const version = await getVersionFromParams(params.slug);
+
   try {
     // Map folder
-    let directory = getDirectoryBenchmarks(
-      "map",
-      getVersionFromParams(params.slug)
-    );
+    let directory = await getDirectoryBenchmarks("map", version);
     let filenames = [];
     let fileContent = null;
     if (!fs.existsSync(directory))
@@ -243,10 +243,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({
     }
 
     //Performance folder
-    directory = getDirectoryBenchmarks(
-      "performance",
-      getVersionFromParams(params.slug)
-    );
+    directory = await getDirectoryBenchmarks("performance", version);
     if (!fs.existsSync(directory))
       return {
         notFound: true,
@@ -269,10 +266,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({
     }
 
     //Speed folder
-    directory = getDirectoryBenchmarks(
-      "speed",
-      getVersionFromParams(params.slug)
-    );
+    directory = await getDirectoryBenchmarks("speed", version);
     if (!fs.existsSync(directory))
       return {
         notFound: true,
