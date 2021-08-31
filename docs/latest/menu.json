@@ -59,7 +59,8 @@
         "title": "Annotation Tool"
       },
       { "slug": "ranker", "title": "Ranker" },
-      { "slug": "query-classifier", "title": "Query Classifier" }
+      { "slug": "query-classifier", "title": "Query Classifier" },
+      { "slug": "rest-api", "title": "REST API" }
     ]
   },
   {
