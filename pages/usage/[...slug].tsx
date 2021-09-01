@@ -22,6 +22,7 @@ import {
   StaticPageProps,
 } from "lib/utils";
 import { components } from "lib/mdx";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 export default function UsageDoc({
   menu,
@@ -86,14 +87,14 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
   try {
     const docTitleSlug = params.slug?.[params.slug?.length - 1];
     const directory = getDirectory("usage", getVersionFromParams(params.slug));
-    const fullPath = join(directory, `${docTitleSlug.replace("-", "_")}.mdx`);
+    const fullPath = join(directory, `${docTitleSlug.split("-").join("_")}.mdx`);
 
     if (!fs.existsSync(directory) || !fs.existsSync(fullPath)) {
       return {
         notFound: true,
       };
     }
-
+    
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     // remove once all markdown files have correctly formatted front matter:
