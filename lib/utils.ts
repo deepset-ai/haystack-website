@@ -136,5 +136,5 @@ export async function getSlugsFromLocalMarkdownFiles(
   const directory = await getDirectory(category, version);
   if (!fs.existsSync(directory)) return [];
   const filenames = fs.readdirSync(directory);
-  return filenames.map((file) => file.replace(/\.mdx$/, "").replace("_", "-"));
+  return filenames.map((file) => file.replace(/\.mdx$/, "").split("_").join("-"));
 }
