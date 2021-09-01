@@ -1,6 +1,6 @@
 # Pipelines
 
-### Flexibility powered by DAGs
+## Flexibility powered by DAGs
 
 In order to build modern search pipelines, you need two things: powerful building blocks and an easy way to stick them together.
 The `Pipeline` class is exactly built for this purpose and enables many search scenarios beyond QA.
@@ -26,7 +26,7 @@ p.draw(path="custom_pipe.png")
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Arguments
+## Arguments
 
 Whatever keyword arguments are passed into the `Pipeline.run()` method will be passed on to each node in the pipeline.
 For example, in the code snippet below, all nodes will receive `query`, `top_k_retriever` and `top_k_reader` as argument,
@@ -43,7 +43,7 @@ res = pipeline.run(
 
 <div style={{ marginBottom: "3rem" }} />
 
-### YAML File Definitions
+## YAML File Definitions
 
 For your convenience, there is also the option of defining and loading pipelines in YAML files.
 Having your pipeline available in a YAML is particularly useful when
@@ -92,7 +92,7 @@ For another example YAML config, check out [this file](https://github.com/deepse
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Multiple retrievers
+## Multiple retrievers
 
 You can now also use multiple Retrievers and join their results:
 
@@ -111,7 +111,7 @@ res = p.run(query="What did Einstein work on?", top_k_retriever=1)
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Custom nodes
+## Custom nodes
 
 You can easily build your own custom nodes. Just respect the following requirements:
 
@@ -122,7 +122,7 @@ You can easily build your own custom nodes. Just respect the following requireme
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Decision nodes
+## Decision nodes
 
 Or you can add decision nodes where only one "branch" is executed afterwards. This allows, for example, to classify an incoming query and depending on the result routing it to different modules:
 ![image](https://user-images.githubusercontent.com/1563902/102452199-41229b80-403a-11eb-9365-7038697e7c3e.png)
@@ -150,17 +150,18 @@ Or you can add decision nodes where only one "branch" is executed afterwards. Th
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Evaluation nodes
+## Evaluation nodes
 
 There are nodes in Haystack that are used to evaluate the performance of readers, retrievers and combine systems.
 To get hands on with this kind of node, have a look at the [evaluation tutorial](/tutorials/evaluation).
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Default Pipelines (replacing the "Finder")
+## Ready-Made Pipelines
 
-Last but not least, we added some "Default Pipelines" that allow you to run standard patterns with very few lines of code.
-This is replacing the `Finder` class which is now deprecated.
+Last but not least, we added some ready-made pipelines that allow you to run standard patterns with very few lines of code. See the [ready-made pipelines page](/usage/ready-made-pipelines) and [pipelines API documentation](/reference/pipelines) to learn more about these.
+
+**Examples:**
 
 ```python
 from haystack.pipeline import DocumentSearchPipeline, ExtractiveQAPipeline, Pipeline, JoinDocuments
@@ -183,6 +184,4 @@ res = doc_pipe.run(query="How can I change my address?", top_k_retriever=3)
 
 ```
 
-See also the [Pipelines API documentation](/reference/pipelines) for more details.
-
-We plan many more features around the new pipelines incl. parallelized execution, distributed execution, dry runs - so stay tuned ...
+We plan many more features around the new pipelines including parallelized execution, distributed execution, dry runs - so stay tuned!

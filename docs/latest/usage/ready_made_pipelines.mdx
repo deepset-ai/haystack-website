@@ -1,0 +1,39 @@
+# Ready-Made Pipelines
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Note:** These ready-made Pipelines replace the `Finder` class which is now deprecated.
+
+</div>
+
+Haystack Pipelines chain together various Haystack components to build a search system. Haystack comes with a number of predefined pipelines that fit most standard search patterns, allowing you to build a QA system in no time.
+
+## ExtractiveQAPipeline
+
+Extractive QA is the task of searching through a large collection of documents for a span of text that answers a question. The ExtractiveQAPipeline combines the Retriever and the Reader such that:
+- The [Retriever](/usage/retriever) combs through a database and returns only the documents that it deems to be the most relevant to the query.
+- The [Reader](/usage/reader) accepts the documents returned by the Retriever and selects a text span as the answer to the query.
+
+Note that outside of a pipeline, Readers and Retrievers accept a `top_k` parameter, which specifies the number of documents that they should return per query. However, inside the pipeline, these parameters are renamed to `top_k_retriever` and `top_k_reader`.
+
+```python
+pipeline = ExtractiveQAPipeline(reader, retriever)
+
+query = "What is Hagrid's dog's name?"
+result = pipeline.run(query=query, top_k_retriever=10, top_k_reader=1)
+```
+
+The output of the pipeline is a Python dictionary with answers stored under the `answers` key. The output provides additional information such as the context from which the answer was extracted and the model’s confidence in the accuracy of the extracted answer.
+
+```python
+result["answers"]
+>>> [{  'answer': 'Fang',
+        'score': 13.26807975769043,
+        'probability': 0.9657130837440491,
+        'context': Криволапик (Kryvolapyk, kryvi lapy "crooked paws")
+                   ===Fang (Hagrid's dog)===
+                   *Chinese (PRC): 牙牙 (ya2 ya) (from 牙 "tooth", 牙,
+...}]
+```
+
+For more examples that showcase ExtractiveQAPipeline, check out one of our tutorials [here](/tutorials/first-qa-system) or [here](/tutorials/without-elasticsearch).

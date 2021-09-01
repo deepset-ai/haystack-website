@@ -23,6 +23,7 @@
         "title": "Preprocessing"
       },
       { "slug": "pipelines", "title": "Pipelines" },
+      { "slug": "ready-made-pipelines", "title": "Ready-Made Pipelines" },
       {
         "slug": "document-store",
         "title": "DocumentStore"
