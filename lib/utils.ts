@@ -7,7 +7,6 @@ import remarkPrism from "remark-prism";
 import autolink from "remark-autolink-headings";
 import GitHubSlugger from "github-slugger";
 import imgLinks from "@pondorasti/remark-img-links";
-import semverCompare from "semver-compare";
 import { getHaystackReleaseTagNames, getStargazersCount } from "./github";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
