@@ -16,13 +16,47 @@ p.add_node(component=reader, name="QAReader", inputs=["ESRetriever1"])
 res = p.run(query="What did Einstein work on?", top_k_retriever=1)
 ```
 
-You can **draw the DAG** to better inspect what you are building:
+<div style={{ marginBottom: "3rem" }} />
 
-```python
-p.draw(path="custom_pipe.png")
+## Initializing a Pipeline
+
+To start building your custom pipeline, you’ll need to initialize an object of the base Pipeline class:
+
+``` python
+from haystack import Pipeline
+
+pipeline = Pipeline()
 ```
 
-![image](https://user-images.githubusercontent.com/1563902/102451716-54813700-4039-11eb-881e-f3c01b47ca15.png)
+By default, a new pipeline receives a root node called `Query`, which is the entry point to the pipeline graph. From that point on, you need to manually define how the information flows from one node to the next.
+
+## Adding Nodes to a Pipeline
+
+Use the `add_node()` method to add new components to the pipeline graph. You may either initialize the modules before or during the call to `add_node()`. When you add a node to the pipeline, give it a name and a list of inputs that may contain one or more items. Note how the default `Query` node acts as the input node to the first explicitly defined node.
+
+``` python
+pipeline.add_node(component=retriever, name='Retriever', inputs=['Query'])
+```
+
+Here's an example of a node with several input sources:
+
+``` python
+pipeline.add_node(component=JoinNode(), name='Joiner',
+                  inputs=['Retriever1', 'Retriever2'])
+```
+
+If the predecessor node has more than one output, you’ll need to specify the output number in the `inputs` list. For example:
+
+``` python
+pipeline.add_node(component=Branch1(), name='Branch1',
+                  inputs=['TopicClassifier.output_1'])
+pipeline.add_node(component=Branch2(), name='Branch2',
+                  inputs=['TopicClassifier.output_2'])
+```
+
+Under the hood, the nodes are placed in a queue and executed one by one when the `run()` method is invoked. The output of the last node in the queue is the output of the entire pipeline.
+
+When you create a custom pipeline, you need to pay extra care that each node’s output is compatible with the input of the successive node in the chain. Otherwise, your system will throw an error at runtime.
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -40,6 +74,61 @@ res = pipeline.run(
     top_k_reader=5
 )
 ```
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Running a Pipeline
+
+The `run()` function is the single command that triggers the execution of the entire pipeline:
+
+``` python
+query = "What's the history of Quidditch?"
+pipeline.run(query=query)
+```
+
+Every node has its own `run()` method, and the pipeline `run()` call invokes each node, one after the other. When you `run()` a pipeline, all the function arguments are propagated to every node in the graph. To disambiguate, say, the `top_k` values of retriever and ranker, they have aliases that are automatically recognized by the respective modules. This lets you dynamically modify these parameters in each call to the pipeline:
+
+``` python
+pipeline.run(query=query, top_k_retriever=28, top_k_ranker=9)
+```
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Inspecting a Pipeline
+
+### Using `draw()`
+
+The `pipeline.draw()` method generates a sketch of your pipeline. By looking at a drawing of your pipeline, you may be able to confirm that the graph is indeed structured in the way that you intended. This is especially true for customized graphs that may branch out at some point.
+
+![image](https://user-images.githubusercontent.com/1563902/102451716-54813700-4039-11eb-881e-f3c01b47ca15.png)
+
+## Accessing Pipeline Nodes
+
+If your custom pipeline is not working as intended, try running your nodes in isolation. You may access any pipeline node by using the `get_node()` method and specifying the component's name:
+
+``` python
+retriever_node = pipeline.get_node('Retriever')
+```
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Running a Node in Isolation
+
+When you execute a pipeline with `run()`, it successively invokes the `run()` methods of all nodes in the queue. However, you can also use a given node's `run()` method in isolation.
+
+``` python
+retriever_node.run(query=query, pipeline_type='Query')
+```
+
+What happens during an individual run depends entirely on the given node's definition. For example, the retriever's `run()` method calls `run_query()`, which in turn calls `retrieve()` and a few other methods. Once you have extracted your node from the pipeline with the `get_node()` method, you're free to run any one of that node's class methods:
+
+``` python
+retriever_node.run_query(query=query)
+retriever_node.retrieve(query=query)
+```
+
+If you want to find out which class methods are called by a component's `run()` function, we recommend that you take a look at the definitions (e.g., [this one](https://github.com/deepset-ai/haystack/blob/4c2a0b914a0ad81d8df3deaf02c637e7c2413b00/haystack/retriever/base.py#L177) in the source code.
+
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -92,39 +181,46 @@ For another example YAML config, check out [this file](https://github.com/deepse
 
 <div style={{ marginBottom: "3rem" }} />
 
-## Multiple retrievers
+## Custom Nodes
 
-You can now also use multiple Retrievers and join their results:
+Thanks to the modularity of pipelines, you can create your own nodes and comfortably integrate them into your system. You should define a `run()` function at the core of each node class that accepts a flexible number of keyword arguments in the form of a dictionary (i.e., **kwargs). That's where the entire functionality of your node will be defined. Let's look at a node class template:
 
-```python
-from haystack import Pipeline
+``` python
+class NodeTemplate():
+    outgoing_edges = 1
 
-p = Pipeline()
-p.add_node(component=es_retriever, name="ESRetriever", inputs=["Query"])
-p.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["Query"])
-p.add_node(component=JoinDocuments(join_mode="concatenate"), name="JoinResults", inputs=["ESRetriever", "DPRRetriever"])
-p.add_node(component=reader, name="QAReader", inputs=["JoinResults"])
-res = p.run(query="What did Einstein work on?", top_k_retriever=1)
+    def run(self, **kwargs):
+        # Insert code here to manipulate the variables in kwarg
+            return (kwargs, "output_1")
 ```
 
-![image](https://user-images.githubusercontent.com/1563902/102451782-7bd80400-4039-11eb-9046-01b002a783f8.png)
+Usually, your node will have one outgoing edge and thus one return value. Just like the `**kwargs` input to a node, a node's return value should also come in the form of a Python dictionary.  That value is returned within a tuple, which also contains its name, e.g., `output_1`.
 
-<div style={{ marginBottom: "3rem" }} />
+It's also possible to have more than one outgoing edge, typically in a decision node. A decision node's `run()` method consists of a decision function that determines the path in the graph by which to send down its input. Such a function has more than one possible return value, and all of these will be named accordingly, i.e. `output_1`, `output_2`, and so forth.
 
-## Custom nodes
+When defining your own custom nodes, you can either create them from scratch or let your new node class inherit from `haystack.BaseComponent`. This second method provides a lot of Node functionality, like methods to save and load arguments:
 
-You can easily build your own custom nodes. Just respect the following requirements:
+``` python
+from haystack import BaseComponent
 
-1. Add a method `run(self, **kwargs)` to your class. `**kwargs` will contain the output from the previous node in your graph.
-2. Do whatever you want within `run()` (e.g. reformatting the query)
-3. Return a tuple that contains your output data (for the next node) and the name of the outgoing edge `output_dict, "output_1`
-4. Add a class attribute `outgoing_edges = 1` that defines the number of output options from your node. You only need a higher number here if you have a decision node (see below).
+class CustomNode(BaseComponent):
+    pass
+```
+
+To view the functionality of this new class, initialize a new node object and print its methods (the if-condition filters out dunder methods, which are less informative):
+
+``` python
+NewNode = CustomNode()
+[method for method in NewNode().__dir__() if method[0] != '_']
+
+>>> ['subclasses', 'pipeline_config', 'load_from_args', 'run', 'set_config']
+```
 
 <div style={{ marginBottom: "3rem" }} />
 
 ## Decision nodes
 
-Or you can add decision nodes where only one "branch" is executed afterwards. This allows, for example, to classify an incoming query and depending on the result routing it to different modules:
+You can add decision nodes where only one "branch" is executed afterwards. This allows, for example, to classify an incoming query and depending on the result routing it to different modules:
 ![image](https://user-images.githubusercontent.com/1563902/102452199-41229b80-403a-11eb-9365-7038697e7c3e.png)
 
 ```python
@@ -185,3 +281,128 @@ res = doc_pipe.run(query="How can I change my address?", top_k_retriever=3)
 ```
 
 We plan many more features around the new pipelines including parallelized execution, distributed execution, dry runs - so stay tuned!
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Example: Multiple retrievers
+
+You can now also use multiple Retrievers and join their results:
+
+```python
+from haystack import Pipeline
+
+p = Pipeline()
+p.add_node(component=es_retriever, name="ESRetriever", inputs=["Query"])
+p.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["Query"])
+p.add_node(component=JoinDocuments(join_mode="concatenate"), name="JoinResults", inputs=["ESRetriever", "DPRRetriever"])
+p.add_node(component=reader, name="QAReader", inputs=["JoinResults"])
+res = p.run(query="What did Einstein work on?", top_k_retriever=1)
+```
+
+![image](https://user-images.githubusercontent.com/1563902/102451782-7bd80400-4039-11eb-9046-01b002a783f8.png)
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Example: Creating a Retriever-Ranker-Summarizer Pipeline
+
+In this example, we'll look at how to establish a custom Retriever-Ranker-Summarizer pipeline. It's useful to add a `Ranker` to a summarization pipeline because the output of the `Summarizer` depends on the order of the documents that it receives.
+
+``` python
+from haystack import Pipeline
+
+pipeline = Pipeline()
+```
+
+To create new pipeline nodes, we initialize the modules first. For our use case, we need a retriever, a ranker, and a summarizer. We tell the summarizer to return a single summary per query (instead of one summary for each document), and that its length should be somewhere between ten and 300 words:
+
+``` python
+from haystack.retriever import ElasticsearchRetriever
+from haystack.ranker import FARMRanker
+from haystack.summarizer import TransformersSummarizer
+
+retriever = ElasticsearchRetriever(document_store, top_k=10)
+
+ranker=FARMRanker(model_name_or_path="sentence-transformers/distilbert-multilingual-nli-stsb-quora-ranking", top_k=10)
+
+summarizer = TransformersSummarizer(model_name_or_path='t5-large', min_length=10, max_length=300, generate_single_summary=True)
+```
+
+We add the nodes to the pipeline:
+
+``` python
+pipeline.add_node(component=retriever, name='Retriever', inputs=['Query'])
+pipeline.add_node(component=ranker, name='Ranker', inputs=['Retriever'])
+pipeline.add_node(component=summarizer, name='Summarizer', inputs=['Ranker'])
+```
+
+Let's now run our custom pipeline on the Harry Potter Wiki dataset. A typical application for this pipeline would be a situation where we want some high-level information about our corpus that is not necessarily contained within one document. We therefore retrieve multiple documents, rank them, and let the summarizer return a single summary of all the texts.
+
+``` python
+query = "What's the history of Quidditch?"
+result = pipeline.run(query=query)
+```
+
+The pipeline returns a dictionary that contains the query, the name of the last node, and a list of documents:
+
+``` python
+result.keys()
+
+>>> dict_keys(['documents', 'query', 'node_id'])
+```
+
+Since we requested a single summary of all the texts we inputted to the summarizer, the list of documents contains only one item. We access the summary through the text attribute:
+
+``` python
+result['documents'][0].text
+
+>>> "the first record of a primitive form of Quidditch (''Kwidditch'') dates to c. 1050. the first known reference to wizards using broomsticks as a means of conveyance dates to A.D. 963. a variant of the game, Quodpot, was invented in the eighteenth century. in the middle of the 14th century it was made a protected species by the wizards council."
+```
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Example: Creating a Custom Translation Node
+
+Let's say that we wanted to add a special translation module to our pipeline. Instead of just translating into one predefined language, our node should be able to return a summary in any language we want (i.e., for which we have a trained model). To that end, we define a CustomTranslator class. Since there's no decision function involved, we set `outgoing_edges = 1`:
+
+``` python
+class CustomTranslator():
+    outgoing_edges = 1
+```
+
+Within a pipeline node, the `run()` function is where all the action happens. Our run function receives a language argument that tells the translator which translation model to initialize:
+
+``` python
+def run(self, language='fr', **kwargs):
+    translator = TransformersTranslator(model_name_or_path=f'Helsinki-NLP/opus-mt-en-{language}')
+```
+
+We run the translator with the specified model and return its output.
+``` python
+translation = translator.run(documents=kwargs['documents'])
+return translation
+```
+
+We initialize this node directly when adding it to the pipeline. As usual, we specify a name and the inputs for this node:
+
+``` python
+pipeline.add_node(component=CustomTranslator(), name='CustomTranslator', inputs=['Summarizer'])
+```
+
+We can now call the pipeline with any [Helsinki-NLP translation model](https://huggingface.co/models?search=helsinki-nlp/opus-mt-en-) from HuggingFace with English as a source language. Pipeline arguments are simply propagated through the pipeline. This means that if we want to pass a language value to our custom node, we simply specify it in our call to the pipeline. Let's look at the French summary of a popular wizard sport:
+
+``` python
+query = "What's the history of Quidditch?'
+result = pipeline.run(query=query, top_k_retriever=30, top_k_ranker=20, language='fr')
+result['documents'][0].text
+
+>>> "''Quidditch'' a obtenu son nom du marais queerditch, l'emplacement du premier jeu enregistré. le jeu a été basé sur un jeu joué par une sorcière au 11ème siècle. un snitch d'or a été introduit à la suite d'un jeu 1269 joué en kent. on pense qu'une version balai du jeu peut avoir inspiré le mouvement du jeu moderne 'harlem shuffle'"
+```
+
+Now, how about Ukrainian?
+
+``` python
+result = pipeline.run(query=query, top_k_retriever=30, top_k_ranker=20, language='uk')
+result['documents'][0].text
+
+>>> '" Quuiditch " отримала свою назву від дивного болота, місця першої в історії записаної гри. Гру було засновано на грі, яку грала відьма у XI столітті. Золотий стукач було введено у гру 1269 гри в кенті. Вважається, що версія мітла у грі, можливо, надихнула сучасну гру на " заплутування " move " гри'
+```
