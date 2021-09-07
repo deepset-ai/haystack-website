@@ -14,14 +14,14 @@ Below, we will trace through what it takes to set this up using the popular [Ras
 ## Overview
 
 When a user speaks to a conversational AI program, each user message is classified and labelled with an intent.
-One approach to integrating Haystack would be to introduce a new intent, such as `knolwedge question`, 
+One approach to integrating Haystack would be to introduce a new intent, such as `knolwedge question`,
 that triggers a call to a running Haystack API.
 
-Alternatively, in cases where they are uncertain what intent fits, chatbots can route requests to a fallback action. 
+Alternatively, in cases where they are uncertain what intent fits, chatbots can route requests to a fallback action.
 Rasa uses the [FallbackClassifier](https://rasa.com/docs/rasa/fallback-handoff/#nlu-fallback) to make this happen.
 
 In both cases, Rasa uses an [action server](https://rasa.com/docs/action-server/) to send a REST API request to Haystack.
-When it receives the result, it will base its next message to the user on the contents of this response. 
+When it receives the result, it will base its next message to the user on the contents of this response.
 
 !!!NEW IMAGE!!!
 ![image](https://user-images.githubusercontent.com/52320144/111071900-930f7c00-84d8-11eb-9105-b06ee4a4735b.png)
@@ -48,7 +48,7 @@ Simply clone it and call the following in the root directory:
 
 ## Starting Rasa
 
-After [installing](https://rasa.com/docs/rasa/installation) Rasa and [initializing](https://rasa.com/docs/rasa/command-line-interface/#rasa-init) a new project, 
+After [installing](https://rasa.com/docs/rasa/installation) Rasa and [initializing](https://rasa.com/docs/rasa/command-line-interface/#rasa-init) a new project,
 there are a few steps that a developer needs to take in order to get Rasa to communicate with Haystack.
 
 In `data/nlu.yaml`, you will want to define a new intent but providing example utterances of that intent:
@@ -72,7 +72,7 @@ You will also want to define what action is taken when that intent is identified
   steps:
   - intent: knowledge_question
   - action: call_haystack
-``` 
+```
 
 Fallback version
 
