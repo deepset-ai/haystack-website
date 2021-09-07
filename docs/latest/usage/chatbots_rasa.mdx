@@ -1,0 +1,60 @@
+# Chatbots (Rasa)
+
+It is easy and simple to imbue your chatbot with the NLP power that Haystack offers.
+If your chatbot is handling a question that is in the log tail of undefined intents, why not handle it using Haystack's question answering capabilities?
+Thanks to Haystack's REST API, chatbot frameworks can seamlessly communicate with your custom Haystack service.
+Below, we will trace through what it takes to set this up using the popular [Rasa](https://rasa.com/) framework.
+For a working demo version, have a look at !!!!THIS REPO!!!
+
+## Overview
+
+Conversational AI assign intents to each user message
+In cases where they are uncertain, requests can be routed on to fallbacks.
+Rasa does this with a [FallbackClassifier](https://rasa.com/docs/rasa/fallback-handoff/#nlu-fallback)
+
+Fallback intents can trigger custom action [servers](https://rasa.com/docs/action-server/)
+This can be defined to send a request to a Haystack QA system via its REST API interface
+
+!!!NEW IMAGE!!!
+![image](https://user-images.githubusercontent.com/52320144/111071900-930f7c00-84d8-11eb-9105-b06ee4a4735b.png)
+
+## Starting Haystack with REST API
+
+To set up a Haystack follow this page...
+by default the end points are...
+Demo application
+
+There is a demo application on GoT
+``` bash
+    cd haystack
+    docker-compose pull
+    docker-compose up
+    
+    # Or on a GPU machine: docker-compose -f docker-compose-gpu.yml up
+```
+
+## Starting Rasa
+
+Defining Fallback / Custom Action
+
+See our demo Repo
+
+Rasa X vs Rasa Core + Screen shot
+
+Rasa run actions for action server
+
+Files changed from Rasa init
+actions
+rule
+endpoints?
+nlu
+   - name: FallbackClassifier
+     # This is the default
+     threshold: 0.8
+     ambiguity_threshold: 0.1
+train
+model that is pushed
+
+
+
+retrain
