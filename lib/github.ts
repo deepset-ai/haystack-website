@@ -17,7 +17,7 @@ export const getDownloadUrl = async ({
     const res = await octokit.rest.repos.getContent({
       owner: "deepset-ai",
       repo: "haystack",
-      path: `docs${version ? `/${version}` : ""}${repoPath}${filename}`,
+      path: `docs${version && version !== "latest" ? `/${version}` : ""}${repoPath}${filename}`,
     });
     if (Array.isArray(res.data)) return;
     if (!res.data.download_url) return;
@@ -33,4 +33,12 @@ export const getStargazersCount = async () => {
     repo: "haystack",
   });
   return res.data.stargazers_count;
+};
+
+export const getHaystackReleaseTagNames = async () => {
+  const res = await octokit.rest.repos.listReleases({
+    owner: "deepset-ai",
+    repo: "haystack",
+  });
+  return res.data.map((release) => release.tag_name);
 };

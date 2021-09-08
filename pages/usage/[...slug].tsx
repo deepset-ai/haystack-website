@@ -50,17 +50,19 @@ export default function UsageDoc({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // we want to get all versions, apart from the latest one
-  const latestVersion = getLatestVersion();
-  const versions = getDocsVersions().filter((v) => v !== latestVersion);
+  const latestVersion = await getLatestVersion();
+  const versions = await getDocsVersions();
+  const versionsOtherThanLatest = versions.filter((v) => v !== latestVersion);
 
   // we initialize the paths array with the paths that will be used for the latest version (i.e. without a version in the url)
-  let paths = getSlugsFromLocalMarkdownFiles("usage").map((param) => ({
+  const slugsForLatestVersion = await getSlugsFromLocalMarkdownFiles("usage");
+  let paths = slugsForLatestVersion.map((param) => ({
     params: { slug: [param] },
   }));
 
   // we loop over all versions other than the latest one, to create paths that will include the version and the slug in the url
-  for (const version of versions) {
-    const slugs = getSlugsFromLocalMarkdownFiles("usage", version);
+  for (const version of versionsOtherThanLatest) {
+    const slugs = await getSlugsFromLocalMarkdownFiles("usage", version);
     paths = [
       ...paths,
       ...slugs.map((param) => ({
@@ -86,8 +88,9 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
 
   try {
     const docTitleSlug = params.slug?.[params.slug?.length - 1];
-    const directory = getDirectory("usage", getVersionFromParams(params.slug));
-    const fullPath = join(directory, `${docTitleSlug.split("-").join("_")}.mdx`);
+    const version = await getVersionFromParams(params.slug);
+    const directory = await getDirectory("usage", version);
+    const fullPath = join(directory, `${docTitleSlug.replace("-", "_")}.mdx`);
 
     if (!fs.existsSync(directory) || !fs.existsSync(fullPath)) {
       return {
@@ -113,8 +116,6 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
       },
       scope: data,
     });
-
-    const version = getVersionFromParams(params.slug) || getLatestVersion();
 
     const type = "usage";
 

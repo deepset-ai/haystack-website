@@ -14,7 +14,7 @@ export default function Custom404({
         <meta name="description" content="Haystack Docs" />
         <link rel="icon" href="/img/HaystackIcon.png" />
       </Head>
-      <Header  docsType={"haystack"}/>
+      <Header docsType={"haystack"} />
       <DesktopNav menu={menu} />
       <main className="sm:pl-60 text-black">
         <div>404 - There&apos;s no doc for the page you requested.</div>
@@ -32,8 +32,8 @@ export default function Custom404({
   );
 }
 
-export const getStaticProps: GetStaticProps = () => {
-  const menu = getMenu();
+export const getStaticProps: GetStaticProps = async () => {
+  const menu = await getMenu();
   return {
     props: {
       menu,
