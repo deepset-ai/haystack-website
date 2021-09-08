@@ -80,7 +80,7 @@ export const getStaticLayoutProps = async ({
   const latestVersion = await getLatestVersion();
   const editOnGitHubLink = `https://github.com/deepset-ai/haystack-website/blob/source/docs/${
     version || latestVersion
-  }/${type}/${docTitleSlug.replace("-", "_")}.mdx`;
+  }/${type}/${docTitleSlug.split("-").join("_")}.mdx`;
 
   const stars = await getStargazersCount();
 
@@ -135,5 +135,5 @@ export async function getSlugsFromLocalMarkdownFiles(
   const directory = await getDirectory(category, version);
   if (!fs.existsSync(directory)) return [];
   const filenames = fs.readdirSync(directory);
-  return filenames.map((file) => file.replace(/\.mdx$/, "").replace("_", "-"));
+  return filenames.map((file) => file.replace(/\.mdx$/, "").split("_").join("-"));
 }

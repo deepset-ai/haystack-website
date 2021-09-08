@@ -22,6 +22,7 @@ import {
   StaticPageProps,
 } from "lib/utils";
 import { components } from "lib/mdx";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 export default function UsageDoc({
   menu,
@@ -96,7 +97,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
         notFound: true,
       };
     }
-
+    
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     // remove once all markdown files have correctly formatted front matter:

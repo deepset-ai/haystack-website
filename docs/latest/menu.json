@@ -23,6 +23,7 @@
         "title": "Preprocessing"
       },
       { "slug": "pipelines", "title": "Pipelines" },
+      { "slug": "ready-made-pipelines", "title": "Ready-Made Pipelines" },
       {
         "slug": "document-store",
         "title": "DocumentStore"
@@ -59,7 +60,8 @@
         "title": "Annotation Tool"
       },
       { "slug": "ranker", "title": "Ranker" },
-      { "slug": "query-classifier", "title": "Query Classifier" }
+      { "slug": "query-classifier", "title": "Query Classifier" },
+      { "slug": "rest-api", "title": "REST API" }
     ]
   },
   {
