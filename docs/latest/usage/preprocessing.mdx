@@ -44,11 +44,8 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
             valid_languages=["de","en"])
           </code>
           <code>doc = converter.convert(file_path=file, meta=None)</code>
-          <p>
-            Alternatively, if you have a PDF containing images. Haystack uses tessaract under the hood,
-            to find out the language code for a given language please visit [here](https://tesseract-ocr.github.io/tessdoc/Data-Files-in-different-versions.html)
-          </p>
           <code>
+            # Alternatively, if you have a PDF containing images, Haystack uses tessaract under the hood to OCR image PDFs.
             from haystack.file_converter import PDFToTextOCRConverter
           </code>
           <code>            
