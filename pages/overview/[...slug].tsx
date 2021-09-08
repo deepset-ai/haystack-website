@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     const docTitleSlug = params.slug?.[params.slug?.length - 1];
     const version = await getVersionFromParams(params.slug);
     const directory = await getDirectory("overview", version);
-    const fullPath = join(directory, `${docTitleSlug.replace("-", "_")}.mdx`);
+    const fullPath = join(directory, `${docTitleSlug.split("-").join("_")}.mdx`);
 
     if (!fs.existsSync(directory) || !fs.existsSync(fullPath)) {
       return {
