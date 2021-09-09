@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
         notFound: true,
       };
     }
-
+    
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     // remove once all markdown files have correctly formatted front matter:
