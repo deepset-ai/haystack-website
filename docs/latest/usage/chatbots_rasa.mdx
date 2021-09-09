@@ -14,7 +14,7 @@ Below, we will trace through what it takes to set this up using the popular [Ras
 ## Overview
 
 When a user speaks to a conversational AI program, each user message is classified and labelled with an intent.
-One approach to integrating Haystack would be to introduce a new intent, such as `knolwedge question`, 
+One approach to integrating Haystack would be to introduce a new intent, such as `knowledge question`, 
 that triggers a call to a running Haystack API.
 
 Alternatively, in cases where they are uncertain what intent fits, chatbots can route requests to a fallback action. 
@@ -43,7 +43,6 @@ Simply clone it and call the following in the root directory:
     
     # Or on a GPU machine: docker-compose -f docker-compose-gpu.yml up
 ```
-
 </div>
 
 ## Starting Rasa
@@ -75,6 +74,7 @@ You will also want to define what action is taken when that intent is identified
 ``` 
 
 Fallback version
+
 
 
 Files changed from Rasa init
