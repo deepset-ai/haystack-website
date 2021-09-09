@@ -80,7 +80,7 @@ export const getStaticLayoutProps = async ({
   const latestVersion = await getLatestVersion();
   const editOnGitHubLink = `https://github.com/deepset-ai/haystack-website/blob/source/docs/${
     version || latestVersion
-  }/${type}/${docTitleSlug.replace("-", "_")}.mdx`;
+  }/${type}/${docTitleSlug.split("-").join("_")}.mdx`;
 
   const stars = await getStargazersCount();
 
