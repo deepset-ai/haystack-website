@@ -62,7 +62,7 @@
       { "slug": "ranker", "title": "Ranker" },
       { "slug": "query-classifier", "title": "Query Classifier" },
       { "slug": "rest-api", "title": "REST API" },
-      { "slug": "chatbots-rasa", "title": "Chatbots (Rasa)" }
+      { "slug": "chatbots", "title": "Chatbot Integration" }
     ]
   },
   {
