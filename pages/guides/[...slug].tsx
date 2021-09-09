@@ -23,7 +23,7 @@ import {
 } from "lib/utils";
 import { components } from "lib/mdx";
 
-export default function UsageDoc({
+export default function GuideDoc({
   menu,
   toc,
   editOnGitHubLink,
@@ -54,14 +54,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const versionsOtherThanLatest = versions.filter((v) => v !== latestVersion);
 
   // we initialize the paths array with the paths that will be used for the latest version (i.e. without a version in the url)
-  const slugsForLatestVersion = await getSlugsFromLocalMarkdownFiles("usage");
+  const slugsForLatestVersion = await getSlugsFromLocalMarkdownFiles("guides");
   let paths = slugsForLatestVersion.map((param) => ({
     params: { slug: [param] },
   }));
 
   // we loop over all versions other than the latest one, to create paths that will include the version and the slug in the url
   for (const version of versionsOtherThanLatest) {
-    const slugs = await getSlugsFromLocalMarkdownFiles("usage", version);
+    const slugs = await getSlugsFromLocalMarkdownFiles("guides", version);
     paths = [
       ...paths,
       ...slugs.map((param) => ({
@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
   try {
     const docTitleSlug = params.slug?.[params.slug?.length - 1];
     const version = await getVersionFromParams(params.slug);
-    const directory = await getDirectory("usage", version);
+    const directory = await getDirectory("guides", version);
     const fullPath = join(directory, `${docTitleSlug.split("-").join("_")}.mdx`);
 
     if (!fs.existsSync(directory) || !fs.existsSync(fullPath)) {

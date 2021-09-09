@@ -15,8 +15,18 @@
     ]
   },
   {
-    "subMenuTitle": "Usage",
-    "pathPrefix": "/usage/",
+    "subMenuTitle": "Components",
+    "pathPrefix": "/components/",
+    "items": [
+      {
+        "slug": "document-store",
+        "title": "DocumentStore"
+      }
+    ]
+  },
+  {
+    "subMenuTitle": "Guides",
+    "pathPrefix": "/guides/",
     "items": [
       {
         "slug": "preprocessing",
