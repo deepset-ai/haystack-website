@@ -12,7 +12,7 @@ Using a query classifier can potentially yield the following benefits:
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Common Query types
+## Common Query types
 
 #### 1. Keyword Queries: 
 Such queries don't have semantic meaning, merely consist of keywords and the order of words does not matter:
@@ -38,7 +38,7 @@ Such queries consist also of a regular, natural sentence with semantic relations
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Usage standalone: Try a Query Classifier
+## Stand-alone Usage
 To test how a query classifier works before integrating it into a pipeline, you can run it just as an individual component:
 
 ```python
@@ -70,7 +70,7 @@ Note how the node returns two objects: the query (e.g.'Arya Stark father') and t
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Usage in a pipeline: Use different retrievers depending on the query type
+## Route Queries to Different Retrievers
 
 You can use a Query Classifier within a pipeline as a "decision node". Depending on the output of the classifier other parts of the pipeline will be executed. For example, we can route keyword queries to an ElasticsearchRetriever and semantic queries (questions/statements) to DPR.  
 
@@ -102,7 +102,7 @@ res_2 = pipe.run(
 )
 
 ```
-### Usage in a pipeline: Run QA only on proper questions
+## Run QA on Proper Questions Only
 
 If you add QA to an existing search system, it can make sense to only use it for real questions that come in and keep a basic document search with elasticsearch for the remaining keyword queries. You can use a Query Classifier to build such a hybrid pipeline: 
 
@@ -134,7 +134,7 @@ res_2 = pipe.run(
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Which models are available?
+## Which models are available?
 The transformer classifier is more accurate than the SkLearn classifier as it can use the context and order of words. However, it requires more memory and most probably GPU for faster inference. You can mitigate those down sides by choosing a very small transformer model. The default models we trained are using a mini BERT architecture which is only about `50 MB` in size and allows relatively fast inference on CPU.
 
 <div style={{ marginBottom: "3rem" }} />
