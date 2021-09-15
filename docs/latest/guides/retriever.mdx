@@ -208,7 +208,7 @@ from haystack.pipeline import ExtractiveQAPipeline
 document_store = ElasticsearchDocumentStore(similarity="cosine")
 ...
 retriever = EmbeddingRetriever(document_store=document_store,
-                               embedding_model="deepset/sentence_bert")
+                               embedding_model="sentence-transformers/all-MiniLM-L6-v2")
 ...
 p = ExtractiveQAPipeline(reader, retriever)
 ```

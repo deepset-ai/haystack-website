@@ -220,8 +220,13 @@ NewNode = CustomNode()
 
 ## Decision nodes
 
-You can add decision nodes where only one "branch" is executed afterwards. This allows, for example, to classify an incoming query and depending on the result routing it to different modules:
+You can add decision nodes where only one "branch" is executed afterwards.
+This allows, for example, to classify an incoming query and depending on the result routing it to different modules.
+To find a ready-made example of a decision node, have a look at [the page](/usage/query-classifier) about the `QueryClassifier`.
+
 ![image](https://user-images.githubusercontent.com/1563902/102452199-41229b80-403a-11eb-9365-7038697e7c3e.png)
+
+If you'd like to define our own, you'll need to create a class that looks something like this:
 
 ```python
     class QueryClassifier():
@@ -279,8 +284,6 @@ doc_pipe = FAQPipeline(retriever=retriever)
 res = doc_pipe.run(query="How can I change my address?", top_k_retriever=3)
 
 ```
-
-We plan many more features around the new pipelines including parallelized execution, distributed execution, dry runs - so stay tuned!
 
 <div style={{ marginBottom: "3rem" }} />
 

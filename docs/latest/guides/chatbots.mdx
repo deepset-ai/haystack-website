@@ -121,6 +121,11 @@ class ActionHaystack(Action):
 
         return []
 ```
+You will also want to declare this new action in the `domain.yml` file:
+```
+actions:
+- call_haystack
+```
 
 ## Running the Chatbot
 
