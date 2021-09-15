@@ -18,6 +18,7 @@ export const getDownloadUrl = async ({
       owner: "deepset-ai",
       repo: "haystack",
       path: `docs${version && version !== "latest" ? `/${version}` : ""}${repoPath}${filename}`,
+      ref: "docs0100_relaese"
     });
     if (Array.isArray(res.data)) return;
     if (!res.data.download_url) return;
