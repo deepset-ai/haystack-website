@@ -142,7 +142,7 @@ result["answers"]
 
 FAQPipeline wraps the [Retriever](/usage/retriever) into a pipeline and allows it to be used for question answering with FAQ data. Compared to other types of question answering, FAQ-style QA is significantly faster. However, it’s only able to answer FAQ-type questions because this type of QA matches queries against questions that already exist in your FAQ documents.
 
-For this task, we recommend using the Embedding Retriever with a sentence similarity model such as `deepset/sentence_bert.` Here’s an example of an FAQPipeline in action:
+For this task, we recommend using the Embedding Retriever with a sentence similarity model such as `sentence-transformers/all-MiniLM-L6-v2` Here’s an example of an FAQPipeline in action:
 
 ```python
 pipeline = FAQPipeline(retriever=retriever)
@@ -157,3 +157,57 @@ result["answers"]
 ```
 
 Check out our [tutorial](/tutorials/existing-faqs) for more information on FAQPipeline.
+
+## QuestionGenerationPipeline
+
+The most basic version of a question generator pipeline takes a document as input and outputs generated questions
+which the the document can answer.
+
+``` python
+text1 = "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant whitespace."
+
+question_generation_pipeline = QuestionGenerationPipeline(question_generator)
+result = question_generation_pipeline.run(documents=[document])
+print(result)
+```
+Output:
+``` python
+[' Who created Python?',
+ ' When was Python first released?',
+ " What is Python's design philosophy?"]
+```
+
+## QuestionAnswerGenerationPipeline
+
+This pipeline takes a document as input, generates questions on it, and attempts to answer these questions using a Reader model.
+
+``` python
+qag_pipeline = QuestionAnswerGenerationPipeline(question_generator, reader)
+result = qag_pipeline.run(document=document)
+print(result)
+```
+Output:
+``` python
+{
+ ...
+ 'query_doc_list': [{'docs': [{'text': "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first ...", ...}],
+                     'queries': ' Who created Python?'},
+                    ...],
+ 'results': [{'answers': [{'answer': 'Guido van Rossum',
+                           'context': 'eted, high-level, general-purpose '
+                                      'programming language. Created by Guido '
+                                      'van Rossum and first released in 1991, '
+                                      "Python's design philosophy emphasizes ",
+                           'document_id': '2ce1de1b4d6dd8e4564795c955e0b356',
+                           'offset_end': 83,
+                           'offset_end_in_doc': 103,
+                           'offset_start': 67,
+                           'offset_start_in_doc': 87,
+                           'score': 0.9960587024688721}],
+              'no_ans_gap': 15.335145950317383,
+              'query': ' Who created Python?'},
+              ...
+             ],
+ ...
+ }
+```
