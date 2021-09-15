@@ -8,17 +8,14 @@ you will find some tips and tricks here for using Haystack in your language.
 
 ## Preprocessor
 
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
-
-**Note**
-
-This feature will be implemented by [this PR.](https://github.com/deepset-ai/haystack/pull/1160)
-
-</div>
-
 The PreProcessor's sentence tokenization is language specific.
 If you are using the PreProcessor on a language other than English,
 make sure to set the `language` argument when initializing it.
+
+``` python
+preprocessor = PreProcessor(language="sv", ...)
+```
+[Here](https://github.com/deepset-ai/haystack/blob/3e6def7e03097021c8efd1b5c277bec6e541c162/haystack/preprocessor/preprocessor.py#L17) you will find the list of supported languages.
 
 <div style={{ marginBottom: "3rem" }} />
 

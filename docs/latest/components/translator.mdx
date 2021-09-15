@@ -4,17 +4,15 @@ Texts come in different languages. This is not different for search and there ar
 One of them is actually to translate the incoming query, the documents or the search results.
 
 Let's imagine you have an English corpus of technical docs, but the mother tongue of many of your users is French.
-You can use a Translator node in your pipeline to
+You can use a `Translator` node in your pipeline to
 
-1. Translate the incoming query from French to English
-2. Search in your English corpus for the right document / answer
-3. Translate the results back from English to French
+- Translate the incoming query from French to English
+- Search in your English corpus for the right document / answer
+- Translate the results back from English to French
 
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+## Example: Stand-alone Translator
 
-**Example (Stand-alone Translator)**
-
-You can use the Translator component directly to translate your query or document(s):
+You can use the Translator component directly to translate your query or documents:
 
 ```python
 from haystack.schema import Document
@@ -33,7 +31,7 @@ res = translator.translate(documents=DOCS, query=None)
 
 <div style={{ marginBottom: "3rem" }} />
 
-**Example (Wrapping another Pipeline)**
+## Example: Wrapping another Pipeline
 
 You can also wrap one of your existing pipelines and "add" the translation nodes at the beginning and at the end of your pipeline.
 For example, lets translate the incoming query to from French to English, then do our document retrieval and then translate the results back from English to French:
@@ -52,4 +50,3 @@ pipeline_with_translation = TranslationWrapperPipeline(input_translator=in_trans
                                                        pipeline=pipeline)
 ```
 
-</div>

@@ -6,12 +6,18 @@ Haystack includes a suite of tools to:
 - normalize white space
 - split text into smaller pieces to optimize retrieval
 
-Check out our [preprocessing tutorial](/tutorials/train-dpr) if you'd like to start working with code examples already!
-
 These data preprocessing steps can have a big impact on the systems performance
 and effective handling of data is key to getting the most out of Haystack.
 
-The Document Store expects its inputs to come in the following format.
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+Check out our [preprocessing tutorial](/tutorials/train-dpr) if you'd like to start working with code examples already!
+
+</div>
+
+## Document Format
+
+The DocumentStore expects its inputs to come in the following format.
 The sections below will show you all the tools you'll need to ready your data for storing.
 
 ```python
@@ -91,10 +97,12 @@ See the [API documentation](https://haystack.deepset.ai/reference/crawler) for m
 ```python
 from haystack.connector import Crawler
 
-crawler = Crawler()
-docs = crawler.crawl(urls=["https://haystack.deepset.ai/overview/get-started"],
-                     output_dir="crawled_files",
-                     filter_urls= ["haystack\.deepset\.ai\/docs\/"])
+crawler = Crawler(output_dir="crawled_files")
+docs = crawler.crawl(
+    urls=["https://haystack.deepset.ai/overview/get-started"],
+    filter_urls=["haystack"],
+    crawler_depth=1
+)
 ```
 
 <div style={{ marginBottom: "3rem" }} />
@@ -106,7 +114,7 @@ it is recommended that they are further processed in order to ensure optimal Ret
 The `PreProcessor` takes one of the documents created by the converter as input,
 performs various cleaning steps and splits them into multiple smaller documents.
 
-For suggestions on how best to split your documents, see [Optimization](/usage/optimization)
+For suggestions on how best to split your documents, see [Optimization](/guides/optimization)
 
 ```python
 from haystack.preprocessor import PreProcessor

@@ -56,10 +56,16 @@ you can provide metadata information as a dictionary under the `meta` key. At qu
 
 <div style={{ marginBottom: "3rem" }} />
 
-## How can I see predictions during evaluation?
+## How can I see each component's output if it's running in a pipeline?
 
-To see predictions during evaluation, you want to initialize the `EvalDocuments` or `EvalAnswers` with `debug=True`.
+To see a pipeline component's out, you want to place an evaluation node after it in the pipeline.
+You'll want an `EvalDocuments` node after a `Retriever` and a `EvalAnswers` node after the `Reader`.
+Have a look at our [evaluation tutorial](/tutorials/5) to see how this is done.
+
+When initializing them, you want to set `debug=True`.
 This causes their `EvalDocuments.log` or `EvalAnswers.log` to be populated with a record of each prediction made.
+
+For more suggestions on how to debug a pipeline, have a look at our [blog article](https://medium.com/deepset-ai/debugging-pipelines-9a3d43f2d59c) on the topic.
 
 <div style={{ marginBottom: "3rem" }} />
 
