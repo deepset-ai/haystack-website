@@ -96,6 +96,8 @@ export const getMenu = async (version?: string) => {
 
 export async function getDocsVersions() {
   const tagNames = await getHaystackReleaseTagNames();
+  tagNames.push('v0.10.0')
+  console.log(tagNames)
   return tagNames.filter((tagName) => tagName.startsWith("v"));
 }
 

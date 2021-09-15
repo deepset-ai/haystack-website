@@ -81,6 +81,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
   params,
 }: GetStaticPropsContext) => {
+  console.log()
   if (!params?.slug || !Array.isArray(params.slug)) {
     return {
       notFound: true,
