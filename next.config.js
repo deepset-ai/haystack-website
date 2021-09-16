@@ -7,6 +7,190 @@ module.exports = {
         destination: "/overview/intro",
       },
       {
+        source: "/docs/intromd",
+        destination: "/overview/intro",
+      },
+      {
+        source: "/docs/get_startedmd",
+        destination: "/overview/get-started",
+      },
+      {
+        source: "/docs/use_casesmd",
+        destination: "/overview/use-cases",
+      },
+      {
+        source: "/docs/roadmapmd",
+        destination: "/overview/roadmap",
+      },
+      {
+        source: "/docs/faqmd",
+        destination: "/overview/faq",
+      },
+      {
+        source: "/docs/termsmd",
+        destination: "/overview/glossary",
+      },
+      {
+        source: "/docs/preprocessingmd",
+        destination: "/usage/preprocessing",
+      },
+      {
+        source: "/docs/pipelinesmd",
+        destination: "/usage/pipelines",
+      },
+      {
+        source: "/docs/documentstoremd",
+        destination: "/usage/document-store",
+      },
+      {
+        source: "/docs/retrievermd",
+        destination: "/usage/retriever",
+      },
+      {
+        source: "/docs/readermd",
+        destination: "/usage/reader",
+      },
+      {
+        source: "/docs/generatormd",
+        destination: "/usage/generator",
+      },
+      {
+        source: "/docs/summarizermd",
+        destination: "/usage/summarizer",
+      },
+      {
+        source: "/docs/translatormd",
+        destination: "/usage/translator",
+      },
+      {
+        source: "/docs/knowledgegraphmd",
+        destination: "/usage/knowledge-graph",
+      },
+      {
+        source: "/docs/languagesmd",
+        destination: "/usage/languages",
+      },
+      {
+        source: "/docs/omain_adaptationmd",
+        destination: "/usage/domain-adaptation",
+      },
+      {
+        source: "/docs/optimizationmd",
+        destination: "/usage/optimization",
+      },
+      {
+        source: "/docs/annotationmd",
+        destination: "/usage/annotation",
+      },
+      {
+        source: "/docs/rankermd",
+        destination: "/usage/ranker",
+      },
+      {
+        source: "/docs/query_classifiermd",
+        destination: "/usage/query-classifier",
+      },
+      {
+        source: "/docs/tutorial1md",
+        destination: "/tutorials/first-qa-system",
+      },
+      {
+        source: "/docs/tutorial2md",
+        destination: "/tutorials/fine-tuning-a-model",
+      },
+      {
+        source: "/docs/tutorial3md",
+        destination: "/tutorials/without-elasticsearch",
+      },
+      {
+        source: "/docs/tutorial4md",
+        destination: "/tutorials/existing-faqs",
+      },
+      {
+        source: "/docs/tutorial5md",
+        destination: "/tutorials/evaluation",
+      },
+      {
+        source: "/docs/tutorial6md",
+        destination: "/tutorials/dense-passage-retrieval",
+      },
+      {
+        source: "/docs/tutorial7md",
+        destination: "/tutorials/retrieval-augmented-generation",
+      },
+      {
+        source: "/docs/tutorial8md",
+        destination: "/tutorials/preprocessing",
+      },
+      {
+        source: "/docs/tutorial9md",
+        destination: "/tutorials/train-dpr",
+      },
+      {
+        source: "/docs/tutorial10md",
+        destination: "/tutorials/knowledge-graph",
+      },
+      {
+        source: "/docs/tutorial11md",
+        destination: "/tutorials/pipelines",
+      },
+      {
+        source: "/docs/tutorial12md",
+        destination: "/tutorials/lfqa",
+      },
+      {
+        source: "/docs/apidatabasemd",
+        destination: "/reference/document-store",
+      },
+      {
+        source: "/docs/apiretrievermd",
+        destination: "/reference/retriever",
+      },
+      {
+        source: "/docs/apireadermd",
+        destination: "/reference/reader",
+      },
+      {
+        source: "/docs/apigeneratormd",
+        destination: "/reference/generator",
+      },
+      {
+        source: "/docs/apisummarizermd",
+        destination: "/reference/summarizer",
+      },
+      {
+        source: "/docs/apitranslatormd",
+        destination: "/reference/translator",
+      },
+      {
+        source: "/docs/apiindexingmd",
+        destination: "/reference/preprocessor",
+      },
+      {
+        source: "/docs/file_convertersmd",
+        destination: "/reference/file-converters",
+      },
+      {
+        source: "/docs/apicrawlermd",
+        destination: "/reference/crawler",
+      },
+      {
+        source: "/docs/apievaluationmd",
+        destination: "/reference/evaluation",
+      },
+      {
+        source: "/docs/apipipelinesmd",
+        destination: "/reference/pipelines",
+      },
+      {
+        source: "/docs/apiknowledgegraphmd",
+        destination: "/reference/knowledge-graph",
+      },
+      {
+        source: "/docs/apigraphretrievermd",
+        destination: "/reference/graph-retriever",
+      },
+      {
         source: "/docs/latest/get_startedmd",
         destination: "/overview/get-started",
       },
