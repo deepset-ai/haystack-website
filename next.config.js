@@ -3,6 +3,74 @@ module.exports = {
   async rewrites() {
     return [
       {
+        source: "/usage/preprocessing",
+        destination: "/components/preprocessing",
+      },
+      {
+        source: "/usage/pipelines",
+        destination: "/components/pipelines",
+      },
+      {
+        source: "/usage/document-store",
+        destination: "/components/document-store",
+      },
+      {
+        source: "/usage/retriever",
+        destination: "/components/retriever",
+      },
+      {
+        source: "/usage/reader",
+        destination: "/components/reader",
+      },
+      {
+        source: "/usage/generator",
+        destination: "/components/generator",
+      },
+      {
+        source: "/usage/summarizer",
+        destination: "/components/summarizer",
+      },
+      {
+        source: "/usage/translator",
+        destination: "/components/translator",
+      },
+      {
+        source: "/usage/knowledge-graph",
+        destination: "/components/knowledge-graph",
+      },
+      {
+        source: "/usage/languages",
+        destination: "/guides/languages",
+      },
+      {
+        source: "/usage/domain-adaptation",
+        destination: "/guides/domain-adaptation",
+      },
+      {
+        source: "/usage/optimization",
+        destination: "/guides/optimization",
+      },
+      {
+        source: "/usage/annotation",
+        destination: "/guides/annotation",
+      },
+      {
+        source: "/usage/rest-api",
+        destination: "/guides/rest-api",
+      },
+      {
+        source: "/usage/chatbots",
+        destination: "/guides/chatbots",
+      },
+      {
+        source: "/usage/ranker",
+        destination: "/components/ranker",
+      },
+      {
+        source: "/usage/query-classifier",
+        destination: "/components/query-classifier",
+      },
+      {
         source: "/docs/intromd",
         destination: "/overview/intro",
       },
