@@ -2,9 +2,9 @@
 
 ## Flexibility powered by DAGs
 
-In order to build modern search pipelines, you need two things: powerful building blocks and an easy way to stick them together.
-The `Pipeline` class is exactly built for this purpose and enables many search scenarios beyond QA.
-The core idea is that you can build a Directed Acyclic Graph (DAG) where each node is one building block (Reader, Retriever, Generator ...).
+To build modern search pipelines, you need two things: powerful building blocks and an easy way to stick them together.
+The `Pipeline` class is precisely built for this purpose and enables many search scenarios beyond QA.
+The core idea is to build a Directed Acyclic Graph (DAG) where each Node is one building block (Reader, Retriever, Generator ...).
 Here's a simple example for a standard Open-Domain QA Pipeline:
 
 ```python
@@ -13,12 +13,12 @@ from haystack import Pipeline
 p = Pipeline()
 p.add_node(component=retriever, name="ESRetriever1", inputs=["Query"])
 p.add_node(component=reader, name="QAReader", inputs=["ESRetriever1"])
-res = p.run(query="What did Einstein work on?", top_k_retriever=1)
+res = p.run(query="What did Einstein work on?")
 ```
 
 <div style={{ marginBottom: "3rem" }} />
 
-## Initializing a Pipeline
+## Initialize a Pipeline
 
 To start building your custom pipeline, you’ll need to initialize an object of the base Pipeline class:
 
@@ -28,11 +28,11 @@ from haystack import Pipeline
 pipeline = Pipeline()
 ```
 
-By default, a new pipeline receives a root node called `Query`, which is the entry point to the pipeline graph. From that point on, you need to manually define how the information flows from one node to the next.
+By default, a new pipeline receives a root node called `Query` or `File` depending on whether it's a Query or Indexing Pipeline, as the entry point to the pipeline graph. You need to manually define how the information flows from one node to the next from that point on.
 
-## Adding Nodes to a Pipeline
+## Add Nodes to a Pipeline
 
-Use the `add_node()` method to add new components to the pipeline graph. You may either initialize the modules before or during the call to `add_node()`. When you add a node to the pipeline, give it a name and a list of inputs that may contain one or more items. Note how the default `Query` node acts as the input node to the first explicitly defined node.
+Use the `add_node()` method to add new components to the pipeline graph. You may either initialize the modules before or during the call to `add_node()`. When you add a node to the pipeline, give it a name and a list of inputs containing one or more items. Note how the default `Query` node acts as the input node to the first explicitly defined node.
 
 ``` python
 pipeline.add_node(component=retriever, name='Retriever', inputs=['Query'])
@@ -62,22 +62,22 @@ When you create a custom pipeline, you need to pay extra care that each node’s
 
 ## Arguments
 
-Whatever keyword arguments are passed into the `Pipeline.run()` method will be passed on to each node in the pipeline.
-For example, in the code snippet below, all nodes will receive `query`, `top_k_retriever` and `top_k_reader` as argument,
-even if they don't use those arguments. It is therefore very important when defining custom nodes that their
-keyword argument names do not clash with the other nodes in your pipeline.
+Each node in a Pipeline defines the arguments the run() method accepts. The Pipeline class takes care of passing relevant
+arguments to the node. In addition to mandatory inputs like `query`, the `run()` accepts optional node parameters like
+`top_k` with the `params` argument. For instance, `params={"top_k": 5}` will set the `top_k` of all nodes as 5. To
+target params to a specific node, the node name can be explicitly specified as `params={"Retriever": {"top_k": 5}}`.
+
 
 ```python
 res = pipeline.run(
     query="What did Einstein work on?",
-    top_k_retriever=1,
-    top_k_reader=5
+    params={"Retriever": {"top_k": 5}, "Reader": {"top_k": 3}}
 )
 ```
 
 <div style={{ marginBottom: "3rem" }} />
 
-## Running a Pipeline
+## Run a Pipeline
 
 The `run()` function is the single command that triggers the execution of the entire pipeline:
 
@@ -89,12 +89,12 @@ pipeline.run(query=query)
 Every node has its own `run()` method, and the pipeline `run()` call invokes each node, one after the other. When you `run()` a pipeline, all the function arguments are propagated to every node in the graph. To disambiguate, say, the `top_k` values of retriever and ranker, they have aliases that are automatically recognized by the respective modules. This lets you dynamically modify these parameters in each call to the pipeline:
 
 ``` python
-pipeline.run(query=query, top_k_retriever=28, top_k_ranker=9)
+pipeline.run(query=query, params={"retriever": {"top_k": 28}, "ranker": {"top_k": 9}})
 ```
 
 <div style={{ marginBottom: "3rem" }} />
 
-## Inspecting a Pipeline
+## Inspect a Pipeline
 
 ### Using `draw()`
 
@@ -111,6 +111,32 @@ retriever_node = pipeline.get_node('Retriever')
 ```
 
 <div style={{ marginBottom: "3rem" }} />
+
+## Add debug information
+
+Nodes in a Pipeline can add debug information that gets propagated to the final output of a Pipeline. For instance, a decision Node can append details on the decision made.
+
+To return debug data from a Node, add a `_debug` key in the output dict. The value can be a primitive or a dict.  For instance,
+
+```python
+def run(self, query: str):
+    if "?" in query:
+        return {"_debug": "The query contains a question mark"}, "output_1"
+    else:
+        return {"_debug": "The query does not contains a question mark"}, "output_2"
+ ```
+This `_debug` gets appended to a "global" `_debug` dict storing per Node  debug data that gets returned with the final output. The final output may look like: `{"answers": ..., "_debug": {"node_a": "my debug info", "node_b": {"key": "value"}}}`
+
+A Node in a Pipeline can access the global `_debug` from preceding nodes by adding `_debug` in the `run()` method:
+
+```python
+def run(self, query: str, _debug: dict):
+    debug_info = _debug["PrecedingNodeA"]
+    ...
+ ```
+
+<div style={{ marginBottom: "3rem" }} />
+
 
 ## Running a Node in Isolation
 
@@ -144,7 +170,7 @@ and simplifies the configuration of pipeline parameters in production.
 For example, you can define and save a simple Retriever Reader pipeline by saving the following to a file:
 
 ```yaml
-version: "0.7"
+version: "0.9"
 
 components: # define all the building-blocks for Pipeline
   - name: MyReader # custom-name for the component; helpful for visualization & debugging
@@ -183,22 +209,22 @@ For another example YAML config, check out [this file](https://github.com/deepse
 
 ## Custom Nodes
 
-Thanks to the modularity of pipelines, you can create your own nodes and comfortably integrate them into your system. You should define a `run()` function at the core of each node class that accepts a flexible number of keyword arguments in the form of a dictionary (i.e., **kwargs). That's where the entire functionality of your node will be defined. Let's look at a node class template:
+Thanks to the modularity of pipelines, you can create your own nodes and comfortably integrate them into your system. You should define a `run()` function at the core of each node class that accepts a flexible number of mandatory or optional keyword arguments. That's where the entire functionality of your node will be defined. Let's look at a node class template:
 
 ``` python
-class NodeTemplate():
+class NodeTemplate(BaseComponent):
     outgoing_edges = 1
 
-    def run(self, **kwargs):
-        # Insert code here to manipulate the variables in kwarg
-            return (kwargs, "output_1")
+    def run(self, query: str, my_arg: Optional[int] = 10):
+        # Insert code here to manipulate the input & produce an output
+            return output, "output_1"
 ```
 
-Usually, your node will have one outgoing edge and thus one return value. Just like the `**kwargs` input to a node, a node's return value should also come in the form of a Python dictionary.  That value is returned within a tuple, which also contains its name, e.g., `output_1`.
+Usually, your node will have one outgoing edge and thus one return value. A node's return value should come in the form of a Python dictionary. That value is returned within a tuple, which also contains the outgoing edge name e.g., `output_1`.
 
 It's also possible to have more than one outgoing edge, typically in a decision node. A decision node's `run()` method consists of a decision function that determines the path in the graph by which to send down its input. Such a function has more than one possible return value, and all of these will be named accordingly, i.e. `output_1`, `output_2`, and so forth.
 
-When defining your own custom nodes, you can either create them from scratch or let your new node class inherit from `haystack.BaseComponent`. This second method provides a lot of Node functionality, like methods to save and load arguments:
+When defining your own custom nodes, you must inherit from `haystack.BaseComponent`. This registers the node as a Component that can later be added to a Pipeline.
 
 ``` python
 from haystack import BaseComponent
@@ -207,16 +233,6 @@ class CustomNode(BaseComponent):
     pass
 ```
 
-To view the functionality of this new class, initialize a new node object and print its methods (the if-condition filters out dunder methods, which are less informative):
-
-``` python
-NewNode = CustomNode()
-[method for method in NewNode().__dir__() if method[0] != '_']
-
->>> ['subclasses', 'pipeline_config', 'load_from_args', 'run', 'set_config']
-```
-
-<div style={{ marginBottom: "3rem" }} />
 
 ## Decision nodes
 
@@ -229,15 +245,15 @@ To find a ready-made example of a decision node, have a look at [the page](/comp
 If you'd like to define our own, you'll need to create a class that looks something like this:
 
 ```python
-    class QueryClassifier():
+    class QueryClassifier(BaseComponent):
         outgoing_edges = 2
 
-        def run(self, **kwargs):
-            if "?" in kwargs["query"]:
-                return (kwargs, "output_1")
+        def run(self, query):
+            if "?" in query:
+                return {}, "output_1"
 
             else:
-                return (kwargs, "output_2")
+                return {}, "output_2"
 
     pipe = Pipeline()
     pipe.add_node(component=QueryClassifier(), name="QueryClassifier", inputs=["Query"])
@@ -246,7 +262,7 @@ If you'd like to define our own, you'll need to create a class that looks someth
     pipe.add_node(component=JoinDocuments(join_mode="concatenate"), name="JoinResults",
                   inputs=["ESRetriever", "DPRRetriever"])
     pipe.add_node(component=reader, name="QAReader", inputs=["JoinResults"])
-    res = p.run(query="What did Einstein work on?", top_k_retriever=1)
+    res = p.run(query="What did Einstein work on?", params={"ESRetriever": {"top_k": 1}, "DPRRetriever": {"top_k": 3}})
 ```
 
 <div style={{ marginBottom: "3rem" }} />
@@ -269,19 +285,19 @@ from haystack.pipeline import DocumentSearchPipeline, ExtractiveQAPipeline, Pipe
 
 # Extractive QA
 qa_pipe = ExtractiveQAPipeline(reader=reader, retriever=retriever)
-res = qa_pipe.run(query="When was Kant born?", top_k_retriever=3, top_k_reader=5)
+res = qa_pipe.run(query="When was Kant born?", params={"retriever": {"top_k": 3}, "reader": {"top_k": 5}})
 
 # Document Search
 doc_pipe = DocumentSearchPipeline(retriever=retriever)
-res = doc_pipe.run(query="Physics Einstein", top_k_retriever=1)
+res = doc_pipe.run(query="Physics Einstein", params={"retriever": {"top_k": 3}})
 
 # Generative QA
 doc_pipe = GenerativeQAPipeline(generator=rag_generator, retriever=retriever)
-res = doc_pipe.run(query="Physics Einstein", top_k_retriever=1)
+res = doc_pipe.run(query="Physics Einstein", params={"retriever": {"top_k": 3}})
 
 # FAQ based QA
 doc_pipe = FAQPipeline(retriever=retriever)
-res = doc_pipe.run(query="How can I change my address?", top_k_retriever=3)
+res = doc_pipe.run(query="How can I change my address?", params={"retriever": {"top_k": 3}})
 
 ```
 
@@ -299,7 +315,7 @@ p.add_node(component=es_retriever, name="ESRetriever", inputs=["Query"])
 p.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["Query"])
 p.add_node(component=JoinDocuments(join_mode="concatenate"), name="JoinResults", inputs=["ESRetriever", "DPRRetriever"])
 p.add_node(component=reader, name="QAReader", inputs=["JoinResults"])
-res = p.run(query="What did Einstein work on?", top_k_retriever=1)
+res = p.run(query="What did Einstein work on?", params={"ESRetriever": {"top_k": 1}, "DPRRetriever": {"top_k": 3}})
 ```
 
 ![image](https://user-images.githubusercontent.com/1563902/102451782-7bd80400-4039-11eb-9046-01b002a783f8.png)
@@ -395,7 +411,7 @@ We can now call the pipeline with any [Helsinki-NLP translation model](https://h
 
 ``` python
 query = "What's the history of Quidditch?'
-result = pipeline.run(query=query, top_k_retriever=30, top_k_ranker=20, language='fr')
+result = pipeline.run(query=query, params={"retriever": {"top_k": 30}, "ranker": {"top_k": 20}, "language": "fr"})
 result['documents'][0].text
 
 >>> "''Quidditch'' a obtenu son nom du marais queerditch, l'emplacement du premier jeu enregistré. le jeu a été basé sur un jeu joué par une sorcière au 11ème siècle. un snitch d'or a été introduit à la suite d'un jeu 1269 joué en kent. on pense qu'une version balai du jeu peut avoir inspiré le mouvement du jeu moderne 'harlem shuffle'"
@@ -404,8 +420,42 @@ result['documents'][0].text
 Now, how about Ukrainian?
 
 ``` python
-result = pipeline.run(query=query, top_k_retriever=30, top_k_ranker=20, language='uk')
+result = pipeline.run(query=query, params={"retriever": {"top_k": 30}, "ranker": {"top_k": 30}, "language": "uk"})
 result['documents'][0].text
 
 >>> '" Quuiditch " отримала свою назву від дивного болота, місця першої в історії записаної гри. Гру було засновано на грі, яку грала відьма у XI столітті. Золотий стукач було введено у гру 1269 гри в кенті. Вважається, що версія мітла у грі, можливо, надихнула сучасну гру на " заплутування " move " гри'
 ```
+
+## Distributed Pipelines with Ray
+
+Ray (https://ray.io) is a framework for distributed computing.
+
+Ray allows distributing a Pipeline's components across a cluster of machines. The individual components of a
+Pipeline can be independently scaled. For instance, an extractive QA Pipeline deployment can have three replicas
+of the Reader and a single replica for the Retriever. It enables efficient resource utilization by horizontally
+scaling Components.
+
+To set the number of replicas, add  `replicas` in the YAML config for the node in a pipeline:
+
+```yaml
+components:
+    ...
+
+pipelines:
+  - name: ray_query_pipeline
+    type: RayPipeline
+    nodes:
+      - name: ESRetriever
+        replicas: 2  # number of replicas to create on the Ray cluster
+        inputs: [ Query ]
+```
+
+A RayPipeline can only be created with a YAML Pipeline config:
+
+```python
+from haystack.pipeline import RayPipeline
+pipeline = RayPipeline.load_from_yaml(path="my_pipelines.yaml", pipeline_name="my_query_pipeline")
+pipeline.run(query="What is the capital of Germany?")
+```
+By default, RayPipelines creates an instance of RayServe locally. To connect to an existing Ray instance,
+set the `address` parameter when creating the RayPipeline instance.
