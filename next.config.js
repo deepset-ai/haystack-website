@@ -100,63 +100,63 @@ module.exports = {
       },
       {
         source: "/docs/preprocessingmd",
-        destination: "/usage/preprocessing",
+        destination: "/components/preprocessing",
       },
       {
         source: "/docs/pipelinesmd",
-        destination: "/usage/pipelines",
+        destination: "/components/pipelines",
       },
       {
         source: "/docs/documentstoremd",
-        destination: "/usage/document-store",
+        destination: "/components/document-store",
       },
       {
         source: "/docs/retrievermd",
-        destination: "/usage/retriever",
+        destination: "/components/retriever",
       },
       {
         source: "/docs/readermd",
-        destination: "/usage/reader",
+        destination: "/components/reader",
       },
       {
         source: "/docs/generatormd",
-        destination: "/usage/generator",
+        destination: "/components/generator",
       },
       {
         source: "/docs/summarizermd",
-        destination: "/usage/summarizer",
+        destination: "/components/summarizer",
       },
       {
         source: "/docs/translatormd",
-        destination: "/usage/translator",
+        destination: "/components/translator",
       },
       {
         source: "/docs/knowledgegraphmd",
-        destination: "/usage/knowledge-graph",
+        destination: "/components/knowledge-graph",
       },
       {
         source: "/docs/languagesmd",
-        destination: "/usage/languages",
+        destination: "/guides/languages",
       },
       {
-        source: "/docs/omain_adaptationmd",
-        destination: "/usage/domain-adaptation",
+        source: "/docs/domain_adaptationmd",
+        destination: "/guides/domain-adaptation",
       },
       {
         source: "/docs/optimizationmd",
-        destination: "/usage/optimization",
+        destination: "/guides/optimization",
       },
       {
         source: "/docs/annotationmd",
-        destination: "/usage/annotation",
+        destination: "/guides/annotation",
       },
       {
         source: "/docs/rankermd",
-        destination: "/usage/ranker",
+        destination: "/guides/ranker",
       },
       {
         source: "/docs/query_classifiermd",
-        destination: "/usage/query-classifier",
+        destination: "/guides/query-classifier",
       },
       {
         source: "/docs/tutorial1md",
@@ -280,63 +280,63 @@ module.exports = {
       },
       {
         source: "/docs/latest/preprocessingmd",
-        destination: "/usage/preprocessing",
+        destination: "/components/preprocessing",
       },
       {
         source: "/docs/latest/pipelinesmd",
-        destination: "/usage/pipelines",
+        destination: "/components/pipelines",
       },
       {
         source: "/docs/latest/documentstoremd",
-        destination: "/usage/document-store",
+        destination: "/components/document-store",
       },
       {
         source: "/docs/latest/retrievermd",
-        destination: "/usage/retriever",
+        destination: "/components/retriever",
       },
       {
         source: "/docs/latest/readermd",
-        destination: "/usage/reader",
+        destination: "/components/reader",
       },
       {
         source: "/docs/latest/generatormd",
-        destination: "/usage/generator",
+        destination: "/components/generator",
       },
       {
         source: "/docs/latest/summarizermd",
-        destination: "/usage/summarizer",
+        destination: "/components/summarizer",
       },
       {
         source: "/docs/latest/translatormd",
-        destination: "/usage/translator",
+        destination: "/components/translator",
       },
       {
         source: "/docs/latest/knowledgegraphmd",
-        destination: "/usage/knowledge-graph",
+        destination: "/components/knowledge-graph",
       },
       {
         source: "/docs/latest/languagesmd",
-        destination: "/usage/languages",
+        destination: "/guides/languages",
       },
       {
-        source: "/docs/latest/omain_adaptationmd",
-        destination: "/usage/domain-adaptation",
+        source: "/docs/latest/domain_adaptationmd",
+        destination: "/guides/domain-adaptation",
       },
       {
         source: "/docs/latest/optimizationmd",
-        destination: "/usage/optimization",
+        destination: "/guides/optimization",
       },
       {
         source: "/docs/latest/annotationmd",
-        destination: "/usage/annotation",
+        destination: "/guides/annotation",
       },
       {
         source: "/docs/latest/rankermd",
-        destination: "/usage/ranker",
+        destination: "/components/ranker",
       },
       {
         source: "/docs/latest/query_classifiermd",
-        destination: "/usage/query-classifier",
+        destination: "/components/query-classifier",
       },
       {
         source: "/docs/latest/tutorial1md",
@@ -507,7 +507,7 @@ module.exports = {
         destination: '/usage/v0.9.0/languages',
       },
       {
-        source: '/docs/v0.9.0/omain_adaptationmd',
+        source: '/docs/v0.9.0/domain_adaptationmd',
         destination: '/usage/v0.9.0/domain-adaptation',
       },
       {
@@ -691,7 +691,7 @@ module.exports = {
         destination: '/usage/v0.8.0/languages',
       },
       {
-        source: '/docs/v0.8.0/omain_adaptationmd',
+        source: '/docs/v0.8.0/domain_adaptationmd',
         destination: '/usage/v0.8.0/domain-adaptation',
       },
       {
@@ -875,7 +875,7 @@ module.exports = {
         destination: '/usage/v0.7.0/languages',
       },
       {
-        source: '/docs/v0.7.0/omain_adaptationmd',
+        source: '/docs/v0.7.0/domain_adaptationmd',
         destination: '/usage/v0.7.0/domain-adaptation',
       },
       {
@@ -1059,7 +1059,7 @@ module.exports = {
         destination: '/usage/v0.6.0/languages',
       },
       {
-        source: '/docs/v0.6.0/omain_adaptationmd',
+        source: '/docs/v0.6.0/domain_adaptationmd',
         destination: '/usage/v0.6.0/domain-adaptation',
       },
       {
@@ -1243,7 +1243,7 @@ module.exports = {
         destination: '/usage/v0.5.0/languages',
       },
       {
-        source: '/docs/v0.5.0/omain_adaptationmd',
+        source: '/docs/v0.5.0/domain_adaptationmd',
         destination: '/usage/v0.5.0/domain-adaptation',
       },
       {
@@ -1427,7 +1427,7 @@ module.exports = {
         destination: '/usage/v0.4.0/languages',
       },
       {
-        source: '/docs/v0.4.0/omain_adaptationmd',
+        source: '/docs/v0.4.0/domain_adaptationmd',
         destination: '/usage/v0.4.0/domain-adaptation',
       },
       {
