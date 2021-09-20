@@ -43,7 +43,7 @@ We typically pass the output of the Retriever to another component such as the R
 
 `DocumentSearchPipeline` wraps the [Retriever](/components/retriever) into a pipeline. Note that this wrapper does not endow the Retrievers with additional functionality but instead allows them to be used consistently with other Haystack Pipeline objects and with the same familiar syntax. Creating this pipeline is as simple as passing the Retriever into the pipeline’s constructor:
 
-```python
+``` python
 pipeline = DocumentSearchPipeline(retriever=retriever)
 
 query = "Tell me something about that time when they play chess."
@@ -128,7 +128,7 @@ result = pipeline.run(query=query, params={"retriever": {"top_k": 10}, "reader":
 
 You may access the answer and other information like the model’s confidence and original context via the `answers` key, in this manner:
 
-```python
+``` python
 result["answers"]
 >>> [{'answer': 'der Klang der Musik',
   'score': 9.269367218017578,
@@ -209,4 +209,33 @@ Output:
              ],
  ...
  }
+```
+
+## MostSimilarDocumentsPipeline
+
+This pipeline is used to find the most similar documents to a given document in your document store.
+
+You will need to first make sure that your indexed documents have attached embeddings.
+You can generate and store their embeddings using the `DocumentStore.update_embeddings()` method.
+
+``` python
+from haystack.pipeline import MostSimilarDocumentsPipeline
+
+msd_pipeline = MostSimilarDocumentsPipeline(document_store)
+result = msd_pipeline.run(document_ids=[doc_id1, doc_id2, ...])
+print(result)
+```
+
+Output:
+
+``` python
+[[
+  {'text': "Southern California's economy is diver...",
+   'score': 0.8605178832348279,
+   'question': None,
+   'meta': {'name': 'Southern_California'},
+   'embedding': ...,
+   'id': '6e26b1b78c48efc6dd6c888e72d0970b'},
+   ...
+]]
 ```
