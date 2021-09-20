@@ -29,12 +29,48 @@ docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.9.2
 Next you can initialize the Haystack object that will connect to this instance.
 
 ```python
+from haystack.document_store import ElasticSearchDocumentStore
+
 document_store = ElasticsearchDocumentStore()
 ```
 
-Note that we also support [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch-docs/).
-Follow [their documentation](https://opendistro.github.io/for-elasticsearch-docs/docs/install/)
-to run it and connect to it using Haystack's `OpenDistroElasticsearchDocumentStore` class.
+### Open Distro for Elasticsearch
+
+Learn how to get started [here](https://opendistro.github.io/for-elasticsearch-docs/#get-started)
+
+If you have Docker set up, we recommend pulling the Docker image and running it.
+
+```bash
+docker pull amazon/opendistro-for-elasticsearch:1.13.2
+docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.13.2
+```
+
+Next you can initialize the Haystack object that will connect to this instance.
+
+```python
+from haystack.document_store import OpenDistroElasticsearchDocumentStore
+
+document_store = OpenDistroElasticsearchDocumentStore()
+```
+
+### OpenSearch
+
+Learn how to get started [here](https://opensearch.org/docs/#docker-quickstart)
+
+If you have Docker set up, we recommend pulling the Docker image and running it.
+
+```bash
+docker pull opensearchproject/opensearch:1.0.1
+docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opensearchproject/opensearch:1.0.1
+```
+
+Next you can initialize the Haystack object that will connect to this instance.
+
+```bash
+from haystack.document_store import OpenSearchDocumentStore
+
+document_store = OpenSearchDocumentStore()
+```
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -210,11 +246,33 @@ The Document Stores have different characteristics. You should choose one depend
 - Fast & accurate sparse retrieval with many tuning options
 - Basic support for dense retrieval
 - Production-ready
-- Support also for Open Distro
 
 **Cons:**
 
 - Slow for dense retrieval with more than ~ 1 Mio documents
+
+### Open Distro for Elasticsearch
+
+**Pros:**
+
+- Fully open source (Apache 2.0 license)
+- Essentially the same features as Elasticsearch
+
+**Cons:**
+
+- Slow for dense retrieval with more than ~ 1 Mio documents
+
+### OpenSearch
+
+**Pros:**
+
+- Fully open source (Apache 2.0 license)
+- Essentially the same features as Elasticsearch
+- Has more support for vector similarity comparisons and approximate nearest neighbours algorithms
+
+**Cons:**
+
+- Not as optimized as dedicated vector similarity options like Milvus and FAISS
 
 <div style={{ marginBottom: "3rem" }} />
 
