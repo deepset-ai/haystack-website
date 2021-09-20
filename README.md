@@ -2,7 +2,7 @@
 
 ### Getting Started
 
-First, install Next.js (if needed)
+First, install Next.js (if needed):
 
 ```bash
 npm install next react react-dom
