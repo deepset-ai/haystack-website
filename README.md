@@ -1,18 +1,16 @@
 ## Development
 
-### Environment Variables
-
-Get a [personal access token from GitHub](https://github.com/settings/tokens/new). The `public_repo` scope is sufficient.
-
-Create a `.env.local` file and add your token as an env variable:
-
-```bash
-GITHUB_PERSONAL_ACCESS_TOKEN="youraccesstoken"
-```
-
 ### Getting Started
 
-First, run the development server:
+First, install Next.js (if needed)
+
+```bash
+npm install next react react-dom
+# or
+yarn install next 
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -29,6 +27,16 @@ yarn dev:watch
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+#### Environment Variables
+
+If you have permission issues when starting up, get a [personal access token from GitHub](https://github.com/settings/tokens/new). The `public_repo` scope is sufficient.
+
+Create a `.env.local` file and add your token as an env variable:
+
+```bash
+GITHUB_PERSONAL_ACCESS_TOKEN="youraccesstoken"
+```
 
 ### Required Reading
 
