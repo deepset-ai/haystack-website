@@ -63,6 +63,36 @@ from haystack.document_store import FAISSDocumentStore
 document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
 ```
 
+#### Save & Load
+
+FAISS document stores can be saved to disk and reloaded:
+
+```python
+from haystack.document_store import FAISSDocumentStore
+
+document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
+
+# Generates two files: my_faiss_index.faiss and my_faiss_index.json
+document_store.save("my_faiss_index.faiss")
+
+# Looks for the two files generated above
+new_document_store = FAISSDocumentStore.load("my_faiss_index.faiss")
+
+assert new_document_store.faiss_index_factory_str == "Flat"
+```
+
+While `my_faiss_index.faiss` contains the index, `my_faiss_index.json` 
+contains the parameters used to inizialize it (like `faiss_index_factory_store`). 
+This configuration file is necessary for `load()` to work. It simply contains 
+the initial parameters in a JSON format. 
+For example, a hand-written configuration file for the above FAISS index could look like:
+
+```json
+{
+    faiss_index_factory_store: 'Flat'
+}
+```
+
 <div style={{ marginBottom: "3rem" }} />
 
 ### In Memory
