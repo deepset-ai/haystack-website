@@ -14,18 +14,6 @@ To get started using Haystack for evaluation, we recommend having a look at our 
 
 </div>
 
-## Datasets
-
-Annotated datasets are crucial for evaluating the retrieval as well as the question answering capabilities of your system.
-Haystack is designed to work with question answering datasets that follow SQuAD format.
-Please check out our [annotation tool](/guides/annotation) if you're interested in creating your own dataset.
-
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
-
-**Data Tool:** have a look at our `SquadData` object in `haystack/squad_data.py` if you'd like to manipulate SQuAD style data using Pandas dataframes.
-
-</div>
-
 ## Open vs Closed Domain
 
 There are two evaluation modes known as **open domain** and **closed domain.**
@@ -90,3 +78,15 @@ While F1 and EM would both score “one hundred percent” as sharing zero simil
 SAS is particularly useful to seek out cases where F1 doesn't give a good indication of the validity of a predicted answer.
 
 You can read more about SAS in [this paper](https://arxiv.org/abs/2108.06130).
+
+## Datasets
+
+Annotated datasets are crucial for evaluating the retrieval as well as the question answering capabilities of your system.
+Haystack is designed to work with question answering datasets that follow SQuAD format.
+Please check out our [annotation tool](/guides/annotation) if you're interested in creating your own dataset.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Data Tool:** have a look at our `SquadData` object in `haystack/squad_data.py` if you'd like to manipulate SQuAD style data using Pandas dataframes.
+
+</div>
