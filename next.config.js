@@ -439,7 +439,7 @@ module.exports = {
         destination: "/reference/graph-retriever",
       },
       {
-        source: '/bm/benchmarks/',
+        source: '/bm/benchmarks',
         destination: '/benchmarks/latest',
       },
       {
