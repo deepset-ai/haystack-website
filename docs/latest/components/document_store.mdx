@@ -13,104 +13,125 @@ Initialising a new DocumentStore within Haystack is straight forward.
 
 <div style={{ marginBottom: "3rem" }} />
 
-### Elasticsearch
+## Types
 
-[Install](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html)
-Elasticsearch and then [start](https://www.elastic.co/guide/en/elasticsearch/reference/current/starting-elasticsearch.html)
-an instance.
-
-If you have Docker set up, we recommend pulling the Docker image and running it.
-
-```bash
-docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.2
-docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.9.2
-```
-
-Next you can initialize the Haystack object that will connect to this instance.
-
-```python
-document_store = ElasticsearchDocumentStore()
-```
-
-Note that we also support [Open Distro for Elasticsearch](https://opendistro.github.io/for-elasticsearch-docs/).
-Follow [their documentation](https://opendistro.github.io/for-elasticsearch-docs/docs/install/)
-to run it and connect to it using Haystack's `OpenDistroElasticsearchDocumentStore` class.
-
-<div style={{ marginBottom: "3rem" }} />
-
-### Milvus
-
-Follow the [official documentation](https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md) to start a Milvus instance via Docker.
-Note that we also have a utility function `haystack.utils.launch_milvus` that can start up a Milvus instance.
-
-You can initialize the Haystack object that will connect to this instance as follows:
-
-```python
-from haystack.document_store import MilvusDocumentStore
-
-document_store = MilvusDocumentStore()
-```
-
-<div style={{ marginBottom: "3rem" }} />
-
-### FAISS
-
-The `FAISSDocumentStore` requires no external setup. Start it by simply using this line.
-
-```python
-from haystack.document_store import FAISSDocumentStore
-
-document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
-```
-
-<div style={{ marginBottom: "3rem" }} />
-
-### In Memory
-
-The `InMemoryDocumentStore()` requires no external setup. Start it by simply using this line.
-
-```python
-from haystack.document_store import InMemoryDocumentStore
-
-document_store = InMemoryDocumentStore()
-```
-
-<div style={{ marginBottom: "3rem" }} />
-
-### SQL
-
-The `SQLDocumentStore` requires SQLite, PostgresQL or MySQL to be installed and started.
-Note that SQLite already comes packaged with most operating systems.
-
-```python
-from haystack.document_store import SQLDocumentStore
-
-document_store = SQLDocumentStore()
-```
-
-<div style={{ marginBottom: "3rem" }} />
-
-### Weaviate
-
-The `WeaviateDocumentStore` requires a running Weaviate Server.
-You can start a basic instance like this (see the [Weaviate docs](https://www.semi.technology/developers/weaviate/current/) for details):
-
-```
-    docker run -d -p 8080:8080 --env AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED='true' --env PERSISTENCE_DATA_PATH='/var/lib/weaviate' semitechnologies/weaviate:1.4.0
-```
-
-Afterwards, you can use it in Haystack:
-
-```python
-from haystack.document_store import WeaviateDocumentStore
-
-document_store = WeaviateDocumentStore()
-```
-
-Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
-See API documentation for more info.
-
-<div style={{ marginBottom: "3rem" }} />
+<Disclosures
+    options={[
+        {
+            title: "Elasticsearch",
+            content: (
+                <div>
+                <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Install</a>&nbsp;
+                Elasticsearch and then <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/starting-elasticsearch.html">start</a>&nbsp;
+                an instance.<br></br><br></br>
+                If you have Docker set up, we recommend pulling the Docker image and running it.<br></br>
+                <pre>
+                    <code>docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.2</code>
+                    <code>docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.9.2</code>
+                </pre>
+                Next you can initialize the Haystack object that will connect to this instance.<br></br>
+                <pre>
+                    <code>document_store = ElasticsearchDocumentStore()</code>
+                </pre>
+                Note that we also support <a href="https://opendistro.github.io/for-elasticsearch-docs/">Open Distro for Elasticsearch</a>.
+                Follow <a href="https://opendistro.github.io/for-elasticsearch-docs/docs/install/">their documentation</a>&nbsp;
+                to run it and connect to it using Haystack's `OpenDistroElasticsearchDocumentStore` class.
+                </div>
+            )
+        },
+        {
+            title: "Milvus",
+            content: (
+                <div>
+                Follow the <a href="https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md">official documentation</a> to start a Milvus instance via Docker.
+                Note that we also have a utility function haystack.utils.launch_milvus that can start up a Milvus instance.<br></br><br></br>
+                You can initialize the Haystack object that will connect to this instance as follows:<br></br>
+                <pre>
+                    <code>from haystack.document_store import MilvusDocumentStore</code>
+                    <code>document_store = MilvusDocumentStore()</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "FAISS",
+            content: (
+                <div>
+                The FAISSDocumentStore requires no external setup. Start it by simply using this line.<br></br>
+                <pre>
+                    <code>from haystack.document_store import FAISSDocumentStore</code>
+                    <code>document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")</code>
+                </pre>
+                <h4>Save & Load</h4>
+                FAISS document stores can be saved to disk and reloaded:
+                <pre>
+                    <code>from haystack.document_store import FAISSDocumentStore</code>
+                    <code>document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")</code>
+                    <code># Generates two files: my_faiss_index.faiss and my_faiss_index.json</code>
+                    <code>document_store.save("my_faiss_index.faiss")</code>
+                    <code># Looks for the two files generated above</code>
+                    <code>new_document_store = FAISSDocumentStore.load("my_faiss_index.faiss")</code>
+                    <code>assert new_document_store.faiss_index_factory_str == "Flat"</code>
+                </pre>
+                While `my_faiss_index.faiss` contains the index, my_faiss_index.json
+                contains the parameters used to inizialize it (like faiss_index_factory_store). 
+                This configuration file is necessary for load() to work. It simply contains 
+                the initial parameters in a JSON format.<br></br>
+                For example, a hand-written configuration file for the above FAISS index could look like:<br></br>
+                <pre>
+                    <code>&#123;</code>
+                    <code>  faiss_index_factory_store: 'Flat'</code>
+                    <code>&#125;</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "In Memory",
+            content: (
+                <div>
+                The InMemoryDocumentStore() requires no external setup. Start it by simply using this line.
+                <pre>
+                    <code>from haystack.document_store import InMemoryDocumentStore</code>
+                    <code>document_store = InMemoryDocumentStore()</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "SQL",
+            content: (
+                <div>
+                The SQLDocumentStore requires SQLite, PostgresQL or MySQL to be installed and started.
+                Note that SQLite already comes packaged with most operating systems.
+                <pre>
+                <code>from haystack.document_store import SQLDocumentStore</code>
+                <code>document_store = SQLDocumentStore()</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "Weaviate",
+            content: (
+                <div>
+                The WeaviateDocumentStore requires a running Weaviate Server.
+                You can start a basic instance like this (see the <a href="https://www.semi.technology/developers/weaviate/current/">Weaviate docs</a> for details):
+                <pre>
+                    <code>docker run -d -p 8080:8080 --env AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED='true' --env PERSISTENCE_DATA_PATH='/var/lib/weaviate' semitechnologies/weaviate:1.4.0</code>
+                </pre>
+                Afterwards, you can use it in Haystack:
+                <pre>
+                    <code>from haystack.document_store import WeaviateDocumentStore</code>
+                    <code>document_store = WeaviateDocumentStore()</code>
+                </pre>
+                Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
+                See API documentation for more info.
+                </div>
+            )
+        }
+    ]}
+/>
 
 ## Input Format
 
