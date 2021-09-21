@@ -26,6 +26,7 @@
       {"slug": "reader", "title": "Reader"},
       {"slug": "generator", "title": "Generator" },
       {"slug": "summarizer", "title": "Summarizer"},
+      {"slug": "classifier", "title": "Classifier"},
       {"slug": "translator", "title": "Translator"},
       {"slug": "knowledge-graph", "title": "Knowledge Graph"},
       {"slug": "ranker", "title": "Ranker"},
