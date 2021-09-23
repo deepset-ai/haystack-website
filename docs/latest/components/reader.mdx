@@ -211,9 +211,9 @@ you might like to try ALBERT XXL which has set SoTA performance on SQuAD 2.0.
 
 When printing the full results of a Reader,
 you will see that each prediction is accompanied
-by a value in the range of 0 to 1 reflecting the model's confidence in that prediction
+by a value in the range of 0 to 1 reflecting the model's confidence in that prediction.
 
-In the output of `print_answers()`, you will find the model confidence in dictionary key called `confidence`.
+In the output of `print_answers()`, you will find the model's confidence score in dictionary key called `score`.
 
 ```python
 from haystack.utils import print_answers
@@ -229,14 +229,16 @@ print_answers(prediction, details="all")
                        'She travels with her father, Eddard, to '
                        "King's Landing when he is made Hand of the "
                        'King. Before she leaves,',
-            'confidence': 0.9899835586547852,
+            'score': 0.9899835586547852,
             ...
         },
     ]
 }
 ```
 
-In order to align this probability score with the model's accuracy, finetuning needs to be performed
+The intuition behind this score is the following: if a model has on average a confidence score of 0.9 that means we can expect the model's predictions to be correct in about 9 out of 10 cases.
+However, if the model's training data strongly differs from the data it needs to make predictions on, we cannot guarantee that the confidence score and the model's accuracy are well aligned.
+In order to better align this confidence score with the model's accuracy, finetuning needs to be performed
 on a specific dataset.
 To this end, the reader has a method `calibrate_confidence_scores(document_store, device, label_index, doc_index, label_origin)`.
 The parameters of this method are the same as for the `eval()` method because the calibration of confidence scores is performed on a dataset that comes with gold labels.
