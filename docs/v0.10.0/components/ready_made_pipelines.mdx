@@ -11,16 +11,15 @@ Haystack Pipelines chain together various Haystack components to build a search 
 ## ExtractiveQAPipeline
 
 Extractive QA is the task of searching through a large collection of documents for a span of text that answers a question. The `ExtractiveQAPipeline` combines the Retriever and the Reader such that:
-- The [Retriever](/components/v0.10.0/retriever) combs through a database and returns only the documents that it deems to be the most relevant to the query.
-- The [Reader](/components/v0.10.0/reader) accepts the documents returned by the Retriever and selects a text span as the answer to the query.
+- The [Retriever](/components/retriever) combs through a database and returns only the documents that it deems to be the most relevant to the query.
+- The [Reader](/components/reader) accepts the documents returned by the Retriever and selects a text span as the answer to the query.
 
-Note that outside of a pipeline, Readers and Retrievers accept a `top_k` parameter, which specifies the number of documents that they should return per query. However, inside the pipeline, these parameters are renamed to `top_k_retriever` and `top_k_reader`.
 
 ```python
 pipeline = ExtractiveQAPipeline(reader, retriever)
 
 query = "What is Hagrid's dog's name?"
-result = pipeline.run(query=query, top_k_retriever=10, top_k_reader=1)
+result = pipeline.run(query=query, params={"retriever": {"top_k": 10}, "reader": {"top_k": 1}})
 ```
 
 The output of the pipeline is a Python dictionary with answers stored under the `answers` key. The output provides additional information such as the context from which the answer was extracted and the model’s confidence in the accuracy of the extracted answer.
@@ -42,13 +41,13 @@ For more examples that showcase `ExtractiveQAPipeline`, check out one of our tut
 
 We typically pass the output of the Retriever to another component such as the Reader or the Generator. However, we can use the Retriever by itself for semantic document search to find the documents most relevant to our query.
 
-`DocumentSearchPipeline` wraps the [Retriever](/components/v0.10.0/retriever) into a pipeline. Note that this wrapper does not endow the Retrievers with additional functionality but instead allows them to be used consistently with other Haystack Pipeline objects and with the same familiar syntax. Creating this pipeline is as simple as passing the Retriever into the pipeline’s constructor:
+`DocumentSearchPipeline` wraps the [Retriever](/components/retriever) into a pipeline. Note that this wrapper does not endow the Retrievers with additional functionality but instead allows them to be used consistently with other Haystack Pipeline objects and with the same familiar syntax. Creating this pipeline is as simple as passing the Retriever into the pipeline’s constructor:
 
-```python
+``` python
 pipeline = DocumentSearchPipeline(retriever=retriever)
 
 query = "Tell me something about that time when they play chess."
-result = pipeline.run(query, top_k_retriever=2)
+result = pipeline.run(query, params={"retriever": {"top_k": 2})
 ```
 
 The pipeline returns a Python dictionary with the retrieved documents accessible via the `documents` key:
@@ -65,14 +64,14 @@ result["documents"]
 
 Unlike extractive QA, which produces an answer by extracting a text span from a collection of passages, generative QA works by producing free text answers that need not correspond to a span of any document. Because the answers are not constrained by text spans, the Generator is able to create answers that are more appropriately worded compared to those extracted by the Reader. Therefore, it makes sense to employ a generative QA system if you expect answers to extend over multiple text spans, or if you expect answers to not be contained verbatim in the documents.
 
-`GenerativeQAPipeline` combines the [Retriever](/components/v0.10.0/retriever) with the [Generator](/components/v0.10.0/generator). To create an answer, the Generator uses the internal factual knowledge stored in the language model’s parameters in addition to the external knowledge provided by the Retriever’s output.
+`GenerativeQAPipeline` combines the [Retriever](/components/retriever) with the [Generator](/components/generator). To create an answer, the Generator uses the internal factual knowledge stored in the language model’s parameters in addition to the external knowledge provided by the Retriever’s output.
 
 You can build a `GenerativeQAPipeline` by simply placing the individual components inside the pipeline’s constructor:
 
 ```python
 pipeline = GenerativeQAPipeline(generator=generator, retriever=retriever)
 
-result = pipeline.run(query="Who opened the Chamber of Secrets?", top_k_retriever=10, top_k_generator=1)
+result = pipeline.run(query="Who opened the Chamber of Secrets?", params={"retriever": {"top_k": 10}, "generator": {"top_k": 1}})
 ```
 
 You can access the answer via the `answers` key:
@@ -90,12 +89,12 @@ For more examples on using `GenerativeQAPipeline`, check out our tutorials where
 
 Summarizer helps make sense of the Retriever’s output by creating a summary of the retrieved documents. This is useful for performing a quick sanity check and confirming the quality of candidate documents suggested by the Retriever, without having to inspect each document individually.
 
-`SearchSummarizationPipeline` combines the [Retriever](/components/v0.10.0/retriever) with the [Summarizer](/components/v0.10.0/summarizer). Below is an example of an implementation.
+`SearchSummarizationPipeline` combines the [Retriever](/components/retriever) with the [Summarizer](/components/summarizer). Below is an example of an implementation.
 
 ```python
-pipeline = SearchSummarizationPipeline(summarizer=summarizer, retriever=retriever)
+pipeline = SearchSummarizationPipeline(summarizer=summarizer, retriever=retriever, generate_single_summary=True)
 
-result = pipeline.run(query="Describe Luna Lovegood.", top_k_retriever=10, generate_single_summary=True)
+result = pipeline.run(query="Describe Luna Lovegood.", params={"retriever": {"top_k": 5}})
 ```
 
 
@@ -111,7 +110,7 @@ result['documents']
 
 Translator components bring the power of machine translation into your QA systems. Say your knowledge base is in English but the majority of your user base speaks German. With a `TranslationWrapperPipeline`, you can chain together:
 
-- The [Translator](/components/v0.10.0/translator), which translates a query source into a target language (e.g. German into English)
+- The [Translator](/components/translator), which translates a query source into a target language (e.g. German into English)
 - A search pipeline such as ExtractiveQAPipeline or DocumentSearchPipeline, which executes the translated query against a knowledge base.
 - Another Translator that translates the search pipeline's results from the target back into the source language (e.g. English into German)
 
@@ -124,12 +123,12 @@ pipeline = TranslationWrapperPipeline(input_translator=de_en_translator,
 
 query = "Was lässt den dreiköpfigen Hund weiterschlafen?" # What keeps the three-headed dog asleep?
 
-result = pipeline.run(query=query, top_k_retriever=10, top_k_reader=1)
+result = pipeline.run(query=query, params={"retriever": {"top_k": 10}, "reader": {"top_k": 1}})
 ```
 
 You may access the answer and other information like the model’s confidence and original context via the `answers` key, in this manner:
 
-```python
+``` python
 result["answers"]
 >>> [{'answer': 'der Klang der Musik',
   'score': 9.269367218017578,
@@ -140,14 +139,14 @@ result["answers"]
 
 ## FAQPipeline
 
-FAQPipeline wraps the [Retriever](/components/v0.10.0/retriever) into a pipeline and allows it to be used for question answering with FAQ data. Compared to other types of question answering, FAQ-style QA is significantly faster. However, it’s only able to answer FAQ-type questions because this type of QA matches queries against questions that already exist in your FAQ documents.
+FAQPipeline wraps the [Retriever](/components/retriever) into a pipeline and allows it to be used for question answering with FAQ data. Compared to other types of question answering, FAQ-style QA is significantly faster. However, it’s only able to answer FAQ-type questions because this type of QA matches queries against questions that already exist in your FAQ documents.
 
 For this task, we recommend using the Embedding Retriever with a sentence similarity model such as `sentence-transformers/all-MiniLM-L6-v2` Here’s an example of an FAQPipeline in action:
 
 ```python
 pipeline = FAQPipeline(retriever=retriever)
 query = "How to reduce stigma around Covid-19?"
-result = pipeline.run(query=query, top_k_retriever=1)
+result = pipeline.run(query=query, params={"retriever": {"top_k": 1})
 ```
 
 ```python
@@ -210,4 +209,33 @@ Output:
              ],
  ...
  }
+```
+
+## MostSimilarDocumentsPipeline
+
+This pipeline is used to find the most similar documents to a given document in your document store.
+
+You will need to first make sure that your indexed documents have attached embeddings.
+You can generate and store their embeddings using the `DocumentStore.update_embeddings()` method.
+
+``` python
+from haystack.pipeline import MostSimilarDocumentsPipeline
+
+msd_pipeline = MostSimilarDocumentsPipeline(document_store)
+result = msd_pipeline.run(document_ids=[doc_id1, doc_id2, ...])
+print(result)
+```
+
+Output:
+
+``` python
+[[
+  {'text': "Southern California's economy is diver...",
+   'score': 0.8605178832348279,
+   'question': None,
+   'meta': {'name': 'Southern_California'},
+   'embedding': ...,
+   'id': '6e26b1b78c48efc6dd6c888e72d0970b'},
+   ...
+]]
 ```

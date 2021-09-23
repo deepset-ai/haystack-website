@@ -26,6 +26,7 @@
       {"slug": "reader", "title": "Reader"},
       {"slug": "generator", "title": "Generator" },
       {"slug": "summarizer", "title": "Summarizer"},
+      {"slug": "classifier", "title": "Classifier"},
       {"slug": "translator", "title": "Translator"},
       {"slug": "knowledge-graph", "title": "Knowledge Graph"},
       {"slug": "ranker", "title": "Ranker"},
@@ -39,6 +40,7 @@
       {"slug": "languages", "title": "Languages Other Than English"},
       {"slug": "domain-adaptation","title": "Domain Adaptation"},
       {"slug": "optimization", "title": "Optimization"},
+      {"slug": "evaluation", "title": "Evaluation"},
       {"slug": "annotation", "title": "Annotation Tool"},
       {"slug": "rest-api", "title": "REST API"},
       {"slug": "chatbots", "title": "Chatbot Integration"}
@@ -107,43 +109,22 @@
     "subMenuTitle": "API Reference",
     "pathPrefix": "/reference/",
     "items": [
-      {
-        "slug": "document-store",
-        "title": "Document Store"
-      },
+      {"slug": "document-store", "title": "Document Store"},
       { "slug": "retriever", "title": "Retriever" },
       { "slug": "reader", "title": "Reader" },
       { "slug": "generator", "title": "Generator" },
-      {
-        "slug": "summarizer",
-        "title": "Summarizer"
-      },
-      {
-        "slug": "translator",
-        "title": "Translator"
-      },
-      {
-        "slug": "preprocessor",
-        "title": "Preprocessor"
-      },
-      {
-        "slug": "file-converters",
-        "title": "File Converters"
-      },
-      { "slug": "crawler", "title": "Crawler" },
-      {
-        "slug": "evaluation",
-        "title": "Evaluation"
-      },
+      {"slug": "summarizer", "title": "Summarizer"},
+      {"slug": "translator", "title": "Translator"},
+      {"slug": "preprocessor", "title": "Preprocessor"},
+      {"slug": "file-converters", "title": "File Converters"},
+      {"slug": "crawler", "title": "Crawler" },
+      {"slug": "evaluation", "title": "Evaluation"},
       { "slug": "pipelines", "title": "Pipelines" },
-      {
-        "slug": "knowledge-graph",
-        "title": "Knowledge Graph"
-      },
-      {
-        "slug": "graph-retriever",
-        "title": "Graph Retriever"
-      }
+      {"slug": "knowledge-graph", "title": "Knowledge Graph"},
+      {"slug": "graph-retriever", "title": "Graph Retriever"},
+      {"slug": "classifier", "title": "Classifier"},
+      {"slug": "question-generator", "title": "Question Generator"},
+      {"slug": "ranker", "title": "Ranker"}
     ]
   }
 ]

@@ -73,7 +73,7 @@ However, passing more documents to the `Reader` will create a larger workload fo
 These parameters can easily be tweaked as follows if using a `Finder`:
 
 ```python
-answers = pipeline.run(query="What did Einstein work on?", top_k_retriever=10, top_k_reader=5)
+answers = pipeline.run(query="What did Einstein work on?", params={"retriever": {"top_k": 10}, "reader": {"top_k": 5}})
 ```
 
 or like this if directly calling the `Retriever`:
@@ -86,7 +86,7 @@ retrieved_docs = retriever.retrieve(top_k=10)
 
 ## Metadata Filtering
 
-Metadata can be attached to the documents which you index into your DocumentStore (see the input data format [here](/components/v0.10.0/retriever)).
+Metadata can be attached to the documents which you index into your DocumentStore (see the input data format [here](/components/retriever)).
 At query time, you can apply filters based on this metadata to limit the scope of your search and ensure your answers
 come from a specific slice of your data.
 
@@ -96,7 +96,7 @@ This can reduce the work load of the retriever and also ensure that you get more
 
 Filters are applied via the `filters` argument of the `Retriever` class. In practice, this argument will probably
 be passed into the `Pipeline.run()` call, which will then route it on to the `Retriever` class
-(see our the Arguments on the [Pipelines page](/components/v0.10.0/pipelines) for an explanation).
+(see our the Arguments on the [Pipelines page](/components/pipelines) for an explanation).
 
 ```python
 pipeline.run(

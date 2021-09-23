@@ -50,6 +50,17 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
             valid_languages=["de","en"])
           </code>
           <code>doc = converter.convert(file_path=file, meta=None)</code>
+          <code>
+            # Alternatively, if you have a PDF containing images, Haystack uses tessaract under the hood to OCR image PDFs.
+          </code>
+          <code>
+            from haystack.file_converter import PDFToTextOCRConverter
+          </code>
+          <code>
+            converter = PDFToTextOCRConverter(remove_numeric_tables=False,
+            valid_languages=["deu","eng"])
+          </code>
+          <code>doc = converter.convert(file_path=file, meta=None)</code>
         </pre>
       ),
     },
@@ -71,7 +82,7 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
       content: (
         <div>
           <p>
-            Haystack also has a`convert_files_to_dicts()` utility function that
+            Haystack also has a `convert_files_to_dicts()` utility function that
             will convert all txt or pdf files in a given folder into this
             dictionary format.
           </p>
@@ -80,6 +91,26 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
               from haystack.preprocessor.utils import convert_files_to_dicts
             </code>
             <code>docs = convert_files_to_dicts(dir_path=doc_dir)</code>
+          </pre>
+        </div>
+      ),
+    },
+    {
+      title: "Image",
+      content: (
+        <div>
+          <p>
+            Haystack supports extraction of text from images using OCR.
+          </p>
+          <pre>
+            <code>
+              from haystack.file_converter import ImageToTextConverter
+            </code>
+            <code>
+            converter = ImageToTextConverter(remove_numeric_tables=True,
+            valid_languages=["de","en"])
+          </code>
+          <code>doc = converter.convert(file_path=file, meta=None)</code>
           </pre>
         </div>
       ),
@@ -114,7 +145,7 @@ it is recommended that they are further processed in order to ensure optimal Ret
 The `PreProcessor` takes one of the documents created by the converter as input,
 performs various cleaning steps and splits them into multiple smaller documents.
 
-For suggestions on how best to split your documents, see [Optimization](/guides/v0.10.0/optimization)
+For suggestions on how best to split your documents, see [Optimization](/guides/optimization)
 
 ```python
 from haystack.preprocessor import PreProcessor

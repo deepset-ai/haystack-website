@@ -14,13 +14,12 @@ Extractive QA is the task of searching through a large collection of documents f
 - The [Retriever](/components/retriever) combs through a database and returns only the documents that it deems to be the most relevant to the query.
 - The [Reader](/components/reader) accepts the documents returned by the Retriever and selects a text span as the answer to the query.
 
-Note that outside of a pipeline, Readers and Retrievers accept a `top_k` parameter, which specifies the number of documents that they should return per query. However, inside the pipeline, these parameters are renamed to `top_k_retriever` and `top_k_reader`.
 
 ```python
 pipeline = ExtractiveQAPipeline(reader, retriever)
 
 query = "What is Hagrid's dog's name?"
-result = pipeline.run(query=query, top_k_retriever=10, top_k_reader=1)
+result = pipeline.run(query=query, params={"retriever": {"top_k": 10}, "reader": {"top_k": 1}})
 ```
 
 The output of the pipeline is a Python dictionary with answers stored under the `answers` key. The output provides additional information such as the context from which the answer was extracted and the model’s confidence in the accuracy of the extracted answer.
@@ -44,11 +43,11 @@ We typically pass the output of the Retriever to another component such as the R
 
 `DocumentSearchPipeline` wraps the [Retriever](/components/retriever) into a pipeline. Note that this wrapper does not endow the Retrievers with additional functionality but instead allows them to be used consistently with other Haystack Pipeline objects and with the same familiar syntax. Creating this pipeline is as simple as passing the Retriever into the pipeline’s constructor:
 
-```python
+``` python
 pipeline = DocumentSearchPipeline(retriever=retriever)
 
 query = "Tell me something about that time when they play chess."
-result = pipeline.run(query, top_k_retriever=2)
+result = pipeline.run(query, params={"retriever": {"top_k": 2})
 ```
 
 The pipeline returns a Python dictionary with the retrieved documents accessible via the `documents` key:
@@ -72,7 +71,7 @@ You can build a `GenerativeQAPipeline` by simply placing the individual componen
 ```python
 pipeline = GenerativeQAPipeline(generator=generator, retriever=retriever)
 
-result = pipeline.run(query="Who opened the Chamber of Secrets?", top_k_retriever=10, top_k_generator=1)
+result = pipeline.run(query="Who opened the Chamber of Secrets?", params={"retriever": {"top_k": 10}, "generator": {"top_k": 1}})
 ```
 
 You can access the answer via the `answers` key:
@@ -93,9 +92,9 @@ Summarizer helps make sense of the Retriever’s output by creating a summary of
 `SearchSummarizationPipeline` combines the [Retriever](/components/retriever) with the [Summarizer](/components/summarizer). Below is an example of an implementation.
 
 ```python
-pipeline = SearchSummarizationPipeline(summarizer=summarizer, retriever=retriever)
+pipeline = SearchSummarizationPipeline(summarizer=summarizer, retriever=retriever, generate_single_summary=True)
 
-result = pipeline.run(query="Describe Luna Lovegood.", top_k_retriever=10, generate_single_summary=True)
+result = pipeline.run(query="Describe Luna Lovegood.", params={"retriever": {"top_k": 5}})
 ```
 
 
@@ -124,12 +123,12 @@ pipeline = TranslationWrapperPipeline(input_translator=de_en_translator,
 
 query = "Was lässt den dreiköpfigen Hund weiterschlafen?" # What keeps the three-headed dog asleep?
 
-result = pipeline.run(query=query, top_k_retriever=10, top_k_reader=1)
+result = pipeline.run(query=query, params={"retriever": {"top_k": 10}, "reader": {"top_k": 1}})
 ```
 
 You may access the answer and other information like the model’s confidence and original context via the `answers` key, in this manner:
 
-```python
+``` python
 result["answers"]
 >>> [{'answer': 'der Klang der Musik',
   'score': 9.269367218017578,
@@ -147,7 +146,7 @@ For this task, we recommend using the Embedding Retriever with a sentence simila
 ```python
 pipeline = FAQPipeline(retriever=retriever)
 query = "How to reduce stigma around Covid-19?"
-result = pipeline.run(query=query, top_k_retriever=1)
+result = pipeline.run(query=query, params={"retriever": {"top_k": 1})
 ```
 
 ```python
@@ -210,4 +209,33 @@ Output:
              ],
  ...
  }
+```
+
+## MostSimilarDocumentsPipeline
+
+This pipeline is used to find the most similar documents to a given document in your document store.
+
+You will need to first make sure that your indexed documents have attached embeddings.
+You can generate and store their embeddings using the `DocumentStore.update_embeddings()` method.
+
+``` python
+from haystack.pipeline import MostSimilarDocumentsPipeline
+
+msd_pipeline = MostSimilarDocumentsPipeline(document_store)
+result = msd_pipeline.run(document_ids=[doc_id1, doc_id2, ...])
+print(result)
+```
+
+Output:
+
+``` python
+[[
+  {'text': "Southern California's economy is diver...",
+   'score': 0.8605178832348279,
+   'question': None,
+   'meta': {'name': 'Southern_California'},
+   'embedding': ...,
+   'id': '6e26b1b78c48efc6dd6c888e72d0970b'},
+   ...
+]]
 ```
