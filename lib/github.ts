@@ -17,7 +17,7 @@ export const getDownloadUrl = async ({
     const res = await octokit.rest.repos.getContent({
       owner: "deepset-ai",
       repo: "haystack",
-      path: `docs${version && version !== "latest" ? `/${version}` : ""}${repoPath}${filename}`,
+      path: `docs${version && version !== "latest" ? `/${version}` : ""}${repoPath}${filename}`
     });
     if (Array.isArray(res.data)) return;
     if (!res.data.download_url) return;
