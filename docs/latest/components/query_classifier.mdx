@@ -42,7 +42,7 @@ Such queries consist also of a regular, natural sentence with semantic relations
 To test how a query classifier works before integrating it into a pipeline, you can run it just as an individual component:
 
 ```python
-from haystack.pipeline import TransformersQueryClassifier
+from haystack.query_classifier import TransformersQueryClassifier
 
 queries = ["Arya Stark father","Jon Snow UK",
            "who is the father of arya stark?","Which country was jon snow filmed in?"]
@@ -79,7 +79,8 @@ You can use a Query Classifier within a pipeline as a "decision node". Depending
 Below, we define a pipeline with a `TransformersQueryClassifier` that routes questions/statements to the node's `output_1` and keyword queries to `output_2`. We leverage this structure in the pipeline by connecting the DPRRetriever to `QueryClassifier.output_1` and the ESRetriever to `QueryClassifier.output_2`. 
 
 ```python
-from haystack.pipeline import TransformersQueryClassifier, Pipeline
+from haystack.pipeline import Pipeline
+from haystack.query_classifier import TransformersQueryClassifier
 from haystack.utils import print_answers
 
 query_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/bert-mini-finetune-question-detection")
@@ -101,7 +102,8 @@ res_2 = pipe.run(query="arya stark father")
 If you add QA to an existing search system, it can make sense to only use it for real questions that come in and keep a basic document search with elasticsearch for the remaining keyword queries. You can use a Query Classifier to build such a hybrid pipeline: 
 
 ```python
-haystack.pipeline import TransformersQueryClassifier, Pipeline
+from haystack.pipeline import Pipeline
+from haystack.query_classifier import TransformersQueryClassifier
 from haystack.utils import print_answers
 
 query_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/question-vs-statement-classifier")
