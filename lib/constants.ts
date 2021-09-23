@@ -75,6 +75,21 @@ export const referenceFiles: Meta = {
       filename: "graph_retriever.md",
       title: "Graph Retriever",
     },
+    {
+      slug: "question-generator",
+      filename: "question_generator.md",
+      title: "Question Generator",
+    },
+    {
+      slug: "classifier",
+      filename: "classifier.md",
+      title: "Classifier",
+    },
+    {
+      slug: "ranker",
+      filename: "ranker.md",
+      title: "Ranker",
+    },
   ],
 };
 
