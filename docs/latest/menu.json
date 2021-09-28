@@ -26,7 +26,6 @@
       {"slug": "reader", "title": "Reader"},
       {"slug": "generator", "title": "Generator" },
       {"slug": "summarizer", "title": "Summarizer"},
-      {"slug": "classifier", "title": "Classifier"},
       {"slug": "translator", "title": "Translator"},
       {"slug": "knowledge-graph", "title": "Knowledge Graph"},
       {"slug": "ranker", "title": "Ranker"},
@@ -122,7 +121,6 @@
       { "slug": "pipelines", "title": "Pipelines" },
       {"slug": "knowledge-graph", "title": "Knowledge Graph"},
       {"slug": "graph-retriever", "title": "Graph Retriever"},
-      {"slug": "classifier", "title": "Classifier"},
       {"slug": "question-generator", "title": "Question Generator"},
       {"slug": "ranker", "title": "Ranker"}
     ]
