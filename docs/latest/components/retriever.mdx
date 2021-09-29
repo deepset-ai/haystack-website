@@ -186,6 +186,10 @@ They are particular suited to cases where your query input is similar in style t
 i.e. when you are searching for most similar documents.
 This is not inherently suited to query based search where the length, language and format of the query usually significantly differs from the searched for text.
 
+If you are interested in using an embedding model from the HuggingFace Model hub as an Embedding Retirever,
+you should consider using the `haystack.modeling.transformers.Converter` object which can convert a Transformers model
+into the format required in order for it to be loaded as an `EmbeddingRetriever`.
+
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
 **Tip**

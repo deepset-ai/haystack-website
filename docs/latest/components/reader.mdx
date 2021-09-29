@@ -45,6 +45,48 @@ While these models can work on CPU, it is recommended that they are run using GP
 
 <div style={{ marginBottom: "3rem" }} />
 
+## Usage
+
+A Reader can be used in isolation through its `predict()` method.
+
+```python
+result = reader.predict(
+    query="Which country is Canberra located in?",
+    documents=documents,
+    top_k=10
+)
+```
+
+This will return a dictionary of the following format:
+
+```python
+{
+    'query': 'Which country is Canberra located in?',
+    'answers':[
+                 {'answer': 'Australia',
+                 'context': "Canberra, federal capital of the Commonwealth of Australia. It occupies part of the Australian Capital Territory (ACT),",
+                 'offset_answer_start': 147,
+                 'offset_answer_end': 154,
+                 'score': 0.9787139466668613,
+                 'document_id': '1337'
+                 },...
+              ],
+}
+```
+
+However, if you are looking to set up Haystack as a service, we recommend using the Reader in a pipeline.
+
+```python
+from haystack.pipeline import ExtractiveQAPipeline
+
+pipe = ExtractiveQAPipeline(reader, retriever)
+
+prediction = pipe.run(
+    query='Which country is Canberra located in?',
+    params={"Retriever": {"top_k": 10}, "Reader": {"top_k": 10}}
+)
+```
+
 ## Choosing the Right Model
 
 In Haystack, you can start using pretrained QA models simply by providing its HuggingFace Model Hub name to the Reader.
@@ -206,6 +248,44 @@ you might like to try ALBERT XXL which has set SoTA performance on SQuAD 2.0.
 </div>
 
 <div style={{ marginBottom: "3rem" }} />
+
+## Fine-tuning, Saving, Loading and Converting
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** If you'd like a hands on example, check out our tutorial on fine-tuning [here](/tutorials/fine-tuning-a-model)
+
+</div>
+
+In Haystack, it is possible to fine-tune your FARMReader model on any SQuAD format QA dataset.
+Simply call the `train()` method to kick off training.
+This method will also save your model in the specified save directory.
+
+```python
+reader.train(
+    data_dir=data_dir,
+    train_filename="dev-v2.0.json",
+    use_gpu=True,
+    n_epochs=1,
+    save_dir="my_model"
+)
+```
+
+If you want to load the model at a later point, simply initialize a `FARMReader` object as follows.
+
+```python
+new_reader = FARMReader(model_name_or_path="my_model")
+```
+
+If you would like to convert your model from or into the HuggingFace Transformers format we provide a `Converter` object.
+Calling `Converter.convert_to_transformers()` will return a list of HuggingFace models.
+This can be particularly useful if you'd like to upload the model to the HuggingFace Model Hub.
+
+```python
+from haystack.modelling.conversion.transformers import Converter
+
+transformers_models = Converter.convert_to_transformers(reader.inferencer.model)
+```
 
 ## Confidence Scores
 
