@@ -50,7 +50,7 @@ Simply clone it and call the following in the root directory:
 After [installing](https://rasa.com/docs/rasa/installation) Rasa and [initializing](https://rasa.com/docs/rasa/command-line-interface/#rasa-init) a new project,
 there are a few steps that a developer needs to take in order to get Rasa to communicate with Haystack.
 
-In `data/nlu.yaml`, you will want to define a new intent but providing example utterances of that intent:
+In `data/nlu.yaml`, you will want to define a new intent by providing example utterances of that intent:
 ```
 nlu:
 - intent: knowledge_question
@@ -92,7 +92,7 @@ By default the Rasa custom action server API is blocked so you will need to unco
 action_endpoint:
  url: "http://localhost:5055/webhook"
 ```
-Finally, we can define an action function that calls the Haystack API and handles the response in `acitons/actions.py`.
+Finally, we can define an action function that calls the Haystack API and handles the response in `actions/actions.py`.
 Here is an example of what that might look like:
 
 ``` python
