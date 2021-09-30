@@ -1546,6 +1546,38 @@ module.exports = {
         source: '/docs/v0.4.0/apigraphretrievermd',
         destination: '/reference/v0.4.0/graph-retriever',
       },
+      {
+        source: '/docs_hub/conf_modelmd',
+        destination: '/overview/get-started',
+      },
+      {
+        source: '/pricing/pricing',
+        destination: '/overview/get-started',
+      },
+      {
+        source: '/docs/signupmd',
+        destination: '/overview/get-started',
+      },
+      {
+        source: '/docs/get_started_hubmd',
+        destination: '/overview/get-started',
+      },
+      {
+        source: '/docs_hub/user_settingsmd',
+        destination: '/overview/get-started',
+      },
+      {
+        source: '/docs/dashboard_hubmd',
+        destination: '/overview/get-started',
+      },
+      {
+        source: '/docs_api/openapispec',
+        destination: '/overview/get-started',
+      },
+      {
+        source: '/docs_hub/get_started_hubmd',
+        destination: '/overview/get-started',
+      },
     ];
   },
 };
