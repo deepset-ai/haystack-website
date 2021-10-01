@@ -124,7 +124,7 @@
       {"slug": "graph-retriever", "title": "Graph Retriever"},
       {"slug": "question-generator", "title": "Question Generator"},
       {"slug": "ranker", "title": "Ranker"},
-      {"slug": "document-classifier", "title": "Document Classifier"},
+      {"slug": "document-classifier", "title": "Document Classifier"}
     ]
   }
 ]
