@@ -25,7 +25,7 @@ doc_classifier_model = 'bhadresh-savani/distilbert-base-uncased-emotion'
 doc_classifier = TransformersDocumentClassifier(model_name_or_path=doc_classifier_model)
 ```
 
-Alternatively, if you can't find a classification model that has been pre-trained for your exact classification task, you can use zero-shot classification with a custom list of labels as follows:
+Alternatively, if you can't find a classification model that has been pre-trained for your exact classification task, you can use zero-shot classification with a custom list of labels and a Natural language Inference (NLI) model as follows:
 
 ``` python
 doc_classifier_model = 'cross-encoder/nli-distilroberta-base'
