@@ -81,9 +81,9 @@ export const referenceFiles: Meta = {
       title: "Question Generator",
     },
     {
-      slug: "classifier",
-      filename: "classifier.md",
-      title: "Classifier",
+      slug: "document-classifier",
+      filename: "document_classifier.md",
+      title: "Document Classifier",
     },
     {
       slug: "ranker",

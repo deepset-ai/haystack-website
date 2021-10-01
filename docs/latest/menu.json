@@ -30,7 +30,8 @@
       {"slug": "knowledge-graph", "title": "Knowledge Graph"},
       {"slug": "ranker", "title": "Ranker"},
       {"slug": "query-classifier", "title": "Query Classifier"},
-      {"slug": "question-generator", "title": "Question Generator"}    ]
+      {"slug": "question-generator", "title": "Question Generator"},
+      {"slug": "document-classifier", "title": "Document Classifier"}]
   },
   {
     "subMenuTitle": "Guides",
@@ -122,7 +123,8 @@
       {"slug": "knowledge-graph", "title": "Knowledge Graph"},
       {"slug": "graph-retriever", "title": "Graph Retriever"},
       {"slug": "question-generator", "title": "Question Generator"},
-      {"slug": "ranker", "title": "Ranker"}
+      {"slug": "ranker", "title": "Ranker"},
+      {"slug": "document-classifier", "title": "Document Classifier"}
     ]
   }
 ]
