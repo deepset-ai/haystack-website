@@ -90,6 +90,17 @@ there are a couple QA models that are directly usable in Haystack.
               ),
             },
             {
+              title: "French",
+              content: (
+                <pre>
+                  <code>from haystack.reader import FARMReader</code>
+                  <code>
+                    reader = FARMReader("etalab-ia/camembert-base-squadFR-fquad-piaf")
+                  </code>
+                </pre>
+              ),
+            },
+            {
               title: "Italian",
               content: (
                 <pre>
@@ -138,12 +149,23 @@ there are a couple QA models that are directly usable in Haystack.
         <Disclosures
           options={[
             {
+              title: "German",
+              content: (
+                <pre>
+                  <code>from haystack.reader import TransformersReader</code>
+                  <code>
+                    reader = TransformersReader("deepset/gelectra-large-germanquad")
+                  </code>
+                </pre>
+              ),
+            },
+            {
               title: "French",
               content: (
                 <pre>
                   <code>from haystack.reader import TransformersReader</code>
                   <code>
-                    reader = TransformersReader("illuin/camembert-base-fquad")
+                    reader = TransformersReader("etalab-ia/camembert-base-squadFR-fquad-piaf")
                   </code>
                 </pre>
               ),
@@ -154,8 +176,22 @@ there are a couple QA models that are directly usable in Haystack.
                 <pre>
                   <code>from haystack.reader import TransformersReader</code>
                   <code>
-                    reader =
-                    TransformersReader("mrm8488/bert-italian-finedtuned-squadv1-it-alfa")
+                    reader = TransformersReader("mrm8488/bert-italian-finedtuned-squadv1-it-alfa")
+                  </code>
+                </pre>
+              ),
+            },
+            {
+              title: "Chinese",
+              content: (
+                <pre>
+                  <code>from haystack.reader import TransformersReader</code>
+                  <code>
+                    reader = TransformersReader("uer/roberta-base-chinese-extractive-qa")
+                  </code>
+                  <code># or</code>
+                  <code>
+                    reader = TransformersReader("wptoux/albert-chinese-large-qa")
                   </code>
                 </pre>
               ),
@@ -166,8 +202,7 @@ there are a couple QA models that are directly usable in Haystack.
                 <pre>
                   <code>from haystack.reader import TransformersReader</code>
                   <code>
-                    reader =
-                    TransformersReader("deepset/xlm-roberta-large-squad2")
+                    reader = TransformersReader("deepset/xlm-roberta-large-squad2")
                   </code>
                 </pre>
               ),
@@ -185,7 +220,7 @@ We are the creators of the **German** model and you can find out more about it [
 
 The **French**, **Italian**, **Spanish**, **Portuguese** and **Chinese** models are monolingual language models trained on versions of the SQuAD dataset in their respective languages
 and their authors report decent results in their model cards
-(e.g. [here](https://huggingface.co/illuin/camembert-base-fquad) and [here](https://huggingface.co/mrm8488/bert-italian-finedtuned-squadv1-it-alfa)).
+(e.g. [here](https://huggingface.co/etalab-ia/camembert-base-squadFR-fquad-piaf) and [here](https://huggingface.co/mrm8488/bert-italian-finedtuned-squadv1-it-alfa)).
 There also exist Korean QA models on the model hub but their performance is not reported.
 
 The **zero-shot model** that is shown above is a **multilingual XLM-RoBERTa Large** that is trained on English SQuAD.
