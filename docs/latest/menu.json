@@ -31,7 +31,9 @@
       {"slug": "ranker", "title": "Ranker"},
       {"slug": "query-classifier", "title": "Query Classifier"},
       {"slug": "question-generator", "title": "Question Generator"},
-      {"slug": "document-classifier", "title": "Document Classifier"}]
+      {"slug": "document-classifier", "title": "Document Classifier"},
+      {"slug": "entity-extractor", "title": "Entity Extractor"}
+    ]
   },
   {
     "subMenuTitle": "Guides",
