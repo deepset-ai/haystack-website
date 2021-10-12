@@ -182,7 +182,7 @@ This pipeline takes a document as input, generates questions on it, and attempts
 
 ``` python
 qag_pipeline = QuestionAnswerGenerationPipeline(question_generator, reader)
-result = qag_pipeline.run(document=document)
+result = qag_pipeline.run(documents=[document])
 print(result)
 ```
 Output:
