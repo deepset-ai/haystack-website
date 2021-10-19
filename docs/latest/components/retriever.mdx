@@ -209,10 +209,12 @@ from haystack.document_store import ElasticsearchDocumentStore
 from haystack.retriever import EmbeddingRetriever
 from haystack.pipeline import ExtractiveQAPipeline
 
-document_store = ElasticsearchDocumentStore(similarity="cosine")
+document_store = ElasticsearchDocumentStore(similarity="cosine",
+                                            embedding_dim=384)
 ...
 retriever = EmbeddingRetriever(document_store=document_store,
                                embedding_model="sentence-transformers/all-MiniLM-L6-v2")
+document_store.update_embeddings(retriever)
 ...
 p = ExtractiveQAPipeline(reader, retriever)
 ```
