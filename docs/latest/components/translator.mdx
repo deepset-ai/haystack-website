@@ -15,8 +15,8 @@ You can use a `Translator` node in your pipeline to
 You can use the Translator component directly to translate your query or documents:
 
 ```python
-from haystack.schema import Document
-from haystack.translator import TransformersTranslator
+from haystack import Document
+from haystack.nodes import TransformersTranslator
 
 DOCS = [
         Document(
@@ -37,8 +37,8 @@ You can also wrap one of your existing pipelines and "add" the translation nodes
 For example, lets translate the incoming query to from French to English, then do our document retrieval and then translate the results back from English to French:
 
 ```python
-from haystack.pipeline import TranslationWrapperPipeline, DocumentSearchPipeline
-from haystack.translator import TransformersTranslator
+from haystack.pipelines import TranslationWrapperPipeline, DocumentSearchPipeline
+from haystack.nodes import TransformersTranslator
 
 pipeline = DocumentSearchPipeline(retriever=my_dpr_retriever)
 

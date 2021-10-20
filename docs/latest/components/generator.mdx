@@ -32,7 +32,7 @@ or with LFQA ([here](/tutorials/pipelines)).
 Initialize a Generator as follows:
 
 ``` python
-from haystack.generator.transformers import RAGenerator
+from haystack.nodes import RAGenerator
 
 generator = RAGenerator(
     model_name_or_path="facebook/rag-sequence-nq",
@@ -45,7 +45,7 @@ generator = RAGenerator(
 Running a Generator in a pipeline:
 
 ``` python
-from haystack.pipeline import GenerativeQAPipeline
+from haystack.pipelines import GenerativeQAPipeline
 
 pipeline = GenerativeQAPipeline(generator=generator, retriever=dpr_retriever)
 result = pipelines.run(query='What are the best party games for adults?', top_k_retriever=20)

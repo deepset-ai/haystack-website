@@ -19,7 +19,7 @@ Haystack’s Readers are:
       content: (
         <div>
           <pre>
-            <code>from haystack.reader import FARMReader</code>
+            <code>from haystack.nodes import FARMReader</code>
             <code>model = "deepset/roberta-base-squad2"</code>
             <code>reader = FARMReader(model, use_gpu=True)</code>
           </pre>
@@ -31,7 +31,7 @@ Haystack’s Readers are:
       content: (
         <div>
           <pre>
-            <code>from haystack.reader import TransformersReader</code>
+            <code>from haystack.nodes import TransformersReader</code>
             <code>model = "deepset/roberta-base-squad2"</code>
             <code>reader = TransformersReader(model, use_gpu=1)</code>
           </pre>
@@ -77,7 +77,7 @@ This will return a dictionary of the following format:
 However, if you are looking to set up Haystack as a service, we recommend using the Reader in a pipeline.
 
 ```python
-from haystack.pipeline import ExtractiveQAPipeline
+from haystack.pipelines import ExtractiveQAPipeline
 
 pipe = ExtractiveQAPipeline(reader, retriever)
 
@@ -106,7 +106,7 @@ To get you started, we have a few recommendations for you to try out.
             <h4>RoBERTa (base)</h4>
             <p>An optimised variant of BERT and a great starting point.</p>
             <pre>
-              <code>from haystack.reader import FARMReader</code>
+              <code>from haystack.nodes import FARMReader</code>
               <code>reader = FARMReader("deepset/roberta-base-squad2")</code>
             </pre>
             <ul>
@@ -124,7 +124,7 @@ To get you started, we have a few recommendations for you to try out.
               speed.
             </p>
             <pre>
-              <code>from haystack.reader import FARMReader</code>
+              <code>from haystack.nodes import FARMReader</code>
               <code>reader = FARMReader("deepset/minilm-uncased-squad2")</code>
             </pre>
             <ul>
@@ -138,7 +138,7 @@ To get you started, we have a few recommendations for you to try out.
             <h4>ALBERT (XXL)</h4>
             <p>Large, powerful, SotA model.</p>
             <pre>
-              <code>from haystack.reader import FARMReader</code>
+              <code>from haystack.nodes import FARMReader</code>
               <code>
                 reader = FARMReader("ahotrod/albert_xxlargev1_squad2_512")
               </code>
@@ -164,7 +164,7 @@ To get you started, we have a few recommendations for you to try out.
             <h4>RoBERTa (base)</h4>
             <p>An optimised variant of BERT and a great starting point.</p>
             <pre>
-              <code>from haystack.reader import TransformersReader</code>
+              <code>from haystack.nodes import TransformersReader</code>
               <code>
                 reader = TransformersReader("deepset/roberta-base-squad2")
               </code>
@@ -184,7 +184,7 @@ To get you started, we have a few recommendations for you to try out.
               speed.
             </p>
             <pre>
-              <code>from haystack.reader import TransformersReader</code>
+              <code>from haystack.nodes import TransformersReader</code>
               <code>
                 reader = TransformersReader("deepset/minilm-uncased-squad2")
               </code>
@@ -200,7 +200,7 @@ To get you started, we have a few recommendations for you to try out.
             <h4>ALBERT (XXL)</h4>
             <p>Large, powerful, SotA model.</p>
             <pre>
-              <code>from haystack.reader import TransformersReader</code>
+              <code>from haystack.nodes import TransformersReader</code>
               <code>
                 reader =
                 TransformersReader("ahotrod/albert_xxlargev1_squad2_512")
@@ -282,7 +282,7 @@ Calling `Converter.convert_to_transformers()` will return a list of HuggingFace 
 This can be particularly useful if you'd like to upload the model to the HuggingFace Model Hub.
 
 ```python
-from haystack.modelling.conversion.transformers import Converter
+from haystack.modeling.conversion.transformers import Converter
 
 transformers_models = Converter.convert_to_transformers(reader.inferencer.model)
 ```
@@ -361,7 +361,7 @@ Haystack also has a close integration with FARM which means that you can further
 See our tutorials for an end-to-end example or below for a shortened example.
 
 ```python
-from haystack.reader import FARMReader
+from haystack.nodes import FARMReader
 
 # Initialise Reader
 model = "deepset/roberta-base-squad2"
@@ -408,7 +408,7 @@ These can be set when the Reader is initialized.
       content: (
         <div>
           <pre>
-            <code>from haystack.reader import FARMReader</code>
+            <code>from haystack.nodes import FARMReader</code>
             <code>
               reader = FARMReader(... max_seq_len=384, doc_stride=128 ...)
             </code>
@@ -421,7 +421,7 @@ These can be set when the Reader is initialized.
       content: (
         <div>
           <pre>
-            <code>from haystack.reader import TransformersReader</code>
+            <code>from haystack.nodes import TransformersReader</code>
             <code>
               reader = TransformersReader(... max_seq_len=384, doc_stride=128
               ...)

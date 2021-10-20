@@ -44,7 +44,7 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
       title: "PDF",
       content: (
         <pre>
-          <code>from haystack.file_converter import PDFToTextConverter</code>
+          <code>from haystack.nodes import PDFToTextConverter</code>
           <code>
             converter = PDFToTextConverter(remove_numeric_tables=True,
             valid_languages=["de","en"])
@@ -54,7 +54,7 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
             # Alternatively, if you have a PDF containing images, Haystack uses tessaract under the hood to OCR image PDFs.
           </code>
           <code>
-            from haystack.file_converter import PDFToTextOCRConverter
+            from haystack.nodes import PDFToTextOCRConverter
           </code>
           <code>
             converter = PDFToTextOCRConverter(remove_numeric_tables=False,
@@ -68,7 +68,7 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
       title: "DOCX",
       content: (
         <pre>
-          <code>from haystack.file_converter import DocxToTextConverter</code>
+          <code>from haystack.nodes import DocxToTextConverter</code>
           <code>
             converter = DocxToTextConverter(remove_numeric_tables=True,
             valid_languages=["de","en"])
@@ -88,7 +88,7 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
           </p>
           <pre>
             <code>
-              from haystack.preprocessor.utils import convert_files_to_dicts
+              from haystack.utils import convert_files_to_dicts
             </code>
             <code>docs = convert_files_to_dicts(dir_path=doc_dir)</code>
           </pre>
@@ -104,7 +104,7 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
           </p>
           <pre>
             <code>
-              from haystack.file_converter import ImageToTextConverter
+              from haystack.nodes import ImageToTextConverter
             </code>
             <code>
             converter = ImageToTextConverter(remove_numeric_tables=True,
@@ -126,7 +126,7 @@ In Haystack, you will find a web crawler that will help you scrape text from web
 See the [API documentation](https://haystack.deepset.ai/reference/crawler) for more details.
 
 ```python
-from haystack.connector import Crawler
+from haystack.nodes import Crawler
 
 crawler = Crawler(output_dir="crawled_files")
 docs = crawler.crawl(
@@ -148,7 +148,7 @@ performs various cleaning steps and splits them into multiple smaller documents.
 For suggestions on how best to split your documents, see [Optimization](/guides/optimization)
 
 ```python
-from haystack.preprocessor import PreProcessor
+from haystack.nodes import PreProcessor
 
 doc = converter.convert(file_path=file, meta=None)
 processor = PreProcessor(

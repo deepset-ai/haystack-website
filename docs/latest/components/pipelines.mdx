@@ -281,7 +281,9 @@ Last but not least, we added some ready-made pipelines that allow you to run sta
 **Examples:**
 
 ```python
-from haystack.pipeline import DocumentSearchPipeline, ExtractiveQAPipeline, Pipeline, JoinDocuments
+from haystack.pipelines import DocumentSearchPipeline, ExtractiveQAPipeline
+from haystack.nodes import JoinDocuments
+from haystack import Pipeline
 
 # Extractive QA
 qa_pipe = ExtractiveQAPipeline(reader=reader, retriever=retriever)
@@ -335,9 +337,7 @@ pipeline = Pipeline()
 To create new pipeline nodes, we initialize the modules first. For our use case, we need a retriever, a ranker, and a summarizer. We tell the summarizer to return a single summary per query (instead of one summary for each document), and that its length should be somewhere between ten and 300 words:
 
 ``` python
-from haystack.retriever import ElasticsearchRetriever
-from haystack.ranker import SentenceTransformersRanker
-from haystack.summarizer import TransformersSummarizer
+from haystack.nodes import ElasticsearchRetriever, SentenceTransformersRanker, TransformersSummarizer
 
 retriever = ElasticsearchRetriever(document_store, top_k=10)
 
@@ -453,7 +453,8 @@ pipelines:
 A RayPipeline can only be created with a YAML Pipeline config:
 
 ```python
-from haystack.pipeline import RayPipeline
+from haystack.pipelines import RayPipeline
+
 pipeline = RayPipeline.load_from_yaml(path="my_pipelines.yaml", pipeline_name="my_query_pipeline")
 pipeline.run(query="What is the capital of Germany?")
 ```

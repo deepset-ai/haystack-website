@@ -19,7 +19,7 @@ the Document Classifier is used to create classification labels that can be atta
 Initialize it as follows:
 
 ``` python
-from haystack.document_classifier import TransformersDocumentClassifier
+from haystack.nodes import TransformersDocumentClassifier
 
 doc_classifier_model = 'bhadresh-savani/distilbert-base-uncased-emotion'
 doc_classifier = TransformersDocumentClassifier(model_name_or_path=doc_classifier_model)

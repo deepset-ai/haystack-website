@@ -60,8 +60,8 @@ In practice, both terms are usually log normalised.
 
 ```python
 from haystack.document_store import InMemoryDocumentStore
-from haystack.retriever.sparse import TfidfRetriever
-from haystack.pipeline import ExtractiveQAPipeline
+from haystack.nodes import TfidfRetriever
+from haystack.pipelines import ExtractiveQAPipeline
 
 document_store = InMemoryDocumentStore()
 ...
@@ -89,8 +89,8 @@ It improves upon its predecessor in two main aspects:
 
 ```python
 from haystack.document_store import ElasticsearchDocumentStore
-from haystack.retriever import ElasticsearchRetriever
-from haystack.pipeline import ExtractiveQAPipeline
+from haystack.nodes import ElasticsearchRetriever
+from haystack.pipelines import ExtractiveQAPipeline
 
 document_store = ElasticsearchDocumentStore()
 ...
@@ -149,7 +149,7 @@ as is done in the code example below.
 
 ```python
 from haystack.document_store import FAISSDocumentStore
-from haystack.retriever import DensePassageRetriever
+from haystack.nodes import DensePassageRetriever
 from haystack.pipeline import ExtractiveQAPipeline
 
 document_store = FAISSDocumentStore(similarity="dot_product")
@@ -206,7 +206,7 @@ as is done in the code example below.
 
 ```python
 from haystack.document_store import ElasticsearchDocumentStore
-from haystack.retriever import EmbeddingRetriever
+from haystack.nodes import EmbeddingRetriever
 from haystack.pipeline import ExtractiveQAPipeline
 
 document_store = ElasticsearchDocumentStore(similarity="cosine",

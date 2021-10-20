@@ -49,7 +49,7 @@ Below is a simplified example.
 See [our tutorial](/tutorials/train-dpr) and also the [API reference](/reference/retriever#train) for `DensePassageRetriever.train()` for more details.
 
 ```python
-from haystack.retriever import DensePassageRetriever
+from haystack.nodes import DensePassageRetriever
 
 dense_passage_retriever = DensePassageRetriever(document_store)
 dense_passage_retriever.train(self,
@@ -82,7 +82,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "German",
               content: (
                 <pre>
-                  <code>from haystack.reader import FARMReader</code>
+                  <code>from haystack.nodes import FARMReader</code>
                   <code>
                     reader = FARMReader("deepset/gelectra-large-germanquad")
                   </code>
@@ -93,7 +93,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "French",
               content: (
                 <pre>
-                  <code>from haystack.reader import FARMReader</code>
+                  <code>from haystack.nodes import FARMReader</code>
                   <code>
                     reader = FARMReader("etalab-ia/camembert-base-squadFR-fquad-piaf")
                   </code>
@@ -104,7 +104,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "Italian",
               content: (
                 <pre>
-                  <code>from haystack.reader import FARMReader</code>
+                  <code>from haystack.nodes import FARMReader</code>
                   <code>
                     reader =
                     FARMReader("mrm8488/bert-italian-finedtuned-squadv1-it-alfa")
@@ -116,7 +116,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "Chinese",
               content: (
                 <pre>
-                  <code>from haystack.reader import FARMReader</code>
+                  <code>from haystack.nodes import FARMReader</code>
                   <code>
                     reader =
                     FARMReader("uer/roberta-base-chinese-extractive-qa")
@@ -132,7 +132,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "Zero-shot",
               content: (
                 <pre>
-                  <code>from haystack.reader import FARMReader</code>
+                  <code>from haystack.nodes import FARMReader</code>
                   <code>
                     reader = FARMReader("deepset/xlm-roberta-large-squad2")
                   </code>
@@ -152,7 +152,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "German",
               content: (
                 <pre>
-                  <code>from haystack.reader import TransformersReader</code>
+                  <code>from haystack.nodes import TransformersReader</code>
                   <code>
                     reader = TransformersReader("deepset/gelectra-large-germanquad")
                   </code>
@@ -163,7 +163,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "French",
               content: (
                 <pre>
-                  <code>from haystack.reader import TransformersReader</code>
+                  <code>from haystack.nodes import TransformersReader</code>
                   <code>
                     reader = TransformersReader("etalab-ia/camembert-base-squadFR-fquad-piaf")
                   </code>
@@ -174,7 +174,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "Italian",
               content: (
                 <pre>
-                  <code>from haystack.reader import TransformersReader</code>
+                  <code>from haystack.nodes import TransformersReader</code>
                   <code>
                     reader = TransformersReader("mrm8488/bert-italian-finedtuned-squadv1-it-alfa")
                   </code>
@@ -185,7 +185,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "Chinese",
               content: (
                 <pre>
-                  <code>from haystack.reader import TransformersReader</code>
+                  <code>from haystack.nodes import TransformersReader</code>
                   <code>
                     reader = TransformersReader("uer/roberta-base-chinese-extractive-qa")
                   </code>
@@ -200,7 +200,7 @@ there are a couple QA models that are directly usable in Haystack.
               title: "Zero-shot",
               content: (
                 <pre>
-                  <code>from haystack.reader import TransformersReader</code>
+                  <code>from haystack.nodes import TransformersReader</code>
                   <code>
                     reader = TransformersReader("deepset/xlm-roberta-large-squad2")
                   </code>

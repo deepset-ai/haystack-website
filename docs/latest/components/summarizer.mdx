@@ -10,8 +10,8 @@ See the up-to-date list of available models [here](https://huggingface.co/models
 By default, the Google [Pegasus](https://ai.googleblog.com/2020/06/pegasus-state-of-art-model-for.html) model is loaded.
 
 ```python
-from haystack.summarizer import TransformersSummarizer
-from haystack.schema import Document
+from haystack.nodes import TransformersSummarizer
+from haystack import Document
 
 docs = [Document("PG&E stated it scheduled the blackouts in response to forecasts for high winds amid dry conditions.\
                  The aim is to reduce the risk of wildfires. Nearly 800 thousand customers were scheduled to be affected by\
@@ -38,7 +38,7 @@ The contents of summary should contain both the summarization and also the origi
 The summarizer can also functions as a node in a pipeline.
 
 ```python
-from haystack.pipeline import Pipeline
+from haystack import Pipeline
 
 p = Pipeline()
 p.add_node(component=retriever, name="ESRetriever1", inputs=["Query"])

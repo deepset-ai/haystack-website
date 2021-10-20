@@ -10,7 +10,7 @@ The `EntityExtractor` can be initialized as follows.
 Any token classification model from the HuggingFace model hub can be provided as a model name, and it will automatically be downloaded and loaded.
 
 ``` python
-from haystack.extractor import EntityExtractor
+from haystack.nodes import EntityExtractor
 
 entity_extractor = EntityExtractor(model_name_or_path="dslim/bert-base-NER")
 ```
