@@ -122,8 +122,6 @@
       {"slug": "crawler", "title": "Crawler" },
       {"slug": "evaluation", "title": "Evaluation"},
       { "slug": "pipelines", "title": "Pipelines" },
-      {"slug": "knowledge-graph", "title": "Knowledge Graph"},
-      {"slug": "graph-retriever", "title": "Graph Retriever"},
       {"slug": "question-generator", "title": "Question Generator"},
       {"slug": "ranker", "title": "Ranker"},
       {"slug": "document-classifier", "title": "Document Classifier"}
