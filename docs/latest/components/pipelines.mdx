@@ -209,29 +209,34 @@ For another example YAML config, check out [this file](https://github.com/deepse
 
 ## Custom Nodes
 
-Thanks to the modularity of pipelines, you can create your own nodes and comfortably integrate them into your system. You should define a `run()` function at the core of each node class that accepts a flexible number of mandatory or optional keyword arguments. That's where the entire functionality of your node will be defined. Let's look at a node class template:
+Thanks to the modularity of pipelines, you can create your own nodes and comfortably integrate them into your system. Here are the steps needed to create a custom node:
+- Create new class that inherits from `BaseComponent`
+- Pass all init params to `self.set_config()` to enable saving/loading via YAML
+- Define a `run()` method that will be executed when your node is called by the Pipeline. The input arguments should consist of all "config" params that you want to allow plus the "data" arguments that you will expect as input from a previous node (e.g. `documents`, `query`, `file_paths`). 
+- Set `run()` to return a tuple, where the first element is an output dict of the data you want to pass to the next node and the second is the name of the outgoing edge (usually `"output_1"`)
+- Optional: Add any custom debug information to `output["_debug"]`. This will be accessible in the pipeline output when the debug mode is enabled.  
+
+**Example:**
 
 ``` python
+from haystack.nodes.base import BaseComponent
+ 
 class NodeTemplate(BaseComponent):
+    # If it's not a decision node, there will be only one outgoing edge
     outgoing_edges = 1
-
+    
+    def __init__(some_param):
+        # store all init params in node's config so that we can easily save/load via YAML 
+        self.set_config(some_param=some_param)
+    
     def run(self, query: str, my_arg: Optional[int] = 10):
-        # Insert code here to manipulate the input & produce an output
-            return output, "output_1"
+        # Insert code here to manipulate the input & produce an output dictionary
+        ...
+        output={"documents": ..., "_debug": {"anything": "you want"}}
+        return output, "output_1"
 ```
 
-Usually, your node will have one outgoing edge and thus one return value. A node's return value should come in the form of a Python dictionary. That value is returned within a tuple, which also contains the outgoing edge name e.g., `output_1`.
-
-It's also possible to have more than one outgoing edge, typically in a decision node. A decision node's `run()` method consists of a decision function that determines the path in the graph by which to send down its input. Such a function has more than one possible return value, and all of these will be named accordingly, i.e. `output_1`, `output_2`, and so forth.
-
-When defining your own custom nodes, you must inherit from `haystack.BaseComponent`. This registers the node as a Component that can later be added to a Pipeline.
-
-``` python
-from haystack import BaseComponent
-
-class CustomNode(BaseComponent):
-    pass
-```
+Usually, your node will have one outgoing edge and thus one return value. However, it's also possible to have more than one outgoing edge, typically in a decision node. A decision node's `run()` method consists of a decision function that determines the path in the graph by which to send down its input. Such a function has more than one possible return value, and all of these will be named accordingly, i.e. `output_1`, `output_2`, and so forth.
 
 
 ## Decision nodes
