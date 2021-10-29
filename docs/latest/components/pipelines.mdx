@@ -209,12 +209,12 @@ For another example YAML config, check out [this file](https://github.com/deepse
 
 ## Custom Nodes
 
-Thanks to the modularity of pipelines, you can create your own nodes and comfortably integrate them into your system. There are a few easy steps to create a custom node:
+Thanks to the modularity of pipelines, you can create your own nodes and comfortably integrate them into your system. Here are the steps needed to create a custom node:
 - Create new class that inherits from `BaseComponent`
 - Pass all init params to `self.set_config()` to enable saving/loading via YAML
-- Define a `run()` method that will be executed when you node is called a the Pipeline. The input arguments should consist of all "config" params that you want to allow plus those "data" arguments that you will expect as input from a previous node (e.g. `documents`, `query`, `file_paths` ...). 
-- Let `run()` return a tuple, where the first element is a dict that contains the data you want to pass to the next node and the second is the name of the outgoing edge (usually `"output_1"`)
-- Optional: Add any custom debug information in `output["_debug"]`. This will be accessible in the pipeline output when the debug mode is enabled.  
+- Define a `run()` method that will be executed when your node is called by the Pipeline. The input arguments should consist of all "config" params that you want to allow plus the "data" arguments that you will expect as input from a previous node (e.g. `documents`, `query`, `file_paths`). 
+- Set `run()` to return a tuple, where the first element is an output dict of the data you want to pass to the next node and the second is the name of the outgoing edge (usually `"output_1"`)
+- Optional: Add any custom debug information to `output["_debug"]`. This will be accessible in the pipeline output when the debug mode is enabled.  
 
 **Example:**
 
