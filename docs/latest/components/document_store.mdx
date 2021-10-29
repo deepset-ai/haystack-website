@@ -48,7 +48,7 @@ Initialising a new DocumentStore within Haystack is straight forward.
                 </pre>
                 Next you can initialize the Haystack object that will connect to this instance.
                 <pre>
-                    <code>from haystack.document_store import OpenDistroElasticsearchDocumentStore</code>
+                    <code>from haystack.document_stores import OpenDistroElasticsearchDocumentStore</code>
                     <code>document_store = OpenDistroElasticsearchDocumentStore()</code>
                 </pre>
                 </div>
@@ -66,7 +66,7 @@ Initialising a new DocumentStore within Haystack is straight forward.
                 </pre>
                 Next you can initialize the Haystack object that will connect to this instance.
                 <pre>
-                    <code>from haystack.document_store import OpenSearchDocumentStore</code>
+                    <code>from haystack.document_stores import OpenSearchDocumentStore</code>
                     <code>document_store = OpenSearchDocumentStore()</code>
                 </pre>
                 </div>
@@ -80,7 +80,7 @@ Initialising a new DocumentStore within Haystack is straight forward.
                 Note that we also have a utility function haystack.utils.launch_milvus that can start up a Milvus instance.<br></br><br></br>
                 You can initialize the Haystack object that will connect to this instance as follows:<br></br>
                 <pre>
-                    <code>from haystack.document_store import MilvusDocumentStore</code>
+                    <code>from haystack.document_stores import MilvusDocumentStore</code>
                     <code>document_store = MilvusDocumentStore()</code>
                 </pre>
                 </div>
@@ -92,13 +92,13 @@ Initialising a new DocumentStore within Haystack is straight forward.
                 <div>
                 The FAISSDocumentStore requires no external setup. Start it by simply using this line.<br></br>
                 <pre>
-                    <code>from haystack.document_store import FAISSDocumentStore</code>
+                    <code>from haystack.document_stores import FAISSDocumentStore</code>
                     <code>document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")</code>
                 </pre>
                 <h4>Save & Load</h4>
                 FAISS document stores can be saved to disk and reloaded:
                 <pre>
-                    <code>from haystack.document_store import FAISSDocumentStore</code>
+                    <code>from haystack.document_stores import FAISSDocumentStore</code>
                     <code>document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")</code>
                     <code># Generates two files: my_faiss_index.faiss and my_faiss_index.json</code>
                     <code>document_store.save("my_faiss_index.faiss")</code>
