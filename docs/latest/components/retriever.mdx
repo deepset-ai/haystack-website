@@ -13,8 +13,50 @@ When used in combination with a Reader, it is a tool for sifting out the obvious
 
 </div>
 
-<!-- _comment: !! Example speedup from slides !! -->
-<!-- _comment: !! Benchmarks !! -->
+## Usage
+
+A Retriever is initialized with a document store as one of its arguments
+
+```
+from haystack.nodes import ElasticsearchRetriever
+
+retriever = ElasticsearchRetriever(document_store)
+```
+
+You can use it in isolation by calling the `retrieve()` method. This will return a list of Document objects.
+
+```
+candidate_documents = retriever.retrieve(
+    query="international climate conferences",
+    top_k=10,
+    filters=None
+)
+```
+You can also run the Retriever in a pipeline with the `DocumentSearchPipeline`
+```
+from haystack.pipelines import DocumentSearchPipeline
+
+pipeline = DocumentSearchPipeline(retriever=retriever)
+
+result = pipeline.run(
+    query="international climate conferences",
+    params={
+        "Retriever": {
+            "top_k": 10,
+            "filters": None
+        }
+    }
+)
+```
+In the above examples, we perform retrieval on all the documents in the document store.
+But if you would like to first filter out documents,
+supply a filter dictionary for the `filters` argument.
+The keys of the filter dictionary are the names of metadata fields and the values are a list of accepted values for that field.
+```
+filter_dictionary = {"year": ["2015", "2016", "2017"]}
+```
+
+## Document Store Compatibility
 
 Note that not all Retrievers can be paired with every DocumentStore.
 Here are the combinations which are supported:
@@ -30,51 +72,7 @@ See [Optimization](/guides/optimization) for suggestions on how to choose top-k 
 
 <div style={{ marginBottom: "3rem" }} />
 
-## TF-IDF
-
-### Description
-
-TF-IDF is a commonly used baseline for information retrieval that exploits two key intuitions:
-
-- documents that have more lexical overlap with the query are more likely to be relevant
-
-- words that occur in fewer documents are more significant than words that occur in many documents
-
-Given a query, a tf-idf score is computed for each document as follows:
-
-```python
-score = tf * idf
-```
-
-Where:
-
-- `tf` is how many times words in the query occur in that document.
-
-- `idf` is the inverse of the fraction of documents containing the word.
-
-In practice, both terms are usually log normalised.
-
-<div style={{ marginBottom: "3rem" }} />
-
-### Initialisation
-
-```python
-from haystack.document_stores import InMemoryDocumentStore
-from haystack.nodes import TfidfRetriever
-from haystack.pipelines import ExtractiveQAPipeline
-
-document_store = InMemoryDocumentStore()
-...
-retriever = TfidfRetriever(document_store)
-...
-p = ExtractiveQAPipeline(reader, retriever)
-```
-
-<div style={{ marginBottom: "3rem" }} />
-
 ## BM25 (Recommended)
-
-### Description
 
 BM25 is a variant of TF-IDF that we recommend you use if you are looking for a retrieval method that does not need a neural network for indexing.
 It improves upon its predecessor in two main aspects:
@@ -82,10 +80,6 @@ It improves upon its predecessor in two main aspects:
 - It saturates `tf` after a set number of occurrences of the given term in the document
 
 - It normalises by document length so that short documents are favoured over long documents if they have the same amount of word overlap with the query
-
-<div style={{ marginBottom: "3rem" }} />
-
-### Initialisation
 
 ```python
 from haystack.document_stores import ElasticsearchDocumentStore
@@ -101,13 +95,9 @@ p = ExtractiveQAPipeline(reader, retriever)
 
 See [this](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables) blog post for more details about the algorithm.
 
-<!-- _comment: !! Diagram showing TFIDF vs BM25 !! -->
-
 <div style={{ marginBottom: "3rem" }} />
 
 ## Dense Passage Retrieval (Recommended)
-
-### Description
 
 [Dense Passage Retrieval](https://arxiv.org/abs/2004.04906) is a highly performant retrieval method that calculates relevance using dense representations.
 Key features:
@@ -117,8 +107,6 @@ Key features:
 - One BERT base model to encode queries
 
 - Ranking of documents done by dot product similarity between query and document embeddings
-
-<!-- _comment: !! Diagram !! -->
 
 Indexing using DPR is comparatively expensive in terms of required computation since all documents in the database need to be processed through the transformer.
 The embeddings that are created in this step can be stored in FAISS, a database optimized for vector similarity.
@@ -132,10 +120,6 @@ There are two design decisions that have made DPR particularly performant.
 
 In Haystack, you can simply download the pretrained encoders needed to start using DPR.
 If you’d like to learn how to set up a DPR based system, have a look at the [tutorial](/tutorials/dense-passage-retrieval)!
-
-<div style={{ marginBottom: "3rem" }} />
-
-### Initialisation
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
@@ -160,7 +144,7 @@ retriever = DensePassageRetriever(
     passage_embedding_model="facebook/dpr-ctx_encoder-single-nq-base"
 )
 ...
-finder = ExtractiveQAPipeline(reader, retriever)
+pipeline = ExtractiveQAPipeline(reader, retriever)
 ```
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
@@ -175,8 +159,6 @@ finder = ExtractiveQAPipeline(reader, retriever)
 <div style={{ marginBottom: "3rem" }} />
 
 ## Embedding Retrieval
-
-### Description
 
 In Haystack, you also have the option of using a single transformer model to encode document and query.
 One style of model that is suited to this kind of retrieval is that of [Sentence Transformers](https://github.com/UKPLab/sentence-transformers).
@@ -200,10 +182,6 @@ as is done in the code example below.
 
 </div>
 
-<div style={{ marginBottom: "3rem" }} />
-
-### Initialisation
-
 ```python
 from haystack.document_stores import ElasticsearchDocumentStore
 from haystack.nodes import EmbeddingRetriever
@@ -215,6 +193,42 @@ document_store = ElasticsearchDocumentStore(similarity="cosine",
 retriever = EmbeddingRetriever(document_store=document_store,
                                embedding_model="sentence-transformers/all-MiniLM-L6-v2")
 document_store.update_embeddings(retriever)
+...
+p = ExtractiveQAPipeline(reader, retriever)
+```
+
+<div style={{ marginBottom: "3rem" }} />
+
+## TF-IDF
+
+TF-IDF is a commonly used baseline for information retrieval that exploits two key intuitions:
+
+- documents that have more lexical overlap with the query are more likely to be relevant
+
+- words that occur in fewer documents are more significant than words that occur in many documents
+
+Given a query, a tf-idf score is computed for each document as follows:
+
+```python
+score = tf * idf
+```
+
+Where:
+
+- `tf` is how many times words in the query occur in that document.
+
+- `idf` is the inverse of the fraction of documents containing the word.
+
+In practice, both terms are usually log normalised.
+
+```python
+from haystack.document_stores import InMemoryDocumentStore
+from haystack.nodes import TfidfRetriever
+from haystack.pipelines import ExtractiveQAPipeline
+
+document_store = InMemoryDocumentStore()
+...
+retriever = TfidfRetriever(document_store)
 ...
 p = ExtractiveQAPipeline(reader, retriever)
 ```
