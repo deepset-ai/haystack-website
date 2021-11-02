@@ -10,6 +10,8 @@ npm install next react react-dom
 yarn install next 
 ```
 
+If you are running into issues with this, make sure to update Node to the latest version.
+
 Then, run the development server:
 
 ```bash
