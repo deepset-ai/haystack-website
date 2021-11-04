@@ -54,6 +54,13 @@ These docs live in the `docs` directory, in the given version directory. The doc
 
 These docs live in the [Haystack repository](https://github.com/deepset-ai/haystack/tree/master/docs), in the given version directory. The docs are generated markdown files and we fetch these **at build time** using the GitHub API. Thanks to Vercel's [Incremental Static Regeneration](https://vercel.com/docs/next.js/incremental-static-regeneration), the static pages we create for these docs are always up-to-date. This means that if existing tutorials or references are changed, the changes will be visible on the docs website automatically.
 
+### Adding a new Tutorial Page
+
+In the Haystack repo, add an entry into `haystack/docs/_src/tutorials/tutorials/headers.py` that corresponds to your new tutorial. When you push your changes to any branch, there is a Github action that calls `haystack/docs/_src/tutorials/tutorials/convert_ipynb.py` to generate a `.md` version of the tutorial in the same folder. These `.md` files are generally called something like `12.md`.
+
+Then in this Haystack Website repo, you need to add an entry to `haystack-website/lib/constants.ts` to refer to the new `.md` file in Haystack. To make it appear in the left Table of Contents, you need to add a new entry to `haystack-website/docs/latest/menu.json`.
+
+
 #### Preview from non-master branches
 
 To preview docs that are on a non-master branch of the Haystack repo, you run this project locally and navigate to `lib/github.ts`, where you have to add a `ref` parameter to the `octokit.rest.repos.getContent` function call with the value of the branch name that you would like to preview. You also need to add the tutorials/references you would like to preview to `docs/{GIVEN_VERSION}/menu.json` and `lib/constants.ts`.
