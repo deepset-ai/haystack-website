@@ -251,10 +251,6 @@ module.exports = {
         destination: "/reference/pipelines",
       },
       {
-        source: "/docs/apiknowledgegraphmd",
-        destination: "/reference/knowledge-graph",
-      },
-      {
         source: "/docs/apigraphretrievermd",
         destination: "/reference/graph-retriever",
       },
@@ -429,10 +425,6 @@ module.exports = {
       {
         source: "/docs/latest/apipipelinesmd",
         destination: "/reference/pipelines",
-      },
-      {
-        source: "/docs/latest/apiknowledgegraphmd",
-        destination: "/reference/knowledge-graph",
       },
       {
         source: "/docs/latest/apigraphretrievermd",
@@ -1577,6 +1569,38 @@ module.exports = {
       {
         source: '/docs_hub/get_started_hubmd',
         destination: '/overview/get-started',
+      },
+      {
+        source: '/usage/glossary',
+        destination: '/overview/glossary',
+      },
+      {
+        source: '/usage/get-started',
+        destination: '/overview/get-started',
+      },
+      {
+        source: '/usage/roadmap',
+        destination: '/overview/roadmap',
+      },
+      {
+        source: '/usage/intro',
+        destination: '/overview/intro',
+      },
+      {
+        source: '/components/classifier',
+        destination: '/components/document-classifier',
+      },
+      {
+        source: '/tutorials/5',
+        destination: '/tutorials/evaluation',
+      },
+      {
+        source: '/reference/v0.6.0/question-generator',
+        destination: '/components/question-generator',
+      },
+      {
+        source: '/reference/knowledge-graph',
+        destination: '/reference/v0.10.0/knowledge-graph',
       },
     ];
   },
