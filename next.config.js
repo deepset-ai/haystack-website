@@ -252,7 +252,7 @@ module.exports = {
       },
       {
         source: "/docs/apigraphretrievermd",
-        destination: "/reference/graph-retriever",
+        destination: "/reference/v0.10.0/graph-retriever",
       },
       {
         source: "/docs/latest/get_startedmd",
@@ -428,7 +428,7 @@ module.exports = {
       },
       {
         source: "/docs/latest/apigraphretrievermd",
-        destination: "/reference/graph-retriever",
+        destination: "/reference//v0.10.0/graph-retriever",
       },
       {
         source: '/bm/benchmarks',
@@ -513,10 +513,6 @@ module.exports = {
       {
         source: '/docs/v0.9.0/rankermd',
         destination: '/usage/v0.9.0/ranker',
-      },
-      {
-        source: '/docs/v0.9.0/query_classifiermd',
-        destination: '/usage/v0.9.0/query-classifier',
       },
       {
         source: '/docs/v0.9.0/tutorial1md',
@@ -675,10 +671,6 @@ module.exports = {
         destination: '/usage/v0.8.0/translator',
       },
       {
-        source: '/docs/v0.8.0/knowledgegraphmd',
-        destination: '/usage/v0.8.0/knowledge-graph',
-      },
-      {
         source: '/docs/v0.8.0/languagesmd',
         destination: '/usage/v0.8.0/languages',
       },
@@ -743,10 +735,6 @@ module.exports = {
         destination: '/tutorials/v0.8.0/knowledge-graph',
       },
       {
-        source: '/docs/v0.8.0/tutorial11md',
-        destination: '/tutorials/v0.8.0/pipelines',
-      },
-      {
         source: '/docs/v0.8.0/tutorial12md',
         destination: '/tutorials/v0.8.0/lfqa',
       },
@@ -793,14 +781,6 @@ module.exports = {
       {
         source: '/docs/v0.8.0/apipipelinesmd',
         destination: '/reference/v0.8.0/pipelines',
-      },
-      {
-        source: '/docs/v0.8.0/apiknowledgegraphmd',
-        destination: '/reference/v0.8.0/knowledge-graph',
-      },
-      {
-        source: '/docs/v0.8.0/apigraphretrievermd',
-        destination: '/reference/v0.8.0/graph-retriever',
       },
       {
         source: '/docs/v0.7.0/intromd',
@@ -855,14 +835,6 @@ module.exports = {
         destination: '/usage/v0.7.0/summarizer',
       },
       {
-        source: '/docs/v0.7.0/translatormd',
-        destination: '/usage/v0.7.0/translator',
-      },
-      {
-        source: '/docs/v0.7.0/knowledgegraphmd',
-        destination: '/usage/v0.7.0/knowledge-graph',
-      },
-      {
         source: '/docs/v0.7.0/languagesmd',
         destination: '/usage/v0.7.0/languages',
       },
@@ -877,14 +849,6 @@ module.exports = {
       {
         source: '/docs/v0.7.0/annotationmd',
         destination: '/usage/v0.7.0/annotation',
-      },
-      {
-        source: '/docs/v0.7.0/rankermd',
-        destination: '/usage/v0.7.0/ranker',
-      },
-      {
-        source: '/docs/v0.7.0/query_classifiermd',
-        destination: '/usage/v0.7.0/query-classifier',
       },
       {
         source: '/docs/v0.7.0/tutorial1md',
@@ -923,10 +887,6 @@ module.exports = {
         destination: '/tutorials/v0.7.0/train-dpr',
       },
       {
-        source: '/docs/v0.7.0/tutorial10md',
-        destination: '/tutorials/v0.7.0/knowledge-graph',
-      },
-      {
         source: '/docs/v0.7.0/tutorial11md',
         destination: '/tutorials/v0.7.0/pipelines',
       },
@@ -955,10 +915,6 @@ module.exports = {
         destination: '/reference/v0.7.0/summarizer',
       },
       {
-        source: '/docs/v0.7.0/apitranslatormd',
-        destination: '/reference/v0.7.0/translator',
-      },
-      {
         source: '/docs/v0.7.0/apiindexingmd',
         destination: '/reference/v0.7.0/preprocessor',
       },
@@ -971,20 +927,8 @@ module.exports = {
         destination: '/reference/v0.7.0/crawler',
       },
       {
-        source: '/docs/v0.7.0/apievaluationmd',
-        destination: '/reference/v0.7.0/evaluation',
-      },
-      {
         source: '/docs/v0.7.0/apipipelinesmd',
         destination: '/reference/v0.7.0/pipelines',
-      },
-      {
-        source: '/docs/v0.7.0/apiknowledgegraphmd',
-        destination: '/reference/v0.7.0/knowledge-graph',
-      },
-      {
-        source: '/docs/v0.7.0/apigraphretrievermd',
-        destination: '/reference/v0.7.0/graph-retriever',
       },
       {
         source: '/docs/v0.6.0/intromd',
@@ -1033,14 +977,6 @@ module.exports = {
       {
         source: '/docs/v0.6.0/generatormd',
         destination: '/usage/v0.6.0/generator',
-      },
-      {
-        source: '/docs/v0.6.0/summarizermd',
-        destination: '/usage/v0.6.0/summarizer',
-      },
-      {
-        source: '/docs/v0.6.0/translatormd',
-        destination: '/usage/v0.6.0/translator',
       },
       {
         source: '/docs/v0.6.0/knowledgegraphmd',
@@ -1099,14 +1035,6 @@ module.exports = {
         destination: '/tutorials/v0.6.0/retrieval-augmented-generation',
       },
       {
-        source: '/docs/v0.6.0/tutorial8md',
-        destination: '/tutorials/v0.6.0/preprocessing',
-      },
-      {
-        source: '/docs/v0.6.0/tutorial9md',
-        destination: '/tutorials/v0.6.0/train-dpr',
-      },
-      {
         source: '/docs/v0.6.0/tutorial10md',
         destination: '/tutorials/v0.6.0/knowledge-graph',
       },
@@ -1133,10 +1061,6 @@ module.exports = {
       {
         source: '/docs/v0.6.0/apigeneratormd',
         destination: '/reference/v0.6.0/generator',
-      },
-      {
-        source: '/docs/v0.6.0/apisummarizermd',
-        destination: '/reference/v0.6.0/summarizer',
       },
       {
         source: '/docs/v0.6.0/apitranslatormd',
@@ -1167,10 +1091,6 @@ module.exports = {
         destination: '/reference/v0.6.0/knowledge-graph',
       },
       {
-        source: '/docs/v0.6.0/apigraphretrievermd',
-        destination: '/reference/v0.6.0/graph-retriever',
-      },
-      {
         source: '/docs/v0.5.0/intromd',
         destination: '/overview/v0.5.0/intro',
       },
@@ -1199,10 +1119,6 @@ module.exports = {
         destination: '/usage/v0.5.0/preprocessing',
       },
       {
-        source: '/docs/v0.5.0/pipelinesmd',
-        destination: '/usage/v0.5.0/pipelines',
-      },
-      {
         source: '/docs/v0.5.0/documentstoremd',
         destination: '/usage/v0.5.0/document-store',
       },
@@ -1215,20 +1131,8 @@ module.exports = {
         destination: '/usage/v0.5.0/reader',
       },
       {
-        source: '/docs/v0.5.0/generatormd',
-        destination: '/usage/v0.5.0/generator',
-      },
-      {
-        source: '/docs/v0.5.0/summarizermd',
-        destination: '/usage/v0.5.0/summarizer',
-      },
-      {
         source: '/docs/v0.5.0/translatormd',
         destination: '/usage/v0.5.0/translator',
-      },
-      {
-        source: '/docs/v0.5.0/knowledgegraphmd',
-        destination: '/usage/v0.5.0/knowledge-graph',
       },
       {
         source: '/docs/v0.5.0/languagesmd',
@@ -1291,14 +1195,6 @@ module.exports = {
         destination: '/tutorials/v0.5.0/train-dpr',
       },
       {
-        source: '/docs/v0.5.0/tutorial10md',
-        destination: '/tutorials/v0.5.0/knowledge-graph',
-      },
-      {
-        source: '/docs/v0.5.0/tutorial11md',
-        destination: '/tutorials/v0.5.0/pipelines',
-      },
-      {
         source: '/docs/v0.5.0/tutorial12md',
         destination: '/tutorials/v0.5.0/lfqa',
       },
@@ -1313,14 +1209,6 @@ module.exports = {
       {
         source: '/docs/v0.5.0/apireadermd',
         destination: '/reference/v0.5.0/reader',
-      },
-      {
-        source: '/docs/v0.5.0/apigeneratormd',
-        destination: '/reference/v0.5.0/generator',
-      },
-      {
-        source: '/docs/v0.5.0/apisummarizermd',
-        destination: '/reference/v0.5.0/summarizer',
       },
       {
         source: '/docs/v0.5.0/apitranslatormd',
@@ -1341,14 +1229,6 @@ module.exports = {
       {
         source: '/docs/v0.5.0/apievaluationmd',
         destination: '/reference/v0.5.0/evaluation',
-      },
-      {
-        source: '/docs/v0.5.0/apipipelinesmd',
-        destination: '/reference/v0.5.0/pipelines',
-      },
-      {
-        source: '/docs/v0.5.0/apiknowledgegraphmd',
-        destination: '/reference/v0.5.0/knowledge-graph',
       },
       {
         source: '/docs/v0.5.0/apigraphretrievermd',
@@ -1383,10 +1263,6 @@ module.exports = {
         destination: '/usage/v0.4.0/preprocessing',
       },
       {
-        source: '/docs/v0.4.0/pipelinesmd',
-        destination: '/usage/v0.4.0/pipelines',
-      },
-      {
         source: '/docs/v0.4.0/documentstoremd',
         destination: '/usage/v0.4.0/document-store',
       },
@@ -1403,18 +1279,6 @@ module.exports = {
         destination: '/usage/v0.4.0/generator',
       },
       {
-        source: '/docs/v0.4.0/summarizermd',
-        destination: '/usage/v0.4.0/summarizer',
-      },
-      {
-        source: '/docs/v0.4.0/translatormd',
-        destination: '/usage/v0.4.0/translator',
-      },
-      {
-        source: '/docs/v0.4.0/knowledgegraphmd',
-        destination: '/usage/v0.4.0/knowledge-graph',
-      },
-      {
         source: '/docs/v0.4.0/languagesmd',
         destination: '/usage/v0.4.0/languages',
       },
@@ -1429,14 +1293,6 @@ module.exports = {
       {
         source: '/docs/v0.4.0/annotationmd',
         destination: '/usage/v0.4.0/annotation',
-      },
-      {
-        source: '/docs/v0.4.0/rankermd',
-        destination: '/usage/v0.4.0/ranker',
-      },
-      {
-        source: '/docs/v0.4.0/query_classifiermd',
-        destination: '/usage/v0.4.0/query-classifier',
       },
       {
         source: '/docs/v0.4.0/tutorial1md',
@@ -1467,22 +1323,6 @@ module.exports = {
         destination: '/tutorials/v0.4.0/retrieval-augmented-generation',
       },
       {
-        source: '/docs/v0.4.0/tutorial8md',
-        destination: '/tutorials/v0.4.0/preprocessing',
-      },
-      {
-        source: '/docs/v0.4.0/tutorial9md',
-        destination: '/tutorials/v0.4.0/train-dpr',
-      },
-      {
-        source: '/docs/v0.4.0/tutorial10md',
-        destination: '/tutorials/v0.4.0/knowledge-graph',
-      },
-      {
-        source: '/docs/v0.4.0/tutorial11md',
-        destination: '/tutorials/v0.4.0/pipelines',
-      },
-      {
         source: '/docs/v0.4.0/tutorial12md',
         destination: '/tutorials/v0.4.0/lfqa',
       },
@@ -1503,14 +1343,6 @@ module.exports = {
         destination: '/reference/v0.4.0/generator',
       },
       {
-        source: '/docs/v0.4.0/apisummarizermd',
-        destination: '/reference/v0.4.0/summarizer',
-      },
-      {
-        source: '/docs/v0.4.0/apitranslatormd',
-        destination: '/reference/v0.4.0/translator',
-      },
-      {
         source: '/docs/v0.4.0/apiindexingmd',
         destination: '/reference/v0.4.0/preprocessor',
       },
@@ -1525,14 +1357,6 @@ module.exports = {
       {
         source: '/docs/v0.4.0/apievaluationmd',
         destination: '/reference/v0.4.0/evaluation',
-      },
-      {
-        source: '/docs/v0.4.0/apipipelinesmd',
-        destination: '/reference/v0.4.0/pipelines',
-      },
-      {
-        source: '/docs/v0.4.0/apiknowledgegraphmd',
-        destination: '/reference/v0.4.0/knowledge-graph',
       },
       {
         source: '/docs/v0.4.0/apigraphretrievermd',
