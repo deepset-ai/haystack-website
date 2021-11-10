@@ -112,11 +112,67 @@ retriever_node = pipeline.get_node('Retriever')
 
 <div style={{ marginBottom: "3rem" }} />
 
-## Add debug information
+## Returning Debugging Information
 
-Nodes in a Pipeline can add debug information that gets propagated to the final output of a Pipeline. For instance, a decision Node can append details on the decision made.
+Nodes in a Pipeline can provide debug information that gets propagated to the final output of a Pipeline.
+For instance, a QueryClassifier node can provide the decision it made on a given query.
+A Retriever can provide the input query and arguments it received
+as well as the candidate documents it retrieved even if it is not the final node in your pipeline.
 
-To return debug data from a Node, add a `_debug` key in the output dict. The value can be a primitive or a dict.  For instance,
+In Haystack, we provide the option to see the input and output of the node via a `debug` argument.
+If you are creating your own custom node, the node will have this debugging functionality as long as you inherit from `BaseComponent`
+
+In all of our nodes, you can enable debugging in two ways.
+You can set the debugging attribute of a node.
+
+```
+es_retriever = ElasticsearchRetriever(document_store)
+es_retriever.debug = True
+```
+
+Alternatively, you can provide it as a parameter when running your pipeline.
+
+```
+result = pipeline.run(
+    query="Who is the father of Arya Stark?",
+    params={
+        "ESRetriever": {
+            "debug": True
+        },
+        "DPRRetriever": {
+            "debug": True
+        },
+        "Reader": {
+            "debug": True
+        }
+    }
+)
+```
+
+When enabled, the debugging information will be stored in the `_debug` key of the dictionary returned by the pipeline.
+
+```
+result = pipeline.run(...)
+result["_debug"]
+```
+
+You can expect a top level key that states the name of the node.
+Under that, you can expect an `input` and `output` key.
+
+```
+{'ESRetriever': {'input': {'debug': True,
+                           'query': 'Who is the father of Arya Stark?',
+                           'root_node': 'Query',
+                           'top_k': 1},
+                 'output': {'documents': [<Document: {'content': "\n===In the Riverlands===\nThe Stark army reaches the Twins, a bridge strong", ...}>]
+                            ...}
+```
+
+## Custom Debugging Functionality
+
+You can also get a node to return custom debugging information.
+To return debug data from a Node, add a `_debug` key in the output dict. The value can be a primitive or a dict.
+For instance,
 
 ```python
 def run(self, query: str):
@@ -125,7 +181,19 @@ def run(self, query: str):
     else:
         return {"_debug": "The query does not contains a question mark"}, "output_2"
  ```
-This `_debug` gets appended to a "global" `_debug` dict storing per Node  debug data that gets returned with the final output. The final output may look like: `{"answers": ..., "_debug": {"node_a": "my debug info", "node_b": {"key": "value"}}}`
+
+This `_debug` gets appended to a "global" `_debug` dict storing per Node debug data that gets returned with the final output.
+The final output may look like:
+
+```
+{
+    "answers": ...,
+    "_debug": {
+        "node_a": "my debug info",
+        "node_b": {"key": "value"}
+    }
+}
+```
 
 A Node in a Pipeline can access the global `_debug` from preceding nodes by adding `_debug` in the `run()` method:
 
