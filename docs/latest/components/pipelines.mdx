@@ -122,7 +122,7 @@ as well as the candidate documents it retrieved even if it is not the final node
 In Haystack, we provide the option to see the input and output of the node via a `debug` argument.
 If you are creating your own custom node, the node will have this debugging functionality as long as you inherit from `BaseComponent`
 
-In all of our nodes, you can enable debugging in two ways.
+In all of our nodes, you can enable debugging a few different ways.
 You can set the debugging attribute of a node.
 
 ```
@@ -147,6 +147,17 @@ result = pipeline.run(
         }
     }
 )
+```
+
+One final option is to provide `debug` as a global parameter when running your pipeline
+
+```
+    result = p_classifier.run(
+        query="Who is the father of Arya Stark?",
+        params={
+            "debug": True
+        }
+    )
 ```
 
 When enabled, the debugging information will be stored in the `_debug` key of the dictionary returned by the pipeline.
