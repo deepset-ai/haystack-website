@@ -18,6 +18,7 @@
     "subMenuTitle": "Components",
     "pathPrefix": "/components/",
     "items": [
+      {"slug": "primitives", "title": "Primitives"},
       {"slug": "preprocessing", "title": "Preprocessing"},
       {"slug": "pipelines", "title": "Pipelines"},
       {"slug": "ready-made-pipelines", "title": "Ready-Made Pipelines"},
