@@ -428,7 +428,7 @@ module.exports = {
       },
       {
         source: "/docs/latest/apigraphretrievermd",
-        destination: "/reference//v0.10.0/graph-retriever",
+        destination: "/reference/v0.10.0/graph-retriever",
       },
       {
         source: '/bm/benchmarks',
@@ -1231,10 +1231,6 @@ module.exports = {
         destination: '/reference/v0.5.0/evaluation',
       },
       {
-        source: '/docs/v0.5.0/apigraphretrievermd',
-        destination: '/reference/v0.5.0/graph-retriever',
-      },
-      {
         source: '/docs/v0.4.0/intromd',
         destination: '/overview/v0.4.0/intro',
       },
@@ -1357,10 +1353,6 @@ module.exports = {
       {
         source: '/docs/v0.4.0/apievaluationmd',
         destination: '/reference/v0.4.0/evaluation',
-      },
-      {
-        source: '/docs/v0.4.0/apigraphretrievermd',
-        destination: '/reference/v0.4.0/graph-retriever',
       },
       {
         source: '/docs_hub/conf_modelmd',
