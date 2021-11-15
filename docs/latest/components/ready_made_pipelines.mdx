@@ -175,7 +175,8 @@ pipeline = SearchSummarizationPipeline(summarizer=summarizer, retriever=retrieve
 result = pipeline.run(query="Describe Luna Lovegood.", params={"retriever": {"top_k": 5}})
 ```
 
-You can access the output via the `documents` key.
+Under the `documents` key of the output, you will find a list of [Document](/components/primitives#document) objects.
+See the [DocumentSearchPipeline](/components/ready-made-pipelines#documentsearchpipeline) on how to best print the output.
 
 ```python
 result['documents']
@@ -203,33 +204,30 @@ query = "Was lässt den dreiköpfigen Hund weiterschlafen?" # What keeps the thr
 result = pipeline.run(query=query, params={"retriever": {"top_k": 10}, "reader": {"top_k": 1}})
 ```
 
-You may access the answer and other information like the model’s confidence and original context via the `answers` key, in this manner:
-
-``` python
-result["answers"]
->>> [{'answer': 'der Klang der Musik',
-  'score': 9.269367218017578,
-  'probability': 0.4444255232810974,
-  'context': "test weakness was the inability to resist falling asleep to the sound of music,"
-  ...}]
-```
+For information on the output of this pipeline, refer to the documentation of the pipeline being wrapped.
 
 ## FAQPipeline
 
-FAQPipeline wraps the [Retriever](/components/retriever) into a pipeline and allows it to be used for question answering with FAQ data. Compared to other types of question answering, FAQ-style QA is significantly faster. However, it’s only able to answer FAQ-type questions because this type of QA matches queries against questions that already exist in your FAQ documents.
+FAQPipeline wraps the [Retriever](/components/retriever) into a pipeline and allows it to be used for question answering with FAQ data.
+Compared to other types of question answering, FAQ-style QA is significantly faster.
+However, it’s only able to answer FAQ-type questions because this type of QA matches queries against questions that already exist in your FAQ documents.
 
-For this task, we recommend using the Embedding Retriever with a sentence similarity model such as `sentence-transformers/all-MiniLM-L6-v2` Here’s an example of an FAQPipeline in action:
+For this task, we recommend using the Embedding Retriever with a sentence similarity model such as `sentence-transformers/all-MiniLM-L6-v2`.
+Here’s an example of an FAQPipeline in action:
 
-```python
+```
 pipeline = FAQPipeline(retriever=retriever)
 query = "How to reduce stigma around Covid-19?"
 result = pipeline.run(query=query, params={"retriever": {"top_k": 1})
 ```
 
-```python
-result["answers"]
->>> [{'answer': 'People can fight stigma and help, not hurt, others by providing social support. Counter stigma by learning and sharing facts. Communicating the facts that viruses do not target specific racial or ethnic groups and how COVID-19 actually spreads can help stop stigma.,
-...}]
+You will find a list of [Answer](/components/primitives#answer) objects under the `answers` key of the pipeline output.
+You see the [Document](/components/primitives#document) objects from which the pipeline is getting the answer but looking at the `documents` key of the pipeline output.
+
+```
+result["answer"]
+
+result["documents"]
 ```
 
 Check out our [tutorial](/tutorials/existing-faqs) for more information on FAQPipeline.
@@ -239,15 +237,19 @@ Check out our [tutorial](/tutorials/existing-faqs) for more information on FAQPi
 The most basic version of a question generator pipeline takes a document as input and outputs generated questions
 which the the document can answer.
 
-``` python
+```
 text1 = "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant whitespace."
 
 question_generation_pipeline = QuestionGenerationPipeline(question_generator)
 result = question_generation_pipeline.run(documents=[document])
-print(result)
+```
+You can access the generated questions as follows.
+
+```
+result["generated_questions"]["questions"]
 ```
 Output:
-``` python
+```
 [' Who created Python?',
  ' When was Python first released?',
  " What is Python's design philosophy?"]
@@ -269,17 +271,7 @@ Output:
  'query_doc_list': [{'docs': [{'text': "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first ...", ...}],
                      'queries': ' Who created Python?'},
                     ...],
- 'results': [{'answers': [{'answer': 'Guido van Rossum',
-                           'context': 'eted, high-level, general-purpose '
-                                      'programming language. Created by Guido '
-                                      'van Rossum and first released in 1991, '
-                                      "Python's design philosophy emphasizes ",
-                           'document_id': '2ce1de1b4d6dd8e4564795c955e0b356',
-                           'offset_end': 83,
-                           'offset_end_in_doc': 103,
-                           'offset_start': 67,
-                           'offset_start_in_doc': 87,
-                           'score': 0.9960587024688721}],
+ 'results': [{'answers': [{<Answer: answer='Guido van Rossum', score=0.9950061142444611, context='eted, high-level, general-purpose programming lang...'>, ...],
               'no_ans_gap': 15.335145950317383,
               'query': ' Who created Python?'},
               ...
@@ -300,19 +292,6 @@ from haystack.pipelines import MostSimilarDocumentsPipeline
 
 msd_pipeline = MostSimilarDocumentsPipeline(document_store)
 result = msd_pipeline.run(document_ids=[doc_id1, doc_id2, ...])
-print(result)
 ```
 
-Output:
-
-```
-[[
-  {'text': "Southern California's economy is diver...",
-   'score': 0.8605178832348279,
-   'question': None,
-   'meta': {'name': 'Southern_California'},
-   'embedding': ...,
-   'id': '6e26b1b78c48efc6dd6c888e72d0970b'},
-   ...
-]]
-```
+The output will be a list of [Document](/components/primitives#document) objects.
