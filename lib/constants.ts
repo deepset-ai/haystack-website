@@ -90,6 +90,26 @@ export const referenceFiles: Meta = {
       filename: "ranker.md",
       title: "Ranker",
     },
+    {
+      slug: "query-classifier",
+      filename: "query_classifier.md",
+      title: "Query Classifier",
+    },
+    {
+      slug: "extractor",
+      filename: "extractor.md",
+      title: "Extractor",
+    },
+    {
+      slug: "other",
+      filename: "other.md",
+      title: "Other",
+    },
+    {
+      slug: "primitives",
+      filename: "primitives.md",
+      title: "Primitives",
+    },
   ],
 };
 
