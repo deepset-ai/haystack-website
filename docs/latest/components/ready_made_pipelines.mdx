@@ -19,7 +19,7 @@ Extractive QA is the task of searching through a large collection of documents f
 pipeline = ExtractiveQAPipeline(reader, retriever)
 
 query = "What is Hagrid's dog's name?"
-result = pipeline.run(query=query, params={"retriever": {"top_k": 10}, "reader": {"top_k": 1}})
+result = pipeline.run(query=query, params={"Retriever": {"top_k": 10}, "reader": {"top_k": 1}})
 ```
 
 The **output** of the pipeline is a Python dictionary with a list of [Answer](/components/primitives#answer) objects stored under the `answers` key.
@@ -71,7 +71,7 @@ To create this pipeline, pass the Retriever into the pipeline’s constructor:
 ```
 pipeline = DocumentSearchPipeline(retriever)
 query = "Tell me something about that time when they play chess."
-result = pipeline.run(query, params={"retriever": {"top_k": 2})
+result = pipeline.run(query, params={"Retriever": {"top_k": 2})
 ```
 
 In the pipeline's **output**, a list of [Document](/components/primitives#document) objects is returned under the `document` key.
@@ -124,7 +124,7 @@ You can build a `GenerativeQAPipeline` by simply placing the individual componen
 ```python
 pipeline = GenerativeQAPipeline(generator=generator, retriever=retriever)
 
-result = pipeline.run(query="Who opened the Chamber of Secrets?", params={"retriever": {"top_k": 10}, "generator": {"top_k": 1}})
+result = pipeline.run(query="Who opened the Chamber of Secrets?", params={"Retriever": {"top_k": 10}, "generator": {"top_k": 1}})
 ```
 
 The **output** of the pipeline is a Python dictionary with a list of dictionaries stored under the `answers` key.
@@ -172,7 +172,7 @@ Below is an example of an implementation.
 ```python
 pipeline = SearchSummarizationPipeline(summarizer=summarizer, retriever=retriever, generate_single_summary=True)
 
-result = pipeline.run(query="Describe Luna Lovegood.", params={"retriever": {"top_k": 5}})
+result = pipeline.run(query="Describe Luna Lovegood.", params={"Retriever": {"top_k": 5}})
 ```
 
 Under the `documents` key of the output, you will find a list of [Document](/components/primitives#document) objects.
@@ -201,7 +201,7 @@ pipeline = TranslationWrapperPipeline(input_translator=de_en_translator,
 
 query = "Was lässt den dreiköpfigen Hund weiterschlafen?" # What keeps the three-headed dog asleep?
 
-result = pipeline.run(query=query, params={"retriever": {"top_k": 10}, "reader": {"top_k": 1}})
+result = pipeline.run(query=query, params={"Retriever": {"top_k": 10}, "reader": {"top_k": 1}})
 ```
 
 For information on the output of this pipeline, refer to the documentation of the pipeline being wrapped.
@@ -218,7 +218,7 @@ Here’s an example of an FAQPipeline in action:
 ```
 pipeline = FAQPipeline(retriever=retriever)
 query = "How to reduce stigma around Covid-19?"
-result = pipeline.run(query=query, params={"retriever": {"top_k": 1})
+result = pipeline.run(query=query, params={"Retriever": {"top_k": 1})
 ```
 
 You will find a list of [Answer](/components/primitives#answer) objects under the `answers` key of the pipeline output.
