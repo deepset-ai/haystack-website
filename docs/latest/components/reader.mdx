@@ -87,6 +87,17 @@ prediction = pipe.run(
 )
 ```
 
+## TableReader
+
+With the `TableReader`, you can get answers to your questions even if the answer is buried in a table.
+It is designed to use the [TAPAS](https://github.com/google-research/tapas) model created by Google.
+
+These models are able to return a single single cell as answer
+or pick a set of cells and then perform an aggregation operation to form a final answer.
+
+Have a look at our guide on [Table Question Answering](/guides/table-qa) to find out more.
+
+
 ## Choosing the Right Model
 
 In Haystack, you can start using pretrained QA models simply by providing its HuggingFace Model Hub name to the Reader.

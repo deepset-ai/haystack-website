@@ -49,6 +49,14 @@ result = pipeline.run(
 )
 ```
 
+## Table Retrieval
+
+The `TableTextRetriever` is designed to perform document retrieval on both text and tabular documents.
+It is a tri-encoder model with a separate encoder for the query, text passage and table.
+
+To learn more about how to use this component in Haystack, have a look at our [Table Question Answering](/guides/table-qa) guide.
+
+
 ## Document Store Compatibility
 
 Note that not all Retrievers can be paired with every DocumentStore.
