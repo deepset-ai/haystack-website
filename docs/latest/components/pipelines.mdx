@@ -182,15 +182,16 @@ Under that, you can expect an `input` and `output` key.
 ## Custom Debugging Functionality
 
 You can also get a node to return custom debugging information.
-To return debug data from a Node, add a `_debug` key in the output dict. The value can be a primitive or a dict.
+To return debug data from a Node, add a `_debug` key in the output dict.
+The value should be a dictionary.
 For instance,
 
-```python
+```
 def run(self, query: str):
     if "?" in query:
-        return {"_debug": "The query contains a question mark"}, "output_1"
+        return {"_debug": {"custom": "My debug info 1"}, "output_1"
     else:
-        return {"_debug": "The query does not contains a question mark"}, "output_2"
+        return {"_debug": {"custom": "My debug info 2"}, "output_2"
  ```
 
 This `_debug` gets appended to a "global" `_debug` dict storing per Node debug data that gets returned with the final output.
@@ -200,8 +201,8 @@ The final output may look like:
 {
     "answers": ...,
     "_debug": {
-        "node_a": "my debug info",
-        "node_b": {"key": "value"}
+        "node_a": {"custom": "My debug info 1"},
+        "node_b": {"custom": "My debug info 2"}
     }
 }
 ```
