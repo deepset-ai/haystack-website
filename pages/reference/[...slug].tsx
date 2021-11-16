@@ -124,9 +124,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
                           .concat(pathsV060)
                           .concat(pathsV050)
                           .concat(pathsV040);
-  for(let path of paths) {
-    console.log(path.params.slug);
-  }
 
   return {
     paths,
