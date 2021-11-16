@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:watch": "next-remote-watch ./docs",
-    "build": "next build",
-    "postbuild": "next-sitemap",
+    "build": "next build && next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch",
