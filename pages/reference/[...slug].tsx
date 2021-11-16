@@ -53,108 +53,80 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const pathsLatest = [
     ...referenceFilesLatest.items.map((item) => ({ params: { slug: [item.slug] } })),
-    ...referenceFilesLatest.items
-      .map((item) =>
-        versions.map((version) => ({
-          params: {
-            slug: [version, item.slug],
-          },
-        }))
-      )
-      .flat(),
   ];
-  let paths = pathsLatest;
   const pathsV0100 = [
-    ...referenceFilesV0100.items.map((item) => ({ params: { slug: [item.slug] } })),
     ...referenceFilesV0100.items
-      .map((item) =>
-        versions.map((version) => ({
+      .map((item) =>({
           params: {
-            slug: [version, item.slug],
+            slug: ["v0.10.0", item.slug],
           },
         }))
-      )
       .flat(),
   ];
-  paths = paths.concat(pathsV0100);
   const pathsV090 = [
-    ...referenceFilesV090.items.map((item) => ({ params: { slug: [item.slug] } })),
     ...referenceFilesV090.items
-      .map((item) =>
-        versions.map((version) => ({
+      .map((item) =>({
           params: {
-            slug: [version, item.slug],
+            slug: ["v0.9.0", item.slug],
           },
         }))
-      )
       .flat(),
   ];
-  paths = paths.concat(pathsV090);
   const pathsV080 = [
-    ...referenceFilesV080.items.map((item) => ({ params: { slug: [item.slug] } })),
     ...referenceFilesV080.items
-      .map((item) =>
-        versions.map((version) => ({
+      .map((item) =>({
           params: {
-            slug: [version, item.slug],
+            slug: ["v0.8.0", item.slug],
           },
         }))
-      )
       .flat(),
   ];
-  paths = paths.concat(pathsV080);
   const pathsV070 = [
-    ...referenceFilesV070.items.map((item) => ({ params: { slug: [item.slug] } })),
     ...referenceFilesV070.items
-      .map((item) =>
-        versions.map((version) => ({
+      .map((item) =>({
           params: {
-            slug: [version, item.slug],
+            slug: ["v0.7.0", item.slug],
           },
         }))
-      )
       .flat(),
   ];
-  paths = paths.concat(pathsV070);
   const pathsV060 = [
-    ...referenceFilesV060.items.map((item) => ({ params: { slug: [item.slug] } })),
     ...referenceFilesV060.items
-      .map((item) =>
-        versions.map((version) => ({
+      .map((item) =>({
           params: {
-            slug: [version, item.slug],
+            slug: ["v0.6.0", item.slug],
           },
         }))
-      )
       .flat(),
   ];
-  paths = paths.concat(pathsV060);
   const pathsV050 = [
-    ...referenceFilesV050.items.map((item) => ({ params: { slug: [item.slug] } })),
     ...referenceFilesV050.items
-      .map((item) =>
-        versions.map((version) => ({
+      .map((item) =>({
           params: {
-            slug: [version, item.slug],
+            slug: ["v0.5.0", item.slug],
           },
         }))
-      )
       .flat(),
   ];
-  paths = paths.concat(pathsV050);
   const pathsV040 = [
-    ...referenceFilesV040.items.map((item) => ({ params: { slug: [item.slug] } })),
     ...referenceFilesV040.items
-      .map((item) =>
-        versions.map((version) => ({
+      .map((item) =>({
           params: {
-            slug: [version, item.slug],
+            slug: ["v0.4.0", item.slug],
           },
         }))
-      )
       .flat(),
   ];
-  paths = paths.concat(pathsV040);
+  let paths = pathsLatest.concat(pathsV0100)
+                          .concat(pathsV090)
+                          .concat(pathsV080)
+                          .concat(pathsV070)
+                          .concat(pathsV060)
+                          .concat(pathsV050)
+                          .concat(pathsV040);
+  for(let path of paths) {
+    console.log(path.params.slug);
+  }
 
   return {
     paths,
