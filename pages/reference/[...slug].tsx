@@ -14,8 +14,16 @@ import {
   getStaticLayoutProps,
   StaticPageProps,
 } from "lib/utils";
-import { referenceFiles } from "lib/constants";
+import { referenceFilesLatest } from "lib/constants";
+import { referenceFilesV0100 } from "lib/constants";
+import { referenceFilesV090 } from "lib/constants";
+import { referenceFilesV080 } from "lib/constants";
+import { referenceFilesV070 } from "lib/constants";
+import { referenceFilesV060 } from "lib/constants";
+import { referenceFilesV050 } from "lib/constants";
+import { referenceFilesV040 } from "lib/constants";
 import matter from "gray-matter";
+import { join } from "path";
 
 export default function ReferenceDoc({
   menu,
@@ -43,9 +51,9 @@ export default function ReferenceDoc({
 export const getStaticPaths: GetStaticPaths = async () => {
   const versions = await getDocsVersions();
 
-  const paths = [
-    ...referenceFiles.items.map((item) => ({ params: { slug: [item.slug] } })),
-    ...referenceFiles.items
+  const pathsLatest = [
+    ...referenceFilesLatest.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...referenceFilesLatest.items
       .map((item) =>
         versions.map((version) => ({
           params: {
@@ -55,6 +63,98 @@ export const getStaticPaths: GetStaticPaths = async () => {
       )
       .flat(),
   ];
+  let paths = pathsLatest;
+  const pathsV0100 = [
+    ...referenceFilesV0100.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...referenceFilesV0100.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV0100);
+  const pathsV090 = [
+    ...referenceFilesV090.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...referenceFilesV090.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV090);
+  const pathsV080 = [
+    ...referenceFilesV080.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...referenceFilesV080.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV080);
+  const pathsV070 = [
+    ...referenceFilesV070.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...referenceFilesV070.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV070);
+  const pathsV060 = [
+    ...referenceFilesV060.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...referenceFilesV060.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV060);
+  const pathsV050 = [
+    ...referenceFilesV050.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...referenceFilesV050.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV050);
+  const pathsV040 = [
+    ...referenceFilesV040.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...referenceFilesV040.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV040);
 
   return {
     paths,
@@ -73,9 +173,44 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
 
   try {
     const docTitleSlug = params.slug?.[params.slug?.length - 1];
-    const item = referenceFiles.items.find(
+    let item = referenceFilesLatest.items.find(
       (item) => item.slug === docTitleSlug
     );
+    if(!item) {
+      item = referenceFilesV0100.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV090.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV080.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV070.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV060.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV050.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV040.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
 
     if (!item) {
       return {
@@ -86,7 +221,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     const version = await getVersionFromParams(params.slug);
 
     const downloadUrl = await getDownloadUrl({
-      repoPath: referenceFiles.repoPath,
+      repoPath: referenceFilesLatest.repoPath,
       filename: item.filename,
       version,
     });

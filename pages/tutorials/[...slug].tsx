@@ -14,7 +14,14 @@ import {
   getStaticLayoutProps,
   StaticPageProps,
 } from "lib/utils";
-import { tutorialFiles } from "lib/constants";
+import { tutorialFilesLatest } from "lib/constants";
+import { tutorialFilesV0100 } from "lib/constants";
+import { tutorialFilesV090 } from "lib/constants";
+import { tutorialFilesV080 } from "lib/constants";
+import { tutorialFilesV070 } from "lib/constants";
+import { tutorialFilesV060 } from "lib/constants";
+import { tutorialFilesV050 } from "lib/constants";
+import { tutorialFilesV040 } from "lib/constants";
 import matter from "gray-matter";
 
 export default function TutorialDoc({
@@ -43,9 +50,9 @@ export default function TutorialDoc({
 export const getStaticPaths: GetStaticPaths = async () => {
   const versions = await getDocsVersions();
 
-  const paths = [
-    ...tutorialFiles.items.map((item) => ({ params: { slug: [item.slug] } })),
-    ...tutorialFiles.items
+  const pathsLatest = [
+    ...tutorialFilesLatest.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...tutorialFilesLatest.items
       .map((item) =>
         versions.map((version) => ({
           params: {
@@ -55,6 +62,98 @@ export const getStaticPaths: GetStaticPaths = async () => {
       )
       .flat(),
   ];
+  let paths = pathsLatest;
+  const pathsV0100 = [
+    ...tutorialFilesV0100.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...tutorialFilesV0100.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV0100);
+  const pathsV090 = [
+    ...tutorialFilesV090.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...tutorialFilesV090.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV090);
+  const pathsV080 = [
+    ...tutorialFilesV080.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...tutorialFilesV080.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV080);
+  const pathsV070 = [
+    ...tutorialFilesV070.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...tutorialFilesV070.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV070);
+  const pathsV060 = [
+    ...tutorialFilesV060.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...tutorialFilesV060.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV060);
+  const pathsV050 = [
+    ...tutorialFilesV050.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...tutorialFilesV050.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV050);
+  const pathsV040 = [
+    ...tutorialFilesV040.items.map((item) => ({ params: { slug: [item.slug] } })),
+    ...tutorialFilesV040.items
+      .map((item) =>
+        versions.map((version) => ({
+          params: {
+            slug: [version, item.slug],
+          },
+        }))
+      )
+      .flat(),
+  ];
+  paths = paths.concat(pathsV040);
 
   return {
     paths,
@@ -73,7 +172,44 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
 
   try {
     const docTitleSlug = params.slug?.[params.slug?.length - 1];
-    const item = tutorialFiles.items.find((item) => item.slug === docTitleSlug);
+    let item = tutorialFilesLatest.items.find(
+      (item) => item.slug === docTitleSlug
+    );
+    if(!item) {
+      item = tutorialFilesV0100.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = tutorialFilesV090.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = tutorialFilesV080.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = tutorialFilesV070.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = tutorialFilesV060.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = tutorialFilesV050.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = tutorialFilesV040.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
 
     if (!item) {
       return {
@@ -83,7 +219,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     const version = await getVersionFromParams(params.slug);
 
     const downloadUrl = await getDownloadUrl({
-      repoPath: tutorialFiles.repoPath,
+      repoPath: tutorialFilesLatest.repoPath,
       filename: item.filename,
       version,
     });
