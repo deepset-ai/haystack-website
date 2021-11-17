@@ -188,5 +188,15 @@ export const tutorialFiles: Meta = {
       filename: "14.md",
       title: 'Query Classifier',
     },
+    {
+      slug: "table-qa",
+      filename: "15.md",
+      title: 'Table Question Answering',
+    },
+    {
+      slug: "doc-class-index",
+      filename: "16.md",
+      title: 'Document Classifier at Indexing',
+    }
   ],
 };

@@ -45,7 +45,8 @@
       {"slug": "evaluation", "title": "Evaluation"},
       {"slug": "annotation", "title": "Annotation Tool"},
       {"slug": "rest-api", "title": "REST API"},
-      {"slug": "chatbots", "title": "Chatbot Integration"}
+      {"slug": "chatbots", "title": "Chatbot Integration"},
+      {"slug": "table-qa", "title": "Table Question Answering"}
     ]
   },
   {
@@ -104,6 +105,14 @@
       {
         "slug": "query-classifier",
         "title": "Query Classifier"
+      },
+      {
+        "slug": "table-qa",
+        "title": "Table Question Answering"
+      },
+      {
+        "slug": "doc-class-index",
+        "title": "Document Classification at Indexing"
       }
     ]
   },
