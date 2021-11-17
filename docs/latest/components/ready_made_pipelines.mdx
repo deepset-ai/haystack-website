@@ -43,7 +43,7 @@ We typically pass the output of the Retriever to another component such as the R
 
 `DocumentSearchPipeline` wraps the [Retriever](/components/retriever) into a pipeline. Note that this wrapper does not endow the Retrievers with additional functionality but instead allows them to be used consistently with other Haystack Pipeline objects and with the same familiar syntax. Creating this pipeline is as simple as passing the Retriever into the pipeline’s constructor:
 
-``` python
+```
 pipeline = DocumentSearchPipeline(retriever=retriever)
 
 query = "Tell me something about that time when they play chess."
@@ -52,7 +52,7 @@ result = pipeline.run(query, params={"retriever": {"top_k": 2})
 
 The pipeline returns a Python dictionary with the retrieved documents accessible via the `documents` key:
 
-```python
+```
 result["documents"]
 >>> [{'text': "used Seamus Finnigan's pieces, which offered him conflicting advice because they knew that he was not a good or experienced player. Murphy McNully and Barnaby LeeDuring the Christmas holidays in the 1984-1985 school year, Rowan Khanna got a new Wizard's Chess set from their parents...",
    'score': 24.10395,
@@ -68,7 +68,7 @@ Unlike extractive QA, which produces an answer by extracting a text span from a 
 
 You can build a `GenerativeQAPipeline` by simply placing the individual components inside the pipeline’s constructor:
 
-```python
+```
 pipeline = GenerativeQAPipeline(generator=generator, retriever=retriever)
 
 result = pipeline.run(query="Who opened the Chamber of Secrets?", params={"retriever": {"top_k": 10}, "generator": {"top_k": 1}})
@@ -76,7 +76,7 @@ result = pipeline.run(query="Who opened the Chamber of Secrets?", params={"retri
 
 You can access the answer via the `answers` key:
 
-```python
+```
 result["answers"]
 >>> [{'query': 'Who opened the Chamber of Secrets?',
    'answer': ' tom riddle',
@@ -100,7 +100,7 @@ result = pipeline.run(query="Describe Luna Lovegood.", params={"retriever": {"to
 
 You can access the output via the `documents` key. Depending on whether you set the `generate_single_summary` to `True` or `False`, the output will either be a single summary of all documents or one summary per document.
 
-```python
+```
 result['documents']
 >>> [{'text': "Luna Lovegood is the only known member of the Lovegood family whose first name is not of Greek origin, rather it is of Latin origin. Her nickname, 'Loony,' refers to the moon and its ties with insanity, as it is short for 'lunatic' she is the goddess of the moon, hunting, the wilderness and the gift of taming wild animals.",
 ...}]
@@ -116,7 +116,7 @@ Translator components bring the power of machine translation into your QA system
 
 After wrapping your search pipeline between two translation nodes, you can query it like you normally would, that is, by calling the `run()` method with a query in the desired language. Here’s an example of an implementation:
 
-```python
+```
 pipeline = TranslationWrapperPipeline(input_translator=de_en_translator,
                                       output_translator=en_de_translator,
                                       pipeline=extractive_qa_pipeline)
@@ -149,7 +149,7 @@ query = "How to reduce stigma around Covid-19?"
 result = pipeline.run(query=query, params={"retriever": {"top_k": 1})
 ```
 
-```python
+```
 result["answers"]
 >>> [{'answer': 'People can fight stigma and help, not hurt, others by providing social support. Counter stigma by learning and sharing facts. Communicating the facts that viruses do not target specific racial or ethnic groups and how COVID-19 actually spreads can help stop stigma.,
 ...}]
@@ -162,7 +162,7 @@ Check out our [tutorial](/tutorials/existing-faqs) for more information on FAQPi
 The most basic version of a question generator pipeline takes a document as input and outputs generated questions
 which the the document can answer.
 
-``` python
+```
 text1 = "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant whitespace."
 
 question_generation_pipeline = QuestionGenerationPipeline(question_generator)
@@ -170,7 +170,7 @@ result = question_generation_pipeline.run(documents=[document])
 print(result)
 ```
 Output:
-``` python
+```
 [' Who created Python?',
  ' When was Python first released?',
  " What is Python's design philosophy?"]
@@ -180,13 +180,13 @@ Output:
 
 This pipeline takes a document as input, generates questions on it, and attempts to answer these questions using a Reader model.
 
-``` python
+```
 qag_pipeline = QuestionAnswerGenerationPipeline(question_generator, reader)
 result = qag_pipeline.run(documents=[document])
 print(result)
 ```
 Output:
-``` python
+```
 {
  ...
  'query_doc_list': [{'docs': [{'text': "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first ...", ...}],
@@ -218,7 +218,7 @@ This pipeline is used to find the most similar documents to a given document in 
 You will need to first make sure that your indexed documents have attached embeddings.
 You can generate and store their embeddings using the `DocumentStore.update_embeddings()` method.
 
-``` python
+```
 from haystack.pipelines import MostSimilarDocumentsPipeline
 
 msd_pipeline = MostSimilarDocumentsPipeline(document_store)
@@ -228,7 +228,7 @@ print(result)
 
 Output:
 
-``` python
+```
 [[
   {'text': "Southern California's economy is diver...",
    'score': 0.8605178832348279,
