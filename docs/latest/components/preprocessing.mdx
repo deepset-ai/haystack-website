@@ -120,6 +120,9 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
 
 <div style={{ marginBottom: "3rem" }} />
 
+Converters are Haystack [Nodes](/components/nodes) and can be added to [Pipelines](/components/pipelines).
+See our [Advanced Indexing Pipeline Tutorial](/tutorials/doc-class-index) for an example.
+
 ## Web Crawler
 
 In Haystack, you will find a web crawler that will help you scrape text from websites and save it to file.
@@ -170,3 +173,6 @@ docs = processor.process(doc)
 - `split_length` sets a maximum number of `'word'`, `'sentence'` or `'passage'` units per output document
 - `split_respect_sentence_boundary` ensures that document boundaries do not fall in the middle of sentences
 - `split_overlap` sets the amount of overlap between two adjacent documents after a split. Setting this to a positive number essentially enables the sliding window approach.
+
+PreProcessors are Haystack [Nodes](/components/nodes) and can be added to [Pipelines](/components/pipelines).
+See our [Advanced Indexing Pipeline Tutorial](/tutorials/doc-class-index) for an example.
