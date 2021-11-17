@@ -189,25 +189,32 @@ For instance,
 ```
 def run(self, query: str):
     if "?" in query:
-        return {"_debug": {"custom": "My debug info 1"}, "output_1"
+        return {"_debug": "The query contained a question mark", "output_1"
     else:
-        return {"_debug": {"custom": "My debug info 2"}, "output_2"
+        return {"_debug": "The query did not contain a question mark", "output_2"
  ```
 
-This `_debug` gets appended to a "global" `_debug` dict storing per Node debug data that gets returned with the final output.
-The final output may look like:
+This `_debug` gets inserted into the "global" `_debug` dictionary storing debug data for each Node, under the `runtime` key. The final output may look like:
 
 ```
 {
     "answers": ...,
     "_debug": {
-        "node_a": {"custom": "My debug info 1"},
-        "node_b": {"custom": "My debug info 2"}
+        "node_a": {
+            "input": { ... },
+            "output": { ... },
+            "runtime": "The query contained a question mark"
+        },
+        "node_b": {
+            "input": { ... },
+            "output": { ... },
+            "runtime": "Some other debug info"
+        }
     }
 }
 ```
 
-A Node in a Pipeline can access the global `_debug` from preceding nodes by adding `_debug` in the `run()` method:
+A Node in a Pipeline can access the global `_debug` from preceding nodes by adding a parameter called `_debug` in its `run()` method:
 
 ```python
 def run(self, query: str, _debug: dict):
