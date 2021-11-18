@@ -16,10 +16,11 @@
     "subMenuTitle": "Components",
     "pathPrefix": "/components/",
     "items": [
+      {"slug": "primitives", "title": "Primitives"},
       {"slug": "nodes", "title": "Nodes"},
       {"slug": "pipelines", "title": "Pipelines"},
-      {"slug": "preprocessing", "title": "Preprocessing"},
       {"slug": "ready-made-pipelines", "title": "Ready-Made Pipelines"},
+      {"slug": "preprocessing", "title": "Preprocessing"},
       {"slug": "document-store", "title": "DocumentStore"},
       {"slug": "retriever", "title": "Retriever"},
       {"slug": "reader", "title": "Reader"},
