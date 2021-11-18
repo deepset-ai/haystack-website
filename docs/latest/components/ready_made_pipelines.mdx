@@ -65,6 +65,7 @@ For more examples that showcase `ExtractiveQAPipeline`, check out one of our tut
 
 We typically pass the output of the Retriever to another component such as the Reader or the Generator. However, we can use the Retriever by itself for semantic document search to find the documents most relevant to our query.
 
+
 `DocumentSearchPipeline` wraps the [Retriever](/components/retriever) into a pipeline. Note that this wrapper does not endow the Retrievers with additional functionality but instead allows them to be used consistently with other Haystack Pipeline objects and with the same familiar syntax.
 To create this pipeline, pass the Retriever into the pipeline’s constructor:
 
@@ -111,6 +112,7 @@ Another option is to convert the Documents to dictionaries before printing.
   'meta': {'name': '224_The_Night_Lands.txt'},
   'score': 0.7827358902378247}},
   ...]
+
 ```
 
 ## GenerativeQAPipeline
@@ -121,7 +123,7 @@ Unlike extractive QA, which produces an answer by extracting a text span from a 
 
 You can build a `GenerativeQAPipeline` by simply placing the individual components inside the pipeline’s constructor:
 
-```python
+```
 pipeline = GenerativeQAPipeline(generator=generator, retriever=retriever)
 
 result = pipeline.run(query="Who opened the Chamber of Secrets?", params={"Retriever": {"top_k": 10}, "generator": {"top_k": 1}})
@@ -178,7 +180,7 @@ result = pipeline.run(query="Describe Luna Lovegood.", params={"Retriever": {"to
 Under the `documents` key of the output, you will find a list of [Document](/components/primitives#document) objects.
 See the [DocumentSearchPipeline](/components/ready-made-pipelines#documentsearchpipeline) on how to best print the output.
 
-```python
+```
 result['documents']
 >>> [{'text': "Luna Lovegood is the only known member of the Lovegood family whose first name is not of Greek origin, rather it is of Latin origin. Her nickname, 'Loony,' refers to the moon and its ties with insanity, as it is short for 'lunatic' she is the goddess of the moon, hunting, the wilderness and the gift of taming wild animals.",
 ...}]
@@ -194,7 +196,7 @@ Translator components bring the power of machine translation into your QA system
 
 After wrapping your search pipeline between two translation nodes, you can query it like you normally would, that is, by calling the `run()` method with a query in the desired language. Here’s an example of an implementation:
 
-```python
+```
 pipeline = TranslationWrapperPipeline(input_translator=de_en_translator,
                                       output_translator=en_de_translator,
                                       pipeline=extractive_qa_pipeline)
@@ -287,7 +289,7 @@ This pipeline is used to find the most similar documents to a given document in 
 You will need to first make sure that your indexed documents have attached embeddings.
 You can generate and store their embeddings using the `DocumentStore.update_embeddings()` method.
 
-``` python
+```
 from haystack.pipelines import MostSimilarDocumentsPipeline
 
 msd_pipeline = MostSimilarDocumentsPipeline(document_store)
@@ -295,3 +297,4 @@ result = msd_pipeline.run(document_ids=[doc_id1, doc_id2, ...])
 ```
 
 The output will be a list of [Document](/components/primitives#document) objects.
+

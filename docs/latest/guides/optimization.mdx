@@ -101,9 +101,11 @@ be passed into the `Pipeline.run()` call, which will then route it on to the `Re
 ```python
 pipeline.run(
     query="Why did the revenue increase?",
-    filters={
-        "years": ["2019"],
-        "companies": ["BMW", "Mercedes"]
-    }
+    params={
+        "filters": {
+            "years": ["2019"],
+            "companies": ["BMW", "Mercedes"]
+        }
+    },
 )
 ```
