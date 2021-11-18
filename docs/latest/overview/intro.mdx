@@ -32,16 +32,16 @@ and Haystack is designed to be the bridge between research and industry.
 
 Haystack is designed to take your search to the next level.
 Keyword search is effective and appropriate for many situations,
-but Machine Learning has enabled a new style of search based on word meaning rather than string matching.
+but Machine Learning has enabled systems to search based on word meaning rather than string matching.
 As new language processing models are developed, new styles of search are also possible.
-In Haystack, you can start systems to perform:
+In Haystack, you can create systems that perform:
 
 - [Question Answering](/components/ready-made-pipelines#extractiveqapipeline)
 - [Summarization](/components/ready-made-pipelines#searchsummarizationpipeline)
 - [Document Search](/components/ready-made-pipelines#documentsearchpipeline)
 - [Question Generation](/components/ready-made-pipelines#questiongenerationpipeline)
 
-These are just a few examples of what can be created in Haystack.
+This is just a small subset of the kinds of systems that can be created in Haystack.
 
 ## The 3 Levels of Haystack
 
@@ -52,7 +52,7 @@ There are many different levels on which you can interact with the components in
 
 Haystack offers different [Nodes](/components/nodes) that perform different kinds of text processing.
 These are often powered by the latest transformer models and code-wise they are Python classes whose methods can be called directly.
-For example, if you would like to [perform question answering with a Reader model](http://localhost:3000/components/reader#usage),
+For example, if you would like to perform question answering with a Reader model,
 all you need to do is provide it with documents and a question.
 
 Working on this level with Haystack Nodes is the "hands-on" approach and
@@ -90,8 +90,8 @@ In order to deploy a search system, you will need more than just a Python script
 Rather you need a service that can stay on, handle requests as they come in and also be callable by many different applications.
 For this, Haystack comes with a [REST API](/guides/rest-api) that is designed to work in production environments.
 
-When set up like this, you can save and load [Pipelines from YAML files](/components/pipelines#yaml-file-definitions),
-interact with Pipelines via HTTP requests and connect Haystack to a user-facing GUI.
+When set up like this, you can load [Pipelines from YAML files](/components/pipelines#yaml-file-definitions),
+interact with Pipelines via HTTP requests and connect Haystack to a user-facing GUIs.
 
 ```
 curl -X 'POST' \
