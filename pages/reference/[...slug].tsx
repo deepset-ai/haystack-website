@@ -14,8 +14,16 @@ import {
   getStaticLayoutProps,
   StaticPageProps,
 } from "lib/utils";
-import { referenceFiles } from "lib/constants";
+import { referenceFilesLatest } from "lib/constants";
+import { referenceFilesV0100 } from "lib/constants";
+import { referenceFilesV090 } from "lib/constants";
+import { referenceFilesV080 } from "lib/constants";
+import { referenceFilesV070 } from "lib/constants";
+import { referenceFilesV060 } from "lib/constants";
+import { referenceFilesV050 } from "lib/constants";
+import { referenceFilesV040 } from "lib/constants";
 import matter from "gray-matter";
+import { join } from "path";
 
 export default function ReferenceDoc({
   menu,
@@ -43,18 +51,79 @@ export default function ReferenceDoc({
 export const getStaticPaths: GetStaticPaths = async () => {
   const versions = await getDocsVersions();
 
-  const paths = [
-    ...referenceFiles.items.map((item) => ({ params: { slug: [item.slug] } })),
-    ...referenceFiles.items
-      .map((item) =>
-        versions.map((version) => ({
+  const pathsLatest = [
+    ...referenceFilesLatest.items.map((item) => ({ params: { slug: [item.slug] } })),
+  ];
+  const pathsV0100 = [
+    ...referenceFilesV0100.items
+      .map((item) =>({
           params: {
-            slug: [version, item.slug],
+            slug: ["v0.10.0", item.slug],
           },
         }))
-      )
       .flat(),
   ];
+  const pathsV090 = [
+    ...referenceFilesV090.items
+      .map((item) =>({
+          params: {
+            slug: ["v0.9.0", item.slug],
+          },
+        }))
+      .flat(),
+  ];
+  const pathsV080 = [
+    ...referenceFilesV080.items
+      .map((item) =>({
+          params: {
+            slug: ["v0.8.0", item.slug],
+          },
+        }))
+      .flat(),
+  ];
+  const pathsV070 = [
+    ...referenceFilesV070.items
+      .map((item) =>({
+          params: {
+            slug: ["v0.7.0", item.slug],
+          },
+        }))
+      .flat(),
+  ];
+  const pathsV060 = [
+    ...referenceFilesV060.items
+      .map((item) =>({
+          params: {
+            slug: ["v0.6.0", item.slug],
+          },
+        }))
+      .flat(),
+  ];
+  const pathsV050 = [
+    ...referenceFilesV050.items
+      .map((item) =>({
+          params: {
+            slug: ["v0.5.0", item.slug],
+          },
+        }))
+      .flat(),
+  ];
+  const pathsV040 = [
+    ...referenceFilesV040.items
+      .map((item) =>({
+          params: {
+            slug: ["v0.4.0", item.slug],
+          },
+        }))
+      .flat(),
+  ];
+  let paths = pathsLatest.concat(pathsV0100)
+                          .concat(pathsV090)
+                          .concat(pathsV080)
+                          .concat(pathsV070)
+                          .concat(pathsV060)
+                          .concat(pathsV050)
+                          .concat(pathsV040);
 
   return {
     paths,
@@ -73,9 +142,44 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
 
   try {
     const docTitleSlug = params.slug?.[params.slug?.length - 1];
-    const item = referenceFiles.items.find(
+    let item = referenceFilesLatest.items.find(
       (item) => item.slug === docTitleSlug
     );
+    if(!item) {
+      item = referenceFilesV0100.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV090.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV080.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV070.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV060.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV050.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = referenceFilesV040.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
 
     if (!item) {
       return {
@@ -86,7 +190,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     const version = await getVersionFromParams(params.slug);
 
     const downloadUrl = await getDownloadUrl({
-      repoPath: referenceFiles.repoPath,
+      repoPath: referenceFilesLatest.repoPath,
       filename: item.filename,
       version,
     });
