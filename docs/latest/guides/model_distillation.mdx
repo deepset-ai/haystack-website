@@ -9,7 +9,7 @@ For this reason, choosing the right reader is always a trade-off between perform
 
 ## How does model distillation work?
 
-The current implementation of model distillation in Haystack uses the logits-based approach proposed by [Hinton et al.](https://arxiv.org/pdf/1503.02531.pdf).
+The current implementation of model distillation in Haystack uses the logits-based approach proposed by [Hinton et al.](https://arxiv.org/pdf/1503.02531.pdf)
 In this approach, a small student model is trained not only with the labels in a dataset, but also with the logits of the teacher model. These logits contain the probability that the teacher model assigns to all possible response spans in the document. This makes the training loss more expressive and allows for higher accuracy with the same model size.
 
 ## How can I distil a model in Haystack?
@@ -38,10 +38,10 @@ Please make sure that the student and teacher models use the same tokenizer. Oth
 For using distillation in Haystack, you just need to call the `distil_from` method on the student and pass the teacher model. 
 
 ```
-student.distil_from(teacher, temperature=5, distillation_loss_weight=0.5, ...)
+student.distil_from(teacher, temperature=5, distillation_loss_weight=0.5, train_filename=train_filename, data_dir=data_dir, ...)
 ```
 
-`distil_from` accepts all parameters that you can use for training, but also accepts additional parameters. The only parameter necessary is the teacher model, but we would also recommend adjusting `temperature` and `distillation_loss_weight`.
+`distil_from` accepts all parameters that you can use for training, but also accepts additional parameters. Everything you need to provide for training such as train_filename (name of file with training dataset) and data_dir (folder of training dataset file and optionally test and eval dataset) is also necessary to provide in `distil_from`. In addition, you also have to provide the teacher model. All other parameters are optional, but we would also recommend adjusting `temperature` and `distillation_loss_weight`.
 
 ## What parameters should I use?
 
