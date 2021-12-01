@@ -100,7 +100,7 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
             </code>
             <code>
             converter = AzureConverter(endpoint="<some-url>",
-                 credential_key="<my-secret-key")
+                 credential_key="<my-secret-key>")
           </code>
           <code>docs = converter.convert(file_path=Path("my-file.pdf"), meta=None)</code>
           </pre>
@@ -148,7 +148,6 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
                          {
       title: "Markdown",
       content: (
-        <div>
           <pre>
             <code>
               from haystack.nodes import MarkdownConverter
@@ -159,7 +158,6 @@ Please refer to [the API docs](/reference/file-converters) to see which converte
           </code>
           <code>docs = converter.convert(file_path=Path("my-file.md"), meta=None)</code>
           </pre>
-        </div>
       ),
     },
   ]}
