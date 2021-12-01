@@ -29,6 +29,7 @@ yarn dev:watch
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Note: This setup is tested with node v14.17.5 - but might be incompatible to older/newer versions. 
 
 #### Environment Variables
 
