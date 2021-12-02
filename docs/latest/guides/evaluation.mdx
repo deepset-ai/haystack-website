@@ -1,7 +1,6 @@
 # Evaluation
 
-Haystack has all the tools needed to evaluate Retrievers, Readers and Generators in both
-open domain and closed domain modes.
+Haystack has all the tools needed to evaluate whole pipelines or individual nodes, such as Retrievers, Readers and Generators. 
 Evaluation and the metrics that it generates are vital for:
 - judging how well your system is performing on a given domain.
 - comparing the performance of different models
@@ -16,7 +15,12 @@ To get started using Haystack for evaluation, we recommend having a look at our 
 
 ## Open vs Closed Domain
 
-There are two evaluation modes known as **open domain** and **closed domain.**
+There are two evaluation modes known as **open domain** and **closed domain.** The default for pipeline evaluation in Haystack via pipeline.eval()` is **open domain.**
+
+**Open domain** means multiple-document QA (typically over the entire database).
+Here, you only look for a match or overlap between the two answer strings.
+Even if the predicted answer is extracted from a different position than the correct answer,
+that's fine as long as the strings match.
 
 **Closed domain** means single document QA.
 In this setting, you want to make sure the correct instance of a string is highlighted as the answer.
@@ -24,22 +28,19 @@ So you compare the indexes of predicted against labeled answers.
 Even if the two strings have identical content, if they occur in different documents,
 or in different positions in the same document, they count as wrong.
 
-**Open domain** means multiple-document QA (typically over the entire database).
-Here, you only look for a match or overlap between the two answer strings.
-Even if the predicted answer is extracted from a different position than the correct answer,
-that's fine as long as the strings match.
-
 ## Metrics: Retrieval
 
 ### Recall
 
 Recall measures how many times the correct document was among the retrieved documents over a set of queries.
-For a single query, the output is binary: either a document is contained in the selection, or it is not.
+For a single query, the output is binary: either the correct document is contained in the selection, or it is not.
 Over the entire dataset, the recall score amounts to a number between zero (no query retrieved the right document) and one (all queries retrieved the right documents).
+
+In some scenarios, there can be multiple correct documents for one query. The metric `recall_single_hit` considers whether at least one of the correct documents is retrieved, whereas `recall_multi_hit` takes into account how many of the multiple correct documents for one query are retrieved.
 
 Note that recall is affected by the number of documents that the retriever returns.
 If the retriever returns only one or a few documents, it is a tougher task to retrieve correct documents.
-Make sure to set the Retriever's `top_k` to an appropriate value and to also define the `top_k` in `Retriever.eval()` or `EvalDocuments`
+Make sure to set the Retriever's `top_k` to an appropriate value in the pipeline that you evaluate.
 
 ### Mean Reciprocal Rank (MRR)
 
