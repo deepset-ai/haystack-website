@@ -49,7 +49,7 @@ Model distillation is controlled by two parameters: `temperature` and `distillat
 
 `temperature` specifies the certainty of the teacher model. Usually language models are very certain that one answer span is correct and assign all other answer spans a very low probability. This is not what we want for distillation as this would be very similar to just having a label. You can correct for this using a higher temperature.
 On the other hand, we also don't want the probabilities to be too similar as this also wouldn't create a meaningful training signal. For this, we can decrease the temperature.
-In most experiments, we found a temperature of 5 to be most useful.
+In most experiments, we found a temperature between 1 and 5 to be most useful.
 
 `distillation_loss_weight` specifies the weight given to the distillation loss in relation to the loss based on the label.
 Most times, you should set this to a relatively high value (e.g. 0.75).
@@ -60,5 +60,8 @@ Here are the results of some of our test and the parameters used:
 | Student model | Teacher model | Dataset | `temperature` | `distillation_loss_weight` | Distilled model EM | Distilled model F1 | Baseline EM | Baseline F1 |
 |-|-|-|-|-|-|-|-|-|
 | prajjwal1/bert-medium | deepset/bert-large-uncased-whole-word-masking-squad2 | SQuADv2 | 5 | 1.0 | 68.6% | 72.8% | 65.6% | 69.6% |
+| roberta-base | deepset/roberta-large-squad2 | SQuADv2 | 1.5 | 0.75 | 79.8% | 83.9% | 78.3% | 82.6% |
+| deepset/xlm-roberta-base | deepset/xlm-roberta-large-squad2 | 3 | 0.75 | 74.8% | 79.0% | 73.8% | 78% |
+| deepset/gelectra-base | deepset/gelectra-large-germanquad | 2 | 0.75 | 61.8% | 80.4% | 68.0% | 86.4% |
 
 The baseline is the student model finetuned without distillation.
