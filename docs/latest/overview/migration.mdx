@@ -1,0 +1,118 @@
+# Haystack v1.0 Migration
+
+With the release of [Haystack v1.0](https://github.com/deepset-ai/haystack/releases/tag/v1.0), we decided to make some bold changes.
+We believe this has brought a significant improvement in the useability of Haystack.
+This does, however, come with a few breaking changes that we will go through below.
+
+## Import Structure
+
+Due to the ever increasing number of Nodes and Document Stores being integrated into Haystack,
+we felt the need to implement a repository structure that makes it easier to navigate to what you're looking for.
+We've also shortened the length of the imports and believe that this also leads to a simpler and more logical organization.
+
+You might be used to imports that look something like this.
+```
+# Document Stores
+from haystack.document_store.elasticsearch import ElasticsearchDocumentStore
+
+# Preprocessing
+from haystack.file_converter.txt import TextConverter
+from haystack.preprocessor.preprocessor import PreProcessor
+
+# Nodes
+from haystack.reader.farm import FARMReader
+from haystack.retriever.sparse import ElasticsearchRetriever
+
+# Pipelines
+from haystack.pipeline import ExtractiveQAPipeline
+
+# Utils
+from haystack.utils import print_answers, launch_es
+```
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Deprecation Warning:** For the large majority of imports, the old style still works but this will be deprecated in future releases.
+
+</div>
+
+This is what they look like in Haystack v1.0.
+```
+# Document Stores
+from haystack.document_stores import ElasticsearchDocumentStore
+
+# Nodes
+from haystack.nodes import ElasticsearchRetriever, FARMReader, PreProcessor, TextConverter
+
+# Pipelines
+from haystack.pipelines import ExtractiveQAPipeline
+
+# Utils
+from haystack.utils import launch_es, print_answers
+```
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**New Directories:**
+
+`haystack.document_stores`
+
+- All Document Stores can now be directly accessed from here
+- Note the pluralization of `document_store` to `document_stores`
+
+`haystack.nodes`
+
+- This directory directly contains any class that can be used as a node
+- This inludes File Converters and PreProcessors
+
+`haystack.pipelines`
+
+- This contains all the base, custom and pre-made pipeline classes
+- Note the pluralization of `pipeline` to `pipelines`
+
+`haystack.utils`
+
+- Any utility functions
+
+</div>
+
+## Input Document Format
+
+This dictionary schema used to be the recommended way to prepare your data to be indexed.
+```
+doc = {
+	'text': 'DOCUMENT_TEXT_HERE',
+	'meta': {'name': DOCUMENT_NAME, ...}
+}
+```
+Now we strongly recommend using our dedicated [`Document`](/components/primitives) class as  a replacement.
+The `text` field has been renamed `content` to accommodate for cases where it is used for another data format,
+for example in [Table QA](/guides/table-qa).
+```
+doc = Document(
+    content='DOCUMENT_TEXT_HERE',
+    meta={'name': DOCUMENT_NAME, ...}
+)
+```
+From here, you can take the same steps to write Documents into your Document Store.
+```
+document_store.write_documents([doc])
+```
+
+## Primitives
+
+Instead of relying on dictionaries, Haystack now standardizes more of the inputs and outputs of Nodes using the following primitive classes:
+
+- [Document](/components/primitives#document)
+- [Answer](/components/primitives#answer)
+- [Label](/components/primitives#label)
+- [MultiLabel](/components/primitives#multilabel)
+- [Span](/components/primitives#span)
+
+With these, there is now support for data structures beyond text and the REST API schema is built around their structure.
+Using these classes also allows for the autocompletion of fields in your IDE.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tip:** To see examples of these primitive classes being returned, have a look at [Ready-Made Pipelines](/components/ready-made-pipelines).
+
+</div>
