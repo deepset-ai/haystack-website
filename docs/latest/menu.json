@@ -5,11 +5,12 @@
     "items": [
       { "slug": "intro", "title": "What is Haystack?" },
       {"slug": "get-started", "title": "Get Started"},
-      { "slug": "use-cases", "title": "Use Cases" },
+      {"slug": "use-cases", "title": "Use Cases" },
       {"slug": "quick-demo", "title": "Quick Demo"},
-      { "slug": "roadmap", "title": "Roadmap" },
-      { "slug": "faq", "title": "FAQ" },
-      { "slug": "glossary", "title": "Glossary" }
+      {"slug": "migration", "title": "Migration to v1.0" },
+      {"slug": "roadmap", "title": "Roadmap" },
+      {"slug": "faq", "title": "FAQ" },
+      {"slug": "glossary", "title": "Glossary" }
     ]
   },
   {
