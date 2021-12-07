@@ -1,11 +1,13 @@
-# Model distillation
+# Model Distillation
 
 Haystack now allows for logits-based distillation of large teacher models into smaller student models.
 
 ## Why should I want to do distil a language model?
 
-In most cases, a larger model size leads to better performance. But the more parameters a model has, the more resource-intensive it is. This makes deployment more difficult and increases latency.
-For this reason, choosing the right reader is always a trade-off between performance and deployment cost. Model distillation is one way to bridge the performance gap between a large language model (the teacher) and a small model (the student).
+In most cases, a larger model size leads to more accurate model predictions. But the more parameters a model has, the more resource-intensive it is. This makes deployment more difficult and increases latency.
+For this reason, choosing the right reader is always a trade-off between quality of results and deployment cost. There are different approaches to bridge the performance gap between large language models and smaller ones.
+The approach we used for this is called model distillation. This method allows to preserve some of the higher accuracy of a large model (called the teacher) when training a smaller model (called the student).
+Another approach you might have heard of is pruning. In this case, a large model is directly made smaller by finding unnecessary weights and removing them.
 
 ## How does model distillation work?
 
@@ -51,12 +53,13 @@ Model distillation is controlled by two parameters: `temperature` and `distillat
 On the other hand, we also don't want the probabilities to be too similar as this also wouldn't create a meaningful training signal. For this, we can decrease the temperature.
 In most experiments, we found a temperature between 1 and 5 to be most useful.
 
-`distillation_loss_weight` specifies the weight given to the distillation loss in relation to the loss based on the label.
+`distillation_loss_weight` specifies the weight given to the distillation loss in relation to the loss based on the label. For example, setting this to 0 would effectively disable model distillation
 Most times, you should set this to a relatively high value (e.g. 0.75).
 
 ## What performance should I expect?
 
-Here are the results of some of our test and the parameters used:
+We are actively working on extending model distillation features in haystack. The following table shows experiment results of the first version of model distillation in haystack. Stay tuned for updates!
+
 | Student model | Teacher model | Dataset | `temperature` | `distillation_loss_weight` | Distilled model EM | Distilled model F1 | Baseline EM | Baseline F1 | Teacher EM | Teacher F1 |
 |-|-|-|-|-|-|-|-|-|-|-|
 | prajjwal1/bert-medium | deepset/bert-large-uncased-whole-word-masking-squad2 | SQuADv2 | 5.0 | 1.0 | 68.6% | 72.8% | 65.6% | 69.6% | 78.9% | 83.2%7 
