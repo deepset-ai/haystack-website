@@ -130,6 +130,7 @@
       {"slug": "translator", "title": "Translator"},
       {"slug": "preprocessor", "title": "Preprocessor"},
       {"slug": "file-converters", "title": "File Converters"},
+      {"slug": "file-classifier", "title": "File Classifier"},
       {"slug": "crawler", "title": "Crawler" },
       {"slug": "evaluation", "title": "Evaluation"},
       {"slug": "pipelines", "title": "Pipelines" },

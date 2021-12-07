@@ -100,6 +100,11 @@ export const referenceFilesLatest: Meta = {
       filename: "primitives.md",
       title: "Primitives",
     },
+    {
+      slug: "file-classifier",
+      filename: "file_classifier.md",
+      title: "File Classifier",
+    }
   ],
 };
 
