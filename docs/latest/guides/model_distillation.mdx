@@ -40,7 +40,8 @@ Please make sure that the student and teacher models use the same tokenizer. Oth
 For using distillation in Haystack, you just need to call the `distil_from` method on the student and pass the teacher model. 
 
 ```
-student.distil_from(teacher, temperature=5, distillation_loss_weight=0.5, train_filename=train_filename, data_dir=data_dir, ...)
+student.distil_from(teacher, temperature=5, distillation_loss_weight=0.5,
+                    data_dir=data_dir, train_filename=train_filename, ...)
 ```
 
 `distil_from` accepts all parameters that you can use for training, but also accepts additional parameters. Everything you need to provide for training such as train_filename (name of file with training dataset) and data_dir (folder of training dataset file and optionally test and eval dataset) is also necessary to provide in `distil_from`. In addition, you also have to provide the teacher model. All other parameters are optional, but we would also recommend adjusting `temperature` and `distillation_loss_weight`.
