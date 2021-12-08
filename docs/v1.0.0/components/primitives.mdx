@@ -1,0 +1,235 @@
+# Primitives
+
+In Haystack, there are a handful of core classes that are regularly used in many different places.
+These are classes that carry data through the system.
+Users will likely interact with these as either the input or output of their pipeline.
+
+## Document
+
+The Document class contains all the information regarding the contents of a document,
+including its id and metadata.
+It may also contain information created in the pipeline including the confidence score of the model that retrieved it
+or the embedding created for it during indexing.
+
+Documents can be written into DocumentStores via `DocumentStore.write_documents()`.
+They are also returned by Retriever and Ranker Nodes or Pipelines containing those Nodes.
+
+#### Attributes
+
+```
+class Document:
+    content: Union[str, pd.DataFrame]
+    content_type: Literal["text", "table", "image"]
+    id: str
+    meta: Dict[str, Any]
+    score: Optional[float] = None
+    embedding: Optional[np.ndarray] = None
+    id_hash_keys: Optional[List[str]] = None
+```
+
+You can find examples of these attributes below.
+
+```
+pipeline = DocumentSearchPipeline(retriever)
+results = pipeline.run("Arya Stark father")
+document = results["documents"][0]
+
+type(document)
+# <class 'haystack.schema.Document'>
+
+document.content
+# " ===On the Kingsroad=== City Watchmen search the caravan for Gendry but are turned away by Yoren."
+
+document.id
+# 'a4d2cc51d351b785c6effddd3345bb39'
+
+document.meta
+# {'name': '224_The_Night_Lands.txt'}
+
+document.embedding
+# 'array([9.25596313e+61, 1.00000000e+00 ...])'
+
+document.score
+# 0.7827358902378247
+```
+
+For more detailed description of these fields, have a look at the [Primitives API documentation](/reference/primitives).
+
+#### Conversion
+
+A Document object can be converted into or initialized from either dictionary or json.
+
+```
+document_dict = document.to_dict()
+document_object = document.from_dict(document_dict)
+
+document_json = document.to_json()
+document_object = document.from_json(document_json)
+```
+
+
+## Answer
+
+The Answer class contains all the information about the prediction made by a Reader model or a pipeline with a Reader model at the end.
+In it, you will find the answer string, the model's confidence score, the context around the answer the document id and its metadata.
+You will also find the start and end offsets of the answer string relative to the full document text and the context window.
+
+Answer objects are returned by Reader and Generator Nodes or Pipelines containing those Nodes.
+
+#### Attributes
+
+```
+class Answer:
+    answer: str
+    type: Literal["generative", "extractive", "other"] = "extractive"
+    score: Optional[float] = None
+    context: Optional[Union[str, pd.DataFrame]] = None
+    offsets_in_document: Optional[List[Span]] = None
+    offsets_in_context: Optional[List[Span]] = None
+    document_id: Optional[str] = None
+    meta: Optional[Dict[str, Any]] = None
+```
+
+You can find examples of these attributes below.
+
+```
+pipeline = ExtractiveQAPipeline(reader, retriever)
+result = pipeline.run("Who is the father of Arya Stark?")
+answer = result["answers"][0]
+
+type(answer)
+# <class 'haystack.schema.Answer'>
+
+answer.answer
+# 'Eddard'
+
+answer.score
+# 0.9946763813495636
+
+answer.context
+# 'She travels with her father, Eddard, to King\'s Landing when he is...'
+
+answer.offsets_in_context
+# [Span(start=72, end=78)]
+
+answer.offsets_in_document
+# [Span(start=147, end=153)]
+
+answer.document_id
+# 'ba2a8e87ddd95e380bec55983ee7d55f'
+```
+
+For more detailed description of these fields, have a look at the [Primitives API documentation](/reference/primitives).
+
+#### Conversion
+
+An Answer object can be converted into or initialized from either dictionary or json.
+
+```
+answer_dict = answer.to_dict()
+answer_object = answer.from_dict(answer_dict)
+
+answer_json = answer.to_json()
+answer_object = answer.from_json(answer_json)
+```
+
+## Label
+
+A Label class contains all the information relevant to one document retrieval or question answering annotation.
+It is generally used for evaluation and can be fetched from a document store via `document_store.get_all_labels()`.
+However, in scenarios where there may be more than one annotation per query, you will want to use `document_store.get_all_labels_aggregated()`.
+This will return a list of MultiLabel objects which in turn contains a list of Labels.
+
+Labels are returned when a DocumentStore containing labelled data is called via the
+`DocumentStore.get_all_labels()` method is called.
+They also need to be supplied in Evaluation Pipelines where each sample has one annotation.
+
+#### Attributes
+
+```
+class Label:
+    id: str
+    query: str
+    document: Document
+    is_correct_answer: bool
+    is_correct_document: bool
+    origin: Literal["user-feedback", "gold-label"]
+    answer: Optional[Answer] = None
+    no_answer: Optional[bool] = None
+    pipeline_id: Optional[str] = None
+    created_at: Optional[str] = None
+    updated_at: Optional[str] = None
+    meta: Optional[dict] = None
+```
+
+You can find examples of these attributes below.
+
+```
+multi_labels = document_store.get_all_labels_aggregated()
+label = multi_labels[0].labels[0]
+
+type(label)
+# <class 'haystack.schema.Answer'>
+
+labels.query
+# 'who is written in the book of life'
+
+labels.id
+# '47413f49-012a-4258-b897-9196c6ad525e'
+
+labels.document
+# <Document: id=fcc5f12d8d1f8f57c34e1a3dc574913f-0, content='Book of Life...'>
+
+labels.answer
+# <Answer: answer='every  person who is destined for Heaven or the World to Come', score=0.0, context='Book of Life - wikipedia Book of Life Jump to: nav...'>
+
+labels.no_answer
+# False
+```
+
+For more detailed description of these fields, have a look at the [Primitives API documentation](/reference/primitives).
+
+## MultiLabel
+
+There are often multiple `Labels` associated with a single query.
+For example, there can be multiple annotated answers for one question
+or multiple documents containing the information you want for a query.
+This class groups them together and provides some extra functionality when working with multiple annotations.
+
+MultiLabel are returned when a DocumentStore containing labelled data is called via the
+`DocumentStore.get_all_labels_aggregated()` method is called.
+They also need to be supplied in Evaluation Pipelines where each sample might have multiple annotations.
+
+#### Attributes
+
+```
+class MultiLabel:
+    labels: List[Label]
+    drop_negative_labels=False
+    drop_no_answers=False
+```
+
+For more detailed description of these fields, have a look at the [Primitives API documentation](/reference/primitives).
+
+When `document_store.get_all_labels_aggregated()` is called, a list of MultiLabel objects is returned
+
+```
+multi_labels = document_store.get_all_labels_aggregated()
+```
+
+## Span
+
+This class contains the indices of the start and end of a span.
+In extractive QA, these are the character indices of where an answer starts and ends.
+In table QA, these are the start and end indices of the answer cells, counted from top left to bottom right of table.
+
+Span objects are found within Answer objects.
+
+#### Attributes
+
+```
+class Span:
+    start: int
+    end: int
+```
+
