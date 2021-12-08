@@ -240,7 +240,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
         ...layoutProps,
         source: markup,
       },
-      revalidate: 30,
+      revalidate: 600,
     };
   } catch (e) {
     console.log(e);
