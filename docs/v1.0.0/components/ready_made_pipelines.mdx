@@ -1,0 +1,300 @@
+# Ready-Made Pipelines
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Note:** These ready-made Pipelines replace the `Finder` class which is now deprecated.
+
+</div>
+
+Haystack Pipelines chain together various Haystack components to build a search system. Haystack comes with a number of predefined pipelines that fit most standard search patterns, allowing you to build a QA system in no time.
+
+## ExtractiveQAPipeline
+
+Extractive QA is the task of searching through a large collection of documents for a span of text that answers a question. The `ExtractiveQAPipeline` combines the Retriever and the Reader such that:
+- The [Retriever](/components/retriever) combs through a database and returns only the documents that it deems to be the most relevant to the query.
+- The [Reader](/components/reader) accepts the documents returned by the Retriever and selects a text span as the answer to the query.
+
+
+```python
+pipeline = ExtractiveQAPipeline(reader, retriever)
+
+query = "What is Hagrid's dog's name?"
+result = pipeline.run(query=query, params={"Retriever": {"top_k": 10}, "reader": {"top_k": 1}})
+```
+
+The **output** of the pipeline is a Python dictionary with a list of [Answer](/components/primitives#answer) objects stored under the `answers` key.
+These provide additional information such as the context from which the answer was extracted and the model’s confidence in the accuracy of the extracted answer.
+
+You can use the `print_answers()` function to cleanly print the output of the pipeline.
+
+```
+from haystack.utils import print_answers
+
+print_answers(result, details="all", max_text_len=100)
+```
+```
+[   <Answer {'answer': 'Eddard', 'type': 'extractive', 'score': 0.9946763813495636, 'context': "s Nymeria after a legendary warrior queen. She travels...", 'offsets_in_document': [{'start': 147, 'end': 153}], 'offsets_in_context': [{'start': 72, 'end': 78}], 'document_id': 'ba2a8e87ddd95e380bec55983ee7d55f', 'meta': {'name': '43_Arya_Stark.txt'}}>,
+    <Answer {'answer': 'King Robert', 'type': 'extractive', 'score': 0.9251320660114288, 'context': 'ordered by the Lord of Light. Melisandre later reveals to Gendry that...', 'offsets_in_document': [{'start': 1808, 'end': 1819}], 'offsets_in_context': [{'start': 70, 'end': 81}], 'document_id': '7b67b0e27571c2b2025a34b4db18ad49', 'meta': {'name': '349_List_of_Game_of_Thrones_characters.txt'}}>,
+    <Answer {'answer': 'Ned', 'type': 'extractive', 'score': 0.8103329539299011, 'context': " girl disguised as a boy all along and is surprised to learn she is Arya...", 'offsets_in_document': [{'start': 920, 'end': 923}], 'offsets_in_context': [{'start': 74, 'end': 77}], 'document_id': '7b67b0e27571c2b2025a34b4db18ad49', 'meta': {'name': '349_List_of_Game_of_Thrones_characters.txt'}}>,
+    ...
+]
+
+```
+
+Another option is to convert the Answers to dictionaries before printing.
+
+```
+[x.to_dict() for x in result["answers"]]
+
+>>> [{'answer': 'Eddard',
+  'context': 's Nymeria after a legendary warrior queen. She travels with her '
+             "father, Eddard, to King's Landing when he is made Hand of the "
+             'King. Before she leaves,',
+  'document_id': 'ba2a8e87ddd95e380bec55983ee7d55f',
+  'meta': {'name': '43_Arya_Stark.txt'},
+  'offsets_in_context': [{'end': 78, 'start': 72}],
+  'offsets_in_document': [{'end': 153, 'start': 147}],
+  'score': 0.9946763813495636,
+  'type': 'extractive'},
+  ...]
+```
+
+For more examples that showcase `ExtractiveQAPipeline`, check out one of our tutorials [here](/tutorials/first-qa-system) or [here](/tutorials/without-elasticsearch).
+
+## DocumentSearchPipeline
+
+We typically pass the output of the Retriever to another component such as the Reader or the Generator. However, we can use the Retriever by itself for semantic document search to find the documents most relevant to our query.
+
+
+`DocumentSearchPipeline` wraps the [Retriever](/components/retriever) into a pipeline. Note that this wrapper does not endow the Retrievers with additional functionality but instead allows them to be used consistently with other Haystack Pipeline objects and with the same familiar syntax.
+To create this pipeline, pass the Retriever into the pipeline’s constructor:
+
+```
+pipeline = DocumentSearchPipeline(retriever)
+query = "Tell me something about that time when they play chess."
+result = pipeline.run(query, params={"Retriever": {"top_k": 2})
+```
+
+In the pipeline's **output**, a list of [Document](/components/primitives#document) objects is returned under the `document` key.
+
+You can use the `print_documents()` function to cleanly print the output of the pipeline.
+
+```
+from haystack.utils import print_documents
+
+print_documents(result, max_text_len=100, print_name=True, print_meta=True)
+```
+```plaintext
+Query: Arya Stark father
+
+{   'content': '\n'
+               '===On the Kingsroad===\n'
+               'City Watchmen search the caravan for Gendry but are turned '
+               'away by Yoren. Ge...',
+    'meta': {'name': '224_The_Night_Lands.txt'},
+    'name': '224_The_Night_Lands.txt'}
+...
+```
+
+Another option is to convert the Documents to dictionaries before printing.
+
+```
+[x.to_dict() for x in result["documents"]]
+>>> [{'content': '\n'
+             '===On the Kingsroad===\n'
+             'City Watchmen search the caravan for Gendry but are turned away '
+             'by Yoren. Gendry tells Arya Stark that he knows she is a girl, '
+             'and she reveals she is actually Arya Stark after learning that '
+             'her father met Gendry before he was executed.',
+  'content_type': 'text',
+  'embedding': None,
+  'id': 'a4d2cc51d351b785c6effddd3345bb39',
+  'meta': {'name': '224_The_Night_Lands.txt'},
+  'score': 0.7827358902378247}},
+  ...]
+
+```
+
+## GenerativeQAPipeline
+
+Unlike extractive QA, which produces an answer by extracting a text span from a collection of passages, generative QA works by producing free text answers that need not correspond to a span of any document. Because the answers are not constrained by text spans, the Generator is able to create answers that are more appropriately worded compared to those extracted by the Reader. Therefore, it makes sense to employ a generative QA system if you expect answers to extend over multiple text spans, or if you expect answers to not be contained verbatim in the documents.
+
+`GenerativeQAPipeline` combines the [Retriever](/components/retriever) with the [Generator](/components/generator). To create an answer, the Generator uses the internal factual knowledge stored in the language model’s parameters in addition to the external knowledge provided by the Retriever’s output.
+
+You can build a `GenerativeQAPipeline` by simply placing the individual components inside the pipeline’s constructor:
+
+```
+pipeline = GenerativeQAPipeline(generator=generator, retriever=retriever)
+
+result = pipeline.run(query="Who opened the Chamber of Secrets?", params={"Retriever": {"top_k": 10}, "generator": {"top_k": 1}})
+```
+
+The **output** of the pipeline is a Python dictionary with a list of dictionaries stored under the `answers` key.
+These provide additional information such as the context from which the answer was extracted and the model’s confidence in the accuracy of the extracted answer.
+
+You can use the `print_answers()` function to cleanly print the output of the pipeline.
+
+```
+from haystack.utils import print_answers
+
+print_answers(result, details="all", max_text_len=100)
+```
+```
+{
+    'answer': ' Cersei lannister',
+    'query': "Who is Tyrion's sister?",
+    'meta': {   'content': [   '\n'
+                               '==Lyrics==\n'
+                               'The title of the song is a line spoken by '
+                               'the character Cersei Lannister in the HBO '
+                               '],
+                'doc_ids': [   '3280fffdf5e01837a118d0b8b12130d0',
+                               '71a783f2734f7e88ed548076e4889bb7',
+                               '71a783f2734f7e88ed548076e4889bb7'],
+                'doc_scores': [   0.6617550197363464,
+                                  0.6361380356314655,
+                                  0.6007305510447117],
+                'titles': [   '401_Power_Is_Power.txt',
+                              '145_Elio_M._García_Jr._and_Linda_Antonsson.txt',
+                              '145_Elio_M._García_Jr._and_Linda_Antonsson.txt']}
+}
+```
+
+For more examples on using `GenerativeQAPipeline`, check out our tutorials where we implement generative QA systems with [RAG](/tutorials/retrieval-augmented-generation ) and [LFQA](/tutorials/lfqa).
+
+## SearchSummarizationPipeline
+
+Summarizer helps make sense of the Retriever’s output by creating a summary of the retrieved documents.
+This is useful for performing a quick sanity check and confirming the quality of candidate documents suggested by the Retriever, without having to inspect each document individually.
+Depending on whether you set the `generate_single_summary` to `True` or `False`, the output will either be a single summary of all documents or one summary per document.
+
+`SearchSummarizationPipeline` combines the [Retriever](/components/retriever) with the [Summarizer](/components/summarizer).
+Below is an example of an implementation.
+
+```python
+pipeline = SearchSummarizationPipeline(summarizer=summarizer, retriever=retriever, generate_single_summary=True)
+
+result = pipeline.run(query="Describe Luna Lovegood.", params={"Retriever": {"top_k": 5}})
+```
+
+Under the `documents` key of the output, you will find a list of [Document](/components/primitives#document) objects.
+See the [DocumentSearchPipeline](/components/ready-made-pipelines#documentsearchpipeline) on how to best print the output.
+
+```
+result['documents']
+>>> [{'text': "Luna Lovegood is the only known member of the Lovegood family whose first name is not of Greek origin, rather it is of Latin origin. Her nickname, 'Loony,' refers to the moon and its ties with insanity, as it is short for 'lunatic' she is the goddess of the moon, hunting, the wilderness and the gift of taming wild animals.",
+...}]
+```
+
+## TranslationWrapperPipeline
+
+Translator components bring the power of machine translation into your QA systems. Say your knowledge base is in English but the majority of your user base speaks German. With a `TranslationWrapperPipeline`, you can chain together:
+
+- The [Translator](/components/translator), which translates a query source into a target language (e.g. German into English)
+- A search pipeline such as ExtractiveQAPipeline or DocumentSearchPipeline, which executes the translated query against a knowledge base.
+- Another Translator that translates the search pipeline's results from the target back into the source language (e.g. English into German)
+
+After wrapping your search pipeline between two translation nodes, you can query it like you normally would, that is, by calling the `run()` method with a query in the desired language. Here’s an example of an implementation:
+
+```
+pipeline = TranslationWrapperPipeline(input_translator=de_en_translator,
+                                      output_translator=en_de_translator,
+                                      pipeline=extractive_qa_pipeline)
+
+query = "Was lässt den dreiköpfigen Hund weiterschlafen?" # What keeps the three-headed dog asleep?
+
+result = pipeline.run(query=query, params={"Retriever": {"top_k": 10}, "reader": {"top_k": 1}})
+```
+
+For information on the output of this pipeline, refer to the documentation of the pipeline being wrapped.
+
+## FAQPipeline
+
+FAQPipeline wraps the [Retriever](/components/retriever) into a pipeline and allows it to be used for question answering with FAQ data.
+Compared to other types of question answering, FAQ-style QA is significantly faster.
+However, it’s only able to answer FAQ-type questions because this type of QA matches queries against questions that already exist in your FAQ documents.
+
+For this task, we recommend using the Embedding Retriever with a sentence similarity model such as `sentence-transformers/all-MiniLM-L6-v2`.
+Here’s an example of an FAQPipeline in action:
+
+```
+pipeline = FAQPipeline(retriever=retriever)
+query = "How to reduce stigma around Covid-19?"
+result = pipeline.run(query=query, params={"Retriever": {"top_k": 1})
+```
+
+You will find a list of [Answer](/components/primitives#answer) objects under the `answers` key of the pipeline output.
+You see the [Document](/components/primitives#document) objects from which the pipeline is getting the answer but looking at the `documents` key of the pipeline output.
+
+```
+result["answer"]
+
+result["documents"]
+```
+
+Check out our [tutorial](/tutorials/existing-faqs) for more information on FAQPipeline.
+
+## QuestionGenerationPipeline
+
+The most basic version of a question generator pipeline takes a document as input and outputs generated questions
+which the the document can answer.
+
+```
+text1 = "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant whitespace."
+
+question_generation_pipeline = QuestionGenerationPipeline(question_generator)
+result = question_generation_pipeline.run(documents=[document])
+```
+You can access the generated questions as follows.
+
+```
+result["generated_questions"]["questions"]
+```
+Output:
+```
+[' Who created Python?',
+ ' When was Python first released?',
+ " What is Python's design philosophy?"]
+```
+
+## QuestionAnswerGenerationPipeline
+
+This pipeline takes a document as input, generates questions on it, and attempts to answer these questions using a Reader model.
+
+```
+qag_pipeline = QuestionAnswerGenerationPipeline(question_generator, reader)
+result = qag_pipeline.run(documents=[document])
+print(result)
+```
+Output:
+```
+{
+ ...
+ 'query_doc_list': [{'docs': [{'text': "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first ...", ...}],
+                     'queries': ' Who created Python?'},
+                    ...],
+ 'results': [{'answers': [{<Answer: answer='Guido van Rossum', score=0.9950061142444611, context='eted, high-level, general-purpose programming lang...'>, ...],
+              'no_ans_gap': 15.335145950317383,
+              'query': ' Who created Python?'},
+              ...
+             ],
+ ...
+ }
+```
+
+## MostSimilarDocumentsPipeline
+
+This pipeline is used to find the most similar documents to a given document in your document store.
+
+You will need to first make sure that your indexed documents have attached embeddings.
+You can generate and store their embeddings using the `DocumentStore.update_embeddings()` method.
+
+```
+from haystack.pipelines import MostSimilarDocumentsPipeline
+
+msd_pipeline = MostSimilarDocumentsPipeline(document_store)
+result = msd_pipeline.run(document_ids=[doc_id1, doc_id2, ...])
+```
+
+The output will be a list of [Document](/components/primitives#document) objects.
+

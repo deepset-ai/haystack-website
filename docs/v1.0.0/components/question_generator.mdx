@@ -1,0 +1,69 @@
+# Question Generator
+
+Question Answering systems are trained to find an answer given a question and a document;
+but with the recent advances in generative NLP, there are now models that can read a document
+and suggest questions that can be answered by that document.
+All this power is available to you now via the `QuestionGenerator` class.
+
+`QuestionGenerator` models can be trained using Question Answering datasets.
+Instead of predicting answers, the `QuestionGenerator` takes the document as input and is trained to output the questions.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Note: ** The `QuestionGenerator` is different to the `Generator`.
+The `QuestionGenerator` receives only documents as input and returns questions as output
+while the `Generator` class is an alternative to the `Reader`.
+It takes a question and documents as input and returns an answer.
+
+</div>
+
+## Stand-Alone Usage
+
+``` python
+from haystack.nodes import QuestionGenerator
+
+text = """Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum
+and first released in 1991, Python's design philosophy emphasizes code
+readability with its notable use of significant whitespace."""
+
+qg = QuestionGenerator()
+result = qg.generate(text)
+```
+
+The output will look like this:
+
+``` python
+[' Who created Python?',
+ ' When was Python first released?',
+ " What is Python's design philosophy?"]
+```
+
+## Ready-Made Pipelines
+
+In Haystack, there are 2 pipeline configurations that are already encapsulated in its own class.
+- `QuestionGenerationPipeline`
+- `QuestionAnswerGenerationPipeline`
+
+Have a look at our [ready-made pipelines page](/components/ready-made-pipelines) to learn more about them.
+Check out the question generation [tutorial](/tutorials/question-generation) to start using them.
+
+## Use Case: Auto-Suggested Questions
+
+Generated questions can help users get closer to the information that they are looking for.
+Search engines now present auto-suggested questions to your top search results and even present suggested answers.
+It is possible to build this same functionality in Haystack using the `QuestionGenerator`.
+
+After your `Retriever` has returned some candidate documents, you can run the `QuestionGenerator` to suggest more answerable questions.
+By presenting these generated questions to your users, you can give them a sense of other facts and topics that are present in the documents.
+You can go even on step further by predicting answers to these questions with a `Reader` or `Generator`.
+
+## Use Case: Human in the Loop Annotation
+
+A `QuestionGenerator` can enable different annotation workflows.
+For example, given a text corpus, you could use the `QuestionGenerator` to create questions,
+but you can also use then use a `Reader` to predict answers.
+
+Correct QA pairs created in this manner might not be so effective in retraining your `Reader` model.
+However, correcting wrong QA pairs creates training samples that your model found challenging.
+These examples are likely to be impactful when it comes to retraining.
+This is also a quicker workflow than having annotators generate both question and answer.
