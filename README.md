@@ -61,8 +61,19 @@ In the Haystack repo, add an entry into `haystack/docs/_src/tutorials/tutorials/
 
 Then in this Haystack Website repo, you need to add an entry to `haystack-website/lib/constants.ts` to refer to the new `.md` file in Haystack. Please add the new file only to the latest version. If you remove files, you also have to remove it in the latest version. To make it appear in the left Table of Contents, you need to add a new entry to `haystack-website/docs/latest/menu.json`. 
 
+For example:
 
-#### Preview from non-master branches
+```
+const res = await octokit.rest.repos.getContent({
+  owner: "deepset-ai",
+  repo: "haystack",
+  path: `docs${version && version !== "latest" ? `/${version}` : ""}${repoPath}${filename}`,
+  ref: HAYSTACK_BRANCH_NAME
+});
+```
+
+
+### Preview from non-master branches
 
 To preview docs that are on a non-master branch of the Haystack repo, you run this project locally and navigate to `lib/github.ts`, where you have to add a `ref` parameter to the `octokit.rest.repos.getContent` function call with the value of the branch name that you would like to preview. You also need to add the tutorials/references you would like to preview to `docs/{GIVEN_VERSION}/menu.json` and `lib/constants.ts`.
 
