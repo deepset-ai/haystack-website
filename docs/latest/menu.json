@@ -47,7 +47,7 @@
       {"slug": "rest-api", "title": "REST API"},
       {"slug": "chatbots", "title": "Chatbot Integration"},
       {"slug": "table-qa", "title": "Table Question Answering"},
-      {"slug": "model-distillation", "title": "Model Distillation"},
+      {"slug": "model-distillation", "title": "Model Distillation"}
     ]
   },
   {
