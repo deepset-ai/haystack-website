@@ -59,12 +59,12 @@ Most times, you should set this to a relatively high value (e.g. 0.75).
 
 Here are the parameters that worked best in our experiments:
 
-| Student             | Teacher                                         | Dataset    | temperature | loss weight |
-| ------------------------ | ---------------------------------------------------- | ---------- | ------------- | -------------------------- |
-| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | SQuADv2    | 5.0           | 1.0                        |
-| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)                         | SQuADv2    |  1.5          | 0.75                       |
-| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)                     | SQuADv2    | 3.0           | 0.75                       |
-| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                    | GermanQuAD | 2.0           | 0.75                       |
+| Student             | Teacher                                         | Distilled | Dataset    | temperature | loss weight |
+| ------------------------ | ---------------------------------------------------- | --- | ---------- | ------------- | -------------------------- |
+| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)| SQuADv2    | 5.0           | 1.0                        |
+| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)  | [deepset/​roberta-base-squad2-distilled](https://huggingface.co/deepset/roberta-base-squad2-distilled)                       | SQuADv2    |  1.5          | 0.75                       |
+| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)           | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)          | SQuADv2    | 3.0           | 0.75                       |
+| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                  | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled)  | GermanQuAD | 2.0           | 0.75                       |
 
 ## What accuracy should I expect?
 
