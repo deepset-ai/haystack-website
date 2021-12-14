@@ -1,0 +1,80 @@
+# Model Distillation
+
+Haystack now allows for logits-based distillation of large teacher models into smaller student models.
+
+## Why should I want to do distil a language model?
+
+In most cases, a larger model size leads to more accurate model predictions. But the more parameters a model has, the more resource-intensive it is. This makes deployment more difficult and increases latency.
+For this reason, choosing the right reader is always a trade-off between quality of results and deployment cost. There are different approaches to bridging the accuracy gap between large language models and smaller ones.
+The approach we used for this is called model distillation. This method allows to preserve some of the higher accuracy of a large model (called the teacher) when training a smaller model (called the student).
+Another approach you might have heard of is pruning. In this case, a large model is directly made smaller by finding unnecessary weights and removing them.
+
+## How does model distillation work?
+
+The current implementation of model distillation in Haystack uses the logits-based approach proposed by [Hinton et al.](https://arxiv.org/pdf/1503.02531.pdf)
+In this approach, a small student model is trained not only with the labels in a dataset, but also with the logits of the teacher model. These logits contain the probability that the teacher model assigns to all possible response spans in the document. This makes the training loss more expressive and allows for higher accuracy with the same model size.
+
+## How can I distil a model in Haystack?
+
+As explained above, when using model distillation you need to have both a teacher and a student model. The teacher model must have already been trained on the task. This can mean just using a finetuned teacher from the huggingface hub or finetuning the teacher on your own data beforehand.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** Check out our [finetuning tutorial](tutorials/fine-tuning-a-model) to learn how to fine-tune your teacher model on your own data.
+
+</div>
+
+### Loading student and teacher models
+
+Both student and teacher models are standard `FARMReader`s so you can load them like you are used to:
+
+```
+student = FARMReader(...)
+teacher = FARMReader(...)
+```
+
+Please make sure that the student and teacher models use the same tokenizer. Otherwise, model distillation will fail.
+
+### Distilling teacher model to student model
+
+For using distillation in Haystack, you just need to call the `distil_from` method on the student and pass the teacher model. 
+
+```
+student.distil_from(teacher, temperature=5, distillation_loss_weight=0.5,
+                    data_dir=data_dir, train_filename=train_filename, ...)
+```
+
+`distil_from` accepts all parameters that you can use for training, but also accepts additional parameters. Everything you need to provide for training such as train_filename (name of file with training dataset) and data_dir (folder of training dataset file and optionally test and eval dataset) is also necessary to provide in `distil_from`. In addition, you also have to provide the teacher model. All other parameters are optional, but we would also recommend adjusting `temperature` and `distillation_loss_weight`.
+
+## What parameters should I use?
+
+Model distillation is controlled by two parameters: `temperature` and `distillation_loss_weight`.
+
+`temperature` specifies the certainty of the teacher model. Usually language models are very certain that one answer span is correct and assign all other answer spans a very low probability. This is not what we want for distillation as this would be very similar to just having a label. You can correct for this using a higher temperature.
+On the other hand, we also don't want the probabilities to be too similar as this also wouldn't create a meaningful training signal. For this, we can decrease the temperature.
+In most experiments, we found a temperature between 1 and 5 to be most useful.
+
+`distillation_loss_weight` specifies the weight given to the distillation loss in relation to the loss based on the label. For example, setting this to 0 would effectively disable model distillation. While setting it to 1 would only use model distillation making the labels unnecessary.
+Most times, you should set this to a relatively high value (e.g. 0.75).
+
+Here are the parameters that worked best in our experiments:
+
+| Student             | Teacher                                         | Distilled | Dataset    | temperature | loss weight |
+| ------------------------ | ---------------------------------------------------- | --- | ---------- | ------------- | -------------------------- |
+| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)| SQuADv2    | 5.0           | 1.0                        |
+| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)  | [deepset/​roberta-base-squad2-distilled](https://huggingface.co/deepset/roberta-base-squad2-distilled)                       | SQuADv2    |  1.5          | 0.75                       |
+| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)           | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)          | SQuADv2    | 3.0           | 0.75                       |
+| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                  | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled)  | GermanQuAD | 2.0           | 0.75                       |
+
+## What accuracy should I expect?
+
+We are actively working on extending model distillation features in haystack. The following table shows experiment results of the first version of model distillation in haystack. Stay tuned for updates!
+
+| Student                  | Teacher                                              | Distilled                                                                                                       | Base F1 | Teacher F1 | Distilled F1 |
+| ------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------ |
+| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)             | 69.6%   | 83.2%      | 72.8%        |
+| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)                         | [deepset/​roberta-base-squad2-distilled](https://huggingface.co/deepset/roberta-base-squad2-distilled)           | 82.6%   | 87.9%      | 83.9%        |
+| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)                     | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)   | 78.0%     | 84.4%      | 79.0%        |
+| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                    | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled) | 77.2%   | 86.4%      | 80.4%        |
+
+The baseline is the student model finetuned without distillation.

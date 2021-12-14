@@ -47,7 +47,8 @@
       {"slug": "annotation", "title": "Annotation Tool"},
       {"slug": "rest-api", "title": "REST API"},
       {"slug": "chatbots", "title": "Chatbot Integration"},
-      {"slug": "table-qa", "title": "Table Question Answering"}
+      {"slug": "table-qa", "title": "Table Question Answering"},
+      {"slug": "model-distillation", "title": "Model Distillation"}
     ]
   },
   {
