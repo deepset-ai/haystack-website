@@ -59,22 +59,22 @@ Most times, you should set this to a relatively high value (e.g. 0.75).
 
 Here are the parameters that worked best in our experiments:
 
-| Student model            | Teacher model                                        | Dataset    | `temperature` | `distillation_loss_weight` |
+| Student             | Teacher                                         | Dataset    | temperature | loss weight |
 | ------------------------ | ---------------------------------------------------- | ---------- | ------------- | -------------------------- |
-| prajjwal1/bert-medium    | deepset/bert-large-uncased-whole-word-masking-squad2 | SQuADv2    | 5.0           | 1.0                        |
-| roberta-base             | deepset/roberta-large-squad2                         | SQuADv2    |  1.5          | 0.75                       |
-| deepset/xlm-roberta-base | deepset/xlm-roberta-large-squad2                     | SQuADv2    | 3.0           | 0.75                       |
-| deepset/gelectra-base    | deepset/gelectra-large-germanquad                    | GermanQuAD | 2.0           | 0.75                       |
+| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | SQuADv2    | 5.0           | 1.0                        |
+| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)                         | SQuADv2    |  1.5          | 0.75                       |
+| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)                     | SQuADv2    | 3.0           | 0.75                       |
+| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                    | GermanQuAD | 2.0           | 0.75                       |
 
 ## What accuracy should I expect?
 
 We are actively working on extending model distillation features in haystack. The following table shows experiment results of the first version of model distillation in haystack. Stay tuned for updates!
 
-| Student model            | Teacher model                                        | Distilled model F1 | Baseline F1 | Teacher F1 | Link                                                                      |
-| ------------------------ | ---------------------------------------------------- | ------------------ | ----------- | ---------- | ------------------------------------------------------------------------- |
-| prajjwal1/bert-medium    | deepset/bert-large-uncased-whole-word-masking-squad2 | 72.8%              | 69.6%       | 83.2%      | [here](https://huggingface.co/deepset/bert-medium-squad2-distilled)       |
-| roberta-base             | deepset/roberta-large-squad2                         | 83.9%              | 82.6%       | 87.9%      | [here](https://huggingface.co/deepset/roberta-base-squad2-distilled)      |
-| deepset/xlm-roberta-base | deepset/xlm-roberta-large-squad2                     | 79.0%              | 78%         | 84.4%      | [here](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)  |
-| deepset/gelectra-base    | deepset/gelectra-large-germanquad                    | 80.4%              | 77.2%       | 86.4%      | [here](https://huggingface.co/deepset/gelectra-base-germanquad-distilled) |
+| Student                  | Teacher                                              | Distilled                                                                                                       | Base F1 | Teacher F1 | Distilled F1 |
+| ------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------ |
+| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)             | 69.6%   | 83.2%      | 72.8%        |
+| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)                         | [deepset/​roberta-base-squad2-distilled](https://huggingface.co/deepset/roberta-base-squad2-distilled)           | 82.6%   | 87.9%      | 83.9%        |
+| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)                     | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)   | 78.0%     | 84.4%      | 79.0%        |
+| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                    | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled) | 77.2%   | 86.4%      | 80.4%        |
 
 The baseline is the student model finetuned without distillation.
