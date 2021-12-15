@@ -4,7 +4,7 @@ Nodes are the core components that process incoming text.
 Some perform preprocessing steps like cleaning or splitting of text
 while others engage transformer models to retrieve documents, summarize passages or generate questions.
 
-Nodes are chained together using a [Pipeline](/components/pipelines).
+Nodes are chained together using a [Pipeline](/components/v1.0.0/pipelines).
 In Haystack, there are many Nodes that you can already start using.
 For example:
 
@@ -22,7 +22,7 @@ For more information on the individual Nodes, have a look at their respective pa
 
 All Nodes are designed to be useable within a Pipeline.
 When a Node has been added to a Pipeline, calling `Pipeline.run()` will in turn call each Node's `run()` method in the predefined sequence.
-For more information on this, see the [Pipelines](/components/pipelines) page.
+For more information on this, see the [Pipelines](/components/v1.0.0/pipelines) page.
 
 Alternatively, you can also call the Nodes outside of the Pipeline.
 What happens during an individual run depends entirely on the given node's definition.
@@ -80,7 +80,7 @@ Such a function has more than one possible return value, and all of these will b
 
 You can add decision nodes where only one "branch" is executed afterwards.
 This allows, for example, to classify an incoming query and depending on the result routing it to different modules.
-To find a ready-made example of a decision node, have a look at [the page](/components/query-classifier) about the `QueryClassifier`.
+To find a ready-made example of a decision node, have a look at [the page](/components/v1.0.0/query-classifier) about the `QueryClassifier`.
 
 ![image](https://user-images.githubusercontent.com/1563902/102452199-41229b80-403a-11eb-9365-7038697e7c3e.png)
 
@@ -114,10 +114,10 @@ If you'd like to define our own, you'll need to create a class that looks someth
 In Haystack, there are Nodes used to evaluate the performance of readers, retrievers and combined systems.
 They include:
 
-- [EvalDocuments](/reference/evaluation#evaldocuments)
-- [EvalAnswers](/reference/evaluation#evalanswers)
+- [EvalDocuments](/reference/v1.0.0/evaluation#evaldocuments)
+- [EvalAnswers](/reference/v1.0.0/evaluation#evalanswers)
 
-To get hands on with this kind of node, have a look at the [evaluation tutorial](/tutorials/evaluation).
+To get hands on with this kind of node, have a look at the [evaluation tutorial](/tutorials/v1.0.0/evaluation).
 
 <div style={{ marginBottom: "3rem" }} />
 
