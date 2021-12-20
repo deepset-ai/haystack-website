@@ -6,7 +6,7 @@ Haystack allows loading and querying knowledge graphs. In particular, Haystack c
 - Execute SPARQL queries on a knowledge graph
 - Execute text queries on the knowledge graph by translating them to SPARQL queries with the help of a pre-trained seq2seq model
 
-Haystack's knowledge graph functionalities are still in a very early stage. Thus, don't expect our [exemplary tutorial](https://github.com/deepset-ai/haystack/blob/v0.9.0/tutorials/Tutorial10_Knowledge_Graph.py) to work on your custom dataset out-of-the-box.
+Haystack's knowledge graph functionalities are still in a very early stage. Thus, don't expect our [exemplary tutorial](/tutorials/v0.9.0/knowledge-graph) to work on your custom dataset out-of-the-box.
 Two classes implement the functionalities: GraphDBKnowledgeGraph and Text2SparqlRetriever.
 
 <div style={{ marginBottom: "3rem" }} />
@@ -26,7 +26,7 @@ Similar to Haystack's ElasticsearchDocumentStore, the only additional setting ne
 `kg = GraphDBKnowledgeGraph(index="tutorial_10_index")`
 
 Indices can be deleted and created with `GraphDBKnowledgeGraph.delete_index()` and `GraphDBKnowledgeGraph.create_index(config_path)`.
-`config_path` needs to point to a .ttl file that contains configuration settings (see [GraphDB documentation](https://graphdb.ontotext.com/documentation/free/configuring-a-repository.html#configure-a-repository-programmatically) for details or use the file from our [tutorial](https://github.com/deepset-ai/haystack/blob/v0.9.0/tutorials/Tutorial10_Knowledge_Graph.py)). It starts with something like:
+`config_path` needs to point to a .ttl file that contains configuration settings (see [GraphDB documentation](https://graphdb.ontotext.com/documentation/free/configuring-a-repository.html#configure-a-repository-programmatically) for details or use the file from our [tutorial](/tutorials/v0.9.0/knowledge-graph)). It starts with something like:
 
 ```
 #
@@ -97,7 +97,7 @@ instead of using the abbreviated form:
 `Text2SparqlRetriever._query_kg(sparql_query="select distinct ?obj where { hp:Hermione_granger hp:patronus ?obj . }")`
 
 If you would like to translate text queries to SPARQL queries for your custom data and use `Text2SparqlRetriever.retrieve(query)`, there is significantly more effort necessary.
-We provide an exemplary pre-trained model in our [tutorial](https://github.com/deepset-ai/haystack/blob/v0.9.0/tutorials/Tutorial10_Knowledge_Graph.py).
+We provide an exemplary pre-trained model in our [tutorial](/tutorials/v0.9.0/knowledge-graph).
 One limitation is that this pre-trained model can only generate questions about resources it has seen during training.
 Otherwise, it cannot translate the name of the resource to the identifier used in the knowledge graph.
 For example, it can translate "Harry" to "hp:Harry_potter" only because we trained it to do so.
