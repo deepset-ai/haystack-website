@@ -11,7 +11,7 @@ and effective handling of data is key to getting the most out of Haystack.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-Check out our [preprocessing tutorial](/tutorials/train-dpr) if you'd like to start working with code examples already!
+Check out our [preprocessing tutorial](/tutorials/v0.10.0/train-dpr) if you'd like to start working with code examples already!
 
 </div>
 
@@ -36,7 +36,7 @@ docs = [
 There are a range of different file converters in Haystack that
 can extract text from files and cast them into the unified dictionary format shown above.
 Haystack features support for txt, pdf and docx files and there is even a converter that leverages Apache Tika.
-Please refer to [the API docs](/reference/file-converters) to see which converter best suits you.
+Please refer to [the API docs](/reference/v0.10.0/file-converters) to see which converter best suits you.
 
 <Tabs
   options={[
@@ -145,7 +145,7 @@ it is recommended that they are further processed in order to ensure optimal Ret
 The `PreProcessor` takes one of the documents created by the converter as input,
 performs various cleaning steps and splits them into multiple smaller documents.
 
-For suggestions on how best to split your documents, see [Optimization](/guides/optimization)
+For suggestions on how best to split your documents, see [Optimization](/guides/v0.10.0/optimization)
 
 ```python
 from haystack.preprocessor import PreProcessor

@@ -79,18 +79,18 @@ from haystack.utils import launch_es, print_answers
 
 Instead of relying on dictionaries, Haystack now standardizes more of the inputs and outputs of Nodes using the following primitive classes:
 
-- [Document](/components/primitives#document)
-- [Answer](/components/primitives#answer)
-- [Label](/components/primitives#label)
-- [MultiLabel](/components/primitives#multilabel)
-- [Span](/components/primitives#span)
+- [Document](/components/v1.0.0/primitives#document)
+- [Answer](/components/v1.0.0/primitives#answer)
+- [Label](/components/v1.0.0/primitives#label)
+- [MultiLabel](/components/v1.0.0/primitives#multilabel)
+- [Span](/components/v1.0.0/primitives#span)
 
 With these, there is now support for data structures beyond text and the REST API schema is built around their structure.
 Using these classes also allows for the autocompletion of fields in your IDE.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Tip:** To see examples of these primitive classes being returned, have a look at [Ready-Made Pipelines](/components/ready-made-pipelines).
+**Tip:** To see examples of these primitive classes being returned, have a look at [Ready-Made Pipelines](/components/v1.0.0/ready-made-pipelines).
 
 </div>
 
@@ -101,9 +101,9 @@ Below, we will go through a few cases that are likely to impact established work
 ## Input Document Format
 
 This dictionary schema used to be the recommended way to prepare your data to be indexed.
-Now we strongly recommend using our dedicated [`Document`](/components/primitives) class as  a replacement.
+Now we strongly recommend using our dedicated [`Document`](/components/v1.0.0/primitives) class as  a replacement.
 The `text` field has been renamed `content` to accommodate for cases where it is used for another data format,
-for example in [Table QA](/guides/table-qa).
+for example in [Table QA](/guides/v1.0.0/table-qa).
 
 **v0.x:**
 ```
@@ -127,7 +127,7 @@ document_store.write_documents([doc])
 
 ## Reader Returns Answer
 
-All Reader Nodes now return [Answer](/components/primitives#label) objects instead of dictionaries.
+All Reader Nodes now return [Answer](/components/v1.0.0/primitives#label) objects instead of dictionaries.
 
 **v0.x:**
 ```
@@ -156,7 +156,7 @@ All Reader Nodes now return [Answer](/components/primitives#label) objects inste
 ## Label Structure
 
 The attributes of the Label object have gone through some changes.
-To see their current structure see [Label](/components/primitives#label).
+To see their current structure see [Label](/components/v1.0.0/primitives#label).
 
 **v0.x:**
 ```

@@ -227,7 +227,7 @@ def run(self, query: str, _debug: dict):
 
 ## Running a Node in Isolation
 
-To learn about how to call a single Node outside of a Pipeline, see the [Nodes Usage](/components/nodes#usage) page.
+To learn about how to call a single Node outside of a Pipeline, see the [Nodes Usage](/components/v1.0.0/nodes#usage) page.
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -270,7 +270,7 @@ pipelines: # multiple Pipelines can be defined using the components from above
         inputs: [MyESRetriever]
 ```
 
-The `components` section is used to define the initialization of your [Nodes](/components/nodes).
+The `components` section is used to define the initialization of your [Nodes](/components/v1.0.0/nodes).
 The `pipelines` section defines how these Nodes are added into the pipeline.
 The above example is the equivalent of the following python code.
 
@@ -310,13 +310,13 @@ pipelines:
     name: DocumentStore
 ```
 
-For another example YAML config, check out [this file](https://github.com/deepset-ai/haystack/blob/master/rest_api/pipeline/pipelines.yaml).
+For another example YAML config, check out [this file](https://github.com/deepset-ai/haystack/blob/v1.0.0/rest_api/pipeline/pipelines.yaml).
 
 <div style={{ marginBottom: "3rem" }} />
 
 ## Ready-Made Pipelines
 
-Last but not least, we added some ready-made pipelines that allow you to run standard patterns with very few lines of code. See the [ready-made pipelines page](/components/ready-made-pipelines) and [pipelines API documentation](/reference/pipelines) to learn more about these.
+Last but not least, we added some ready-made pipelines that allow you to run standard patterns with very few lines of code. See the [ready-made pipelines page](/components/v1.0.0/ready-made-pipelines) and [pipelines API documentation](/reference/v1.0.0/pipelines) to learn more about these.
 
 **Examples:**
 
