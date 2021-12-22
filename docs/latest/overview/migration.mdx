@@ -126,7 +126,7 @@ document_store.write_documents([doc])
 ```
 
 Note that this change also affects the naming of fields in the DocumentStore.
-You will want to change the field names in your database if you are migrating a v0.x compliant service to Haystack v1.0.
+You will want to change the field's name from `text` to `content` in your database if you are migrating a v0.x compliant service to Haystack v1.0.
 
 ## Reader Returns Answer
 
@@ -180,7 +180,7 @@ label = Label(
 ```
 
 Note that this change also affects the naming of fields in the DocumentStore.
-You will want to change the field names in your database if you are migrating a v0.x compliant service to Haystack v1.0.
+You will want to change the field's name from `question` to `query` in your database if you are migrating a v0.x compliant service to Haystack v1.0.
 
 ## REST API Output
 
