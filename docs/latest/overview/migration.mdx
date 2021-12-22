@@ -125,6 +125,9 @@ From here, you can take the same steps to write Documents into your Document Sto
 document_store.write_documents([doc])
 ```
 
+Note that this change also affects the naming of fields in the DocumentStore.
+You will want to change the field names in your database if you are migrating a v0.x compliant service to Haystack v1.0.
+
 ## Reader Returns Answer
 
 All Reader Nodes now return [Answer](/components/primitives#label) objects instead of dictionaries.
@@ -175,6 +178,9 @@ label = Label(
     ...
 )
 ```
+
+Note that this change also affects the naming of fields in the DocumentStore.
+You will want to change the field names in your database if you are migrating a v0.x compliant service to Haystack v1.0.
 
 ## REST API Output
 
@@ -249,3 +255,10 @@ Below, we are showing the REST API output of any Pipeline with a Reader at the e
    ]
 }
 ```
+
+## Field Names in Database Services
+
+If you are using a persistent database service as a `DocumentStore` (e.g. Elasticsearch, Milvus),
+you will need to change certain field names when migrating from v0.x to v1.0.
+Due to the [change in the `Document` object](/overview/migration#input-document-format), you will need to rename the `text` field in your database to `content`.
+Due to the [change in the `Label` object](/overview/migration#label-structure), you will need to rename the `question` field in your database to `query`.
