@@ -13,20 +13,13 @@ To get started using Haystack for evaluation, we recommend having a look at our 
 
 </div>
 
-## Open vs Closed Domain
+## Prediction Input vs Label Input
 
-There are two evaluation modes known as **open domain** and **closed domain.** The default for pipeline evaluation in Haystack via pipeline.eval()` is **open domain.**
+We distinguish two pipeline evaluation modes **prediction input** and **label input**. The terms refer to whether a pipeline node gets its input from the predictions of the preceeding node in the pipeline or from the ground-truth labels. An evaluation with **prediction input** tells what result quality users will experience when running the pipeline and it is the default for pipeline evaluation in Haystack via `pipeline.eval()`. An evaluation with **label input** tells what the maximum result quality of a node could be if it received the perfect input from the preceeding node. It can be activated in addition via `pipeline.eval(use_labels_as_input=True)`. For example, in an ExtractiveQAPipeline comprising a retriever and a reader node, you can find out the upper bounds of the reader's evaluation metrics assuming that the retriever passed on all relevant documents.
+If the upper bound differs a lot from the actual result quality, we suggest that you focus on improving the predictions of the preceeding node to achieve the full performance of the pipeline.
 
-**Open domain** means multiple-document QA (typically over the entire database).
-Here, you only look for a match or overlap between the two answer strings.
-Even if the predicted answer is extracted from a different position than the correct answer,
-that's fine as long as the strings match.
-
-**Closed domain** means single document QA.
-In this setting, you want to make sure the correct instance of a string is highlighted as the answer.
-So you compare the indexes of predicted against labeled answers.
-Even if the two strings have identical content, if they occur in different documents,
-or in different positions in the same document, they count as wrong.
+What we call **prediction input** is often referred to as **open domain** in literature, which means multiple-document QA (typically over the entire database). The relevant documents need to be identified first in this scenario. In contrast, **label input** is referred to as **closed domain**, meaning single document QA. There is no retrieval step involved in this scenario as the relevant document is already given.
+In both scenarios, Haystack evaluates the correctness of an extracted answer by looking for a match or overlap between the two answer strings. Even if the predicted answer is extracted from a different position than the correct answer, that's fine as long as the strings match. 
 
 ## Metrics: Retrieval
 
