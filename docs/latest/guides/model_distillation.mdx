@@ -100,6 +100,7 @@ The following tables show experiment results of the current version of model dis
 
 ### Only using prediction layer distillation
 This table shows the results of a few experiments where we applied prediction layer to distill a finetuned large model (~350M parameters) into a base model (~115M parameters and ~2x the speed of a large model).
+
 | Student                  | Teacher                                              | Distilled                                                                                                       | Base F1 | Teacher F1 | Distilled F1 |
 | ------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------ |
 | [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)             | 69.6%   | 83.2%      | 72.8%        |
@@ -109,6 +110,7 @@ This table shows the results of a few experiments where we applied prediction la
 
 ### Intermediate layer distillation + Prediction layer distillation
 Here you can see an experiment where we also used intermediate layer distillation. In this case, we distilled a base model (~115M parameters) into a TinyBERT-6L-768d model (~67M parameters and ~2x the speed of a base model).
+
 | Student | Teacher | Distilled | Base F1 | Teacher F1 | Distilled F1 |
 | -- | -- | -- | -- | -- | -- |
 | [huawei-​noah/​Tiny​BERT\_​General\_​6L\_​768D](https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D) | [deepset/​bert-​base-​uncased-​squad2](https://huggingface.co/deepset/bert-base-uncased-squad2/) | [deepset/​tinybert-​6l-​768d-​squad2](https://huggingface.co/deepset/tinybert-6l-768d-squad2) | 71.1% | 77.8% | 76.2% |
