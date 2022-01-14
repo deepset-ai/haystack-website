@@ -11,11 +11,11 @@ Another approach you might have heard of is pruning. In this case, a large model
 
 ## How does model distillation work?
 
-The goal of model distillation is for the student model to behave similarly to the teacher model. This similarity can be enforced using a range of different loss functions. There are various approaches to model distillation using different sets of loss functions when training the student. The two approaches we have focussed on are the logits-based approach proposed by [Hinton et al.](https://arxiv.org/pdf/1503.02531.pdf) and the approach used by [TinyBERT (Jiao et al.)](https://arxiv.org/pdf/1909.10351).
+The goal of model distillation is for the student model to behave similarly to the teacher model. This similarity can be enforced using a range of different loss functions. There are various approaches to model distillation using different sets of loss functions when training the student. The two approaches we have focussed on are the approach proposed by [Hinton et al.](https://arxiv.org/pdf/1503.02531.pdf) of distilling the outputs of the prediction layers and the approach used by [TinyBERT (Jiao et al.)](https://arxiv.org/pdf/1909.10351) of also distilling intermediate layers.
 
-The logits-based approach introduces a loss function to minimise the difference between the logits of the student model and the teacher model. These logits contain the probabilities that the teacher model assigns to all possible response spans in the document. This makes the training loss more expressive and allows for higher accuracy with the same model size. An advantage of this method is that it is very quick and does not have any requirements for the student architecture.
+The prediction layer distillation approach introduces a loss function to minimise the difference between the logits (outputs of the prediction layer) of the student model and the teacher model. These logits contain the probabilities that the teacher model assigns to all possible response spans in the document. This makes the training loss more expressive and allows for higher accuracy with the same model size. An advantage of this method is that it is very quick and does not have any requirements for the student architecture.
 
-The TinyBERT approach consists of two steps: In the first step, the differences between the hidden states and the attentions of the student of student and teacher are minimised. In the second step, the output logits are compared similarly to the logits-based approach. An advantage of this method is that it delivers much better results than just applying to logits-based approach. However, compared to the logits-based approach this approach takes much longer (a few days instead of a few hours).
+The TinyBERT approach adds an additional step before performing prediction layer distillation. In this step, the differences between the hidden states and the attentions of the student of student and teacher are minimised. This additional step greatly increases performance because it forces the student model to behave very similarly to the teacher. However, this restricts the kinds of teachers and students you can use (the student needs to be pretrained using the teacher) and increases computation time (going from a few hours to multiple days).
 
 ## How can I distil a model in Haystack?
 
@@ -27,13 +27,13 @@ As explained above, when using model distillation you need to have both a teache
 
 </div>
 
-### Data augmentation (for using TinyBERT augmentation)
+### Data augmentation (for using intermediate layer distillation)
 
-The first stage of the TinyBERT approach requires a lot of data. Because acquiring a lot of training data is quite expensive, the TinyBERT paper suggests a data augmentation approach to multiply existing datasets. To use data augmentation in haystack, you can use the [`augment_squad.py` script](https://github.com/deepset-ai/haystack/blob/master/haystack/utils/augment_squad.py) provided in haystack. You could use the following command if the dataset is called `dataset.json` and is in the same folder as `augment_squad.py`:
+The optional intermediate layer distillation step requires a lot of data. Because acquiring a lot of training data is quite expensive, the TinyBERT paper suggests a data augmentation approach to multiply existing datasets. To use data augmentation in haystack, you can use the [`augment_squad.py` script](https://github.com/deepset-ai/haystack/blob/master/haystack/utils/augment_squad.py) provided in haystack. You could use the following command if the dataset is called `dataset.json` and is in the same folder as `augment_squad.py`:
 ```
 python augment_squad.py --squad_path dataset.json --ouput_path augmented_dataset.json --multiplication_factor 20
 ```
-This would create an augmented dataset with 20 times the samples in the file `augmented_dataset.json`.
+This would create an augmented dataset with 20 times the samples of `dataset.json` and place it in the file `augmented_dataset.json`.
 
 ### Loading student and teacher models
 
@@ -48,32 +48,32 @@ Please make sure that the student and teacher models use the same tokenizer. Oth
 
 ### Distilling teacher model to student model
 
-#### Logits-based approach
-For using logits-based distillation in Haystack, you just need to call the `distil_from` method on the student and pass the teacher model. 
+#### Intermediate layer distillation (optional)
+In case you want to use intermediate layer distillation in haystack, you just need to call the `distil_intermediate_layers_from` method on the student and pass the teacher model.
 
 ```
-student.distil_from(teacher, temperature=5, distillation_loss_weight=0.5,
-                    data_dir=data_dir, train_filename=train_filename, ...)
+student.distil_intermediate_layers_from(teacher, data_dir=data_dir, train_filename=train_filename)
+```
+As described above, it is recommended that the training dataset specified with `data_dir` and `train_filename` has been augmented using the `augment_squad.py` script.
+`distil_intermediate_layers_from` accepts all the parameters you can use for training and every parameter that are neccesary for training will also need to be provided here. The method also accepts additional parameters like `temperature` and `distillation_loss`. However, for intermediate layer distillation it should be enough to leave them at their default values.
+Please be aware that while intermediate layer distillation is optional, performing prediction layer distillation after intermediate layer distillation is necessary to achieve good performance.
+
+#### Prediction layer distillation
+For using prediction layer distillation in Haystack, you just need to call the `distil_prediction_layer_from` method on the student and pass the teacher model. 
+
+```
+student.distil_prediction_layer_from(teacher, temperature=5, distillation_loss_weight=0.5,
+                                     data_dir=data_dir, train_filename=train_filename, ...)
 ```
 
-`distil_from` accepts all parameters that you can use for training, but also accepts additional parameters. Everything you need to provide for training such as train_filename (name of file with training dataset) and data_dir (folder of training dataset file and optionally test and eval dataset) is also necessary to provide in `distil_from`. In addition, you also have to provide the teacher model. All other parameters are optional, but we would also recommend adjusting `temperature` and `distillation_loss_weight`.
-
-#### TinyBERT
-To use TinyBERT distillation in haystack, you also just need to call the `distil_from` method on the student and pass the teacher model. However, you need to provide a few additional parameters:
-
-```
-student.distil_from(teacher, tinybert_loss=True,
-                    data_dir=data_dir, train_filename=train_filename,
-                    tinybert_train_filename=augmented_dataset,
-                    tinybert_epochs=5, tinybert_learning_rate=5e-5 ...)
-```
-To activate the additional distillation step for TinyBERT distillation, you need to set the `tinybert_loss` parameter to `True` and you should also provide an augmented dataset (see above for instructions on how to use the augmentation script) for this first stage. This dataset must be specified using the `tinybert_train_filename` parameter.
-
-If you want, you can also specify the learning rate and the number of epochs for the first TinyBERT distillation step. Otherwise, they will be set to recommended values.
+Like `distil_intermediate_layers_from`, `distil_prediction_layer_from` accepts all parameters that you can use for training, but also accepts additional parameters. Everything you need to provide for training such as train_filename (name of file with training dataset) and data_dir (folder of training dataset file and optionally test and eval dataset) is also necessary to provide in `distil_from`. In addition, you also have to provide the teacher model. All other parameters are optional, but we would also recommend adjusting `temperature` and `distillation_loss_weight`.
 
 ## What parameters should I use?
-### Logits-based approach
-Logits-based model distillation is controlled by two parameters: `temperature` and `distillation_loss_weight`.
+### Intermediate layer distillation
+When using intermediate layer distillation, we would recommend just using the default parameters.
+
+### Prediction layer distillation
+Prediction layer distillation is controlled by two parameters: `temperature` and `distillation_loss_weight`.
 
 `temperature` specifies the certainty of the teacher model. Usually language models are very certain that one answer span is correct and assign all other answer spans a very low probability. This is not what we want for distillation as this would be very similar to just having a label. You can correct for this using a higher temperature.
 On the other hand, we also don't want the probabilities to be too similar as this also wouldn't create a meaningful training signal. For this, we can decrease the temperature.
@@ -91,13 +91,11 @@ Here are the parameters that worked best in our experiments:
 | [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)           | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)          | SQuADv2    | 3.0           | 0.75                       |
 | [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                  | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled)  | GermanQuAD | 2.0           | 0.75                       |
 
-### TinyBERT
-With TinyBERT, we would recommend just using the default parameters.
-
 ## What accuracy should I expect?
 
-We are actively working on extending model distillation features in haystack. The following table shows experiment results of the first version of model distillation in haystack. Stay tuned for updates!
+We are actively working on extending model distillation features in haystack. The following tables shows experiment results of the first version of model distillation in haystack. Stay tuned for updates!
 
+### Only using prediction layer distillation
 | Student                  | Teacher                                              | Distilled                                                                                                       | Base F1 | Teacher F1 | Distilled F1 |
 | ------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------ |
 | [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)             | 69.6%   | 83.2%      | 72.8%        |
@@ -105,9 +103,9 @@ We are actively working on extending model distillation features in haystack. Th
 | [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)                     | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)   | 78.0%     | 84.4%      | 79.0%        |
 | [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                    | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled) | 77.2%   | 86.4%      | 80.4%        |
 
-
-| Student | Logits | TinyBERT | Base F1 | Logits F1 | TinyBERT F1 | Base F1 | Large F1 |
-| -- | -- | -- | -- | -- | -- | -- | -- |
-| huawei-noah/TinyBERT_General_6L_768D | | | 71.1% | 73.0% | 76.2% | 77.8% | 83.2% |
+### Intermediate layer distillation + Prediction layer distillation
+| Student | Teacher | Distilled | Base F1 | Teacher F1 | Distilled F1 |
+| -- | -- | -- | -- | -- | -- |
+| huawei-noah/TinyBERT_General_6L_768D | | | 71.1% | 76.2% | 77.8% |
 
 The baseline is the student model finetuned without distillation.
