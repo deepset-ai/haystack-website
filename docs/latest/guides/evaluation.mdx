@@ -13,20 +13,13 @@ To get started using Haystack for evaluation, we recommend having a look at our 
 
 </div>
 
-## Open vs Closed Domain
+## Integrated vs Isolated Node Evaluation
 
-There are two evaluation modes known as **open domain** and **closed domain.** The default for pipeline evaluation in Haystack via pipeline.eval()` is **open domain.**
+We distinguish two evaluation modes for pipelines **integrated** and **isolated** node evaluation. The terms refer to whether we evaluate a pipeline node based on the predictions of the preceeding node in the pipeline as input (integrated evaluation) or whether we evaluate it in isolation from the other nodes with the ground-truth labels as input (isolated evaluation). An **integrated** evaluation tells what result quality users will experience when running the pipeline and it is the default for pipeline evaluation in Haystack via `pipeline.eval()`. An **isolated** evaluation tells what the maximum result quality of a node could be if it received the perfect input from the preceeding node. It can be activated in addition via `pipeline.eval(add_isolated_node_eval=True)`. For example, in an ExtractiveQAPipeline comprising a retriever and a reader node, you can find out the upper bounds of the reader's evaluation metrics assuming that the retriever passed on all relevant documents.
+If the upper bound (isolated evaluation result) differs a lot from the actually achieved result quality (integrated evaluation result), we suggest that you focus on improving the predictions of the preceeding node to achieve the full performance of the pipeline. If the difference is small, you would need to focus on improving this node itself to improve the pipeline's overall result quality.
 
-**Open domain** means multiple-document QA (typically over the entire database).
-Here, you only look for a match or overlap between the two answer strings.
-Even if the predicted answer is extracted from a different position than the correct answer,
-that's fine as long as the strings match.
-
-**Closed domain** means single document QA.
-In this setting, you want to make sure the correct instance of a string is highlighted as the answer.
-So you compare the indexes of predicted against labeled answers.
-Even if the two strings have identical content, if they occur in different documents,
-or in different positions in the same document, they count as wrong.
+What we call **integrated evaluation** is often referred to as **open domain** in literature, which means multiple-document QA (typically over the entire database). The relevant documents need to be identified first in this scenario. In contrast, **isolated evaluation** is referred to as **closed domain**, meaning single document QA. There is no retrieval step involved in this scenario as the relevant document is already given.
+In both scenarios, Haystack evaluates the correctness of an extracted answer by looking for a match or overlap between the two answer strings. Even if the predicted answer is extracted from a different position than the correct answer, that's fine as long as the strings match. 
 
 ## Metrics: Retrieval
 
