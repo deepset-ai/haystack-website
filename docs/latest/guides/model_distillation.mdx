@@ -1,4 +1,4 @@
-# Knowledge Distillation for Reader Models
+# Model Distillation
 
 Haystack now allows for distillation of large readers serving as teachers into smaller readers called students.
 
@@ -35,6 +35,7 @@ When only using prediction layer distillation, the only thing that needs to be t
 Intermediate layer distillation places quite strict restrictions on the kinds of models you can use. It requires that the student model was distilled during pretraining with the same teacher model. This means that for each student model there is only one teacher model you can use for fine tuning.
 
 | Student | Teacher |
+|-|-|
 | [huawei-noah/TinyBERT_General_4L_312D](https://huggingface.co/huawei-noah/TinyBERT_General_4L_312D), [https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D](https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D) | [bert-base-uncased](https://huggingface.co/bert-base-uncased) and all models fine tuned using this: [twmkn9/bert-base-uncased-squad2](https://huggingface.co/twmkn9/bert-base-uncased-squad2), ... |
 
 Unlike the table for prediction layer distillation, this table should currently be quite exhaustive. Please note, however, that we are actively working on training more student models compatible with other teachers.
