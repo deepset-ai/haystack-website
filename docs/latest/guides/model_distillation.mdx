@@ -1,6 +1,6 @@
-# Model Distillation
+# Knowledge Distillation for Reader Models
 
-Haystack now allows for logits-based distillation of large teacher models into smaller student models.
+Haystack now allows for distillation of large readers serving as teachers into smaller readers called students.
 
 ## Why should I want to do distil a language model?
 
@@ -17,6 +17,28 @@ The goal of model distillation is for the student model to behave similarly to t
 The prediction layer distillation approach introduces a loss function to minimise the difference between the logits (outputs of the prediction layer) of the student model and the teacher model. These logits contain the probabilities that the teacher model assigns to all possible answer spans in the document. This makes the training loss more expressive and allows for higher accuracy with the same model size. An advantage of this method is that it is very quick and does not have any requirements for the student architecture.
 
 The TinyBERT approach adds an additional step before performing prediction layer distillation. In this step, the differences between the hidden states and the attentions of the student and teacher are minimised. This additional step called intermediate layer distillation greatly increases performance because it forces the student model to behave very similarly to the teacher. However, this restricts the kinds of teachers and students you can use (the student needs to be pretrained using the teacher) and increases computation time (about 35x the time of just performing prediction layer distillation).
+
+## Which student-teacher combinations can I use?
+What kind of students and teachers you can combine, heavily depends on whether you are using intermediate layer distillation as this places a greater restriction on the models you can use.
+
+### Possible student-teacher combinations for prediction layer distillation
+When only using prediction layer distillation, the only thing that needs to be the same is the tokenizer. In this non-exhaustive table, you can find a few examples of models with the same tokenizer:
+
+| Tokenizer | Models |
+|-|-|
+| Bert uncased tokenizer | [prajjwal1/bert-medium](https://huggingface.co/prajjwal1/bert-medium), [huawei-noah/TinyBERT_General_6L_768D](https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D), [bert-base-uncased](https://huggingface.co/bert-base-uncased), [bert-large-uncased](https://huggingface.co/bert-large-uncased), and all models fine tuned on those: [mrm8488/bert-tiny-5-finetuned-squadv2](https://huggingface.co/mrm8488/bert-tiny-5-finetuned-squadv2) ... |
+| Bert cased tokenizer | [bert-base-cased](https://huggingface.co/bert-base-cased), [bert-large-cased](https://huggingface.co/bert-large-cased), and all models fine tuned on those: [deepset/bert-base-cased-squad2](https://huggingface.co/deepset/bert-base-cased-squad2), ... |
+| RoBERTa tokenizer | [roberta-base](https://huggingface.co/roberta-base), [roberta-large](https://huggingface.co/roberta-large), and all models fine tuned on those: [deepset/roberta-base-squad2](https://huggingface.co/deepset/roberta-base-squad2), ... |
+| Electra tokenizer | [google/electra-small-discriminator](https://huggingface.co/google/electra-small-discriminator), [google/electra-base-discriminator](https://huggingface.co/google/electra-base-discriminator), [google/electra-large-discriminator](https://huggingface.co/google/electra-large-discriminator), and all models fine tuned on those: [deepset/electra-base-squad2](https://huggingface.co/deepset/electra-base-squad2) |
+
+### Possible student-teacher combinations for intermediate layer distillation
+Intermediate layer distillation places quite strict restrictions on the kinds of models you can use. It requires that the student model was distilled during pretraining with the same teacher model. This means that for each student model there is only one teacher model you can use for fine tuning.
+
+| Student | Teacher |
+| [huawei-noah/TinyBERT_General_4L_312D](https://huggingface.co/huawei-noah/TinyBERT_General_4L_312D), [https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D](https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D) | [bert-base-uncased](https://huggingface.co/bert-base-uncased) and all models fine tuned using this: [twmkn9/bert-base-uncased-squad2](https://huggingface.co/twmkn9/bert-base-uncased-squad2), ... |
+
+Unlike the table for prediction layer distillation, this table should currently be quite exhaustive. Please note, however, that we are actively working on training more student models compatible with other teachers.
+
 
 ## How can I distil a model in Haystack?
 
