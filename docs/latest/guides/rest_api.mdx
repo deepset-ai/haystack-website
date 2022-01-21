@@ -63,33 +63,12 @@ The API server by default runs on http://127.0.0.1:8000. The API server includes
 
 You can use the Swagger page to view the available endpoints and expected input and output formats for each endpoint. The Swagger site also includes the option to send sample API requests and inspect responses.
 
-### API endpoints included in the example application
+### API endpoints
 
-The example Haystack API includes the following endpoints:
+<div>
+    <Swagger />
+</div>
 
-#### POST /query
-
-This endpoint receives the question as a string and allows the requester to set additional parameters that will be passed on to the Haystack pipeline.
-
-#### POST ​/feedback
-
-This endpoint allows the API user to submit feedback on an answer for a particular query. For example, the user can send feedback on whether the answer was correct and whether the right snippet was identified as the answer. Information submitted through this endpoint is used to train the underlying QA model.
-
-#### POST ​/eval-feedback
-
-This endpoint returns basic accuracy metrics based on user feedback, e.g., the ratio of correct answers or correctly identified documents. You can filter the output by document or label.
-
-#### GET ​/export-feedback
-
-This endpoint returns JSON output in the SQuAD format for question/answer pairs that were marked as "relevant" by user feedback through the /feedback endpoint.
-
-#### POST ​/file-upload
-
-You can use this endpoint to upload a file for indexing (see the section below for more details on indexing).
-
-#### POST ​/documents/delete_by_filters
-
-This endpoint allows you to delete a subset of the documents contained in your document store. You can filter the documents to delete by metadata (like the document's name), or provide an empty JSON object to clear the document store.
 
 ### Running HTTP API without Docker
 
