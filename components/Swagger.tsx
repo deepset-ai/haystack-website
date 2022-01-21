@@ -8,6 +8,7 @@ class Swagger extends Component {
       dom_id: '#swaggerContainer',
       url: `/openapi/openapi.json`,
       presets: [presets.apis],
+      supportedSubmitMethods: [],
     });
   }
 
