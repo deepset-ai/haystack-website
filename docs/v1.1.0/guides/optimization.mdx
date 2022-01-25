@@ -10,7 +10,7 @@ On our [benchmarks page](https://haystack.deepset.ai/bm/benchmarks), you will fi
 many of the common model architectures. While our default recommendation is RoBERTa,
 MiniLM offers much faster processing for only a minimal drop in accuracy.
 If you are interested in compressing your own large models into smaller ones similar to TinyBERT, you can also
-take a look at our [Model Distillation guide](/model-distillation).
+take a look at our [Model Distillation guide](/guides/v1.0.1/model-distillation).
 You can find the models that we've trained on [the HuggingFace Model Hub](https://huggingface.co/deepset)
 
 <div style={{ marginBottom: "3rem" }} />
@@ -88,7 +88,7 @@ retrieved_docs = retriever.retrieve(top_k=10)
 
 ## Metadata Filtering
 
-Metadata can be attached to the documents which you index into your DocumentStore (see the input data format [here](/v1.1.0/components/retriever)).
+Metadata can be attached to the documents which you index into your DocumentStore (see the input data format [here](/components/v1.1.0/retriever)).
 At query time, you can apply filters based on this metadata to limit the scope of your search and ensure your answers
 come from a specific slice of your data.
 
@@ -98,7 +98,7 @@ This can reduce the work load of the retriever and also ensure that you get more
 
 Filters are applied via the `filters` argument of the `Retriever` class. In practice, this argument will probably
 be passed into the `Pipeline.run()` call, which will then route it on to the `Retriever` class
-(see our the Arguments on the [Pipelines page](/v1.1.0/components/pipelines) for an explanation).
+(see our the Arguments on the [Pipelines page](/components/v1.1.0/pipelines) for an explanation).
 
 ```python
 pipeline.run(

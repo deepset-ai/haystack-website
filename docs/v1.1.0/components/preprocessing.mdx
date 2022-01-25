@@ -12,7 +12,7 @@ and effective handling of data is key to getting the most out of Haystack.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-Check out our [preprocessing tutorial](/v1.1.0/tutorials/preprocessing) if you'd like to start working with code examples already!
+Check out our [preprocessing tutorial](/tutorials/v1.1.0/preprocessing) if you'd like to start working with code examples already!
 
 </div>
 
@@ -20,7 +20,7 @@ Check out our [preprocessing tutorial](/v1.1.0/tutorials/preprocessing) if you'd
 
 You can index `Document` objects (recommended) or plain dictionaries into a Haystack `DocumentStore`. 
 The output of your preprocessing should comply with one of these two formats.
-To learn more about the `Document` class see [Primitives](/v1.1.0/components/primitives).
+To learn more about the `Document` class see [Primitives](/components/v1.1.0/primitives).
 
 ```python
 # Option 1: Native Haystack Documents
@@ -48,7 +48,7 @@ docs = [
 There are a range of different file converters in Haystack that
 can extract text from files and cast them into the unified dictionary format shown above.
 Haystack features support for txt, pdf and docx files and there is even a converter that leverages Apache Tika.
-Please refer to [the API docs](/v1.1.0/reference/file-converters) to see which converter best suits you.
+Please refer to [the API docs](/reference/v1.1.0/file-converters) to see which converter best suits you.
 
 <Tabs
   options={[
@@ -167,8 +167,8 @@ Please refer to [the API docs](/v1.1.0/reference/file-converters) to see which c
 
 <div style={{ marginBottom: "3rem" }} />
 
-Converters are Haystack [Nodes](/v1.1.0/components/nodes) and can be added to [Pipelines](/v1.1.0/components/pipelines).
-See our [Advanced Indexing Pipeline Tutorial](/v1.1.0/tutorials/doc-class-index) for an example.
+Converters are Haystack [Nodes](/components/v1.1.0/nodes) and can be added to [Pipelines](/components/v1.1.0/pipelines).
+See our [Advanced Indexing Pipeline Tutorial](/tutorials/v1.1.0/doc-class-index) for an example.
 
 ## Web Crawler
 
@@ -195,7 +195,7 @@ it is recommended that they are further processed in order to ensure optimal Ret
 The `PreProcessor` takes one of the documents created by the converter as input,
 performs various cleaning steps and splits them into multiple smaller documents.
 
-For suggestions on how best to split your documents, see [Optimization](/v1.1.0/guides/optimization)
+For suggestions on how best to split your documents, see [Optimization](/guides/v1.1.0/optimization)
 
 ```python
 from haystack.nodes import PreProcessor
@@ -221,5 +221,5 @@ docs = processor.process(doc)
 - `split_respect_sentence_boundary` ensures that document boundaries do not fall in the middle of sentences
 - `split_overlap` sets the amount of overlap between two adjacent documents after a split. Setting this to a positive number essentially enables the sliding window approach.
 
-PreProcessors are Haystack [Nodes](/v1.1.0/components/nodes) and can be added to [Pipelines](/v1.1.0/components/pipelines).
-See our [Advanced Indexing Pipeline Tutorial](/v1.1.0/tutorials/doc-class-index) for an example.
+PreProcessors are Haystack [Nodes](/components/v1.1.0/nodes) and can be added to [Pipelines](/components/v1.1.0/pipelines).
+See our [Advanced Indexing Pipeline Tutorial](/tutorials/v1.1.0/doc-class-index) for an example.
