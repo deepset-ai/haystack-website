@@ -10,13 +10,13 @@ The diagram below illustrates how the Haystack REST API is structured:
 
 ## Background: Haystack Pipelines
 
-The Haystack [Pipeline](/v1.1.0/components/pipelines) is at the core of Haystack’s QA functionality, whether Haystack is used directly through the Python bindings or through a REST API.
+The Haystack [Pipeline](/components/v1.1.0/pipelines) is at the core of Haystack’s QA functionality, whether Haystack is used directly through the Python bindings or through a REST API.
 
 A pipeline is defined as a sequence of components where each component performs a dedicated function, e.g., retrieving documents from a document store or extracting an answer to a query from a text document. A pipeline’s components are interconnected through inputs and outputs.
 
 The Haystack REST API exposes an HTTP interface for interacting with a pipeline. For instance, you can use the REST API to send a query submitted in the body of an HTTP request to the Haystack Pipeline. Haystack will then process the request and return the answer to the query in a HTTP response.
 
-When running Haystack as a REST API, you'll need to define the pipeline you'll be using in the API as a YAML file. Check out the [Pipelines YAML doc](/v1.1.0/components/pipelines) for more details.
+When running Haystack as a REST API, you'll need to define the pipeline you'll be using in the API as a YAML file. Check out the [Pipelines YAML doc](/components/v1.1.0/pipelines) for more details.
 
 The example Haystack pipeline that we’ll be using below is defined in the [rest_api/pipeline/pipelines.yaml](https://github.com/deepset-ai/haystack/blob/master/rest_api/pipeline/pipelines.yaml) file.
 
@@ -159,7 +159,7 @@ curl -X 'POST' \
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Note:** If you'd like to learn how to pass parameters into your Pipeline, see the [Pipeline arguments section](/v1.1.0/components/pipelines#arguments).
+**Note:** If you'd like to learn how to pass parameters into your Pipeline, see the [Pipeline arguments section](/components/v1.1.0/pipelines#arguments).
 
 </div>
 

@@ -1,7 +1,7 @@
 # Ranker
 
 There are pure "semantic document search" use cases that do not need question answering functionality but only document ranking.
-While the [Retriever](/v1.1.0/components/retriever) is a perfect fit for document retrieval, we can further improve its results with the Ranker.
+While the [Retriever](/components/v1.1.0/retriever) is a perfect fit for document retrieval, we can further improve its results with the Ranker.
 For example, BM25 (sparse retriever) does not take into account semantics of the documents and the query but only their keywords.
 The Ranker can re-rank the results of the retriever step by taking semantics into account.
 Similar to the Reader, it is based on the latest language models.
