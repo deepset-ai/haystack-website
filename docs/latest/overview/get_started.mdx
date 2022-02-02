@@ -104,7 +104,7 @@ document_store = ElasticsearchDocumentStore()
 dicts = convert_files_to_dicts(doc_dir, clean_func=clean_wiki_text)
 document_store.write_documents(dicts)
 
-# Retriever: A Fast and simple algo to indentify the most promising candidate documents
+# Retriever: A Fast and simple algo to identify the most promising candidate documents
 retriever = ElasticsearchRetriever(document_store)
 
 # Reader: Powerful but slower neural network trained for QA
