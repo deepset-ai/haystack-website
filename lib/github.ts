@@ -17,6 +17,7 @@ export const getDownloadUrl = async ({
     const res = await octokit.rest.repos.getContent({
       owner: "deepset-ai",
       repo: "haystack",
+      branch: "upgrade-pydoc-markdown",
       path: `docs${version && version !== "latest" ? `/${version}` : ""}${repoPath}${filename}`
     });
     if (Array.isArray(res.data)) return;
