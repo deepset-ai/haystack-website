@@ -28,24 +28,28 @@ You can call `git pull` on the repo to update.
 
 If the `install` command does not work for you and you have `pip<21.3`, see [Custom Installation](/overview/installation#custom-installation)
 
-## REST API and UI
+## Installing the REST API and UI
 
-Run the following from the root directory of the Haystack repo
+Haystack comes packaged with a REST API so that it can be deployed as a service.
+There is also a UI that interacts with this service to provide an interactive app to the user.
+To install these, run the following from the root directory of the Haystack repo.
 
 ```
 pip install rest_api/
 pip install ui/
 ```
 
-## Installing on Windows
+## Other Operating Systems
+
+### Windows
 
 ```
 pip install farm-haystack -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-## Installing on Apple Silicon (M1)
+### Apple Silicon (M1)
 
-M1 Macbooks require some extra depencies in order to install Haystack.
+Macs with a M1 processor require some extra dependencies in order to install Haystack.
 
 ```
 # some additional dependencies needed on m1 mac
@@ -59,15 +63,21 @@ GRPC_PYTHON_BUILD_SYSTEM_ZLIB=true pip install farm-haystack
 
 ## Custom Installation
 
-To install groups of dependencies along with Haystack, specify them in the `pip install` command.
+To install groups of optional dependencies along with Haystack, specify them in the `pip install` command.
 The dependencies of Haystack are split into different groupings which you can find in `haystack/setup.cfg`.
 
 ```
-pip install -e .[all]            # install haystack and all depedencies
-pip install -e .[all-gpu]        # install haystack, all dependencies and gpu support
-pip install -e .[docstores-gpu]  # install haystack, all docstores and gpu support
-pip install -e .[docstores-gpu]  # install haystack, all docstores and gpu support
+# install haystack and all optional depedencies
+pip install -e .[all]
 
+# install haystack and all optional dependencies with gpu support
+pip install -e .[all-gpu]
+
+# install haystack and all docstores with gpu support
+pip install -e .[docstores-gpu]
+
+# install haystack and faiss with gpu support
+pip install -e .[faiss-gpu]
 ```
 
 If you are running `pip<21.3` you won't be able to install dependency groups that reference other groups.
