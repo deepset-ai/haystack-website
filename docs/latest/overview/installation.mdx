@@ -54,15 +54,13 @@ brew install cmake
 brew install rust
 
 # haystack installation
-GRPC_PYTHON_BUILD_SYSTEM_ZLIB=true pip install git+https://github.com/deepset-ai/haystack.git
+GRPC_PYTHON_BUILD_SYSTEM_ZLIB=true pip install farm-haystack
 ```
 
 ## Custom Installation
 
-The dependencies of Haystack are split into different groupings.
-You can find these in `haystack/setup.cfg`.
-
 To install groups of dependencies along with Haystack, specify them in the `pip install` command.
+The dependencies of Haystack are split into different groupings which you can find in `haystack/setup.cfg`.
 
 ```
 pip install -e .[all]            # install haystack and all depedencies
