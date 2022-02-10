@@ -1,15 +1,17 @@
 # Get Started
 
-## Installation
+<div style={{ marginBottom: "3rem" }} />
 
 <Tabs
   options={[
     {
-      title: "Basic",
+      title: "Basic Install",
       content: (
         <div>
           <p>
-            The most straightforward way to install Haystack is through pip.
+              The most straightforward way to install the latest release of Haystack is through pip.
+              This command will install everything needed for Pipelines that use an Elasticsearch Document Store.
+              See <a href="https://haystack.deepset.ai/overview/installation">Installation</a> for more details.
           </p>
           <pre>
             <code>pip install farm-haystack</code>
@@ -18,34 +20,40 @@
       ),
     },
     {
-      title: "Editable",
+      title: "Full Install",
       content: (
         <div>
           <p>
-            If you’d like to run a specific, unreleased version of Haystack, or
-            make edits to the way Haystack runs, you’ll want to install it using
-            `git` and `pip --editable`. This clones a copy of the repo to a
-            local directory and runs Haystack from there.
+              If you plan to be using more advanced features like Milvus, FAISS, Weaviate, OCR or Ray, you will need to install a full version of Haystack.
+              The following command will install the latest version on the master branch.
+              See <a href="https://haystack.deepset.ai/overview/installation">Installation</a> for more details.
           </p>
           <pre>
             <code>git clone https://github.com/deepset-ai/haystack.git</code>
             <code>cd haystack</code>
-            <code>pip install --editable .</code>
+            <code>pip install -e .[all]</code>
           </pre>
+        </div>
+      ),
+    },
+      {
+      title: "Online Demo",
+      content: (
+        <div>
           <p>
-            By default, this will give you the latest version of the master
-            branch. Use regular git commands to switch between different
-            branches and commits.
+              See what Haystack can do with our <a href="https://haystack-demo.deepset.ai/">Explore the World demo</a>!
           </p>
         </div>
       ),
     },
         {
-      title: "Docker",
+      title: "Local Demo",
       content: (
         <div>
           <p>
-            Run a demo via Docker.
+            You can set up and run a local Haystack demo via Docker.
+            To enable GPU acceleration, add the `-f docker-compose-gpu.yml` flag to both `docker-compose` commands.
+            See <a href="https://haystack.deepset.ai/overview/quick-demo#local">Quick Demo</a> for more details.
           </p>
           <pre>
             <code>git clone https://github.com/deepset-ai/haystack.git</code>
@@ -56,34 +64,12 @@
         </div>
       ),
     },
-            {
-      title: "Docker (GPU)",
-      content: (
-        <div>
-          <p>
-            Run a demo via Docker using GPUs.
-          </p>
-          <pre>
-            <code>git clone https://github.com/deepset-ai/haystack.git</code>
-            <code>cd haystack</code>
-            <code>docker-compose -f docker-compose-gpu.yml pull</code>
-            <code>docker-compose -f docker-compose-gpu.yml up</code>
-            </pre>
-        </div>
-      ),
-    },
   ]}
 />
 
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+## Installation
 
-**Windows:** On Windows add the arg `-f https://download.pytorch.org/whl/torch_stable.html` to install PyTorch correctly
-
-**Apple M1 (a.k.a. Apple Silicon):** Please check out [this thread](https://github.com/deepset-ai/haystack/issues/1310#issuecomment-996824097) for a guide on installation
-
-</div>
-
-<div style={{ marginBottom: "3rem" }} />
+For a full guide on how to install Haystack see [Installation](/overview/installation).
 
 ## Quick Demo
 
