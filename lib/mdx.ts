@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 export const components = {
   Disclosures: dynamic(() => import("components/Disclosures")),
   Tabs: dynamic(() => import("components/Tabs")),
+  Swagger: dynamic(() => import("components/Swagger")),
   pre: dynamic(() => import("components/Pre")),
   code: dynamic(() => import("components/Code")),
 };
