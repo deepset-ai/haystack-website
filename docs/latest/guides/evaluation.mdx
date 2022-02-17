@@ -15,11 +15,37 @@ To get started using Haystack for evaluation, we recommend having a look at our 
 
 ## Integrated vs Isolated Node Evaluation
 
-We distinguish two evaluation modes for pipelines **integrated** and **isolated** node evaluation. The terms refer to whether we evaluate a pipeline node based on the predictions of the preceeding node in the pipeline as input (integrated evaluation) or whether we evaluate it in isolation from the other nodes with the ground-truth labels as input (isolated evaluation). An **integrated** evaluation tells what result quality users will experience when running the pipeline and it is the default for pipeline evaluation in Haystack via `pipeline.eval()`. An **isolated** evaluation tells what the maximum result quality of a node could be if it received the perfect input from the preceeding node. It can be activated in addition via `pipeline.eval(add_isolated_node_eval=True)`. For example, in an ExtractiveQAPipeline comprising a retriever and a reader node, you can find out the upper bounds of the reader's evaluation metrics assuming that the retriever passed on all relevant documents.
-If the upper bound (isolated evaluation result) differs a lot from the actually achieved result quality (integrated evaluation result), we suggest that you focus on improving the predictions of the preceeding node to achieve the full performance of the pipeline. If the difference is small, you would need to focus on improving this node itself to improve the pipeline's overall result quality.
+We distinguish between two evaluation modes for Pipelines: **integrated** and **isolated** node evaluation.
 
-What we call **integrated evaluation** is often referred to as **open domain** in literature, which means multiple-document QA (typically over the entire database). The relevant documents need to be identified first in this scenario. In contrast, **isolated evaluation** is referred to as **closed domain**, meaning single document QA. There is no retrieval step involved in this scenario as the relevant document is already given.
-In both scenarios, Haystack evaluates the correctness of an extracted answer by looking for a match or overlap between the two answer strings. Even if the predicted answer is extracted from a different position than the correct answer, that's fine as long as the strings match. 
+In **integrated** evaluation, a node receives the predictions from the preceding node as input.
+It shows what performance users can expect when running the pipeline and it is the default when calling `pipeline.eval()`.
+
+In **isolated** evaluation, a node is isolated from the predictions of the preceding node.
+Instead, it receives ground-truth labels as input.
+It shows the maximum performance of a node if it receives the perfect input from the preceding node.
+It can be activated with `pipeline.eval(add_isolated_node_eval=True)`.
+
+For example, in an `ExtractiveQAPipeline` comprised of a Retriever and a Reader,
+**isolated** evaluation would measure the upper bound of the Reader's performance -
+that is the performance of the Reader assuming that the Retriever passes on all relevant documents.
+
+If the **isolated** evaluation result of a given node differs significantly from its **integrated** evaluation result,
+we suggest that you focus on improving the preceding node in order to get the best results from your pipeline.
+If the difference is small, you would need to focus on improving this node itself to improve the pipeline's overall result quality.
+
+## Comparison to Open and Closed Domain Question Answering
+
+**Integrated** evaluation on an `ExtractiveQAPipeline` is equivalent to **open domain** question answering.
+In this setting, QA is performed over multiple documents, typically an entire database,
+and the relevant documents need first to be identified.
+
+In contrast, **isolated** evaluation of a Reader node is equivalent to **closed domain** question answering.
+Here, there the question is being asked on a single document.
+There is no retrieval step involved as the relevant document is already given.
+
+When using `pipeline.eval()` in either **integrated** or **isolated** modes,
+Haystack evaluates the correctness of an extracted answer by looking for a match or overlap between the answer and prediction strings.
+Even if the predicted answer is extracted from a different position than the correct answer, that's fine, as long as the strings match.
 
 ## Metrics: Retrieval
 
