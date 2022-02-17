@@ -79,18 +79,18 @@ from haystack.utils import launch_es, print_answers
 
 Instead of relying on dictionaries, Haystack now standardizes more of the inputs and outputs of Nodes using the following primitive classes:
 
-- [Document](/components/v1.0.0/primitives#document)
-- [Answer](/components/v1.0.0/primitives#answer)
-- [Label](/components/v1.0.0/primitives#label)
-- [MultiLabel](/components/v1.0.0/primitives#multilabel)
-- [Span](/components/v1.0.0/primitives#span)
+- [Document](/components/primitives#document)
+- [Answer](/components/primitives#answer)
+- [Label](/components/primitives#label)
+- [MultiLabel](/components/primitives#multilabel)
+- [Span](/components/primitives#span)
 
 With these, there is now support for data structures beyond text and the REST API schema is built around their structure.
 Using these classes also allows for the autocompletion of fields in your IDE.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Tip:** To see examples of these primitive classes being returned, have a look at [Ready-Made Pipelines](/components/v1.0.0/ready-made-pipelines).
+**Tip:** To see examples of these primitive classes being returned, have a look at [Ready-Made Pipelines](/components/ready-made-pipelines).
 
 </div>
 
@@ -98,12 +98,19 @@ Many of the fields in these classes have also been renamed or removed.
 You can see a more comprehensive list of them in this [Github issue](https://github.com/deepset-ai/haystack/issues/1590).
 Below, we will go through a few cases that are likely to impact established workflows.
 
+## Field Names in Database Services
+
+If you are using a persistent database service as a `DocumentStore` (e.g. Elasticsearch, Milvus),
+you will need to change certain field names when migrating from v0.x to v1.0.
+Due to the [change in the `Document` object](/overview/migration#input-document-format), you will need to rename the `text` field in your database to `content`.
+Due to the [change in the `Label` object](/overview/migration#label-structure), you will need to rename the `question` field in your database to `query`.
+
 ## Input Document Format
 
 This dictionary schema used to be the recommended way to prepare your data to be indexed.
-Now we strongly recommend using our dedicated [`Document`](/components/v1.0.0/primitives) class as  a replacement.
+Now we strongly recommend using our dedicated [`Document`](/components/primitives) class as  a replacement.
 The `text` field has been renamed `content` to accommodate for cases where it is used for another data format,
-for example in [Table QA](/guides/v1.0.0/table-qa).
+for example in [Table QA](/guides/table-qa).
 
 **v0.x:**
 ```
@@ -125,9 +132,12 @@ From here, you can take the same steps to write Documents into your Document Sto
 document_store.write_documents([doc])
 ```
 
+Note that this change also affects the naming of fields in the DocumentStore.
+You will want to change the field's name from `text` to `content` in your database if you are migrating a v0.x compliant service to Haystack v1.0.
+
 ## Reader Returns Answer
 
-All Reader Nodes now return [Answer](/components/v1.0.0/primitives#label) objects instead of dictionaries.
+All Reader Nodes now return [Answer](/components/primitives#label) objects instead of dictionaries.
 
 **v0.x:**
 ```
@@ -156,7 +166,7 @@ All Reader Nodes now return [Answer](/components/v1.0.0/primitives#label) object
 ## Label Structure
 
 The attributes of the Label object have gone through some changes.
-To see their current structure see [Label](/components/v1.0.0/primitives#label).
+To see their current structure see [Label](/components/primitives#label).
 
 **v0.x:**
 ```
@@ -175,6 +185,9 @@ label = Label(
     ...
 )
 ```
+
+Note that this change also affects the naming of fields in the DocumentStore.
+You will want to change the field's name from `question` to `query` in your database if you are migrating a v0.x compliant service to Haystack v1.0.
 
 ## REST API Output
 
