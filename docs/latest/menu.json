@@ -5,11 +5,13 @@
     "items": [
       { "slug": "intro", "title": "What is Haystack?" },
       {"slug": "get-started", "title": "Get Started"},
-      { "slug": "use-cases", "title": "Use Cases" },
+      {"slug": "installation", "title": "Installation" },
       {"slug": "quick-demo", "title": "Quick Demo"},
-      { "slug": "roadmap", "title": "Roadmap" },
-      { "slug": "faq", "title": "FAQ" },
-      { "slug": "glossary", "title": "Glossary" }
+      {"slug": "migration", "title": "Migration to v1.0" },
+      {"slug": "roadmap", "title": "Roadmap" },
+      {"slug": "use-cases", "title": "Use Cases" },
+      {"slug": "faq", "title": "FAQ" },
+      {"slug": "glossary", "title": "Glossary" }
     ]
   },
   {
@@ -45,8 +47,10 @@
       {"slug": "evaluation", "title": "Evaluation"},
       {"slug": "annotation", "title": "Annotation Tool"},
       {"slug": "rest-api", "title": "REST API"},
+      {"slug": "rest-api-definition", "title": "REST API Definition"},
       {"slug": "chatbots", "title": "Chatbot Integration"},
-      {"slug": "table-qa", "title": "Table Question Answering"}
+      {"slug": "table-qa", "title": "Table Question Answering"},
+      {"slug": "model-distillation", "title": "Model Distillation"}
     ]
   },
   {
@@ -129,6 +133,7 @@
       {"slug": "translator", "title": "Translator"},
       {"slug": "preprocessor", "title": "Preprocessor"},
       {"slug": "file-converters", "title": "File Converters"},
+      {"slug": "file-classifier", "title": "File Classifier"},
       {"slug": "crawler", "title": "Crawler" },
       {"slug": "evaluation", "title": "Evaluation"},
       {"slug": "pipelines", "title": "Pipelines" },

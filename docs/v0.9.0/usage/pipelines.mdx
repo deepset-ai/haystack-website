@@ -88,7 +88,7 @@ To load, simply call:
 pipeline.load_from_yaml(Path("sample.yaml"))
 ```
 
-For another example YAML config, check out [this file](https://github.com/deepset-ai/haystack/blob/master/rest_api/pipeline/pipelines.yaml).
+For another example YAML config, check out [this file](https://github.com/deepset-ai/haystack/blob/v0.9.0/rest_api/pipeline/pipelines.yaml).
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -153,7 +153,7 @@ Or you can add decision nodes where only one "branch" is executed afterwards. Th
 ### Evaluation nodes
 
 There are nodes in Haystack that are used to evaluate the performance of readers, retrievers and combine systems.
-To get hands on with this kind of node, have a look at the [evaluation tutorial](/tutorials/evaluation).
+To get hands on with this kind of node, have a look at the [evaluation tutorial](/tutorials/v0.9.0/evaluation).
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -183,6 +183,6 @@ res = doc_pipe.run(query="How can I change my address?", top_k_retriever=3)
 
 ```
 
-See also the [Pipelines API documentation](/reference/pipelines) for more details.
+See also the [Pipelines API documentation](/reference/v0.9.0/pipelines) for more details.
 
 We plan many more features around the new pipelines incl. parallelized execution, distributed execution, dry runs - so stay tuned ...

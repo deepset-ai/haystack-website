@@ -203,7 +203,7 @@ To load, simply call:
 pipeline.load_from_yaml(Path("sample.yaml"))
 ```
 
-For another example YAML config, check out [this file](https://github.com/deepset-ai/haystack/blob/master/rest_api/pipeline/pipelines.yaml).
+For another example YAML config, check out [this file](https://github.com/deepset-ai/haystack/blob/v0.10.0/rest_api/pipeline/pipelines.yaml).
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -238,7 +238,7 @@ class CustomNode(BaseComponent):
 
 You can add decision nodes where only one "branch" is executed afterwards.
 This allows, for example, to classify an incoming query and depending on the result routing it to different modules.
-To find a ready-made example of a decision node, have a look at [the page](/components/query-classifier) about the `QueryClassifier`.
+To find a ready-made example of a decision node, have a look at [the page](/components/v0.10.0/query-classifier) about the `QueryClassifier`.
 
 ![image](https://user-images.githubusercontent.com/1563902/102452199-41229b80-403a-11eb-9365-7038697e7c3e.png)
 
@@ -270,13 +270,13 @@ If you'd like to define our own, you'll need to create a class that looks someth
 ## Evaluation nodes
 
 There are nodes in Haystack that are used to evaluate the performance of readers, retrievers and combine systems.
-To get hands on with this kind of node, have a look at the [evaluation tutorial](/tutorials/evaluation).
+To get hands on with this kind of node, have a look at the [evaluation tutorial](/tutorials/v0.10.0/evaluation).
 
 <div style={{ marginBottom: "3rem" }} />
 
 ## Ready-Made Pipelines
 
-Last but not least, we added some ready-made pipelines that allow you to run standard patterns with very few lines of code. See the [ready-made pipelines page](/components/ready-made-pipelines) and [pipelines API documentation](/reference/pipelines) to learn more about these.
+Last but not least, we added some ready-made pipelines that allow you to run standard patterns with very few lines of code. See the [ready-made pipelines page](/components/v0.10.0/ready-made-pipelines) and [pipelines API documentation](/reference/v0.10.0/pipelines) to learn more about these.
 
 **Examples:**
 

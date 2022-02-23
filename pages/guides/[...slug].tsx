@@ -116,7 +116,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
       scope: data,
     });
 
-    const type = "usage";
+    const type = "guides";
 
     const layoutProps = await getStaticLayoutProps({
       content,

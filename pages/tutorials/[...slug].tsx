@@ -15,6 +15,8 @@ import {
   StaticPageProps,
 } from "lib/utils";
 import { tutorialFilesLatest } from "lib/constants";
+import { tutorialFilesV110 } from "lib/constants";
+import { tutorialFilesV100 } from "lib/constants";
 import { tutorialFilesV0100 } from "lib/constants";
 import { tutorialFilesV090 } from "lib/constants";
 import { tutorialFilesV080 } from "lib/constants";
@@ -52,6 +54,24 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const pathsLatest = [
     ...tutorialFilesLatest.items.map((item) => ({ params: { slug: [item.slug] } })),
+  ];
+  const pathsV110 = [
+    ...tutorialFilesV110.items
+      .map((item) =>({
+          params: {
+            slug: ["v1.1.0", item.slug],
+          },
+        }))
+      .flat(),
+  ];
+  const pathsV100 = [
+    ...tutorialFilesV100.items
+      .map((item) =>({
+          params: {
+            slug: ["v1.0.0", item.slug],
+          },
+        }))
+      .flat(),
   ];
   const pathsV0100 = [
     ...tutorialFilesV0100.items
@@ -116,7 +136,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
         }))
       .flat(),
   ];
-  let paths = pathsLatest.concat(pathsV0100)
+  let paths = pathsLatest.concat(pathsV110)
+                          .concat(pathsV100)
+                          .concat(pathsV0100)
                           .concat(pathsV090)
                           .concat(pathsV080)
                           .concat(pathsV070)
@@ -144,6 +166,16 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     let item = tutorialFilesLatest.items.find(
       (item) => item.slug === docTitleSlug
     );
+    if(!item) {
+      item = tutorialFilesV110.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
+    if(!item) {
+      item = tutorialFilesV100.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
     if(!item) {
       item = tutorialFilesV0100.items.find(
         (item) => item.slug === docTitleSlug
@@ -224,7 +256,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
         ...layoutProps,
         source: markup,
       },
-      revalidate: 30,
+      revalidate: 600,
     };
   } catch (e) {
     console.log(e);

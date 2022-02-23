@@ -1,0 +1,385 @@
+# DocumentStores
+
+You can think of the DocumentStore as a "database" that:
+
+- stores your texts and meta data
+- provides them to the retriever at query time
+
+There are different DocumentStores in Haystack to fit different use cases and tech stacks.
+
+## Initialisation
+
+Initialising a new DocumentStore within Haystack is straight forward.
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Types
+
+<Disclosures
+    options={[
+        {
+            title: "Elasticsearch",
+            content: (
+                <div>
+                <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Install</a>&nbsp;
+                Elasticsearch and then <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/starting-elasticsearch.html">start</a>&nbsp;
+                an instance.<br></br><br></br>
+                If you have Docker set up, we recommend pulling the Docker image and running it.<br></br>
+                <pre>
+                    <code>docker pull docker.elastic.co/elasticsearch/elasticsearch:7.9.2</code>
+                    <code>docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.9.2</code>
+                </pre>
+                Next you can initialize the Haystack object that will connect to this instance.<br></br>
+                <pre>
+                    <code>document_store = ElasticsearchDocumentStore()</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "Open Distro for Elasticsearch",
+            content: (
+                <div>
+                Learn how to get started <a href="https://opendistro.github.io/for-elasticsearch-docs/#get-started">here</a>.
+                If you have Docker set up, we recommend pulling the Docker image and running it.
+                <pre>
+                    <code>docker pull amazon/opendistro-for-elasticsearch:1.13.2</code>
+                    <code>docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.13.2</code>
+                </pre>
+                Next you can initialize the Haystack object that will connect to this instance.
+                <pre>
+                    <code>from haystack.document_stores import OpenDistroElasticsearchDocumentStore</code>
+                    <code>document_store = OpenDistroElasticsearchDocumentStore()</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "OpenSearch",
+            content: (
+                <div>
+                Learn how to get started <a href="https://opensearch.org/docs/#docker-quickstart">here</a>.
+                If you have Docker set up, we recommend pulling the Docker image and running it.
+                <pre>
+                    <code>docker pull opensearchproject/opensearch:1.0.1</code>
+                    <code>docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opensearchproject/opensearch:1.0.1</code>
+                </pre>
+                Next you can initialize the Haystack object that will connect to this instance.
+                <pre>
+                    <code>from haystack.document_stores import OpenSearchDocumentStore</code>
+                    <code>document_store = OpenSearchDocumentStore()</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "Milvus",
+            content: (
+                <div>
+                Follow the <a href="https://www.milvus.io/docs/v1.0.0/milvus_docker-cpu.md">official documentation</a> to start a Milvus instance via Docker.
+                Note that we also have a utility function haystack.utils.launch_milvus that can start up a Milvus instance.<br></br><br></br>
+                You can initialize the Haystack object that will connect to this instance as follows:<br></br>
+                <pre>
+                    <code>from haystack.document_stores import MilvusDocumentStore</code>
+                    <code>document_store = MilvusDocumentStore()</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "FAISS",
+            content: (
+                <div>
+                The FAISSDocumentStore requires no external setup. Start it by simply using this line.<br></br>
+                <pre>
+                    <code>from haystack.document_stores import FAISSDocumentStore</code>
+                    <code>document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")</code>
+                </pre>
+                <h4>Save & Load</h4>
+                FAISS document stores can be saved to disk and reloaded:
+                <pre>
+                    <code>from haystack.document_stores import FAISSDocumentStore</code>
+                    <code>document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")</code>
+                    <code># Generates two files: my_faiss_index.faiss and my_faiss_index.json</code>
+                    <code>document_store.save("my_faiss_index.faiss")</code>
+                    <code># Looks for the two files generated above</code>
+                    <code>new_document_store = FAISSDocumentStore.load("my_faiss_index.faiss")</code>
+                    <code>assert new_document_store.faiss_index_factory_str == "Flat"</code>
+                </pre>
+                While `my_faiss_index.faiss` contains the index, my_faiss_index.json
+                contains the parameters used to inizialize it (like faiss_index_factory_store). 
+                This configuration file is necessary for load() to work. It simply contains 
+                the initial parameters in a JSON format.<br></br>
+                For example, a hand-written configuration file for the above FAISS index could look like:<br></br>
+                <pre>
+                    <code>&#123;</code>
+                    <code>  faiss_index_factory_store: 'Flat'</code>
+                    <code>&#125;</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "In Memory",
+            content: (
+                <div>
+                The InMemoryDocumentStore() requires no external setup. Start it by simply using this line.
+                <pre>
+                    <code>from haystack.document_store import InMemoryDocumentStore</code>
+                    <code>document_store = InMemoryDocumentStore()</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "SQL",
+            content: (
+                <div>
+                The SQLDocumentStore requires SQLite, PostgresQL or MySQL to be installed and started.
+                Note that SQLite already comes packaged with most operating systems.
+                <pre>
+                <code>from haystack.document_store import SQLDocumentStore</code>
+                <code>document_store = SQLDocumentStore()</code>
+                </pre>
+                </div>
+            )
+        },
+        {
+            title: "Weaviate",
+            content: (
+                <div>
+                The WeaviateDocumentStore requires a running Weaviate Server.
+                You can start a basic instance like this (see the <a href="https://www.semi.technology/developers/weaviate/current/">Weaviate docs</a> for details):
+                <pre>
+                    <code>docker run -d -p 8080:8080 --env AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED='true' --env PERSISTENCE_DATA_PATH='/var/lib/weaviate' semitechnologies/weaviate:1.4.0</code>
+                </pre>
+                Afterwards, you can use it in Haystack:
+                <pre>
+                    <code>from haystack.document_store import WeaviateDocumentStore</code>
+                    <code>document_store = WeaviateDocumentStore()</code>
+                </pre>
+                Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
+                See API documentation for more info.
+                </div>
+            )
+        }
+    ]}
+/>
+
+## Input Format
+
+DocumentStores expect Documents in dictionary form, like that below.
+They are loaded using the `DocumentStore.write_documents()` method.
+See [Preprocessing](/components/v1.1.0/preprocessing) for more information on the cleaning and splitting steps that will help you maximize Haystack's performance.
+
+[//]: # "Add link to preprocessing section"
+
+```python
+from haystack.document_store import ElasticsearchDocumentStore
+
+document_store = ElasticsearchDocumentStore()
+dicts = [
+    {
+        'content': DOCUMENT_TEXT_HERE,
+        'meta': {'name': DOCUMENT_NAME, ...}
+    }, ...
+]
+document_store.write_documents(dicts)
+```
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Writing Documents (Sparse Retrievers)
+
+Haystack allows for you to write store documents in an optimised fashion so that query times can be kept low.
+For **sparse**, keyword based retrievers such as BM25 and TF-IDF,
+you simply have to call `DocumentStore.write_documents()`.
+The creation of the inverted index which optimises querying speed is handled automatically.
+
+```python
+document_store.write_documents(dicts)
+```
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Writing Documents (Dense Retrievers)
+
+For **dense** neural network based retrievers like Dense Passage Retrieval, or Embedding Retrieval,
+indexing involves computing the Document embeddings which will be compared against the Query embedding.
+
+The storing of the text is handled by `DocumentStore.write_documents()` and the computation of the
+embeddings is started by `DocumentStore.update_embeddings()`.
+
+```python
+document_store.write_documents(dicts)
+document_store.update_embeddings(retriever)
+```
+
+This step is computationally intensive since it will engage the transformer based encoders.
+Having GPU acceleration will significantly speed this up.
+
+<!-- _comment: !! Diagrams of inverted index / document embeds !! -->
+<!-- _comment: !! Make this a tab element to show how different datastores are initialized !! -->
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Choosing the Right Document Store
+
+The Document Stores have different characteristics. You should choose one depending on the maturity of your project, the use case and technical environment:
+
+<Disclosures
+    options={[
+        {
+            title: "Elasticsearch",
+            content: (
+                <div>
+                <strong>Pros:</strong>
+                <ul>
+                    <li>Fast & accurate sparse retrieval with many tuning options</li>
+                    <li>Basic support for dense retrieval</li>
+                    <li>Production-ready</li>
+                    <li>Support also for Open Distro</li>
+                </ul>
+                <strong>Cons:</strong>
+                <ul>
+                    <li>Slow for dense retrieval with more than ~ 1 Mio documents</li>
+                </ul>
+                </div>
+            )
+        },
+        {
+            title: "Open Distro for Elasticsearch",
+            content: (
+                <div>
+                <strong>Pros:</strong>
+                <ul>
+                    <li>Fully open source (Apache 2.0 license)</li>
+                    <li>Essentially the same features as Elasticsearch</li>
+                </ul>
+                <strong>Cons:</strong>
+                <ul>
+                    <li>Slow for dense retrieval with more than ~ 1 Mio documents</li>
+                </ul>
+                </div>
+            )
+        },
+        {
+            title: "OpenSearch",
+            content: (
+                <div>
+                <strong>Pros:</strong>
+                <ul>
+                    <li>Fully open source (Apache 2.0 license)</li>
+                    <li>Essentially the same features as Elasticsearch</li>
+                    <li>Has more support for vector similarity comparisons and approximate nearest neighbours algorithms</li>
+                </ul>
+                <strong>Cons:</strong>
+                <ul>
+                    <li>Not as optimized as dedicated vector similarity options like Milvus and FAISS</li>
+                </ul>
+                </div>
+            )
+        },
+        {
+            title: "Milvus",
+            content: (
+                <div>
+                <strong>Pros:</strong>
+                <ul>
+                    <li>Scalable DocumentStore that excels at handling vectors (hence suited to dense retrieval methods like DPR)</li>
+                    <li>Encapsulates multiple ANN libraries (e.g. FAISS and ANNOY) and provides added reliability</li>
+                    <li>Runs as a separate service (e.g. a Docker container)</li>
+                    <li>Allows dynamic data management</li>
+                </ul>
+                <strong>Cons:</strong>
+                <ul>
+                    <li>No efficient sparse retrieval</li>
+                </ul>
+                </div>
+            )
+        },
+        {
+            title: "FAISS",
+            content: (
+                <div>
+                <strong>Pros:</strong>
+                <ul>
+                    <li>Fast & accurate dense retrieval</li>
+                    <li>Highly scalable due to approximate nearest neighbour algorithms (ANN)</li>
+                    <li>Many options to tune dense retrieval via different index types (more info <a href="https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index">here</a>)</li>
+                </ul>
+                <strong>Cons:</strong>
+                <ul>
+                    <li>No efficient sparse retrieval</li>
+                </ul>
+                </div>
+            )
+        },
+        {
+            title: "In Memory",
+            content: (
+                <div>
+                <strong>Pros:</strong>
+                <ul>
+                    <li>Simple</li>
+                    <li>Exists already in many environments</li>
+                </ul>
+                <strong>Cons:</strong>
+                <ul>
+                    <li>Only compatible with minimal TF-IDF Retriever</li>
+                    <li>Bad retrieval performance</li>
+                    <li>Not recommended for production</li>
+                </ul>
+                </div>
+            )
+        },
+        {
+            title: "SQL",
+            content: (
+                <div>
+                <strong>Pros:</strong>
+                <ul>
+                    <li>Simple & fast to test</li>
+                    <li>No database requirements</li>
+                    <li>Supports MySQL, PostgreSQL and SQLite</li>
+                </ul>
+                <strong>Cons:</strong>
+                <ul>
+                    <li>Not scalable</li>
+                    <li>Not persisting your data on disk</li>
+                </ul>
+                </div>
+            )
+        },
+        {
+            title: "Weaviate",
+            content: (
+                <div>
+                <strong>Pros:</strong>
+                <ul>
+                    <li>Simple vector search</li>
+                    <li>Stores everything in one place: documents, meta data and vectors - so less network overhead when scaling this up</li>
+                    <li>Allows combination of vector search and scalar filtering, i.e. you can filter for a certain tag and do dense retrieval on that subset</li>
+                </ul>
+                <strong>Cons:</strong>
+                <ul>
+                    <li>Less options for ANN algorithms than FAISS or Milvus</li>
+                    <li>No BM25 / Tf-idf retrieval</li>
+                </ul>
+                </div>
+            )
+        }
+    ]}
+/>
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+#### Our Recommendations
+
+**Restricted environment:** Use the `InMemoryDocumentStore`, if you are just giving Haystack a quick try on a small sample and are working in a restricted environment that complicates running Elasticsearch or other databases
+
+**Allrounder:** Use the `ElasticSearchDocumentStore`, if you want to evaluate the performance of different retrieval options (dense vs. sparse) and are aiming for a smooth transition from PoC to production
+
+**Vector Specialist:** Use the `MilvusDocumentStore`, if you want to focus on dense retrieval and possibly deal with larger datasets
+
+</div>

@@ -29,6 +29,7 @@ yarn dev:watch
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Note: This setup is tested with node v14.17.5 - but might be incompatible to older/newer versions. 
 
 #### Environment Variables
 
@@ -60,16 +61,35 @@ In the Haystack repo, add an entry into `haystack/docs/_src/tutorials/tutorials/
 
 Then in this Haystack Website repo, you need to add an entry to `haystack-website/lib/constants.ts` to refer to the new `.md` file in Haystack. Please add the new file only to the latest version. If you remove files, you also have to remove it in the latest version. To make it appear in the left Table of Contents, you need to add a new entry to `haystack-website/docs/latest/menu.json`. 
 
+For example:
 
-#### Preview from non-master branches
+```
+const res = await octokit.rest.repos.getContent({
+  owner: "deepset-ai",
+  repo: "haystack",
+  path: `docs${version && version !== "latest" ? `/${version}` : ""}${repoPath}${filename}`,
+  ref: HAYSTACK_BRANCH_NAME
+});
+```
+
+
+### Preview from non-master branches
 
 To preview docs that are on a non-master branch of the Haystack repo, you run this project locally and navigate to `lib/github.ts`, where you have to add a `ref` parameter to the `octokit.rest.repos.getContent` function call with the value of the branch name that you would like to preview. You also need to add the tutorials/references you would like to preview to `docs/{GIVEN_VERSION}/menu.json` and `lib/constants.ts`.
 
 ### Updating docs after a release
 
-When there's a new Haystack release, we need to create a directory for the new version within the local `/docs` directory. In this directory, we can write new overview and usage docs in .mdx (or manually copy over the ones from the previous version directory). Once this is done, the project will automatically fetch the reference and tutorial docs for the new version from GitHub. Bear in mind that a `menu.json` file needs to exist in every new version directory so that our Menu components know which page links to display. Moreover, we need to point the links, which are pointing to the latest to version, to the new version. Currently, we do not have a script for this process. Therefore, you need to use the search function of your IDE. Additionally, the `referenceFiles` and `tutorialFiles` constants in `lib/constants` need to be updated with any new reference or tutorial docs that get created as part of a new release. During a release, please add a new object `referenceFiles` and `tutorialFiles` with the release number to file. This change has also implecations on the files `tutorials/[...slug].tsx` and `tutorials/[...slug].tsx`. Please update the functions `getStaticPaths` and `getStaticProps` in both files with an array representing the latest version. In the [haystack](https://github.com/deepset-ai/haystack) repo, we have to release the api and tutorial docs by copying them to a new version folder as well. If you want to include here files from another brnach than master follwo **Preview from non-master branches**. **Lastly**, we have to update the constant specified in the `components/VersionSelect` component, so that we default to the new version when navigating between pages.
+When there's a new Haystack release, we need to create a directory for the new version within the local `/docs` directory. In this directory, we can write new overview and usage docs in .mdx (or manually copy over the ones from the previous version directory). Once this is done, the project will automatically fetch the reference and tutorial docs for the new version from GitHub. Bear in mind that a `menu.json` file needs to exist in every new version directory so that our Menu components know which page links to display. 
+
+Moreover, we need to point the links, which are pointing to the latest version, to the new version. Currently, we do not have a script for this process. Therefore, you need to use the search function of your IDE. 
+
+Additionally, the `referenceFiles` and `tutorialFiles` constants in `lib/constants` need to be updated with any new reference or tutorial docs that get created as part of a new release. During a release, please add a new object `referenceFiles` and `tutorialFiles` with the release number to file. This change has also implications on the files `tutorials/[...slug].tsx` and `reference/[...slug].tsx`. Please update the functions `getStaticPaths` and `getStaticProps` in both files with an array representing the latest version. 
+
+In the [haystack](https://github.com/deepset-ai/haystack) repo, we have to release the api and tutorial docs by copying them to a new version folder as well. If you want to include here files from another branch than master follow **Preview from non-master branches**. **Lastly**, we have to update the constant specified in the `components/VersionSelect` component, so that we default to the new version when navigating between pages.
+
 After releasing the docs, we need to release the benchmarks. Create a new version folder in the folder `benchmarks` and copy all folders from `latest` to the new folder.
-If you know start the local sever and go to the new version, you will see the 404 page. We pull the version from the haystack release tags. Most likely, the newest version is not released yet. Therefore, you have to add it manually to the array `tagNames` in the function `getDocsVersions` by adding the command `tagNames.push('v0.10.0');`.
+
+If you now start the local sever and go to the new version, you will see the 404 page. We pull the version from the haystack release tags. Most likely, the newest version is not released yet. Therefore, you have to add it manually to the array `tagNames` in the function `getDocsVersions` by adding the command `tagNames.push('v0.10.0');`.
 
 
 ## Styling
@@ -83,3 +103,4 @@ This application gets deployed on [Vercel](https://vercel.com). In the dashboard
 ## Future Work
 
 Convert the remote markdown files for references and tutorials to .mdx, so that we can inject React components into these. This would also allow for more code sharing between the overview+usage pages and tutorial+reference pages.
+

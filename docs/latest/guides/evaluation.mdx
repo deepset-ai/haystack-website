@@ -1,7 +1,6 @@
 # Evaluation
 
-Haystack has all the tools needed to evaluate Retrievers, Readers and Generators in both
-open domain and closed domain modes.
+Haystack has all the tools needed to evaluate whole pipelines or individual nodes, such as Retrievers, Readers and Generators. 
 Evaluation and the metrics that it generates are vital for:
 - judging how well your system is performing on a given domain.
 - comparing the performance of different models
@@ -14,32 +13,53 @@ To get started using Haystack for evaluation, we recommend having a look at our 
 
 </div>
 
-## Open vs Closed Domain
+## Integrated vs Isolated Node Evaluation
 
-There are two evaluation modes known as **open domain** and **closed domain.**
+We distinguish between two evaluation modes for Pipelines: **integrated** and **isolated** node evaluation.
 
-**Closed domain** means single document QA.
-In this setting, you want to make sure the correct instance of a string is highlighted as the answer.
-So you compare the indexes of predicted against labeled answers.
-Even if the two strings have identical content, if they occur in different documents,
-or in different positions in the same document, they count as wrong.
+In **integrated** evaluation, a node receives the predictions from the preceding node as input.
+It shows what performance users can expect when running the pipeline and it is the default when calling `pipeline.eval()`.
 
-**Open domain** means multiple-document QA (typically over the entire database).
-Here, you only look for a match or overlap between the two answer strings.
-Even if the predicted answer is extracted from a different position than the correct answer,
-that's fine as long as the strings match.
+In **isolated** evaluation, a node is isolated from the predictions of the preceding node.
+Instead, it receives ground-truth labels as input.
+It shows the maximum performance of a node if it receives the perfect input from the preceding node.
+It can be activated with `pipeline.eval(add_isolated_node_eval=True)`.
+
+For example, in an `ExtractiveQAPipeline` comprised of a Retriever and a Reader,
+**isolated** evaluation would measure the upper bound of the Reader's performance -
+that is the performance of the Reader assuming that the Retriever passes on all relevant documents.
+
+If the **isolated** evaluation result of a given node differs significantly from its **integrated** evaluation result,
+we suggest that you focus on improving the preceding node in order to get the best results from your pipeline.
+If the difference is small, you would need to focus on improving this node itself to improve the pipeline's overall result quality.
+
+## Comparison to Open and Closed Domain Question Answering
+
+**Integrated** evaluation on an `ExtractiveQAPipeline` is equivalent to **open domain** question answering.
+In this setting, QA is performed over multiple documents, typically an entire database,
+and the relevant documents need first to be identified.
+
+In contrast, **isolated** evaluation of a Reader node is equivalent to **closed domain** question answering.
+Here, the question is being asked on a single document.
+There is no retrieval step involved as the relevant document is already given.
+
+When using `pipeline.eval()` in either **integrated** or **isolated** modes,
+Haystack evaluates the correctness of an extracted answer by looking for a match or overlap between the answer and prediction strings.
+Even if the predicted answer is extracted from a different position than the correct answer, that's fine, as long as the strings match.
 
 ## Metrics: Retrieval
 
 ### Recall
 
 Recall measures how many times the correct document was among the retrieved documents over a set of queries.
-For a single query, the output is binary: either a document is contained in the selection, or it is not.
+For a single query, the output is binary: either the correct document is contained in the selection, or it is not.
 Over the entire dataset, the recall score amounts to a number between zero (no query retrieved the right document) and one (all queries retrieved the right documents).
+
+In some scenarios, there can be multiple correct documents for one query. The metric `recall_single_hit` considers whether at least one of the correct documents is retrieved, whereas `recall_multi_hit` takes into account how many of the multiple correct documents for one query are retrieved.
 
 Note that recall is affected by the number of documents that the retriever returns.
 If the retriever returns only one or a few documents, it is a tougher task to retrieve correct documents.
-Make sure to set the Retriever's `top_k` to an appropriate value and to also define the `top_k` in `Retriever.eval()` or `EvalDocuments`
+Make sure to set the Retriever's `top_k` to an appropriate value in the pipeline that you evaluate.
 
 ### Mean Reciprocal Rank (MRR)
 

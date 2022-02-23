@@ -86,7 +86,7 @@ retrieved_docs = retriever.retrieve(top_k=10)
 
 ## Metadata Filtering
 
-Metadata can be attached to the documents which you index into your DocumentStore (see the input data format [here](/usage/retriever)).
+Metadata can be attached to the documents which you index into your DocumentStore (see the input data format [here](/usage/v0.9.0/retriever)).
 At query time, you can apply filters based on this metadata to limit the scope of your search and ensure your answers
 come from a specific slice of your data.
 
@@ -96,7 +96,7 @@ This can reduce the work load of the retriever and also ensure that you get more
 
 Filters are applied via the `filters` argument of the `Retriever` class. In practice, this argument will probably
 be passed into the `Pipeline.run()` call, which will then route it on to the `Retriever` class
-(see our the Arguments on the [Pipelines page](/usage/pipelines) for an explanation).
+(see our the Arguments on the [Pipelines page](/usage/v0.9.0/pipelines) for an explanation).
 
 ```python
 pipeline.run(

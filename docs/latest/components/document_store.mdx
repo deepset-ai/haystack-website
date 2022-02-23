@@ -125,7 +125,7 @@ Initialising a new DocumentStore within Haystack is straight forward.
                 <div>
                 The InMemoryDocumentStore() requires no external setup. Start it by simply using this line.
                 <pre>
-                    <code>from haystack.nodes import InMemoryDocumentStore</code>
+                    <code>from haystack.document_store import InMemoryDocumentStore</code>
                     <code>document_store = InMemoryDocumentStore()</code>
                 </pre>
                 </div>
@@ -138,7 +138,7 @@ Initialising a new DocumentStore within Haystack is straight forward.
                 The SQLDocumentStore requires SQLite, PostgresQL or MySQL to be installed and started.
                 Note that SQLite already comes packaged with most operating systems.
                 <pre>
-                <code>from haystack.nodes import SQLDocumentStore</code>
+                <code>from haystack.document_store import SQLDocumentStore</code>
                 <code>document_store = SQLDocumentStore()</code>
                 </pre>
                 </div>
@@ -155,7 +155,7 @@ Initialising a new DocumentStore within Haystack is straight forward.
                 </pre>
                 Afterwards, you can use it in Haystack:
                 <pre>
-                    <code>from haystack.nodes import WeaviateDocumentStore</code>
+                    <code>from haystack.document_store import WeaviateDocumentStore</code>
                     <code>document_store = WeaviateDocumentStore()</code>
                 </pre>
                 Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
@@ -175,7 +175,7 @@ See [Preprocessing](/components/preprocessing) for more information on the clean
 [//]: # "Add link to preprocessing section"
 
 ```python
-from haystack.nodes import ElasticsearchDocumentStore
+from haystack.document_store import ElasticsearchDocumentStore
 
 document_store = ElasticsearchDocumentStore()
 dicts = [
@@ -294,6 +294,7 @@ The Document Stores have different characteristics. You should choose one depend
                 <strong>Cons:</strong>
                 <ul>
                     <li>No efficient sparse retrieval</li>
+                    <li>Does not support filters for queries</li>
                 </ul>
                 </div>
             )
@@ -311,6 +312,7 @@ The Document Stores have different characteristics. You should choose one depend
                 <strong>Cons:</strong>
                 <ul>
                     <li>No efficient sparse retrieval</li>
+                    <li>Does not support filters for queries</li>
                 </ul>
                 </div>
             )
@@ -322,12 +324,12 @@ The Document Stores have different characteristics. You should choose one depend
                 <strong>Pros:</strong>
                 <ul>
                     <li>Simple</li>
-                    <li>Exists already in many environments</li>
+                    <li>No extra services or dependencies</li>
                 </ul>
                 <strong>Cons:</strong>
                 <ul>
-                    <li>Only compatible with minimal TF-IDF Retriever</li>
-                    <li>Bad retrieval performance</li>
+                    <li>Slow retrieval on larger datasets</li>
+                    <li>No Approximate Nearest Neighbours (ANN)</li>
                     <li>Not recommended for production</li>
                 </ul>
                 </div>
@@ -365,6 +367,7 @@ The Document Stores have different characteristics. You should choose one depend
                 <ul>
                     <li>Less options for ANN algorithms than FAISS or Milvus</li>
                     <li>No BM25 / Tf-idf retrieval</li>
+                    <li>Does not support dot product similarity</li>
                 </ul>
                 </div>
             )

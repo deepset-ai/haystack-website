@@ -6,7 +6,7 @@ Haystack includes a suite of tools to:
 - normalize white space
 - split text into smaller pieces to optimize retrieval
 
-Check out our [preprocessing tutorial](/tutorials/train-dpr) if you'd like to start working with code examples already!
+Check out our [preprocessing tutorial](/tutorials/v0.9.0/train-dpr) if you'd like to start working with code examples already!
 
 These data preprocessing steps can have a big impact on the systems performance
 and effective handling of data is key to getting the most out of Haystack.
@@ -30,7 +30,7 @@ docs = [
 There are a range of different file converters in Haystack that
 can extract text from files and cast them into the unified dictionary format shown above.
 Haystack features support for txt, pdf and docx files and there is even a converter that leverages Apache Tika.
-Please refer to [the API docs](/reference/file-converters) to see which converter best suits you.
+Please refer to [the API docs](/reference/v0.9.0/file-converters) to see which converter best suits you.
 
 <Tabs
   options={[
@@ -106,7 +106,7 @@ it is recommended that they are further processed in order to ensure optimal Ret
 The `PreProcessor` takes one of the documents created by the converter as input,
 performs various cleaning steps and splits them into multiple smaller documents.
 
-For suggestions on how best to split your documents, see [Optimization](/usage/optimization)
+For suggestions on how best to split your documents, see [Optimization](/usage/v0.9.0/optimization)
 
 ```python
 from haystack.preprocessor import PreProcessor
