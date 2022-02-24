@@ -11,10 +11,6 @@ There are different DocumentStores in Haystack to fit different use cases and te
 
 Initialising a new DocumentStore within Haystack is straight forward.
 
-<div style={{ marginBottom: "3rem" }} />
-
-## Types
-
 <Disclosures
     options={[
         {
@@ -386,3 +382,25 @@ The Document Stores have different characteristics. You should choose one depend
 **Vector Specialist:** Use the `MilvusDocumentStore`, if you want to focus on dense retrieval and possibly deal with larger datasets
 
 </div>
+
+## Working with Existing Databases
+
+If you have an existing Elasticsearch or OpenSearch database with indexed documents,
+you can very quickly make a Haystack compliant version using our `es_index_to_document_store` function.
+
+```python
+from haystack.document_stores.utils import es_index_to_document_store
+
+new_ds = es_index_to_document_store(
+    document_store=empty_document_store,
+    original_content_field="content",
+    original_index_name="document",
+    original_name_field="title",
+    preprocessor=preprocessor,
+    port=9201,
+    verify_certs=False,
+    scheme="https",
+    username="admin",
+    password="admin"
+)
+```
