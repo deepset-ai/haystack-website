@@ -50,7 +50,8 @@
       {"slug": "rest-api-definition", "title": "REST API Definition"},
       {"slug": "chatbots", "title": "Chatbot Integration"},
       {"slug": "table-qa", "title": "Table Question Answering"},
-      {"slug": "model-distillation", "title": "Model Distillation"}
+      {"slug": "model-distillation", "title": "Model Distillation"},
+      {"slug": "metadata-filtering", "title": "Metadata Filtering"}
     ]
   },
   {
