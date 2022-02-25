@@ -11,18 +11,14 @@ There are different DocumentStores in Haystack to fit different use cases and te
 
 Initialising a new DocumentStore within Haystack is straight forward.
 
-<div style={{ marginBottom: "3rem" }} />
-
-## Types
-
 <Disclosures
     options={[
         {
             title: "Elasticsearch",
             content: (
                 <div>
-                <a href="https://www.elastic.co/guide/en/elasticsearch/reference/v1.2.0/current/install-elasticsearch.html">Install</a>&nbsp;
-                Elasticsearch and then <a href="https://www.elastic.co/guide/en/elasticsearch/reference/v1.2.0/current/starting-elasticsearch.html">start</a>&nbsp;
+                <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Install</a>&nbsp;
+                Elasticsearch and then <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/starting-elasticsearch.html">start</a>&nbsp;
                 an instance.<br></br><br></br>
                 If you have Docker set up, we recommend pulling the Docker image and running it.<br></br>
                 <pre>
@@ -107,8 +103,8 @@ Initialising a new DocumentStore within Haystack is straight forward.
                     <code>assert new_document_store.faiss_index_factory_str == "Flat"</code>
                 </pre>
                 While `my_faiss_index.faiss` contains the index, my_faiss_index.json
-                contains the parameters used to inizialize it (like faiss_index_factory_store). 
-                This configuration file is necessary for load() to work. It simply contains 
+                contains the parameters used to inizialize it (like faiss_index_factory_store).
+                This configuration file is necessary for load() to work. It simply contains
                 the initial parameters in a JSON format.<br></br>
                 For example, a hand-written configuration file for the above FAISS index could look like:<br></br>
                 <pre>
@@ -386,3 +382,25 @@ The Document Stores have different characteristics. You should choose one depend
 **Vector Specialist:** Use the `MilvusDocumentStore`, if you want to focus on dense retrieval and possibly deal with larger datasets
 
 </div>
+
+## Working with Existing Databases
+
+If you have an existing Elasticsearch or OpenSearch database with indexed documents,
+you can very quickly make a Haystack compliant version using our `es_index_to_document_store` function.
+
+```python
+from haystack.document_stores.utils import es_index_to_document_store
+
+new_ds = es_index_to_document_store(
+    document_store=empty_document_store,
+    original_content_field="content",
+    original_index_name="document",
+    original_name_field="title",
+    preprocessor=preprocessor,
+    port=9201,
+    verify_certs=False,
+    scheme="https",
+    username="admin",
+    password="admin"
+)
+```
