@@ -103,4 +103,3 @@ This application gets deployed on [Vercel](https://vercel.com). In the dashboard
 ## Future Work
 
 Convert the remote markdown files for references and tutorials to .mdx, so that we can inject React components into these. This would also allow for more code sharing between the overview+usage pages and tutorial+reference pages.
-
