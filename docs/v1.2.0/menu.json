@@ -1,7 +1,7 @@
 [
   {
     "subMenuTitle": "Overview",
-    "pathPrefix": "/overview/v1.2.0/",
+    "pathPrefix": "/overview/",
     "items": [
       { "slug": "intro", "title": "What is Haystack?" },
       {"slug": "get-started", "title": "Get Started"},
@@ -16,7 +16,7 @@
   },
   {
     "subMenuTitle": "Components",
-    "pathPrefix": "/components/v1.2.0/",
+    "pathPrefix": "/components/",
     "items": [
       {"slug": "primitives", "title": "Primitives"},
       {"slug": "nodes", "title": "Nodes"},
@@ -39,7 +39,7 @@
   },
   {
     "subMenuTitle": "Guides",
-    "pathPrefix": "/guides/v1.2.0/",
+    "pathPrefix": "/guides/",
     "items": [
       {"slug": "languages", "title": "Languages Other Than English"},
       {"slug": "domain-adaptation","title": "Domain Adaptation"},
@@ -56,7 +56,7 @@
   },
   {
     "subMenuTitle": "Tutorials",
-    "pathPrefix": "/tutorials/v1.2.0/",
+    "pathPrefix": "/tutorials/",
     "items": [
       {
         "slug": "first-qa-system",
@@ -123,7 +123,7 @@
   },
   {
     "subMenuTitle": "API Reference",
-    "pathPrefix": "/reference/v1.2.0/",
+    "pathPrefix": "/reference/",
     "items": [
       {"slug": "primitives", "title": "Primitives"},
       {"slug": "document-store", "title": "Document Store"},
