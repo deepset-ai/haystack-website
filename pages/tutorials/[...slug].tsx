@@ -57,7 +57,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     ...tutorialFilesLatest.items.map((item) => ({ params: { slug: [item.slug] } })),
   ];
   const pathsV120 = [
-    ...tutorialFilesV110.items
+    ...tutorialFilesV120.items
       .map((item) =>({
           params: {
             slug: ["v1.2.0", item.slug],
