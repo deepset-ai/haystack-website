@@ -19,7 +19,7 @@ Extractive QA is the task of searching through a large collection of documents f
 pipeline = ExtractiveQAPipeline(reader, retriever)
 
 query = "What is Hagrid's dog's name?"
-result = pipeline.run(query=query, params={"Retriever": {"top_k": 10}, "reader": {"top_k": 1}})
+result = pipeline.run(query=query, params={"Retriever": {"top_k": 10}, "Reader": {"top_k": 1}})
 ```
 
 The **output** of the pipeline is a Python dictionary with a list of [Answer](/components/primitives#answer) objects stored under the `answers` key.
@@ -203,7 +203,7 @@ pipeline = TranslationWrapperPipeline(input_translator=de_en_translator,
 
 query = "Was lässt den dreiköpfigen Hund weiterschlafen?" # What keeps the three-headed dog asleep?
 
-result = pipeline.run(query=query, params={"Retriever": {"top_k": 10}, "reader": {"top_k": 1}})
+result = pipeline.run(query=query, params={"Retriever": {"top_k": 10}, "Reader": {"top_k": 1}})
 ```
 
 For information on the output of this pipeline, refer to the documentation of the pipeline being wrapped.
