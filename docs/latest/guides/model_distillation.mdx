@@ -123,81 +123,171 @@ This command creates an augmented dataset with 20 times the samples from the `da
 python augment_squad.py --squad_path dataset.json --output_path augmented_dataset.json --multiplication_factor 20
 ```
 
-### Loading student and teacher models
+### Loading Student and Teacher Models
 
-Both student and teacher models are standard `FARMReader`s so you can load them like you are used to:
+Both student and teacher models are standard `FARMReader`s so you can load them as you are used to:
 
 ```
 student = FARMReader(...)
 teacher = FARMReader(...)
 ```
 
-Please make sure that the student and teacher models use the same tokenizer. Otherwise, model distillation will fail.
+Ensure that the student and teacher models use the same tokenizer. Otherwise, model distillation fails.
 
-### Distilling teacher model to student model
+### Distilling a Teacher Model to a Student Model
 
-#### Intermediate layer distillation (optional)
-In case you want to use intermediate layer distillation in haystack, you just need to call the `distil_intermediate_layers_from` method on the student and pass the teacher model.
+#### Intermediate Layer Distillation (optional)
+To use intermediate layer distillation in haystack, call the `distil_intermediate_layers_from` method on the student passing the teacher model:
 
 ```
 student.distil_intermediate_layers_from(teacher, data_dir=data_dir, train_filename=train_filename)
 ```
-As described above, it is recommended that the training dataset specified with `data_dir` and `train_filename` has been augmented using the `augment_squad.py` script.
-`distil_intermediate_layers_from` accepts all the parameters you can use for training and every parameter that are neccesary for training will also need to be provided here. The method also accepts additional parameters like `temperature` and `distillation_loss`. However, for intermediate layer distillation it should be enough to leave them at their default values.
-Please be aware that while intermediate layer distillation is optional, performing prediction layer distillation after intermediate layer distillation is necessary to achieve good performance.
+Ensure that the training dataset specified with `data_dir` and `train_filename` has been augmented using the `augment_squad.py` script.
+`distil_intermediate_layers_from` accepts all the parameters you can use for training. You must provide all the necessary parameters in this method. The method also accepts additional parameters like `temperature` and `distillation_loss`. However, for intermediate layer distillation, you can leave them at their default values.
+Intermediate layer distillation is optional but if you decide to use it, you must perform prediction layer distillation after it to achieve good performance.
 
-#### Prediction layer distillation
-For using prediction layer distillation in Haystack, you just need to call the `distil_prediction_layer_from` method on the student and pass the teacher model. 
+#### Prediction Layer Distillation
+To use prediction layer distillation in haystack, call the `distil_prediction_layer_from` method on the student and pass the teacher model: 
 
 ```
 student.distil_prediction_layer_from(teacher, temperature=5, distillation_loss_weight=0.5,
                                      data_dir=data_dir, train_filename=train_filename, ...)
 ```
 
-Like `distil_intermediate_layers_from`, `distil_prediction_layer_from` accepts all parameters that you can use for training, but also accepts additional parameters. Everything you need to provide for training such as train_filename (name of file with training dataset) and data_dir (folder of training dataset file and optionally test and eval dataset) is also necessary to provide in `distil_from`. In addition, you also need to provide the teacher model. All other parameters are optional, but we would also recommend adjusting `temperature` and `distillation_loss_weight`.
+Like `distil_intermediate_layers_from`, `distil_prediction_layer_from` accepts all parameters that you can use for training, but also accepts additional parameters. Everything you need to provide for training such as train_filename (name of file with training data set) and data_dir (folder of training data set file and optionally test and eval data set) is also necessary to provide in `distil_from`. You also need to provide the teacher model. All other parameters are optional, but we also recommend adjusting `temperature` and `distillation_loss_weight`.
 
-## What parameters should I use?
-### Intermediate layer distillation
-When using intermediate layer distillation, we would recommend just using the default parameters. However, if you want, you can trying tuning the distillation specific parameter `temperature`. Additionally, you can try adjusting all the parameters that are also relevant for training (e.g. `learning_rate`, `n_epochs`). The only exception to this is the parameter `batch_size`. Please specify `student_batch_size` instead. 
+## What Parameters Should I Use?
+### Intermediate Layer Distillation
+When using intermediate layer distillation, we recommend using the default parameters. You can try tuning the distillation-specific parameter `temperature` and adjusting all the parameters that are relevant for training (for example, `learning_rate`, `n_epochs`). The only exception to this is the parameter `batch_size`. Specify `student_batch_size` instead. 
 
-### Prediction layer distillation
+### Prediction Layer Distillation
 Prediction layer distillation is controlled by two parameters: `temperature` and `distillation_loss_weight`.
 
-`temperature` specifies the certainty of the teacher model. Usually language models are very certain that one answer span is correct and assign all other answer spans a very low probability. This is not what we want for distillation as this would be very similar to just having a label. You can correct for this using a higher temperature.
-On the other hand, we also don't want the probabilities to be too similar as this also wouldn't create a meaningful training signal. For this, we can decrease the temperature.
+The `temperature` parameter specifies the certainty of the teacher model. Usually language models are very certain that one answer span is correct and assign all other answer spans a very low probability. We don't want this for distillation as it would be similar to having a label. You can correct this by using a higher temperature.
+We also don't want the probabilities to be too similar as this doesn't create a meaningful training signal. For this, we can decrease the temperature.
 In most experiments, we found a temperature between 1 and 5 to be most useful.
 
-`distillation_loss_weight` specifies the weight given to the distillation loss in relation to the loss based on the label. For example, setting this to 0 would effectively disable model distillation. While setting it to 1 would only use model distillation making the labels unnecessary.
-Most times, you should set this to a relatively high value (e.g. 0.75).
+The `distillation_loss_weight` parameter specifies the weight given to the distillation loss in relation to the loss based on the label. For example, setting this to 0 effectively disables model distillation and setting it to 1 only uses model distillation making the labels unnecessary.
+Most times, you should set this to a relatively high value (for example, 0.75).
 
 Here are the parameters that worked best in our experiments:
+<table>
+    <tbody>
+        <tr>
+            <th><p align="left">Student</p></th>
+            <th><p align="left">Teacher</p></th>
+            <th><p align="left">Distilled</p></th>
+            <th><p align="left">Data set</p></th>
+            <th><p align="left">temperature</p></th>
+            <th><p align="left">loss weight</p></th>
+        </tr>
+        <tr>
+            <td><p align="left"><a href="https://huggingface.co/prajjwal1/bert-medium">prajjwal1/​bert-medium</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2">deepset/​bert-large-uncased-whole-word-masking-squad2</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/bert-medium-squad2-distilled">deepset/​bert-medium-squad2-distilled</a></p></td>
+            <td><p align="left">SQuADv2</p></td>
+             <td><p align="left">5.0</p></td>
+              <td><p align="left">1.0</p></td>
+        </tr>
+         <tr>
+            <td><p align="left"><a href="https://huggingface.co/roberta-base">roberta-base</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/roberta-large-squad2">deepset/​roberta-large-squad2</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/roberta-base-squad2-distilled">deepset/​roberta-base-squad2-distilled</a></p></td>
+            <td><p align="left">SQuADv2</p></td>
+             <td><p align="left">1.5</p></td>
+              <td><p align="left">0.75 </p></td>
+        </tr>
+        <tr>
+            <td><p align="left"><a href="https://huggingface.co/xlm-roberta-base">xlm-roberta-base</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/xlm-roberta-large-squad2">deepset/​xlm-roberta-large-squad2</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled">deepset/​xlm-roberta-base-squad2-distilled</a></p></td>
+            <td><p align="left">SQuADv2</p></td>
+             <td><p align="left">3.0 </p></td>
+              <td><p align="left">0.75</p></td>
+        </tr>
+        <tr>
+            <td><p align="left"><a href="https://huggingface.co/deepset/gelectra-base">deepset/​gelectra-base</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/gelectra-large-germanquad">deepset/​gelectra-large-germanquad</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/gelectra-base-germanquad-distilled">deepset/​gelectra-base-germanquad-distilled</a></p></td>
+            <td><p align="left">GermanQuAD</p></td>
+             <td><p align="left">2.0 </p></td>
+              <td><p align="left">0.75</p></td>
+        </tr>
+    </tbody>
+</table>
 
-| Student             | Teacher                                         | Distilled | Dataset    | temperature | loss weight |
-| ------------------------ | ---------------------------------------------------- | --- | ---------- | ------------- | -------------------------- |
-| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)| SQuADv2    | 5.0           | 1.0                        |
-| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)  | [deepset/​roberta-base-squad2-distilled](https://huggingface.co/deepset/roberta-base-squad2-distilled)                       | SQuADv2    |  1.5          | 0.75                       |
-| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)           | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)          | SQuADv2    | 3.0           | 0.75                       |
-| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                  | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled)  | GermanQuAD | 2.0           | 0.75                       |
+## What Accuracy Can I Expect?
 
-## What accuracy should I expect?
-
-The following tables show experiment results of the current version of model distillation in haystack.
+These tables show experiment results of the current version of model distillation in haystack.
 
 ### Only using prediction layer distillation
-This table shows the results of a few experiments where we applied prediction layer to distill a finetuned large model (~350M parameters) into a base model (~115M parameters and ~2x the speed of a large model).
+This table shows the results of the experiments where we applied prediction layer to distill a fine-tuned large model (~350M parameters) into a base model (~115M parameters and ~2x the speed of a large model).
+<table>
+    <tbody>
+        <tr>
+            <th><p align="left">Student</p></th>
+            <th><p align="left">Teacher</p></th>
+            <th><p align="left">Distilled</p></th>
+            <th><p align="left">Base F1</p></th>
+            <th><p align="left">Teacher F1</p></th>
+            <th><p align="left">Distilled F1</p></th>
+        </tr>
+        <tr>
+            <td><p align="left"><a href="https://huggingface.co/prajjwal1/bert-medium">prajjwal1/​bert-medium</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2">deepset/​bert-large-uncased-whole-word-masking-squad2</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/bert-medium-squad2-distilled">deepset/​bert-medium-squad2-distilled</a></p></td>
+            <td><p align="left">69.6% </p></td>
+             <td><p align="left">83.2% </p></td>
+              <td><p align="left">72.8%</p></td>
+        </tr>
+         <tr>
+            <td><p align="left"><a href="https://huggingface.co/roberta-base">roberta-base</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/roberta-large-squad2">deepset/​roberta-large-squad2</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/roberta-base-squad2-distilled">deepset/​roberta-base-squad2-distilled</a></p></td>
+            <td><p align="left">82.6%</p></td>
+             <td><p align="left">87.9%</p></td>
+              <td><p align="left">83.9%</p></td>
+        </tr>
+        <tr>
+            <td><p align="left"><a href="https://huggingface.co/xlm-roberta-base">xlm-roberta-base</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/xlm-roberta-large-squad2">deepset/​xlm-roberta-large-squad2</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled">deepset/​xlm-roberta-base-squad2-distilled</a></p></td>
+            <td><p align="left">78.0%</p></td>
+             <td><p align="left">84.4% </p></td>
+              <td><p align="left">79.0%</p></td>
+        </tr>
+        <tr>
+            <td><p align="left"><a href="https://huggingface.co/deepset/gelectra-base">deepset/​gelectra-base</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/gelectra-large-germanquad">deepset/​gelectra-large-germanquad</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/gelectra-base-germanquad-distilled">deepset/​gelectra-base-germanquad-distilled</a></p></td>
+            <td><p align="left">77.2%</p></td>
+             <td><p align="left">86.4%</p></td>
+              <td><p align="left">80.4%</p></td>
+        </tr>
+    </tbody>
+</table>
 
-| Student                  | Teacher                                              | Distilled                                                                                                       | Base F1 | Teacher F1 | Distilled F1 |
-| ------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------ |
-| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)             | 69.6%   | 83.2%      | 72.8%        |
-| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)                         | [deepset/​roberta-base-squad2-distilled](https://huggingface.co/deepset/roberta-base-squad2-distilled)           | 82.6%   | 87.9%      | 83.9%        |
-| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)                     | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)   | 78.0%     | 84.4%      | 79.0%        |
-| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                    | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled) | 77.2%   | 86.4%      | 80.4%        |
+### Intermediate Layer Distillation and Prediction Layer Distillation
+In this experiment, we used intermediate layer distillation. We distilled a base model (~115M parameters) into a TinyBERT-6L-768d model (~67M parameters and ~2x the speed of a base model).
+<table>
+    <tbody>
+        <tr>
+            <th><p align="left">Student</p></th>
+            <th><p align="left">Teacher</p></th>
+            <th><p align="left">Distilled</p></th>
+            <th><p align="left">Base F1</p></th>
+            <th><p align="left">Teacher F1</p></th>
+            <th><p align="left">Distilled F1</p></th>
+        </tr>
+        <tr>
+            <td><p align="left"><a href="https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D">huawei-​noah/​Tiny​BERT\_​General\_​6L\_​768D</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/bert-base-uncased-squad2/">deepset/​bert-​base-​uncased-​squad2</a></p></td>
+            <td><p align="left"><a href="https://huggingface.co/deepset/tinybert-6l-768d-squad2">deepset/​tinybert-​6l-​768d-​squad2</a></p></td>
+            <td><p align="left">71.1%</p></td>
+             <td><p align="left">77.8% </p></td>
+              <td><p align="left">76.2%</p></td>
+        </tr>
+    </tbody>
+</table>
 
-### Intermediate layer distillation + Prediction layer distillation
-Here you can see an experiment where we also used intermediate layer distillation. In this case, we distilled a base model (~115M parameters) into a TinyBERT-6L-768d model (~67M parameters and ~2x the speed of a base model).
-
-| Student | Teacher | Distilled | Base F1 | Teacher F1 | Distilled F1 |
-| -- | -- | -- | -- | -- | -- |
-| [huawei-​noah/​Tiny​BERT\_​General\_​6L\_​768D](https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D) | [deepset/​bert-​base-​uncased-​squad2](https://huggingface.co/deepset/bert-base-uncased-squad2/) | [deepset/​tinybert-​6l-​768d-​squad2](https://huggingface.co/deepset/tinybert-6l-768d-squad2) | 71.1% | 77.8% | 76.2% |
-
-The baseline is the student model finetuned without distillation.
+The baseline is the student model fine-tuned without distillation.
