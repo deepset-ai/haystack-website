@@ -104,23 +104,24 @@ This table will be growing as we are actively working on training more student m
 
 ## Distilling a Model in Haystack
 
-When using model distillation, you need to have both a teacher and a student model. The teacher model must be trained on the task. This means that you can use a fine-tuned teacher from the huggingface hub or you can fine-tune the teacher on your own data beforehand.
+When using model distillation, you need to have both a teacher and a student model. The teacher model must be trained on the task. This means that you can use a fine-tuned teacher from the Hugging Face hub or you can fine-tune the teacher on your own data beforehand.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Tutorial:** Check out our [finetuning tutorial](/tutorials/fine-tuning-a-model) to learn how to fine-tune your teacher model on your own data.
+**Tutorial:** To learn how to fine-tune your teacher model on your own data, check out our [finetuning tutorial](/tutorials/fine-tuning-a-model).
 
 </div>
 
-The following paragraphs are only relevant for intermediate layer distillation. If you just want to use prediction layer distillation, you can skip them and jump directly to the section "Prediction layer distillation". Otherwise, read on to learn how to use intermediate layer distillation.
+The following paragraphs are only relevant for intermediate layer distillation. To use prediction layer distillation, jump directly to "Prediction layer distillation". Otherwise, read on to learn how to use intermediate layer distillation.
 
-### Data augmentation (for using intermediate layer distillation)
+### Data Augmentation for Intermediate Layer Distillation
 
-The optional intermediate layer distillation step requires a lot of data. Because acquiring a lot of training data is quite expensive, the TinyBERT paper suggests a data augmentation approach to multiply existing datasets. To use data augmentation, you can use the [`augment_squad.py` script](https://github.com/deepset-ai/haystack/blob/master/haystack/utils/augment_squad.py) provided in haystack. You could use the following command if the dataset is called `dataset.json` and is in the same folder as `augment_squad.py`:
+The optional intermediate layer distillation step requires a lot of data. Because acquiring a lot of training data is expensive, the TinyBERT paper suggests a data augmentation approach in which you multiply existing datasets. For data augmentation, you can use the [`augment_squad.py`](https://github.com/deepset-ai/haystack/blob/master/haystack/utils/augment_squad.py) script from haystack.
+
+This command creates an augmented dataset with 20 times the samples from the `dataset.json` data set and places it in the `augmented_dataset.json` file. In this example, `dataset.json` is in the same folder as `augment_squad.py`:
 ```
 python augment_squad.py --squad_path dataset.json --output_path augmented_dataset.json --multiplication_factor 20
 ```
-This would create an augmented dataset with 20 times the samples of `dataset.json` and place it in the file `augmented_dataset.json`.
 
 ### Loading student and teacher models
 
