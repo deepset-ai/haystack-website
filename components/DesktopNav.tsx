@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 type Props = {
   menu: any;
@@ -9,6 +10,24 @@ type Props = {
 export default function Sidebar({ menu = [] }: Props) {
   const router = useRouter();
   const [versionPath, setVersionPath] = useState<string>();
+
+  const initialMenuState = useMemo(() => {
+    const currentIndex = menu.map((menuItem: any) => menuItem.pathPrefix).indexOf(`/${router.asPath.split('/')[1]}/`);
+    const arr = new Array(menu.length).fill(false);
+    arr[currentIndex] = true;
+    return arr
+  }, [menu, router]);
+
+  const [menuState, setMenuState] = useState<boolean[]>(initialMenuState);
+
+  const toggleMenuState = useCallback((index: number) => {
+    setMenuState((oldValue: boolean[]) => {
+      const newValue = [...oldValue];
+      newValue[index] = !newValue[index];
+      return newValue;
+    })
+  }, [setMenuState]);
+
 
   useEffect(() => {
     if (router.query.slug && router.query.slug.length > 1) {
@@ -21,33 +40,29 @@ export default function Sidebar({ menu = [] }: Props) {
   return (
     <div className="fixed inset-0 p-6 pt-24 w-60 bg-dark-blue sm:block hidden overflow-y-scroll text-medium-grey dark:bg-black">
       <ol>
-        {menu.map((submenu: any) => (
+        {menu.map((submenu: any, index: number) => (
           <li key={submenu.subMenuTitle}>
-            <p className="text-xl text-white mb-3 font-medium">
-              {submenu.subMenuTitle}
-            </p>
-            <ol className="mb-8">
+            <button className="flex justify-between items-center w-full text-xl text-white mb-3 font-medium hover:text-yellow-300" onClick={() => toggleMenuState(index)}>
+              {submenu.subMenuTitle}<ChevronRightIcon className={`${menuState[index] ? 'transform rotate-90' : ''} w-5 h-5`}/>
+            </button>
+            <ol className={menuState[index] ? "mb-8" : "mb-8 hidden"}>
               {submenu.items.map((item: any) => (
                 <li
                   key={item.title}
-                  className={`mb-2 ${
-                    router.asPath ===
-                    `${submenu.pathPrefix}${versionPath ? versionPath : ""}${
-                      item.slug
+                  className={`mb-2 ${router.asPath ===
+                    `${submenu.pathPrefix}${versionPath ? versionPath : ""}${item.slug
                     }`
-                      ? "text-yellow-dark-theme"
-                      : "hover:text-light-grey"
-                  }`}
+                    ? "text-yellow-dark-theme"
+                    : "hover:text-light-grey"
+                    }`}
                 >
                   <Link
-                    href={`${submenu.pathPrefix}${
-                      versionPath ? versionPath : ""
-                    }${item.slug}`}
+                    href={`${submenu.pathPrefix}${versionPath ? versionPath : ""
+                      }${item.slug}`}
                   >
                     <a
-                      href={`${submenu.pathPrefix}${
-                        versionPath ? versionPath : ""
-                      }${item.slug}`}
+                      href={`${submenu.pathPrefix}${versionPath ? versionPath : ""
+                        }${item.slug}`}
                     >
                       {item.title}
                     </a>
