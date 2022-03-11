@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 type Props = {
   menu: any;
@@ -9,11 +10,11 @@ type Props = {
 export default function Sidebar({ menu = [] }: Props) {
   const router = useRouter();
   const [versionPath, setVersionPath] = useState<string>();
-  
+
   const initialMenuState = useMemo(() => {
     const currentIndex = menu.map((menuItem: any) => menuItem.pathPrefix).indexOf(`/${router.asPath.split('/')[1]}/`);
-    const arr = new Array(menu.length).fill(false); 
-    arr[currentIndex] = true; 
+    const arr = new Array(menu.length).fill(false);
+    arr[currentIndex] = true;
     return arr
   }, [menu, router]);
 
@@ -41,18 +42,18 @@ export default function Sidebar({ menu = [] }: Props) {
       <ol>
         {menu.map((submenu: any, index: number) => (
           <li key={submenu.subMenuTitle}>
-            <button className="text-xl text-white mb-3 font-medium" onClick={() => toggleMenuState(index)}>
-              {submenu.subMenuTitle}
+            <button className="flex justify-between items-center w-full text-xl text-white mb-3 font-medium hover:text-yellow-300" onClick={() => toggleMenuState(index)}>
+              {submenu.subMenuTitle}<ChevronRightIcon className={`${menuState[index] ? 'transform rotate-90' : ''} w-5 h-5`}/>
             </button>
             <ol className={menuState[index] ? "mb-8" : "mb-8 hidden"}>
               {submenu.items.map((item: any) => (
                 <li
                   key={item.title}
                   className={`mb-2 ${router.asPath ===
-                      `${submenu.pathPrefix}${versionPath ? versionPath : ""}${item.slug
-                      }`
-                      ? "text-yellow-dark-theme"
-                      : "hover:text-light-grey"
+                    `${submenu.pathPrefix}${versionPath ? versionPath : ""}${item.slug
+                    }`
+                    ? "text-yellow-dark-theme"
+                    : "hover:text-light-grey"
                     }`}
                 >
                   <Link
