@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Transition } from "@headlessui/react";
-import { useState, useEffect, useRef } from "react";
-import { XIcon, MenuAlt3Icon } from "@heroicons/react/solid";
+import { useMemo, useCallback, useState, useEffect, useRef } from "react";
+import { XIcon, MenuAlt3Icon,ChevronRightIcon } from "@heroicons/react/solid";
 // import {
 //   disableBodyScroll,
 //   enableBodyScroll,
@@ -14,6 +14,23 @@ export default function TWMobileNav({ menu = [] }: { menu: any }) {
   const [versionPath, setVersionPath] = useState<string>();
   const [isShowing, setIsShowing] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const initialMenuState = useMemo(() => {
+    const currentIndex = menu.map((menuItem: any) => menuItem.pathPrefix).indexOf(`/${router.asPath.split('/')[1]}/`);
+    const arr = new Array(menu.length).fill(false);
+    arr[currentIndex] = true;
+    return arr
+  }, [menu, router]);
+
+  const [menuState, setMenuState] = useState<boolean[]>(initialMenuState);
+
+  const toggleMenuState = useCallback((index: number) => {
+    setMenuState((oldValue: boolean[]) => {
+      const newValue = [...oldValue];
+      newValue[index] = !newValue[index];
+      return newValue;
+    })
+  }, [setMenuState]);
 
   useEffect(() => {
     if (router.query.slug && router.query.slug.length > 1) {
@@ -60,12 +77,12 @@ export default function TWMobileNav({ menu = [] }: { menu: any }) {
       >
         <div className="fixed top-0 left-0 bottom-0 p-3 bg-dark-blue text-medium-grey z-10 w-4/5 shadow-lg border-r-2 border-off-white overflow-y-scroll">
           <ol>
-            {menu.map((submenu: any) => (
+            {menu.map((submenu: any, index: number) => (
               <li key={submenu.subMenuTitle}>
-                <p className="text-2xl text-white mb-3 font-medium">
-                  {submenu.subMenuTitle}
-                </p>
-                <ol className="mb-8">
+                <button className="flex justify-between items-center w-full text-xl text-white mb-3 font-medium" onClick={() => toggleMenuState(index)}>
+                  {submenu.subMenuTitle}<ChevronRightIcon className={`${menuState[index] ? 'transform rotate-90' : ''} w-5 h-5`}/>
+                </button>
+                <ol className={menuState[index] ? "mb-8" : "mb-8 hidden"}>
                   {submenu.items.map((item: any) => (
                     <li
                       key={item.title}
