@@ -12,7 +12,6 @@
       {"slug": "use-cases", "title": "Use Cases" },
       {"slug": "faq", "title": "FAQ" },
       {"slug": "glossary", "title": "Glossary" }
-      {"slug": "telemetry", "title": "Telemetry" }
     ]
   },
   {
@@ -52,7 +51,8 @@
       {"slug": "chatbots", "title": "Chatbot Integration"},
       {"slug": "table-qa", "title": "Table Question Answering"},
       {"slug": "model-distillation", "title": "Model Distillation"},
-      {"slug": "metadata-filtering", "title": "Metadata Filtering"}
+      {"slug": "metadata-filtering", "title": "Metadata Filtering"},
+      {"slug": "telemetry", "title": "Telemetry" }
     ]
   },
   {
