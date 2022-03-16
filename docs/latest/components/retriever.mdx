@@ -9,7 +9,7 @@ When used in combination with a Reader, it is a tool for sifting out irrelevant 
 
 - BM25 (sparse)
 
-- Dense Passage Retrieval (dense)
+- EmbeddingRetriever (dense)
 
 </div>
 
@@ -98,7 +98,55 @@ See [this](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-
 
 <div style={{ marginBottom: "3rem" }} />
 
-## Dense Passage Retrieval (Recommended)
+## Embedding Retrieval (Recommended)
+
+In Haystack, you have the option of using a transformer model to encode document and query.
+One style of model that is suited to this kind of retrieval is that of [Sentence Transformers](https://www.sbert.net/index.html).
+These models are trained in Siamese Networks and use triplet loss such that they learn to embed similar sentences near to each other in a shared embedding space.
+
+Some models have been finetuned on massive Information Retrieval data
+and can be used to retrieve documents based on a short query (e.g. `multi-qa-mpnet-base-dot-v1`).
+There are others that are more suited to semantic similarity tasks where you are trying to find
+the most similar documents to a given document (e.g. `all-mpnet-base-v2`).
+There are even models that are multilingual (e.g. `paraphrase-multilingual-mpnet-base-v2`).
+For a good overview of different models with their evaluation metrics,
+see [this page](https://www.sbert.net/docs/pretrained_models.html#) in the Sentence Transformers documentation.
+
+If you are interested in using a Sentence Transformers model as an `EmbeddingRetriever`,
+you should set the `model_format="sentence_transformers"`.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tip**
+
+When using Sentence Transformer models, we recommend referring to
+their [Model Overview](https://www.sbert.net/docs/pretrained_models.html#) to pick the best similarity function
+and also to find its embedding dimensions .
+
+</div>
+
+```python
+from haystack.document_stores import ElasticsearchDocumentStore
+from haystack.nodes import EmbeddingRetriever
+from haystack.pipelines import ExtractiveQAPipeline
+
+document_store = ElasticsearchDocumentStore(
+    similarity="cosine",
+    embedding_dim=768
+)
+retriever = EmbeddingRetriever(
+    document_store=document_store,
+   embedding_model="sentence-transformers/multi-qa-mpnet-base-dot-v1",
+   model_format="sentence_transformers"
+)
+document_store.update_embeddings(retriever)
+...
+p = ExtractiveQAPipeline(reader, retriever)
+```
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Dense Passage Retrieval
 
 [Dense Passage Retrieval](https://arxiv.org/abs/2004.04906) is a highly performant retrieval method that calculates relevance using dense representations.
 Key features:
@@ -156,47 +204,6 @@ pipeline = ExtractiveQAPipeline(reader, retriever)
 
 <!-- _comment: !! Training in future? !! -->
 <!-- _comment: !! Talk more about benchmarks, SoTA, results !! -->
-
-<div style={{ marginBottom: "3rem" }} />
-
-## Embedding Retrieval
-
-In Haystack, you also have the option of using a single transformer model to encode document and query.
-One style of model that is suited to this kind of retrieval is that of [Sentence Transformers](https://github.com/UKPLab/sentence-transformers).
-These models are trained in Siamese Networks and use triplet loss such that they learn to embed similar sentences near to each other in a shared embedding space.
-
-They are particular suited to cases where your query input is similar in style to that of the documents in your database
-i.e. when you are searching for most similar documents.
-This is not inherently suited to query based search where the length, language and format of the query usually significantly differs from the searched for text.
-
-If you are interested in using an embedding model from the HuggingFace Model Hub as an `EmbeddingRetriever`,
-you should consider using the `haystack.modeling.transformers.Converter` object which can convert a Transformers model
-into the format required in order for it to be loaded as an `EmbeddingRetriever`.
-
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
-
-**Tip**
-
-When using Sentence Transformer models, we recommend that you use a cosine similarity function.
-To do so, simply provide `similarity="cosine"` when initializing the DocumentStore
-as is done in the code example below.
-
-</div>
-
-```python
-from haystack.document_stores import ElasticsearchDocumentStore
-from haystack.nodes import EmbeddingRetriever
-from haystack.pipeline import ExtractiveQAPipeline
-
-document_store = ElasticsearchDocumentStore(similarity="cosine",
-                                            embedding_dim=384)
-...
-retriever = EmbeddingRetriever(document_store=document_store,
-                               embedding_model="sentence-transformers/all-MiniLM-L6-v2")
-document_store.update_embeddings(retriever)
-...
-p = ExtractiveQAPipeline(reader, retriever)
-```
 
 <div style={{ marginBottom: "3rem" }} />
 
