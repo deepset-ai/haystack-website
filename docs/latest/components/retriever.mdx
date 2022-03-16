@@ -101,7 +101,7 @@ See [this](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-
 ## Embedding Retrieval (Recommended)
 
 In Haystack, you have the option of using a transformer model to encode document and query.
-One style of model that is suited to this kind of retrieval is that of [Sentence Transformers](https://github.com/UKPLab/sentence-transformers).
+One style of model that is suited to this kind of retrieval is that of [Sentence Transformers](https://www.sbert.net/index.html).
 These models are trained in Siamese Networks and use triplet loss such that they learn to embed similar sentences near to each other in a shared embedding space.
 
 Some models have been finetuned on massive Information Retrieval data
@@ -112,30 +112,33 @@ There are even models that are multilingual (e.g. `paraphrase-multilingual-mpnet
 For a good overview of different models with their evaluation metrics,
 see [this page](https://www.sbert.net/docs/pretrained_models.html#) in the Sentence Transformers documentation.
 
-If you are interested in using an embedding model from the HuggingFace Model Hub as an `EmbeddingRetriever`,
-you should consider using the `haystack.modeling.transformers.Converter` object which can convert a Transformers model
-into the format required in order for it to be loaded as an `EmbeddingRetriever`.
+If you are interested in using a Sentence Transformers model as an `EmbeddingRetriever`,
+you should set the `model_format="sentence_transformers"`.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
 **Tip**
 
-When using Sentence Transformer models, we recommend that you use a cosine similarity function.
-To do so, simply provide `similarity="cosine"` when initializing the DocumentStore
-as is done in the code example below.
+When using Sentence Transformer models, we recommend referring to
+their [Model Overview](https://www.sbert.net/docs/pretrained_models.html#) to pick the best similarity function
+and also to find its embedding dimensions .
 
 </div>
 
 ```python
 from haystack.document_stores import ElasticsearchDocumentStore
 from haystack.nodes import EmbeddingRetriever
-from haystack.pipeline import ExtractiveQAPipeline
+from haystack.pipelines import ExtractiveQAPipeline
 
-document_store = ElasticsearchDocumentStore(similarity="cosine",
-                                            embedding_dim=384)
-...
-retriever = EmbeddingRetriever(document_store=document_store,
-                               embedding_model="sentence-transformers/multi-qa-mpnet-base-dot-v1")
+document_store = ElasticsearchDocumentStore(
+    similarity="cosine",
+    embedding_dim=768
+)
+retriever = EmbeddingRetriever(
+    document_store=document_store,
+   embedding_model="sentence-transformers/multi-qa-mpnet-base-dot-v1",
+   model_format="sentence_transformers"
+)
 document_store.update_embeddings(retriever)
 ...
 p = ExtractiveQAPipeline(reader, retriever)
