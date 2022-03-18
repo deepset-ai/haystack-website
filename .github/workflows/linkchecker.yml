@@ -6,8 +6,12 @@ jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@linkchecker
+    - uses: actions/checkout@v2
     - uses: gaurav-nelson/github-action-markdown-link-check@v1
-      continue-on-error: true
+     with:
+          use-quiet-mode: 'no'
+          use-verbose-mode: 'yes'
+          check-modified-files-only: 'no'
+        
 
 
