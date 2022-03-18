@@ -3,7 +3,7 @@ name: Spellchecker
 on:
   push:
     branches:
-      - source # Modify if you use a different main branch name, such as the legacy "master" name.
+      - spellchecker # Modify if you use a different main branch name, such as the legacy "master" name.
   pull_request:
     branches:
       - source # Modify if you use a different main branch name, such as the legacy "master" name.
