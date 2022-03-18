@@ -6,7 +6,7 @@ jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@source
+    - uses: actions/checkout@linkchecker
     - uses: gaurav-nelson/github-action-markdown-link-check@v1
       continue-on-error: true
 
