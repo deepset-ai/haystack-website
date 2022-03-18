@@ -19,4 +19,4 @@ jobs:
         with:
           node-version: "12"
       - run: npm install -g cspell
-      - run: cspell --config ./cSpell.json #"docs/**/*.md"
+      - run: cspell "**/*.md" #--config ./cSpell.json 
