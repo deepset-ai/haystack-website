@@ -34,7 +34,8 @@
         "Sklearn",
         "finetuned",
         "logits",
-        "finetuning"
+        "finetuning",
+        "Vercel"
 
     ],
     "ignoreRegExpList": [
