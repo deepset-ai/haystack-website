@@ -12,7 +12,7 @@ jobs:
           use-quiet-mode: 'no'
           use-verbose-mode: 'yes'
           check-modified-files-only: 'no'
-          #fetch-depth: 0
+          continue-on-error: true
         
 
 
