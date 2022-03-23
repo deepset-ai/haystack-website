@@ -240,10 +240,11 @@ Just export the YAML from your notebook / IDE and import it into your production
 It also helps with version control of pipelines, allows you to share your pipeline easily with colleagues,
 and simplifies the configuration of pipeline parameters in production.
 
-For example, you can define and save a simple Retriever Reader pipeline by saving the following to a file:
+For example, you can define and save a simple Retriever Reader pipeline by saving the following to a 
+file called ``sample.haystack-pipeline.yml``:
 
 ```yaml
-version: "0.9"
+version: "1.2.0"
 
 components: # define all the building-blocks for Pipeline
   - name: MyReader # custom-name for the component; helpful for visualization & debugging
@@ -272,6 +273,16 @@ pipelines: # multiple Pipelines can be defined using the components from above
 
 The `components` section is used to define the initialization of your [Nodes](/components/nodes).
 The `pipelines` section defines how these Nodes are added into the pipeline.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tip**: The suffix `*.haystack-pipeline.yml` tells your IDE that this YAML contains a
+Haystack pipeline configuration and allows it to show you some feedback and 
+autocompletion features (assuming that the relevant plugins are enabled/installed).
+The schema used for validation can be found in [SchemaStore](https://www.schemastore.org/json/).
+
+</div>
+
 The above example is the equivalent of the following python code.
 
 ```
@@ -283,7 +294,7 @@ pipeline.add_node(component=MyReader, name='MyReader', inputs=['MyESRetriever'])
 To load, simply call:
 
 ```python
-pipeline.load_from_yaml(Path("sample.yaml"))
+pipeline.load_from_yaml(Path("sample.haystack-pipeline.yml"))
 ```
 
 You can also define indexing pipelines via YAML.
