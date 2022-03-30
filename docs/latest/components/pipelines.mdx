@@ -233,15 +233,12 @@ To learn about how to call a single Node outside of a Pipeline, see the [Nodes U
 
 ## YAML File Definitions
 
-For your convenience, there is also the option of defining and loading pipelines in YAML files.
-Having your pipeline available in a YAML is particularly useful when
-you move between experimentation and production environments.
-Just export the YAML from your notebook / IDE and import it into your production environment.
-It also helps with version control of pipelines, allows you to share your pipeline easily with colleagues,
-and simplifies the configuration of pipeline parameters in production.
+You can define and load pipelines in YAML files. This is particularly useful when
+you move between experimentation and production environments. Just export the YAML from your notebook or IDE and import it into your production environment.
+Having your pipeline in a YAML file helps with version control of pipelines, makes it easy to share your pipelines with colleagues
+and configure pipeline parameters in production.
 
-For example, you can define and save a simple Retriever Reader pipeline by saving the following to a 
-file called ``sample.haystack-pipeline.yml``:
+For example, you can define a simple Retriever-Reader pipeline and save it to a file called ``sample.haystack-pipeline.yml``:
 
 ```yaml
 version: "1.2.0"
@@ -271,19 +268,8 @@ pipelines: # multiple Pipelines can be defined using the components from above
         inputs: [MyESRetriever]
 ```
 
-The `components` section is used to define the initialization of your [Nodes](/components/nodes).
-The `pipelines` section defines how these Nodes are added into the pipeline.
-
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
-
-**Tip**: The suffix `*.haystack-pipeline.yml` tells your IDE that this YAML contains a
-Haystack pipeline configuration and allows it to show you some feedback and 
-autocompletion features (assuming that the relevant plugins are enabled/installed, like 
-[YAML for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)).
-The schema used for validation can be found in [SchemaStore](https://www.schemastore.org/json/)
-and [in our repo](https://raw.githubusercontent.com/deepset-ai/haystack/master/haystack/json-schemas/haystack-pipeline.schema.json).
-
-</div>
+The `components` section defines the pipeline nodes.
+The `pipelines` section defines how these nodes are added into the pipeline.
 
 The above example is the equivalent of the following python code.
 
@@ -324,6 +310,23 @@ pipelines:
 ```
 
 For another example YAML config, check out [this file](https://github.com/deepset-ai/haystack/blob/master/rest_api/pipeline/pipelines.yaml).
+
+#### Validating Your YAML
+
+To validate yoru file manually, run:
+
+```python
+from pathlib import Path
+from haystack.pipelines.config import validate_yaml
+validate_yaml(Path("path_to_your_file"))
+```
+
+You can also use your IDE to validate the file. The `*.haystack-pipeline.yml` suffix tells your IDE that this YAML contains Haystack pipeline configuration. It makes it possible for your IDE to show you feedback and autocompletion features, assuming that you have the relevant plugins like [YAML for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
+
+You can find the schema used for validation in [SchemaStore](https://www.schemastore.org/json/)
+and [in our repo](https://raw.githubusercontent.com/deepset-ai/haystack/master/haystack/json-schemas/haystack-pipeline.schema.json).
+
+An update to the Haystack version might require small updates to the YAML files. You can set `version` to `unstable` in the pipeline YAML to circumvent validation or set it to the latest Haystack version if the components and parameters that you use are compatible with the latest version.
 
 <div style={{ marginBottom: "3rem" }} />
 
