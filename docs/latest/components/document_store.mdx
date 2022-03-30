@@ -9,7 +9,7 @@ There are different DocumentStores in Haystack to fit different use cases and te
 
 ## Initialisation
 
-Initialising a new DocumentStore within Haystack is straight forward.
+Initialising a new DocumentStore within Haystack is straightforward.
 
 <Disclosures
     options={[
@@ -158,7 +158,21 @@ Initialising a new DocumentStore within Haystack is straight forward.
                 See API documentation for more info.
                 </div>
             )
+        },
+        {
+            title: "Pinecone",
+            content: (
+                <div>
+                To initialize the Pinecone document store, provide an API key and Pinecone cloud environment. To obtain the API key, <a href="https://app.pinecone.io">create a free Pinecone account</a>. The enviroment is <code>us-west1-gcp</code> by default. 
+               
+                <pre>
+                    <code>import os</code>
+                    <code>from haystack.document_store import PineconeDocumentStore</code>
+                    <code>document_store = PineconeDocumentStore(api_key=os.environ["PINECONE_API_KEY"])</code>
+               
+            )
         }
+
     ]}
 />
 
@@ -367,7 +381,27 @@ The Document Stores have different characteristics. You should choose one depend
                 </ul>
                 </div>
             )
+        },
+        {
+            title: "Pinecone",
+            content: (
+                <div>
+                <strong>Pros:</strong>
+                <ul>
+                    <li>A fully managed service for large-scale dense retrieval</li>
+                    <li>Low query latency at any scale</li>
+                    <li>Live index updates</li>
+                    <li>Stores embeddings and metadata separately from the document content which makes it easier to setup infrastructure and maintenance</li>
+                </ul>
+                <strong>Cons:</strong>
+                <ul>
+                    <li>You still need to run a SQL database locally</li>
+                    <li>You need to be on a paid plan to fully benefit from it</li>
+                </ul>
+                </div>
+            )
         }
+
     ]}
 />
 
