@@ -34,7 +34,9 @@
       {"slug": "query-classifier", "title": "Query Classifier"},
       {"slug": "question-generator", "title": "Question Generator"},
       {"slug": "document-classifier", "title": "Document Classifier"},
-      {"slug": "entity-extractor", "title": "Entity Extractor"}
+      {"slug": "entity-extractor", "title": "Entity Extractor"},
+      {"slug": "route-documents", "title": "RouteDocuments"},
+      {"slug": "join-answers", "title": "JoinAnswers"}
     ]
   },
   {
