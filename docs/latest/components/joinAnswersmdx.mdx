@@ -1,0 +1,13 @@
+# JoinAnswers
+
+The `JoinAnswers` node takes answers from two individual Reader nodes as input and joins them to product a single list of answers. 
+
+A typical use case for `JoinAnswers` is as follows:
+- Your documents contain different types of data, for example tables and text
+- You use the `RouteDocuments` node to split your documents by content type
+- You use a different reader for each document type and you get predicted answers form each reader separately
+- You use the `JoinAnswers` node to join the answers in a single list 
+
+Here's what an example pipeline with the `JoinAnswers` node could look like:
+![image](/img/JoinAnswers_pipeline.jpg)
+
