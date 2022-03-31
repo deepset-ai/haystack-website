@@ -47,6 +47,40 @@ When using `pipeline.eval()` in either **integrated** or **isolated** modes,
 Haystack evaluates the correctness of an extracted answer by looking for a match or overlap between the answer and prediction strings.
 Even if the predicted answer is extracted from a different position than the correct answer, that's fine, as long as the strings match.
 
+## Evaluating Information Retrieval with BEIR
+
+Haystack has an integration with the Benchmarking Information Retrieval (BEIR) tool that you can use to assess the quality of your information retrieval pipelines. BEIR contains preprocessed datasets for evaluating retrieval models in 17 languages.
+
+To use BEIR, install Haystack with BEIR dependency:
+```python
+pip install farm-haystack[beir]
+```
+After that, you can evaluate your pipelines by calling ``Pipeline.eval_beir()``.
+Here is an example of how to run BEIR evaluation for `DocumentSearchPipeline`:
+
+```python
+from haystack.pipelines import DocumentSearchPipeline, Pipeline
+from haystack.nodes import TextConverter, ElasticsearchRetriever
+from haystack.document_stores.elasticsearch import ElasticsearchDocumentStore
+
+text_converter = TextConverter()
+document_store = ElasticsearchDocumentStore(search_fields=["content", "name"], index="scifact_beir")
+retriever = ElasticsearchRetriever(document_store=document_store, top_k=1000)
+
+index_pipeline = Pipeline()
+index_pipeline.add_node(text_converter, name="TextConverter", inputs=["File"])
+index_pipeline.add_node(document_store, name="DocumentStore", inputs=["TextConverter"])
+
+query_pipeline = DocumentSearchPipeline(retriever=retriever)
+
+ndcg, _map, recall, precision = Pipeline.eval_beir(
+    index_pipeline=index_pipeline, query_pipeline=query_pipeline, dataset="scifact"
+)
+```
+
+
+For more information, see [BEIR](https://github.com/beir-cellar/beir).
+
 ## Metrics: Retrieval
 
 ### Recall
