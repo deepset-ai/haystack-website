@@ -19,6 +19,8 @@ When initializing this node, you must specify the join mode that you want to use
 
 Optionally, you can use the `top_k` parameter to specify the number of answers to be displayed.
 
+This code initializes `JoinAnswers` with the default `concatenate` join mode:
+
 ```python
-join_answers = JoinAnswers(join_mode="concatenate")
+join_answers = JoinAnswers()
 ```
