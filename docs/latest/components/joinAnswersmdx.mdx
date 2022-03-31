@@ -11,3 +11,14 @@ A typical use case for `JoinAnswers` is as follows:
 Here's what an example pipeline with the `JoinAnswers` node could look like:
 ![image](/img/JoinAnswers_pipeline.jpg)
 
+## Usage
+
+When initializing this node, you must specify the join mode that you want to use. There are two modes available:
+- `concatenate` Combines documnets from multiple readers
+- `merge` Aggregates scores of individual answers. If you use this option, you can also specify the `weights` parameter which assigns importance to the input nodes. By default, all nodes are assigned equal weight.
+
+Optionally, you can use the `top_k` parameter to specify the number of answers to be displayed.
+
+```python
+join_answers = JoinAnswers(join_mode="concatenate")
+```
