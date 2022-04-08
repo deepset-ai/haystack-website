@@ -1,0 +1,26 @@
+# JoinAnswers
+
+The `JoinAnswers` node takes answers from two individual Reader nodes as input and joins them to product a single list of answers. 
+
+A typical use case for `JoinAnswers` is as follows:
+- Your documents contain different types of data, for example tables and text
+- You use the `RouteDocuments` node to split your documents by content type
+- You use a different reader for each document type and you get predicted answers form each reader separately
+- You use the `JoinAnswers` node to join the answers in a single list 
+
+Here's what an example pipeline with the `JoinAnswers` node could look like:
+![image](/img/JoinAnswers_pipeline.jpg)
+
+## Usage
+
+When initializing this node, you must specify the join mode that you want to use. There are two modes available:
+- `concatenate` Combines documents from multiple readers
+- `merge` Aggregates scores of individual answers. If you use this option, you can also specify the `weights` parameter which assigns importance to the input nodes. By default, all nodes are assigned equal weight.
+
+Optionally, you can use the `top_k` parameter to specify the number of answers to be displayed.
+
+This code initializes `JoinAnswers` with the default `concatenate` join mode:
+
+```python
+join_answers = JoinAnswers()
+```

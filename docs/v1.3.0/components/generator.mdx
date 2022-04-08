@@ -1,0 +1,62 @@
+# Generator
+
+While extractive QA highlights the span of text that answers a query,
+generative QA can return a novel text answer that it has composed.
+
+The best current approaches, such as [Retriever-Augmented Generation](https://arxiv.org/abs/2005.11401) and [LFQA](https://yjernite.github.io/lfqa.html),
+can draw upon both the knowledge it gained during language model pretraining (parametric memory)
+as well as passages provided to it with a retriever (non-parametric memory).
+
+With the advent of Transformer based retrieval methods such as [Dense Passage Retrieval](https://arxiv.org/abs/2004.04906),
+retriever and generator can be trained concurrently from the one loss signal.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** Checkout our tutorial notebooks for a guide on how to build your own generative QA system with RAG ([here](/tutorials/v1.3.0/retrieval-augmented-generation))
+or with LFQA ([here](/tutorials/v1.3.0/lfqa)).
+
+</div>
+
+**Pros**
+
+- More appropriately phrased answers
+- Able to synthesize information from different texts
+- Can draw on latent knowledge stored in language model
+
+**Cons**
+
+- Not easy to track what piece of information the generator is basing its response off of
+
+## Usage
+
+Initialize a Generator as follows:
+
+``` python
+from haystack.nodes import RAGenerator
+
+generator = RAGenerator(
+    model_name_or_path="facebook/rag-sequence-nq",
+    retriever=dpr_retriever,
+    top_k=1,
+    min_length=2
+)
+```
+
+Running a Generator in a pipeline:
+
+``` python
+from haystack.pipelines import GenerativeQAPipeline
+
+pipeline = GenerativeQAPipeline(generator=generator, retriever=dpr_retriever)
+result = pipelines.run(query='What are the best party games for adults?', top_k_retriever=20)
+```
+
+Running a stand-alone Generator:
+
+``` python
+result = generator.predict(
+    query='What are the best party games for adults?',
+    documents=[doc1, doc2, doc3...],
+    top_k=top_k
+)
+```

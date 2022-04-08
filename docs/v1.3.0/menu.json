@@ -1,0 +1,152 @@
+[
+  {
+    "subMenuTitle": "Overview",
+    "pathPrefix": "/overview/",
+    "items": [
+      { "slug": "intro", "title": "What is Haystack?" },
+      {"slug": "get-started", "title": "Get Started"},
+      {"slug": "installation", "title": "Installation" },
+      {"slug": "quick-demo", "title": "Quick Demo"},
+      {"slug": "migration", "title": "Migration to v1.0" },
+      {"slug": "roadmap", "title": "Roadmap" },
+      {"slug": "use-cases", "title": "Use Cases" },
+      {"slug": "faq", "title": "FAQ" },
+      {"slug": "glossary", "title": "Glossary" }
+    ]
+  },
+  {
+    "subMenuTitle": "Components",
+    "pathPrefix": "/components/",
+    "items": [
+      {"slug": "primitives", "title": "Primitives"},
+      {"slug": "nodes", "title": "Nodes"},
+      {"slug": "pipelines", "title": "Pipelines"},
+      {"slug": "ready-made-pipelines", "title": "Ready-Made Pipelines"},
+      {"slug": "preprocessing", "title": "Preprocessing"},
+      {"slug": "document-store", "title": "DocumentStore"},
+      {"slug": "retriever", "title": "Retriever"},
+      {"slug": "reader", "title": "Reader"},
+      {"slug": "generator", "title": "Generator" },
+      {"slug": "summarizer", "title": "Summarizer"},
+      {"slug": "translator", "title": "Translator"},
+      {"slug": "knowledge-graph", "title": "Knowledge Graph"},
+      {"slug": "ranker", "title": "Ranker"},
+      {"slug": "query-classifier", "title": "Query Classifier"},
+      {"slug": "question-generator", "title": "Question Generator"},
+      {"slug": "document-classifier", "title": "Document Classifier"},
+      {"slug": "entity-extractor", "title": "Entity Extractor"},
+      {"slug": "route-documents", "title": "RouteDocuments"},
+      {"slug": "join-answers", "title": "JoinAnswers"}
+    ]
+  },
+  {
+    "subMenuTitle": "Guides",
+    "pathPrefix": "/guides/",
+    "items": [
+      {"slug": "languages", "title": "Languages Other Than English"},
+      {"slug": "domain-adaptation","title": "Domain Adaptation"},
+      {"slug": "optimization", "title": "Optimization"},
+      {"slug": "evaluation", "title": "Evaluation"},
+      {"slug": "annotation", "title": "Annotation Tool"},
+      {"slug": "rest-api", "title": "REST API"},
+      {"slug": "rest-api-definition", "title": "REST API Definition"},
+      {"slug": "chatbots", "title": "Chatbot Integration"},
+      {"slug": "table-qa", "title": "Table Question Answering"},
+      {"slug": "model-distillation", "title": "Model Distillation"},
+      {"slug": "metadata-filtering", "title": "Metadata Filtering"},
+      {"slug": "telemetry", "title": "Telemetry" }
+    ]
+  },
+  {
+    "subMenuTitle": "Tutorials",
+    "pathPrefix": "/tutorials/",
+    "items": [
+      {
+        "slug": "first-qa-system",
+        "title": "Build Your First QA System"
+      },
+      {
+        "slug": "fine-tuning-a-model",
+        "title": "Fine-tuning a Model on Your Own Data"
+      },
+      {
+        "slug": "without-elasticsearch",
+        "title": "Build a QA System Without Elasticsearch"
+      },
+      {
+        "slug": "existing-faqs",
+        "title": "Utilizing existing FAQs for Question Answering"
+      },
+      {
+        "slug": "evaluation",
+        "title": "Evaluation of a QA System"
+      },
+      {
+        "slug": "dense-passage-retrieval",
+        "title": "Better Retrieval via \"Dense Passage Retrieval\""
+      },
+      {
+        "slug": "retrieval-augmented-generation",
+        "title": "Generative QA with \"Retrieval-Augmented Generation\""
+      },
+      {
+        "slug": "preprocessing",
+        "title": "Preprocessing your Documents"
+      },
+      { "slug": "train-dpr", "title": "How to Train DPR" },
+      {
+        "slug": "knowledge-graph",
+        "title": "Question Answering on a Knowledge Graph"
+      },
+      {
+        "slug": "pipelines",
+        "title": "How to use Pipelines"
+      },
+      {
+        "slug": "lfqa",
+        "title": "Generative QA with \"LFQA\""
+      },
+      {
+        "slug": "question-generation",
+        "title": "Question Generation"
+      },
+      {
+        "slug": "query-classifier",
+        "title": "Query Classifier"
+      },
+      {
+        "slug": "table-qa",
+        "title": "Table Question Answering"
+      },
+      {
+        "slug": "doc-class-index",
+        "title": "Document Classification at Indexing"
+      }
+    ]
+  },
+  {
+    "subMenuTitle": "API Reference",
+    "pathPrefix": "/reference/",
+    "items": [
+      {"slug": "primitives", "title": "Primitives"},
+      {"slug": "document-store", "title": "Document Store"},
+      {"slug": "retriever", "title": "Retriever" },
+      {"slug": "reader", "title": "Reader" },
+      {"slug": "generator", "title": "Generator" },
+      {"slug": "summarizer", "title": "Summarizer"},
+      {"slug": "translator", "title": "Translator"},
+      {"slug": "preprocessor", "title": "Preprocessor"},
+      {"slug": "file-converters", "title": "File Converters"},
+      {"slug": "file-classifier", "title": "File Classifier"},
+      {"slug": "crawler", "title": "Crawler" },
+      {"slug": "evaluation", "title": "Evaluation"},
+      {"slug": "pipelines", "title": "Pipelines" },
+      {"slug": "question-generator", "title": "Question Generator"},
+      {"slug": "ranker", "title": "Ranker"},
+      {"slug": "document-classifier", "title": "Document Classifier"},
+      {"slug": "query-classifier", "title": "Query Classifier"},
+      {"slug": "extractor", "title": "Extractor"},
+      {"slug": "other", "title": "Other"}
+    ]
+  }
+]
