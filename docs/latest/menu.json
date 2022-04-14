@@ -26,7 +26,6 @@
       {"slug": "preprocessing", "title": "Preprocessing"},
       {"slug": "document-store", "title": "DocumentStore"},
       {"slug": "retriever", "title": "Retriever"},
-      {"slug": "reader", "title": "Reader"},
       {"slug": "generator", "title": "Generator" },
       {"slug": "summarizer", "title": "Summarizer"},
       {"slug": "translator", "title": "Translator"},
@@ -38,6 +37,13 @@
       {"slug": "entity-extractor", "title": "Entity Extractor"},
       {"slug": "route-documents", "title": "RouteDocuments"},
       {"slug": "join-answers", "title": "JoinAnswers"}
+    ]
+  },
+  {
+    "subMenuTitle": "Pipeline Nodes",
+    "pathPrefix": "/pipeline_nodes/",
+    "items": [
+      {"slug": "reader", "title": "Reader"}
     ]
   },
   {
