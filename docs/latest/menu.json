@@ -8,11 +8,11 @@
       {"slug": "installation", "title": "Installation" },
       {"slug": "quick-demo", "title": "Quick Demo"},
       {"slug": "migration", "title": "Migration to v1.0" },
+      {"slug": "nlp-resources", "title": "NLP Resources" },
       {"slug": "roadmap", "title": "Roadmap" },
       {"slug": "use-cases", "title": "Use Cases" },
       {"slug": "faq", "title": "FAQ" },
-      {"slug": "glossary", "title": "Glossary" },
-      {"slug": "nlp-resources", "title": "NLP Resources" }
+      {"slug": "glossary", "title": "Glossary" }
     ]
   },
   {
