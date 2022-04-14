@@ -419,12 +419,29 @@ The Document Stores have different characteristics. You should choose one depend
 ## Working with Existing Databases
 
 If you have an existing Elasticsearch or OpenSearch database with indexed documents,
-you can very quickly make a Haystack compliant version using our `es_index_to_document_store` function.
+you can very quickly make a Haystack compliant version using our `elasticsearch_index_to_document_store` or `open_search_index_to_document_store` function.
 
 ```python
-from haystack.document_stores.utils import es_index_to_document_store
+from haystack.document_stores.utils import elasticsearch_index_to_document_store
 
-new_ds = es_index_to_document_store(
+new_ds = elasticsearch_index_to_document_store(
+    document_store=empty_document_store,
+    original_content_field="content",
+    original_index_name="document",
+    original_name_field="title",
+    preprocessor=preprocessor,
+    port=9201,
+    verify_certs=False,
+    scheme="https",
+    username="admin",
+    password="admin"
+)
+```
+
+```python
+from haystack.document_stores.utils import open_search_index_to_document_store
+
+new_ds = open_search_index_to_document_store(
     document_store=empty_document_store,
     original_content_field="content",
     original_index_name="document",
