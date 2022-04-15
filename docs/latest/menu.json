@@ -3,7 +3,7 @@
     "subMenuTitle": "Overview",
     "pathPrefix": "/overview/",
     "items": [
-      { "slug": "intro", "title": "What is Haystack?" },
+      {"slug": "intro", "title": "What is Haystack?" },
       {"slug": "get-started", "title": "Get Started"},
       {"slug": "installation", "title": "Installation" },
       {"slug": "quick-demo", "title": "Quick Demo"},
