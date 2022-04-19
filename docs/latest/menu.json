@@ -19,17 +19,26 @@
     "subMenuTitle": "Components",
     "pathPrefix": "/components/",
     "items": [
-      {"slug": "primitives", "title": "Primitives"},
+      {"slug": "document-store", "title": "DocumentStore"},
       {"slug": "nodes", "title": "Nodes"},
+      {"slug": "primitives", "title": "Primitives"},
       {"slug": "pipelines", "title": "Pipelines"},
       {"slug": "ready-made-pipelines", "title": "Ready-Made Pipelines"},
+      {"slug": "rest-api", "title": "REST API"},
+      {"slug": "rest-api-definition", "title": "REST API Definition"},
+      {"slug": "annotation", "title": "Annotation Tool"}
+    ]
+  },
+  {
+    "subMenuTitle": "Pipeline Nodes",
+    "pathPrefix": "/pipeline_nodes/",
+    "items": [
       {"slug": "preprocessing", "title": "Preprocessing"},
-      {"slug": "document-store", "title": "DocumentStore"},
       {"slug": "retriever", "title": "Retriever"},
+      {"slug": "reader", "title": "Reader"},
       {"slug": "generator", "title": "Generator" },
       {"slug": "summarizer", "title": "Summarizer"},
       {"slug": "translator", "title": "Translator"},
-      {"slug": "knowledge-graph", "title": "Knowledge Graph"},
       {"slug": "ranker", "title": "Ranker"},
       {"slug": "query-classifier", "title": "Query Classifier"},
       {"slug": "question-generator", "title": "Question Generator"},
@@ -40,13 +49,6 @@
     ]
   },
   {
-    "subMenuTitle": "Pipeline Nodes",
-    "pathPrefix": "/pipeline_nodes/",
-    "items": [
-      {"slug": "reader", "title": "Reader"}
-    ]
-  },
-  {
     "subMenuTitle": "Guides",
     "pathPrefix": "/guides/",
     "items": [
@@ -54,13 +56,11 @@
       {"slug": "domain-adaptation","title": "Domain Adaptation"},
       {"slug": "optimization", "title": "Optimization"},
       {"slug": "evaluation", "title": "Evaluation"},
-      {"slug": "annotation", "title": "Annotation Tool"},
-      {"slug": "rest-api", "title": "REST API"},
-      {"slug": "rest-api-definition", "title": "REST API Definition"},
       {"slug": "chatbots", "title": "Chatbot Integration"},
       {"slug": "table-qa", "title": "Table Question Answering"},
       {"slug": "model-distillation", "title": "Model Distillation"},
       {"slug": "metadata-filtering", "title": "Metadata Filtering"},
+      {"slug": "knowledge-graph", "title": "Knowledge Graph"},
       {"slug": "telemetry", "title": "Telemetry" }
     ]
   },
