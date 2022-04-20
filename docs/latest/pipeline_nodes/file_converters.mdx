@@ -1,0 +1,128 @@
+# File Converters
+
+There are a range of different file converters in Haystack that
+can extract text from files and cast them into the unified Document format
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| At the very beginning of an indexing Pipeline |
+|__Input__       | Files                                                                                                                                                                  |
+|__Output__      | Documents or dictionaries                                                                                                             |
+|__Classes__     | PDFToTextConverter, DocxToTextConverter, AzureConverter, ImageToTextConverter, MarkdownConverter                                                                                                           |
+|||
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** Check out our [advanced indexing tutorial](/tutorials/doc-class-index) for an example on how
+    to use File Converters in a Pipeline.
+
+</div>
+
+## Usage
+
+<Tabs
+  options={[
+    {
+      title: "PDF",
+      content: (
+        <pre>
+          <code>from haystack.nodes import PDFToTextConverter</code>
+          <code>
+            converter = PDFToTextConverter(remove_numeric_tables=True,
+            valid_languages=["de","en"])
+          </code>
+          <code>docs = converter.convert(file_path=Path("my-file.pdf"), meta=None)</code>
+          <code>
+            # Alternatively, if you have a PDF containing images, Haystack uses tessaract under the hood to OCR image PDFs.
+          </code>
+          <code>
+            from haystack.nodes import PDFToTextOCRConverter
+          </code>
+          <code>
+            converter = PDFToTextOCRConverter(remove_numeric_tables=False,
+            valid_languages=["deu","eng"])
+          </code>
+          <code>docs = converter.convert(file_path=Path("my-file.pdf"), meta=None)</code>
+        </pre>
+      ),
+    },
+    {
+      title: "DOCX",
+      content: (
+        <pre>
+          <code>from haystack.nodes import DocxToTextConverter</code>
+          <code>
+            converter = DocxToTextConverter(remove_numeric_tables=True,
+            valid_languages=["de","en"])
+          </code>
+          <code>docs = converter.convert(file_path=Path("my-file.docx"), meta=None)</code>
+        </pre>
+      ),
+    },
+     {
+      title: "Azure",
+      content: (
+        <div>
+          <p>
+            We recommend the [Azure Form Recognizer](https://azure.microsoft.com/en-us/services/form-recognizer/) service for parsing tables from PDFs or other complex document structures.
+          </p>
+          <pre>
+            <code>
+              from haystack.nodes import AzureConverter
+            </code>
+            <code>
+            converter = AzureConverter(endpoint="some-url",
+                 credential_key="my-secret-key")
+          </code>
+          <code>docs = converter.convert(file_path=Path("my-file.pdf"), meta=None)</code>
+          </pre>
+        </div>
+      ),
+    },
+    {
+      title: "Image",
+      content: (
+        <div>
+          <p>
+            Haystack supports extraction of text from images using OCR.
+          </p>
+          <pre>
+            <code>
+              from haystack.nodes import ImageToTextConverter
+            </code>
+            <code>
+            converter = ImageToTextConverter(remove_numeric_tables=True,
+            valid_languages=["de","en"])
+          </code>
+          <code>docs = converter.convert(file_path=Path("my-file.png"), meta=None)</code>
+          </pre>
+        </div>
+      ),
+    },
+                         {
+      title: "Markdown",
+      content: (
+          <pre>
+            <code>
+              from haystack.nodes import MarkdownConverter
+            </code>
+            <code>
+            converter = MarkdownConverter(remove_numeric_tables=True,
+            valid_languages=["de","en"])
+          </code>
+          <code>docs = converter.convert(file_path=Path("my-file.md"), meta=None)</code>
+          </pre>
+      ),
+    },
+  ]}
+/>
+
+Haystack also has a `convert_files_to_dicts()` utility function that
+will convert all txt or pdf files in a given directory.
+
+```
+from haystack.utils import convert_files_to_dicts
+docs = convert_files_to_dicts(dir_path=doc_dir)
+```
+
+<div style={{ marginBottom: "3rem" }} />

@@ -1,0 +1,19 @@
+
+## Web Crawler
+
+In Haystack, you will find a web crawler that will help you scrape text from websites and save it to file.
+See the [API documentation](https://haystack.deepset.ai/reference/crawler) for more details.
+
+```python
+from haystack.nodes import Crawler
+
+crawler = Crawler(output_dir="crawled_files")
+docs = crawler.crawl(
+    urls=["https://haystack.deepset.ai/overview/get-started"],
+    filter_urls=["haystack"],
+    crawler_depth=1
+)
+```
+
+<div style={{ marginBottom: "3rem" }} />
+

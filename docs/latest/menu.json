@@ -33,7 +33,9 @@
     "subMenuTitle": "Pipeline Nodes",
     "pathPrefix": "/pipeline_nodes/",
     "items": [
-      {"slug": "preprocessing", "title": "Preprocessing"},
+      {"slug": "preprocessor", "title": "PreProcessor"},
+      {"slug": "file-converters", "title": "File Converters"},
+      {"slug": "crawler", "title": "Crawler"},
       {"slug": "retriever", "title": "Retriever"},
       {"slug": "reader", "title": "Reader"},
       {"slug": "generator", "title": "Generator" },

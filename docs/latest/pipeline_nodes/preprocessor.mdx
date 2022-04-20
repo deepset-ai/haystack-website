@@ -1,0 +1,79 @@
+# PreProcessor
+
+The PreProcessor can perform different kinds of PreProcessing on a `Document`:
+
+- normalization of white space
+- splitting of text into smaller pieces
+
+Splitting is generally recommended where long `Document`s are involved
+since this can improve the performance of retrieval
+and speed up Question Answering.
+For suggestions on how best to split your documents, see [Optimization](/guides/optimization)
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| As early in an indexing Pipeline as possible but after File Converters and Crawlers |
+|__Input__       | Documents or dictionaries                                                                                                                                                                  |
+|__Output__      | Documents or dictionaries                                                                                                                                                                    |
+|__Classes__     | PreProcessor                                                                                                                                             |
+|||
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** Check out our [preprocessing tutorial](/tutorials/preprocessing) if you'd like to start working with code examples
+    or our [advanced indexing tutorial](/tutorials/doc-class-index) for ideas on what can be done at indexing time.
+
+</div>
+
+## Usage
+
+```python
+from haystack.nodes import PreProcessor
+
+doc = converter.convert(file_path=file, meta=None)
+processor = PreProcessor(
+    clean_empty_lines=True,
+    clean_whitespace=True,
+    clean_header_footer=True,
+    split_by="word",
+    split_length=200,
+    split_respect_sentence_boundary=True,
+    split_overlap=0
+)
+docs = processor.process(doc)
+```
+
+- `clean_empty_lines` will normalize 3 or more consecutive empty lines to be just a two empty lines
+- `clean_whitespace` will remove any whitespace at the beginning or end of each line in the text
+- `clean_header_footer` will remove any long header or footer texts that are repeated on each page
+- `split_by` determines what unit the document is split by: `'word'`, `'sentence'` or `'passage'`
+- `split_length` sets a maximum number of `'word'`, `'sentence'` or `'passage'` units per output document
+- `split_respect_sentence_boundary` ensures that document boundaries do not fall in the middle of sentences
+- `split_overlap` sets the amount of overlap between two adjacent documents after a split. Setting this to a positive number essentially enables the sliding window approach.
+
+## Document Format
+
+When you are not using an indexing Pipeline, the PreProcessor can take either `Document` objects (recommended)
+as input or plain dictionaries.
+To learn more about the `Document` class see [Primitives](/components/primitives).
+
+```python
+# Option 1: Native Haystack Documents
+docs = [
+    Document(
+        content='DOCUMENT_TEXT_HERE',
+        meta={'name': DOCUMENT_NAME, ...}
+        ...
+    ), ...
+]
+
+# Option 2: Plain dict
+docs = [
+    {
+        'content': 'DOCUMENT_TEXT_HERE',
+        'meta': {'name': DOCUMENT_NAME, ...}
+    }, ...
+]
+```
+
+<div style={{ marginBottom: "3rem" }} />

@@ -1,14 +1,22 @@
 # Document Classifier
 
-The TransformersDocumentClassifier Node is a transformer based classification model used to create predictions that can be attached to retrieved documents as metadata.
+The Document Classifier Node is a transformer based classification model used to create predictions that are attached to documents as metadata.
 For example, by using a sentiment model, you can label each document as being either positive or negative in sentiment.
 Through a tight integration with the HuggingFace model hub, you can easily load any classification model by simply supplying the model name.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| After the PreProcessor in an indexing Pipeline or after a Retriever in a query Pipeline for classification on the fly |
+|__Input__       | Documents                                                                                                                                                                   |
+|__Output__      | Documents                                                                                                                                                                     |
+|__Classes__     | TransformersDocumentClassifier                                                                                                                                             |
+|||
 
 ![image](/img/classifier.png)
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-Note that the Document Classifier is different from the Query Classifier.
+**Note: ** The **Document Classifier is different from the Query Classifier.**
 While the Query Classifier categorizes incoming queries in order to route them to different parts of the pipeline,
 the Document Classifier is used to create classification labels that can be attached to retrieved documents as metadata.
 
