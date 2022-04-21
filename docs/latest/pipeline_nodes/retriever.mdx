@@ -1,17 +1,26 @@
 # Retriever
 
-The Retriever is a lightweight filter that can quickly go through the full document store and pass on a set of candidate documents that are relevant to the query.
-When used in combination with a Reader, it is a tool for sifting out irrelevant documents, saving the Reader from doing more work than it needs to and speeding up the querying process.
+The Retriever can perform Document Retrieval by sweeping through a document store and returning a set of candidate documents that are relevant to the query.
 
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+When used in combination with a Reader, it is a tool for quickly sifting out irrelevant documents,
+saving the Reader from doing more work than it needs to and speeding up the querying process.
 
-**Recommendations**
+The Retriever is tightly coupled with the Document Store and requires a Document Store object in its initialization.
+While the Retriever functions as a Node in the Pipeline, the Document Store does not.
+When it is run, the Retriever receives a Query as input, which it uses to query into the documents contained in the Document Store,
+before passing on the best candidates.
 
-- BM25 (sparse)
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| At the beginning of a querying Pipeline |
+|__Input__       | Query                                                                                                                                                                  |
+|__Output__      | Documents                                                                                                             |
+|__Classes__     | BM25Retriever, ElasticsearchRetriever, DensePassageRetriever, TableTextRetriever, EmbeddingRetriever, TfidfRetriever, ElasticsearchFilterOnlyRetriever                                                                                                           |
+|||
 
-- EmbeddingRetriever (dense)
-
-</div>
+Our starting recommendations would be to use an Embedding Retriever if GPU acceleration is available,
+and a BM25 based sparse retriever like the ElasticsearchRetriever if it is not.
+Have a read of the sections below to learn about different types of Retrievers.
 
 ## Usage
 

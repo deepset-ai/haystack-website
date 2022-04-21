@@ -1,13 +1,21 @@
 # Summarizer
 
-Haystack's Summmarizer is here to help you make sense of the documents at a glance. This Component is a good
-way to get a short overview of a Document that is otherwise quite long.
-Using the Summarizer, you could, for example, gain a glimpse into what Documents your Retriever is returning.
+The Summmarizer is a useful tool for getting a short overview of a Document that is otherwise quite long.
+Using the Summarizer, you could, for example, gain a more manageable glimpse into what Documents your Retriever is returning.
 
-There is a full integration with Huggingface Transformers and using any of their summarization
-models is as simple as providing the model name.
+You can use any summarization model from HuggingFace Transformers by providing the model name.
 See the up-to-date list of available models [here](https://huggingface.co/models?filter=summarization).
 By default, the Google [Pegasus](https://ai.googleblog.com/2020/06/pegasus-state-of-art-model-for.html) model is loaded.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| After preprocessing in an indexing Pipeline or after the Retriever in a querying Pipeline |
+|__Input__       | Documents                                                                                                                                                                  |
+|__Output__      | Documents                                                                                                             |
+|__Classes__     | TransformersSummarizer                                                                                                           |
+|||
+
+## Usage
 
 ```python
 from haystack.nodes import TransformersSummarizer
