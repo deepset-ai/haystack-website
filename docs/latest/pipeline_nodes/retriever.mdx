@@ -14,7 +14,7 @@ before passing on the best candidates.
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |__Position in a Pipeline__| At the beginning of a querying Pipeline |
 |__Input__       | Query                                                                                                                                                                  |
-|__Output__      | Documents                                                                                                             |
+|__Output__      | [Documents](/components/documents-answers-labels#document)                                                                                                             |
 |__Classes__     | BM25Retriever, ElasticsearchRetriever, DensePassageRetriever, TableTextRetriever, EmbeddingRetriever, TfidfRetriever, ElasticsearchFilterOnlyRetriever                                                                                                           |
 |||
 
@@ -84,7 +84,7 @@ See [Optimization](/guides/optimization) for suggestions on how to choose top-k 
 
 ## BM25 (Recommended)
 
-BM25 is a variant of [TF-IDF](https://haystack.deepset.ai/components/retriever#tf-idf) that we recommend you use if you are looking for a retrieval method that does not need a neural network for indexing.
+BM25 is a variant of [TF-IDF](https://haystack.deepset.ai/pipeline_nodes/retriever#tf-idf) that we recommend you use if you are looking for a retrieval method that does not need a neural network for indexing.
 It improves upon its predecessor in two main aspects:
 
 - It saturates `tf` after a set number of occurrences of the given term in the document
