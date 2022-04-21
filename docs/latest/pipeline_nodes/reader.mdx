@@ -1,16 +1,31 @@
 # Reader
 
-The Reader, also known as Open-Domain QA systems in Machine Learning speak,
-is the core component that enables Haystack to find the answers that you need.
-Haystack’s Readers are:
+The Reader takes a question and a set of Documents as input and returns an Answer
+by selecting a text span within the Documents.
+The Reader, is also known as an Open-Domain QA systems in Machine Learning speak.
 
-- built on the latest transformer based language models
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| Generally after a Retriever |
+|__Input__       | Documents                                                                                                                                                                  |
+|__Output__      | Answers                                                                                                             |
+|__Classes__     | FARMReader, TransformersReader                                                                                                          |
+|||
 
-- strong in their grasp of semantics
+**Pros**
 
-- sensitive to syntactic structure
+- Built on the latest transformer based language models
+- Strong in their grasp of semantics
+- Sensitive to syntactic structure
+- State-of-the-art in QA tasks like SQuAD and Natural Questions
 
-- state-of-the-art in QA tasks like SQuAD and Natural Questions
+**Cons**
+
+- Require a GPU to run quickly
+
+## Usage
+
+Initialization:
 
 <Tabs
   options={[
@@ -40,12 +55,6 @@ Haystack’s Readers are:
     },
   ]}
 />
-
-While these models can work on CPU, it is recommended that they are run using GPUs to keep query times low.
-
-<div style={{ marginBottom: "3rem" }} />
-
-## Usage
 
 A Reader can be used in isolation through its `predict()` method.
 
@@ -94,18 +103,15 @@ It is designed to use the [TAPAS](https://github.com/google-research/tapas) mode
 
 These models are able to return a single single cell as answer
 or pick a set of cells and then perform an aggregation operation to form a final answer.
-
 Have a look at our guide on [Table Question Answering](/guides/table-qa) to find out more.
 
 
-## Choosing the Right Model
+## Models
 
 In Haystack, you can start using pretrained QA models simply by providing its HuggingFace Model Hub name to the Reader.
-The loading of model weights is handled by Haystack,
-and you have the option of using the QA pipeline from deepset FARM or HuggingFace Transformers (see FARM vs Transformers for details).
+The loading of model weights is handled by Haystack.
 
-Currently, there are a lot of different models out there and it can be rather overwhelming trying to pick the one that fits your use case.
-To get you started, we have a few recommendations for you to try out.
+Here are our recommendations for models to start with:
 
 <Tabs
   options={[
@@ -115,13 +121,13 @@ To get you started, we have a few recommendations for you to try out.
         <div>
           <div style={{ marginBottom: "2rem" }}>
             <h4>RoBERTa (base)</h4>
-            <p>An optimised variant of BERT and a great starting point.</p>
+            <p>A well rounded model and our recommended starting point.</p>
             <pre>
               <code>from haystack.nodes import FARMReader</code>
               <code>reader = FARMReader("deepset/roberta-base-squad2")</code>
             </pre>
             <ul>
-              <li>Pro: Strong all round model</li>
+              <li>Pro: Strong all round model that performs capably on a Nvidia V100 GPU</li>
               <li>
                 Con: There are other models that are either faster or more
                 accurate
@@ -139,7 +145,7 @@ To get you started, we have a few recommendations for you to try out.
               <code>reader = FARMReader("deepset/minilm-uncased-squad2")</code>
             </pre>
             <ul>
-              <li>Pro: Inference speed up to 50% faster than BERT base</li>
+              <li>Pro: 40% smaller, 50% faster inference speed and better accuracy than BERT base</li>
               <li>
                 Con: Still doesn’t match the best base sized models in accuracy
               </li>
@@ -173,7 +179,7 @@ To get you started, we have a few recommendations for you to try out.
         <div>
           <div style={{ marginBottom: "2rem" }}>
             <h4>RoBERTa (base)</h4>
-            <p>An optimised variant of BERT and a great starting point.</p>
+            <p>A well rounded model and our recommended starting point.</p>
             <pre>
               <code>from haystack.nodes import TransformersReader</code>
               <code>
@@ -181,7 +187,7 @@ To get you started, we have a few recommendations for you to try out.
               </code>
             </pre>
             <ul>
-              <li>Pro: Strong all round model</li>
+              <li>Pro: Strong all round model that performs capably on a Nvidia V100 GPU</li>
               <li>
                 Con: There are other models that are either faster or more
                 accurate
@@ -201,7 +207,7 @@ To get you started, we have a few recommendations for you to try out.
               </code>
             </pre>
             <ul>
-              <li>Pro: Inference speed up to 50% faster than BERT base</li>
+              <li>Pro: 40% smaller, 50% faster inference speed and better accuracy than BERT base</li>
               <li>
                 Con: Still doesn’t match the best base sized models in accuracy
               </li>
@@ -233,40 +239,7 @@ To get you started, we have a few recommendations for you to try out.
   ]}
 />
 
-<div style={{ marginBottom: "3rem" }} />
-
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
-
-**Recommendations:**
-
-**All-rounder**: In the class of base sized models trained on SQuAD, **RoBERTa** has shown better performance than BERT
-and can be capably handled by any machine equipped with a single NVidia V100 GPU.
-We recommend this as the starting point for anyone wanting to create a performant and computationally reasonable instance of Haystack.
-
-**Built for Speed**: If speed and GPU memory are more of a priority to you than accuracy,
-you should try the MiniLM model.
-It is a smaller model that is trained to mimic larger models through the distillation process,
-and it outperforms the BERT base on SQuAD even though it is about 40% smaller.
-
-<!-- _comment: !! In our tests we found that it was XX% faster than BERT and ~X% better in perfomance. Compared to RoBERTa, it is only off by about X% absolute, -->
-
-**State of the Art Accuracy**: For most, **ALBERT XXL** will be too large to feasibly work with.
-But if performance is your sole concern, and you have the computational resources,
-you might like to try ALBERT XXL which has set SoTA performance on SQuAD 2.0.
-
-<!-- _comment: !! How good is it? How much computation resource do you need to run it? !! -->
-
-</div>
-
-<div style={{ marginBottom: "3rem" }} />
-
 ## Fine-tuning, Saving, Loading and Converting
-
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
-
-**Tutorial:** If you'd like a hands on example, check out our tutorial on fine-tuning [here](/tutorials/fine-tuning-a-model)
-
-</div>
 
 In Haystack, it is possible to fine-tune your FARMReader model on any SQuAD format QA dataset.
 Simply call the `train()` method to kick off training.
@@ -297,6 +270,12 @@ from haystack.modeling.conversion.transformers import Converter
 
 transformers_models = Converter.convert_to_transformers(reader.inferencer.model)
 ```
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** If you'd like a hands on example, check out our tutorial on fine-tuning [here](/tutorials/fine-tuning-a-model)
+
+</div>
 
 ## Confidence Scores
 
