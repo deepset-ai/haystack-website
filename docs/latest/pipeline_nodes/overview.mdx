@@ -76,7 +76,6 @@ Here are the steps needed to create a custom node:
 
 - Create new class that inherits from `BaseComponent`
 - Define the number of `outgoing_edges` as a class attribute
-- Pass all init params to `self.set_config()` to enable saving/loading via YAML
 - Define a `run()` method that will be executed when your node is called by the Pipeline. The input arguments should consist of all "config" params that you want to allow plus the "data" arguments that you will expect as input from a previous node (e.g. `documents`, `query`, `file_paths`).
 - Set `run()` to return a tuple, where the first element is an output dict of the data you want to pass to the next node and the second is the name of the outgoing edge (usually `"output_1"`)
 - Optional: Add any custom debug information to `output["_debug"]`. This will be accessible in the pipeline output when the debug mode is enabled.
