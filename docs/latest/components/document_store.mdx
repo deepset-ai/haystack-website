@@ -1,11 +1,15 @@
 # Document Stores
 
-You can think of the DocumentStore as a "database" that:
+You can think of the Document Store as a "database" that:
 
 - stores your texts and meta data
-- provides them to the retriever at query time
+- provides them to the Retriever at query time
 
-There are different DocumentStores in Haystack to fit different use cases and tech stacks.
+By far the most common way to use a Document Store in Haystack is to
+fetch documents using a Retriever.
+A Document Store needs to be provided as an argument to the initialization of a Retriever.
+Note that the Retriever functions as a [Node](/pipeline_nodes/overview)
+while a Document Store does not.
 
 ## Initialisation
 
