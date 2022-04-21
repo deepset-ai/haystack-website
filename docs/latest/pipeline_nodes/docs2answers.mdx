@@ -1,0 +1,27 @@
+# Doc2Answers
+
+This Node is used to convert retrieved documents into predicted answers format.
+It is useful for situations where you are calling a Retriever only pipeline via REST API.
+This ensures that your output is in a compatible format.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| At the end of a querying Pipeline |
+|__Input__       | [Documents](/components/documents-answers-labels#document)                                                                                                                                                                  |
+|__Output__      | [Answers](/components/documents-answers-labels#answer)                                                                                                             |
+|__Classes__     | Docs2Answers                                                                                                        |
+|||
+
+## Usage
+
+```python
+from haystack.nodes import Pipeline
+from haystack.nodes import Docs2Answers
+
+docs2answers = Docs2Answers()
+
+pipe = Pipeline()
+pipe.add_node(component=retriever, name="Retriever", inputs=["Query"])
+pipe.add_node(component=docs2answers, name="Doc2Answers", inputs=["Retriever"])
+res = pipe.run(query="What did Einstein work on?")
+```

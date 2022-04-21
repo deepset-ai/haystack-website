@@ -1,0 +1,32 @@
+# Join Documents
+
+This Node receives Documents from multiple Nodes and joins them back together.
+This allows for the merging of two separate Pipeline branches.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| Generally used in cases where two separate branches have two different Retrievers whose results need to be amalgamated |
+|__Input__       | [Documents](/components/documents-answers-labels#document)                                                                                                                                                                  |
+|__Output__      | [Documents](/components/documents-answers-labels#document)                                                                                                             |
+|__Classes__     | JoinDocuments                                                                                                           |
+|||
+
+## Usage
+
+```python
+from haystack.nodes import Pipeline
+from haystack.nodes import JoinDocuments, QueryClassifier
+
+join_documents = JoinDocuments(
+    join_mode="concatenate",
+    top_k_join=10
+)
+
+pipe = Pipeline()
+pipe.add_node(component=QueryClassifier(), name="QueryClassifier", inputs=["Query"])
+pipe.add_node(component=es_retriever, name="ESRetriever", inputs=["QueryClassifier.output_1"])
+pipe.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["QueryClassifier.output_2"])
+pipe.add_node(component=join_documents, name="JoinResults",
+              inputs=["ESRetriever", "DPRRetriever"])
+res = pipe.run(query="What did Einstein work on?")
+```
