@@ -13,6 +13,7 @@ jobs:
           use-verbose-mode: 'yes'
           check-modified-files-only: 'no'
           folder-path: 'docs/latest' 
+          file-extension: '.mdx'
         
 
 
