@@ -1,5 +1,4 @@
 import os
-import re
 from pprint import pprint
 
 patterns = [
@@ -14,7 +13,7 @@ patterns = [
 
 all_links = []
 all_new_links = []
-all_external_links = []
+
 
 def get_mdx_filenames(directory):
     files = list(os.walk(directory))
@@ -25,9 +24,11 @@ def get_mdx_filenames(directory):
                 all_mdx_files.append(curr_dir + "/" + f)
     return all_mdx_files
 
+
 def replace_links(all_mdx_files, patterns, new_version):
     for mdx_file in all_mdx_files:
         replace_links_single(mdx_file, patterns, new_version)
+
 
 def replace_links_single(mdx_file, patterns, new_version):
     lines = [l for l in open(mdx_file)]
@@ -49,18 +50,9 @@ def replace_links_single(mdx_file, patterns, new_version):
         f.write("".join(new_lines))
 
 
-
-def test():
-    example = "[Preprocessing](/components/preprocessing)"
-    x = re.compile("]\(\/components\/.*\)")
-    y = x.findall(example)
-    print(y)
-
 if __name__ == "__main__":
 
     from argparse import ArgumentParser
-
-    # test()
 
     parser = ArgumentParser()
     parser.add_argument(
