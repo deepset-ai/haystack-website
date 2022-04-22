@@ -12,7 +12,7 @@ jobs:
           use-quiet-mode: 'no'
           use-verbose-mode: 'yes'
           check-modified-files-only: 'no'
-          folder-path: 'docs/latest'
+          folder-path: 'docs/latest' 
         
 
 
