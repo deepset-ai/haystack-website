@@ -131,7 +131,7 @@ from haystack.nodes import EmbeddingRetriever
 from haystack.pipelines import ExtractiveQAPipeline
 
 document_store = ElasticsearchDocumentStore(
-    similarity="cosine",
+    similarity="dot_product",
     embedding_dim=768
 )
 retriever = EmbeddingRetriever(
