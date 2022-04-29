@@ -99,5 +99,5 @@
 
 .markdown td,
 .markdown th {
-  @apply w-full text-center p-2 border-l border-r;
+  @apply text-center p-2 border-l border-r;
 }
