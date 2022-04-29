@@ -18,9 +18,9 @@ When used in combination with a Reader, it is a tool for sifting out irrelevant 
 A Retriever is initialized with a document store as one of its arguments
 
 ```
-from haystack.nodes import ElasticsearchRetriever
+from haystack.nodes import BM25Retriever
 
-retriever = ElasticsearchRetriever(document_store)
+retriever = BM25Retriever(document_store)
 ```
 
 You can use it in isolation by calling the `retrieve()` method. This will return a list of Document objects.
@@ -62,12 +62,13 @@ To learn more about how to use this component in Haystack, have a look at our [T
 Note that not all Retrievers can be paired with every DocumentStore.
 Here are the combinations which are supported:
 
-|           | Memory | Elasticsearch | SQL | FAISS | Milvus |
-| --------- | ------ | ------------- | --- | ----- | ------ |
-| BM25      | N      | Y             | N   | N     | N      |
-| TF-IDF    | Y      | Y             | Y   | N     | N      |
-| Embedding | Y      | Y             | N   | Y     | Y      |
-| DPR       | Y      | Y             | N   | Y     | Y      |
+|           | Memory | Elasticsearch | OpenSearch | OpenDistroElasticsearch | SQL | FAISS | Milvus |
+| --------- | ------ | ------------- | ---------- | ----------------------- | --- | ----- | ------ |
+| BM25      | N      | Y             | Y          | Y                       | N   | N     | N      |
+| TF-IDF    | Y      | Y             | Y          | Y                       | Y   | N     | N      |
+| Embedding | Y      | Y             | Y          | Y                       | N   | Y     | Y      |
+| DPR       | Y      | Y             | Y          | Y                       | N   | Y     | Y      |
+| Filter    | N      | Y             | Y          | Y                       | N   | N     | N      | 
 
 See [Optimization](/guides/optimization) for suggestions on how to choose top-k values.
 
@@ -84,12 +85,12 @@ It improves upon its predecessor in two main aspects:
 
 ```python
 from haystack.document_stores import ElasticsearchDocumentStore
-from haystack.nodes import ElasticsearchRetriever
+from haystack.nodes import BM25Retriever
 from haystack.pipelines import ExtractiveQAPipeline
 
 document_store = ElasticsearchDocumentStore()
 ...
-retriever = ElasticsearchRetriever(document_store)
+retriever = BM25Retriever(document_store)
 ...
 p = ExtractiveQAPipeline(reader, retriever)
 ```

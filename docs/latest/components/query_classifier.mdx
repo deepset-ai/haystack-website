@@ -72,7 +72,7 @@ Note how the node returns two objects: the query (e.g.'Arya Stark father') and t
 
 ## Route Queries to Different Retrievers
 
-You can use a Query Classifier within a pipeline as a "decision node". Depending on the output of the classifier other parts of the pipeline will be executed. For example, we can route keyword queries to an ElasticsearchRetriever and semantic queries (questions/statements) to DPR.  
+You can use a Query Classifier within a pipeline as a "decision node". Depending on the output of the classifier other parts of the pipeline will be executed. For example, we can route keyword queries to an BM25Retriever and semantic queries (questions/statements) to DPR.  
 
 ![image](https://user-images.githubusercontent.com/6007894/127831511-f55bad86-4b4f-4b54-9889-7bba37e475c6.png)
 
@@ -93,7 +93,7 @@ pipe.add_node(component=es_retriever, name="ESRetriever", inputs=["QueryClassifi
 # Pass a question -> run DPR
 res_1 = pipe.run(query="Who is the father of Arya Stark?")
 
-# Pass keywords -> run the ElasticsearchRetriever
+# Pass keywords -> run the BM25Retriever
 res_2 = pipe.run(query="arya stark father")
 
 ```
@@ -116,7 +116,7 @@ pipe.add_node(component=reader, name="QAReader", inputs=["DPRRetriever"])
 # Pass a question -> run DPR + QA -> return answers
 res_1 = pipe.run(query="Who is the father of Arya Stark?")
 
-# Pass keywords -> run only ElasticsearchRetriever -> return docs
+# Pass keywords -> run only BM25Retriever -> return docs
 res_2 = pipe.run(query="arya stark father")
 
 ```
