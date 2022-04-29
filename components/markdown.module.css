@@ -86,7 +86,7 @@
 }
 
 .markdown table {
-  @apply table-fixed w-full mb-4;
+  @apply table-auto w-full mb-4;
 }
 
 .markdown thead {
