@@ -86,7 +86,7 @@
 }
 
 .markdown table {
-  @apply table-auto w-full mb-4;
+  @apply table-fixed w-full mb-4;
 }
 
 .markdown thead {
@@ -94,7 +94,7 @@
 }
 
 .markdown tr {
-  @apply flex w-full justify-evenly bg-light-grey-BG border dark:bg-gray-800;
+  @apply w-full bg-light-grey-BG border dark:bg-gray-800;
 }
 
 .markdown td,
