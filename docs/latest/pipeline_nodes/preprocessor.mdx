@@ -1,14 +1,11 @@
 # PreProcessor
 
-The PreProcessor can perform different kinds of preprocessing on a `Document`:
+Use the PreProcessor to normalize white spaces, get rid of headers and footers,
+clean empty lines in your Documents, or split them into smaller pieces.
 
-- normalization of white space
-- splitting of text into smaller pieces
-
-Splitting is generally recommended where long `Document`s are involved
-since this can improve the performance of retrieval
-and speed up Question Answering.
-For suggestions on how best to split your documents, see [Optimization](/guides/optimization)
+Splitting is generally recommended for long Documents
+as it makes the Retriever's job easier and speeds up Question Answering.
+For suggestions on how best to split your documents, see [Optimization](/guides/optimization).
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -27,10 +24,11 @@ For suggestions on how best to split your documents, see [Optimization](/guides/
 
 ## Usage
 
+Initialization:
+
 ```python
 from haystack.nodes import PreProcessor
 
-doc = converter.convert(file_path=file, meta=None)
 processor = PreProcessor(
     clean_empty_lines=True,
     clean_whitespace=True,
@@ -40,16 +38,24 @@ processor = PreProcessor(
     split_respect_sentence_boundary=True,
     split_overlap=0
 )
-docs = processor.process(doc)
 ```
 
-- `clean_empty_lines` will normalize 3 or more consecutive empty lines to be just a two empty lines
-- `clean_whitespace` will remove any whitespace at the beginning or end of each line in the text
-- `clean_header_footer` will remove any long header or footer texts that are repeated on each page
-- `split_by` determines what unit the document is split by: `'word'`, `'sentence'` or `'passage'`
-- `split_length` sets a maximum number of `'word'`, `'sentence'` or `'passage'` units per output document
-- `split_respect_sentence_boundary` ensures that document boundaries do not fall in the middle of sentences
-- `split_overlap` sets the amount of overlap between two adjacent documents after a split. Setting this to a positive number essentially enables the sliding window approach.
+| Argument                        | Type   | Description                                                                                                                                                 |
+|---------------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| clean_empty_lines               | bool   | Whether to normalize 3 or more consecutive empty lines to be just a two empty lines.                                                                        |
+| clean_whitespace                | bool   | Whether to remove any whitespace at the beginning or end of each line in the text.                                                                          |
+| clean_header_footer             | bool   | Whether to remove any long header or footer texts that are repeated on each page.                                                                           |
+| split_by                        | string | Determines what unit the document is split by. Choose from `'word'`, `'sentence'` or `'passage'`.                                                           |
+| split_length                    | int    | Sets a maximum number of `'word'`, `'sentence'` or `'passage'` units per output document                                                                    |
+| split_respect_sentence_boundary | bool   | Ensures that document boundaries do not fall in the middle of sentences                                                                                     |
+| split_overlap                   | int    | Sets the amount of overlap between two adjacent documents after a split. Setting this to a positive number essentially enables the sliding window approach. |
+
+To run the processor by itself:
+
+```python
+doc = converter.convert(file_path=file, meta=None)
+docs = processor.process(doc)
+```
 
 ## Document Format
 
