@@ -140,13 +140,15 @@ document_store.write_documents(dicts)
 When we talk about Documents in Haystack, we are referring specifically to the individual blocks of text that are being held in the DocumentStore.
 You might want to use all the text in one file as a Document, or split it into multiple Documents.
 This splitting can have a big impact on speed and performance.
-
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme p-6 my-4 rounded-md dark:bg-yellow-900">
-  <span className="font-bold">Tip:</span> If Haystack is running very slowly,
+
+  <b>Tip:</b> If Haystack is running very slowly,
   you might want to try splitting your text into smaller Documents. If you want
   an improvement to performance, you might want to try concatenating text to
-  make larger Documents. See [Optimization](/guides/v1.1.0/optimization) for
-  more details.
+  make larger Documents. 
+
+  See <a href="https://haystack.deepset.ai/guides/v1.1.0/optimization">Optimization</a> for more details.
+
 </div>
 
 <div style={{ marginBottom: "3rem" }} />
