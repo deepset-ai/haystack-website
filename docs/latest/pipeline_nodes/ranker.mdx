@@ -1,12 +1,12 @@
 # Ranker
 
 A Ranker reorders a set of Documents based on their relevance to the Query.
-They are particularly useful when your Retriever has high recall but poor relevance scoring.
+It is particularly useful when your Retriever has high recall but poor relevance scoring.
 The improvement that the Ranker brings comes at the cost of some additional computation time.
 The ranking models supported by Haystack are
-models powered by transformers meaning that they are sensitive to word order and syntax.
+models powered by transformers, meaning that they are sensitive to word order and syntax.
 
-In Haystack, you can use any [Cross-Encoder](https://huggingface.co/cross-encoder) model that returns as a single logit
+In Haystack, you can use any [Cross-Encoder](https://huggingface.co/cross-encoder) model that returns a single logit
 as a similarity score.
 See this [Sentence Transformers](https://www.sbert.net/docs/pretrained-models/ce-msmarco.html#usage-with-transformers) page for some examples.
 
@@ -20,7 +20,7 @@ See this [Sentence Transformers](https://www.sbert.net/docs/pretrained-models/ce
 
 ## Usage
 
-To use it in a Pipeline:
+To use the Ranker in a pipeline:
 
 ```python
 from haystack.document_stores import ElasticsearchDocumentStore
@@ -42,7 +42,7 @@ The `SentenceTransformersRanker` can also be used in isolation by calling its `p
 ## Use Case
 
 As an example, a Ranker can pair nicely with a sparse BM25 retriever such as the ElasticsearchRetriever.
-While the BM25 retriever is fast and light weight, it is not sensitive to word order but rather treats text as a bag of words.
+While the BM25 retriever is fast and lightweight, it is not sensitive to word order but rather treats text as a bag of words.
 By placing a Ranker afterwards, you can offset this weakness and have a better sorted list of relevant documents.
 
 ## Training
