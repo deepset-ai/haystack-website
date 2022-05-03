@@ -3,7 +3,9 @@
 Nodes are the core components that process and route incoming text.
 Some perform steps like preprocessing, retrieving or summarizing text
 while route queries through different branches of a Pipeline.
-Nodes are chained together using a [Pipeline](/components/pipelines).
+Nodes are chained together using a [Pipeline](/components/pipelines)
+and they function like building blocks that can be easily switched out for each other.
+A Node takes the output of the previous Node (or Nodes) as input.
 
 ## Usage
 
