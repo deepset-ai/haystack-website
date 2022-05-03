@@ -12,9 +12,11 @@ The `JoinAnswers` node takes Answers from two or more Reader or Generator nodes 
 
 ## Usage
 
-Initialize the node like this:
+To initialize the Node:
 
 ```python
+from haystack.nodes import JoinAnswers
+
 join_answers = JoinAnswers(
     join_mode="concatenate",
     sort_by_score=True
@@ -22,15 +24,15 @@ join_answers = JoinAnswers(
 ```
 
 There are two available `join_mode`s:
-- `concatenate` combines documents from multiple readers
-- `merge` Aggregates scores of individual answers. If you use this option, you can also specify the `weights` parameter which assigns importance to the input nodes. By default, all nodes are assigned equal weight.
+- `concatenate`: Combines documents from multiple readers
+- `merge`: Aggregates scores of individual answers. If you use this option, you can also specify the `weights` parameter which assigns importance to the input nodes. By default, all nodes are assigned equal weight.
 
 Optionally, you can use the `top_k` parameter to specify the number of answers to be displayed.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
 **Note:** Answers coming from a Generator have no score.
-You will need set `sort_by_score=False` to join these with Answers coming from other sources.
+You will need to set `sort_by_score=False` to join these with Answers coming from other sources.
 
 </div>
 
