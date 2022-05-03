@@ -1,0 +1,52 @@
+# Ranker
+
+A Ranker reorders a set of Documents based on their relevance to the Query.
+It is particularly useful when your Retriever has high recall but poor relevance scoring.
+The improvement that the Ranker brings comes at the cost of some additional computation time.
+The ranking models supported by Haystack are
+models powered by transformers, meaning that they are sensitive to word order and syntax.
+
+In Haystack, you can use any [Cross-Encoder](https://huggingface.co/cross-encoder) model that returns a single logit
+as a similarity score.
+See this [Sentence Transformers](https://www.sbert.net/docs/pretrained-models/ce-msmarco.html#usage-with-transformers) page for some examples.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| After a Retriever |
+|__Input__       | [Documents](/components/documents-answers-labels#document)                                                                                                                                                                  |
+|__Output__      | [Documents](/components/documents-answers-labels#document)                                                                                                             |
+|__Classes__     | SentenceTransformersRanker                                                                                                          |
+|||
+
+## Usage
+
+To use the Ranker in a pipeline:
+
+```python
+from haystack.document_stores import ElasticsearchDocumentStore
+from haystack.nodes import ElasticsearchRetriever, SentenceTransformersRanker
+from haystack import Pipeline
+
+document_store = ElasticsearchDocumentStore()
+...
+retriever = ElasticsearchRetriever(document_store)
+ranker = SentenceTransformersRanker(model_name_or_path="cross-encoder/ms-marco-MiniLM-L-12-v2")
+...
+p = Pipeline()
+p.add_node(component=retriever, name="ESRetriever", inputs=["Query"])
+p.add_node(component=ranker, name="Ranker", inputs=["ESRetriever"])
+```
+
+The `SentenceTransformersRanker` can also be used in isolation by calling its `predict()` method after initialization.
+
+## Use Case
+
+As an example, a Ranker can pair nicely with a sparse BM25 retriever such as the ElasticsearchRetriever.
+While the BM25 retriever is fast and lightweight, it is not sensitive to word order but rather treats text as a bag of words.
+By placing a Ranker afterwards, you can offset this weakness and have a better sorted list of relevant documents.
+
+## Training
+
+The Ranker needs to be initialised with a model trained on a text pair classification task.
+The `SentenceTransformersRanker` has a `train()` method to allow for this training.
+Alternatively, [this FARM script](https://github.com/deepset-ai/FARM/blob/master/examples/text_pair_classification.py) shows how to train a text pair classification model.
