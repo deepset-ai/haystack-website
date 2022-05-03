@@ -267,14 +267,12 @@ If you want to load the model at a later point, initialize a `FARMReader` object
 new_reader = FARMReader(model_name_or_path="my_model")
 ```
 
-If you would like to convert your model from or into the HuggingFace Transformers format we provide a `Converter` object.
-Calling `Converter.convert_to_transformers()` will return a list of HuggingFace models.
+If you would like to convert your model from or into the HuggingFace Transformers format we provide a conversion function.
+Calling `reader.inferencer.model.convert_to_transformers()` will return a list of HuggingFace models.
 This can be particularly useful if you'd like to upload the model to the HuggingFace Model Hub.
 
 ```python
-from haystack.modeling.conversion.transformers import Converter
-
-transformers_models = Converter.convert_to_transformers(reader.inferencer.model)
+transformers_models = reader.inferencer.model.convert_to_transformers()
 ```
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
