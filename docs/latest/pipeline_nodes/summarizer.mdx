@@ -1,10 +1,10 @@
 # Summarizer
 
-The Summmarizer is a useful tool for getting a short overview of a Document that is otherwise quite long.
-Using the Summarizer, you could, for example, gain a more manageable glimpse into what Documents your Retriever is returning.
+The Summarizer gives a short overview of a long Document.
+The Summarizer can give you a glimpse of what Documents your Retriever is returning.
 
-You can use any summarization model from HuggingFace Transformers by providing the model name.
-See the up-to-date list of available models [here](https://huggingface.co/models?filter=summarization).
+You can use any summarization model from
+[HuggingFace Transformers](https://huggingface.co/models?filter=summarization) by providing the model name.
 By default, the Google [Pegasus](https://ai.googleblog.com/2020/06/pegasus-state-of-art-model-for.html) model is loaded.
 
 |||
@@ -16,6 +16,8 @@ By default, the Google [Pegasus](https://ai.googleblog.com/2020/06/pegasus-state
 |||
 
 ## Usage
+
+To initialize and run a stand-alone Summarizer:
 
 ```python
 from haystack.nodes import TransformersSummarizer
@@ -29,7 +31,7 @@ summarizer = TransformersSummarizer(model_name_or_path="google/pegasus-xsum")
 summary = summarizer.predict(documents=docs, generate_single_summary=True)
 ```
 
-The contents of summary should contain both the summarization and also the original document text.
+The contents of summary should contain both the summarization and also the original document text:
 
 ```python
 [
@@ -43,7 +45,7 @@ The contents of summary should contain both the summarization and also the origi
 ]
 ```
 
-The summarizer can also functions as a node in a pipeline.
+To use a Summarizer in a pipeline:
 
 ```python
 from haystack import Pipeline
