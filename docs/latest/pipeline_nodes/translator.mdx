@@ -1,8 +1,8 @@
 # Translator
 
 The Translator does what it says on the tin: it translates text from one language into another.
-For a list of compatible models, see the HuggingFace [Model Hub](https://huggingface.co/models?pipeline_tag=translation&sort=downloads).
-
+Some translation models are language specific while others are multilingual.
+See the HuggingFace [Model Hub](https://huggingface.co/models?pipeline_tag=translation&sort=downloads) for a list of available models.
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |__Position in a Pipeline__| After preprocessing in an indexing Pipeline or after the Retriever in a querying Pipeline |
@@ -30,10 +30,10 @@ translator = TransformersTranslator(model_name_or_path="Helsinki-NLP/opus-mt-en-
 res = translator.translate(documents=DOCS, query=None)
 ```
 
-## Use Case: Wrapping another Pipeline
+## Using the TranslationWrapperPipeline
 
 Let's imagine you have an English corpus of technical docs, but the mother tongue of many of your users is French.
-You can use a `Translator` node in your pipeline to
+You can use a `Translator` node in your pipeline to:
 
 - Translate the incoming query from French to English
 - Search in your English corpus for the right document / answer
