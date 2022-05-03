@@ -1,7 +1,7 @@
 # RouteDocuments
 
-The `RouteDocuments` Node is a decision Node that makes it possible to route documents
-to different branches of your Pipeline based on their `content_type` or a metadata field.
+This Node routes Documents to different branches of your pipeline based on their content_type or a metadata field.
+RouteDocuments is a decision node.
 
 This node is handy if you have different types of data, for example tables and text.
 You can then use it to route each document type to a Reader trained on it.
@@ -16,15 +16,13 @@ You can then use it to route each document type to a Reader trained on it.
 
 ## Usage
 
-By default `RouteDocuments` routes Documents based on content type (e.g. text vs table).
+To initialize RouteDocuments so that it routes documents based on their content type (text vs. table):
 
 ```python
 route_documents = RouteDocuments()
 ```
 
-You can also initialize `RouteDocuments` to route based on a metadata field.
-The following example shows how to initialize the class if you have a metadata field called `language`
-with `de`, `en` and `es` as the possible values.
+To initialize RouteDocuments so that it routes documents based on a metadata field:
 
 ```python
 route_documents = RouteDocuments(
