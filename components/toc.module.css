@@ -1,0 +1,9 @@
+.toc-scroll-height {
+    max-height: calc(100vh - 6rem);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.toc-scroll-height::-webkit-scrollbar {
+    display: none;
+}
