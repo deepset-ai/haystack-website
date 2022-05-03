@@ -6,9 +6,9 @@ generative QA can return a novel text answer that it has composed.
 
 The best current approaches, such as [Retriever-Augmented Generation](https://arxiv.org/abs/2005.11401) and [LFQA](https://yjernite.github.io/lfqa.html),
 can draw upon both the knowledge it gained during language model pretraining (parametric memory)
-as well as passages provided to it with a retriever (non-parametric memory).
-With the advent of Transformer based retrieval methods such as [Dense Passage Retrieval](https://arxiv.org/abs/2004.04906),
-retriever and generator can be trained concurrently from the one loss signal.
+as well as passages provided to it with a Retriever (non-parametric memory).
+With the advent of transformer-based retrieval methods such as [Dense Passage Retrieval](https://arxiv.org/abs/2004.04906),
+Retriever and Generator can be trained concurrently from the one loss signal.
 
 
 |||
@@ -32,15 +32,14 @@ retriever and generator can be trained concurrently from the one loss signal.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Tutorial:** Checkout our tutorial notebooks for a guide on how to build your own generative QA system with [RAG](/tutorials/retrieval-augmented-generation)
-or with [LFQA](/tutorials/lfqa).
+**Tutorial:** Build your own generative QA system with [RAG](/tutorials/retrieval-augmented-generation)
+and [LFQA](/tutorials/lfqa).
 
 </div>
 
-
 ## Usage
 
-Initialize a Generator as follows:
+To initialize a Generator:
 
 ``` python
 from haystack.nodes import RAGenerator
@@ -53,7 +52,7 @@ generator = RAGenerator(
 )
 ```
 
-Running a Generator in a pipeline:
+To run a Generator in a pipeline:
 
 ``` python
 from haystack.pipelines import GenerativeQAPipeline
@@ -62,7 +61,7 @@ pipeline = GenerativeQAPipeline(generator=generator, retriever=dpr_retriever)
 result = pipelines.run(query='What are the best party games for adults?', top_k_retriever=20)
 ```
 
-Running a stand-alone Generator:
+To run a stand-alone Generator:
 
 ``` python
 result = generator.predict(
