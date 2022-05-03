@@ -1432,4 +1432,19 @@ module.exports = {
       },
     ];
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/components/primitives',
+        destination: '/components/documents-answers-labels',
+        permanent: true,
+      },
+      {
+        source: '/components/nodes',
+        destination: '/pipeline_nodes/overview',
+        permanent: true,
+      },
+    ]
+  },
 };
