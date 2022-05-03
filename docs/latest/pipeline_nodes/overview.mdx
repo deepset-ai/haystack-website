@@ -91,10 +91,6 @@ class NodeTemplate(BaseComponent):
     # If it's not a decision node, there will be only one outgoing edge
     outgoing_edges = 1
 
-    def __init__(some_param):
-        # store all init params in node's config so that we can easily save/load via YAML
-        self.set_config(some_param=some_param)
-
     def run(self, query: str, my_arg: Optional[int] = 10):
         # Insert code here to manipulate the input & produce an output dictionary
         ...
@@ -123,7 +119,6 @@ class CustomTranslator(BaseComponent):
 
     def __init__(some_param):
         # store all init params in node's config so that we can easily save/load via YAML
-        self.set_config(some_param=some_param)
         self.translator = TransformersTranslator(model_name_or_path=f'Helsinki-NLP/opus-mt-en-{language}')
 
 ```
