@@ -7,26 +7,56 @@ The Query Classifiers in Haystack distinguish between three different classes of
 - Statements
 
 Based on its classification, it can route the query to a specified branch of the Pipeline.
+By passing on queries to Nodes that are more suited to handle them, you get better search results.
 
-By passing on queries to Nodes that are more suited to that kind of query, you can expect to get better search results.
-For example, the Dense Passage Retriever is trained on full questions and so it makes sense to only pass questions to it.
-By choosing also to pass keyword queries to a BM25 retriever, such as the ElasticsearchRetriever,
-you can reduce the load on the GPU powered Dense Passage Rertriever.
+For example, the Dense Passage Retriever is trained on full questions and so it works best if you only pass questions to it.
+By choosing also to pass keyword queries to a BM25 Retriever, such as the ElasticsearchRetriever,
+you can reduce the load on the GPU-powered Dense Passage Rertriever.
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |__Position in a Pipeline__| At the beginning of a query Pipeline |
 |__Input__       | Query                                                                                                                                                                  |
 |__Output__      | Query                                                                                                                                                                    |
-|__Classes__     | TransformersQueryClassifier, SklearnQueryClassifier                                                                                                                                             |
+|__Classes__     | TransformersQueryClassifier<br />SklearnQueryClassifier                                                                                                                                             |
 |||
 
+The Query Classifier will populate the metadata fields of the Query with its classification and can also route it based on this.
 
 <div style={{ marginBottom: "3rem" }} />
 
-## Usage (Standalone)
+## Query Types
 
-The Query Classifier can be used as a standalone node:
+#### Keyword Queries
+
+Such queries don't have sentence structure. They consist of keywords and the order of words does not matter:
+
+*   arya stark father
+*   jon snow country
+*   arya stark younger brothers
+
+#### Questions
+
+In such queries users ask a question in a complete, grammatical sentence.
+A Query Classifier should be able to classify a query regardless of whether it ends with a question mark or not.
+
+*   who is the father of arya stark?
+*   which country was jon snow filmed in
+*   who are the younger brothers of arya stark?
+
+#### Statements:
+
+This type of query is a declarative sentence, such as:
+
+*   Arya stark was a daughter of a lord.
+*   Show countries that Jon snow was filmed in.
+*   List all brothers of Arya.
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Usage
+
+To use the Query Classifier as a stand-alone Node:
 
 ```python
 from haystack.nodes import TransformersQueryClassifier
@@ -55,8 +85,6 @@ for query in queries:
 
 Note how the node returns two objects: the query (e.g.'Arya Stark father') and the name of the output edge (e.g. "output_2").
 This information can be leveraged in a pipeline for routing the query to the next node.
-
-## Usage (Pipeline)
 
 You can use a Query Classifier within a pipeline as a decision node.
 Depending on the output of the classifier only one branch of the Pipeline will be executed.
@@ -111,38 +139,6 @@ res_2 = pipe.run(query="arya stark father")
 
 <div style={{ marginBottom: "3rem" }} />
 
-
-## Query Types
-
-#### Keyword Queries
-
-Such queries don't have sentence structure. They consist of keywords and the order of words does not matter:
-
-*   arya stark father
-*   jon snow country
-*   arya stark younger brothers
-
-#### Questions
-
-In such queries users ask a question in a complete, grammatical sentence.
-Query Classifier models should be able to make its prediction separate from the presence or absence of the question mark.
-
-*   who is the father of arya stark?
-*   which country was jon snow filmed in
-*   who are the younger brothers of arya stark?
-
-#### Statements:
-
-These queries consist also of a regular, grammatical sentences.
-However, they are declarative in nature rather than interrogative:
-
-*   Arya stark was a daughter of a lord.
-*   Show countries that Jon snow was filmed in.
-*   List all brothers of Arya.
-
-<div style={{ marginBottom: "3rem" }} />
-
-
 ## Models
 
 The TransformersQueryClassifier is more accurate than the SkLearnQueryClassifier as it is sensitive to the syntax of a sentence.
@@ -152,7 +148,7 @@ The default models that we trained use a mini BERT architecture which is about `
 
 #### Transformers
 
-Pass your own `Transformer` binary classification model from file or use one of the following pretrained models hosted on Huggingface:
+Pass your own `Transformer` binary classification model from file or use one of the following pretrained models hosted on Hugging Face:
 
 **Keywords vs. Questions/Statements (Default)**
 
