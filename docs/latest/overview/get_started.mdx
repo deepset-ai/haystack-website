@@ -91,7 +91,7 @@ dicts = convert_files_to_dicts(doc_dir, clean_func=clean_wiki_text)
 document_store.write_documents(dicts)
 
 # Retriever: A Fast and simple algo to identify the most promising candidate documents
-retriever = ElasticsearchRetriever(document_store)
+retriever = BM25Retriever(document_store)
 
 # Reader: Powerful but slower neural network trained for QA
 model_name = "deepset/roberta-base-squad2"

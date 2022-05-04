@@ -94,10 +94,10 @@
 }
 
 .markdown tr {
-  @apply flex w-full justify-evenly bg-light-grey-BG border dark:bg-gray-800;
+  @apply w-full bg-light-grey-BG border dark:bg-gray-800;
 }
 
 .markdown td,
 .markdown th {
-  @apply w-full text-center p-2 border-l border-r;
+  @apply text-center p-2 border-l border-r;
 }
