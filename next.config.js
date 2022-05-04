@@ -1451,18 +1451,18 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/usage/knowledge_graph',
-        destination: '/guides/knowledge_graph',
+        source: '/usage/knowledge-graph',
+        destination: '/guides/knowledge-graph',
         permanent: true,
       },
       {
         source: '/components/classifier',
-        destination: '/pipeline_nodes/query_classifier',
+        destination: '/pipeline_nodes/query-classifier',
         permanent: true,
       },
       {
-        source: '/components/route_documents',
-        destination: '/pipeline_nodes/route_documents',
+        source: '/components/route-documents',
+        destination: '/pipeline_nodes/route-documents',
         permanent: true,
       },
       {
@@ -1491,28 +1491,28 @@ module.exports = {
         permanent: true, 
       },
       {
-        source: '/components/join_answers',
-        destination: '/pipeline_nodes/join_answers',
+        source: '/components/join-answers',
+        destination: '/pipeline_nodes/join-answers',
         permanent: true, 
       },
       {
         source: '/usage/pipelines',
-        destination: '/components/ready_made_pipelines',
+        destination: '/components/ready-made-pipelines',
         permanent: true, 
       },
       {
-        source: '/components/question_generator',
-        destination: '/pipeline_nodes/question_generator',
+        source: '/components/question-generator',
+        destination: '/pipeline_nodes/question-generator',
         permanent: true, 
       },
       {
-        source: '/usage/query_classifier',
-        destination: '/pipeline_nodes/query_classifier',
+        source: '/usage/query-classifier',
+        destination: '/pipeline_nodes/query-classifier',
         permanent: true,
       },
       {
-        source: '/usage/domain_adaptation',
-        destination: '/guides/domain_adaptation',
+        source: '/usage/domain-adaptation',
+        destination: '/guides/domain-adaptation',
         permanent: true,
       },
       {
@@ -1531,8 +1531,8 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/guides/rest_api_definition',
-        destination: '/components/rest_api_definition',
+        source: '/guides/rest-api-definition',
+        destination: '/components/rest-api-definition',
         permanent: true,
       },
       {
@@ -1561,8 +1561,8 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/usage/document_store',
-        destination: '/components/document_store',
+        source: '/usage/document-store',
+        destination: '/components/document-store',
         permanent: true,
       },
       {
@@ -1581,18 +1581,13 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/guides/rest_api',
-        destination: '/components/rest_api',
+        source: '/guides/rest-api',
+        destination: '/components/rest-api',
         permanent: true,
       },
       {
-        source: '/components/knowledge_graph',
-        destination: '/guides/knowledge_graph',
-        permanent: true,
-      },
-      {
-        source: '/usage/get_started',
-        destination: '/overview/get_started',
+        source: '/components/knowledge-graph',
+        destination: '/guides/knowledge-graph',
         permanent: true,
       },
       {
@@ -1606,8 +1601,8 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/components/query_classifier',
-        destination: '/pipeline_nodes/query_classifier',
+        source: '/components/query-classifier',
+        destination: '/pipeline_nodes/query-classifier',
         permanent: true,
       },
       {
@@ -1616,13 +1611,13 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/components/entity_extractor',
-        destination: '/pipeline_nodes/entity_extractor',
+        source: '/components/entity-extractor',
+        destination: '/pipeline_nodes/entity-extractor',
         permanent: true,
       },
       {
-        source: '/components/document_classifier',
-        destination: '/pipeline_nodes/document_classifier',
+        source: '/components/document-classifier',
+        destination: '/pipeline_nodes/document-classifier',
         permanent: true,
       },
       {
