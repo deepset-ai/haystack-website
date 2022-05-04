@@ -32,9 +32,9 @@ You can reduce the work load on the Reader by instructing the Retriever to pass 
 This is done by setting the `top_k_retriever` parameter to a lower value.
 
 Making sure that your documents are shorter can also increase the speed of your system. You can split
-your documents into smaller chunks by using the `PreProcessor` (see [tutorial](https://haystack.deepset.ai/tutorials/pipelines)).
+your documents into smaller chunks by using the `PreProcessor` (see [tutorial](https://haystack.deepset.ai/tutorials/v1.4.0/pipelines)).
 
-For more optimization suggestions, have a look at our [optimization page](https://haystack.deepset.ai/usage/optimization)
+For more optimization suggestions, have a look at our [optimization page](https://haystack.deepset.ai/usage/v1.4.0/optimization)
 and also our [blogs](https://medium.com/deepset-ai)
 
 <div style={{ marginBottom: "3rem" }} />
@@ -43,22 +43,22 @@ and also our [blogs](https://medium.com/deepset-ai)
 
 The components in Haystack, such as the `Retriever` or the `Reader`, are designed in a language agnostic way. However you may
 have to set certain parameters or load models pretrained for your language in order to get good performance out of Haystack.
-See our [languages page](https://haystack.deepset.ai/usage/languages) for more details.
+See our [languages page](https://haystack.deepset.ai/usage/v1.4.0/languages) for more details.
 
 <div style={{ marginBottom: "3rem" }} />
 
 ## How can I add metadata to my documents so that I can apply filters?
 
-When providing your documents in the input format (see [here](https://haystack.deepset.aihttps://haystack.deepset.ai/usage/document-store#input-format))
+When providing your documents in the input format (see [here](https://haystack.deepset.aihttps://haystack.deepset.ai/usage/v1.4.0/document-store#input-format))
 you can provide metadata information as a dictionary under the `meta` key. At query time, you can provide a `filters` argument
 (most likely through `Pipeline.run()`) that specifies the accepted values for a certain metadata field
-(for an example of what a `filters` dictionary might look like, please refer to [this example](https://haystack.deepset.ai/reference/retriever#__init__))
+(for an example of what a `filters` dictionary might look like, please refer to [this example](https://haystack.deepset.ai/reference/v1.4.0/retriever#__init__))
 
 <div style={{ marginBottom: "3rem" }} />
 
 ## How can I see each component's output if it's running in a pipeline?
 
-To find out more about how to debug a pipeline, have a look at our [Pipelines documentation page](/components/pipelines#returning-debugging-information).
+To find out more about how to debug a pipeline, have a look at our [Pipelines documentation page](/components/v1.4.0/pipelines#returning-debugging-information).
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -76,7 +76,7 @@ The confidence scores are in the range of 0 and 1 and reflect how confident the 
 Having a confidence score is particularly useful in cases where you need Haystack to work with a certain accuracy threshold.
 Many of our users have built systems where predictions below a certain confidence value are routed on to a fallback system.
 
-For more information on model confidence and how to tune it, please refer to [this section](https://haystack.deepset.ai/usage/reader#confidence-scores).
+For more information on model confidence and how to tune it, please refer to [this section](https://haystack.deepset.ai/usage/v1.4.0/reader#confidence-scores).
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -94,5 +94,5 @@ Note that this also applies at evaluation where labels are written into their ow
 In short, the FARMReader uses a QA pipeline implementation that comes from our own
 [FARM framework](https://github.com/deepset-ai/FARM) that we can more easily update and also optimize for performance.
 By contrast, the TransformersReader uses a QA pipeline implementation that comes from HuggingFace's [Transformers](https://github.com/huggingface/transformers).
-See [this section](https://haystack.deepset.ai/usage/reader#deeper-dive-farm-vs-transformers)
+See [this section](https://haystack.deepset.ai/usage/v1.4.0/reader#deeper-dive-farm-vs-transformers)
 for a more details about their differences!

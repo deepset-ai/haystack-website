@@ -79,18 +79,18 @@ from haystack.utils import launch_es, print_answers
 
 Instead of relying on dictionaries, Haystack now standardizes more of the inputs and outputs of Nodes using the following primitive classes:
 
-- [Document](/components/documents-answers-labels#document)
-- [Answer](/components/documents-answers-labels#answer)
-- [Label](/components/documents-answers-labels#label)
-- [MultiLabel](/components/documents-answers-labels#multilabel)
-- [Span](/components/documents-answers-labels#span)
+- [Document](/components/v1.4.0/documents-answers-labels#document)
+- [Answer](/components/v1.4.0/documents-answers-labels#answer)
+- [Label](/components/v1.4.0/documents-answers-labels#label)
+- [MultiLabel](/components/v1.4.0/documents-answers-labels#multilabel)
+- [Span](/components/v1.4.0/documents-answers-labels#span)
 
 With these, there is now support for data structures beyond text and the REST API schema is built around their structure.
 Using these classes also allows for the autocompletion of fields in your IDE.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Tip:** To see examples of these primitive classes being returned, have a look at [Ready-Made Pipelines](/components/ready-made-pipelines).
+**Tip:** To see examples of these primitive classes being returned, have a look at [Ready-Made Pipelines](/components/v1.4.0/ready-made-pipelines).
 
 </div>
 
@@ -102,15 +102,15 @@ Below, we will go through a few cases that are likely to impact established work
 
 If you are using a persistent database service as a `DocumentStore` (e.g. Elasticsearch, Milvus),
 you will need to change certain field names when migrating from v0.x to v1.0.
-Due to the [change in the `Document` object](/overview/migration#input-document-format), you will need to rename the `text` field in your database to `content`.
-Due to the [change in the `Label` object](/overview/migration#label-structure), you will need to rename the `question` field in your database to `query`.
+Due to the [change in the `Document` object](/overview/v1.4.0/migration#input-document-format), you will need to rename the `text` field in your database to `content`.
+Due to the [change in the `Label` object](/overview/v1.4.0/migration#label-structure), you will need to rename the `question` field in your database to `query`.
 
 ## Input Document Format
 
 This dictionary schema used to be the recommended way to prepare your data to be indexed.
-Now we strongly recommend using our dedicated [`Document`](/components/documents-answers-labels) class as  a replacement.
+Now we strongly recommend using our dedicated [`Document`](/components/v1.4.0/documents-answers-labels) class as  a replacement.
 The `text` field has been renamed `content` to accommodate for cases where it is used for another data format,
-for example in [Table QA](/guides/table-qa).
+for example in [Table QA](/guides/v1.4.0/table-qa).
 
 **v0.x:**
 ```
@@ -137,7 +137,7 @@ You will want to change the field's name from `text` to `content` in your databa
 
 ## Reader Returns Answer
 
-All Reader Nodes now return [Answer](/components/documents-answers-labels#label) objects instead of dictionaries.
+All Reader Nodes now return [Answer](/components/v1.4.0/documents-answers-labels#label) objects instead of dictionaries.
 
 **v0.x:**
 ```
@@ -166,7 +166,7 @@ All Reader Nodes now return [Answer](/components/documents-answers-labels#label)
 ## Label Structure
 
 The attributes of the Label object have gone through some changes.
-To see their current structure see [Label](/components/documents-answers-labels#label).
+To see their current structure see [Label](/components/v1.4.0/documents-answers-labels#label).
 
 **v0.x:**
 ```

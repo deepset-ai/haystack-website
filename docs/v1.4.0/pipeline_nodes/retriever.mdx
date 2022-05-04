@@ -14,7 +14,7 @@ and pass on the best candidates.
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |__Position in a Pipeline__| At the beginning of a querying Pipeline |
 |__Input__       | Query                                                                                                                                                                  |
-|__Output__      | [Documents](/components/documents-answers-labels#document)                                                                                                             |
+|__Output__      | [Documents](/components/v1.4.0/documents-answers-labels#document)                                                                                                             |
 |__Classes__     | BM25Retriever<br />ElasticsearchRetriever<br />DensePassageRetriever<br />TableTextRetriever<br />EmbeddingRetriever<br />TfidfRetriever<br />ElasticsearchFilterOnlyRetriever                                                                                                           |
 |||
 
@@ -65,7 +65,7 @@ result = pipeline.run(
 The `TableTextRetriever` is designed to perform document retrieval on both text and tabular documents.
 It is a tri-encoder model with a separate encoder for the query, text passage and table.
 
-To learn more about how to use this component in Haystack, have a look at our [Table Question Answering](/guides/table-qa) guide.
+To learn more about how to use this component in Haystack, have a look at our [Table Question Answering](/guides/v1.4.0/table-qa) guide.
 
 
 ## Document Store Compatibility
@@ -80,14 +80,14 @@ Here are the combinations which are supported:
 | Embedding | Y      | Y             | N   | Y     | Y      |
 | DPR       | Y      | Y             | N   | Y     | Y      |
 
-See [Optimization](/guides/optimization) for suggestions on how to choose top-k values.
+See [Optimization](/guides/v1.4.0/optimization) for suggestions on how to choose top-k values.
 
 <div style={{ marginBottom: "3rem" }} />
 
 ## BM25 (Recommended)
 
 Use BM25 if you are looking for a retrieval method that doesn't need a neural network for indexing.
-BM25 is a variant of [TF-IDF](https://haystack.deepset.ai/pipeline_nodes/retriever#tf-idf).
+BM25 is a variant of [TF-IDF](https://haystack.deepset.ai/pipeline_nodes/v1.4.0/retriever#tf-idf).
 It improves upon its predecessor in two main aspects:
 
 - It saturates `tf` after a set number of occurrences of the given term in the document
@@ -180,7 +180,7 @@ There are two design decisions that have made DPR particularly performant.
 - Training with ‘In-batch negatives’ (gold labels are treated as negative examples for other samples in same batch) is highly efficient
 
 In Haystack, you can simply download the pretrained encoders needed to start using DPR.
-If you’d like to learn how to set up a DPR based system, have a look at the [tutorial](/tutorials/dense-passage-retrieval)!
+If you’d like to learn how to set up a DPR based system, have a look at the [tutorial](/tutorials/v1.4.0/dense-passage-retrieval)!
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
@@ -210,7 +210,7 @@ pipeline = ExtractiveQAPipeline(reader, retriever)
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Training DPR:** Haystack supports training of your own DPR model! Check out the [tutorial](/tutorials/train-dpr) to see how this is done!
+**Training DPR:** Haystack supports training of your own DPR model! Check out the [tutorial](/tutorials/v1.4.0/train-dpr) to see how this is done!
 
 </div>
 

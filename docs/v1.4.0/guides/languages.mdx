@@ -30,7 +30,7 @@ The default analyzer is an English analyzer.
 While it can still work decently for a large range of languages,
 you will want to set it to your language's analyzer for optimal performance.
 In some cases, such as with Thai, the default analyzer is completely incompatible.
-See [this page](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-lang-analyzer.html)
+See [this page](https://www.elastic.co/guide/en/elasticsearch/reference/v1.4.0/current/analysis-lang-analyzer.html)
 for the full list of language specific analyzers.
 
 ```python
@@ -46,7 +46,7 @@ The default model that is loaded in the DensePassageRetriever is for English.
 We have created a [German DensePassageRetriever model](https://deepset.ai/germanquad) and know other teams who work on further languages.
 If you have a language model and a question answering dataset in your own language, you can also train a DPR model using Haystack!
 Below is a simplified example.
-See [our tutorial](/tutorials/train-dpr) and also the [API reference](/reference/retriever#train) for `DensePassageRetriever.train()` for more details.
+See [our tutorial](/tutorials/v1.4.0/train-dpr) and also the [API reference](/reference/v1.4.0/retriever#train) for `DensePassageRetriever.train()` for more details.
 
 ```python
 from haystack.nodes import DensePassageRetriever

@@ -1,6 +1,6 @@
 # Metadata Filtering
 
-Metadata can be attached to the documents which you index into your DocumentStore (see the input data format [here](/pipeline_nodes/retriever)).
+Metadata can be attached to the documents which you index into your DocumentStore (see the input data format [here](/pipeline_nodes/v1.4.0/retriever)).
 At query time, you can apply filters based on this metadata to limit the scope of your search and ensure your answers
 come from a specific slice of your data.
 
@@ -13,7 +13,7 @@ This can reduce the work load of the retriever and also ensure that you get more
 Filters are applied via the `filters` argument of the `Retriever` class.
 When working with a Pipeline, the filter supplied to `Pipeline.run()`,
 which will then route it on to the `Retriever` class
-(see our the Arguments on the [Pipelines page](/components/pipelines) for an explanation).
+(see our the Arguments on the [Pipelines page](/components/v1.4.0/pipelines) for an explanation).
 Basic filtering is supported by the `ElasticsearchDocumentStore`, `OpenSearchDocumentStore` and `WeaviateDocumentStore`.
 
 

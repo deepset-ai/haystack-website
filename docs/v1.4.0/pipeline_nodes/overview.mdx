@@ -3,7 +3,7 @@
 Nodes are the core components that process and route incoming text.
 Some perform steps like preprocessing, retrieving or summarizing text
 while route queries through different branches of a Pipeline.
-Nodes are chained together using a [Pipeline](/components/pipelines)
+Nodes are chained together using a [Pipeline](/components/v1.4.0/pipelines)
 and they function like building blocks that can be easily switched out for each other.
 A Node takes the output of the previous Node (or Nodes) as input.
 
@@ -11,7 +11,7 @@ A Node takes the output of the previous Node (or Nodes) as input.
 
 All Nodes are designed to be useable within a Pipeline.
 When a Node has been added to a Pipeline, calling `Pipeline.run()` will in turn call each Node's `run()` method in the predefined sequence.
-For more information on this, see the [Pipelines](/components/pipelines) page.
+For more information on this, see the [Pipelines](/components/v1.4.0/pipelines) page.
 
 Alternatively, you can also call the Nodes outside of the Pipeline.
 See each individual Node's documentation page to learn more about its available methods.
@@ -20,29 +20,29 @@ See each individual Node's documentation page to learn more about its available 
 
 | Node | Classes | Description   |
 |-------------|-----------------------------------------------------------------|---|
-| [FileConverters](/pipeline_nodes/file-converters)      | PDFToTextConverter, DocxToTextConverter, AzureConverter, ImageToTextConverter, MarkdownConverter | Performs cleaning and splitting on Documents   |
-| [Crawler](/pipeline_nodes/crawler)      | Crawler | Scrapes websites and returns text  |
-| [PreProcessor](/pipeline_nodes/preprocessor)      | PreProcessor                                 | Performs cleaning and splitting on Documents   |
-| [Retriever](/pipeline_nodes/retriever)       | BM25Retriever, ElasticsearchRetriever, DensePassageRetriever, TableTextRetriever, EmbeddingRetriever, TfidfRetriever, ElasticsearchFilterOnlyRetriever  | Looks into a coupled Document Store and fetches Documents that are relevant to a given Query  |
-| [Reader](/pipeline_nodes/retriever)      | FARMReader, TransformersReader                      |  Finds an answer to a question by selecting a text span in the provided Documents |
-| [Generator](/pipeline_nodes/generator)      | RAGenerator, Seq2SeqGenerator  |  Generates an answer to a question by reading through the provided documents and composing an answer word-by-word |
-| [Summarizer](/pipeline_nodes/summarizer)      | TransformersSummarizer  |  Creates a shorter overview of a given Document |
-| [Translator](/pipeline_nodes/translator)      | TransformersTranslator  |  Translate text from one language into another |
-| [Ranker](/pipeline_nodes/ranker)      | SentenceTransformersRanker  |  Reorders a set of Documents based on their relevance to the Query |
-| [Query Classifier](/pipeline_nodes/query-classifier)      | TransformersQueryClassifier, SklearnQueryClassifier  |  Distinguishes between queries that are keywords, questions or statements and routes accordingly |
-| [Question Generator](/pipeline_nodes/question-generator)      | QuestionGenerator  | takes a Document as input and generates questions which it believes can be answered by the Document |
-| [Document Classifier](/pipeline_nodes/document-classifier)      | TransformersDocumentClassifier  |  Performs classification on Documents and attaches it as metadata |
-| [Entity Extractor](/pipeline_nodes/entity-extractor)      | EntityExtractor  |  Extracts predefined entities out of a piece of text |
-| [Route Documents](/pipeline_nodes/route-documents)      | RouteDocuments  |  Routes documents based on their content type or a metadata field  |
-| [Join Documents](/pipeline_nodes/join-documents)      | JoinDocuments  |  Takes Documents from multiple Nodes and joins them to form one list of Documents. |
-| [Join Answers](/pipeline_nodes/join-answers)      | JoinAnswers  |  Takes Answers from two or more Reader or Generator nodes and joins them to produce a single list of Answers |
-| [Docs2Answers](/pipeline_nodes/docs2answers)      | Docs2Answers  |  Converts retrieved Documents into predicted Answers format. |
+| [FileConverters](/pipeline_nodes/v1.4.0/file-converters)      | PDFToTextConverter, DocxToTextConverter, AzureConverter, ImageToTextConverter, MarkdownConverter | Performs cleaning and splitting on Documents   |
+| [Crawler](/pipeline_nodes/v1.4.0/crawler)      | Crawler | Scrapes websites and returns text  |
+| [PreProcessor](/pipeline_nodes/v1.4.0/preprocessor)      | PreProcessor                                 | Performs cleaning and splitting on Documents   |
+| [Retriever](/pipeline_nodes/v1.4.0/retriever)       | BM25Retriever, ElasticsearchRetriever, DensePassageRetriever, TableTextRetriever, EmbeddingRetriever, TfidfRetriever, ElasticsearchFilterOnlyRetriever  | Looks into a coupled Document Store and fetches Documents that are relevant to a given Query  |
+| [Reader](/pipeline_nodes/v1.4.0/retriever)      | FARMReader, TransformersReader                      |  Finds an answer to a question by selecting a text span in the provided Documents |
+| [Generator](/pipeline_nodes/v1.4.0/generator)      | RAGenerator, Seq2SeqGenerator  |  Generates an answer to a question by reading through the provided documents and composing an answer word-by-word |
+| [Summarizer](/pipeline_nodes/v1.4.0/summarizer)      | TransformersSummarizer  |  Creates a shorter overview of a given Document |
+| [Translator](/pipeline_nodes/v1.4.0/translator)      | TransformersTranslator  |  Translate text from one language into another |
+| [Ranker](/pipeline_nodes/v1.4.0/ranker)      | SentenceTransformersRanker  |  Reorders a set of Documents based on their relevance to the Query |
+| [Query Classifier](/pipeline_nodes/v1.4.0/query-classifier)      | TransformersQueryClassifier, SklearnQueryClassifier  |  Distinguishes between queries that are keywords, questions or statements and routes accordingly |
+| [Question Generator](/pipeline_nodes/v1.4.0/question-generator)      | QuestionGenerator  | takes a Document as input and generates questions which it believes can be answered by the Document |
+| [Document Classifier](/pipeline_nodes/v1.4.0/document-classifier)      | TransformersDocumentClassifier  |  Performs classification on Documents and attaches it as metadata |
+| [Entity Extractor](/pipeline_nodes/v1.4.0/entity-extractor)      | EntityExtractor  |  Extracts predefined entities out of a piece of text |
+| [Route Documents](/pipeline_nodes/v1.4.0/route-documents)      | RouteDocuments  |  Routes documents based on their content type or a metadata field  |
+| [Join Documents](/pipeline_nodes/v1.4.0/join-documents)      | JoinDocuments  |  Takes Documents from multiple Nodes and joins them to form one list of Documents. |
+| [Join Answers](/pipeline_nodes/v1.4.0/join-answers)      | JoinAnswers  |  Takes Answers from two or more Reader or Generator nodes and joins them to produce a single list of Answers |
+| [Docs2Answers](/pipeline_nodes/v1.4.0/docs2answers)      | Docs2Answers  |  Converts retrieved Documents into predicted Answers format. |
 
 ## Decision Nodes
 
 You can add decision nodes where only one "branch" is executed afterwards.
 This allows, for example, to classify an incoming query and depending on the result routing it to different modules.
-To find a ready-made example of a decision node, have a look at [the page](/pipeline_nodes/query-classifier) about the `QueryClassifier`.
+To find a ready-made example of a decision node, have a look at [the page](/pipeline_nodes/v1.4.0/query-classifier) about the `QueryClassifier`.
 
 ![image](https://user-images.githubusercontent.com/1563902/102452199-41229b80-403a-11eb-9365-7038697e7c3e.png)
 

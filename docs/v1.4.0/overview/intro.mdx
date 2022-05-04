@@ -3,7 +3,7 @@
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
 ** Get Started **: If you'd already like to start installing Haystack and building your first system,
-please check out [Get Started](/overview/get-started).
+please check out [Get Started](/overview/v1.4.0/get-started).
 
 </div>
 
@@ -13,16 +13,16 @@ Haystack is an **open-source framework** for building **search systems** that wo
 Recent advances in NLP have enabled the application of question answering, retrieval and summarization to real world settings
 and Haystack is designed to be the bridge between research and industry.
 
-- **NLP for Search**: Pick components that perform [retrieval](/pipeline_nodes/retriever),
-[question answering](/pipeline_nodes/reader), [reranking](/pipeline_nodes/ranker) and much more
+- **NLP for Search**: Pick components that perform [retrieval](/pipeline_nodes/v1.4.0/retriever),
+[question answering](/pipeline_nodes/v1.4.0/reader), [reranking](/pipeline_nodes/v1.4.0/ranker) and much more
 
 - **Latest models**: Utilize all transformer based models (BERT, RoBERTa, MiniLM, DPR) and smoothly switch when new ones get published
 
-- **Flexible databases**: Load data into and query from a range of [databases](/components/document-store) such as Elasticsearch, Milvus, FAISS, SQL and more
+- **Flexible databases**: Load data into and query from a range of [databases](/components/v1.4.0/document-store) such as Elasticsearch, Milvus, FAISS, SQL and more
 
-- **Scalability**: [Scale your system](/guides/optimization) to handle millions of documents and deploy them via [REST API](/components/rest-api)
+- **Scalability**: [Scale your system](/guides/v1.4.0/optimization) to handle millions of documents and deploy them via [REST API](/components/v1.4.0/rest-api)
 
-- **Domain adaptation**: All tooling you need to [annotate](/components/annotation) examples, collect [user-feedback](/guides/domain-adaptation#user-feedback), [evaluate](/guides/evaluation) components and [finetune](/guides/domain-adaptation) models.
+- **Domain adaptation**: All tooling you need to [annotate](/components/v1.4.0/annotation) examples, collect [user-feedback](/guides/v1.4.0/domain-adaptation#user-feedback), [evaluate](/guides/v1.4.0/evaluation) components and [finetune](/guides/v1.4.0/domain-adaptation) models.
 
 ![image](/img/concepts_haystack_handdrawn.png)
 
@@ -36,10 +36,10 @@ but Machine Learning has enabled systems to search based on word meaning rather 
 As new language processing models are developed, new styles of search are also possible.
 In Haystack, you can create systems that perform:
 
-- [Question Answering](/components/ready-made-pipelines#extractiveqapipeline)
-- [Summarization](/components/ready-made-pipelines#searchsummarizationpipeline)
-- [Document Search](/components/ready-made-pipelines#documentsearchpipeline)
-- [Question Generation](/components/ready-made-pipelines#questiongenerationpipeline)
+- [Question Answering](/components/v1.4.0/ready-made-pipelines#extractiveqapipeline)
+- [Summarization](/components/v1.4.0/ready-made-pipelines#searchsummarizationpipeline)
+- [Document Search](/components/v1.4.0/ready-made-pipelines#documentsearchpipeline)
+- [Question Generation](/components/v1.4.0/ready-made-pipelines#questiongenerationpipeline)
 
 This is just a small subset of the kinds of systems that can be created in Haystack.
 
@@ -50,7 +50,7 @@ There are many different levels on which you can interact with the components in
 
 ### 1) Nodes
 
-Haystack offers different [Nodes](/pipeline_nodes/overview) that perform different kinds of text processing.
+Haystack offers different [Nodes](/pipeline_nodes/v1.4.0/overview) that perform different kinds of text processing.
 These are often powered by the latest transformer models and code-wise they are Python classes whose methods can be called directly.
 For example, if you would like to perform question answering with a Reader model,
 all you need to do is provide it with documents and a question.
@@ -72,10 +72,10 @@ result = reader.predict(
 
 Haystack is built on the idea that great systems are more than the sum of their parts.
 By combining the NLP power of different Nodes, users can create powerful and customizable systems.
-The [Pipeline](/components/pipelines) is the key to making this modular approach work.
+The [Pipeline](/components/v1.4.0/pipelines) is the key to making this modular approach work.
 
 When adding Nodes to a Pipeline, the user can define how data flows through the system and which Nodes perform their processing step when.
-On top of simplifying data flow logic, this also allows for complex routing options such as those involving [decision nodes](/pipeline_nodes/overview#decision-nodes).
+On top of simplifying data flow logic, this also allows for complex routing options such as those involving [decision nodes](/pipeline_nodes/v1.4.0/overview#decision-nodes).
 
 ```
 p = Pipeline()
@@ -88,9 +88,9 @@ result = p.run(query="What did Einstein work on?")
 
 In order to deploy a search system, you will need more than just a Python script.
 Rather you need a service that can stay on, handle requests as they come in and also be callable by many different applications.
-For this, Haystack comes with a [REST API](/components/rest-api) that is designed to work in production environments.
+For this, Haystack comes with a [REST API](/components/v1.4.0/rest-api) that is designed to work in production environments.
 
-When set up like this, you can load [Pipelines from YAML files](/components/pipelines#yaml-file-definitions),
+When set up like this, you can load [Pipelines from YAML files](/components/v1.4.0/pipelines#yaml-file-definitions),
 interact with Pipelines via HTTP requests and connect Haystack to a user-facing GUIs.
 
 ```
@@ -108,8 +108,8 @@ curl -X 'POST' \
 
 The value of chaining together different Nodes is clearest when looking at the Retriever-Reader Pipeline.
 It is one of the most common systems built in Haystack and it
-harnesses the reading comprehension power of the [Reader](/pipeline_nodes/reader)
-but also applies it to large document bases with the help of the [Retriever](/pipeline_nodes/retriever).
+harnesses the reading comprehension power of the [Reader](/pipeline_nodes/v1.4.0/reader)
+but also applies it to large document bases with the help of the [Retriever](/pipeline_nodes/v1.4.0/retriever).
 
 **Readers**, also known as Closed-Domain Question Answering systems in Machine Learning speak,
 are powerful models that do close analysis of documents and perform the core task of question answering.
@@ -131,12 +131,12 @@ The power of this system comes from the combination of the two.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-** Question Answering Tutorial**: To start building your first question answering system, see our [Introductory Tutorial](/tutorials/first-qa-system)
+** Question Answering Tutorial**: To start building your first question answering system, see our [Introductory Tutorial](/tutorials/v1.4.0/first-qa-system)
 
 </div>
 
 The Retriever-Reader pipeline is by no means the only one that Haystack offers,
 but it is perhaps the most instructive for showing the gains from combining Nodes.
-Many of the synergistic Node combinations are covered by our [Ready Made Pipelines](/components/ready-made-pipelines)
+Many of the synergistic Node combinations are covered by our [Ready Made Pipelines](/components/v1.4.0/ready-made-pipelines)
 but we are sure there many still to be discovered!
 
