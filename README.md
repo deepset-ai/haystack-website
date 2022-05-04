@@ -81,7 +81,7 @@ To preview docs that are on a non-master branch of the Haystack repo, you run th
 
 When there's a new Haystack release, we need to create a directory for the new version within the local `/docs` directory. In this directory, we can write new overview and usage docs in .mdx (or manually copy over the ones from the previous version directory). Once this is done, the project will automatically fetch the reference and tutorial docs for the new version from GitHub. Bear in mind that a `menu.json` file needs to exist in every new version directory so that our Menu components know which page links to display. 
 
-Moreover, we need to point the links, which are pointing to the latest version, to the new version. Currently, we do not have a script for this process. Therefore, you need to use the search function of your IDE. 
+Moreover, we need to point the links, which are pointing to the latest version, to the new version. Update links in docs using `haystack-website/docs/update_links.py`. The command you run should look something like `python update_links.py -d v0.3.0 -v v0.3.0`. This script prints the changes to console. Have a scan through these as a sanity check.
 
 Additionally, the `referenceFiles` and `tutorialFiles` constants in `lib/constants` need to be updated with any new reference or tutorial docs that get created as part of a new release. During a release, please add a new object `referenceFiles` and `tutorialFiles` with the release number to file. This change has also implications on the files `tutorials/[...slug].tsx` and `reference/[...slug].tsx`. Please update the functions `getStaticPaths` and `getStaticProps` in both files with an array representing the latest version. 
 

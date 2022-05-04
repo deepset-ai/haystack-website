@@ -126,7 +126,7 @@ In all of our nodes, you can enable debugging a few different ways.
 You can set the debugging attribute of a node.
 
 ```
-es_retriever = ElasticsearchRetriever(document_store)
+es_retriever = BM25Retriever(document_store)
 es_retriever.debug = True
 ```
 
@@ -241,7 +241,7 @@ components: # define all the building-blocks for Pipeline
       no_ans_boost: -10
       model_name_or_path: deepset/roberta-base-squad2
   - name: MyESRetriever
-    type: ElasticsearchRetriever
+    type: BM25Retriever
     params:
       document_store: MyDocumentStore # params can reference other components defined in the YAML
       custom_query: null
@@ -384,9 +384,9 @@ pipeline = Pipeline()
 To create new pipeline nodes, we initialize the modules first. For our use case, we need a retriever, a ranker, and a summarizer. We tell the summarizer to return a single summary per query (instead of one summary for each document), and that its length should be somewhere between ten and 300 words:
 
 ``` python
-from haystack.nodes import ElasticsearchRetriever, SentenceTransformersRanker, TransformersSummarizer
+from haystack.nodes import BM25Retriever, SentenceTransformersRanker, TransformersSummarizer
 
-retriever = ElasticsearchRetriever(document_store, top_k=10)
+retriever = BM25Retriever(document_store, top_k=10)
 
 ranker = SentenceTransformersRanker(model_name_or_path="cross-encoder/ms-marco-MiniLM-L-12-v2", top_k=10)
 

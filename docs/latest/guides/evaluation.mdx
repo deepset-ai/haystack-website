@@ -60,12 +60,12 @@ Here is an example of how to run BEIR evaluation for `DocumentSearchPipeline`:
 
 ```python
 from haystack.pipelines import DocumentSearchPipeline, Pipeline
-from haystack.nodes import TextConverter, ElasticsearchRetriever
+from haystack.nodes import TextConverter, BM25Retriever
 from haystack.document_stores.elasticsearch import ElasticsearchDocumentStore
 
 text_converter = TextConverter()
 document_store = ElasticsearchDocumentStore(search_fields=["content", "name"], index="scifact_beir")
-retriever = ElasticsearchRetriever(document_store=document_store, top_k=1000)
+retriever = BM25Retriever(document_store=document_store, top_k=1000)
 
 index_pipeline = Pipeline()
 index_pipeline.add_node(text_converter, name="TextConverter", inputs=["File"])

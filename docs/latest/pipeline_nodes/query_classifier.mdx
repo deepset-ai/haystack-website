@@ -105,12 +105,12 @@ query_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/b
 pipe = Pipeline()
 pipe.add_node(component=query_classifier, name="QueryClassifier", inputs=["Query"])
 pipe.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["QueryClassifier.output_1"])
-pipe.add_node(component=es_retriever, name="ESRetriever", inputs=["QueryClassifier.output_2"])
+pipe.add_node(component=bm25_retriever, name="BM25Retriever", inputs=["QueryClassifier.output_2"])
 
 # Pass a question -> run DPR
 res_1 = pipe.run(query="Who is the father of Arya Stark?")
 
-# Pass keywords -> run the ElasticsearchRetriever
+# Pass keywords -> run the BM25Retriever
 res_2 = pipe.run(query="arya stark father")
 
 ```
@@ -126,13 +126,13 @@ query_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/q
 pipe = Pipeline()
 pipe.add_node(component=query_classifier, name="QueryClassifier", inputs=["Query"])
 pipe.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["QueryClassifier.output_1"])
-pipe.add_node(component=es_retriever, name="ESRetriever", inputs=["QueryClassifier.output_2"])
+pipe.add_node(component=bm25_retriever, name="BM25", inputs=["QueryClassifier.output_2"])
 pipe.add_node(component=reader, name="QAReader", inputs=["DPRRetriever"])
 
 # Pass a question -> run DPR + QA -> return answers
 res_1 = pipe.run(query="Who is the father of Arya Stark?")
 
-# Pass keywords -> run only ElasticsearchRetriever -> return docs
+# Pass keywords -> run only BM25Retriever -> return docs
 res_2 = pipe.run(query="arya stark father")
 
 ```
