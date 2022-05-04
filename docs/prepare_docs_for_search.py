@@ -3,7 +3,7 @@ import json
 from deepset_toolkit.dc.index_handling import upload_passages, create_url
 import asyncio
 
-token = "<BEARER_TOKEN_HERE>"
+token = ""
 
 async def main():
     source_directory = "v1.0.0"
@@ -36,7 +36,7 @@ def files_to_jsonl(filepaths, output_file):
             "text": content,
             "meta": {
                 "filepath": filepath,
-                "version": output_file.replace(".jsonl", "")
+                "docs_version": output_file.replace(".jsonl", "")
             },
             "file_name": filename
         }
@@ -57,7 +57,8 @@ def get_files_by_ext(directory, ext):
     return ret
 
 def upload_docs_version(version):
-    mdx_files = get_files_by_ext(source_directory, ".mdx")
+    assert token
+    mdx_files = get_files_by_ext(version, ".mdx")
     target_filename = source_directory + ".jsonl"
     files_to_jsonl(mdx_files, target_filename)
     url = create_url("api.cloud.deepset.ai", "default")[1]
