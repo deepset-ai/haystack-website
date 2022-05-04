@@ -1445,6 +1445,196 @@ module.exports = {
         destination: '/pipeline_nodes/overview',
         permanent: true,
       },
+      {
+        source: '/usage/reader',
+        destination: '/pipeline_nodes/reader',
+        permanent: true,
+      },
+      {
+        source: '/usage/knowledge_graph',
+        destination: '/guides/knowledge_graph',
+        permanent: true,
+      },
+      {
+        source: '/components/classifier',
+        destination: '/pipeline_nodes/query_classifier',
+        permanent: true,
+      },
+      {
+        source: '/components/route_documents',
+        destination: '/pipeline_nodes/route_documents',
+        permanent: true,
+      },
+      {
+        source: '/usage/annotation',
+        destination: '/components/annotation',
+        permanent: true, 
+      },
+      {
+        source: '/components/ranker',
+        destination: '/pipeline_nodes/ranker',
+        permanent: true, 
+      },
+      {
+        source: '/usage/retriever',
+        destination: '/pipeline_nodes/retriever',
+        permanent: true, 
+      },
+      {
+        source: '/usage/glossary',
+        destination: '/overview/glossary',
+        permanent: true, 
+      },
+      {
+        source: '/components/preprocessing',
+        destination: '/pipeline_nodes/preprocessor',
+        permanent: true, 
+      },
+      {
+        source: '/components/join_answers',
+        destination: '/pipeline_nodes/join_answers',
+        permanent: true, 
+      },
+      {
+        source: '/usage/pipelines',
+        destination: '/components/ready_made_pipelines',
+        permanent: true, 
+      },
+      {
+        source: '/components/question_generator',
+        destination: '/pipeline_nodes/question_generator',
+        permanent: true, 
+      },
+      {
+        source: '/usage/query_classifier',
+        destionation: '/pipeline_nodes/query_classifier',
+        permanent: true,
+      },
+      {
+        source: '/usage/domain_adaptation',
+        destionation: '/guides/domain_adaptation',
+        permanent: true,
+      },
+      {
+        source: '/usage/roadmap',
+        destionation: '/overview/roadmap',
+        permanent: true,
+      },
+      {
+        source: '/usage/translator',
+        destionation: '/pipeline_nodes/translator',
+        permanent: true,
+      },
+      {
+        source: '/usage/generator',
+        destionation: '/pipeline_nodes/generator',
+        permanent: true,
+      },
+      {
+        source: '/guides/rest_api_definition',
+        destionation: '/components/rest_api_definition',
+        permanent: true,
+      },
+      {
+        source: '/usage/reader',
+        destionation: '/pipeline_nodes/reader',
+        permanent: true,
+      },
+      {
+        source: '/components/reader',
+        destionation: '/pipeline_nodes/reader',
+        permanent: true,
+      },
+      {
+        source: '/components/generator',
+        destionation: '/pipeline_nodes/generator',
+        permanent: true,
+      },
+      {
+        source: '/components/retriever',
+        destionation: '/pipeline_nodes/retriever',
+        permanent: true,
+      },
+      {
+        source: '/components/summarizer',
+        destionation: '/pipeline_nodes/summarizer',
+        permanent: true,
+      },
+      {
+        source: '/usage/document_store',
+        destionation: '/components/document_store',
+        permanent: true,
+      },
+      {
+        source: '/usage/summarizer',
+        destionation: '/pipeline_nodes/summarizer',
+        permanent: true,
+      },
+      {
+        source: '/usage/intro',
+        destionation: '/overview/intro',
+        permanent: true,
+      },
+      {
+        source: '/usage/optimization',
+        destionation: '/guides/optimization',
+        permanent: true,
+      },
+      {
+        source: '/guides/rest_api',
+        destionation: '/components/rest_api',
+        permanent: true,
+      },
+      {
+        source: '/components/knowledge_graph',
+        destionation: '/guides/knowledge_graph',
+        permanent: true,
+      },
+      {
+        source: '/usage/get_started',
+        destionation: '/overview/get_started',
+        permanent: true,
+      },
+      {
+        source: '/usage/preprocessing',
+        destionation: '/pipeline_nodes/preprocessor',
+        permanent: true,
+      },
+      {
+        source: '/components/translator',
+        destionation: '/pipeline_nodes/translator',
+        permanent: true,
+      },
+      {
+        source: '/components/query_classifier',
+        destionation: '/pipeline_nodes/query_classifier',
+        permanent: true,
+      },
+      {
+        source: '/usage/ranker',
+        destionation: '/pipeline_nodes/ranker',
+        permanent: true,
+      },
+      {
+        source: '/components/entity_extractor',
+        destionation: '/pipeline_nodes/entity_extractor',
+        permanent: true,
+      },
+      {
+        source: '/components/document_classifier',
+        destionation: '/pipeline_nodes/document_classifier',
+        permanent: true,
+      },
+      {
+        source: '/guides/annotation',
+        destionation: '/components/annotation',
+        permanent: true,
+      },
+      {
+        source: '/usage/languages',
+        destionation: '/guides/languages',
+        permanent: true,
+      }
     ]
   },
 };
