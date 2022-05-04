@@ -91,6 +91,11 @@ After releasing the docs, we need to release the benchmarks. Create a new versio
 
 If you now start the local sever and go to the new version, you will see the 404 page. We pull the version from the haystack release tags. Most likely, the newest version is not released yet. Therefore, you have to add it manually to the array `tagNames` in the function `getDocsVersions` by adding the command `tagNames.push('v0.10.0');`.
 
+### Renaming or Restructuring Pages
+
+When renaming documentation pages, or restructuring the directories that they're contained in, the new filepath can cause links on the internet to break. For example, when the pipeline_nodes grouping was created `components/reader.mdx` did not exist any more as it had changed to `pipeline_nodes/reader.mdx`. This meant that links on websites were broken. 
+
+Run the `haystack-website/docs/generate_redirect_table.py` script to generate a mapping of old filepaths to their latest equivalents.
 
 ## Styling
 
