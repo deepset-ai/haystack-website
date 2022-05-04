@@ -1,13 +1,21 @@
 # Entity Extractor
 
-The `EntityExtractor` node extracts predefined entities out of a piece of text.
+The EntityExtractor node extracts predefined entities out of a piece of text.
 The most common kind of entity extraction is Named Entity Extraction (NER) but
-this could also be used to label each word by part of speech.
+this Node could also be used, as an example, to label each word by part of speech.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| After the PreProcessor in an indexing Pipeline or after a Retriever in a query Pipeline for extraction on the fly |
+|__Input__       | [Documents](/components/documents-answers-labels#document)                                                                                                                                                                   |
+|__Output__      | [Documents](/components/documents-answers-labels#document)                                                                                                                                                                     |
+|__Classes__     | EntityExtractor                                                                                                                                             |
+|||
 
 ## Usage
 
-The `EntityExtractor` can be initialized as follows.
-Any token classification model from the HuggingFace model hub can be provided as a model name, and it will automatically be downloaded and loaded.
+To initialize EntityExtractor, run the following code.
+You can provide any token classification model from the Hugging Face model hub as a model name.
 
 ``` python
 from haystack.nodes import EntityExtractor
@@ -15,7 +23,7 @@ from haystack.nodes import EntityExtractor
 entity_extractor = EntityExtractor(model_name_or_path="dslim/bert-base-NER")
 ```
 
-To use it in isolation, simply call the `extract()` method.
+To run EntityExtractor as a standalone node, use the extract() method:
 
 ```
 entities = entity_extractor.extract(
@@ -47,8 +55,8 @@ Note that multi-token entities such as `European Union` are merged together even
   'word': 'European Union'}]
 ```
 
-This node can be put in query a query pipeline so that entity extraction only occurs on retrieved documents.
-The extracted entities will populate `Document.meta["entities"]`.
+To run EntityExtractor in a query pipeline, run the following code.
+Entity extraction occurs on retrieved documents only and the extracted entities populate Document.meta.
 
 ```
 pipeline = Pipeline()
@@ -59,8 +67,8 @@ pipeline.add_node(component=reader, name="Reader", inputs=["NER"])
 result = pipeline.run(query="What is Berlin?")
 ```
 
-Alternatively, it can be placed in the indexing pipeline so that all documents in the document stores
-have extracted entities as part of their metadata.
+To run EntityExtractor in an indexing pipeline, run the following code.
+All documents in the document store have extracted entities as part of their metadata.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 

@@ -111,7 +111,7 @@ export async function getLatestVersion() {
 }
 
 export async function getDirectory(
-  category: "overview" | "usage" | "guides" | "components",
+  category: "overview" | "usage" | "guides" | "components" | "pipeline_nodes",
   version?: string
 ) {
   const latestVersion = await getLatestVersion();
@@ -130,7 +130,7 @@ export async function getDirectoryBenchmarks(
 }
 
 export async function getSlugsFromLocalMarkdownFiles(
-  category: "overview" | "usage" | "guides" | "components",
+  category: "overview" | "usage" | "guides" | "components" | "pipeline_nodes",
   version?: string
 ) {
   const directory = await getDirectory(category, version);

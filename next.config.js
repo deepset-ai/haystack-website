@@ -39,6 +39,10 @@ module.exports = {
         destination: "/components/knowledge-graph",
       },
       {
+        source: "/pipeline_nodes/reader",
+        destination: "/pipeline_nodes/reader"
+      },
+      {
         source: "/usage/languages",
         destination: "/guides/languages",
       },

@@ -79,11 +79,11 @@ from haystack.utils import launch_es, print_answers
 
 Instead of relying on dictionaries, Haystack now standardizes more of the inputs and outputs of Nodes using the following primitive classes:
 
-- [Document](/components/primitives#document)
-- [Answer](/components/primitives#answer)
-- [Label](/components/primitives#label)
-- [MultiLabel](/components/primitives#multilabel)
-- [Span](/components/primitives#span)
+- [Document](/components/documents-answers-labels#document)
+- [Answer](/components/documents-answers-labels#answer)
+- [Label](/components/documents-answers-labels#label)
+- [MultiLabel](/components/documents-answers-labels#multilabel)
+- [Span](/components/documents-answers-labels#span)
 
 With these, there is now support for data structures beyond text and the REST API schema is built around their structure.
 Using these classes also allows for the autocompletion of fields in your IDE.
@@ -108,7 +108,7 @@ Due to the [change in the `Label` object](/overview/migration#label-structure), 
 ## Input Document Format
 
 This dictionary schema used to be the recommended way to prepare your data to be indexed.
-Now we strongly recommend using our dedicated [`Document`](/components/primitives) class as  a replacement.
+Now we strongly recommend using our dedicated [`Document`](/components/documents-answers-labels) class as  a replacement.
 The `text` field has been renamed `content` to accommodate for cases where it is used for another data format,
 for example in [Table QA](/guides/table-qa).
 
@@ -137,7 +137,7 @@ You will want to change the field's name from `text` to `content` in your databa
 
 ## Reader Returns Answer
 
-All Reader Nodes now return [Answer](/components/primitives#label) objects instead of dictionaries.
+All Reader Nodes now return [Answer](/components/documents-answers-labels#label) objects instead of dictionaries.
 
 **v0.x:**
 ```
@@ -166,7 +166,7 @@ All Reader Nodes now return [Answer](/components/primitives#label) objects inste
 ## Label Structure
 
 The attributes of the Label object have gone through some changes.
-To see their current structure see [Label](/components/primitives#label).
+To see their current structure see [Label](/components/documents-answers-labels#label).
 
 **v0.x:**
 ```
