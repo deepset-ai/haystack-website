@@ -9,7 +9,7 @@ MANUAL_REDIRECTS = {
     "components/preprocessing.mdx": "pipeline_nodes/preprocessor.mdx",
     "components/primitives.mdx": "components/documents_answers_labels.mdx",
     "usage/preprocessing.mdx": "pipeline_nodes/preprocessor.mdx",
-    "components/nodes.mdx": "pipeline_nodes/overview.mdx"
+    "components/nodes.mdx": "pipeline_nodes/components_overview.mdx"
 }
 
 def generate_redirect_table():
