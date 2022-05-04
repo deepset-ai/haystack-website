@@ -4,6 +4,7 @@ a renaming or restructuring has happened in the latest version of the docs."""
 
 import os
 from pathlib import Path
+import json
 
 MANUAL_REDIRECTS = {
     "components/preprocessing.mdx": "pipeline_nodes/preprocessor.mdx",
@@ -49,3 +50,4 @@ def generate_redirect_table():
 
 if __name__ == "__main__":
     redirect_table = generate_redirect_table()
+    json.dump(redirect_table, open("redirect_table.json", "w"), indent=2)
