@@ -94,13 +94,9 @@ To make sure links aren't broken please follow these steps:
     }
     ```
     
-    If you have not renamed files and merely changed their locations, you can use our script to populate the new paths:
-  
-    Run the `haystack-website/docs/generate_redirect_table.py` script to generate a mapping of old filepaths to their latest equivalents.
+   The `haystack-website/docs/generate_redirect_table.py` script will generate a set of suggested mappings. In cases where the directory structure has changed but the filename has stayed the same, this script will map from the old link to the new link in latest. In cases where the filename has changed, this script will identify the old link but not provide a suggestion for a new link. Update the `MANUAL_REDIRECTS` option to define any custom destinations.
 
-    Use the `MANUAL_REDIRECTS` option to define any custom destionations.
-
-3. Push the changes to your branch and test that the old paths still work and point to the intended deistination. You can do this by checking out the 
+3. Push the changes to your branch and test that the old paths still work and point to the intended destination. You can do this by checking out the 
 Preview that Vercel will produce.
 
 ### Updating docs after a release
