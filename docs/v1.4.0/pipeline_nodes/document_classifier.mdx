@@ -1,0 +1,62 @@
+# Document Classifier
+
+The Document Classifier Node is a transformer based classification model used to create predictions that are attached to documents as metadata.
+For example, by using a sentiment model, you can label each document as being either positive or negative in sentiment.
+Thanks to tight integration with the Hugging Face model hub, you can supply a model name to load it.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| After the PreProcessor in an indexing Pipeline or after a Retriever in a query Pipeline for classification on the fly |
+|__Input__       | [Documents](/components/v1.4.0/documents-answers-labels#document)                                                                                                                                                                   |
+|__Output__      | [Documents](/components/v1.4.0/documents-answers-labels#document)                                                                                                                                                                     |
+|__Classes__     | TransformersDocumentClassifier                                                                                                                                             |
+|||
+
+![image](/img/classifier.png)
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Note: ** The *Document Classifier is different from the Query Classifier.*
+While the Query Classifier categorizes incoming queries in order to route them to different parts of the pipeline,
+the Document Classifier is used to create classification labels that can be attached to retrieved documents as metadata.
+The Query Classifier is a decision Node while the Document Classifier is not.
+
+</div>
+
+## Usage
+
+To initialize the Node:
+
+``` python
+from haystack.nodes import TransformersDocumentClassifier
+
+doc_classifier_model = 'bhadresh-savani/distilbert-base-uncased-emotion'
+doc_classifier = TransformersDocumentClassifier(model_name_or_path=doc_classifier_model)
+```
+
+Alternatively, if you can't find a classification model that has been pre-trained for your exact classification task,
+you can use zero-shot classification with a custom list of labels and a Natural language Inference (NLI) model as follows:
+
+``` python
+doc_classifier_model = 'cross-encoder/nli-distilroberta-base'
+doc_classifier = TransformersDocumentClassifier(
+        model_name_or_path=doc_classifier_model,
+        task="zero-shot-classification",
+        labels=["negative", "positive"]
+```
+
+To use it in a Pipeline:
+
+``` python
+pipeline = Pipeline()
+pipeline.add_node(component=retriever, name="Retriever", inputs=["Query"])
+pipeline.add_node(component=doc_classifier, name='DocClassifier', inputs=['Retriever'])
+```
+
+It can also be run in isolation:
+
+``` python
+documents = doc_classifier.predict(
+    documents = [doc1, doc2, doc3, ...]
+):
+```
