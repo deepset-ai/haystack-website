@@ -77,6 +77,28 @@ const res = await octokit.rest.repos.getContent({
 
 To preview docs that are on a non-master branch of the Haystack repo, you run this project locally and navigate to `lib/github.ts`, where you have to add a `ref` parameter to the `octokit.rest.repos.getContent` function call with the value of the branch name that you would like to preview. You also need to add the tutorials/references you would like to preview to `docs/{GIVEN_VERSION}/menu.json` and `lib/constants.ts`.
 
+### Redirects In Case of Renaming or Restructuring Pages
+
+When renaming documentation pages, or restructuring the directories that they're contained in, the new filepath can cause old links to break. For example, when the pipeline_nodes grouping was created `components/reader.mdx` did not exist any more as it had changed to `pipeline_nodes/reader.mdx`. This meant that links on websites were broken. 
+
+To make sure links aren't broken please follow these steps:
+
+1. Identify what path is no longer valid and what new path is the most appropriate for it to point to
+
+2. Populate the `redirects()` function in `next.config.js` with an entry containing `source`, `destination` and `permanent`:
+    ```
+    {
+      source: 'the/old/path',
+      destination: '/the/new/path',
+      permanent: true,
+    }
+    ```
+    
+   The `haystack-website/docs/generate_redirect_table.py` script will generate a set of suggested mappings. In cases where the directory structure has changed but the filename has stayed the same, this script will map from the old link to the new link in latest. In cases where the filename has changed, this script will identify the old link but not provide a suggestion for a new link. Update the `MANUAL_REDIRECTS` option to define any custom destinations.
+
+3. Push the changes to your branch and test that the old paths still work and point to the intended destination. You can do this by checking out the 
+Preview that Vercel will produce.
+
 ### Updating docs after a release
 
 When there's a new Haystack release, we need to create a directory for the new version within the local `/docs` directory. In this directory, we can write new overview and usage docs in .mdx (or manually copy over the ones from the previous version directory). Once this is done, the project will automatically fetch the reference and tutorial docs for the new version from GitHub. Bear in mind that a `menu.json` file needs to exist in every new version directory so that our Menu components know which page links to display. 
@@ -90,12 +112,6 @@ In the [haystack](https://github.com/deepset-ai/haystack) repo, we have to relea
 After releasing the docs, we need to release the benchmarks. Create a new version folder in the folder `benchmarks` and copy all folders from `latest` to the new folder.
 
 If you now start the local sever and go to the new version, you will see the 404 page. We pull the version from the haystack release tags. Most likely, the newest version is not released yet. Therefore, you have to add it manually to the array `tagNames` in the function `getDocsVersions` by adding the command `tagNames.push('v0.10.0');`.
-
-### Renaming or Restructuring Pages
-
-When renaming documentation pages, or restructuring the directories that they're contained in, the new filepath can cause links on the internet to break. For example, when the pipeline_nodes grouping was created `components/reader.mdx` did not exist any more as it had changed to `pipeline_nodes/reader.mdx`. This meant that links on websites were broken. 
-
-Run the `haystack-website/docs/generate_redirect_table.py` script to generate a mapping of old filepaths to their latest equivalents.
 
 ## Styling
 
