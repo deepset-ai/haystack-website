@@ -50,7 +50,8 @@
       {"slug": "route-documents", "title": "RouteDocuments"},
       {"slug": "join-documents", "title": "JoinDocuments"},
       {"slug": "join-answers", "title": "JoinAnswers"},
-      {"slug": "docs2answers", "title": "Docs2Answers"}
+      {"slug": "docs2answers", "title": "Docs2Answers"},
+      {"slug": "custom-nodes", "title": "Custom Nodes"}
     ]
   },
   {
