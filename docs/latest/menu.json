@@ -19,6 +19,7 @@
     "subMenuTitle": "Components",
     "pathPrefix": "/components/",
     "items": [
+      {"slug": "components-overview", "title": "Overview"},
       {"slug": "documents-answers-labels", "title": "Documents, Answers and Labels"},
       {"slug": "document-store", "title": "Document Stores"},
       {"slug": "pipelines", "title": "Pipelines"},
@@ -56,6 +57,7 @@
     "subMenuTitle": "Guides",
     "pathPrefix": "/guides/",
     "items": [
+      {"slug": "guides-overview", "title": "Overview"},
       {"slug": "languages", "title": "Languages Other Than English"},
       {"slug": "domain-adaptation","title": "Domain Adaptation"},
       {"slug": "optimization", "title": "Optimization"},
@@ -72,6 +74,10 @@
     "subMenuTitle": "Tutorials",
     "pathPrefix": "/tutorials/",
     "items": [
+      {
+        "slug": "tutorials-overview",
+        "title": "Overview"
+      },
       {
         "slug": "first-qa-system",
         "title": "Build Your First QA System"

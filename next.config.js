@@ -1432,4 +1432,204 @@ module.exports = {
       },
     ];
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/components/primitives',
+        destination: '/components/documents-answers-labels',
+        permanent: true,
+      },
+      {
+        source: '/components/nodes',
+        destination: '/pipeline_nodes/overview',
+        permanent: true,
+      },
+      {
+        source: '/usage/reader',
+        destination: '/pipeline_nodes/reader',
+        permanent: true,
+      },
+      {
+        source: '/usage/knowledge-graph',
+        destination: '/guides/knowledge-graph',
+        permanent: true,
+      },
+      {
+        source: '/components/classifier',
+        destination: '/pipeline_nodes/query-classifier',
+        permanent: true,
+      },
+      {
+        source: '/components/route-documents',
+        destination: '/pipeline_nodes/route-documents',
+        permanent: true,
+      },
+      {
+        source: '/usage/annotation',
+        destination: '/components/annotation',
+        permanent: true, 
+      },
+      {
+        source: '/components/ranker',
+        destination: '/pipeline_nodes/ranker',
+        permanent: true, 
+      },
+      {
+        source: '/usage/retriever',
+        destination: '/pipeline_nodes/retriever',
+        permanent: true, 
+      },
+      {
+        source: '/usage/glossary',
+        destination: '/overview/glossary',
+        permanent: true, 
+      },
+      {
+        source: '/components/preprocessing',
+        destination: '/pipeline_nodes/preprocessor',
+        permanent: true, 
+      },
+      {
+        source: '/components/join-answers',
+        destination: '/pipeline_nodes/join-answers',
+        permanent: true, 
+      },
+      {
+        source: '/usage/pipelines',
+        destination: '/components/ready-made-pipelines',
+        permanent: true, 
+      },
+      {
+        source: '/components/question-generator',
+        destination: '/pipeline_nodes/question-generator',
+        permanent: true, 
+      },
+      {
+        source: '/usage/query-classifier',
+        destination: '/pipeline_nodes/query-classifier',
+        permanent: true,
+      },
+      {
+        source: '/usage/domain-adaptation',
+        destination: '/guides/domain-adaptation',
+        permanent: true,
+      },
+      {
+        source: '/usage/roadmap',
+        destination: '/overview/roadmap',
+        permanent: true,
+      },
+      {
+        source: '/usage/translator',
+        destination: '/pipeline_nodes/translator',
+        permanent: true,
+      },
+      {
+        source: '/usage/generator',
+        destination: '/pipeline_nodes/generator',
+        permanent: true,
+      },
+      {
+        source: '/guides/rest-api-definition',
+        destination: '/components/rest-api-definition',
+        permanent: true,
+      },
+      {
+        source: '/usage/reader',
+        destination: '/pipeline_nodes/reader',
+        permanent: true,
+      },
+      {
+        source: '/components/reader',
+        destination: '/pipeline_nodes/reader',
+        permanent: true,
+      },
+      {
+        source: '/components/generator',
+        destination: '/pipeline_nodes/generator',
+        permanent: true,
+      },
+      {
+        source: '/components/retriever',
+        destination: '/pipeline_nodes/retriever',
+        permanent: true,
+      },
+      {
+        source: '/components/summarizer',
+        destination: '/pipeline_nodes/summarizer',
+        permanent: true,
+      },
+      {
+        source: '/usage/document-store',
+        destination: '/components/document-store',
+        permanent: true,
+      },
+      {
+        source: '/usage/summarizer',
+        destination: '/pipeline_nodes/summarizer',
+        permanent: true,
+      },
+      {
+        source: '/usage/intro',
+        destination: '/overview/intro',
+        permanent: true,
+      },
+      {
+        source: '/usage/optimization',
+        destination: '/guides/optimization',
+        permanent: true,
+      },
+      {
+        source: '/guides/rest-api',
+        destination: '/components/rest-api',
+        permanent: true,
+      },
+      {
+        source: '/components/knowledge-graph',
+        destination: '/guides/knowledge-graph',
+        permanent: true,
+      },
+      {
+        source: '/usage/preprocessing',
+        destination: '/pipeline_nodes/preprocessor',
+        permanent: true,
+      },
+      {
+        source: '/components/translator',
+        destination: '/pipeline_nodes/translator',
+        permanent: true,
+      },
+      {
+        source: '/components/query-classifier',
+        destination: '/pipeline_nodes/query-classifier',
+        permanent: true,
+      },
+      {
+        source: '/usage/ranker',
+        destination: '/pipeline_nodes/ranker',
+        permanent: true,
+      },
+      {
+        source: '/components/entity-extractor',
+        destination: '/pipeline_nodes/entity-extractor',
+        permanent: true,
+      },
+      {
+        source: '/components/document-classifier',
+        destination: '/pipeline_nodes/document-classifier',
+        permanent: true,
+      },
+      {
+        source: '/guides/annotation',
+        destination: '/components/annotation',
+        permanent: true,
+      },
+      {
+        source: '/usage/languages',
+        destination: '/guides/languages',
+        permanent: true,
+      }
+    ]
+  },
 };
