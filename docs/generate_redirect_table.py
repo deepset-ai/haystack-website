@@ -8,7 +8,7 @@ import json
 
 MANUAL_REDIRECTS = {
     "components/preprocessing.mdx": "pipeline_nodes/preprocessor.mdx",
-    "components/primitives.mdx": "components/documents_answers_labels.mdx",
+    "components/primitives.mdx": "components/documents-answers-labels.mdx",
     "usage/preprocessing.mdx": "pipeline_nodes/preprocessor.mdx",
     "components/nodes.mdx": "pipeline_nodes/overview.mdx"
 }
@@ -41,12 +41,20 @@ def generate_redirect_table():
             filename = filepath.split("/")[-1]
             latest_equivalent = [lfp for lfp in latest_filepaths if filename in lfp]
             if latest_equivalent:
-                redirect_table[filepath] = latest_equivalent[0]
+                redirect_table[filepath] = dash_for_underscore(latest_equivalent[0])
             elif filepath in MANUAL_REDIRECTS:
-                redirect_table[filepath] = MANUAL_REDIRECTS[filepath]
+                redirect_table[filepath] = dash_for_underscore(MANUAL_REDIRECTS[filepath])
             else:
                 redirect_table[filepath] = ""
     return redirect_table
+
+def dash_for_underscore(filepath):
+    parts = filepath.split("/")
+    filename_dashed = parts[-1].replace("_", "-")
+    new_parts = parts[:-1]
+    new_parts.append(filename_dashed)
+    new_filepath = "/".join(new_parts)
+    return new_filepath
 
 if __name__ == "__main__":
     redirect_table = generate_redirect_table()
