@@ -1639,6 +1639,21 @@ module.exports = {
         source: '/reference/classifier',
         destination: '/reference/document-classifier',
         permanent: true,
+      },
+      {
+        source: '/docs/retrievermd',
+        destination: '/pipeline_nodes/retriever',
+        permanent: true,
+      },
+      {
+        source: '/tutorials/v0.10.0/table-qa',
+        destination: '/tutorials/v1.0.0/table-qa',
+        permanent: true,
+      },
+      {
+        source: '/tutorials/v0.10.0/doc-class-index',
+        destination: '/tutorials/v1.0.0/doc-class-index',
+        permanent: true,
       }
     ]
   },
