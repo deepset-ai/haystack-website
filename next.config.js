@@ -1629,6 +1629,16 @@ module.exports = {
         source: '/usage/languages',
         destination: '/guides/languages',
         permanent: true,
+      },
+      {
+        source: '/reference/graph-retriever',
+        destination: '/reference/retriever',
+        permanent: true,
+      },
+      {
+        source: '/reference/classifier',
+        destination: '/reference/document-classifier',
+        permanent: true,
       }
     ]
   },

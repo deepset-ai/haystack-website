@@ -10,7 +10,10 @@ MANUAL_REDIRECTS = {
     "components/preprocessing.mdx": "pipeline_nodes/preprocessor.mdx",
     "components/primitives.mdx": "components/documents-answers-labels.mdx",
     "usage/preprocessing.mdx": "pipeline_nodes/preprocessor.mdx",
-    "components/nodes.mdx": "pipeline_nodes/overview.mdx"
+    "components/nodes.mdx": "pipeline_nodes/overview.mdx",
+    "reference/graph-retriever.mdx": "reference/retriever.mdx",
+    "reference/classifier.mdx": "reference/document-classifier.mdx"
+
 }
 
 def generate_redirect_table():
