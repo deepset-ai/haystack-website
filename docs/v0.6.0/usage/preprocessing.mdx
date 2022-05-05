@@ -28,7 +28,7 @@ docs = [
 There are a range of different file converters in Haystack that
 can extract text from files and cast them into the unified dictionary format shown above.
 Haystack features support for txt, pdf and docx files and there is even a converter that leverages Apache Tika.
-Please refer to [the API docs](/docs/latest/file_convertersmd) to see which converter best suits you.
+Please refer to [the API docs](/docs/file_convertersmd) to see which converter best suits you.
 
 <Tabs
   options={[
@@ -88,7 +88,7 @@ it is recommended that they are further processed in order to ensure optimal Ret
 The `PreProcessor` takes one of the documents created by the converter as input,
 performs various cleaning steps and splits them into multiple smaller documents.
 
-For suggestions on how best to split your documents, see [Optimization](/docs/latest/optimizationmd)
+For suggestions on how best to split your documents, see [Optimization](/docs/optimizationmd)
 
 ```python
 doc = converter.convert(file_path=file, meta=None)
