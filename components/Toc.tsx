@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { PencilAltIcon } from "@heroicons/react/solid";
 import { StaticPageProps } from "lib/utils";
+import styles from "./toc.module.css";
 
 type TocProps = Pick<StaticPageProps, "toc" | "editOnGitHubLink" | "stars">;
 
 export default function Toc({ stars, editOnGitHubLink, toc }: TocProps) {
   return (
-    <div className="sticky top-20 lg:block hidden w-60 2xl:w-80 pl-10 break-words">
+    <div className={`sticky top-[6rem] lg:block hidden w-60 2xl:w-80 pl-10 pb-5 break-words overflow-y-scroll ${styles['toc-scroll-height']}`}>
       <Link href="https://github.com/deepset-ai/haystack">
         <a
           href="https://github.com/deepset-ai/haystack"
