@@ -113,7 +113,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
       // Optionally pass remark/rehype plugins
       mdxOptions: {
         // @ts-ignore
-        remarkPlugins: [remarkSlug, remarkAutolinkHeadings],
+        remarkPlugins: [remarkSlug],
         rehypePlugins: [],
       },
       scope: data,
