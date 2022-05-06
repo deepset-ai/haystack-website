@@ -75,10 +75,6 @@
     "pathPrefix": "/tutorials/",
     "items": [
       {
-        "slug": "tutorials-overview",
-        "title": "Overview"
-      },
-      {
         "slug": "first-qa-system",
         "title": "Build Your First QA System"
       },
