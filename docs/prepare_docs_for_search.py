@@ -59,7 +59,7 @@ def get_files_by_ext(directory, ext):
 def upload_docs_version(version):
     assert token
     mdx_files = get_files_by_ext(version, ".mdx")
-    target_filename = source_directory + ".jsonl"
+    target_filename = version + ".jsonl"
     files_to_jsonl(mdx_files, target_filename)
     url = create_url("api.cloud.deepset.ai", "default")[1]
     upload_passages(
@@ -72,6 +72,8 @@ def upload_docs_version(version):
     )
 
 if __name__ == "__main__":
-    source_directory = "v1.0.0"
-    upload_docs_version(source_directory)
+    versions = sorted([x for x in os.listdir(".") if x[-3:] != ".py"])
+    for v in versions:
+        print("Uploading {} docs".format(v))
+        upload_docs_version(v)
 
