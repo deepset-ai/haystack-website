@@ -10,6 +10,21 @@
   @apply text-2xl sm:text-3xl mb-4 font-semibold;
 }
 
+.markdown h2 a div {
+  margin-left: 10px;
+  opacity: 0;
+  background: url('/img/anchor.svg') center no-repeat;
+  min-width: 20px;
+  min-height: 20px;
+  color: white;
+  display: inline-block;
+}
+
+.markdown h2:hover a div {
+  opacity: 1;
+  cursor: pointer;
+}
+
 .markdown h2::before {
   content: "";
   display: block;
@@ -20,6 +35,21 @@
 
 .markdown h3 {
   @apply text-xl sm:text-2xl mb-4 font-semibold;
+}
+
+.markdown h3 a div {
+  margin-left: 10px;
+  opacity: 0;
+  background: url('/img/anchor.svg') center no-repeat;
+  min-width: 20px;
+  min-height: 20px;
+  color: white;
+  display: inline-block;
+}
+
+.markdown h2:hover a div {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .markdown h3::before {

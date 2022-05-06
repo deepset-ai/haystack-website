@@ -10,4 +10,6 @@ export const components = {
   Swagger: dynamic(() => import("components/Swagger")),
   pre: dynamic(() => import("components/Pre")),
   code: dynamic(() => import("components/Code")),
+  h2: dynamic(() => import("components/H2")),
+  h3: dynamic(() => import("components/H3")),
 };
