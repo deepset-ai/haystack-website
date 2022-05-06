@@ -5,26 +5,8 @@ import asyncio
 
 token = ""
 
-async def main():
-    source_directory = "v1.0.0"
-    target_docs_folder = "search_docs"
-    if not os.path.exists(target_docs_folder):
-        os.makedirs(target_docs_folder)
-    mdx_files = get_files_by_ext(source_directory, ".mdx")
-    target_filename = source_directory + ".jsonl"
-    files_to_jsonl(mdx_files, target_filename)
-    url = create_url("api.cloud.deepset.ai", "default")[1]
-    await upload_passages(
-        index_url=url,
-        path=target_filename,
-        token=token,
-        data_format="jsonl",
-        batch_size=1,
-        debug=True
-    )
 
-
-def files_to_jsonl(filepaths, output_file):
+def files_to_documents(filepaths, output_file):
     processed_filenames = []
     documents = []
     for filepath in filepaths:
@@ -41,9 +23,7 @@ def files_to_jsonl(filepaths, output_file):
             "file_name": filename
         }
         documents.append(curr_document)
-    with open(output_file, "w") as f:
-        for d in documents:
-            f.write(json.dumps(d) + "\n")
+    return documents
 
 
 def get_files_by_ext(directory, ext):
@@ -56,22 +36,33 @@ def get_files_by_ext(directory, ext):
                 ret.append("/".join([curr_dir, file]))
     return ret
 
-def upload_docs_version(version):
-    assert token
+def prepare_documents(version):
     mdx_files = get_files_by_ext(version, ".mdx")
-    target_filename = source_directory + ".jsonl"
-    files_to_jsonl(mdx_files, target_filename)
+    target_filename = version + ".jsonl"
+    documents = files_to_documents(mdx_files, target_filename)
+    return documents
+
+def prepare_all_jsonl(jsonl_filename):
+    versions = sorted([x for x in os.listdir(".") if x[-3:] != ".py"])
+    all_docs = []
+    for v in versions:
+        curr_docs = prepare_documents(v)
+        all_docs += curr_docs
+    with open(jsonl_filename, "w") as f:
+        for d in all_docs:
+            f.write(json.dumps(d) + "\n")
+
+
+if __name__ == "__main__":
+    jsonl_filename = "all.jsonl"
+    prepare_all_jsonl(jsonl_filename)
     url = create_url("api.cloud.deepset.ai", "default")[1]
+    assert token
     upload_passages(
         index_url=url,
-        path=target_filename,
+        path=jsonl_filename,
         token=token,
         data_format="jsonl",
         batch_size=1,
         debug=True
     )
-
-if __name__ == "__main__":
-    source_directory = "v1.0.0"
-    upload_docs_version(source_directory)
-
