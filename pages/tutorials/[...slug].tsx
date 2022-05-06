@@ -13,6 +13,7 @@ import {
   getDocsVersions,
   getStaticLayoutProps,
   StaticPageProps,
+  getH1FromMarkdown,
 } from "lib/utils";
 import { tutorialFilesLatest } from "lib/constants";
 import { tutorialFilesV130 } from "lib/constants";
@@ -34,6 +35,7 @@ export default function TutorialDoc({
   editOnGitHubLink,
   stars,
   source,
+  htmlTitle,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
@@ -41,6 +43,7 @@ export default function TutorialDoc({
       editOnGitHubLink="https://github.com/deepset-ai/haystack/tree/master/tutorials"
       stars={stars}
       toc={toc}
+      htmlTitle={htmlTitle}
     >
       <div
         dangerouslySetInnerHTML={{ __html: source as string }}
@@ -276,11 +279,13 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
 
     const type = "";
 
+    const htmlTitle = getH1FromMarkdown(content);
     const layoutProps = await getStaticLayoutProps({
       content,
       version,
       docTitleSlug,
       type,
+      htmlTitle,
     });
 
     return {

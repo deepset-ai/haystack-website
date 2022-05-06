@@ -11,10 +11,11 @@ import { StaticPageProps } from "lib/utils";
 
 type LayoutProps = Pick<
   StaticPageProps,
-  "menu" | "toc" | "editOnGitHubLink" | "stars"
+  "htmlTitle" | "menu" | "toc" | "editOnGitHubLink" | "stars"
 >;
 
 const Layout: FC<LayoutProps> = ({
+  htmlTitle,
   menu,
   toc,
   editOnGitHubLink,
@@ -33,7 +34,7 @@ const Layout: FC<LayoutProps> = ({
   return (
     <div className="dark:bg-gray-800">
       <Head>
-        <title>Haystack Docs</title>
+        <title>{ htmlTitle ? `Haystack - ${htmlTitle}` : "Haystack Docs" }</title>
         <meta name="robots" content="follow, index" />
         <meta
           content="Haystack enables Question Answering at Scale"

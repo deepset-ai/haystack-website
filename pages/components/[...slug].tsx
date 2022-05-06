@@ -20,6 +20,7 @@ import {
   getLatestVersion,
   getStaticLayoutProps,
   StaticPageProps,
+  getH1FromMarkdown,
 } from "lib/utils";
 import { components } from "lib/mdx";
 
@@ -29,6 +30,7 @@ export default function ComponentDoc({
   editOnGitHubLink,
   stars,
   source,
+  htmlTitle,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
@@ -36,6 +38,7 @@ export default function ComponentDoc({
       editOnGitHubLink={editOnGitHubLink}
       stars={stars}
       toc={toc}
+      htmlTitle={htmlTitle}
     >
       {source && (
         <MDXRemote
@@ -118,11 +121,13 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
 
     const type = "components";
 
+    const htmlTitle = getH1FromMarkdown(content);
     const layoutProps = await getStaticLayoutProps({
       content,
       version,
       docTitleSlug,
       type,
+      htmlTitle,
     });
 
     return {

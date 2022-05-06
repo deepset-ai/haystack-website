@@ -42,6 +42,7 @@ export const markdownToHtml = async ({
 };
 
 export type StaticPageProps = {
+  htmlTitle?: string;
   menu: any;
   toc: { text: string; level: number; link: string }[];
   editOnGitHubLink: string;
@@ -56,11 +57,13 @@ export const getStaticLayoutProps = async ({
   version,
   docTitleSlug,
   type,
+  htmlTitle,
 }: {
   content: string;
   version?: string;
   docTitleSlug: string;
   type: string;
+  htmlTitle?: string;
 }) => {
   const getHeadings = () => {
     const headingLines = content
@@ -84,7 +87,7 @@ export const getStaticLayoutProps = async ({
 
   const stars = await getStargazersCount();
 
-  return { menu, toc, editOnGitHubLink, stars };
+  return { menu, toc, editOnGitHubLink, stars, htmlTitle };
 };
 
 export const getMenu = async (version?: string) => {
@@ -137,4 +140,10 @@ export async function getSlugsFromLocalMarkdownFiles(
   if (!fs.existsSync(directory)) return [];
   const filenames = fs.readdirSync(directory);
   return filenames.map((file) => file.replace(/\.mdx$/, "").split("_").join("-"));
+}
+
+export const getH1FromMarkdown = (md: string): string => {
+  const matches = md.match(/# [a-zA-Z0-9 \-\"]+/);
+  if (matches?.length != 1) return '';
+  return matches[0].slice(2);
 }

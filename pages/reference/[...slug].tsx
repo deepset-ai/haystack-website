@@ -13,6 +13,7 @@ import {
   getDocsVersions,
   getStaticLayoutProps,
   StaticPageProps,
+  getH1FromMarkdown,
 } from "lib/utils";
 import { referenceFilesLatest } from "lib/constants";
 import { referenceFilesV130 } from "lib/constants";
@@ -35,6 +36,7 @@ export default function ReferenceDoc({
   editOnGitHubLink,
   stars,
   source,
+  htmlTitle,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
@@ -42,6 +44,7 @@ export default function ReferenceDoc({
       editOnGitHubLink="https://github.com/deepset-ai/haystack/tree/master/haystack"
       stars={stars}
       toc={toc}
+      htmlTitle={htmlTitle}
     >
       <div
         className={styles["nonMdx"]}
@@ -278,11 +281,13 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
 
     const type = "";
 
+    const htmlTitle = getH1FromMarkdown(content);
     const layoutProps = await getStaticLayoutProps({
       content,
       version,
       docTitleSlug,
       type,
+      htmlTitle,
     });
 
     return {
