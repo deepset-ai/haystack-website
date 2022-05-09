@@ -5,7 +5,6 @@ import html from "remark-html";
 import slug from "remark-slug";
 import remarkPrism from "remark-prism";
 import autolink from "remark-autolink-headings";
-import GitHubSlugger from "github-slugger";
 import imgLinks from "@pondorasti/remark-img-links";
 import { getHaystackReleaseTagNames, getStargazersCount } from "./github";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
@@ -13,6 +12,7 @@ import { MDXRemoteSerializeResult } from "next-mdx-remote";
 // we have to explicitly require prismjs and loadLanguages so that they're available during revalidation on Vercel
 const Prism = require("prismjs");
 const loadLanguages = require("prismjs/components/index");
+const slugger = require('github-slugger').slug;
 
 export const markdownToHtml = async ({
   content,
@@ -50,8 +50,6 @@ export type StaticPageProps = {
   source: MDXRemoteSerializeResult | string;
 };
 
-const slugger = new GitHubSlugger();
-
 export const getStaticLayoutProps = async ({
   content,
   version,
@@ -72,7 +70,7 @@ export const getStaticLayoutProps = async ({
     return headingLines.map((raw) => {
       const text = raw.replace(/^###*\s/, "").replace(/\\/g, "");
       const level = raw.slice(0, 3) === "###" ? 3 : 2;
-      return { text, level, link: slugger.slug(text) };
+      return { text, level, link: slugger(text) };
     });
   };
 
