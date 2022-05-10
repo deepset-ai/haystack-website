@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "git clone https://github.com/deepset-ai/haystack.git",
     "dev": "next dev",
     "dev:watch": "next-remote-watch ./docs",
     "build": "next build",
