@@ -14,6 +14,10 @@ const Prism = require("prismjs");
 const loadLanguages = require("prismjs/components/index");
 const slugger = require("github-slugger").slug;
 
+// variables to cache GitHub API results
+var tags: string[] = [];
+var stars: number = 0;
+
 export const markdownToHtml = async ({
   content,
   rawURL,
@@ -83,7 +87,9 @@ export const getStaticLayoutProps = async ({
     version || latestVersion
   }/${type}/${docTitleSlug.split("-").join("_")}.mdx`;
 
-  const stars = await getStargazersCount();
+  if (stars == 0) {
+    stars = await getStargazersCount();
+  }
 
   return { menu, toc, editOnGitHubLink, stars, htmlTitle };
 };
@@ -96,9 +102,13 @@ export const getMenu = async (version?: string) => {
 };
 
 export async function getDocsVersions() {
+  if (tags.length > 0) {
+    return tags;
+  }
+
   const tagNames = await getHaystackReleaseTagNames();
-  tagNames.push("v1.0.0");
-  return tagNames.filter((tagName) => tagName.startsWith("v"));
+  tags = tagNames.filter((tagName) => tagName.startsWith("v"));
+  return tags;
 }
 
 export async function getVersionFromParams(params: string[]) {
