@@ -1,31 +1,9 @@
+import fs from "fs";
 import { Octokit } from "octokit";
 
 export const octokit = new Octokit({
   auth: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
 });
-
-export const getDownloadUrl = async ({
-  filename,
-  repoPath,
-  version,
-}: {
-  filename: string;
-  repoPath: string;
-  version?: string;
-}) => {
-  try {
-    const res = await octokit.rest.repos.getContent({
-      owner: "deepset-ai",
-      repo: "haystack",
-      path: `docs${version && version !== "latest" ? `/${version}` : ""}${repoPath}${filename}`
-    });
-    if (Array.isArray(res.data)) return;
-    if (!res.data.download_url) return;
-    return res.data.download_url;
-  } catch (e) {
-    return;
-  }
-};
 
 export const getStargazersCount = async () => {
   const res = await octokit.rest.repos.get({
@@ -42,3 +20,21 @@ export const getHaystackReleaseTagNames = async () => {
   });
   return res.data.map((release) => release.tag_name);
 };
+
+export function getRawURL(path: string): string {
+  return `https://raw.githubusercontent.com/deepset-ai/haystack/master/docs/${path}`;
+}
+
+export function getRelativePath(
+  filename: string,
+  repoPath: string,
+  version: string
+): string {
+  const versionPrefix = version == "latest" ? "" : `/${version}`;
+  const relPath = `docs${versionPrefix}${repoPath}${filename}`;
+  if (!fs.existsSync(relPath)) {
+    return "";
+  }
+
+  return relPath;
+}

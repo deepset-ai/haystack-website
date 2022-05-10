@@ -1,31 +1,31 @@
+import imgLinks from "@pondorasti/remark-img-links";
 import fs from "fs";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { join } from "path";
 import remark from "remark";
-import html from "remark-html";
-import slug from "remark-slug";
-import remarkPrism from "remark-prism";
 import autolink from "remark-autolink-headings";
-import imgLinks from "@pondorasti/remark-img-links";
+import html from "remark-html";
+import remarkPrism from "remark-prism";
+import slug from "remark-slug";
 import { getHaystackReleaseTagNames, getStargazersCount } from "./github";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 // we have to explicitly require prismjs and loadLanguages so that they're available during revalidation on Vercel
 const Prism = require("prismjs");
 const loadLanguages = require("prismjs/components/index");
-const slugger = require('github-slugger').slug;
+const slugger = require("github-slugger").slug;
 
 export const markdownToHtml = async ({
   content,
-  downloadUrl,
+  rawURL,
 }: {
   content: string;
-  downloadUrl: string;
+  rawURL: string;
 }) => {
   loadLanguages();
 
   const result = await remark()
     .use(imgLinks, {
-      absolutePath: downloadUrl,
+      absolutePath: rawURL,
     })
     // @ts-ignore
     .use(html)
@@ -97,7 +97,7 @@ export const getMenu = async (version?: string) => {
 
 export async function getDocsVersions() {
   const tagNames = await getHaystackReleaseTagNames();
-  tagNames.push('v1.0.0');
+  tagNames.push("v1.0.0");
   return tagNames.filter((tagName) => tagName.startsWith("v"));
 }
 
@@ -137,11 +137,16 @@ export async function getSlugsFromLocalMarkdownFiles(
   const directory = await getDirectory(category, version);
   if (!fs.existsSync(directory)) return [];
   const filenames = fs.readdirSync(directory);
-  return filenames.map((file) => file.replace(/\.mdx$/, "").split("_").join("-"));
+  return filenames.map((file) =>
+    file
+      .replace(/\.mdx$/, "")
+      .split("_")
+      .join("-")
+  );
 }
 
 export const getH1FromMarkdown = (md: string): string => {
   const matches = md.match(/# [a-zA-Z0-9 \-\"]+/);
-  if (matches?.length != 1) return '';
+  if (matches?.length != 1) return "";
   return matches[0].slice(2);
-}
+};
