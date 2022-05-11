@@ -14,7 +14,8 @@ const Prism = require("prismjs");
 const loadLanguages = require("prismjs/components/index");
 const slugger = require("github-slugger").slug;
 
-// variables to cache GitHub API results
+// To reduce the number of calls to the GitHub API, we store
+// the results in the following variables, acting as a cache.
 var tags: string[] = [];
 var stars: number = 0;
 
@@ -87,6 +88,7 @@ export const getStaticLayoutProps = async ({
     version || latestVersion
   }/${type}/${docTitleSlug.split("-").join("_")}.mdx`;
 
+  // Only hit the GitHub API the first time and cache the result
   if (stars == 0) {
     stars = await getStargazersCount();
   }
@@ -102,11 +104,13 @@ export const getMenu = async (version?: string) => {
 };
 
 export async function getDocsVersions() {
+  // Don't hit the GitHub API if we did it already
   if (tags.length > 0) {
     return tags;
   }
 
   const tagNames = await getHaystackReleaseTagNames();
+  // cache the results
   tags = tagNames.filter((tagName) => tagName.startsWith("v"));
   return tags;
 }
