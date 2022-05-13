@@ -21,6 +21,7 @@ import {
   StaticPageProps,
   getStaticLayoutProps,
   getH1FromMarkdown,
+  getMetaFromMarkdown,
 } from "lib/utils";
 import { components } from "lib/mdx";
 
@@ -31,6 +32,7 @@ export default function OverviewDoc({
   stars,
   source,
   htmlTitle,
+  meta,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
@@ -39,6 +41,7 @@ export default function OverviewDoc({
       stars={stars}
       toc={toc}
       htmlTitle={htmlTitle}
+      meta={meta}
     >
       {source && (
         <MDXRemote
@@ -125,12 +128,14 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     const type = "overview";
 
     const htmlTitle = getH1FromMarkdown(content);
+    const meta = getMetaFromMarkdown(content);
     const layoutProps = await getStaticLayoutProps({
       content,
       version,
       docTitleSlug,
       type,
-      htmlTitle
+      htmlTitle,
+      meta,
     });
 
     return {

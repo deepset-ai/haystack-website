@@ -14,6 +14,7 @@ import {
   getStaticLayoutProps,
   StaticPageProps,
   getH1FromMarkdown,
+  getMetaFromMarkdown,
 } from "lib/utils";
 import { referenceFilesLatest } from "lib/constants";
 import { referenceFilesV140 } from "lib/constants";
@@ -38,6 +39,7 @@ export default function ReferenceDoc({
   stars,
   source,
   htmlTitle,
+  meta,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
@@ -46,6 +48,7 @@ export default function ReferenceDoc({
       stars={stars}
       toc={toc}
       htmlTitle={htmlTitle}
+      meta={meta}
     >
       <div
         className={styles["nonMdx"]}
@@ -298,12 +301,14 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     const type = "";
 
     const htmlTitle = getH1FromMarkdown(content);
+    const meta = getMetaFromMarkdown(content);
     const layoutProps = await getStaticLayoutProps({
       content,
       version,
       docTitleSlug,
       type,
       htmlTitle,
+      meta,
     });
 
     return {

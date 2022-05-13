@@ -14,6 +14,7 @@ import {
   getStaticLayoutProps,
   StaticPageProps,
   getH1FromMarkdown,
+  getMetaFromMarkdown,
 } from "lib/utils";
 import { tutorialFilesLatest } from "lib/constants";
 import { tutorialFilesV140 } from "lib/constants";
@@ -37,6 +38,7 @@ export default function TutorialDoc({
   stars,
   source,
   htmlTitle,
+  meta,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout
@@ -45,6 +47,7 @@ export default function TutorialDoc({
       stars={stars}
       toc={toc}
       htmlTitle={htmlTitle}
+      meta={meta}
     >
       <div
         dangerouslySetInnerHTML={{ __html: source as string }}
@@ -296,12 +299,14 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     const type = "";
 
     const htmlTitle = getH1FromMarkdown(content);
+    const meta = getMetaFromMarkdown(content);
     const layoutProps = await getStaticLayoutProps({
       content,
       version,
       docTitleSlug,
       type,
       htmlTitle,
+      meta,
     });
 
     return {

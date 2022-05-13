@@ -113,6 +113,28 @@ After releasing the docs, we need to release the benchmarks. Create a new versio
 
 If you now start the local sever and go to the new version, you will see the 404 page. We pull the version from the haystack release tags. Most likely, the newest version is not released yet. Therefore, you have to add it manually to the array `tagNames` in the function `getDocsVersions` by adding the command `tagNames.push('v0.10.0');`.
 
+### Document Metadata
+
+You can overwrite the default meta tags (title, description, image, etc.) for individual pages, by adding HTML comments in the source files. The page currently support title, description and image.  
+The properties must be provided exactly in the format specified below:
+
+* `<!-- meta_title: "CONTENT HERE" -->`
+* `<!-- meta_description: "CONTENT HERE" -->`
+* `<!-- meta_image: "CONTENT HERE" -->`
+
+Properties that have not been provided or weren't parsed correctly will be overwritten by their default. For the title this is the content of the first H1 in the document prefixed with "Haystack - ".
+
+#### Example
+
+```md
+<!-- meta_title: "Enter HTML title here" -->
+<!-- meta_description: "Enter description here" -->
+<!-- meta_image: "Enter image uri for previews here" -->
+
+# Document Starts
+...
+```
+
 ## Styling
 
 We use [Tailwind](https://tailwindcss.com) for CSS. It's a CSS utility library, which allows us to write barely any CSS ourselves. The `tailwind.config.js` file contains configuration to provide classes that match deepset.ai's new style guide. Additionally, there is a `styles/global.css` file, which loads our custom font provided by the style guide. Lastly, we have two css module files within the `components` directory (markdown.module.css and tutorial.module.css), wich are applied on the `components/Layout` component. These files allow us to provide some defaults for certain HTML elements, which get applied to the HTML tags generated when we convert markdown to html at build time. We also use a React component library authored by the Tailwind team, called [Headless UI](http://headlessui.dev/). This allows us to easily create React components such as the `components/Tabs` and `components/Disclosures` components.

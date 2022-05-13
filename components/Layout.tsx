@@ -11,11 +11,12 @@ import { StaticPageProps } from "lib/utils";
 
 type LayoutProps = Pick<
   StaticPageProps,
-  "htmlTitle" | "menu" | "toc" | "editOnGitHubLink" | "stars"
+  "htmlTitle" | "meta" | "menu" | "toc" | "editOnGitHubLink" | "stars"
 >;
 
 const Layout: FC<LayoutProps> = ({
   htmlTitle,
+  meta,
   menu,
   toc,
   editOnGitHubLink,
@@ -23,23 +24,20 @@ const Layout: FC<LayoutProps> = ({
   children,
 }) => {
   const router = useRouter();
-
-  const meta = {
-    title: "Haystack Docs",
-    description: "Haystack enables Question Answering at Scale",
-    image: "/img/haystack-logo-colored.png",
-    type: "website",
-  };
+  
+  const metadata = {
+    title: meta?.title ? meta.title : (htmlTitle ? `Haystack - ${htmlTitle}` : "Haystack Docs"),
+    description: meta?.description || "Haystack enables Question Answering at Scale",
+    image: meta?.image || "/img/haystack-logo-colored.png",
+    type: meta?.type || "website",
+  }
 
   return (
     <div className="dark:bg-gray-800">
       <Head>
-        <title>{ htmlTitle ? `Haystack - ${htmlTitle}` : "Haystack Docs" }</title>
+        <title>{ metadata.title }</title>
         <meta name="robots" content="follow, index" />
-        <meta
-          content="Haystack enables Question Answering at Scale"
-          name="description"
-        />
+        <meta content={metadata.description} name="description" />
         <meta
           property="og:url"
           content={`https://haystack.deepset.ai${router.asPath}`}
@@ -49,16 +47,16 @@ const Layout: FC<LayoutProps> = ({
           href={`https://haystack.deepset.ai${router.asPath}`}
         />
         <link rel="icon" href="/img/HaystackIcon.png" />
-        <meta property="og:type" content={meta.type} />
+        <meta property="og:type" content={metadata.type} />
         <meta property="og:site_name" content="Haystack Docs" />
-        <meta property="og:description" content={meta.description} />
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:image" content={meta.image} />
+        <meta property="og:description" content={metadata.description} />
+        <meta property="og:title" content={metadata.title} />
+        <meta property="og:image" content={metadata.image} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@deepset_ai" />
-        <meta name="twitter:title" content={meta.title} />
-        <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content={meta.image} />
+        <meta name="twitter:title" content={metadata.title} />
+        <meta name="twitter:description" content={metadata.description} />
+        <meta name="twitter:image" content={metadata.image} />
       </Head>
       <Header docsType={"haystack"} />
       <DesktopNav menu={menu} />

@@ -43,6 +43,7 @@ export const markdownToHtml = async ({
 
 export type StaticPageProps = {
   htmlTitle?: string;
+  meta?: Metadata;
   menu: any;
   toc: { text: string; level: number; link: string }[];
   editOnGitHubLink: string;
@@ -56,12 +57,14 @@ export const getStaticLayoutProps = async ({
   docTitleSlug,
   type,
   htmlTitle,
+  meta,
 }: {
   content: string;
   version?: string;
   docTitleSlug: string;
   type: string;
   htmlTitle?: string;
+  meta?: Metadata;
 }) => {
   const getHeadings = () => {
     const headingLines = content
@@ -85,7 +88,7 @@ export const getStaticLayoutProps = async ({
 
   const stars = await getStargazersCount();
 
-  return { menu, toc, editOnGitHubLink, stars, htmlTitle };
+  return { menu, toc, editOnGitHubLink, stars, htmlTitle, meta };
 };
 
 export const getMenu = async (version?: string) => {
@@ -144,4 +147,24 @@ export const getH1FromMarkdown = (md: string): string => {
   const matches = md.match(/# [a-zA-Z0-9 \-\"]+/);
   if (matches?.length != 1) return '';
   return matches[0].slice(2);
+}
+
+export interface Metadata {
+  title: string;
+  description: string;
+  image: string;
+  type: string;
+}
+
+export const getMetaFromMarkdown = (md: string): Metadata => {
+  const title = md.match(/<!-- meta_title: "(.+)" -->/)
+  const description = md.match(/<!-- meta_description: "(.+)" -->/)
+  const image = md.match(/<!-- meta_image: "(.+)" -->/)
+
+  return {
+    title: title?.at(1) || "",
+    description: description?.at(1) || "",
+    image: image?.at(1) || "",
+    type: "website",
+  }
 }
