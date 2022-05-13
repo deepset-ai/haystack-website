@@ -41,6 +41,14 @@ Create a `.env.local` file and add your token as an env variable:
 GITHUB_PERSONAL_ACCESS_TOKEN="youraccesstoken"
 ```
 
+To use the documentation search, provide the search endpoint and access token in `.env.local`.
+
+```bash
+HAYSTACK_ENDPOINT=""
+HAYSTACK_TOKEN=""
+```
+
+
 ### Required Reading
 
 This project makes heavy use of Next.js's [getStaticProps](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation) and [getStaticPaths](https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation) functions, to fetch markdown files at build time (locally from the `docs` directory as well as from GitHub using the GitHub API) and generate html pages for each of these files. Before working on the project, it's vital that you understand how these functions work and how they apply to this project. [This example](https://github.com/vercel/next.js/tree/canary/examples/blog-starter-typescript) and [this example](https://github.com/vercel/next.js/tree/canary/examples/with-mdx-remote) may be used as simple demonstrations of these functions to solidify your understanding.

@@ -3,6 +3,8 @@ import VersionSelect from "./VersionSelect";
 import { useState, useEffect } from "react";
 import { Switch } from "@headlessui/react";
 import { SunIcon, MoonIcon } from "@heroicons/react/outline";
+import { SearchModal } from "./SearchModal";
+import { SearchIcon } from "./SearchIcon";
 
 type Props = {
   docsType: string;
@@ -10,6 +12,7 @@ type Props = {
 
 export default function Header({ docsType = "haystack" }: Props) {
   const [darkMode, setDarkMode] = useState(false);
+  const [searchModal, setSearchModal] = useState(false);
 
   const handleChange = () => {
     if (localStorage.theme === undefined) {
@@ -117,6 +120,12 @@ export default function Header({ docsType = "haystack" }: Props) {
             </a>
           </Link>
         </div>
+      </div>
+      <div className="hidden lg:flex mr-8 xl:mr-12 2xl:mr-16">
+        <button className="" onClick={() => setSearchModal(true)}>
+          <SearchIcon />
+        </button>
+        <SearchModal searchModal={searchModal} setSearchModal={setSearchModal} />
       </div>
       <div className="hidden lg:flex items-center mr-8 xl:mr-12 2xl:mr-16">
         <Switch

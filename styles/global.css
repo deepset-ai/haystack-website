@@ -102,4 +102,14 @@
     font-style: italic;
     src: url("/fonts/greycliff-CF/woff/thin-oblique.woff") format("woff");
   }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  input.no-focus-border:focus {
+    outline-width: 0;
+  }
 }
