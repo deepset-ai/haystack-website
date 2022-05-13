@@ -5,6 +5,8 @@ type Meta = {
   items: { filename: string; title: string; slug: string }[];
 };
 
+export const githubDiscussionLink = "https://github.com/deepset-ai/haystack/discussions";
+
 export const referenceFilesLatest: Meta = {
   subMenuTitle: "API Reference",
   repoPath: "/_src/api/api/",
