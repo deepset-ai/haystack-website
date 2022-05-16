@@ -50,6 +50,7 @@ export function getRelativePath(
   const versionPrefix = version == "latest" ? "" : `/${version}`;
   const relPath = `haystack/docs${versionPrefix}${repoPath}${filename}`;
   if (!fs.existsSync(relPath)) {
+    console.log(`error - file not found: ${relPath}`);
     return "";
   }
 
