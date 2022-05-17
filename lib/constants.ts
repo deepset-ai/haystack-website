@@ -183,6 +183,16 @@ export const tutorialFilesLatest: Meta = {
       filename: "14.md",
       title: 'Query Classifier',
     },
+    {
+      slug: "table-qa",
+      filename: "15.md",
+      title: 'Table Question Answering',
+    },
+    {
+      slug: "doc-class-index",
+      filename: "16.md",
+      title: 'Document Classification at Index',
+    },
   ],
 };
 
@@ -363,6 +373,16 @@ export const tutorialFilesV140: Meta = {
       slug: "query-classifier",
       filename: "14.md",
       title: 'Query Classifier',
+    },
+    {
+      slug: "table-qa",
+      filename: "15.md",
+      title: 'Table Question Answering',
+    },
+    {
+      slug: "doc-class-index",
+      filename: "16.md",
+      title: 'Document Classification at Index',
     },
   ],
 };

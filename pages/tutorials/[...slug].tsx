@@ -185,7 +185,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -303,8 +303,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
       props: {
         ...layoutProps,
         source: markup,
-      },
-      revalidate: 3600,
+      }
     };
   } catch (e) {
     console.log(e);
