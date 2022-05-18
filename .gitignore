@@ -13,6 +13,10 @@
 /.next/
 /out/
 
+# these are always regenerated and should never be added
+/public/robots.txt
+/public/sitemap.xml
+
 # production
 /build
 

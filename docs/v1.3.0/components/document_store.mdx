@@ -103,8 +103,8 @@ Initialising a new DocumentStore within Haystack is straightforward.
                     <code>assert new_document_store.faiss_index_factory_str == "Flat"</code>
                 </pre>
                 While `my_faiss_index.faiss` contains the index, my_faiss_index.json
-                contains the parameters used to inizialize it (like faiss_index_factory_store). 
-                This configuration file is necessary for load() to work. It simply contains 
+                contains the parameters used to inizialize it (like faiss_index_factory_store).
+                This configuration file is necessary for load() to work. It simply contains
                 the initial parameters in a JSON format.<br></br>
                 For example, a hand-written configuration file for the above FAISS index could look like:<br></br>
                 <pre>
@@ -163,8 +163,7 @@ Initialising a new DocumentStore within Haystack is straightforward.
             title: "Pinecone",
             content: (
                 <div>
-                To initialize the Pinecone document store, provide an API key and Pinecone cloud environment. To obtain the API key, <a href="https://app.pinecone.io">create a free Pinecone account</a>. The enviroment is <b>us-west1-gcp</b> by default. 
-               
+                To initialize the Pinecone document store, provide an API key and Pinecone cloud environment. To obtain the API key, <a href="https://app.pinecone.io">create a free Pinecone account</a>. The enviroment is <b>us-west1-gcp</b> by default.
                 <pre>
                     <code>import os</code>
                     <code>from haystack.document_store import PineconeDocumentStore</code>
@@ -401,7 +400,6 @@ The Document Stores have different characteristics. You should choose one depend
                 </div>
             )
         }
-
     ]}
 />
 
