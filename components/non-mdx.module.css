@@ -13,6 +13,7 @@
 
 .nonMdx img {
   @apply mb-4;
+  max-height: 70vh;
 }
 
 .nonMdx code {
