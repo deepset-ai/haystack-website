@@ -19,5 +19,6 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       - run: yarn haystack
-      - run: yarn dev &
+      - run: yarn build
+      - run: yarn start &
       - run: yarn linkcheck
