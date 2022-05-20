@@ -13,6 +13,7 @@ async function main() {
   versions = [""].concat(versions);
   console.log(versions);
 
+  var success: boolean = true;
   for (var version of versions) {
     const localUrl: string = `http://localhost:3000/overview/${version}/intro`;
     const cmd: string = `wget --spider -r -nd -nv -H -l 1 --exclude-domains ${excludeDomains} -o ${logFile}  ${localUrl}`;
@@ -25,12 +26,17 @@ async function main() {
         console.log(
           red(`error checking ${localUrl}: `) + crawlingLogs.substring(idx)
         );
-        process.exitCode = 1;
-        return;
+        success = false;
       }
 
       console.log(green("success ") + `No broken links found in ${localUrl}`);
     });
+  }
+
+  // fail the check if even one URL has broken links
+  if (!success) {
+    process.exitCode = 1;
+    return;
   }
 }
 
