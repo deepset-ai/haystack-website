@@ -5,7 +5,7 @@ import * as fs from "fs";
 const logFile: string = "linkcheck.log";
 const localUrl: string = "http://localhost:3000";
 const excludeDomains: string = "googletagmanager.com";
-const cmd: string = `wget --spider -r -nd -nv -H -l 1 --exclude-domains ${excludeDomains} -o ${logFile}  ${localUrl}`;
+const cmd: string = `wget --spider -r -nd -nv -H -l 1 -w 1 --exclude-domains ${excludeDomains} -o ${logFile}  ${localUrl}`;
 
 console.log(`Crawling ${localUrl} recursively...`);
 
