@@ -9,7 +9,6 @@ async function main() {
 
   var versions = await getHaystackReleaseTagNames();
   versions = versions.filter((tagName) => tagName.startsWith("v"));
-  versions = versions.slice(0, 5);
   // prepend `latest` version, i.e. no version string in the URL
   versions = [""].concat(versions);
   console.log(versions);
