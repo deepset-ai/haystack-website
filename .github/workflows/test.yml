@@ -1,0 +1,24 @@
+name: 'build-test'
+on:
+  # rebuild at every commit on PRs and main branch
+  pull_request:
+  push:
+    branches:
+      - source
+
+
+jobs:
+  # Build the NextJS app and Run the link checker
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn haystack
+      - run: yarn build
+      - run: yarn start &
+      - run: yarn linkcheck
