@@ -15,4 +15,4 @@ jobs:
       - name: Github Action
         uses: readmeio/rdme@7.2.0
         with:
-          rdme: docs ./docs --key=4ShCDfmKYSGB7GyabeR3Z0S2mSKOwvUT --version=2.0
+          rdme: docs ./docs --key="4ShCDfmKYSGB7GyabeR3Z0S2mSKOwvUT" --version=1.0
