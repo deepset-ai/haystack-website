@@ -1,5 +1,5 @@
 import { green, red } from "chalk";
-import { exec } from "child_process";
+import { execSync } from "child_process";
 import * as fs from "fs";
 import { getHaystackReleaseTagNames } from "../lib/github";
 
@@ -11,7 +11,6 @@ async function main() {
   versions = versions.filter((tagName) => tagName.startsWith("v"));
   // prepend `latest` version, i.e. no version string in the URL
   versions = [""].concat(versions);
-  console.log(versions);
 
   var success: boolean = true;
   for (var version of versions) {
@@ -19,18 +18,17 @@ async function main() {
     const cmd: string = `wget --spider -r -nd -nv -H -l 1 --exclude-domains ${excludeDomains} -o ${logFile}  ${localUrl}`;
 
     console.log(`Crawling ${localUrl} recursively...`);
-    exec(cmd, (error, stdout, stderr) => {
-      const crawlingLogs: string = fs.readFileSync(logFile, "utf8");
-      const idx: number = crawlingLogs.search(/Found \d+ broken link[s]?\./g);
-      if (idx != -1) {
-        console.log(
-          red(`error checking ${localUrl}: `) + crawlingLogs.substring(idx)
-        );
-        success = false;
-      }
+    execSync(cmd);
+    const crawlingLogs: string = fs.readFileSync(logFile, "utf8");
+    const idx: number = crawlingLogs.search(/Found \d+ broken link[s]?\./g);
+    if (idx != -1) {
+      console.log(
+        red(`error checking ${localUrl}: `) + crawlingLogs.substring(idx)
+      );
+      success = false;
+    }
 
-      console.log(green("success ") + `No broken links found in ${localUrl}`);
-    });
+    console.log(green("success ") + `No broken links found in ${localUrl}`);
   }
 
   // fail the check if even one URL has broken links
