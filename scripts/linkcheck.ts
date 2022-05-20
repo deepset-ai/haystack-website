@@ -20,6 +20,7 @@ async function main() {
     console.log(`Crawling ${localUrl} recursively...`);
     try {
       execSync(cmd);
+      console.log(green("success ") + `No broken links found in ${localUrl}`);
     } catch (err) {
       console.log(red(err));
     }
@@ -32,8 +33,6 @@ async function main() {
       );
       success = false;
     }
-
-    console.log(green("success ") + `No broken links found in ${localUrl}`);
   }
 
   // fail the check if even one URL has broken links
