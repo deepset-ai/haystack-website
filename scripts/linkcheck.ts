@@ -15,10 +15,15 @@ async function main() {
   var success: boolean = true;
   for (var version of versions) {
     const localUrl: string = `http://localhost:3000/overview/${version}/intro`;
-    const cmd: string = `wget --spider -r -nd -nv -H -l 1 --exclude-domains ${excludeDomains} -o ${logFile}  ${localUrl}`;
+    const cmd: string = `wget --spider -r -nd -nv -H -l 1 --exclude-domains ${excludeDomains} -o ${logFile} ${localUrl}`;
 
     console.log(`Crawling ${localUrl} recursively...`);
-    execSync(cmd);
+    try {
+      execSync(cmd);
+    } catch (err) {
+      console.log(red(err));
+    }
+
     const crawlingLogs: string = fs.readFileSync(logFile, "utf8");
     const idx: number = crawlingLogs.search(/Found \d+ broken link[s]?\./g);
     if (idx != -1) {
