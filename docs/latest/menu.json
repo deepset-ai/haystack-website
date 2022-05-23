@@ -27,7 +27,7 @@
       {"slug": "rest-api", "title": "REST API"},
       {"slug": "rest-api-definition", "title": "REST API Definition"},
       {"slug": "annotation", "title": "Annotation Tool"},
-      {"slug": "pseudo_label_generator", "title": "Pseudo Label Generator"}
+      {"slug": "pseudo-label-generator", "title": "Pseudo Label Generator"}
     ]
   },
   {
