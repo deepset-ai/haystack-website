@@ -53,6 +53,8 @@ In most cases, an answer is considered correct if it matches the gold answer in 
 
 Specifying the answer or document scope comes in handy if you want to ensure that an answer is considered correct only if it exists within a specific context. It's especially useful for short answers, such as dates ("2004") or names of places ("Berlin"). Use the `answer_scope` (for question answering) or `document_scope` (for document retrieval) parameter of `calculate_metrics` to specify the scope in which the answer or document is considered correct. 
 
+If you want to try different preprocessors in your indexing pipeline with the same set of labels, the `context` value of `document_scope` is what you need. Using different preprocessors usually means that you end up with a different set of documents (the number of documents varies depending on the parameters set for a preprocessor) ultimately resulting in different document IDs. That's why you can't rely on document ID matching. The `context` value of `document_scope` solves that by ussing fuzzy string matchin between documents and labels. 
+
 For more information, see the [Evaluation Tutorial](/tutorials/evaluation).
 
 
