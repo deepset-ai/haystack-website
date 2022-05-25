@@ -118,12 +118,12 @@ Click a tab to read more about each converter and see how to initialize it:
   ]}
 />
 
-Haystack also has a `convert_files_to_dicts()` utility function that
+Haystack also has a `convert_files_to_docs()` utility function that
 will convert all txt or pdf files in a given directory.
 
 ```
-from haystack.utils import convert_files_to_dicts
-docs = convert_files_to_dicts(dir_path=doc_dir)
+from haystack.utils.preprocessing import convert_files_to_docs
+docs = convert_files_to_docs(dir_path=doc_dir)
 ```
 
 <div style={{ marginBottom: "3rem" }} />
