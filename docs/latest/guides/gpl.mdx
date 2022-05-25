@@ -11,7 +11,7 @@ If you want to find out more, here's the original [GPL paper](https://arxiv.org/
 Here's what happens if you want to use GPL to adapt a dense retriever to a new domain:
 1. A pretrained query-generation model generates questions for your documents. The original model used for that was the T5 encoder-decoder model, which is similar to the Haystack question generator. 
 2. A retrieval system uses the generated queries to retrieve negative passages. Negative passages are documents that are not relevant to the query. 
-3. The dense retriever is trained using the genrated queries, the source document, and the negative passages. It is trained to give high relevancy scores to the source document but low relevancy scores to a negative passage. This should improve the effectiveness of the dense retriever in the new domain.
+3. The dense retriever is trained using the generated queries, the source document, and the negative passages. It is trained to give high relevancy scores to the source document but low relevancy scores to a negative passage. This should improve the effectiveness of the dense retriever in the new domain.
 
 ## How It Works in Haystack
 
