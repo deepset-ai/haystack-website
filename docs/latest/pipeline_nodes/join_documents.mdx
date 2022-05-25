@@ -17,7 +17,7 @@ To use JoinDocuments in a Pipeline, run the following.
 Here the outputs of the ESRetriever and the DPRRetriever are combined by JoinDocuments.
 
 ```python
-from haystack.nodes import Pipeline
+from haystack.pipelines import Pipeline
 from haystack.nodes import JoinDocuments, QueryClassifier
 
 join_documents = JoinDocuments(
