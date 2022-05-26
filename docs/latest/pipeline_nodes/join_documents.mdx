@@ -13,7 +13,17 @@ This allows for the merging of two separate Pipeline branches.
 
 ## Usage
 
-To use JoinDocuments in a Pipeline, run the following.
+* To initialize the Node, run:
+```python
+from haystack.nodes import JoinDocuments, QueryClassifier
+
+join_documents = JoinDocuments(
+    join_mode="concatenate",
+    top_k_join=10
+)
+```
+
+* To use `JoinDocuments` in a Pipeline, run the following code.
 Here the outputs of the ESRetriever and the DPRRetriever are combined by JoinDocuments.
 
 ```python

@@ -1,8 +1,7 @@
 # Entity Extractor
 
-The EntityExtractor node extracts predefined entities out of a piece of text.
-The most common kind of entity extraction is Named Entity Extraction (NER) but
-this Node could also be used, as an example, to label each word by part of speech.
+The EntityExtractor Node extracts predefined entities out of a piece of text.
+Its most common use case is Named Entity Extraction (NER) but you can also use it, for example, to label each word by part of speech.
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -23,7 +22,7 @@ from haystack.nodes import EntityExtractor
 entity_extractor = EntityExtractor(model_name_or_path="dslim/bert-base-NER")
 ```
 
-To run EntityExtractor as a standalone node, use the extract() method:
+To run EntityExtractor as a stand-alone node, use the `extract()` method:
 
 ```
 entities = entity_extractor.extract(
@@ -33,8 +32,8 @@ entities = entity_extractor.extract(
  )
 ```
 
-The return format is a list of dictionaries containing, the entity string,
-the group that the entity belongs to, the start and end character indices and the model's confidence.
+The return format is a list of dictionaries containing the entity string,
+the group that the entity belongs to, the start and end character indices, and the model's confidence.
 Note that multi-token entities such as `European Union` are merged together even though the model is making predictions on a per token level.
 
 ```
@@ -72,8 +71,7 @@ All documents in the document store have extracted entities as part of their met
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Tip**: You will want to make sure that the `EntityExtractor` comes after the `PreProcessor` since the document splitting
-performed by the `PreProcessor` will break alignment with the start and end character indices returned by the `EntityExtractor`.
+**Tip**: Ensure that the `EntityExtractor` comes after the `PreProcessor` because `PreProcessor` splits documents which breaks the alignment with the start and end character indices that the `EntityExtractor` returns.
 
 </div>
 
@@ -91,29 +89,29 @@ pipeline.run(file_paths=file_paths)
 
 ### Entity Relation
 
-It can also be used in conjunction with question answering as a kind of entity relation extraction.
+You can use `EntityExtractor` in conjunction with question answering as a kind of entity relation extraction.
 After extracting all entities within a text, you can form a question that represents a relation using an entity and a template.
-For example, after extracting all person names in a set of documents you can then ask the question,
+For example, after extracting all person names from a set of documents, you can then ask the question,
 "Who is the father of [PERS]?".
 In the most naive implementation, any other entities that occur in the answer to this question can be considered part of the relational triple.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
 **Tip**: If you are using the `EntityExtractor` in a question answering pipeline,
-check out our utility function `haystack.extractor.entities.simplify_ner_for_qa` which will print
-out predicted QA answers as well as the NER entities which are contained in them.
+check out our utility function `haystack.extractor.entities.simplify_ner_for_qa` which prints
+out predicted QA answers together with the NER entities which are contained in them.
 
 </div>
 
 ### Metadata Filtering
 
 Performing entity extraction can be a powerful way to generate metadata data
-by which your documents can filtered.
+by which your documents can be filtered.
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
 **Note**: All the information needed to perform metadata filtering is already there but the format of the extracted entities is not in
 the same format as that of other metadata fields.
-If using entities for metadata filtering is of interest to you, please feel free to open an issue in our Github!
+If you want to use entities for metadata filtering, feel free to open an issue in our Github!
 
 </div>

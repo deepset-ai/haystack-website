@@ -9,15 +9,23 @@ The Reader is also known as an Open-Domain QA system in Machine Learning speak.
 |__Position in a Pipeline__| Generally after a Retriever |
 |__Input__       | [Documents](/components/documents-answers-labels#document)                                                                                                                                                                  |
 |__Output__      | [Answers](/components/documents-answers-labels#answer)                                                                                                             |
-|__Classes__     | FARMReader<br />TransformersReader                                                                                                          |
+|__Classes__     | FARMReader<br />TransformersReader<br />TableReader                                                                                                          |
 |||
 
 **Pros**
 
-- Built on the latest transformer based language models
+- Built on the latest transformer-based language models
 - Strong in their grasp of semantics
 - Sensitive to syntactic structure
 - State-of-the-art in QA tasks like SQuAD and Natural Questions
+
+Haystack Readers contain all the components of end-to-end, open-domain QA systems, including:
+* Loading of model weights
+* Tokenization
+* Embedding computation
+* Span prediction
+* Candidate aggregation
+
 
 **Cons**
 
@@ -101,9 +109,9 @@ prediction = pipe.run(
 With the `TableReader`, you can get answers to your questions even if the answer is buried in a table.
 It is designed to use the [TAPAS](https://github.com/google-research/tapas) model created by Google.
 
-These models are able to return a single single cell as answer
+These models are able to return a single cell as an answer
 or pick a set of cells and then perform an aggregation operation to form a final answer.
-Have a look at our guide on [Table Question Answering](/guides/table-qa) to find out more.
+To find out more, have a look at our guide on [Table Question Answering](/guides/table-qa).
 
 
 ## Models
@@ -115,7 +123,7 @@ Models trained on different data may be more suited to certain domains.
 
 You will find many open source Reader models on the [HuggingFace Model Hub](https://huggingface.co/models?pipeline_tag=question-answering).
 These models are directly usable in Haystack if you provide the Model Hub name to the Reader's initialization.
-Haystack will automatically handle the downloading and loading of the model.
+Haystack automatically handles the downloading and loading of the model.
 
 If you're unsure which model to use, here are our recommendations that you can start with:
 
@@ -133,10 +141,10 @@ If you're unsure which model to use, here are our recommendations that you can s
               <code>reader = FARMReader("deepset/roberta-base-squad2")</code>
             </pre>
             <ul>
-              <li>Pro: Strong all round model that performs capably on a Nvidia V100 GPU</li>
+              <li>Pro: Strong all round model that performs capably on a Nvidia V100 GPU.</li>
               <li>
                 Con: There are other models that are either faster or more
-                accurate
+                accurate.
               </li>
             </ul>
           </div>
@@ -151,9 +159,9 @@ If you're unsure which model to use, here are our recommendations that you can s
               <code>reader = FARMReader("deepset/minilm-uncased-squad2")</code>
             </pre>
             <ul>
-              <li>Pro: 40% smaller, 50% faster inference speed and better accuracy than BERT base</li>
+              <li>Pro: 40% smaller, 50% faster inference speed and better accuracy than BERT base.</li>
               <li>
-                Con: Still doesn’t match the best base sized models in accuracy
+                Con: Still doesn’t match the best base sized models in accuracy.
               </li>
             </ul>
           </div>
@@ -168,11 +176,11 @@ If you're unsure which model to use, here are our recommendations that you can s
             </pre>
             <ul>
               <li>
-                Pro: Better accuracy than any other open source model in QA
+                Pro: Better accuracy than any other open source model in QA.
               </li>
               <li>
-                Con: The computational power needed make it impractical for most
-                use cases
+                Con: The computational power needed makes it impractical for most
+                use cases.
               </li>
             </ul>
           </div>
@@ -193,10 +201,10 @@ If you're unsure which model to use, here are our recommendations that you can s
               </code>
             </pre>
             <ul>
-              <li>Pro: Strong all round model that performs capably on a Nvidia V100 GPU</li>
+              <li>Pro: Strong all round model that performs capably on a Nvidia V100 GPU.</li>
               <li>
                 Con: There are other models that are either faster or more
-                accurate
+                accurate.
               </li>
             </ul>
           </div>
@@ -213,9 +221,9 @@ If you're unsure which model to use, here are our recommendations that you can s
               </code>
             </pre>
             <ul>
-              <li>Pro: 40% smaller, 50% faster inference speed and better accuracy than BERT base</li>
+              <li>Pro: 40% smaller, 50% faster inference speed and better accuracy than BERT base.</li>
               <li>
-                Con: Still doesn’t match the best base sized models in accuracy
+                Con: Still doesn’t match the best base sized models in accuracy.
               </li>
             </ul>
           </div>
@@ -231,11 +239,11 @@ If you're unsure which model to use, here are our recommendations that you can s
             </pre>
             <ul>
               <li>
-                Pro: Better accuracy than any other open source model in QA
+                Pro: Better accuracy than any other open source model in QA.
               </li>
               <li>
                 Con: The computational power needed make it impractical for most
-                use cases
+                use cases.
               </li>
             </ul>
           </div>
@@ -245,11 +253,11 @@ If you're unsure which model to use, here are our recommendations that you can s
   ]}
 />
 
-## Fine-tuning, Saving, Loading and Converting
+## Fine-tuning, Saving, Loading, and Converting
 
 In Haystack, it is possible to fine-tune your FARMReader model on any SQuAD format QA dataset.
-To kick off training, call the train() method.
-This method will also save your model in the specified save directory.
+To kick off training, call the `train()` method.
+This method also saves your model in the specified directory.
 
 ```python
 reader.train(
@@ -267,9 +275,9 @@ If you want to load the model at a later point, initialize a `FARMReader` object
 new_reader = FARMReader(model_name_or_path="my_model")
 ```
 
-If you would like to convert your model from or into the HuggingFace Transformers format we provide a conversion function.
-Calling `reader.inferencer.model.convert_to_transformers()` will return a list of HuggingFace models.
-This can be particularly useful if you'd like to upload the model to the HuggingFace Model Hub.
+To convert your model from or into the Hugging Face Transformers format, use a conversion function.
+Calling `reader.inferencer.model.convert_to_transformers()` returns a list of Hugging Face models.
+This can be particularly useful if want to upload the model to the Hugging Face Model Hub.
 
 ```python
 transformers_models = reader.inferencer.model.convert_to_transformers()
@@ -277,17 +285,17 @@ transformers_models = reader.inferencer.model.convert_to_transformers()
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Tutorial:** If you'd like a hands on example, check out our tutorial on fine-tuning [here](/tutorials/fine-tuning-a-model)
+**Tutorial:** For a hands-on example, check out our [tutorial on fine-tuning](/tutorials/fine-tuning-a-model).
 
 </div>
 
 ## Confidence Scores
 
 When printing the full results of a Reader,
-you will see that each prediction is accompanied
+each prediction is accompanied
 by a value in the range of 0 to 1 reflecting the model's confidence in that prediction.
 
-In the output of `print_answers()`, you will find the model's confidence score in dictionary key called `score`.
+In the output of `print_answers()`, you can find the model's confidence score in a dictionary key called `score`.
 
 ```python
 from haystack.utils import print_answers
@@ -310,17 +318,16 @@ print_answers(prediction, details="all")
 }
 ```
 
-The intuition behind this score is the following: if a model has on average a confidence score of 0.9 that means we can expect the model's predictions to be correct in about 9 out of 10 cases.
+The intuition behind this score is the following: if a model has on average a confidence score of 0.9, that means we can expect the model's predictions to be correct in about 9 out of 10 cases.
 However, if the model's training data strongly differs from the data it needs to make predictions on, we cannot guarantee that the confidence score and the model's accuracy are well aligned.
-In order to better align this confidence score with the model's accuracy, finetuning needs to be performed
-on a specific dataset.
-To this end, the reader has a method `calibrate_confidence_scores(document_store, device, label_index, doc_index, label_origin)`.
+In order to better align this confidence score with the model's accuracy, you should fine-tune your model on a specific dataset.
+The Reader has a method `calibrate_confidence_scores(document_store, device, label_index, doc_index, label_origin)` that you can use.
 The parameters of this method are the same as for the `eval()` method because the calibration of confidence scores is performed on a dataset that comes with gold labels.
 The calibration calls the `eval()` method internally and therefore needs a DocumentStore containing labeled questions and evaluation documents.
 
 Have a look at this [FARM tutorial](https://github.com/deepset-ai/FARM/blob/master/examples/question_answering_confidence.py)
 to see how to compare calibrated confidence scores with uncalibrated confidence scores within FARM.
-Note that a finetuned confidence score is specific to the domain that it is finetuned on.
+Note that a fine-tuned confidence score is specific to the domain that it is fine-tuned on.
 There is no guarantee that this performance can transfer to a new domain.
 
 Having a confidence score is particularly useful in cases where you need Haystack to work with a certain accuracy threshold.
@@ -335,16 +342,16 @@ on to a fallback system.
 
 Apart from the **model weights**, Haystack Readers contain all the components found in end-to-end open domain QA systems.
 This includes **tokenization**, **embedding computation**, **span prediction** and **candidate aggregation**.
-While the handling of model weights is the same between the FARM and Transformers libraries, their QA pipelines differ in some ways.
+FARM and Transformers libraries handle weights in the same way but their QA pipelines differ in some ways.
 The major points are:
 
-- The **TransformersReader** will sometimes predict the same span twice while duplicates are removed in the **FARMReader**
+- The **TransformersReader** sometimes predicts the same span twice while the **FARMReader** removes duplicates.
 
-- The **FARMReader** currently uses the tokenizers from the HuggingFace Transformers library while the **TransformersReader** uses the tokenizers from the HuggingFace Tokenizers library
+- The **FARMReader** currently uses the tokenizers from the Hugging Face Transformers library while the **TransformersReader** uses the tokenizers from the Hugging Face Tokenizers .
 
-- Start and end logits are normalized per passage and multiplied in the **TransformersReader** while they are summed and not normalised in the **FARMReader**
+- Start and end logits are normalized per passage and multiplied in the **TransformersReader** while they are summed and not normalised in the **FARMReader**.
 
-If you’re interested in the finer details of these points, have a look at [this](https://github.com/deepset-ai/haystack/issues/248#issuecomment-661977237) GitHub comment.
+If you’re interested in the finer details of these points, have a look at [this Github comment](https://github.com/deepset-ai/haystack/issues/248#issuecomment-661977237).
 
 We see value in maintaining both kinds of Readers since Transformers is a very familiar library to many of Haystack’s users
 but we at deepset can more easily update and optimise the FARM pipeline for speed and performance.
@@ -378,22 +385,18 @@ finetuned_reader = FARMReader(save_dir)
 Language models form the core of most modern NLP systems and that includes the Readers in Haystack.
 They build a general understanding of language when performing training tasks such as Masked Language Modeling or Replaced Token Detection
 on large amounts of text.
-Well trained language models capture the word distribution in one or more languages
+Well-trained language models capture the word distribution in one or more languages
 but more importantly, convert input text into a set of word vectors that capture elements of syntax and semantics.
 
-In order to convert a language model into a Reader model, it needs first to be trained on a Question Answering dataset.
-To do so requires the addition of a question answering prediction head on top of the language model.
-The task can be thought of as a token classification task where every input token is assigned a probability of being
+To convert a language model into a Reader model, you must firts train it on a Question Answering dataset.
+To do so, you must add a question answering prediction head on top of the language model.
+You can think of it as a token classification task where every input token is assigned a probability of being
 either the start or end token of the correct answer.
-In cases where the answer is not contained within the passage, the prediction head is also expected to return a `no_answer` prediction.
+If a passage doesn't contain the answer, the prediction head should return a `no_answer` prediction.
 
 <!-- _comment: !! Diagram of language model / prediction head !! -->
 
-Since language models are limited in the number of tokens which they can process in a single forward pass,
-a sliding window mechanism is implemented to handle variable length documents.
-This functions by slicing the document into overlapping passages of (approximately) `max_seq_length`
-that are each offset by `doc_stride` number of tokens.
-These can be set when the Reader is initialized.
+Because the number of tokens that language models can process in a single forward pass is limited, we implemented a sliding window mechanism to handle documents of variable length. This mechanism slices the document into overlapping passages of approximately `max_seq_len`. Each passage is offset by a `doc_stride` number of tokens. You can set these parameters when initializing the Reader:
 
 <Tabs
   options={[
@@ -428,4 +431,4 @@ These can be set when the Reader is initialized.
 />
 
 Predictions are made on each individual passage and the process of aggregation picks the best candidates across all passages.
-If you’d like to learn more about what is happening behind the scenes, have a look at [this](https://medium.com/deepset-ai/modern-question-answering-systems-explained-4d0913744097) article.
+To learn about what is happening behind the scenes, have a look at [Modern Question Answering Systems Explained](https://medium.com/deepset-ai/modern-question-answering-systems-explained-4d0913744097).
