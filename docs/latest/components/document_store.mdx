@@ -148,7 +148,7 @@ Initialising a new DocumentStore within Haystack is straightforward.
             title: "Weaviate",
             content: (
                 <div>
-                The WeaviateDocumentStore requires a running Weaviate Server.
+                The WeaviateDocumentStore requires a running Weaviate Server version 1.8 or later.
                 You can start a basic instance like this (see the <a href="https://www.semi.technology/developers/weaviate/current/">Weaviate docs</a> for details):
                 <pre>
                     <code>docker run -d -p 8080:8080 --env AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED='true' --env PERSISTENCE_DATA_PATH='/var/lib/weaviate' semitechnologies/weaviate:1.12.0</code>
