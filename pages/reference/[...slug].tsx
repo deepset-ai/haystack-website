@@ -6,7 +6,7 @@ import {
   InferGetStaticPropsType,
 } from "next";
 import Layout from "components/Layout";
-import { getDownloadUrl } from "lib/github";
+import { getRelativePath, getRawURL } from "lib/github";
 import {
   markdownToHtml,
   getVersionFromParams,
@@ -31,6 +31,7 @@ import { referenceFilesV050 } from "lib/constants";
 import { referenceFilesV040 } from "lib/constants";
 import matter from "gray-matter";
 import { join } from "path";
+import fs from "fs";
 
 export default function ReferenceDoc({
   menu,
@@ -188,7 +189,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -274,21 +275,14 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     }
 
     const version = await getVersionFromParams(params.slug);
-
-    const downloadUrl = await getDownloadUrl({
-      repoPath: referenceFilesLatest.repoPath,
-      filename: item.filename,
-      version,
-    });
-
-    if (!downloadUrl) {
+    const filePath = getRelativePath(item.filename, referenceFilesLatest.repoPath, version);
+    if (!filePath) {
       return {
         notFound: true,
       };
     }
-
-    const res = await fetch(downloadUrl);
-    const fileContent = await res.text();
+    const rawURL = getRawURL(filePath)
+    const fileContent = fs.readFileSync(filePath).toString();
 
     // remove once all markdown files have correctly formatted front matter:
     const fileContentWithFrontMatter = fileContent
@@ -296,7 +290,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
       .replace("--->", "---");
 
     const { content } = matter(fileContentWithFrontMatter);
-    const { markup } = await markdownToHtml({ content, downloadUrl });
+    const { markup } = await markdownToHtml({ content, rawURL });
 
     const type = "";
 
@@ -315,8 +309,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
       props: {
         ...layoutProps,
         source: markup,
-      },
-      revalidate: 3600,
+      }
     };
   } catch (e) {
     console.log(e);

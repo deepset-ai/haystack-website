@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { PencilAltIcon } from "@heroicons/react/solid";
+import { PencilAltIcon, UserGroupIcon } from "@heroicons/react/solid";
 import { StaticPageProps } from "lib/utils";
 import styles from "./toc.module.css";
+import { githubDiscussionLink } from "lib/constants";
 
 type TocProps = Pick<StaticPageProps, "toc" | "editOnGitHubLink" | "stars">;
 
@@ -37,21 +38,38 @@ export default function Toc({ stars, editOnGitHubLink, toc }: TocProps) {
         </a>
       </Link>
       {editOnGitHubLink && (
-        <Link href={editOnGitHubLink}>
-          <a
-            href={editOnGitHubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block mb-10"
-          >
-            <div className="border-2 border-gray-400 hover:border-gray-700 rounded px-4 py-2 hover:cursor-pointer text-sm flex items-center justify-center">
-              <PencilAltIcon className="hidden h-5 w-5 mr-1 sm:block dark:text-off-white" />
-              <span className="hidden sm:block dark:text-off-white">
-                Edit on GitHub
-              </span>
-            </div>
-          </a>
-        </Link>
+        <>
+          <Link href={editOnGitHubLink}>
+            <a
+              href={editOnGitHubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mb-4"
+            >
+              <div className="border-2 border-gray-400 hover:border-gray-700 rounded px-4 py-2 hover:cursor-pointer text-sm flex items-center justify-center">
+                <PencilAltIcon className="hidden h-5 w-5 mr-2 sm:block dark:text-off-white" />
+                <span className="hidden sm:block dark:text-off-white">
+                  Edit on GitHub
+                </span>
+              </div>
+            </a>
+          </Link>
+          <Link href={githubDiscussionLink}>
+            <a
+              href={githubDiscussionLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mb-10"
+            >
+              <div className="border-2 border-gray-400 hover:border-gray-700 rounded px-4 py-2 hover:cursor-pointer text-sm flex items-center justify-center">
+                <UserGroupIcon className="hidden h-5 w-5 mr-2 sm:block dark:text-off-white" />
+                <span className="hidden sm:block dark:text-off-white">
+                  Start a Discussion!
+                </span>
+              </div>
+            </a>
+          </Link>
+        </>
       )}
       {toc && (
       <ul className="border-l-4 pl-4">

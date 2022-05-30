@@ -6,7 +6,7 @@ import {
 } from "next";
 import styles from "components/non-mdx.module.css";
 import Layout from "components/Layout";
-import { getDownloadUrl } from "lib/github";
+import { getRelativePath, getRawURL } from "lib/github";
 import {
   markdownToHtml,
   getVersionFromParams,
@@ -30,6 +30,7 @@ import { tutorialFilesV060 } from "lib/constants";
 import { tutorialFilesV050 } from "lib/constants";
 import { tutorialFilesV040 } from "lib/constants";
 import matter from "gray-matter";
+import fs from "fs";
 
 export default function TutorialDoc({
   menu,
@@ -187,7 +188,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -271,22 +272,16 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
         notFound: true,
       };
     }
+
     const version = await getVersionFromParams(params.slug);
-
-    const downloadUrl = await getDownloadUrl({
-      repoPath: tutorialFilesLatest.repoPath,
-      filename: item.filename,
-      version,
-    });
-
-    if (!downloadUrl) {
+    const filePath = getRelativePath(item.filename, tutorialFilesLatest.repoPath, version);
+    if (!filePath) {
       return {
         notFound: true,
       };
     }
-
-    const res = await fetch(downloadUrl);
-    const fileContent = await res.text();
+    const rawURL = getRawURL(filePath)
+    const fileContent = fs.readFileSync(filePath).toString();
 
     // remove once all markdown files have correctly formatted front matter:
     const fileContentWithFrontMatter = fileContent
@@ -294,7 +289,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
       .replace("--->", "---");
 
     const { content } = matter(fileContentWithFrontMatter);
-    const { markup } = await markdownToHtml({ content, downloadUrl });
+    const { markup } = await markdownToHtml({ content, rawURL });
 
     const type = "";
 
@@ -313,8 +308,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
       props: {
         ...layoutProps,
         source: markup,
-      },
-      revalidate: 3600,
+      }
     };
   } catch (e) {
     console.log(e);

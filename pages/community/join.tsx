@@ -167,7 +167,7 @@ const handleSubmit = (event: any) =>  {
 
     return <div>
     <Head>
-        <title>Haystack Benchmarks</title>
+        <title>Haystack Community</title>
         <meta name="description" content="Haystack Slack" />
         <link rel="icon" href="/img/HaystackIcon.png" />
     </Head>
