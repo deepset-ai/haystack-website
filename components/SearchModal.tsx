@@ -115,7 +115,7 @@ export function SearchModal(props: {
               onClick={closeModal}
             >
               <div
-                className="relative inline-block bg-dark-blue rounded-lg transition-all w-[80vw] max-h-[80vh] overflow-y-auto no-scrollbar"
+                className="relative inline-block bg-dark-blue rounded-lg transition-all w-[80vw] max-h-[80vh] overflow-y-auto no-scrollbar drop-shadow-xl shadow-inner-light"
                 onClick={(e => e.stopPropagation())}
               >
                 <div className={`flex flex-row justify-center items-center h-20 px-5 ${showContent() ? 'border-b' : ''} border-white/20`}>

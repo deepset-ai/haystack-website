@@ -30,6 +30,9 @@ module.exports = {
       fontFamily: {
         sans: ["Greycliff CF", ...defaultTheme.fontFamily.sans],
       },
+      boxShadow: {
+        "inner-light": "inset 0 0 0 1px rgb(255 255 255 / 20%)"
+      }
     },
   },
   variants: {
