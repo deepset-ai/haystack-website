@@ -81,7 +81,7 @@ export default function Header({ docsType = "haystack" }: Props) {
       </Link>
       <div className="hidden lg:flex w-full justify-end">
         <div className="mr-8 xl:mr-12 2xl:mr-16">
-          <Link href="/overview/intro">
+          <Link href="/overview/intro" passHref>
             <div className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer">
               Haystack Docs
             </div>
@@ -95,14 +95,14 @@ export default function Header({ docsType = "haystack" }: Props) {
           </Link>
         </div> */}
         <div className="mr-8 xl:mr-12 2xl:mr-16">
-          <Link href="/benchmarks/latest">
+          <Link href="/benchmarks/latest" passHref>
             <div className="text-white font-bold lg:text-xl xl:text-2xl cursor-pointer">
               Benchmarks
             </div>
           </Link>
         </div>
         <div className="mr-8 xl:mr-12 2xl:mr-16">
-          <Link href="/community/join">
+          <Link href="/community/join" passHref>
             <div className="font-bold lg:text-xl xl:text-2xl cursor-pointer text-green-dark-theme">
               Join Slack
             </div>

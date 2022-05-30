@@ -5,6 +5,8 @@ type Meta = {
   items: { filename: string; title: string; slug: string }[];
 };
 
+export const githubDiscussionLink = "https://github.com/deepset-ai/haystack/discussions";
+
 export const referenceFilesLatest: Meta = {
   subMenuTitle: "API Reference",
   repoPath: "/_src/api/api/",
@@ -182,6 +184,16 @@ export const tutorialFilesLatest: Meta = {
       slug: "query-classifier",
       filename: "14.md",
       title: 'Query Classifier',
+    },
+    {
+      slug: "table-qa",
+      filename: "15.md",
+      title: 'Table Question Answering',
+    },
+    {
+      slug: "doc-class-index",
+      filename: "16.md",
+      title: 'Document Classification at Index',
     },
   ],
 };
@@ -364,6 +376,16 @@ export const tutorialFilesV140: Meta = {
       filename: "14.md",
       title: 'Query Classifier',
     },
+    {
+      slug: "table-qa",
+      filename: "15.md",
+      title: 'Table Question Answering',
+    },
+    {
+      slug: "doc-class-index",
+      filename: "16.md",
+      title: 'Document Classification at Index',
+    },
   ],
 };
 
@@ -544,6 +566,16 @@ export const tutorialFilesV130: Meta = {
       slug: "query-classifier",
       filename: "14.md",
       title: 'Query Classifier',
+    },
+    {
+      slug: "table-qa",
+      filename: "15.md",
+      title: 'Table Question Answering',
+    },
+    {
+      slug: "doc-class-index",
+      filename: "16.md",
+      title: 'Document Classification at Index',
     },
   ],
 };
@@ -726,6 +758,16 @@ export const tutorialFilesV120: Meta = {
       filename: "14.md",
       title: 'Query Classifier',
     },
+    {
+      slug: "table-qa",
+      filename: "15.md",
+      title: 'Table Question Answering',
+    },
+    {
+      slug: "doc-class-index",
+      filename: "16.md",
+      title: 'Document Classification at Index',
+    },
   ],
 };
 
@@ -907,6 +949,16 @@ export const tutorialFilesV110: Meta = {
       filename: "14.md",
       title: 'Query Classifier',
     },
+    {
+      slug: "table-qa",
+      filename: "15.md",
+      title: 'Table Question Answering',
+    },
+    {
+      slug: "doc-class-index",
+      filename: "16.md",
+      title: 'Document Classification at Index',
+    },
   ],
 };
 
@@ -1082,6 +1134,16 @@ export const tutorialFilesV100: Meta = {
       slug: "query-classifier",
       filename: "14.md",
       title: 'Query Classifier',
+    },
+    {
+      slug: "table-qa",
+      filename: "15.md",
+      title: 'Table Question Answering',
+    },
+    {
+      slug: "doc-class-index",
+      filename: "16.md",
+      title: 'Document Classification at Index',
     },
   ],
 };

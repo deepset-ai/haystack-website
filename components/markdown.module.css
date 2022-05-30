@@ -53,6 +53,10 @@
   @apply mb-6;
 }
 
+.markdown img { 
+  max-height: 70vh;
+}
+
 .markdown ul {
   @apply list-disc list-inside;
 }

@@ -2,34 +2,32 @@
 
 ### Getting Started
 
-First, install Next.js (if needed):
-
+First, install the dependencies (If you are running into issues with this,
+make sure to update Node to the latest version):
 ```bash
-npm install next react react-dom
-# or
-yarn install next 
+yarn install
 ```
 
-If you are running into issues with this, make sure to update Node to the latest version.
-
-Then, run the development server:
-
+Part of the documentation source lives within the [Haystack repo](https://github.com/deepset-ai/haystack)
+and the build system expects to find it locally, so before running the development
+server run this command to get a local copy of Haystack:
 ```bash
-npm run dev
-# or
+yarn haystack
+```
+
+At this point you can run the development server:
+```bash
 yarn dev
 ```
 
-If you're editing mdx files, run the following command to see your changes update automatically:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+When editing `.mdx` files, you can run the following command to see your changes update automatically:
 ```bash
-npm run dev:watch
-# or
 yarn dev:watch
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-Note: This setup is tested with node v14.17.5 - but might be incompatible to older/newer versions. 
+Note: This setup is tested with node v14.17.5 - but might be incompatible to older/newer versions.
 
 #### Environment Variables
 
@@ -61,16 +59,21 @@ These docs live in the `docs` directory, in the given version directory. The doc
 
 ### Tutorial & Reference Docs
 
-These docs live in the [Haystack repository](https://github.com/deepset-ai/haystack/tree/master/docs), in the given version directory. The docs are generated markdown files and we fetch these **at build time** using the GitHub API. Thanks to Vercel's [Incremental Static Regeneration](https://vercel.com/docs/next.js/incremental-static-regeneration), the static pages we create for these docs are always up-to-date. This means that if existing tutorials or references are changed, the changes will be visible on the docs website automatically.
+These docs live in the [Haystack repository](https://github.com/deepset-ai/haystack/tree/master/docs),
+in the given version directory. The docs are generated markdown files and must be fetched before the
+build starts. Thanks to Vercel's [Incremental Static Regeneration](https://vercel.com/docs/next.js/incremental-static-regeneration), the static pages we create for these docs are always up-to-date. This
+means that if existing tutorials or references are changed, the changes will be visible on the docs
+website automatically.
 
 ### Adding a new Tutorial Page
 
 In the Haystack repo, add an entry into `haystack/docs/_src/tutorials/tutorials/headers.py` that corresponds to your new tutorial. When you push your changes to any branch, there is a Github action that calls `haystack/docs/_src/tutorials/tutorials/convert_ipynb.py` to generate a `.md` version of the tutorial in the same folder. These `.md` files are generally called something like `12.md`.
 
-Then in this Haystack Website repo, you need to add an entry to `haystack-website/lib/constants.ts` to refer to the new `.md` file in Haystack. Please add the new file only to the latest version. If you remove files, you also have to remove it in the latest version. To make it appear in the left Table of Contents, you need to add a new entry to `haystack-website/docs/latest/menu.json`. 
+Then in this repo, you need to add an entry to `haystack-website/lib/constants.ts` to refer to the new `.md` file in Haystack. Please add the new file only to the latest version. If you remove files, you also
+have to remove it in the latest version. To make it appear in the left Table of Contents, you need to
+add a new entry to `haystack-website/docs/latest/menu.json`.
 
 For example:
-
 ```
 const res = await octokit.rest.repos.getContent({
   owner: "deepset-ai",
@@ -79,15 +82,13 @@ const res = await octokit.rest.repos.getContent({
   ref: HAYSTACK_BRANCH_NAME
 });
 ```
-
-
 ### Preview from non-master branches
 
 To preview docs that are on a non-master branch of the Haystack repo, you run this project locally and navigate to `lib/github.ts`, where you have to add a `ref` parameter to the `octokit.rest.repos.getContent` function call with the value of the branch name that you would like to preview. You also need to add the tutorials/references you would like to preview to `docs/{GIVEN_VERSION}/menu.json` and `lib/constants.ts`.
 
 ### Redirects In Case of Renaming or Restructuring Pages
 
-When renaming documentation pages, or restructuring the directories that they're contained in, the new filepath can cause old links to break. For example, when the pipeline_nodes grouping was created `components/reader.mdx` did not exist any more as it had changed to `pipeline_nodes/reader.mdx`. This meant that links on websites were broken. 
+When renaming documentation pages, or restructuring the directories that they're contained in, the new filepath can cause old links to break. For example, when the pipeline_nodes grouping was created `components/reader.mdx` did not exist any more as it had changed to `pipeline_nodes/reader.mdx`. This meant that links on websites were broken.
 
 To make sure links aren't broken please follow these steps:
 
@@ -101,19 +102,19 @@ To make sure links aren't broken please follow these steps:
       permanent: true,
     }
     ```
-    
+
    The `haystack-website/docs/generate_redirect_table.py` script will generate a set of suggested mappings. In cases where the directory structure has changed but the filename has stayed the same, this script will map from the old link to the new link in latest. In cases where the filename has changed, this script will identify the old link but not provide a suggestion for a new link. Update the `MANUAL_REDIRECTS` option to define any custom destinations.
 
-3. Push the changes to your branch and test that the old paths still work and point to the intended destination. You can do this by checking out the 
+3. Push the changes to your branch and test that the old paths still work and point to the intended destination. You can do this by checking out the
 Preview that Vercel will produce.
 
 ### Updating docs after a release
 
-When there's a new Haystack release, we need to create a directory for the new version within the local `/docs` directory. In this directory, we can write new overview and usage docs in .mdx (or manually copy over the ones from the previous version directory). Once this is done, the project will automatically fetch the reference and tutorial docs for the new version from GitHub. Bear in mind that a `menu.json` file needs to exist in every new version directory so that our Menu components know which page links to display. 
+When there's a new Haystack release, we need to create a directory for the new version within the local `/docs` directory. In this directory, we can write new overview and usage docs in .mdx (or manually copy over the ones from the previous version directory). Once this is done, the project will automatically fetch the reference and tutorial docs for the new version from GitHub. Bear in mind that a `menu.json` file needs to exist in every new version directory so that our Menu components know which page links to display.
 
 Moreover, we need to point the links, which are pointing to the latest version, to the new version. Update links in docs using `haystack-website/docs/update_links.py`. The command you run should look something like `python update_links.py -d v0.3.0 -v v0.3.0`. This script prints the changes to console. Have a scan through these as a sanity check.
 
-Additionally, the `referenceFiles` and `tutorialFiles` constants in `lib/constants` need to be updated with any new reference or tutorial docs that get created as part of a new release. During a release, please add a new object `referenceFiles` and `tutorialFiles` with the release number to file. This change has also implications on the files `tutorials/[...slug].tsx` and `reference/[...slug].tsx`. Please update the functions `getStaticPaths` and `getStaticProps` in both files with an array representing the latest version. 
+Additionally, the `referenceFiles` and `tutorialFiles` constants in `lib/constants` need to be updated with any new reference or tutorial docs that get created as part of a new release. During a release, please add a new object `referenceFiles` and `tutorialFiles` with the release number to file. This change has also implications on the files `tutorials/[...slug].tsx` and `reference/[...slug].tsx`. Please update the functions `getStaticPaths` and `getStaticProps` in both files with an array representing the latest version.
 
 In the [haystack](https://github.com/deepset-ai/haystack) repo, we have to release the api and tutorial docs by copying them to a new version folder as well. If you want to include here files from another branch than master follow **Preview from non-master branches**. **Lastly**, we have to update the constant specified in the `components/VersionSelect` component, so that we default to the new version when navigating between pages.
 
@@ -127,8 +128,13 @@ We use [Tailwind](https://tailwindcss.com) for CSS. It's a CSS utility library, 
 
 ## Deployment
 
-This application gets deployed on [Vercel](https://vercel.com). In the dashboard, connect the `haystack-website` repo to a new project and it should handle builds, preview environments (all branches other than master), and production environments (master branch) automatically.
+This application gets deployed on [Vercel](https://vercel.com). In the dashboard, connect the
+`haystack-website` repo to a new project and it should handle builds, preview environments (all branches
+other than master), and production environments (master branch) automatically. Be sure to include
+`yarn haystack` in the list of build commands.
 
 ## Future Work
 
-Convert the remote markdown files for references and tutorials to .mdx, so that we can inject React components into these. This would also allow for more code sharing between the overview+usage pages and tutorial+reference pages.
+Convert the remote markdown files for references and tutorials to .mdx, so that we can inject React
+components into these. This would also allow for more code sharing between the overview+usage pages and
+tutorial+reference pages.

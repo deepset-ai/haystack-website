@@ -20,7 +20,7 @@ res = p.run(query="What did Einstein work on?")
 
 ## Initialize a Pipeline
 
-To start building your custom pipeline, you’ll need to initialize an object of the base Pipeline class:
+To start building your custom pipeline, you need to initialize an object of the base Pipeline class:
 
 ``` python
 from haystack import Pipeline
@@ -54,7 +54,7 @@ pipeline.add_node(component=Branch2(), name='Branch2',
                   inputs=['TopicClassifier.output_2'])
 ```
 
-Under the hood, the nodes are placed in a queue and executed one by one when the `run()` method is invoked. The output of the last node in the queue is the output of the entire pipeline.
+Under the hood, the nodes are placed in a queue and executed one by one when the `run()` or `run_batch()` method is invoked. The output of the last node in the queue is the output of the entire pipeline.
 
 When you create a custom pipeline, you need to pay extra care that each node’s output is compatible with the input of the successive node in the chain. Otherwise, your system will throw an error at runtime.
 
@@ -62,11 +62,11 @@ When you create a custom pipeline, you need to pay extra care that each node’s
 
 ## Arguments
 
-Each node in a Pipeline defines the arguments the run() method accepts. The Pipeline class takes care of passing relevant
-arguments to the node. In addition to mandatory inputs like `query`, the `run()` accepts optional node parameters like
-`top_k` with the `params` argument. For instance, `params={"top_k": 5}` will set the `top_k` of all nodes as 5. To
-target params to a specific node, the node name can be explicitly specified as `params={"Retriever": {"top_k": 5}}`.
+Each node in a Pipeline defines the arguments the `run()` and `run_batch()` methods accept. The Pipeline class takes care of passing relevant
+arguments to the node. In addition to mandatory inputs like `query` and `queries`, `run()` and `run_batch()` accept optional node parameters, such as the number of documents to display (`top_k`) with the `params` argument. For instance, `params={"top_k": 5}` sets the `top_k` of all nodes to `5`. To
+target parameters to a specific node, you can explicitly specify the node name, for example: `params={"Retriever": {"top_k": 5}}`. 
 
+This example sets the number of documents to be returned by the Retriever node to 5 and the number of documents to be returned by the Reader node to 3: 
 
 ```python
 res = pipeline.run(
@@ -80,25 +80,32 @@ res = pipeline.run(
 ## Run a Pipeline
 
 The `run()` function is the single command that triggers the execution of the entire pipeline:
-
 ``` python
 query = "What's the history of Quidditch?"
 pipeline.run(query=query)
 ```
+For query pipelines, there's an additional function `run_batch()` that you can use to provide multiple queries as input:
+``` python
+queries = ["What's the history of Quidditch?", "Where did Quidditch originate?", "When did the first Quidditch match take place?"]
+pipeline.run_batch(query=queries)
+```
 
-Every node has its own `run()` method, and the pipeline `run()` call invokes each node, one after the other. When you `run()` a pipeline, all the function arguments are propagated to every node in the graph. To disambiguate, say, the `top_k` values of retriever and ranker, they have aliases that are automatically recognized by the respective modules. This lets you dynamically modify these parameters in each call to the pipeline:
+Every node has its own `run()` method, and the pipeline `run()` call invokes each node, one after the other. When you `run()` a pipeline, all the function arguments are propagated to every node in the graph. The same is true for the `run_batch()` method.  
+
+Say, the `top_k` values of Retriever and Ranker have aliases that are automatically recognized by the respective modules. This lets you dynamically modify these parameters in each call to the pipeline:
 
 ``` python
 pipeline.run(query=query, params={"retriever": {"top_k": 28}, "ranker": {"top_k": 9}})
 ```
 
+To learn more about the `run_batch()` method, see also [the PR on Github](https://github.com/deepset-ai/haystack/pull/2481).
 <div style={{ marginBottom: "3rem" }} />
 
 ## Inspect a Pipeline
 
 ### Using `draw()`
 
-The `pipeline.draw()` method generates a sketch of your pipeline. By looking at a drawing of your pipeline, you may be able to confirm that the graph is indeed structured in the way that you intended. This is especially true for customized graphs that may branch out at some point.
+The `pipeline.draw()` method generates a sketch of your pipeline. By looking at a drawing of your pipeline, it's easier to check if it's structured as you intended. This is especially true for customized graphs that may branch out at some point.
 
 ![image](https://user-images.githubusercontent.com/1563902/102451716-54813700-4039-11eb-881e-f3c01b47ca15.png)
 
@@ -116,21 +123,20 @@ retriever_node = pipeline.get_node('Retriever')
 
 Nodes in a Pipeline can provide debug information that gets propagated to the final output of a Pipeline.
 For instance, a QueryClassifier node can provide the decision it made on a given query.
-A Retriever can provide the input query and arguments it received
-as well as the candidate documents it retrieved even if it is not the final node in your pipeline.
+A Retriever can provide the input query and arguments it received as well as the candidate documents it retrieved, even if it is not the final node in your pipeline.
 
-In Haystack, we provide the option to see the input and output of the node via a `debug` argument.
-If you are creating your own custom node, the node will have this debugging functionality as long as you inherit from `BaseComponent`
+In Haystack, you can see the input and output of the node using a `debug` argument.
+If create a custom node, it has this debugging functionality as long as it inherits from `BaseComponent`.
 
-In all of our nodes, you can enable debugging a few different ways.
-You can set the debugging attribute of a node.
+In all Haystack nodes, you can enable debugging in a few ways:
+- You can set the debugging attribute of a node:
 
 ```
 es_retriever = BM25Retriever(document_store)
 es_retriever.debug = True
 ```
 
-Alternatively, you can provide it as a parameter when running your pipeline.
+- You can provide the debugging attribute as a parameter when running your pipeline:
 
 ```
 result = pipeline.run(
@@ -149,7 +155,7 @@ result = pipeline.run(
 )
 ```
 
-One final option is to provide `debug` as a global parameter when running your pipeline
+- You can provide `debug` as a global parameter when running your pipeline:
 
 ```
     result = p_classifier.run(
@@ -160,15 +166,14 @@ One final option is to provide `debug` as a global parameter when running your p
     )
 ```
 
-When enabled, the debugging information will be stored in the `_debug` key of the dictionary returned by the pipeline.
+If you enable debugging, the `_debug` key of the dictionary returned by the pipeline stores the debugging information.
 
 ```
 result = pipeline.run(...)
 result["_debug"]
 ```
 
-You can expect a top level key that states the name of the node.
-Under that, you can expect an `input` and `output` key.
+You can expect a top level key with the name of the node. Under that, there is an `input` and `output` key.
 
 ```
 {'ESRetriever': {'input': {'debug': True,
@@ -181,10 +186,9 @@ Under that, you can expect an `input` and `output` key.
 
 ## Custom Debugging Functionality
 
-You can also get a node to return custom debugging information.
-To return debug data from a Node, add a `_debug` key in the output dict.
+Nodes can also return custom debugging information. To return debug data from a Node, add a `_debug` key in the output dictionary.
 The value should be a dictionary.
-For instance,
+For instance:
 
 ```
 def run(self, query: str):
@@ -194,7 +198,7 @@ def run(self, query: str):
         return {"_debug": "The query did not contain a question mark", "output_2"
  ```
 
-This `_debug` gets inserted into the "global" `_debug` dictionary storing debug data for each Node, under the `runtime` key. The final output may look like:
+This `_debug` gets inserted into the "global" `_debug` dictionary storing debug data for each Node, under the `runtime` key. The final output may look as follows:
 
 ```
 {
@@ -214,18 +218,19 @@ This `_debug` gets inserted into the "global" `_debug` dictionary storing debug 
 }
 ```
 
-A Node in a Pipeline can access the global `_debug` from preceding nodes by adding a parameter called `_debug` in its `run()` method:
+A Node in a Pipeline can access the global `_debug` from preceding Nodes by adding a parameter called `_debug` in its `run()` method:
 
 ```python
 def run(self, query: str, _debug: dict):
     debug_info = _debug["PrecedingNodeA"]
     ...
  ```
+ This is also true for the `run_batch()` method.
 
 ## YAML File Definitions
 
 You can define and load pipelines in YAML files. This is particularly useful when
-you move between experimentation and production environments. Just export the YAML from your notebook or IDE and import it into your production environment.
+you move between experimentation and production environments. Just export the YAML from your notebook or IDE and import it into your production environment.  
 Having your pipeline in a YAML file helps with version control of pipelines, makes it easy to share your pipelines with colleagues
 and configure pipeline parameters in production.
 
@@ -262,7 +267,7 @@ pipelines: # multiple Pipelines can be defined using the components from above
 The `components` section defines the pipeline nodes.
 The `pipelines` section defines how these nodes are added into the pipeline.
 
-The above example is the equivalent of the following python code.
+The above example is the equivalent of the following python code:
 
 ```
 pipeline = Pipeline()
@@ -277,7 +282,7 @@ pipeline.load_from_yaml(Path("sample.haystack-pipeline.yml"))
 ```
 
 You can also define indexing pipelines via YAML.
-Nodes such as the PreProcessor, DocumentClassifier, EntityExtractor, FileTypeClassifier and the Converters are all compatible.
+Nodes such as the PreProcessor, DocumentClassifier, EntityExtractor, FileTypeClassifier, and the Converters are all compatible.
 
 ```
 pipelines:
@@ -300,11 +305,11 @@ pipelines:
     name: DocumentStore
 ```
 
-For another example YAML config, check out [this file](https://github.com/deepset-ai/haystack/blob/master/rest_api/pipeline/pipelines.yaml).
+For another example YAML configuration, check out [Pipelines in GitHub](https://github.com/deepset-ai/haystack/tree/master/rest_api/pipeline).
 
 #### Validating Your YAML
 
-To validate yoru file manually, run:
+To validate your file manually, run:
 
 ```python
 from pathlib import Path
@@ -323,7 +328,7 @@ An update to the Haystack version might require small updates to the YAML files.
 
 ## Ready-Made Pipelines
 
-Last but not least, we added some ready-made pipelines that allow you to run standard patterns with very few lines of code. See the [ready-made pipelines page](/components/ready-made-pipelines) and [pipelines API documentation](/reference/pipelines) to learn more about these.
+Last but not least, we added some ready-made pipelines that you can use to run standard patterns with very few lines of code. To learn more about these, see the [ready-made pipelines page](/components/ready-made-pipelines) and [pipelines API documentation](/reference/pipelines).
 
 **Examples:**
 
@@ -352,7 +357,7 @@ res = doc_pipe.run(query="How can I change my address?", params={"retriever": {"
 
 <div style={{ marginBottom: "3rem" }} />
 
-## Example: Multiple retrievers
+## Example: Multiple Retrievers
 
 You can now also use multiple Retrievers and join their results:
 
@@ -381,7 +386,7 @@ from haystack import Pipeline
 pipeline = Pipeline()
 ```
 
-To create new pipeline nodes, we initialize the modules first. For our use case, we need a retriever, a ranker, and a summarizer. We tell the summarizer to return a single summary per query (instead of one summary for each document), and that its length should be somewhere between ten and 300 words:
+To create new pipeline nodes, we initialize the modules first. For our use case, we need a Retriever, a Ranker, and a Summarizer. We tell the Summarizer to return a single summary per query (instead of one summary for each document), and that its length should be somewhere between ten and 300 words:
 
 ``` python
 from haystack.nodes import BM25Retriever, SentenceTransformersRanker, TransformersSummarizer
@@ -401,7 +406,7 @@ pipeline.add_node(component=ranker, name='Ranker', inputs=['Retriever'])
 pipeline.add_node(component=summarizer, name='Summarizer', inputs=['Ranker'])
 ```
 
-Let's now run our custom pipeline on the Harry Potter Wiki dataset. A typical application for this pipeline would be a situation where we want some high-level information about our corpus that is not necessarily contained within one document. We therefore retrieve multiple documents, rank them, and let the summarizer return a single summary of all the texts.
+Let's now run our custom pipeline on the Harry Potter Wiki dataset. A typical application for this pipeline is a situation where we want high-level information about our corpus that is not necessarily contained within one document. We retrieve multiple documents, rank them, and let the Summarizer return a single summary of all the texts.
 
 ``` python
 query = "What's the history of Quidditch?"
@@ -416,7 +421,7 @@ result.keys()
 >>> dict_keys(['documents', 'query', 'node_id'])
 ```
 
-Since we requested a single summary of all the texts we inputted to the summarizer, the list of documents contains only one item. We access the summary through the text attribute:
+Because we requested a single summary of all the texts we inputted to the Summarizer, the list of Documents contains only one item. We access the summary through the text attribute:
 
 ``` python
 result['documents'][0].text
@@ -434,7 +439,7 @@ Ray (https://ray.io) is a framework for distributed computing.
 Ray allows distributing a Pipeline's components across a cluster of machines. The individual components of a
 Pipeline can be independently scaled. For instance, an extractive QA Pipeline deployment can have three replicas
 of the Reader and a single replica for the Retriever. It enables efficient resource utilization by horizontally
-scaling Components.
+scaling components.
 
 To set the number of replicas, add  `replicas` in the YAML config for the node in a pipeline:
 
@@ -451,7 +456,7 @@ pipelines:
         inputs: [ Query ]
 ```
 
-A RayPipeline can only be created with a YAML Pipeline config:
+A `RayPipeline` can only be created with a YAML Pipeline configuration:
 
 ```python
 from haystack.pipelines import RayPipeline

@@ -10,7 +10,9 @@ A Node takes the output of the previous Node (or Nodes) as input.
 ## Usage
 
 All Nodes are designed to be useable within a Pipeline.
-When a Node has been added to a Pipeline, calling `Pipeline.run()` will in turn call each Node's `run()` method in the predefined sequence.
+When you add a Node to a Pipeline and call `Pipeline.run()`, it calls each Node's `run()` method in the predefined sequence.
+The same is true for `Pipeline.run_batch()` that you can use if you want to ask multiple queries. It calls each Node's `run_batch()` method. 
+
 For more information on this, see the [Pipelines](/components/pipelines) page.
 
 Alternatively, you can also call the Nodes outside of the Pipeline.
