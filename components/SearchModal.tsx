@@ -1,4 +1,4 @@
-import { Dispatch, KeyboardEvent, SetStateAction, useState } from "react";
+import { Dispatch, KeyboardEvent, SetStateAction, useEffect, useState } from "react";
 import { ISearchResult } from "pages/api/search";
 import { SearchIcon } from "./SearchIcon";
 
@@ -43,6 +43,19 @@ export function VersionPill(props: { version: string }) {
   )
 }
 
+function useDebounce<T>(value: T, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    }
+  }, [value, delay]);
+  return debouncedValue;
+}
+
 export function SearchResult(props: { result: ISearchResult }) {
   return (
     <>
@@ -66,6 +79,7 @@ export function SearchModal(props: {
 	const [searchResults, setSearchResults] = useState<ISearchResult[]>([]);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [isDirty, setIsDirty] = useState<boolean>(false);
+  const debouncedSearchTerm = useDebounce<string>(searchTerm, 400);
 
   const search = async () => {
     if (searchTerm === "") return;
@@ -102,6 +116,10 @@ export function SearchModal(props: {
   const showNoResults = () => searchResults.length === 0 && isDirty;
   const showResults = () => searchResults.length > 0;
   const showContent = () => showNoResults() || showResults();
+
+  useEffect(() => {
+    if (debouncedSearchTerm !== '') search();
+  }, [debouncedSearchTerm]);  // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<>
