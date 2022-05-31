@@ -1,6 +1,7 @@
 import { Dispatch, KeyboardEvent, SetStateAction, useEffect, useState } from "react";
 import { ISearchResult } from "pages/api/search";
 import { SearchIcon } from "./SearchIcon";
+import styles from "./SearchModal.module.css";
 
 
 interface IProcessedSearchResult extends ISearchResult {
@@ -43,12 +44,8 @@ const cleanPathSegment = (segment: string): string => {
 
 const getNavPath = (result: ISearchResult): string => {
 	const segments = result.meta.filepath.split('/');
-	[segments[0], segments[1]] = [segments[1], segments[0]];
-	const path = removeMdxFileEnding(
-    replaceUnderscore(
-      replaceWhitespaceLink(segments.join('/'))
-    )
-  ).replace('latest/', '');
+	[segments[0], segments[1], segments[2]] = [segments[1], segments[0], replaceWhitespaceLink(segments[2])];
+	const path = removeMdxFileEnding(segments.join('/')).replace('latest/', '');
 	return `${window.location.origin}/${path}`;
 }
 
@@ -135,12 +132,26 @@ export function SearchResultGroup(props: { group: IGroupedSearchResult }) {
   )
 }
 
+export function Spinner() {
+  return (
+    <>
+      <div className={styles['loading-spinner']}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </>
+  )
+}
+
 export function SearchModal(props: {
   searchModal: boolean,
   setSearchModal: Dispatch<SetStateAction<boolean>>,
 }) {
 	const [searchResults, setSearchResults] = useState<IGroupedSearchResult[]>([]);
 	const [searchTerm, setSearchTerm] = useState<string>("");
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isDirty, setIsDirty] = useState<boolean>(false);
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 400);
 
@@ -156,6 +167,7 @@ export function SearchModal(props: {
       
       return data as ISearchResult[];
     }
+    setIsLoading(true);
     const data = await search(searchTerm);
     setSearchResults(
       sortGroups(
@@ -165,6 +177,7 @@ export function SearchModal(props: {
       )
     );
     setIsDirty(true);
+    setIsLoading(false);
   };
 
   const closeModal = () => {
@@ -221,6 +234,9 @@ export function SearchModal(props: {
                     placeholder="Search documentation"
                     onKeyDown={inputKeyPress}
                   />
+                  {
+                    isLoading && <Spinner />
+                  }
                 </div>
 
                 <div className={`px-10 ${showContent() ? 'pb-10' : ''}`}>                
