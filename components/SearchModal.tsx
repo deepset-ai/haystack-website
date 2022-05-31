@@ -3,9 +3,33 @@ import { ISearchResult } from "pages/api/search";
 import { SearchIcon } from "./SearchIcon";
 
 
-const replaceWhitespaceLink = (text: string): string => text.replace('_', '-');
+interface IProcessedSearchResult extends ISearchResult {
+  groupName: string;
+  documentName: string;
+  navPath: string;
+}
+
+interface IGroupedSearchResult {
+  name: string;
+  values: IProcessedSearchResult[];
+}
+
+function useDebounce<T>(value: T, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    }
+  }, [value, delay]);
+  return debouncedValue;
+}
+
+const replaceWhitespaceLink = (text: string): string => text.replace('_', '-').replace(' ', '-');
 const replaceWhitespaceText = (text: string): string => text.replace('_', ' ');
-const replaceUnderscore = (text: string): string => text.replace('_', '-');
+const replaceUnderscore = (text: string): string => text.replace('_', ' ');
 const removeMdxFileEnding = (text: string): string => text.replace('.mdx', '');
 const capitalizeWords = (text: string): string => text.replace(/(?:^|\s)\S/g, (a) => { return a.toUpperCase(); });
 
@@ -28,46 +52,85 @@ const getNavPath = (result: ISearchResult): string => {
 	return `${window.location.origin}/${path}`;
 }
 
-const getNavName = (result: ISearchResult): string => {
+const getNavNames = (result: ISearchResult): [string, string] => {
   const segments = result.meta.filepath.split('/');
-  return capitalizeWords(cleanPathSegment(segments[1])) + " - " + capitalizeWords(cleanPathSegment(segments[2]));
+  return [capitalizeWords(cleanPathSegment(segments[1])), capitalizeWords(cleanPathSegment(segments[2]))];
 }
 
 const isLatestVersion = (result: ISearchResult): number => {
   return result.meta.docs_version === 'latest' ? 1 : 0;
 }
 
+const parseSearchResults = (results: ISearchResult[]): IProcessedSearchResult[] => {
+  return results.map((result) => {
+    const [groupName, documentName] = getNavNames(result);
+    return {
+      ...result,
+      groupName,
+      documentName,
+      navPath: getNavPath(result),
+    }
+  })
+}
+
+const groupResults = (results: IProcessedSearchResult[]): IGroupedSearchResult[] => {
+  const groups = results.reduce((pv: any, cv) => {
+    return {
+      ...pv,
+      [cv.groupName]: [
+        ...(pv[cv.groupName] || []),
+        cv,
+      ]
+    }
+  }, {});
+  return Object.keys(groups).map(groupKey => ({
+    name: groupKey,
+    values: groups[groupKey],
+  }))
+}
+
+const sortGroups = (results: IGroupedSearchResult[]): IGroupedSearchResult[] => {
+  const scored = results.map(result => ({
+    ...result,
+    maxScore: result.values.reduce((a, b) => Math.max(a, b.score), 0),
+  }));
+  return scored.sort((a, b) => b.maxScore - a.maxScore);
+}
+
 export function VersionPill(props: { version: string }) {
   return (
-    <span className="text-gray-400 bg-black/20 px-2 py-1 text-center rounded-full">{props.version}</span>
+    <span className="px-2 py-1 mb-1 rounded-full bg-black/20 text-gray-400 text-center text-sm">{props.version}</span>
   )
 }
 
-function useDebounce<T>(value: T, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState<T>(value);
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-    return () => {
-      clearTimeout(handler);
-    }
-  }, [value, delay]);
-  return debouncedValue;
-}
-
-export function SearchResult(props: { result: ISearchResult }) {
+export function SearchResult(props: { result: IProcessedSearchResult }) {
+  const previewMaxLength = 250;
   return (
     <>
-      <a href={getNavPath(props.result)}>
-        <div className="flex flex-col bg-blue-900/20 text-gray-100 rounded-md px-3 py-2">
+      <a href={props.result.navPath}>
+        <div className="flex flex-col px-6 py-3 border-t border-gray-100/20">
             <div className="flex flex-row flex-grow justify-between">
-              <span className="text-lg font-bold">{getNavName(props.result)}</span>
+              <span className="text-lg font-bold">{props.result.documentName}</span>
               <VersionPill version={props.result.meta.docs_version} />
             </div>
-            <span>{props.result.content}</span>
+            <span>{props.result.content.substring(0, previewMaxLength)}...</span>
         </div>
       </a>
+    </>
+  )
+}
+
+export function SearchResultGroup(props: { group: IGroupedSearchResult }) {
+  return (
+    <>
+      <div className="flex flex-col bg-blue-900/30 text-gray-100 rounded-md py-2">
+        <span className="text-xl font-bold text-gray-100 mb-2 px-5 py-2">{props.group.name}</span>
+        {
+          props.group.values.map(result => (
+            <SearchResult key={result.result_id} result={result} />
+          ))
+        }
+      </div>
     </>
   )
 }
@@ -76,7 +139,7 @@ export function SearchModal(props: {
   searchModal: boolean,
   setSearchModal: Dispatch<SetStateAction<boolean>>,
 }) {
-	const [searchResults, setSearchResults] = useState<ISearchResult[]>([]);
+	const [searchResults, setSearchResults] = useState<IGroupedSearchResult[]>([]);
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [isDirty, setIsDirty] = useState<boolean>(false);
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 400);
@@ -94,7 +157,13 @@ export function SearchModal(props: {
       return data as ISearchResult[];
     }
     const data = await search(searchTerm);
-    setSearchResults(data.sort((a,b) => isLatestVersion(b) - isLatestVersion(a)));
+    setSearchResults(
+      sortGroups(
+        groupResults(
+          parseSearchResults(data.sort((a,b) => isLatestVersion(b) - isLatestVersion(a)))
+        )
+      )
+    );
     setIsDirty(true);
   };
 
@@ -167,11 +236,11 @@ export function SearchModal(props: {
                   {
                     showResults() && (
                       <>
-                        <ul className="mt-12 overflow-y-auto">
+                        <ul className="mt-8 overflow-y-auto">
                           {
-                            searchResults.map(result => (
-                              <li className="mb-4" key={result.result_id}>
-                                <SearchResult result={result} />
+                            searchResults.map(group => (
+                              <li className="mb-4" key={group.name}>
+                                <SearchResultGroup group={group} />
                               </li>
                             ))
                           }
