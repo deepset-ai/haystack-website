@@ -16,6 +16,7 @@ import {
   getH1FromMarkdown,
 } from "lib/utils";
 import { tutorialFilesLatest } from "lib/constants";
+import { tutorialFilesV150 } from "lib/constants";
 import { tutorialFilesV140 } from "lib/constants";
 import { tutorialFilesV130 } from "lib/constants";
 import { tutorialFilesV120 } from "lib/constants";
@@ -61,6 +62,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const pathsLatest = [
     ...tutorialFilesLatest.items.map((item) => ({ params: { slug: [item.slug] } })),
+  ];
+  const pathsV150 = [
+    ...tutorialFilesV150.items
+      .map((item) =>({
+          params: {
+            slug: ["v1.5.0", item.slug],
+          },
+        }))
+      .flat(),
   ];
   const pathsV140 = [
     ...tutorialFilesV140.items
@@ -170,7 +180,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
         }))
       .flat(),
   ];
-  let paths = pathsLatest.concat(pathsV140)
+  let paths = pathsLatest.concat(pathsV150)
+                          .concat(pathsV140)
                           .concat(pathsV130)
                           .concat(pathsV120)
                           .concat(pathsV110)
@@ -203,6 +214,11 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     let item = tutorialFilesLatest.items.find(
       (item) => item.slug === docTitleSlug
     );
+    if(!item) {
+      item = tutorialFilesV150.items.find(
+        (item) => item.slug === docTitleSlug
+      );
+    }
     if(!item) {
       item = tutorialFilesV140.items.find(
         (item) => item.slug === docTitleSlug

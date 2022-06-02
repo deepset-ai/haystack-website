@@ -1,0 +1,264 @@
+# Migration to v1.0
+
+With the release of [Haystack v1.0](https://github.com/deepset-ai/haystack/releases/tag/v1.0.0), we decided to make some bold changes.
+We believe this has brought a significant improvement in the usability of Haystack.
+While this does come with a few breaking changes, this page will guide you on how to go from v0.x to v1.0.
+
+## Import Structure
+
+Due to the ever increasing number of Nodes and Document Stores being integrated into Haystack,
+we felt the need to implement a repository structure that makes it easier to navigate to what you're looking for.
+We've also shortened the length of the imports and believe that this also leads to a simpler and more logical organization.
+
+**v0.x:**
+```
+# Document Stores
+from haystack.document_store.elasticsearch import ElasticsearchDocumentStore
+
+# Preprocessing
+from haystack.file_converter.txt import TextConverter
+from haystack.preprocessor.preprocessor import PreProcessor
+
+# Nodes
+from haystack.reader.farm import FARMReader
+from haystack.retriever.sparse import BM25Retriever
+
+# Pipelines
+from haystack.pipeline import ExtractiveQAPipeline
+
+# Utils
+from haystack.utils import print_answers, launch_es
+```
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Deprecation Warning:** For the large majority of imports, the old style still works but this will be deprecated in future releases.
+
+</div>
+
+**v1.0:**
+```
+# Document Stores
+from haystack.document_stores import ElasticsearchDocumentStore
+
+# Nodes
+from haystack.nodes import BM25Retriever, FARMReader, PreProcessor, TextConverter
+
+# Pipelines
+from haystack.pipelines import ExtractiveQAPipeline
+
+# Utils
+from haystack.utils import launch_es, print_answers
+```
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**New Packages**
+
+`haystack.document_stores`
+
+- All Document Stores can now be directly accessed from here
+- Note the pluralization of `document_store` to `document_stores`
+
+`haystack.nodes`
+
+- This directory directly contains any class that can be used as a node
+- This inludes File Converters and PreProcessors
+
+`haystack.pipelines`
+
+- This contains all the base, custom and pre-made pipeline classes
+- Note the pluralization of `pipeline` to `pipelines`
+
+`haystack.utils`
+
+- Any utility functions
+
+</div>
+
+## Primitive Objects
+
+Instead of relying on dictionaries, Haystack now standardizes more of the inputs and outputs of Nodes using the following primitive classes:
+
+- [Document](/components/documents-answers-labels#document)
+- [Answer](/components/documents-answers-labels#answer)
+- [Label](/components/documents-answers-labels#label)
+- [MultiLabel](/components/documents-answers-labels#multilabel)
+- [Span](/components/documents-answers-labels#span)
+
+With these, there is now support for data structures beyond text and the REST API schema is built around their structure.
+Using these classes also allows for the autocompletion of fields in your IDE.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tip:** To see examples of these primitive classes being returned, have a look at [Ready-Made Pipelines](/components/ready-made-pipelines).
+
+</div>
+
+Many of the fields in these classes have also been renamed or removed.
+You can see a more comprehensive list of them in this [Github issue](https://github.com/deepset-ai/haystack/issues/1590).
+Below, we will go through a few cases that are likely to impact established workflows.
+
+## Field Names in Database Services
+
+If you are using a persistent database service as a `DocumentStore` (e.g. Elasticsearch, Milvus),
+you will need to change certain field names when migrating from v0.x to v1.0.
+Due to the [change in the `Document` object](/overview/migration#input-document-format), you will need to rename the `text` field in your database to `content`.
+Due to the [change in the `Label` object](/overview/migration#label-structure), you will need to rename the `question` field in your database to `query`.
+
+## Input Document Format
+
+This dictionary schema used to be the recommended way to prepare your data to be indexed.
+Now we strongly recommend using our dedicated [`Document`](/components/documents-answers-labels) class as  a replacement.
+The `text` field has been renamed `content` to accommodate for cases where it is used for another data format,
+for example in [Table QA](/guides/table-qa).
+
+**v0.x:**
+```
+doc = {
+	'text': 'DOCUMENT_TEXT_HERE',
+	'meta': {'name': DOCUMENT_NAME, ...}
+}
+```
+
+**v1.0:**
+```
+doc = Document(
+    content='DOCUMENT_TEXT_HERE',
+    meta={'name': DOCUMENT_NAME, ...}
+)
+```
+From here, you can take the same steps to write Documents into your Document Store.
+```
+document_store.write_documents([doc])
+```
+
+Note that this change also affects the naming of fields in the DocumentStore.
+You will want to change the field's name from `text` to `content` in your database if you are migrating a v0.x compliant service to Haystack v1.0.
+
+## Reader Returns Answer
+
+All Reader Nodes now return [Answer](/components/documents-answers-labels#label) objects instead of dictionaries.
+
+**v0.x:**
+```
+[
+    {
+        'answer': 'Fang',
+        'score': 13.26807975769043,
+        'probability': 0.9657130837440491,
+        'context': """Криволапик (Kryvolapyk, kryvi lapy "crooked paws")
+            ===Fang (Hagrid's dog)===
+            *Chinese (PRC): 牙牙 (ya2 ya) (from 牙 "tooth", 牙,"""
+    }
+]
+```
+
+**v1.0:**
+```
+[
+    <Answer {'answer': 'Eddard', 'type': 'extractive', 'score': 0.9946763813495636, 'context': "s Nymeria after a legendary warrior queen. She travels...", 'offsets_in_document': [{'start': 147, 'end': 153}], 'offsets_in_context': [{'start': 72, 'end': 78}], 'document_id': 'ba2a8e87ddd95e380bec55983ee7d55f', 'meta': {'name': '43_Arya_Stark.txt'}}>,
+    <Answer {'answer': 'King Robert', 'type': 'extractive', 'score': 0.9251320660114288, 'context': 'ordered by the Lord of Light. Melisandre later reveals to Gendry that...', 'offsets_in_document': [{'start': 1808, 'end': 1819}], 'offsets_in_context': [{'start': 70, 'end': 81}], 'document_id': '7b67b0e27571c2b2025a34b4db18ad49', 'meta': {'name': '349_List_of_Game_of_Thrones_characters.txt'}}>,
+    <Answer {'answer': 'Ned', 'type': 'extractive', 'score': 0.8103329539299011, 'context': " girl disguised as a boy all along and is surprised to learn she is Arya...", 'offsets_in_document': [{'start': 920, 'end': 923}], 'offsets_in_context': [{'start': 74, 'end': 77}], 'document_id': '7b67b0e27571c2b2025a34b4db18ad49', 'meta': {'name': '349_List_of_Game_of_Thrones_characters.txt'}}>,
+    ...
+]
+```
+
+## Label Structure
+
+The attributes of the Label object have gone through some changes.
+To see their current structure see [Label](/components/documents-answers-labels#label).
+
+**v0.x:**
+```
+label = Label(
+    question=QUESTION_TEXT_HERE,
+    answer=ANSWER_STRING_HERE,
+    ...
+)
+```
+
+**v1.0:**
+```
+label = Label(
+    query=QUERY_TEXT_HERE,
+    answer=Answer(...),
+    ...
+)
+```
+
+Note that this change also affects the naming of fields in the DocumentStore.
+You will want to change the field's name from `question` to `query` in your database if you are migrating a v0.x compliant service to Haystack v1.0.
+
+## REST API Output
+
+The REST API's output format matches that of the primitive objects, only in json form.
+They are generally converted using the primitive class' `to_json()` method.
+Below, we are showing the REST API output of any Pipeline with a Reader at the end like an ExtractiveQAPipeline.
+
+**v0.x:**
+```
+{
+  "query": "Who is the father of Arya Stark?",
+  "answers": [
+    {
+      "answer": "Lord Eddard Stark",
+      "question": null,
+      "score": 14.684528350830078,
+      "probability": 0.9044522047042847,
+      "context": "ark daughters.\nDuring the Tourney of the Hand to honour her father Lord Eddard Stark, Sansa Stark is enchanted by the knights performing in the event.",
+      "offset_start": 67,
+      "offset_end": 84,
+      "offset_start_in_doc": 659,
+      "offset_end_in_doc": 676,
+      "document_id": "a413e1f3-aa2c-4e17-8a47-8b067a5440d1",
+      "meta": {
+        "name": "332_Sansa_Stark.txt"
+      }
+    },
+   ...
+   ]
+}
+```
+**v1.0:**
+```
+{
+   "query":"Who is the father of Arya Stark?",
+   "answers":[
+      {
+         "answer":"Ned",
+         "type":"extractive",
+         "score":0.9767240881919861,
+         "context":"\n====Season 1====\nArya accompanies her father Ned and her sister Sansa to King's Landing. Before their departure, Arya's half-brother Jon Snow gifts A",
+         "offsets_in_document":[
+            {
+               "start":46,
+               "end":49
+            }
+         ],
+         "offsets_in_context":[
+            {
+               "start":46,
+               "end":49
+            }
+         ],
+         "document_id":"180c2a6b36369712b361a80842e79356",
+         "meta":{
+            "name":"43_Arya_Stark.txt"
+         }
+      },
+      ...
+   ],
+   "documents":[
+      {
+         "content":"\n===In the Riverlands===\nThe Stark army reaches the Twins, a bridge stronghold controlled by Walder Frey, who agrees to allow the army to cross the river and to commit his troops in return for Robb and Arya Stark marrying two of his children.\nTyrion Lannister suspects his father Tywin, who decides Tyrion and his barbarians will fight in the vanguard, wants him killed...",
+         "content_type":"text",
+         "id":"6b181174d1237878b706e6a12d69e92",
+         "meta":{
+            "name":"450_Baelor.txt"
+         },
+         "score":0.8110895501528345
+      },
+   ...
+   ]
+}
+```

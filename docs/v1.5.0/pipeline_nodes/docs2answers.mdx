@@ -1,0 +1,27 @@
+# Doc2Answers
+
+Doc2Answers converts retrieved Documents into Answers. It is useful if you have a Retriever-only pipeline that you want to run using the REST API. The REST API assumes that the output format of a Pipeline is an Answer. In such case, you can use Doc2Answers as the final node to match the expected format.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| At the end of a querying Pipeline |
+|__Input__       | [Documents](/components/documents-answers-labels#document)                                                                                                                                                                  |
+|__Output__      | [Answers](/components/documents-answers-labels#answer)                                                                                                             |
+|__Classes__     | Docs2Answers                                                                                                        |
+|||
+
+## Usage
+
+To use it in a Pipeline:
+
+```python
+from haystack.nodes import Pipeline
+from haystack.nodes import Docs2Answers
+
+docs2answers = Docs2Answers()
+
+pipe = Pipeline()
+pipe.add_node(component=retriever, name="Retriever", inputs=["Query"])
+pipe.add_node(component=docs2answers, name="Doc2Answers", inputs=["Retriever"])
+res = pipe.run(query="What did Einstein work on?")
+```
