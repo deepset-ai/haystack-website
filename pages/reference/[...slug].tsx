@@ -65,10 +65,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
     ...referenceFilesLatest.items.map((item) => ({ params: { slug: [item.slug] } })),
   ];
   const pathsV150 = [
-    ...referenceFilesV140.items
+    ...referenceFilesV150.items
       .map((item) =>({
           params: {
-            slug: ["v1.4.0", item.slug],
+            slug: ["v1.5.0", item.slug],
           },
         }))
       .flat(),
