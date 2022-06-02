@@ -30,6 +30,7 @@ Here the outputs of the ESRetriever and the DPRRetriever are combined by JoinDoc
 from haystack.pipelines import Pipeline
 from haystack.nodes import JoinDocuments, TransformersQueryClassifier, BM25Retriever, DensePassageRetriever
 
+# Here's how you initialize the JoinDocuments node. Note that before running the Pipeline, you need to initialize all the other nodes as well.
 join_documents = JoinDocuments(
     join_mode="concatenate",
     top_k_join=10

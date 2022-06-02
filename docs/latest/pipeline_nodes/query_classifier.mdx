@@ -132,7 +132,7 @@ pipe.add_node(component=reader, name="QAReader", inputs=["DPRRetriever"])
 # Pass a question -> run DPR + QA -> return answers
 res_1 = pipe.run(query="Who is the father of Arya Stark?")
 
-# Pass keywords -> run only BM25Retriever -> return docs
+# Pass keywords -> run only BM25Retriever -> return Documents
 res_2 = pipe.run(query="arya stark father")
 
 ```

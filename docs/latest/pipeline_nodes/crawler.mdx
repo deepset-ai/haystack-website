@@ -1,7 +1,7 @@
 
 # Crawler
 
-The Crawler scrapes the text from a website, creates a Haystack Document object out of it, and saves it to a file. 
+The Crawler scrapes the text from a website, creates a Haystack Document object out of it, and saves it to a JSON file. 
 For example, you can use the Crawler if you want to add the contents of a website to your files to use them for search.
 
 |||
@@ -18,11 +18,11 @@ To use a Crawler on its own, run:
 ```python
 from haystack.nodes import Crawler
 
-crawler = Crawler(output_dir="crawled_files") #this tells the Crawler where to store the crawled files
+crawler = Crawler(output_dir="crawled_files") # This tells the Crawler where to store the crawled files
 docs = crawler.crawl(
-    urls=["https://haystack.deepset.ai/overview/get-started"], #this tells the Crawler which URLs to crawl
-    filter_urls=["haystack"], #here, you can pass regular expressions that the crawled URLs must comply with
-    crawler_depth=1 #this tells the Crawler to follow only the links that it finds on the initial URL
+    urls=["https://haystack.deepset.ai/overview/get-started"], # This tells the Crawler which URLs to crawl
+    filter_urls=["haystack"], # Here, you can pass regular expressions that the crawled URLs must comply with
+    crawler_depth=1 # This tells the Crawler to follow only the links that it finds on the initial URLs
 )
 ```
 
@@ -49,8 +49,8 @@ from haystack.document_stores import ElasticsearchDocumentStore
 
 
 # Create the document store. You need it to:
-#  1. Store the documents you crawled and preprocessed (with an indexing pipeline)
-#  2. Extract the documents that contain the answer to your question (with a query pipeline)
+#  1. Store the documents you crawled and preprocessed (with an indexing pipeline).
+#  2. Extract the documents that contain the answer to your question (with a query pipeline).
 document_store = ElasticsearchDocumentStore(host="localhost", username="", password="", index="document")
 
 

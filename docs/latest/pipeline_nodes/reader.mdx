@@ -277,7 +277,7 @@ new_reader = FARMReader(model_name_or_path="my_model")
 
 To convert your model from or into the Hugging Face Transformers format, use a conversion function.
 Calling `reader.inferencer.model.convert_to_transformers()` returns a list of Hugging Face models.
-This can be particularly useful if want to upload the model to the Hugging Face Model Hub.
+This can be particularly useful if you want to upload the model to the Hugging Face Model Hub.
 
 ```python
 transformers_models = reader.inferencer.model.convert_to_transformers()
@@ -347,7 +347,7 @@ The major points are:
 
 - The **TransformersReader** sometimes predicts the same span twice while the **FARMReader** removes duplicates.
 
-- The **FARMReader** currently uses the tokenizers from the Hugging Face Transformers library while the **TransformersReader** uses the tokenizers from the Hugging Face Tokenizers .
+- The **FARMReader** currently uses the tokenizers from the Hugging Face Transformers library while the **TransformersReader** uses the tokenizers from the Hugging Face Tokenizers.
 
 - Start and end logits are normalized per passage and multiplied in the **TransformersReader** while they are summed and not normalised in the **FARMReader**.
 
@@ -368,7 +368,7 @@ from haystack.nodes import FARMReader
 model = "deepset/roberta-base-squad2"
 reader = FARMReader(model)
 
-# Perform finetuning
+# Perform fine-tuning
 train_data = "PATH/TO_YOUR/TRAIN_DATA"
 train_filename = "train.json"
 save_dir = "finetuned_model"
@@ -388,10 +388,9 @@ on large amounts of text.
 Well-trained language models capture the word distribution in one or more languages
 but more importantly, convert input text into a set of word vectors that capture elements of syntax and semantics.
 
-To convert a language model into a Reader model, you must firts train it on a Question Answering dataset.
+To convert a language model into a Reader model, you must first train it on a Question Answering dataset.
 To do so, you must add a question answering prediction head on top of the language model.
-You can think of it as a token classification task where every input token is assigned a probability of being
-either the start or end token of the correct answer.
+You can think of it as a token classification task where every input token is assigned a probability of being the start or end token of the correct answer.
 If a passage doesn't contain the answer, the prediction head should return a `no_answer` prediction.
 
 <!-- _comment: !! Diagram of language model / prediction head !! -->
