@@ -6,7 +6,7 @@ The Query Classifiers in Haystack distinguish between three different classes of
 - Questions
 - Statements
 
-Based on its classification, it can route the query to a specified branch of the Pipeline.
+Based on the query classification, Query Classifier can route the query to the specified branch of the Pipeline.
 By passing on queries to Nodes that are more suited to handle them, you get better search results.
 
 For example, the Dense Passage Retriever is trained on full questions and so it works best if you only pass questions to it.
@@ -21,7 +21,7 @@ you can reduce the load on the GPU-powered Dense Passage Rertriever.
 |__Classes__     | TransformersQueryClassifier<br />SklearnQueryClassifier                                                                                                                                             |
 |||
 
-The Query Classifier will populate the metadata fields of the Query with its classification and can also route it based on this.
+The Query Classifier populates the metadata fields of the Query with the Query classification and can also route the Query based on this classification.
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -29,7 +29,7 @@ The Query Classifier will populate the metadata fields of the Query with its cla
 
 #### Keyword Queries
 
-Such queries don't have sentence structure. They consist of keywords and the order of words does not matter:
+Keyword queries don't have sentence structure. They consist of keywords and the order of words does not matter. For example:
 
 *   arya stark father
 *   jon snow country
@@ -37,8 +37,8 @@ Such queries don't have sentence structure. They consist of keywords and the ord
 
 #### Questions
 
-In such queries users ask a question in a complete, grammatical sentence.
-A Query Classifier should be able to classify a query regardless of whether it ends with a question mark or not.
+In such queries, users ask a question in a complete, grammatical sentence.
+A Query Classifier can classify a query regardless of whether it ends with a question mark or not. Examples of questions:
 
 *   who is the father of arya stark?
 *   which country was jon snow filmed in
@@ -56,7 +56,7 @@ This type of query is a declarative sentence, such as:
 
 ## Usage
 
-To use the Query Classifier as a stand-alone Node:
+To use the Query Classifier as a stand-alone Node, run:
 
 ```python
 from haystack.nodes import TransformersQueryClassifier
@@ -83,17 +83,17 @@ for query in queries:
 # Query: Which country was jon snow filmed in?, raw_output: ({'query': 'Which country was jon snow filmed in?'}, 'output_1'), class: question
 ```
 
-Note how the node returns two objects: the query (e.g.'Arya Stark father') and the name of the output edge (e.g. "output_2").
-This information can be leveraged in a pipeline for routing the query to the next node.
+Note that the node returns two objects: the query ('Arya Stark father') and the name of the output edge ("output_2").
+You can use this information in a pipeline for routing the query to the next node.
 
 You can use a Query Classifier within a pipeline as a decision node.
-Depending on the output of the classifier only one branch of the Pipeline will be executed.
-For example, we can route keyword queries to an ElasticsearchRetriever and questions + statements to DPR.
+Depending on the output of the classifier, only one branch of the Pipeline is executed.
+For example, we can route keyword queries to an ElasticsearchRetriever and questions and statements to DPR.
 
 ![image](https://user-images.githubusercontent.com/6007894/127831511-f55bad86-4b4f-4b54-9889-7bba37e475c6.png)
 
-Below, we define a pipeline with a `TransformersQueryClassifier` that routes questions/statements to the node's `output_1` and keyword queries to `output_2`.
-We leverage this structure in the pipeline by connecting the DPRRetriever to `QueryClassifier.output_1` and the ESRetriever to `QueryClassifier.output_2`.
+Below, there is a pipeline with a `TransformersQueryClassifier` that routes questions and statements to the node's `output_1` and keyword queries to `output_2`.
+We use this structure in the pipeline by connecting the DPRRetriever to `QueryClassifier.output_1` and the ESRetriever to `QueryClassifier.output_2`.
 
 ```python
 from haystack import Pipeline
@@ -115,7 +115,7 @@ res_2 = pipe.run(query="arya stark father")
 
 ```
 
-One alternative set up is to route questions to a Question Answering branch and keywords to a Document Search branch:
+An alternative setup is to route questions to a Question Answering branch and keywords to a Document Search branch:
 
 ```python
 haystack.pipeline import TransformersQueryClassifier, Pipeline
@@ -132,7 +132,7 @@ pipe.add_node(component=reader, name="QAReader", inputs=["DPRRetriever"])
 # Pass a question -> run DPR + QA -> return answers
 res_1 = pipe.run(query="Who is the father of Arya Stark?")
 
-# Pass keywords -> run only BM25Retriever -> return docs
+# Pass keywords -> run only BM25Retriever -> return Documents
 res_2 = pipe.run(query="arya stark father")
 
 ```
@@ -172,7 +172,7 @@ Learn more about this model from its [model card](https://huggingface.co/shahruk
 
 #### Sklearn
 
-Pass your own `Sklearn` binary classification model or use one of the following pretrained Gradient boosting models:
+Pass your own `Sklearn` binary classification model or use one of the following pretrained gradient boosting models:
 
 **Keywords vs. Questions/Statements (Default)**
 

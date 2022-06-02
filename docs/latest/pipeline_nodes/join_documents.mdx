@@ -13,23 +13,34 @@ This allows for the merging of two separate Pipeline branches.
 
 ## Usage
 
-To use JoinDocuments in a Pipeline, run the following.
+* To initialize the Node, run:
+```python
+from haystack.nodes import JoinDocuments, TransformersQueryClassifier
+
+join_documents = JoinDocuments(
+    join_mode="concatenate",
+    top_k_join=10
+)
+```
+
+* To use `JoinDocuments` in a Pipeline, run the following code.
 Here the outputs of the ESRetriever and the DPRRetriever are combined by JoinDocuments.
 
 ```python
 from haystack.pipelines import Pipeline
-from haystack.nodes import JoinDocuments, QueryClassifier
+from haystack.nodes import JoinDocuments, TransformersQueryClassifier, BM25Retriever, DensePassageRetriever
 
+# Here's how you initialize the JoinDocuments node. Note that before running the Pipeline, you need to initialize all the other nodes as well.
 join_documents = JoinDocuments(
     join_mode="concatenate",
     top_k_join=10
 )
 
 pipe = Pipeline()
-pipe.add_node(component=QueryClassifier(), name="QueryClassifier", inputs=["Query"])
-pipe.add_node(component=es_retriever, name="ESRetriever", inputs=["QueryClassifier.output_1"])
-pipe.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["QueryClassifier.output_2"])
-pipe.add_node(component=join_documents, name="JoinResults",
+pipe.add_node(component=QueryClassifier(), name="TransformersQueryClassifier", inputs=["Query"])
+pipe.add_node(component=bm25_retriever, name="BM25Retriever", inputs=["TransformersQueryClassifier.output_1"])
+pipe.add_node(component=dpr_retriever, name="DensePassageRetriever", inputs=["TransformersQueryClassifier.output_2"])
+pipe.add_node(component=join_documents, name="JoinDocuments",
               inputs=["ESRetriever", "DPRRetriever"])
 res = pipe.run(query="What did Einstein work on?")
 ```

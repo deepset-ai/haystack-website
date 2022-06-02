@@ -1,8 +1,8 @@
 # Pipeline Nodes
 
 Nodes are the core components that process and route incoming text.
-Some perform steps like preprocessing, retrieving or summarizing text
-while route queries through different branches of a Pipeline.
+Some perform steps like preprocessing, retrieving, or summarizing text
+while routing queries through different branches of a Pipeline.
 Nodes are chained together using a [Pipeline](/components/pipelines)
 and they function like building blocks that can be easily switched out for each other.
 A Node takes the output of the previous Node (or Nodes) as input.
@@ -13,7 +13,7 @@ All Nodes are designed to be useable within a Pipeline.
 When you add a Node to a Pipeline and call `Pipeline.run()`, it calls each Node's `run()` method in the predefined sequence.
 The same is true for `Pipeline.run_batch()` that you can use if you want to ask multiple queries. It calls each Node's `run_batch()` method. 
 
-For more information on this, see the [Pipelines](/components/pipelines) page.
+For more information, see the [Pipelines](/components/pipelines) page.
 
 Alternatively, you can also call the Nodes outside of the Pipeline.
 See each individual Node's documentation page to learn more about its available methods.
@@ -43,12 +43,12 @@ See each individual Node's documentation page to learn more about its available 
 ## Decision Nodes
 
 You can add decision nodes where only one "branch" is executed afterwards.
-This allows, for example, to classify an incoming query and depending on the result routing it to different modules.
-To find a ready-made example of a decision node, have a look at [the page](/pipeline_nodes/query-classifier) about the `QueryClassifier`.
+You can use decision nodes to classify an incoming query and, depending on the result, route it to different modules.
+To find a ready-made example of a decision node, have a look at [QueryClassifier](/pipeline_nodes/query-classifier).
 
 ![image](https://user-images.githubusercontent.com/1563902/102452199-41229b80-403a-11eb-9365-7038697e7c3e.png)
 
-If you'd like to define our own, you'll need to create a class that looks something like this:
+You can also create a custom decision node. To do this, create a class that looks like this:
 
 ```python
     class QueryClassifier(BaseComponent):

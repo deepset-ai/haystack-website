@@ -2,13 +2,13 @@
 
 The Retriever performs Document Retrieval by sweeping through a document store and returning a set of candidate documents that are relevant to the query.
 
-When used in combination with a Reader, it is a tool for quickly sifting out irrelevant documents,
+When used in combination with a Reader, it can quickly sift out irrelevant documents,
 saving the Reader from doing more work than it needs to, and speeding up the querying process.
 
 The Retriever is tightly coupled with the Document Store. You must specify a Document Store when initializing the Retriever.
 While the Retriever functions as a Node in the Pipeline, the Document Store does not.
 When the Retriever runs, it receives a Query as input. It then uses the Query to check the documents contained in the Document Store,
-and pass on the best candidates.
+and to pass on the best candidates.
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -18,23 +18,23 @@ and pass on the best candidates.
 |__Classes__     | BM25Retriever<br />ElasticsearchRetriever<br />DensePassageRetriever<br />TableTextRetriever<br />EmbeddingRetriever<br />TfidfRetriever<br />ElasticsearchFilterOnlyRetriever                                                                                                           |
 |||
 
-If you're unsure which Retriever to use, see the sections below explaining each retriever type.
+If you're unsure which Retriever to use, see the sections below explaining each Retriever type.
 Our starting recommendations are to use an EmbeddingRetriever if you can use GPU acceleration.
-If you can't use GPU, we recommend the BM25 retriever.
+If you can't use GPU, we recommend the BM25Retriever.
 
 ## Usage
 
 To initialize a Retriever, pass a Document Store as its argument:
 
-```
+```python
 from haystack.nodes import BM25Retriever
 
 retriever = BM25Retriever(document_store)
 ```
 
-To run a Retriever on its own, use the retrieve() method. It returns a list of Document objects:
+To run a Retriever on its own, use the `retrieve()` method. It returns a list of Document objects:
 
-```
+```python
 candidate_documents = retriever.retrieve(
     query="international climate conferences",
     top_k=10,
@@ -44,7 +44,7 @@ candidate_documents = retriever.retrieve(
 
 To run a Retriever within a ready-made Pipeline:
 
-```
+```python
 from haystack.pipelines import DocumentSearchPipeline
 
 pipeline = DocumentSearchPipeline(retriever=retriever)
@@ -60,28 +60,27 @@ result = pipeline.run(
 )
 ```
 
-## Table Retrieval
-
-The `TableTextRetriever` is designed to perform document retrieval on both text and tabular documents.
-It is a tri-encoder model with a separate encoder for the query, text passage and table.
-
-To learn more about how to use this component in Haystack, have a look at our [Table Question Answering](/guides/table-qa) guide.
-
-
 ## Document Store Compatibility
 
 Note that not all Retrievers can be paired with every DocumentStore.
 Here are the combinations which are supported:
 
-|           | Memory | Elasticsearch | OpenSearch | OpenDistroElasticsearch | SQL | FAISS | Milvus | Weaviate | Pinecone |
-| --------- | ------ | ------------- | ---------- | ----------------------- | --- | ----- | ------ | -------- | -------- |
-| BM25      | N      | Y             | Y          | Y                       | N   | N     | N      | N        | N        |      
-| TF-IDF    | Y      | Y             | Y          | Y                       | Y   | N     | N      | Y        | Y        |
-| Embedding | Y      | Y             | Y          | Y                       | N   | Y     | Y      | Y        | Y        |
-| DPR       | Y      | Y             | Y          | Y                       | N   | Y     | Y      | Y        | Y        |
-| Filter    | Y      | Y             | Y          | Y                       | Y   | Y     | Y      | Y        | Y        |
+|           | InMemory | Elasticsearch | OpenSearch | OpenDistroElasticsearch | SQL | FAISS | Milvus | Weaviate | Pinecone | DeepsetCloud |
+| --------- | ------ | ------------- | ---------- | ----------------------- | --- | ----- | ------ | -------- | -------- | -------- |
+| BM25      | N      | Y             | Y          | Y                       | N   | N     | N      | N        | N        | Y |   
+| TF-IDF    | Y      | Y             | Y          | Y                       | Y   | N     | N      | Y        | Y        | Y |
+| Embedding | Y      | Y             | Y          | Y                       | N   | Y     | Y      | Y        | Y        | Y |
+| DPR       | Y      | Y             | Y          | Y                       | N   | Y     | Y      | Y        | Y        | Y |
+| Filter    | Y      | Y             | Y          | Y                       | Y   | Y     | Y      | Y        | Y        | Y |
 
 See [Optimization](/guides/optimization) for suggestions on how to choose top-k values.
+
+## Table Retrieval
+
+The `TableTextRetriever` is designed to perform document retrieval on both text and tabular documents.
+It is a tri-encoder model with a separate encoder for the query, text passage, and table.
+
+To learn more about how to use this component in Haystack, have a look at our [Table Question Answering](/guides/table-qa) guide.
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -107,23 +106,23 @@ retriever = BM25Retriever(document_store)
 p = ExtractiveQAPipeline(reader, retriever)
 ```
 
-See [this](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables) blog post for more details about the algorithm.
+For more information about the algorithm, see [BM25 algorithm](https://www.elastic.co/blog/practical-bm25-part-2-the-bm25-algorithm-and-its-variables).
 
 <div style={{ marginBottom: "3rem" }} />
 
 ## Embedding Retrieval (Recommended)
 
 In Haystack, you have the option of using a transformer model to encode document and query.
-One style of model that is suited to this kind of retrieval is that of [Sentence Transformers](https://www.sbert.net/index.html).
+One style of model that is suited to this kind of retrieval is [Sentence Transformers](https://www.sbert.net/index.html).
 These models are trained in Siamese Networks and use triplet loss such that they learn to embed similar sentences near to each other in a shared embedding space.
 
-Some models have been finetuned on massive Information Retrieval data
-and can be used to retrieve documents based on a short query (e.g. `multi-qa-mpnet-base-dot-v1`).
+Some models have been fine-tuned on massive Information Retrieval data
+and can be used to retrieve documents based on a short query (for example, `multi-qa-mpnet-base-dot-v1`).
 There are others that are more suited to semantic similarity tasks where you are trying to find
-the most similar documents to a given document (e.g. `all-mpnet-base-v2`).
-There are even models that are multilingual (e.g. `paraphrase-multilingual-mpnet-base-v2`).
+the most similar documents to a given document (for example, `all-mpnet-base-v2`).
+There are even models that are multilingual (for example, `paraphrase-multilingual-mpnet-base-v2`).
 For a good overview of different models with their evaluation metrics,
-see [this page](https://www.sbert.net/docs/pretrained_models.html#) in the Sentence Transformers documentation.
+see [Pretrained models](https://www.sbert.net/docs/pretrained_models.html#) in the Sentence Transformers documentation.
 
 If you are interested in using a Sentence Transformers model as an `EmbeddingRetriever`,
 you should set the `model_format="sentence_transformers"`.
@@ -134,7 +133,7 @@ you should set the `model_format="sentence_transformers"`.
 
 When using Sentence Transformer models, we recommend referring to
 their [Model Overview](https://www.sbert.net/docs/pretrained_models.html#) to pick the best similarity function
-and also to find its embedding dimensions .
+and also to find its embedding dimensions.
 
 </div>
 
@@ -181,15 +180,15 @@ There are two design decisions that have made DPR particularly performant.
 - Training with ‘In-batch negatives’ (gold labels are treated as negative examples for other samples in same batch) is highly efficient
 
 In Haystack, you can simply download the pretrained encoders needed to start using DPR.
-If you’d like to learn how to set up a DPR based system, have a look at the [tutorial](/tutorials/dense-passage-retrieval)!
+To learn how to set up a DPR-based system, have a look at the [Dense Passage Retrieval tutorial](/tutorials/dense-passage-retrieval).
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
 **Tip**
 
-When using DPR, it is recommended that you use the dot product similarity function since that is how it is trained.
+When using DPR, it is recommended that you use the `dot product` similarity function since that is how it is trained.
 To do so, simply provide `similarity="dot_product"` when initializing the DocumentStore
-as is done in the code example below.
+as in the code example below.
 
 </div>
 
@@ -224,9 +223,9 @@ pipeline = ExtractiveQAPipeline(reader, retriever)
 
 TF-IDF is a commonly used baseline for information retrieval that exploits two key intuitions:
 
-- documents that have more lexical overlap with the query are more likely to be relevant
+- Documents that have more lexical overlap with the query are more likely to be relevant
 
-- words that occur in fewer documents are more significant than words that occur in many documents
+- Words that occur in fewer documents are more significant than words that occur in many documents
 
 Given a query, a tf-idf score is computed for each document as follows:
 
@@ -258,33 +257,33 @@ p = ExtractiveQAPipeline(reader, retriever)
 
 ## Deeper Dive: Dense vs Sparse
 
-Broadly speaking, retrieval methods can be split into two categories: **dense** and **sparse**.
+Broadly speaking, there are two categories of retrieval methods: **dense** and **sparse**.
 
-**Sparse** methods, like TF-IDF and BM25, operate by looking for shared keywords between the document and query.
-They are:
+**Sparse** methods, like TF-IDF and BM25, operate by looking for shared keywords between the document and the query.
+These methods:
 
-- simple but effective
+- Are simple but effective
 
-- don’t need to be trained
+- Don’t need to be trained
 
-- work on any language
+- Work on any language
 
 More recently, **dense** approaches such as Dense Passage Retrieval (DPR) have shown even better performance than their sparse counter parts.
 These methods embed both document and query into a shared embedding space using deep neural networks
 and the top candidates are the nearest neighbour documents to the query.
 They are:
 
-- powerful but computationally more expensive especially during indexing
+- Powerful but computationally more expensive, especially during indexing
 
-- trained using labelled datasets
+- Trained using labelled datasets
 
-- language specific
+- Language specific
 
 <div style={{ marginBottom: "3rem" }} />
 
 ### Qualitative Differences
 
-Between these two types there are also some qualitative differences too.
+Between these two types, there are also some qualitative differences.
 For example, sparse methods treat text as a bag-of-words meaning that they **do not take word order and syntax into account**,
 while the latest generation of dense methods use transformer based encoders
 which are designed to be **sensitive** to these factors.
@@ -302,8 +301,8 @@ As such, **they handle out-of-vocabulary words with no problem**.
 ### Indexing
 
 Dense methods perform indexing by processing all the documents through a neural network and storing the resulting vectors.
-This is a much more expensive operation than the creation of the inverted-index in sparse methods
-and will require significant computational power and time.
+This is a much more expensive operation than creating the inverted-index used in sparse methods
+and requires significant computational power and time.
 
 <!-- _comment: !!See their individual sections (!! link !!) for more details on this point. Benchmarks too !! -->
 
@@ -315,8 +314,8 @@ and will require significant computational power and time.
 <!-- _comment: !! This section should be turned into something more like a side note !! -->
 
 The terms **dense** and **sparse** refer to the representations that the algorithms build for each document and query.
-**Sparse** methods characterise texts using vectors with one dimension corresponding to each word in the vocabulary.
-Dimensions will be zero if the word is absent and non-zero if it is present.
+**Sparse** methods characterize texts using vectors with one dimension corresponding to each word in the vocabulary.
+Dimensions are zero if the word is absent and non-zero if it is present.
 Since most documents contain only a small subset of the full vocabulary,
 these vectors are considered sparse since non-zero values are few and far between.
 

@@ -8,14 +8,27 @@ in different formats and cast it into the unified Document format.
 |__Position in a Pipeline__| At the very beginning of an indexing Pipeline |
 |__Input__       | Filename                                                                                                                                                                  |
 |__Output__      | [Documents](/components/documents-answers-labels#document)                                                                                                             |
-|__Classes__     | PDFToTextConverter<br />DocxToTextConverter<br />AzureConverter<br />ImageToTextConverter<br />MarkdownConverter                                                                                                           |
+|__Classes__     | PDFToTextConverter<br />PDFToTextOCRConverter<br />DocxToTextConverter<br />AzureConverter<br />ImageToTextConverter<br />MarkdownConverter<br />ParsrConverter<br />TikaConverter<br />TextConverter<br />                                                                                                           |
 |||
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
-**Tutorial:** To see an example of file converters in a pipeline, see out [advanced indexing tutorial](/tutorials/doc-class-index).
+**Tutorial:** To see an example of file converters in a pipeline, see the [advanced indexing tutorial](/tutorials/doc-class-index).
 
 </div>
+
+## File Converter Classes
+
+Here's what each of the file convertes type can do:
+* `PDFToTextConverter`: Extracts text from a PDF file using the [pdftotext](https://www.xpdfreader.com/pdftotext-man.html library.
+* `PDFToTextOCRConverter`: Extracts text from PDF files that contain images using the [pytesseract](https://github.com/madmaze/pytesseract) library.
+* `DocxToTextConverter`: Extracts text from .docx files.
+* `AzureConverter`: Extracts text and tables from files in the following formats: PDF, JPEG, PNG, BMP, and TIFF. Uses [Microsoft Azure's Form Recognizer](https://azure.microsoft.com/en-us/services/form-recognizer/). To use this converter, you must have an active Azure account and a Form Recognizer or Cognitive Services resource. For more information, see [Form Recognizer](https://docs.microsoft.com/en-us/azure/applied-ai-services/form-recognizer/quickstarts/try-v3-python-sdk#prerequisites).
+* `ImageToTextConverter`: Extracts text from image files using the [pytesseract library](https://github.com/madmaze/pytesseract).
+* `MarkdownConverter`: Converts markdown to plain text.
+* `ParsrConverter`: Extracts text and tables from PDF and .docx files using the open-source [Parsr](https://github.com/axa-group/Parsr) by axa-group.
+* `TikaConverter`: Converts files into Documents using [Apache Tika](https://tika.apache.org/).
+* `TextConverter`: Preprocesses text files and returns documents. 
 
 ## Usage
 
@@ -34,7 +47,7 @@ Click a tab to read more about each converter and see how to initialize it:
           </code>
           <code>docs = converter.convert(file_path=Path("my-file.pdf"), meta=None)</code>
           <code>
-            # Alternatively, if you have a PDF containing images, Haystack uses tessaract under the hood to OCR image PDFs.
+            # Alternatively, if you have a PDF containing images, Haystack uses the pytessaract library under the hood for optical character recognition of image PDFs.
           </code>
           <code>
             from haystack.nodes import PDFToTextOCRConverter
