@@ -1,0 +1,40 @@
+# AnswerToSpeech
+
+Use this node in question-answering pipelines to convert text Answers into AudioAnswers. AudioAnswers and their content are read out into an audio file. 
+
+This node is experimental because of the dataclasses it uses (`GeneratedAudioAnswer`). Bear in mind that that they might change in the future. 
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| The last node in the pipeline, after a Reader |
+|__Input__       | Answer                                                                                                                                                                  |
+|__Output__      | GeneratedAudioAnswer                                                                                                             |
+|__Classes__     | AnswerToSpeech                                                                                                          |
+|||
+
+## Usage
+To initialize `AnswerToSpeech`, run:
+```python
+from haystack.nodes import AnswerToSpeech
+
+model_name = 'espnet/kan-bayashi_ljspeech_vits'
+answer_dir = './generated_audio_answers'
+
+audio_answer = AnswerToSpeech(model_name_or_path=model_name, generated_audio_dir=answer_dir)
+```
+To use `AnswerToSpeech` in a pipeline, run:
+```python
+from haystack.nodes import AnswerToSpeech
+
+retriever = BM25Retriever(document_store=document_store)
+reader = FARMReader(model_name_or_path="deepset/roberta-base-squad2", use_gpu=True)
+answer2speech = AnswerToSpeech(
+    model_name_or_path="espnet/kan-bayashi_ljspeech_vits",
+    generated_audio_dir=Path(__file__).parent / "audio_answers",
+    )
+
+audio_pipeline = Pipeline()
+audio_pipeline.add_node(retriever, name="Retriever", inputs=["Query"])
+audio_pipeline.add_node(reader, name="Reader", inputs=["Retriever"])
+audio_pipeline.add_node(answer2speech, name="AnswerToSpeech", inputs=["Reader"])
+```
