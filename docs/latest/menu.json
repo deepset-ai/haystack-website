@@ -35,6 +35,8 @@
     "pathPrefix": "/pipeline_nodes/",
     "items": [
       {"slug": "overview", "title": "Overview"},
+      {"slug": "answer-to-speech", "title": "AnswerToSpeech"},
+      {"slug": "document-to-speech", "title": "DocumentToSpeech"},
       {"slug": "preprocessor", "title": "PreProcessor"},
       {"slug": "file-converters", "title": "File Converters"},
       {"slug": "crawler", "title": "Crawler"},
