@@ -73,6 +73,11 @@ export const referenceFilesLatest: Meta = {
       title: "Question Generator",
     },
     {
+      slug: "pseudo-label-generator",
+      filename: "pseudo_label_generator.md",
+      title: "Pseudo Label Generator",
+    },
+    {
       slug: "document-classifier",
       filename: "document_classifier.md",
       title: "Document Classifier",
@@ -262,6 +267,11 @@ export const referenceFilesV150: Meta = {
       slug: "question-generator",
       filename: "question_generator.md",
       title: "Question Generator",
+    },
+    {
+      slug: "pseudo-label-generator",
+      filename: "pseudo_label_generator.md",
+      title: "Pseudo Label Generator",
     },
     {
       slug: "document-classifier",
