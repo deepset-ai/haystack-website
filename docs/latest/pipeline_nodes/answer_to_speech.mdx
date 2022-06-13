@@ -1,14 +1,14 @@
 # AnswerToSpeech
 
-Use this node in question-answering pipelines to convert text Answers into AudioAnswers. AudioAnswers and their content are read out into an audio file. 
+Use this node in question-answering pipelines to convert text Answers into SpeechAnswers. The answer and its context are read out into two audio files. 
 
-This node is experimental because of the dataclasses it uses (`GeneratedAudioAnswer`). Bear in mind that that they might change in the future. 
+This node is experimental because of the dataclasses it uses (`SpeechAnswer`). Bear in mind that that they might change in the future. 
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |__Position in a Pipeline__| The last node in the pipeline, after a Reader |
 |__Input__       | Answer                                                                                                                                                                  |
-|__Output__      | GeneratedAudioAnswer                                                                                                             |
+|__Output__      | SpeechAnswer                                                                                                             |
 |__Classes__     | AnswerToSpeech                                                                                                          |
 |||
 

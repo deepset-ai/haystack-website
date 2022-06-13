@@ -1,14 +1,14 @@
 # DocumentToSpeech
 
-Use this node in document retrieval pipelines to convert text Documents into AudioDocuments. AudioDocuments and their content are read out into an audio file. 
+Use this node in document retrieval pipelines to convert text Documents into SpeechDocuments. The document's content is read out into an audio file. 
 
-This node is experimental because of the dataclasses it uses (`GeneratedAudioDocument`). Bear in mind that that they might change in the future. 
+This node is experimental because of the dataclasses it uses (`SpeechDocument`). Bear in mind that that they might change in the future. 
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|__Position in a Pipeline__| The last node in the pipeline, after a Reader |
+|__Position in a Pipeline__| The last node in the pipeline, after a Retriever |
 |__Input__       | Document                                                                                                                                                                  |
-|__Output__      | GeneratedAudioDocument                                                                                                             |
+|__Output__      | SpeechDocument                                                                                                             |
 |__Classes__     | DocumentToSpeech                                                                                                         |
 |||
 
