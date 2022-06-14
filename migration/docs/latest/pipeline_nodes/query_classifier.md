@@ -1,0 +1,197 @@
+# Query Classifier
+
+The Query Classifiers in Haystack distinguish between three different classes of queries:
+
+- Keywords
+- Questions
+- Statements
+
+Based on the query classification, Query Classifier can route the query to the specified branch of the Pipeline.
+By passing on queries to Nodes that are more suited to handle them, you get better search results.
+
+For example, the Dense Passage Retriever is trained on full questions and so it works best if you only pass questions to it.
+By choosing also to pass keyword queries to a BM25 Retriever, such as the ElasticsearchRetriever,
+you can reduce the load on the GPU-powered Dense Passage Rertriever.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| At the beginning of a query Pipeline |
+|__Input__       | Query                                                                                                                                                                  |
+|__Output__      | Query                                                                                                                                                                    |
+|__Classes__     | TransformersQueryClassifier<br />SklearnQueryClassifier                                                                                                                                             |
+|||
+
+The Query Classifier populates the metadata fields of the Query with the Query classification and can also route the Query based on this classification.
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Query Types
+
+#### Keyword Queries
+
+Keyword queries don't have sentence structure. They consist of keywords and the order of words does not matter. For example:
+
+*   arya stark father
+*   jon snow country
+*   arya stark younger brothers
+
+#### Questions
+
+In such queries, users ask a question in a complete, grammatical sentence.
+A Query Classifier can classify a query regardless of whether it ends with a question mark or not. Examples of questions:
+
+*   who is the father of arya stark?
+*   which country was jon snow filmed in
+*   who are the younger brothers of arya stark?
+
+#### Statements:
+
+This type of query is a declarative sentence, such as:
+
+*   Arya stark was a daughter of a lord.
+*   Show countries that Jon snow was filmed in.
+*   List all brothers of Arya.
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Usage
+
+To use the Query Classifier as a stand-alone Node, run:
+
+```python
+from haystack.nodes import TransformersQueryClassifier
+
+queries = ["Arya Stark father","Jon Snow UK",
+           "who is the father of arya stark?","Which country was jon snow filmed in?"]
+
+question_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/bert-mini-finetune-question-detection")
+# Or Sklearn based:
+
+for query in queries:
+    result = question_classifier.run(query=query)
+    if result[1] == "output_1":
+        category = "question"
+    else:
+        category = "keywords"
+
+    print(f"Query: {query}, raw_output: {result}, class: {category}")
+
+# Returns:
+# Query: Arya Stark father, raw_output: ({'query': 'Arya Stark father'}, 'output_2'), class: keywords
+# Query: Jon Snow UK, raw_output: ({'query': 'Jon Snow UK'}, 'output_2'), class: keywords
+# Query: who is the father of arya stark?, raw_output: ({'query': 'who is the father of arya stark?'}, 'output_1'), class: question
+# Query: Which country was jon snow filmed in?, raw_output: ({'query': 'Which country was jon snow filmed in?'}, 'output_1'), class: question
+```
+
+Note that the node returns two objects: the query ('Arya Stark father') and the name of the output edge ("output_2").
+You can use this information in a pipeline for routing the query to the next node.
+
+You can use a Query Classifier within a pipeline as a decision node.
+Depending on the output of the classifier, only one branch of the Pipeline is executed.
+For example, we can route keyword queries to an ElasticsearchRetriever and questions and statements to DPR.
+
+![image](https://user-images.githubusercontent.com/6007894/127831511-f55bad86-4b4f-4b54-9889-7bba37e475c6.png)
+
+Below, there is a pipeline with a `TransformersQueryClassifier` that routes questions and statements to the node's `output_1` and keyword queries to `output_2`.
+We use this structure in the pipeline by connecting the DPRRetriever to `QueryClassifier.output_1` and the ESRetriever to `QueryClassifier.output_2`.
+
+```python
+from haystack import Pipeline
+from haystack.nodes import TransformersQueryClassifier
+from haystack.utils import print_answers
+
+query_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/bert-mini-finetune-question-detection")
+
+pipe = Pipeline()
+pipe.add_node(component=query_classifier, name="QueryClassifier", inputs=["Query"])
+pipe.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["QueryClassifier.output_1"])
+pipe.add_node(component=bm25_retriever, name="BM25Retriever", inputs=["QueryClassifier.output_2"])
+
+# Pass a question -> run DPR
+res_1 = pipe.run(query="Who is the father of Arya Stark?")
+
+# Pass keywords -> run the BM25Retriever
+res_2 = pipe.run(query="arya stark father")
+
+```
+
+An alternative setup is to route questions to a Question Answering branch and keywords to a Document Search branch:
+
+```python
+haystack.pipeline import TransformersQueryClassifier, Pipeline
+from haystack.utils import print_answers
+
+query_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/question-vs-statement-classifier")
+
+pipe = Pipeline()
+pipe.add_node(component=query_classifier, name="QueryClassifier", inputs=["Query"])
+pipe.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["QueryClassifier.output_1"])
+pipe.add_node(component=bm25_retriever, name="BM25", inputs=["QueryClassifier.output_2"])
+pipe.add_node(component=reader, name="QAReader", inputs=["DPRRetriever"])
+
+# Pass a question -> run DPR + QA -> return answers
+res_1 = pipe.run(query="Who is the father of Arya Stark?")
+
+# Pass keywords -> run only BM25Retriever -> return Documents
+res_2 = pipe.run(query="arya stark father")
+
+```
+
+<div style={{ marginBottom: "3rem" }} />
+
+## Models
+
+The TransformersQueryClassifier is more accurate than the SkLearnQueryClassifier as it is sensitive to the syntax of a sentence.
+However, it requires more memory and a GPU in order to run quickly.
+You can mitigate those downsides by choosing a smaller transformer model.
+The default models that we trained use a mini BERT architecture which is about `50 MB` in size and allows relatively fast inference on CPU.
+
+#### Transformers
+
+Pass your own `Transformer` binary classification model from file or use one of the following pretrained models hosted on Hugging Face:
+
+**Keywords vs. Questions/Statements (Default)**
+
+   ```python
+   TransformersQueryClassifier(model_name_or_path="shahrukhx01/bert-mini-finetune-question-detection") 
+   # output_1 => question/statement 
+   # output_2 => keyword query 
+   ```
+   
+Learn more about this model from its [model card](https://huggingface.co/shahrukhx01/bert-mini-finetune-question-detection).
+
+**Questions vs. Statements**
+
+    ```python
+    TransformersQueryClassifier(model_name_or_path="shahrukhx01/question-vs-statement-classifier") 
+    # output_1 => question  
+    # output_2 => statement 
+    ```
+    
+Learn more about this model from its [model card](https://huggingface.co/shahrukhx01/question-vs-statement-classifier).
+
+#### Sklearn
+
+Pass your own `Sklearn` binary classification model or use one of the following pretrained gradient boosting models:
+
+**Keywords vs. Questions/Statements (Default)**
+
+    ```python
+    SklearnQueryClassifier(query_classifier = "https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier/model.pickle",
+                      query_vectorizer = "https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier/vectorizer.pickle")
+                      
+    # output_1 => question/statement  
+    # output_2 => keyword query  
+    ```
+Learn more about this model from its [readme](https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier/readme.txt).
+
+**Questions vs. Statements**
+
+    ```python
+    SklearnQueryClassifier(query_classifier = "https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier_statements/model.pickle",
+                      query_vectorizer = "https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier_statements/vectorizer.pickle")
+
+    output_1 => question  
+    output_2 => statement 
+    ```
+Learn more about this model from its [readme](https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier_statements/readme.txt).

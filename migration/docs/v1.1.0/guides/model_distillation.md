@@ -1,0 +1,141 @@
+# Model Distillation
+
+Haystack now allows for distillation of large readers serving as teachers into smaller readers called students.
+
+## Why should I want to do distil a language model?
+
+In most cases, a larger model size leads to more accurate model predictions. But the more parameters a model has, the more resource-intensive it is. This makes deployment more difficult and increases latency.
+For this reason, choosing the right reader is always a trade-off between quality of results and deployment cost. There are different approaches to bridging the accuracy gap between large language models and smaller ones.
+
+The approach we used for this is called model distillation. This method allows to preserve some of the higher accuracy of a large model (called the teacher) when training a smaller model (called the student).
+Another approach you might have heard of is pruning. In this case, a large model is directly made smaller by finding unnecessary weights and removing them.
+
+## How does model distillation work?
+
+The goal of model distillation is for the student model to behave similarly to the teacher model. This similarity can be enforced using a range of different loss functions. There are various approaches to model distillation using different sets of loss functions when training the student. The two approaches we have focussed on are the approach proposed by [Hinton et al.](https://arxiv.org/pdf/1503.02531.pdf) of distilling the outputs of the prediction layers and the approach used by [TinyBERT (Jiao et al.)](https://arxiv.org/pdf/1909.10351) of also distilling intermediate layers.
+
+The prediction layer distillation approach introduces a loss function to minimise the difference between the logits (outputs of the prediction layer) of the student model and the teacher model. These logits contain the probabilities that the teacher model assigns to all possible answer spans in the document. This makes the training loss more expressive and allows for higher accuracy with the same model size. An advantage of this method is that it is very quick and does not have any requirements for the student architecture.
+
+The TinyBERT approach adds an additional step before performing prediction layer distillation. In this step, the differences between the hidden states and the attentions of the student and teacher are minimised. This additional step called intermediate layer distillation greatly increases performance because it forces the student model to behave very similarly to the teacher. However, this restricts the kinds of teachers and students you can use (the student needs to be pretrained using the teacher) and increases computation time (about 35x the time of just performing prediction layer distillation).
+
+## Which student-teacher combinations can I use?
+What kind of students and teachers you can combine, heavily depends on whether you are using intermediate layer distillation as this places a greater restriction on the models you can use.
+
+### Possible student-teacher combinations for prediction layer distillation
+When only using prediction layer distillation, the only thing that needs to be the same is the tokenizer. In this non-exhaustive table, you can find a few examples of models with the same tokenizer:
+
+| Tokenizer | Models |
+|-|-|
+| Bert uncased tokenizer | [prajjwal1/bert-medium](https://huggingface.co/prajjwal1/bert-medium), [huawei-noah/TinyBERT_General_6L_768D](https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D), [bert-base-uncased](https://huggingface.co/bert-base-uncased), [bert-large-uncased](https://huggingface.co/bert-large-uncased), and all models fine tuned on those: [mrm8488/bert-tiny-5-finetuned-squadv2](https://huggingface.co/mrm8488/bert-tiny-5-finetuned-squadv2) ... |
+| Bert cased tokenizer | [bert-base-cased](https://huggingface.co/bert-base-cased), [bert-large-cased](https://huggingface.co/bert-large-cased), and all models fine tuned on those: [deepset/bert-base-cased-squad2](https://huggingface.co/deepset/bert-base-cased-squad2), ... |
+| RoBERTa tokenizer | [roberta-base](https://huggingface.co/roberta-base), [roberta-large](https://huggingface.co/roberta-large), and all models fine tuned on those: [deepset/roberta-base-squad2](https://huggingface.co/deepset/roberta-base-squad2), ... |
+| Electra tokenizer | [google/electra-small-discriminator](https://huggingface.co/google/electra-small-discriminator), [google/electra-base-discriminator](https://huggingface.co/google/electra-base-discriminator), [google/electra-large-discriminator](https://huggingface.co/google/electra-large-discriminator), and all models fine tuned on those: [deepset/electra-base-squad2](https://huggingface.co/deepset/electra-base-squad2) |
+
+### Possible student-teacher combinations for intermediate layer distillation
+Intermediate layer distillation places quite strict restrictions on the kinds of models you can use. It requires that the student model was distilled during pretraining with the same teacher model. This means that for each student model there is only one teacher model you can use for fine tuning.
+
+| Student | Teacher |
+|-|-|
+| [huawei-noah/TinyBERT_General_4L_312D](https://huggingface.co/huawei-noah/TinyBERT_General_4L_312D), [https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D](https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D) | [bert-base-uncased](https://huggingface.co/bert-base-uncased) and all models fine tuned using this: [twmkn9/bert-base-uncased-squad2](https://huggingface.co/twmkn9/bert-base-uncased-squad2), ... |
+
+Unlike the table for prediction layer distillation, this table should currently be quite exhaustive. Please note, however, that we are actively working on training more student models compatible with other teachers.
+
+
+## How can I distil a model in Haystack?
+
+As explained above, when using model distillation you need to have both a teacher and a student model. The teacher model needs to have already been trained on the task. This can mean just using a finetuned teacher from the huggingface hub or finetuning the teacher on your own data beforehand.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** Check out our [finetuning tutorial](/tutorials/v1.1.0/fine-tuning-a-model) to learn how to fine-tune your teacher model on your own data.
+
+</div>
+
+The following paragraphs are only relevant for intermediate layer distillation. If you just want to use prediction layer distillation, you can skip them and jump directly to the section "Prediction layer distillation". Otherwise, read on to learn how to use intermediate layer distillation.
+
+### Data augmentation (for using intermediate layer distillation)
+
+The optional intermediate layer distillation step requires a lot of data. Because acquiring a lot of training data is quite expensive, the TinyBERT paper suggests a data augmentation approach to multiply existing datasets. To use data augmentation, you can use the [`augment_squad.py` script](https://github.com/deepset-ai/haystack/blob/master/haystack/utils/augment_squad.py) provided in haystack. You could use the following command if the dataset is called `dataset.json` and is in the same folder as `augment_squad.py`:
+```
+python augment_squad.py --squad_path dataset.json --output_path augmented_dataset.json --multiplication_factor 20
+```
+This would create an augmented dataset with 20 times the samples of `dataset.json` and place it in the file `augmented_dataset.json`.
+
+### Loading student and teacher models
+
+Both student and teacher models are standard `FARMReader`s so you can load them like you are used to:
+
+```
+student = FARMReader(...)
+teacher = FARMReader(...)
+```
+
+Please make sure that the student and teacher models use the same tokenizer. Otherwise, model distillation will fail.
+
+### Distilling teacher model to student model
+
+#### Intermediate layer distillation (optional)
+In case you want to use intermediate layer distillation in haystack, you just need to call the `distil_intermediate_layers_from` method on the student and pass the teacher model.
+
+```
+student.distil_intermediate_layers_from(teacher, data_dir=data_dir, train_filename=train_filename)
+```
+As described above, it is recommended that the training dataset specified with `data_dir` and `train_filename` has been augmented using the `augment_squad.py` script.
+`distil_intermediate_layers_from` accepts all the parameters you can use for training and every parameter that are neccesary for training will also need to be provided here. The method also accepts additional parameters like `temperature` and `distillation_loss`. However, for intermediate layer distillation it should be enough to leave them at their default values.
+Please be aware that while intermediate layer distillation is optional, performing prediction layer distillation after intermediate layer distillation is necessary to achieve good performance.
+
+#### Prediction layer distillation
+For using prediction layer distillation in Haystack, you just need to call the `distil_prediction_layer_from` method on the student and pass the teacher model. 
+
+```
+student.distil_prediction_layer_from(teacher, temperature=5, distillation_loss_weight=0.5,
+                                     data_dir=data_dir, train_filename=train_filename, ...)
+```
+
+Like `distil_intermediate_layers_from`, `distil_prediction_layer_from` accepts all parameters that you can use for training, but also accepts additional parameters. Everything you need to provide for training such as train_filename (name of file with training dataset) and data_dir (folder of training dataset file and optionally test and eval dataset) is also necessary to provide in `distil_from`. In addition, you also need to provide the teacher model. All other parameters are optional, but we would also recommend adjusting `temperature` and `distillation_loss_weight`.
+
+## What parameters should I use?
+### Intermediate layer distillation
+When using intermediate layer distillation, we would recommend just using the default parameters. However, if you want, you can trying tuning the distillation specific parameter `temperature`. Additionally, you can try adjusting all the parameters that are also relevant for training (e.g. `learning_rate`, `n_epochs`). The only exception to this is the parameter `batch_size`. Please specify `student_batch_size` instead. 
+
+### Prediction layer distillation
+Prediction layer distillation is controlled by two parameters: `temperature` and `distillation_loss_weight`.
+
+`temperature` specifies the certainty of the teacher model. Usually language models are very certain that one answer span is correct and assign all other answer spans a very low probability. This is not what we want for distillation as this would be very similar to just having a label. You can correct for this using a higher temperature.
+On the other hand, we also don't want the probabilities to be too similar as this also wouldn't create a meaningful training signal. For this, we can decrease the temperature.
+In most experiments, we found a temperature between 1 and 5 to be most useful.
+
+`distillation_loss_weight` specifies the weight given to the distillation loss in relation to the loss based on the label. For example, setting this to 0 would effectively disable model distillation. While setting it to 1 would only use model distillation making the labels unnecessary.
+Most times, you should set this to a relatively high value (e.g. 0.75).
+
+Here are the parameters that worked best in our experiments:
+
+| Student             | Teacher                                         | Distilled | Dataset    | temperature | loss weight |
+| ------------------------ | ---------------------------------------------------- | --- | ---------- | ------------- | -------------------------- |
+| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)| SQuADv2    | 5.0           | 1.0                        |
+| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)  | [deepset/​roberta-base-squad2-distilled](https://huggingface.co/deepset/roberta-base-squad2-distilled)                       | SQuADv2    |  1.5          | 0.75                       |
+| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)           | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)          | SQuADv2    | 3.0           | 0.75                       |
+| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                  | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled)  | GermanQuAD | 2.0           | 0.75                       |
+
+## What accuracy should I expect?
+
+The following tables show experiment results of the current version of model distillation in haystack.
+
+### Only using prediction layer distillation
+This table shows the results of a few experiments where we applied prediction layer to distill a finetuned large model (~350M parameters) into a base model (~115M parameters and ~2x the speed of a large model).
+
+| Student                  | Teacher                                              | Distilled                                                                                                       | Base F1 | Teacher F1 | Distilled F1 |
+| ------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------- | ---------- | ------------ |
+| [prajjwal1/​bert-medium](https://huggingface.co/prajjwal1/bert-medium)    | [deepset/​bert-large-uncased-whole-word-masking-squad2](https://huggingface.co/deepset/bert-large-uncased-whole-word-masking-squad2) | [deepset/​bert-medium-squad2-distilled](https://huggingface.co/deepset/bert-medium-squad2-distilled)             | 69.6%   | 83.2%      | 72.8%        |
+| [roberta-base](https://huggingface.co/roberta-base)             | [deepset/​roberta-large-squad2](https://huggingface.co/deepset/roberta-large-squad2)                         | [deepset/​roberta-base-squad2-distilled](https://huggingface.co/deepset/roberta-base-squad2-distilled)           | 82.6%   | 87.9%      | 83.9%        |
+| [xlm-roberta-base](https://huggingface.co/xlm-roberta-base) | [deepset/​xlm-roberta-large-squad2](https://huggingface.co/deepset/xlm-roberta-large-squad2)                     | [deepset/​xlm-roberta-base-squad2-distilled](https://huggingface.co/deepset/xlm-roberta-base-squad2-distilled)   | 78.0%     | 84.4%      | 79.0%        |
+| [deepset/​gelectra-base](https://huggingface.co/deepset/gelectra-base)    | [deepset/​gelectra-large-germanquad](https://huggingface.co/deepset/gelectra-large-germanquad)                    | [deepset/​gelectra-base-germanquad-distilled](https://huggingface.co/deepset/gelectra-base-germanquad-distilled) | 77.2%   | 86.4%      | 80.4%        |
+
+### Intermediate layer distillation + Prediction layer distillation
+Here you can see an experiment where we also used intermediate layer distillation. In this case, we distilled a base model (~115M parameters) into a TinyBERT-6L-768d model (~67M parameters and ~2x the speed of a base model).
+
+| Student | Teacher | Distilled | Base F1 | Teacher F1 | Distilled F1 |
+| -- | -- | -- | -- | -- | -- |
+| [huawei-​noah/​Tiny​BERT\_​General\_​6L\_​768D](https://huggingface.co/huawei-noah/TinyBERT_General_6L_768D) | [deepset/​bert-​base-​uncased-​squad2](https://huggingface.co/deepset/bert-base-uncased-squad2/) | [deepset/​tinybert-​6l-​768d-​squad2](https://huggingface.co/deepset/tinybert-6l-768d-squad2) | 71.1% | 77.8% | 76.2% |
+
+The baseline is the student model finetuned without distillation.
