@@ -70,7 +70,7 @@
       {"slug": "metadata-filtering", "title": "Metadata Filtering"},
       {"slug": "knowledge-graph", "title": "Knowledge Graph"},
       {"slug": "telemetry", "title": "Telemetry" },
-      {"slug": "gpl", "title": "Generative Pseudo Labelling" }
+      {"slug": "gpl", "title": "Generative Pseudo Labeling" }
     ]
   },
   {
