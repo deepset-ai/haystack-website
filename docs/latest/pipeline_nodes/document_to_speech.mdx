@@ -6,7 +6,7 @@ This node is experimental because of the dataclasses it uses (`SpeechDocument`).
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|__Position in a Pipeline__| The last node in the pipeline, after a Retriever |
+|__Position in a Pipeline__| The last node in a document search pipeline, after a Retriever in a single-Retriever pipeline; or at the end of an indexing pipeline, before the Document Store |
 |__Input__       | Document                                                                                                                                                                  |
 |__Output__      | SpeechDocument                                                                                                             |
 |__Classes__     | DocumentToSpeech                                                                                                         |
@@ -35,4 +35,33 @@ document2speech = DocumentToSpeech(
 audio_pipeline = Pipeline()
 audio_pipeline.add_node(retriever, name="Retriever", inputs=["Query"])
 audio_pipeline.add_node(document2speech, name="DocumentToSpeech", inputs=["Retriever"])
+```
+Here's an example of an indexing pipeline with `DocumentToSpeech`:
+```python
+file_paths = [p for p in Path(documents_path).glob("**/*")]
+
+indexing_pipeline = Pipeline()
+
+classifier = FileTypeClassifier()
+indexing_pipeline.add_node(classifier, name="classifier", inputs=["File"])
+
+text_converter = TextConverter(remove_numeric_tables=True)
+indexing_pipeline.add_node(text_converter, name="text_converter", inputs=["classifier.output_1"])
+
+preprocessor = PreProcessor(
+        clean_whitespace=True,
+        clean_empty_lines=True,
+        split_length=100,
+        split_overlap=50,
+        split_respect_sentence_boundary=True,
+)
+indexing_pipeline.add_node(preprocessor, name="preprocessor", inputs=["text_converter"])
+
+doc2speech = DocumentToSpeech(model_name_or_path="espnet/kan-bayashi_ljspeech_vits", generated_audio_dir=Path("./audio_documents"))
+indexing_pipeline.add_node(doc2speech, name="doc2speech", inputs=["preprocessor"])
+
+document_store = ElasticsearchDocumentStore(host="localhost", username="", password="", index="document")
+indexing_pipeline.add_node(document_store, name="document_store", inputs=["doc2speech"])
+
+indexing_pipeline.run(file_paths=file_paths, meta=files_metadata)
 ```
