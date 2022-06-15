@@ -190,7 +190,7 @@ result['documents']
 
 Translator components bring the power of machine translation into your QA systems. Say your knowledge base is in English but the majority of your user base speaks German. With a `TranslationWrapperPipeline`, you can chain together:
 
-- The [Translator](/pipeline_nodes/translator), which translates a query source into a target language (e.g. German into English)
+- The [Translator](/pipeline_nodes/v1.5.0/translator), which translates a query source into a target language (e.g. German into English)
 - A search pipeline such as ExtractiveQAPipeline or DocumentSearchPipeline, which executes the translated query against a knowledge base.
 - Another Translator that translates the search pipeline's results from the target back into the source language (e.g. English into German)
 
@@ -296,5 +296,5 @@ msd_pipeline = MostSimilarDocumentsPipeline(document_store)
 result = msd_pipeline.run(document_ids=[doc_id1, doc_id2, ...])
 ```
 
-The output will be a list of [Document](/components/documents-answers-labels#document) objects.
+The output will be a list of [Document](/components/v1.5.0/documents-answers-labels#document) objects.
 
