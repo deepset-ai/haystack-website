@@ -1,0 +1,38 @@
+# DocumentToSpeech
+
+Use this node in document retrieval pipelines to convert text Documents into SpeechDocuments. The document's content is read out into an audio file. 
+
+This node is experimental because of the dataclasses it uses (`SpeechDocument`). Bear in mind that that they might change in the future. 
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| The last node in the pipeline, after a Retriever |
+|__Input__       | Document                                                                                                                                                                  |
+|__Output__      | SpeechDocument                                                                                                             |
+|__Classes__     | DocumentToSpeech                                                                                                         |
+|||
+
+## Usage
+To initialize `DocumentToSpeech`, run:
+```python
+from haystack.nodes import DocumentToSpeech
+
+model_name = 'espnet/kan-bayashi_ljspeech_vits'
+answer_dir = './generated_audio_answers'
+
+audio_document = DocumentToSpeech(model_name_or_path=model_name, generated_audio_dir=answer_dir)
+```
+To use `DocumentToSpeech` in a pipeline, run:
+```python
+from haystack.nodes import DocumentToSpeech
+
+retriever = BM25Retriever(document_store=document_store)
+document2speech = DocumentToSpeech(
+    model_name_or_path="espnet/kan-bayashi_ljspeech_vits",
+    generated_audio_dir=Path(__file__).parent / "audio_documents",
+    )
+
+audio_pipeline = Pipeline()
+audio_pipeline.add_node(retriever, name="Retriever", inputs=["Query"])
+audio_pipeline.add_node(document2speech, name="DocumentToSpeech", inputs=["Retriever"])
+```
