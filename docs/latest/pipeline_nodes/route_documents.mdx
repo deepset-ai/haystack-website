@@ -16,17 +16,50 @@ You can then use it to route each document type to a Reader trained on it.
 
 ## Usage
 
-To initialize RouteDocuments so that it routes documents based on their content type (text vs. table):
+To initialize RouteDocuments so that it routes documents based on their content type (text vs. table), run:
 
 ```python
 route_documents = RouteDocuments()
 ```
 
-To initialize RouteDocuments so that it routes documents based on a metadata field:
+To initialize RouteDocuments so that it routes documents based on a metadata field, run:
 
 ```python
 route_documents = RouteDocuments(
     split_by="language",
     metadata_values=["de", "en", "es"]
 )
+```
+
+To use RouteDocuments in a pipeline, run:
+
+```python
+# Define the Retriever:
+from haystack.nodes.retriever import EmbeddingRetriever
+
+retriever = EmbeddingRetriever(document_store=document_store, embedding_model="deepset/all-mpnet-base-v2-table")
+
+# Define a table reader and a text reader. RouteDocuments will route relevant documents to the corresponding reader.
+# In a question answering pipeline, it makes sense to use RouteDocuments with JoinAnswers:
+
+from haystack.nodes import FARMReader, TableReader, RouteDocuments, JoinAnswers
+
+text_reader = FARMReader("deepset/roberta-base-squad2")
+# In order to get meaningful scores from the TableReader, use "deepset/tapas-large-nq-hn-reader" or
+# "deepset/tapas-large-nq-reader" as TableReader models. The disadvantage of these models is, however,
+# that they are not capable of doing aggregations over multiple table cells.
+table_reader = TableReader("deepset/tapas-large-nq-hn-reader")
+route_documents = RouteDocuments()
+join_answers = JoinAnswers()
+
+# Combine your nodes into a pipeline:
+
+from haystack import Pipeline
+
+text_table_qa_pipeline = Pipeline()
+text_table_qa_pipeline.add_node(component=retriever, name="EmbeddingRetriever", inputs=["Query"])
+text_table_qa_pipeline.add_node(component=route_documents, name="RouteDocuments", inputs=["EmbeddingRetriever"])
+text_table_qa_pipeline.add_node(component=text_reader, name="TextReader", inputs=["RouteDocuments.output_1"])
+text_table_qa_pipeline.add_node(component=table_reader, name="TableReader", inputs=["RouteDocuments.output_2"])
+text_table_qa_pipeline.add_node(component=join_answers, name="JoinAnswers", inputs=["TextReader", "TableReader"])
 ```
