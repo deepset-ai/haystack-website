@@ -26,7 +26,8 @@
       {"slug": "ready-made-pipelines", "title": "Ready-Made Pipelines"},
       {"slug": "rest-api", "title": "REST API"},
       {"slug": "rest-api-definition", "title": "REST API Definition"},
-      {"slug": "annotation", "title": "Annotation Tool"}
+      {"slug": "annotation", "title": "Annotation Tool"},
+      {"slug": "pseudo-label-generator", "title": "Pseudo Label Generator"}
     ]
   },
   {
@@ -68,7 +69,8 @@
       {"slug": "model-distillation", "title": "Model Distillation"},
       {"slug": "metadata-filtering", "title": "Metadata Filtering"},
       {"slug": "knowledge-graph", "title": "Knowledge Graph"},
-      {"slug": "telemetry", "title": "Telemetry" }
+      {"slug": "telemetry", "title": "Telemetry" },
+      {"slug": "gpl", "title": "Generative Pseudo Labeling" }
     ]
   },
   {
@@ -156,6 +158,7 @@
       {"slug": "evaluation", "title": "Evaluation"},
       {"slug": "pipelines", "title": "Pipelines" },
       {"slug": "question-generator", "title": "Question Generator"},
+      {"slug": "pseudo-label-generator", "title": "Pseudo Label Generator"},
       {"slug": "ranker", "title": "Ranker"},
       {"slug": "document-classifier", "title": "Document Classifier"},
       {"slug": "query-classifier", "title": "Query Classifier"},
