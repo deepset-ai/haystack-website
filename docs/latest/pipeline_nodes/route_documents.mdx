@@ -1,10 +1,9 @@
 # RouteDocuments
 
 This Node routes Documents to different branches of your pipeline based on their content_type or a metadata field.
-RouteDocuments is a decision node.
+RouteDocuments is a decision node. By default, it routes Documents of content_type `text` and `table` to different branches of your pipeline. You can also base this routing on metadata instead of on content_type. To do this, specify the parameter `metadata_values`.
 
-This node is handy if you have different types of data, for example tables and text.
-You can then use it to route each document type to a Reader trained on it.
+This Node is handy if you have different types of data, for example tables and text. You can then use it to route each document type to a Reader trained on it.
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
