@@ -4,6 +4,8 @@ Adapt your dense Retriever to a new domain without human annotation.
 
 Dense retrieval methods require a large amount of training data to work well and are sensitive to domain shifts. Generative Pseudo Labelling (GPL) is a technique that can make dense retrievers more effective in a new domain, without needing human annotators. It uses an ensemble of trained models to generate labeled data that are then used to perform domain adaptation on the dense retriever.
 
+The default [question generation](https://huggingface.co/doc2query/msmarco-t5-base-v1) and [cross-encoder](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2) models were trained on the English language corpus. However, you can also use language-specific question generation and cross-encoder models to apply GPL to documents in languages other than English.
+
 If you want to find out more, here's the original [GPL paper](https://arxiv.org/pdf/2112.07577.pdf).
 
 ## How It Works in General
