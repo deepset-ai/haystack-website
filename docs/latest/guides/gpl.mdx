@@ -48,4 +48,4 @@ psg = PseudoLabelGenerator(qg, retriever)
 output, _ = psg.run(documents=document_store.get_all_documents()) 
 retriever.train(output["gpl_labels"])
 ```
-And that's it! You now have a fine-tuned retriever.
+And that's it! You now have a domain-adapted retriever.
