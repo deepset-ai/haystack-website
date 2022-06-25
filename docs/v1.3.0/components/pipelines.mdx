@@ -282,7 +282,7 @@ pipeline.add_node(component=MyReader, name='MyReader', inputs=['MyESRetriever'])
 To load, simply call:
 
 ```python
-pipeline.load_from_yaml(Path("sample.haystack-pipeline.yml"))
+pipeline = Pipeline.load_from_yaml(Path("sample.haystack-pipeline.yml"))
 ```
 
 You can also define indexing pipelines via YAML.
