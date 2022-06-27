@@ -200,6 +200,11 @@ export const tutorialFilesLatest: Meta = {
       filename: "16.md",
       title: 'Document Classification at Index',
     },
+    {
+      slug: "gpl",
+      filename: "18.md",
+      title: 'Use Generative Pseudo Labelling for Domain Adaptation',
+    },
   ],
 };
 

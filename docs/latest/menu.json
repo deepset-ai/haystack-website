@@ -137,6 +137,10 @@
       {
         "slug": "doc-class-index",
         "title": "Document Classification at Indexing"
+      },
+      {
+        "slug": "gpl",
+        "title": "Use Generative Pseudo Labelling for Domain Adaptation"
       }
     ]
   },
