@@ -195,7 +195,7 @@ as in the code example below.
 ```python
 from haystack.document_stores import FAISSDocumentStore
 from haystack.nodes import DensePassageRetriever
-from haystack.pipeline import ExtractiveQAPipeline
+from haystack.pipelines import ExtractiveQAPipeline
 
 document_store = FAISSDocumentStore(similarity="dot_product")
 ...
