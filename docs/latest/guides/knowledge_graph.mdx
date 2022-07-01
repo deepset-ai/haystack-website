@@ -20,7 +20,7 @@ It does not require any extra installation or setup beyond installing Haystack.
 
 `kg = InMemoryKnowledgeGraph(index="tutorial_10_index")`
 
-Indices can be deleted and created with `InMemoryKnowledgeGraph.delete_index()` and `InMemoryKnowledgeGraph.create_index(config_path)`.
+Indices can be deleted and created with `InMemoryKnowledgeGraph.delete_index()` and `InMemoryKnowledgeGraph.create_index()`.
 
 InMemoryKnowledgeGraph can load an existing knowledge graph represented in the form of a .ttl file with the method `InMemoryKnowledgeGraph.import_from_ttl_file(index, path)`, where path points to a ttl file starting with something like:
 
@@ -57,7 +57,8 @@ Internally, Text2SparqlRetriever uses a pre-trained BART model to translate text
 
 If you want to use your custom data you would first need to have your custom knowledge graph in the format of a .ttl file.
 You can load your custom graph and execute SPARQL queries with `Text2SparqlRetriever._query_kg(sparql_query)`.
-To allow the use of abbreviations of namespaces, GraphDBKnowledgeGraph needs to know about them:
+
+If you're using abbreviations of namespaces in a GraphDBKnowledgeGraph, you will need to pass them in the following format:
 
 ```
 prefixes = """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
