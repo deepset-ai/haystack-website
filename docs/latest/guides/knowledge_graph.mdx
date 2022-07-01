@@ -6,45 +6,23 @@ Haystack allows loading and querying knowledge graphs. In particular, Haystack c
 - Execute SPARQL queries on a knowledge graph
 - Execute text queries on the knowledge graph by translating them to SPARQL queries with the help of a pre-trained seq2seq model
 
-Haystack's knowledge graph functionalities are still in a very early stage. Thus, don't expect our [exemplary tutorial](/tutorials/knowledge-graph) to work on your custom dataset out-of-the-box.
-Two classes implement the functionalities: GraphDBKnowledgeGraph and Text2SparqlRetriever.
+Haystack's knowledge graph functionalities are still in a very early stage.
+Thus, don't expect our [exemplary tutorial](/tutorials/knowledge-graph) to work on your custom dataset out-of-the-box.
+We recommend using the InMemoryKnowledgeGraph and Text2SparqlRetriever.
+If you would like to use GraphDB, please refer to the tutorial.
 
 <div style={{ marginBottom: "3rem" }} />
 
-## GraphDBKnowledgeGraph
+## InMemoryKnowledgeGraph
 
-GraphDBKnowledgeGraph is a triple store similar to Haystack's document stores. Currently, it is the only implementation of the BaseKnowledgeGraph class.
-GraphDBKnowledgeGraph runs on GraphDB. The licensing of GraphDB is rather complicated and it's more than unfortunate that GraphDB cannot be used right away in colab notebooks.
-On your local machine, you can start a GraphDB instance by running:
+InMemoryKnowledgeGraph is a triple store similar to Haystack's document stores.
+It does not require any extra installation or setup beyond installing Haystack.
 
-`docker run -d -p 7200:7200 --name graphdb-instance-tutorial docker-registry.ontotext.com/graphdb-free:9.4.1-adoptopenjdk11`
+`kg = InMemoryKnowledgeGraph(index="tutorial_10_index")`
 
-By default, GraphDBKnowledgeGraph connects to a GraphDB instance running on localhost at port 7200.
-Similar to Haystack's ElasticsearchDocumentStore, the only additional setting needed is an index name.
-(Note that GraphDB internally calls these indices repositories.)
+Indices can be deleted and created with `InMemoryKnowledgeGraph.delete_index()` and `InMemoryKnowledgeGraph.create_index()`.
 
-`kg = GraphDBKnowledgeGraph(index="tutorial_10_index")`
-
-Indices can be deleted and created with `GraphDBKnowledgeGraph.delete_index()` and `GraphDBKnowledgeGraph.create_index(config_path)`.
-`config_path` needs to point to a .ttl file that contains configuration settings (see [GraphDB documentation](https://graphdb.ontotext.com/documentation/free/configuring-a-repository.html#configure-a-repository-programmatically) for details or use the file from our [tutorial](/tutorials/knowledge-graph)). It starts with something like:
-
-```
-#
-# Sesame configuration template for a GraphDB Free repository
-#
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix rep: <http://www.openrdf.org/config/repository#>.
-@prefix sr: <http://www.openrdf.org/config/repository/sail#>.
-@prefix sail: <http://www.openrdf.org/config/sail#>.
-@prefix owlim: <http://www.ontotext.com/trree/owlim#>.
-
-[] a rep:Repository ;
-    rep:repositoryID "tutorial_10_index" ;
-    rdfs:label "tutorial 10 index" ;
-...
-```
-
-GraphDBKnowledgeGraph can load an existing knowledge graph represented in the form of a .ttl file with the method `GraphDBKnowledgeGraph.import_from_ttl_file(index, path)`, where path points to a ttl file starting with something like:
+InMemoryKnowledgeGraph can load an existing knowledge graph represented in the form of a .ttl file with the method `InMemoryKnowledgeGraph.import_from_ttl_file(index, path)`, where path points to a ttl file starting with something like:
 
 ```
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -58,9 +36,9 @@ hp:Gryffindor hp:founder hp:Godric_gryffindor .
 ...
 ```
 
-`GraphDBKnowledgeGraph.get_all_triples()` returns all loaded triples in the form of subject, predicate, and object. It is helpful to check whether the loading of a .ttl file was successful.
+`InMemoryKnowledgeGraph.get_all_triples()` returns all loaded triples in the form of subject, predicate, and object. It is helpful to check whether the loading of a .ttl file was successful.
 
-`GraphDBKnowledgeGraph.query(sparql_query)` executes SPARQL queries on the knowledge graph. However, we usually do not want to use this method directly but use it through a retriever.
+`InMemoryKnowledgeGraph.query(sparql_query)` executes SPARQL queries on the knowledge graph. However, we usually do not want to use this method directly but use it through a retriever.
 
 <div style={{ marginBottom: "3rem" }} />
 
@@ -78,7 +56,9 @@ Internally, Text2SparqlRetriever uses a pre-trained BART model to translate text
 ## Trying Question Answering on Knowledge Graphs with Custom Data
 
 If you want to use your custom data you would first need to have your custom knowledge graph in the format of a .ttl file.
-You can load your custom graph and execute SPARQL queries with `Text2SparqlRetriever._query_kg(sparql_query)`. To allow the use of abbreviations of namespaces, GraphDBKnowledgeGraph needs to know about them:
+You can load your custom graph and execute SPARQL queries with `Text2SparqlRetriever._query_kg(sparql_query)`.
+
+If you're using abbreviations of namespaces in a GraphDBKnowledgeGraph, you will need to pass them in the following format:
 
 ```
 prefixes = """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -104,4 +84,4 @@ For example, it can translate "Harry" to "hp:Harry_potter" only because we train
 
 Unfortunately, our pre-trained model for translating text queries does not work with your custom data.
 Instead, you need to train your own model. It needs to be trained according to the [seq2seq example for summarization with BART in transformers](https://github.com/huggingface/transformers/tree/master/examples/legacy/seq2seq).
-Haystack currently does not support the training of text2sparql models. We dont have concrete plans to extend the funtionality, but we are more than open to contributions. Don't hesitate to reach out!
+Haystack currently does not support the training of text2sparql models. We dont have concrete plans to extend the functionality, but we are more than open to contributions. Don't hesitate to reach out!
