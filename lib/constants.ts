@@ -201,6 +201,11 @@ export const tutorialFilesLatest: Meta = {
       title: 'Document Classification at Index',
     },
     {
+      slug: "audio",
+      filename: "17.md",
+      title: 'Make Your QA Pipelines Talk with Audio Nodes!',
+    },
+    {
       slug: "gpl",
       filename: "18.md",
       title: 'Use Generative Pseudo Labelling for Domain Adaptation',

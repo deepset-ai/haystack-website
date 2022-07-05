@@ -141,6 +141,10 @@
         "title": "Document Classification at Indexing"
       },
       {
+        "slug": "audio",
+        "title": "Make Your QA Pipelines Talk with Audio Nodes!"
+      },
+      {
         "slug": "gpl",
         "title": "Use Generative Pseudo Labelling for Domain Adaptation"
       }
