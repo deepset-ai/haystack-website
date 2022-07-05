@@ -158,6 +158,17 @@ p = ExtractiveQAPipeline(reader, retriever)
 
 <div style={{ marginBottom: "3rem" }} />
 
+## Multihop Embedding Retriever
+
+This is a retriever that retrieves multiple supporting text passages that contain the necessary evidence to answer a question. It's useful for fact checking, where a chain of evidence pieces leads to the final answer. `MultihopEmbeddingRetriever` "hops" from one text passage to the next one to combine the information it obtains and arrive at an answer.
+
+`MultihopEmbeddingRetriever` works iteratively. In the first iteration, it retrieves a set of documents. Then, it concatenates and embeds the query and the top-ranked document from the first iteration to give context to the query. Then, it uses this embedding to search the documents in the second iteration. It continues in this manner until...??
+
+This retriever uses one encoder for the query and the documents.
+
+For more information, see [Answering complex open-domain questions with multi-hop dense retrieval](https://arxiv.org/abs/2009.12756).
+
+
 ## Dense Passage Retrieval
 
 [Dense Passage Retrieval](https://arxiv.org/abs/2004.04906) is a highly performant retrieval method that calculates relevance using dense representations.
