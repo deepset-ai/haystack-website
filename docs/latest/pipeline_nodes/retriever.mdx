@@ -112,9 +112,15 @@ For more information about the algorithm, see [BM25 algorithm](https://www.elast
 
 ## Embedding Retrieval (Recommended)
 
-In Haystack, you have the option of using a transformer model to encode document and query.
+In Haystack, you have the option of using a transformer model to encode document and query. Haystack loads models directly from Hugging Face. If you're new to NLP, choosing the right model may be a difficult task. To make it easier, we suggest seraching for a model on Hugging Face:
+1. Go to [Hugging Face](https://huggingface.co/) and click **Models** in the top menu.
+2. From the Tasks on the left, select _Sentence Similarity_ and filter the models by Most Downloads. You get a list of most popular models. It's best to start with one of them.
+
+To use a private model hosted on Hugging Face, enter your Hugging Face access token in the `use_auth_token` parameter. For more information about models, see [Language Models](/guides/language_models).
+
+
 One style of model that is suited to this kind of retrieval is [Sentence Transformers](https://www.sbert.net/index.html).
-These models are trained in Siamese Networks and use triplet loss such that they learn to embed similar sentences near to each other in a shared embedding space. For more information about models, see [Language Models](/guides/language_models).
+These models are trained in Siamese Networks and use triplet loss such that they learn to embed similar sentences near to each other in a shared embedding space. 
 
 Some models have been fine-tuned on massive Information Retrieval data
 and can be used to retrieve documents based on a short query (for example, `multi-qa-mpnet-base-dot-v1`).
@@ -124,18 +130,7 @@ There are even models that are multilingual (for example, `paraphrase-multilingu
 For a good overview of different models with their evaluation metrics,
 see [Pretrained models](https://www.sbert.net/docs/pretrained_models.html#) in the Sentence Transformers documentation.
 
-If you are interested in using a Sentence Transformers model as an `EmbeddingRetriever`,
-you should set the `model_format="sentence_transformers"`.
 
-<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
-
-**Tip**
-
-When using Sentence Transformer models, we recommend referring to
-their [Model Overview](https://www.sbert.net/docs/pretrained_models.html#) to pick the best similarity function
-and also to find its embedding dimensions.
-
-</div>
 
 ```python
 from haystack.document_stores import ElasticsearchDocumentStore
@@ -179,8 +174,11 @@ There are two design decisions that have made DPR particularly performant.
 
 - Training with ‘In-batch negatives’ (gold labels are treated as negative examples for other samples in same batch) is highly efficient
 
-In Haystack, you can simply download the pretrained encoders needed to start using DPR.
-To learn how to set up a DPR-based system, have a look at the [Dense Passage Retrieval tutorial](/tutorials/dense-passage-retrieval). For more information about models, see [Language Models](/guides/language_models).
+In Haystack, you can simply download the pretrained encoders needed to start using DPR. For DPR, you need to provide two models - one for the query and one for the documents, however the models must be trained on the same data. The easiest way to start is to go to [Hugging Face](https://huggingface.co/models) and search for `dpr`. You'll get a list of DPR models sorted by Most Downloads, which means that the models at the top of the list are the most popular ones. Choose a `ctx_encoder` and a `question_encoder` model. 
+
+To use a private model hosted on Hugging Face, enter your Hugging Face access token in the `use_auth_token` parameter. For more information about models, see [Language Models](/guides/language_models).
+
+To learn how to set up a DPR-based system, have a look at the [Dense Passage Retrieval tutorial](/tutorials/dense-passage-retrieval). 
 
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 

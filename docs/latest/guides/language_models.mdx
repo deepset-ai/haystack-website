@@ -24,9 +24,9 @@ Here's a typical model name:
 
 `deepset` is the user who trained and uploaded the model, `roberta` is the model architecture, `base` is the size, and `squad2` is the dataset on which the model was trained.
 
-### Model Architecture
+### Model Types
 
-You don't need to have in-depth knowledge of the architecture to be able to use a model but it's usually best to start with the models using the newest architecture. So it may be useful for you to know which architectures were developed chronologically:
+You don't need to have in-depth knowledge of the architecture to be able to use a model but it's helpful to have a rough overview of the most common model types out there and their key differences. This will help you to better understand which models to try out in your own pipeline.
 
 ![image](/img/architecture_chronology.png)
 
@@ -50,3 +50,15 @@ If you're trying to find the right model on Hugging Face, go to the Models menu 
 
 There are two types of pipeline nodes that use models: dense retrievers and readers. Readers use models for question answering, while retrievers use sentence similarity or DPR models.For information about choosing the models for pipeline nodes, see [EmbeddingRetriever](/pipeline_nodes/retriever#embedding-retrieval-recommended), [DensePassageRetriever](/pipeline_nodes/retriever#dense-passage-retrieval), and [Reader](/pipeline_nodes/reader).
 
+To use a model, simply provide its Hugging Face location as a parameter to the node and deepset Cloud will take care of loading it. For example:
+
+```YAML
+- name: Retriever 
+    type: EmbeddingRetriever 
+    params:
+      document_store: DocumentStore
+      embedding_model: sentence-transformers/multi-qa-mpnet-base-dot-v1 
+      model_format: sentence_transformers
+      pooling_strategy: cls_token 
+      top_k: 20
+```
