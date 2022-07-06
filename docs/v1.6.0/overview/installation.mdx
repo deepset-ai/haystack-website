@@ -1,0 +1,93 @@
+# Installation
+
+## Basic Installation
+
+You can install a basic version of Haystack's latest release by using [pip](https://github.com/pypa/pip).
+
+```
+pip install farm-haystack
+```
+
+This command will install everything needed for basic Pipelines that use an Elasticsearch Document Store.
+
+## Full Installation
+
+If you plan to be using more advanced features like Milvus, FAISS, Weaviate, OCR or Ray,
+you will need to install a full version of Haystack.
+The following command will install the latest version of Haystack from the master branch.
+
+```
+git clone https://github.com/deepset-ai/haystack.git
+cd haystack
+pip install --upgrade pip
+pip install -e '.[all]' ## or 'all-gpu' for the GPU-enabled dependencies
+```
+
+The `-e` flag makes this an editable installation meaning that changes to the cloned repo will affect how the package runs.
+You can call `git pull` on the repo to update.
+
+If the `install` command does not work for you and you have `pip<21.3`, see [Custom Installation](/overview/v1.6.0/installation#custom-installation)
+
+## Installing the REST API and UI
+
+Haystack comes packaged with a REST API so that it can be deployed as a service.
+There is also a UI that interacts with this service to provide an interactive app to the user.
+To install these, run the following from the root directory of the Haystack repo.
+
+```
+pip install rest_api/
+pip install ui/
+```
+
+## Other Operating Systems
+
+### Windows
+
+```
+pip install farm-haystack -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+### Apple Silicon (M1)
+
+Macs with a M1 processor require some extra dependencies in order to install Haystack.
+
+```
+# some additional dependencies needed on m1 mac
+brew install postgresql
+brew install cmake
+brew install rust
+
+# haystack installation
+GRPC_PYTHON_BUILD_SYSTEM_ZLIB=true pip install farm-haystack
+```
+
+## Custom Installation
+
+To install groups of optional dependencies along with Haystack, specify them in the `pip install` command.
+The dependencies of Haystack are split into different groupings which you can find in `haystack/setup.cfg`.
+
+```
+# install haystack and all optional depedencies
+pip install -e .[all]
+
+# install haystack and all optional dependencies with gpu support
+pip install -e .[all-gpu]
+
+# install haystack and all docstores with gpu support
+pip install -e .[docstores-gpu]
+
+# install haystack and faiss with gpu support
+pip install -e .[faiss-gpu]
+```
+
+If you are running `pip<21.3` you won't be able to install dependency groups that reference other groups.
+Instead you can only specify groups that contain direct package references.
+
+```
+# instead of [all]
+pip install -e .[sql,only-faiss,only-milvus1,weaviate,graphdb,crawler,preprocessing,ocr,onnx,ray,dev]
+
+# instead of [all-gpu]
+pip install -e .[sql,only-faiss-gpu,only-milvus1,weaviate,graphdb,crawler,preprocessing,ocr,onnx-gpu,ray,dev]
+```
+

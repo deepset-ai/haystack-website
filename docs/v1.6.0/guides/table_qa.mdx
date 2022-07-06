@@ -1,0 +1,99 @@
+# Table Question Answering
+
+Unlock the information stored in your tables using Haystack.
+Using the `TableReader` and the `TableTextRetriever`, you can now perform open domain question answering on tabular data.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** Checkout our [Table QA tutorial](/tutorials/v1.6.0/table-qa) for a hands on guide on how to build your own system.
+
+</div>
+
+## Indexing Data
+
+To index data, cast your tables into pandas DataFrame format and use them to initialize `Document` objects.
+Then write them into your document store using the `write_documents()` method.
+
+```
+from haystack import Document
+import pandas as pd
+
+table = pd.DataFrame()
+docs = [
+    Document(content=table,
+             content_type="table",
+             meta={}),
+    ...
+]
+document_store.write_documents(docs)
+```
+
+If you have your tables embedded in raw files (e.g. within a PDF), you can use the `AzureConverter` to parse them into the required format (see [File Converters](/pipeline_nodes/v1.6.0/file-converters)).
+
+## Retrieval
+
+The `TableTextRetriever` is designed to perform document retrieval on both text and tabular documents.
+It is a tri-encoder model with a separate encoder for the query, text passage and table.
+To learn more about the design of this component and also the training of the default models,
+have a look at [our paper](https://arxiv.org/abs/2108.04049) which was accepted at EMNLP 2021.
+
+```
+retriever = TableTextRetriever(
+    document_store=document_store,
+    query_embedding_model="deepset/bert-small-mm_retrieval-question_encoder",
+    passage_embedding_model="deepset/bert-small-mm_retrieval-passage_encoder",
+    table_embedding_model="deepset/bert-small-mm_retrieval-table_encoder",
+    embed_meta_fields=["title", "section_title"]
+)
+document_store.update_embeddings(retriever=retriever)
+```
+
+## TableReader
+
+With the `TableReader`, you can get answers to your questions even if the answer is buried in a table.
+It is designed to use the [TAPAS](https://github.com/google-research/tapas) model created by Google.
+These models are able to pick out single cells,
+or a set of cells and perform an aggregation operating to form a final answer.
+
+```
+reader = TableReader(model_name_or_path="google/tapas-base-finetuned-wtq", max_seq_len=512)
+```
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Note:** When the [Answers](/components/v1.6.0/documents-answers-labels#answers) are returned by the `TableReader`,
+the offsets indicate the cells that answer the question.
+These offsets are start and end indices when counting through the table in a linear fashion
+i.e. first cell is top left and last cell is bottom right.
+
+</div>
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Note:** In the `Answer`'s `meta` field, you will find the aggregation operator used to combine a set of cells into a final answer.
+
+</div>
+
+## Pipeline
+
+All the table QA components can be combined together in a pipeline.
+
+```
+table_qa_pipeline = Pipeline()
+table_qa_pipeline.add_node(component=retriever, name="TableTextRetriever", inputs=["Query"])
+table_qa_pipeline.add_node(component=reader, name="TableReader", inputs=["TableTextRetriever"])
+```
+
+You can run queries on this pipeline as follows.
+
+```
+prediction = table_qa_pipeline.run("How many twin buildings are under construction?")
+```
+
+The output of the pipeline is compatible with the `print_answers()` utility function
+
+```
+from haystack.utils import print_answers
+
+print_answers(prediction, details="minimal")
+```
