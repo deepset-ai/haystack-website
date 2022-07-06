@@ -55,10 +55,6 @@ module.exports = {
         destination: "/guides/optimization",
       },
       {
-        source: "/usage/annotation",
-        destination: "/guides/annotation",
-      },
-      {
         source: "/usage/rest-api",
         destination: "/guides/rest-api",
       },
@@ -149,10 +145,6 @@ module.exports = {
       {
         source: "/docs/optimizationmd",
         destination: "/guides/optimization",
-      },
-      {
-        source: "/docs/annotationmd",
-        destination: "/guides/annotation",
       },
       {
         source: "/docs/rankermd",
@@ -325,10 +317,6 @@ module.exports = {
       {
         source: "/docs/latest/optimizationmd",
         destination: "/guides/optimization",
-      },
-      {
-        source: "/docs/latest/annotationmd",
-        destination: "/guides/annotation",
       },
       {
         source: "/docs/latest/rankermd",
@@ -1654,7 +1642,17 @@ module.exports = {
         source: '/tutorials/v0.10.0/doc-class-index',
         destination: '/tutorials/v1.0.0/doc-class-index',
         permanent: true,
-      }
+      },
+      {
+        source: "/docs/annotationmd",
+        destination: "/components/annotation",
+        permanent: true,
+      },
+      {
+        source: "/docs/latest/annotationmd",
+        destination: "/components/annotation",
+        permanent: true,
+      },
     ]
   },
 };
