@@ -62,6 +62,7 @@
     "pathPrefix": "/guides/",
     "items": [
       {"slug": "guides-overview", "title": "Overview"},
+      {"slug": "language-models", "title": "Language Models"},
       {"slug": "languages", "title": "Languages Other Than English"},
       {"slug": "domain-adaptation","title": "Domain Adaptation"},
       {"slug": "optimization", "title": "Optimization"},
