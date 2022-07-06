@@ -1,0 +1,100 @@
+# PreProcessor
+
+Use the PreProcessor to normalize white spaces, get rid of headers and footers,
+clean empty lines in your Documents, or split them into smaller pieces.
+
+Splitting is generally recommended for long Documents
+as it makes the Retriever's job easier and speeds up Question Answering.
+For suggestions on how best to split your documents, see [Optimization](/guides/optimization).
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| As early in an indexing Pipeline as possible but after File Converters and Crawlers |
+|__Input__       | [Documents](/components/documents-answers-labels#document)                                                                                                                                                                  |
+|__Output__      | [Documents](/components/documents-answers-labels#document)                                                                                                                                                                    |
+|__Classes__     | PreProcessor                                                                                                                                             |
+|||
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** To start working with code examples, have a look at the [preprocessing tutorial](/tutorials/preprocessing). For ideas on what you can do at indexing time, see
+    [advanced indexing tutorial](/tutorials/doc-class-index).
+
+</div>
+
+## Usage
+
+To initialize `PreProcessor`, run:
+
+```python
+from haystack.nodes import PreProcessor
+
+processor = PreProcessor(
+    clean_empty_lines=True,
+    clean_whitespace=True,
+    clean_header_footer=True,
+    split_by="word",
+    split_length=200,
+    split_respect_sentence_boundary=True,
+    split_overlap=0
+)
+```
+
+| Argument                        | Type   | Description                                                                                                                                                 |
+|---------------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| clean_empty_lines               | bool   | Normalizes 3 or more consecutive empty lines to be just a two empty lines.                                                                        |
+| clean_whitespace                | bool   | Removes any whitespace at the beginning or end of each line in the text.                                                                          |
+| clean_header_footer             | bool   | Removes any long header or footer texts that are repeated on each page.                                                                           |
+| split_by                        | string | Determines what unit the document is split by. Choose from `'word'`, `'sentence'` or `'passage'`.                                                           |
+| split_length                    | int    | Sets a maximum number of `'word'`, `'sentence'` or `'passage'` units per output document                                                                    |
+| split_respect_sentence_boundary | bool   | Ensures that document boundaries do not fall in the middle of sentences                                                                                     |
+| split_overlap                   | int    | Sets the amount of overlap between two adjacent documents after a split. Setting this to a positive number essentially enables the sliding window approach. |
+
+To run the `PreProcessor` by itself, run:
+
+```python
+doc = converter.convert(file_path=file, meta=None)
+docs = processor.process(doc)
+```
+
+To use `PreProcessor` in a pipeline, run:
+```python
+from haystack.pipelines import Pipeline
+from haystack.nodes import PreProcessor, TextConverter, Retriever
+from haystack.nodes import DeepsetCloudDocumentStore
+
+pipeline = Pipeline()
+pipeline.add_node(component=text_converter, name="TextConverter", inputs=["File"])
+pipeline.add_node(component=preprocessor, name="PreProcessor", inputs=["TextConverter"])
+pipeline.add_node(component=retriever, name="EmbeddingRetriever", inputs=["PreProcessor"])
+pipeline.add_node(component=document_store, name="DeepsetCloudDocumentStore", inputs="EmbeddingRetriever")
+
+```
+
+
+## Document Format
+
+When you are not using an indexing Pipeline, the PreProcessor can take either `Document` objects (recommended)
+as input or plain dictionaries.
+To learn more about the `Document` class, see [Documents, Answers, and Labels](/components/documents-answers-labels).
+
+```python
+# Option 1: Native Haystack Documents
+docs = [
+    Document(
+        content='DOCUMENT_TEXT_HERE',
+        meta={'name': DOCUMENT_NAME, ...}
+        ...
+    ), ...
+]
+
+# Option 2: Plain dictionary
+docs = [
+    {
+        'content': 'DOCUMENT_TEXT_HERE',
+        'meta': {'name': DOCUMENT_NAME, ...}
+    }, ...
+]
+```
+
+<div style={{ marginBottom: "3rem" }} />
