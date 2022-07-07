@@ -7,7 +7,7 @@ The core idea is to build a Directed Acyclic Graph (DAG) where each Node is one 
 ## Indexing Pipelines vs Querying Pipelines
 
 Indexing pipelines take files as input. They convert them into Haystack Documents and perform some processing steps. Then they index the Documents into a Document Store.
-The first Node in an indexing pipeline will usually be a [File Convertor](/pipeline_nodes/file_converters) or a FileTypeClassifier and take "File" as its input.
+The first Node in an indexing pipeline will usually be a [File Converter](/pipeline_nodes/file_converters) or a FileTypeClassifier and take "File" as its input.
 The last Node will always be a Document Store.
 Here's an example of an indexing pipeline that preprocesses and classifies each document:
 
