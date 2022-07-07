@@ -1,11 +1,37 @@
 # Pipelines
 
-## Flexibility powered by DAGs
-
 To build modern search pipelines, you need two things: powerful [building blocks](/pipeline_nodes/overview) and an easy way to stick them together.
 The `Pipeline` class is precisely built for this purpose and enables many search scenarios beyond QA.
 The core idea is to build a Directed Acyclic Graph (DAG) where each Node is one building block (Reader, Retriever, Generator).
-Here's a simple example for a standard Open-Domain QA Pipeline:
+
+## Indexing Pipelines vs Querying Pipelines
+
+Indexing pipelines take files as input. They convert them into Haystack Documents and perform some processing steps. Then they index the Documents into a Document Store.
+The first Node in an indexing pipeline will usually be a [File Convertor](/pipeline_nodes/file_converters) or a FileTypeClassifier and take "File" as its input.
+The last Node will always be a Document Store.
+Here's an example of an indexing pipeline that preprocesses and classifies each document:
+
+```python
+from haystack.pipelines import Pipeline
+
+p = Pipeline()
+p.add_node(component=text_converter, name="TextConverter", inputs=["File"])
+p.add_node(component=preprocessor, name="PreProcessor", inputs=["TextConverter"])
+p.add_node(component=document_classifier, name="DocumentClassifier", inputs=["PreProcessor"])
+p.add_node(component=document_store, name="DocumentStore", inputs=["DocumentClassifier"])
+
+p.run(file_paths=["filename.txt"])
+```
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** have a look at the [Document Classification at Indexing Tutorial](/tutorials/doc-class-index) for a more detailed example of this kind of pipeline.
+
+</div>
+
+Querying pipelines perform searches (or any other NLP task) on a set of documents that have been indexed into a Document Store.
+The first Node in a querying pipeline will take "Query" as its input and the documents will most often be found within the Retriever which in turn contains a Document Store.
+A querying pipeline for Open-Domain QA might look something like this:
 
 ```python
 from haystack import Pipeline
@@ -15,8 +41,6 @@ p.add_node(component=retriever, name="ESRetriever1", inputs=["Query"])
 p.add_node(component=reader, name="QAReader", inputs=["ESRetriever1"])
 res = p.run(query="What did Einstein work on?")
 ```
-
-<div style={{ marginBottom: "3rem" }} />
 
 ## Initialize a Pipeline
 
@@ -79,11 +103,18 @@ res = pipeline.run(
 
 ## Run a Pipeline
 
-The `run()` function is the single command that triggers the execution of the entire pipeline:
+The `run()` function is the single command that triggers the execution of the entire pipeline.
+For query pipelines, you will need to provide `query` as an argument:
 ``` python
 query = "What's the history of Quidditch?"
 pipeline.run(query=query)
 ```
+For indexing pipelines, you will need to provide `file_paths` as an argument:
+```python
+file_paths = ["filename1.txt", "filename2.pdf"]
+pipeline.run(file_paths=file_paths)
+```
+
 For query pipelines, there's an additional function `run_batch()` that you can use to provide multiple queries as input:
 ``` python
 queries = ["What's the history of Quidditch?", "Where did Quidditch originate?", "When did the first Quidditch match take place?"]
