@@ -28,6 +28,7 @@ const Layout: FC<LayoutProps> = ({
     title: "Haystack Docs",
     description: "Haystack enables Question Answering at Scale",
     image: "/img/haystack-logo-colored.png",
+    twitter_image: "https://raw.githubusercontent.com/deepset-ai/haystack-website/source/public/img/haystack-logo-colored.png",
     type: "website",
   };
 
@@ -58,7 +59,7 @@ const Layout: FC<LayoutProps> = ({
         <meta name="twitter:site" content="@deepset_ai" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content={meta.image} />
+        <meta name="twitter:image" content={meta.twitter_image} />
       </Head>
       <Header docsType={"haystack"} />
       <DesktopNav menu={menu} />
