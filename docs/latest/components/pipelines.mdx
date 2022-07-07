@@ -64,9 +64,9 @@ When you create a custom pipeline, you need to pay extra care that each node’s
 
 Each node in a Pipeline defines the arguments the `run()` and `run_batch()` methods accept. The Pipeline class takes care of passing relevant
 arguments to the node. In addition to mandatory inputs like `query` and `queries`, `run()` and `run_batch()` accept optional node parameters, such as the number of documents to display (`top_k`) with the `params` argument. For instance, `params={"top_k": 5}` sets the `top_k` of all nodes to `5`. To
-target parameters to a specific node, you can explicitly specify the node name, for example: `params={"Retriever": {"top_k": 5}}`. 
+target parameters to a specific node, you can explicitly specify the node name, for example: `params={"Retriever": {"top_k": 5}}`.
 
-This example sets the number of documents to be returned by the Retriever node to 5 and the number of documents to be returned by the Reader node to 3: 
+This example sets the number of documents to be returned by the Retriever node to 5 and the number of documents to be returned by the Reader node to 3:
 
 ```python
 res = pipeline.run(
@@ -90,7 +90,7 @@ queries = ["What's the history of Quidditch?", "Where did Quidditch originate?",
 pipeline.run_batch(query=queries)
 ```
 
-Every node has its own `run()` method, and the pipeline `run()` call invokes each node, one after the other. When you `run()` a pipeline, all the function arguments are propagated to every node in the graph. The same is true for the `run_batch()` method.  
+Every node has its own `run()` method, and the pipeline `run()` call invokes each node, one after the other. When you `run()` a pipeline, all the function arguments are propagated to every node in the graph. The same is true for the `run_batch()` method.
 
 Say, the `top_k` values of Retriever and Ranker have aliases that are automatically recognized by the respective modules. This lets you dynamically modify these parameters in each call to the pipeline:
 
@@ -230,7 +230,7 @@ def run(self, query: str, _debug: dict):
 ## YAML File Definitions
 
 You can define and load pipelines in YAML files. This is particularly useful when
-you move between experimentation and production environments. Just export the YAML from your notebook or IDE and import it into your production environment.  
+you move between experimentation and production environments. Just export the YAML from your notebook or IDE and import it into your production environment.
 Having your pipeline in a YAML file helps with version control of pipelines, makes it easy to share your pipelines with colleagues
 and configure pipeline parameters in production.
 
@@ -278,7 +278,7 @@ pipeline.add_node(component=MyReader, name='MyReader', inputs=['MyESRetriever'])
 To load, simply call:
 
 ```python
-pipeline.load_from_yaml(Path("sample.haystack-pipeline.yml"))
+pipeline = Pipeline.load_from_yaml(Path("sample.haystack-pipeline.yml"))
 ```
 
 You can also define indexing pipelines via YAML.
