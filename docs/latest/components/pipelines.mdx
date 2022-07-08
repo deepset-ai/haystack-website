@@ -4,7 +4,22 @@ To build modern search pipelines, you need two things: powerful [building blocks
 The `Pipeline` class is precisely built for this purpose and enables many search scenarios beyond QA.
 The core idea is to build a Directed Acyclic Graph (DAG) where each Node is one building block (Reader, Retriever, Generator).
 
-## Indexing Pipelines vs Querying Pipelines
+## Querying Pipelines
+
+Querying pipelines perform searches on a set of documents that have been indexed into a Document Store.
+The first Node in a querying pipeline always takes query as input. To find the right answer, the pipeline uses Documents stored in a Document Store.
+
+Here's an example of a querying pipeline for open-domain question answering:
+```python
+from haystack import Pipeline
+
+p = Pipeline()
+p.add_node(component=retriever, name="ESRetriever1", inputs=["Query"])
+p.add_node(component=reader, name="QAReader", inputs=["ESRetriever1"])
+res = p.run(query="What did Einstein work on?")
+```
+
+## Indexing Pipelines
 
 Indexing pipelines prepare your files for search.
 Their main objective is to convert your files into Haystack [Documents](/components/documents-answers-labels#document),
@@ -39,19 +54,6 @@ p.run(file_paths=["filename.txt"])
 **Tutorial:** For a more detailed example of this kind of pipeline, have a look at the [Document Classification at Indexing Tutorial](/tutorials/doc-class-index).
 
 </div>
-
-Querying pipelines perform searches on a set of documents that have been indexed into a Document Store.
-The first Node in a querying pipeline always takes query as input. To find the right answer, the pipeline uses Documents stored in a Document Store.
-
-Here's an example of a querying pipeline for open-domain question answering:
-```python
-from haystack import Pipeline
-
-p = Pipeline()
-p.add_node(component=retriever, name="ESRetriever1", inputs=["Query"])
-p.add_node(component=reader, name="QAReader", inputs=["ESRetriever1"])
-res = p.run(query="What did Einstein work on?")
-```
 
 ## Initialize a Pipeline
 
