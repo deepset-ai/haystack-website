@@ -38,6 +38,7 @@
       {"slug": "answer-to-speech", "title": "AnswerToSpeech"},
       {"slug": "document-to-speech", "title": "DocumentToSpeech"},
       {"slug": "preprocessor", "title": "PreProcessor"},
+      {"slug": "file-classifier", "title": "File Classifier"},
       {"slug": "file-converters", "title": "File Converters"},
       {"slug": "crawler", "title": "Crawler"},
       {"slug": "retriever", "title": "Retriever"},
