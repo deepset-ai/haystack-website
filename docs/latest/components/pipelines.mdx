@@ -40,10 +40,10 @@ p.run(file_paths=["filename.txt"])
 
 </div>
 
-Querying pipelines perform searches (or any other NLP task) on a set of documents that have been indexed into a Document Store.
-The first Node in a querying pipeline will take "Query" as its input and the documents will most often be found within the Retriever which in turn contains a Document Store.
-A querying pipeline for Open-Domain QA might look something like this:
+Querying pipelines perform searches on a set of documents that have been indexed into a Document Store.
+The first Node in a querying pipeline always takes query as input. To find the right answer, the pipeline uses Documents stored in a Document Store.
 
+Here's an example of a querying pipeline for open-domain question answering:
 ```python
 from haystack import Pipeline
 
@@ -115,7 +115,7 @@ res = pipeline.run(
 ## Run a Pipeline
 
 The `run()` function is the single command that triggers the execution of the entire pipeline.
-For query pipelines, you will need to provide `query` as an argument:
+For querying pipelines, provide `query` as an argument:
 ``` python
 query = "What's the history of Quidditch?"
 pipeline.run(query=query)
@@ -126,7 +126,7 @@ file_paths = ["filename1.txt", "filename2.pdf"]
 pipeline.run(file_paths=file_paths)
 ```
 
-For query pipelines, there's an additional function `run_batch()` that you can use to provide multiple queries as input:
+For querying pipelines, there's an additional function `run_batch()` that you can use to provide multiple queries as input:
 ``` python
 queries = ["What's the history of Quidditch?", "Where did Quidditch originate?", "When did the first Quidditch match take place?"]
 pipeline.run_batch(query=queries)
