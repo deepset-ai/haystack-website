@@ -27,13 +27,12 @@ so that they can be saved in a [Document Store](/components/document-store).
 
 They begin with either a [File Converter](/pipeline_nodes/file-converters),
 or a [File Classifier](/pipeline_nodes/file-classifier) followed by File Converters.
+The last Node in an indexing pipeline is always a Document Store.
 
 When you add Nodes into the middle of an indexing pipeline,
 they can also perform extra steps of processing on Documents before they are saved into the Document Store.
 For example, a [PreProcessor](/pipeline_nodes/preprocessor) can be added to perform Document splitting and cleaning.
 A [Document Classifier](/pipeline_nodes/document-classifier) in an indexing pipeline attaches a classification label to each Document.
-
-The last Node in an indexing pipeline is always a Document Store.
 
 Here's an example of an indexing pipeline that preprocesses and classifies each document:
 
