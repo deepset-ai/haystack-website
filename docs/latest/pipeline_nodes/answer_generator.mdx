@@ -3,19 +3,21 @@
 The Answer Generator reads a set of documents and generates an answer to a question, word by word.
 While extractive QA highlights the span of text that answers a query,
 generative QA can return a novel text answer that it has composed.
-The best current approaches can draw upon both the knowledge it gained during language model pretraining (parametric memory)
+The best current approaches can draw upon both the knowledge the Answer Generator gained during language model pretraining (parametric memory)
 and the passages provided to it with a Retriever (non-parametric memory).
 
-Haystack offers generative systems that can be run on your own hardware
-such as [Retriever-Augmented Generation](https://arxiv.org/abs/2005.11401) and [LFQA](https://yjernite.github.io/lfqa.html),
-With the advent of transformer-based retrieval methods such as [Dense Passage Retrieval](https://arxiv.org/abs/2004.04906),
-Answer Generators can be trained concurrently with the Retriever from the one loss signal.
+Haystack offers generative systems such as [RAG](https://arxiv.org/abs/2005.11401) and [LFQA](https://yjernite.github.io/lfqa.html),
+that you can run on your own hardware.
+Since Answer Generators are often trained concurrently with a Retriever,
+you should use models that were trained together for best performance.
+For example, the RAG model expects a [Dense Passage Retrieval](https://arxiv.org/abs/2004.04906).
 
-With Haystack, you also have the option of offloading answer generation to an API.
+With Haystack, you can use an API to perform answer generation.
 [GPT-3](https://openai.com/api/) from OpenAI is a large scale generative language model that can be used in this question answering setting.
-It is infeasible to run a model of this size on local hardware, but you can query an instance of GPT-3 via an API.
-The `OpenAIAnswerGenerator` class facilitates this, and it functions just like any other Node in Haystack.
-Note that to use GPT-3, you will need a valid OpenAI account and API key.
+It is infeasible to run a model of this size on local hardware, but you can query an instance of GPT-3 using an API.
+The `OpenAIAnswerGenerator` class facilitates this, and like any other Node in Haystack,
+it can be used in isolation or as part of a [Pipeline](/components/pipelines).
+Note that to use GPT-3, you need to sign up for an [OpenAI account](https://openai.com/api/) and obtain a valid API key.
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -72,7 +74,7 @@ from haystack.nodes import OpenAIAnswerGenerator
 generator = OpenAIAnswerGenerator(api_key=MY_API_KEY)
 ```
 
-To run an Answer Generator in a pipeline, run:
+To use an Answer Generator in a pipeline, run:
 
 ``` python
 from haystack.pipelines import GenerativeQAPipeline
