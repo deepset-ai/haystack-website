@@ -43,7 +43,7 @@
       {"slug": "crawler", "title": "Crawler"},
       {"slug": "retriever", "title": "Retriever"},
       {"slug": "reader", "title": "Reader"},
-      {"slug": "generator", "title": "Generator" },
+      {"slug": "answer-generator", "title": "Answer Generator" },
       {"slug": "summarizer", "title": "Summarizer"},
       {"slug": "translator", "title": "Translator"},
       {"slug": "ranker", "title": "Ranker"},
