@@ -28,7 +28,7 @@ See each individual Node's documentation page to learn more about its available 
 | [PreProcessor](/pipeline_nodes/preprocessor)      | PreProcessor                                 | Performs cleaning and splitting on Documents   |
 | [Retriever](/pipeline_nodes/retriever)       | BM25Retriever, ElasticsearchRetriever, DensePassageRetriever, TableTextRetriever, EmbeddingRetriever, TfidfRetriever, ElasticsearchFilterOnlyRetriever  | Looks into a coupled Document Store and fetches Documents that are relevant to a given Query  |
 | [Reader](/pipeline_nodes/retriever)      | FARMReader, TransformersReader                      |  Finds an answer to a question by selecting a text span in the provided Documents |
-| [Generator](/pipeline_nodes/generator)      | RAGenerator, Seq2SeqGenerator  |  Generates an answer to a question by reading through the provided documents and composing an answer word-by-word |
+| [Answer Generator](/pipeline_nodes/answer-generator)      | RAGenerator, Seq2SeqGenerator, OpenAIAnswerGenerator  |  Generates an answer to a question by reading through the provided documents and composing an answer word-by-word |
 | [Summarizer](/pipeline_nodes/summarizer)      | TransformersSummarizer  |  Creates a shorter overview of a given Document |
 | [Translator](/pipeline_nodes/translator)      | TransformersTranslator  |  Translate text from one language into another |
 | [Ranker](/pipeline_nodes/ranker)      | SentenceTransformersRanker  |  Reorders a set of Documents based on their relevance to the Query |
