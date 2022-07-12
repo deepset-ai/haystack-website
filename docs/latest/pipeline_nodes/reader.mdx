@@ -122,10 +122,27 @@ Larger models are generally more accurate but sacrifice some speed.
 Models trained on different data may be more suited to certain domains. For more information about models, see [Language Models](/guides/language_models).
 
 You will find many open source Reader models on the [HuggingFace Model Hub](https://huggingface.co/models?pipeline_tag=question-answering).
-These models are directly usable in Haystack if you provide the Model Hub name to the Reader's initialization.
-Haystack automatically handles the downloading and loading of the model.
+Haystack automatically handles the downloading and loading of the model if you provide the Model Hub name to the Reader's initialization.
 
-If you're unsure which model to use, here are our recommendations that you can start with:
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+** Compatible models **
+
+The Reader supports extractive question answering models that have a BERT-based architecture such as:
+- BERT
+- RoBERTa
+- ALBERT
+- MiniLM
+- XLM
+- DistilBERT
+- XLM-RoBERTa
+- DeBERTa
+
+If you're using a sequence to sequence model such as BART, use the [Answer Generator](/pipeline_nodes/answer-generator) instead.
+
+</div>
+
+If you're unsure which Reader model to use, here are our recommendations that you can start with:
 
 <Tabs
   options={[
