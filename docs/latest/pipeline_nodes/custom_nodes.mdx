@@ -83,7 +83,7 @@ This means that if we want to pass a language value to our custom node, we can s
 Let's look at the French summary of a popular wizard sport:
 
 ``` python
-query = "What's the history of Quidditch?'
+query = "What's the history of Quidditch?"
 result = pipeline.run(query=query, params={"retriever": {"top_k": 30}, "ranker": {"top_k": 20}, "language": "fr"})
 result['documents'][0].text
 
