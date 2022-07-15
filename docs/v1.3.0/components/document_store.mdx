@@ -121,7 +121,7 @@ Initialising a new DocumentStore within Haystack is straightforward.
                 <div>
                 The InMemoryDocumentStore() requires no external setup. Start it by simply using this line.
                 <pre>
-                    <code>from haystack.document_store import InMemoryDocumentStore</code>
+                    <code>from haystack.document_stores import InMemoryDocumentStore</code>
                     <code>document_store = InMemoryDocumentStore()</code>
                 </pre>
                 </div>
@@ -134,7 +134,7 @@ Initialising a new DocumentStore within Haystack is straightforward.
                 The SQLDocumentStore requires SQLite, PostgresQL or MySQL to be installed and started.
                 Note that SQLite already comes packaged with most operating systems.
                 <pre>
-                <code>from haystack.document_store import SQLDocumentStore</code>
+                <code>from haystack.document_stores import SQLDocumentStore</code>
                 <code>document_store = SQLDocumentStore()</code>
                 </pre>
                 </div>
@@ -151,7 +151,7 @@ Initialising a new DocumentStore within Haystack is straightforward.
                 </pre>
                 Afterwards, you can use it in Haystack:
                 <pre>
-                    <code>from haystack.document_store import WeaviateDocumentStore</code>
+                    <code>from haystack.document_stores import WeaviateDocumentStore</code>
                     <code>document_store = WeaviateDocumentStore()</code>
                 </pre>
                 Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
@@ -166,7 +166,7 @@ Initialising a new DocumentStore within Haystack is straightforward.
                 To initialize the Pinecone document store, provide an API key and Pinecone cloud environment. To obtain the API key, <a href="https://app.pinecone.io">create a free Pinecone account</a>. The enviroment is <b>us-west1-gcp</b> by default.
                 <pre>
                     <code>import os</code>
-                    <code>from haystack.document_store import PineconeDocumentStore</code>
+                    <code>from haystack.document_stores import PineconeDocumentStore</code>
                     <code>document_store = PineconeDocumentStore(api_key=os.environ["PINECONE_API_KEY"])</code>
                 </pre>
                 </div>

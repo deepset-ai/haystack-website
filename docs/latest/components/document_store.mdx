@@ -155,7 +155,7 @@ Initialising a new DocumentStore within Haystack is straightforward.
                 </pre>
                 Afterwards, you can use it in Haystack:
                 <pre>
-                    <code>from haystack.document_store import WeaviateDocumentStore</code>
+                    <code>from haystack.document_stores import WeaviateDocumentStore</code>
                     <code>document_store = WeaviateDocumentStore()</code>
                 </pre>
                 Each DocumentStore constructor allows for arguments specifying how to connect to existing databases and the names of indexes.
@@ -171,7 +171,7 @@ Initialising a new DocumentStore within Haystack is straightforward.
                
                 <pre>
                     <code>import os</code>
-                    <code>from haystack.document_store import PineconeDocumentStore</code>
+                    <code>from haystack.document_stores import PineconeDocumentStore</code>
                     <code>document_store = PineconeDocumentStore(api_key=os.environ["PINECONE_API_KEY"])</code>
                 </pre>
                 </div>
@@ -189,7 +189,7 @@ See [PreProcessor}](/pipeline_nodes/preprocessor) for more information on the cl
 [//]: # "Add link to preprocessing section"
 
 ```python
-from haystack.document_store import ElasticsearchDocumentStore
+from haystack.document_stores import ElasticsearchDocumentStore
 
 document_store = ElasticsearchDocumentStore()
 dicts = [

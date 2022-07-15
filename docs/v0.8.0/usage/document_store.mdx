@@ -46,7 +46,7 @@ Note that we also have a utility function `haystack.utils.launch_milvus` that ca
 You can initialize the Haystack object that will connect to this instance as follows:
 
 ```python
-from haystack.document_store import MilvusDocumentStore
+from haystack.document_stores import MilvusDocumentStore
 
 document_store = MilvusDocumentStore()
 ```
@@ -58,7 +58,7 @@ document_store = MilvusDocumentStore()
 The `FAISSDocumentStore` requires no external setup. Start it by simply using this line.
 
 ```python
-from haystack.document_store import FAISSDocumentStore
+from haystack.document_stores import FAISSDocumentStore
 
 document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
 ```
@@ -70,7 +70,7 @@ document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
 The `InMemoryDocumentStore()` requires no external setup. Start it by simply using this line.
 
 ```python
-from haystack.document_store import InMemoryDocumentStore
+from haystack.document_stores import InMemoryDocumentStore
 
 document_store = InMemoryDocumentStore()
 ```
@@ -83,7 +83,7 @@ The `SQLDocumentStore` requires SQLite, PostgresQL or MySQL to be installed and 
 Note that SQLite already comes packaged with most operating systems.
 
 ```python
-from haystack.document_store import SQLDocumentStore
+from haystack.document_stores import SQLDocumentStore
 
 document_store = SQLDocumentStore()
 ```
