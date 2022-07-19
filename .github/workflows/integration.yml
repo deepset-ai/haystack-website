@@ -18,4 +18,4 @@ jobs:
           README_API_KEY: ${{ secrets.README_API_KEY }}
         uses: readmeio/rdme@7.2.0
         with:
-          rdme: docs ./docs --key="$README_API_KEY" --version=1.0
+          rdme: docs ./docs --key="rdme_xn8s9h22f5f66f0224d89f0fed2cf3e539e5ba2bfdf252769804c90b8d5210c87cce4a" --version=1.0
