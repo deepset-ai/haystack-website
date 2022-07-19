@@ -16,4 +16,4 @@ jobs:
       - name: Github Action
         uses: readmeio/rdme@7.2.0
         with:
-          rdme: docs ./docs --key=${{ secrets.README_API_KEY }} --version=1.0
+          rdme: docs ./docs --key="${{ secrets.FAKEAPI }}" --version=1.0
