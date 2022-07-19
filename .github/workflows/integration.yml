@@ -9,10 +9,13 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout this repo
         uses: actions/checkout@v3
 
       - name: Github Action
+        env:
+          README_API_KEY: ${{ secrets.README_API_KEY }}
         uses: readmeio/rdme@7.2.0
         with:
-          rdme: docs ./docs --key="4ShCDfmKYSGB7GyabeR3Z0S2mSKOwvUT" --version=1.0
+          rdme: docs ./docs --key="$README_API_KEY" --version=1.0
