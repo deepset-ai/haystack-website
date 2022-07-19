@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Github Action
-        env:
-          README_API_KEY: ${{ secrets.README_API_KEY }}
         uses: readmeio/rdme@7.2.0
         with:
+          env:
+            README_API_KEY: ${{ secrets.README_API_KEY }}
           rdme: docs ./docs --key="$README_API_KEY" --version=1.0
