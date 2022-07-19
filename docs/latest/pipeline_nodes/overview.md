@@ -7,6 +7,8 @@ category: 62cec7b9c64192049e795c0d
 
 # Pipeline Nodes
 
+xx
+
 Nodes are the core components that process and route incoming text.
 Some perform steps like preprocessing, retrieving or summarizing text
 while route queries through different branches of a Pipeline.
