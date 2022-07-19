@@ -19,3 +19,4 @@ jobs:
           README_API_KEY: ${{ secrets.README_API_KEY }}
         with:
           rdme: docs ./docs --key="$README_API_KEY" --version=1.0
+
