@@ -119,7 +119,7 @@ Another option is to convert the Documents to dictionaries before printing.
 
 Unlike extractive QA, which produces an answer by extracting a text span from a collection of passages, generative QA works by producing free text answers that need not correspond to a span of any document. Because the answers are not constrained by text spans, the Generator is able to create answers that are more appropriately worded compared to those extracted by the Reader. Therefore, it makes sense to employ a generative QA system if you expect answers to extend over multiple text spans, or if you expect answers to not be contained verbatim in the documents.
 
-`GenerativeQAPipeline` combines the [Retriever](/pipeline_nodes/retriever) with the [Generator](/pipeline_nodes/answer-generator). To create an answer, the Generator uses the internal factual knowledge stored in the language model’s parameters in addition to the external knowledge provided by the Retriever’s output.
+`GenerativeQAPipeline` combines the [Retriever](/pipeline_nodes/retriever) with the [Answer Generator](/pipeline_nodes/answer-generator). To create an answer, the Generator uses the internal factual knowledge stored in the language model’s parameters in addition to the external knowledge provided by the Retriever’s output.
 
 You can build a `GenerativeQAPipeline` by simply placing the individual components inside the pipeline’s constructor:
 
