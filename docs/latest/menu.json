@@ -175,7 +175,8 @@
       {"slug": "document-classifier", "title": "Document Classifier"},
       {"slug": "query-classifier", "title": "Query Classifier"},
       {"slug": "extractor", "title": "Extractor"},
-      {"slug": "other", "title": "Other"}
+      {"slug": "other-nodes", "title": "Other Nodes"},
+      {"slug": "utils", "title": "Utils"}
     ]
   }
 ]
