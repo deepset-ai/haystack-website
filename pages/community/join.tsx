@@ -16,9 +16,6 @@ export default function Index() {
     type Serverity = "error" | "success" | "info" | "warning" | undefined;
 
 const [email, setEmail] = useState('');
-const [github, setGithub] = useState('');
-const [twitter, setTwitter] = useState('');
-const [company, setCompany] = useState('');
 const [fname, setFName] = useState('');
 const [lname, setLName] = useState('');
 const [consentToProcess, setConsentToProcess] = useState(false);
@@ -44,18 +41,6 @@ const handleSubmit = (event: any) =>  {
         {
           "name": "email",
           "value": email
-        },
-        {
-          "name": "github",
-          "value": github
-        },
-        {
-          "name": "twitter",
-          "value": twitter
-        },
-        {
-          "name": "company",
-          "value": company
         },
         {
           "name": "firstname",
@@ -168,7 +153,7 @@ const handleSubmit = (event: any) =>  {
     return <div>
     <Head>
         <title>Haystack Community</title>
-        <meta name="description" content="Haystack Slack" />
+        <meta name="description" content="Haystack Discord" />
         <link rel="icon" href="/img/HaystackIcon.png" />
     </Head>
     <Header docsType={"haystack"}/>
@@ -180,7 +165,7 @@ const handleSubmit = (event: any) =>  {
 
     <div className="justify-center relative w-full p-8 dark:bg-gray-800 dark:text-white">
         <div className="flex justify-center mb-10">
-            <h1 className="text-5xl font-semibold max-w-4xl">Join the Haystack Community on Slack</h1>
+            <h1 className="text-5xl font-semibold max-w-4xl">Join the Haystack Community on Discord</h1>
         </div>
         <div className="flex justify-center mb-4">
             <h2 className="text-3xl font-semibold max-w-4xl text-center">Learn more about what people are building with Haystack, ask questions, share knowledge, track events, meet collaborators.</h2>
@@ -191,37 +176,19 @@ const handleSubmit = (event: any) =>  {
                     <div className="mb-2">
                         <FormControl className="form-control max-w-4xl w-full" variant="filled">
                             <InputLabel required htmlFor="fname">First Name</InputLabel>
-                            <Input required id="fname" value={fname} onChange={handleChangeFName} />
+                            <Input id="fname" value={fname} onChange={handleChangeFName} />
                         </FormControl>
                     </div>
                     <div className="mb-2">
                         <FormControl className="form-control max-w-4xl w-full" variant="filled">
                             <InputLabel required htmlFor="lname">Last Name</InputLabel>
-                            <Input required id="lname" value={lname} onChange={handleChangeLName} />
+                            <Input id="lname" value={lname} onChange={handleChangeLName} />
                         </FormControl>
                     </div>
                     <div className="mb-2">
                         <FormControl className="form-control max-w-4xl w-full" variant="filled">
                             <InputLabel required htmlFor="email">Email address</InputLabel>
-                            <Input required id="email" value={email} onChange={handleChangeEmail} />
-                        </FormControl>
-                    </div>
-                    <div className="mb-2">
-                        <FormControl className="form-control max-w-4xl w-full" variant="filled">
-                            <InputLabel htmlFor="company">Company/ Organization</InputLabel>
-                            <Input id="company" value={company} onChange={handleChangeCompany} />
-                        </FormControl>
-                    </div>
-                    <div className="mb-2">
-                        <FormControl className="form-control max-w-4xl w-full" variant="filled">
-                            <InputLabel htmlFor="github">GitHub username</InputLabel>
-                            <Input id="github" value={github} onChange={handleChangeGithub} />
-                        </FormControl>
-                    </div>
-                    <div className="mb-2">
-                        <FormControl className="form-control max-w-4xl w-full" variant="filled">
-                            <InputLabel htmlFor="twitter">Twitter handle</InputLabel>
-                            <Input id="twitter" value={twitter} onChange={handleChangeTwitter} />
+                            <Input id="email" value={email} onChange={handleChangeEmail} />
                         </FormControl>
                     </div>
                     <div className="mb-2">
@@ -238,12 +205,19 @@ const handleSubmit = (event: any) =>  {
                     </div>
                 </div>                    
                 <div className="flex justify-center">
-                    <button
+                  <iframe src="https://discord.com/widget?id=993534733298450452&theme=dark" 
+                          width="350" height="350" 
+                          allowtransparency="true" 
+                          frameborder="0" 
+                          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+                  </iframe>
+
+                    {/* <button
                         type="submit"
                         className="bottom-2 right-2 bg-dark-blue rounded-lg p-4 z-10 shadow border border-off-white text-white font-bold text-2xl"
                     >
-                        Join the Haystack Community on Slack
-                    </button>
+                        Join the Haystack Community on Discord
+                    </button> */}
                 </div>
             </form>
         </div>
