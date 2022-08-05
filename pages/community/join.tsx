@@ -113,17 +113,17 @@ const handleSubmit = (event: any) =>  {
     setEmail(event.target.value);
   };
    
-  const handleChangeGithub = (event: any) => {
-    setGithub(event.target.value);
-  };
+  // const handleChangeGithub = (event: any) => {
+  //   setGithub(event.target.value);
+  // };
 
-  const handleChangeTwitter = (event: any) => {
-    setTwitter(event.target.value);
-  };
+  // const handleChangeTwitter = (event: any) => {
+  //   setTwitter(event.target.value);
+  // };
 
-  const handleChangeCompany = (event: any) => {
-    setCompany(event.target.value);
-  };
+  // const handleChangeCompany = (event: any) => {
+  //   setCompany(event.target.value);
+  // };
 
   const handleChangeFName = (event: any) => {
     setFName(event.target.value);
