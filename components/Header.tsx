@@ -101,7 +101,7 @@ export default function Header({ docsType = "haystack" }: Props) {
         <div className="mr-8 xl:mr-12 2xl:mr-16">
           <Link href="/community/join" passHref>
             <div className="font-bold lg:text-xl xl:text-2xl cursor-pointer text-green-dark-theme">
-              Join Slack
+              Join Discord
             </div>
           </Link>
         </div>
