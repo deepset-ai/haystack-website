@@ -173,8 +173,7 @@ const handleSubmit = (event: any) =>  {
         <div className="flex justify-center mb-10">
                 <iframe src="https://discord.com/widget?id=993534733298450452&theme=dark" 
                         width="350" height="350" 
-                        allowtransparency="true" 
-                        frameborder="0" 
+                        frameBorder="0" 
                         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
                 </iframe>
 
