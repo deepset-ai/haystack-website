@@ -98,9 +98,14 @@ export const referenceFilesLatest: Meta = {
       title: "Extractor",
     },
     {
-      slug: "other",
-      filename: "other.md",
+      slug: "other-nodes",
+      filename: "other_nodes.md",
       title: "Other",
+    },
+    {
+      slug: "utils",
+      filename: "utils.md",
+      title: "Utils",
     },
     {
       slug: "primitives",
