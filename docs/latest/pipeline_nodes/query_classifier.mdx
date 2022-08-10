@@ -66,7 +66,7 @@ Here, the query is processed by only one branch of the pipeline, depending on th
 ## Distinguishing between Keywords, Questions and Statements
 
 One recommended setup would be to route both questions and statements to a DensePassageRetriever, which is better accustomed to these types, while routing keyword queries to an ElasticsearchRetriever.
-To learn about these different types, see [Query Type Definitions](/docs/pipeline_nodes/query)
+To learn about these different types, see [Query Type Definitions](/docs/pipeline_nodes/query).
 
 ![image](https://user-images.githubusercontent.com/6007894/127831511-f55bad86-4b4f-4b54-9889-7bba37e475c6.png)
 
@@ -103,18 +103,6 @@ However, it requires more memory and a GPU in order to run quickly.
 You can mitigate those downsides by choosing a smaller transformer model.
 The default model used in the TransformerQueryClassifier is `shahrukhx01/bert-mini-finetune-question-detection`.
 We trained this using a mini BERT architecture which is about `50 MB` in size and allows relatively fast inference on CPU.
-
-| Name                                                                                                                            | Class                       | Initialization                                                                                      | Output 1           | Output 2 |
-|---------------------------------------------------------------------------------------------------------------------------------|-----------------------------|-----------------------------------------------------------------------------------------------------|--------------------|----------|
-| [`shahrukhx01/bert-mini-finetune-question-detection`](https://huggingface.co/shahrukhx01/bert-mini-finetune-question-detection) | TransformersQueryClassifier | TransformersQueryClassifier(model_name_or_path="shahrukhx01/bert-mini-finetune-question-detection") | Question/Statement | Keyword  |
-|                                                                                                                                 |                             |                                                                                                     |                    |          |
-|                                                                                                                                 |                             |                                                                                                     |                    |          |
-
-
-
-
-
-
 
 #### Transformers
 
@@ -166,7 +154,46 @@ Learn more about this model from its [readme](https://ext-models-haystack.s3.eu-
     ```
 Learn more about this model from its [readme](https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier_statements/readme.txt).
 
-## Zero-Shot
+## Zero-Shot Classification
+
+While most classification models, like those shown in the examples above, have a predefined set of labels, zero-shot classification models can perform classification with any set of labels that you define.
+To initialize a zero-shot QueryClassifier, run:
+
+```python
+ # In zero-shot-classification, you can choose the labels
+ labels = ["music", "cinema"]
+
+ query_classifier = TransformersQueryClassifier(
+     model_name_or_path="typeform/distilbert-base-uncased-mnli",
+     use_gpu=True,
+     task="zero-shot-classification",
+     labels=labels,
+ )
+ ```
+
+Here the `labels` variable defines which labels you want the QueryClassifier to use. The model you pick should be a natural language inference model such as those trained on [the Multi-Genre Natural Language Inference (MultiNLI)](https://huggingface.co/datasets/multi_nli) dataset.
+
+To perform the classification, run:
+
+ ```python
+ queries = [
+     "In which films does John Travolta appear?",  # query about cinema
+     "What is the Rolling Stones first album?",  # query about music
+     "Who was Sergio Leone?",  # query about cinema
+ ]
+
+ import pandas as pd
+
+ query_classification_results = {"Query": [], "Output Branch": [], "Class": []}
+
+ for query in queries:
+     result = query_classifier.run(query=query)
+     query_classification_results["Query"].append(query)
+     query_classification_results["Output Branch"].append(result[1])
+     query_classification_results["Class"].append("music" if result[1] == "output_1" else "cinema")
+
+ pd.DataFrame.from_dict(query_classification_results)
+ ```
 
 ## Query Type Definitions
 
@@ -194,28 +221,3 @@ This type of query is a declarative sentence, such as:
 *   Arya stark was a daughter of a lord.
 *   Show countries that Jon snow was filmed in.
 *   List all brothers of Arya.
-
-
-=========
-Intro
-
-Usage (Transformers with Custom model)
-- standalone
-- pipeline
-
-Keywords, Questions, Statements
-The most common form of query classification is to distinguish between
-
-
-Zero Shot
-
-SKLearn
-
-
-
-
-
-
-
-## Models
-
