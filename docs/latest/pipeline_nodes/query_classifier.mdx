@@ -40,7 +40,7 @@ for query in queries:
 # Query: Which country was jon snow filmed in?, raw_output: ({'query': 'Which country was jon snow filmed in?'}, 'output_1'), class: question
 ```
 
-To use the QueryClassifier within a pipeline as a [decision node](/docs/pipeline_nodes/overview#decision-nodes), run:
+To use the QueryClassifier within a pipeline as a [decision node](/pipeline_nodes/overview#decision-nodes), run:
 
 ```python
 from haystack import Pipeline
@@ -66,11 +66,11 @@ Here, the query is processed by only one branch of the pipeline, depending on th
 ## Distinguishing between Keywords, Questions and Statements
 
 One recommended setup would be to route both questions and statements to a DensePassageRetriever, which is better accustomed to these types, while routing keyword queries to an ElasticsearchRetriever.
-To learn about these different types, see [Query Type Definitions](/docs/pipeline_nodes/query).
+To learn about these different types, see [Query Type Definitions](/pipeline_nodes/query).
 
 ![image](https://user-images.githubusercontent.com/6007894/127831511-f55bad86-4b4f-4b54-9889-7bba37e475c6.png)
 
-A code example of this configuration is shown in [Usage](/docs/pipeline_nodes/query-classifier#usage).
+A code example of this configuration is shown in [Usage](/pipeline_nodes/query-classifier#usage).
 This pipeline has a `TransformersQueryClassifier` that routes questions and statements to the node's `output_1` and keyword queries to `output_2`.
 The DensePassageRetriever to `QueryClassifier.output_1` and the ESRetriever to `QueryClassifier.output_2`.
 
