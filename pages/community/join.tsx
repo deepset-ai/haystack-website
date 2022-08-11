@@ -102,29 +102,16 @@ const handleSubmit = (event: any) =>  {
 
       // Sends the request 
       xhr.send(final_data);
-      window.open(
-        'https://join.slack.com/t/haystack-community/shared_invite/zt-n9pgt0w1-J7YB_FM4dFeubQI2t6WD8w',
-        '_blank'
-      );
-
+      var form = document.getElementById("signup-form");
+      if(form != null){
+        form.innerHTML = "Thank you for signing up ❤️";
+      }
   };
 
   const handleChangeEmail = (event: any) => {
     setEmail(event.target.value);
   };
    
-  // const handleChangeGithub = (event: any) => {
-  //   setGithub(event.target.value);
-  // };
-
-  // const handleChangeTwitter = (event: any) => {
-  //   setTwitter(event.target.value);
-  // };
-
-  // const handleChangeCompany = (event: any) => {
-  //   setCompany(event.target.value);
-  // };
-
   const handleChangeFName = (event: any) => {
     setFName(event.target.value);
   };
@@ -185,9 +172,9 @@ const handleSubmit = (event: any) =>  {
                   </button> */}
         </div>
         <div className="flex justify-center mb-10">
-            <h2 className="text-3xl font-semibold max-w-4xl text-center">(Optional) Subscribe to our updates and future newsletrers 👇</h2>
+            <h2 className="text-3xl font-semibold max-w-4xl text-center">(Optional) Subscribe to our updates and future newsletters 👇</h2>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center" id="signup-form">
             <form onSubmit={handleSubmit}>
                 <div>
                     <div className="mb-2">
@@ -219,6 +206,14 @@ const handleSubmit = (event: any) =>  {
                             control={<Checkbox checked={communications} onChange={handleCommunication} name="communications" />}
                             label="I agree to receive information, product updates and commercial offers from deepset GmbH."
                             />
+                    </div>
+                    <div className="flex justify-center">
+                        <button
+                            type="submit"
+                            className="bottom-2 right-2 bg-dark-blue rounded-lg p-4 z-10 shadow border border-off-white text-white font-bold text-2xl"
+                        >
+                            Sign up for Emails and Newsletters
+                        </button>
                     </div>
                 </div>                       
             </form>
