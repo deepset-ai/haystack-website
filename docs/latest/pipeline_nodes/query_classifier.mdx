@@ -3,8 +3,8 @@
 Classifying queries lets you route them to specific branches of your pipeline that are better suited to handling them, giving you better search results.
 The QueryClassifier populates the metadata fields of the query with the classification label and can also handle the routing.
 
-For example, it can be used to route keyword queries to a less-computationally expensive sparse Retriever, while passing questions to a dense Retriever, thus saving you time and GPU resources.
-Alternatively, queries can also be categorized by topic and routed to the appropriate database.
+For example, you can route keyword queries to a less computationally expensive sparse Retriever, while passing questions to a dense Retriever, thus saving you time and GPU resources.
+The QueryClassifier can also categorize queries by topic and, based on that, route them to the appropriate database.
 
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -66,7 +66,7 @@ res_2 = pipe.run(query="arya stark father")
 
 Here, the query is processed by only one branch of the pipeline, depending on the output of the QueryClassifier.
 
-## Classifying Keyword, Question and Statement Queries
+## Classifying Keyword, Question, and Statement Queries
 
 <Disclosures
     options={[
@@ -107,7 +107,6 @@ Here, the query is processed by only one branch of the pipeline, depending on th
 />
 
 One recommended setup would be to route both questions and statements to a DensePassageRetriever, which is better accustomed to these types, while routing keyword queries to an ElasticsearchRetriever in order to save GPU resources.
-To learn about these different query types, see [Query Type Definitions](/pipeline_nodes/query-classifier#query-type-definitions).
 
 ![image](https://user-images.githubusercontent.com/6007894/127831511-f55bad86-4b4f-4b54-9889-7bba37e475c6.png)
 
@@ -160,7 +159,7 @@ We trained this using a mini BERT architecture which is about `50 MB` in size an
                     Output 1: Question/Statement<br></br>
                     Output 2: Keyword<br></br>
                     <br></br>
-                    To found out more about how it was trained and how well it performed, see its <a href="https://huggingface.co/shahrukhx01/bert-mini-finetune-question-detection">model card</a>.
+                    To find out more about how it was trained and how well it performed, see its <a href="https://huggingface.co/shahrukhx01/bert-mini-finetune-question-detection">model card</a>.
                 </div>
             )
         },
@@ -177,7 +176,7 @@ We trained this using a mini BERT architecture which is about `50 MB` in size an
                     Output 1: Question<br></br>
                     Output 2: Statement<br></br>
                     <br></br>
-                    To found out more about how it was trained and how well it performed, see its <a href="https://huggingface.co/shahrukhx01/question-vs-statement-classifier">model card</a>.
+                    To find out more about how it was trained and how well it performed, see its <a href="https://huggingface.co/shahrukhx01/question-vs-statement-classifier">model card</a>.
                 </div>
             )
         },
@@ -196,7 +195,7 @@ We trained this using a mini BERT architecture which is about `50 MB` in size an
                     Output 1: Question/Statement<br></br>
                     Output 2: Keyword<br></br>
                     <br></br>
-                    To found out more about how it was trained and how well it performed, see its <a href="https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier/readme.txt">Readme</a>.
+                    To find out more about how it was trained and how well it performed, see its <a href="https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier/readme.txt">Readme</a>.
                 </div>
             )
         },
@@ -215,7 +214,7 @@ We trained this using a mini BERT architecture which is about `50 MB` in size an
                     Output 1: Question<br></br>
                     Output 2: Statement<br></br>
                     <br></br>
-                    To found out more about how it was trained and how well it performed, see its <a href="https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier_statements/readme.txt">Readme</a>.
+                    To find out more about how it was trained and how well it performed, see its <a href="https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier_statements/readme.txt">Readme</a>.
                 </div>
             )
         },
