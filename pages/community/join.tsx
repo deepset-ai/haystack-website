@@ -158,18 +158,22 @@ const handleSubmit = (event: any) =>  {
             <h2 className="text-3xl font-semibold max-w-4xl text-center">Learn more about what people are building with Haystack, ask questions, share knowledge, track events, meet collaborators.</h2>
         </div>
         <div className="flex justify-center mb-10">
-                <iframe src="https://discord.com/widget?id=993534733298450452&theme=dark" 
+                {/* <iframe src="https://discord.com/widget?id=993534733298450452&theme=dark" 
                         width="350" height="350" 
                         frameBorder="0" 
                         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-                </iframe>
-
-                  {/* <button
+                </iframe> */}
+              <form onSubmit={(e) => {
+                        e.preventDefault();
+                        window.location.href='https://discord.gg/VBpFzsgRVF';
+                        }}>
+                  <button 
                       type="submit"
-                      className="bottom-2 right-2 bg-dark-blue rounded-lg p-4 z-10 shadow border border-off-white text-white font-bold text-2xl"
+                      className="bottom-2 right-2 bg-indigo-500 rounded-lg p-4 z-10 shadow border border-off-white text-white font-bold text-2xl"
                   >
                       Join the Haystack Community on Discord
-                  </button> */}
+                  </button>
+              </form>
         </div>
         <div className="flex justify-center mb-10">
             <h2 className="text-3xl font-semibold max-w-4xl text-center">(Optional) Subscribe to our updates and future newsletters 👇</h2>
