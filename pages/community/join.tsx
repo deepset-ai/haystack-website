@@ -53,7 +53,7 @@ const handleSubmit = (event: any) =>  {
       ],
       "context": {
         "pageUri": "haystack.deepset.ai",
-        "pageName": "Haystack Hub"
+        "pageName": "Discord Signup Page"
       },
       "legalConsentOptions":{ // Include this object when GDPR options are enabled
         "consent":{
@@ -62,7 +62,7 @@ const handleSubmit = (event: any) =>  {
           "communications":[
             {
               "value":communications,
-              "subscriptionTypeId":999,
+              "subscriptionTypeId":44544699,
               "text":"I agree to receive marketing communications from deepset GmbH."
             }
           ]
