@@ -77,25 +77,28 @@ Here, the query is processed by only one branch of the pipeline, depending on th
 
                 Keyword queries don't have sentence structure. They consist of keywords and the order of words does not matter. For example:
 
-                [//]: # (<ul style=“list-style-type:disc”>)
-
-[//]: # ()
-                [//]: # (<li>arya stark father</li>)
-
-[//]: # ()
-                [//]: # (<li>jon snow country</li>)
-
-[//]: # ()
-                [//]: # (<li>arya stark younger brothers</li>)
-
-[//]: # ()
-                [//]: # (</ul>)
-
                 </div>
             )
         }
     ]}
 />
+
+### Questions
+
+In such queries, users ask a question in a complete, grammatical sentence.
+A Query Classifier can classify a query regardless of whether it ends with a question mark or not. Examples of questions:
+
+*   who is the father of arya stark?
+*   which country was jon snow filmed in
+*   who are the younger brothers of arya stark?
+
+### Statements
+
+This type of query is a declarative sentence, such as:
+
+*   Arya stark was a daughter of a lord.
+*   Show countries that Jon snow was filmed in.
+*   List all brothers of Arya.
 
 XXXXXXXX ADD DEFINITIONS HERE
 
@@ -230,24 +233,3 @@ To perform the classification, run:
 
  pd.DataFrame.from_dict(query_classification_results)
  ```
-
-XXXXX MIGRATE AND COLLAPSE
-
-
-
-### Questions
-
-In such queries, users ask a question in a complete, grammatical sentence.
-A Query Classifier can classify a query regardless of whether it ends with a question mark or not. Examples of questions:
-
-*   who is the father of arya stark?
-*   which country was jon snow filmed in
-*   who are the younger brothers of arya stark?
-
-### Statements
-
-This type of query is a declarative sentence, such as:
-
-*   Arya stark was a daughter of a lord.
-*   Show countries that Jon snow was filmed in.
-*   List all brothers of Arya.
