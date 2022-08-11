@@ -3,6 +3,9 @@
 Classifying queries lets you route them to specific branches of your pipeline that are better suited to handling them, giving you better search results.
 The QueryClassifier populates the metadata fields of the query with the classification label and can also handle the routing.
 
+For example, it can be used to route keyword queries to a less-computationally expensive sparse Retriever, while passing questions to a dense Retriever, thus saving you time and GPU resources.
+Alternatively, queries can also be categorized by topic and routed to the appropriate database.
+
 |||
 |-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |__Position in a Pipeline__| At the beginning of a query Pipeline |
@@ -63,9 +66,36 @@ res_2 = pipe.run(query="arya stark father")
 
 Here, the query is processed by only one branch of the pipeline, depending on the output of the QueryClassifier.
 
-## Distinguishing between Keywords, Questions and Statements
+## Classifying Keyword, Question and Statement Queries
 
-One recommended setup would be to route both questions and statements to a DensePassageRetriever, which is better accustomed to these types, while routing keyword queries to an ElasticsearchRetriever.
+<Disclosures
+    options={[
+        {
+            title: "Keyword Queries",
+            content: (
+                <div>
+
+                Keyword queries don't have sentence structure. They consist of keywords and the order of words does not matter. For example:
+
+                <ul style=“list-style-type:disc”>
+
+                <li>arya stark father</li>
+
+                <li>jon snow country</li>
+
+                <li>arya stark younger brothers</li>
+
+                </ul>
+
+                </div>
+            )
+        },
+    ]}
+/>
+
+XXXXXXXX ADD DEFINITIONS HERE
+
+One recommended setup would be to route both questions and statements to a DensePassageRetriever, which is better accustomed to these types, while routing keyword queries to an ElasticsearchRetriever in order to save GPU resources.
 To learn about these different query types, see [Query Type Definitions](/pipeline_nodes/query-classifier#query-type-definitions).
 
 ![image](https://user-images.githubusercontent.com/6007894/127831511-f55bad86-4b4f-4b54-9889-7bba37e475c6.png)
@@ -103,6 +133,8 @@ However, it requires more memory and a GPU in order to run quickly.
 You can mitigate those downsides by choosing a smaller transformer model.
 The default model used in the TransformerQueryClassifier is `shahrukhx01/bert-mini-finetune-question-detection`.
 We trained this using a mini BERT architecture which is about `50 MB` in size and allows relatively fast inference on CPU.
+
+XXXX COLLAPSE
 
 #### Transformers
 
@@ -195,15 +227,9 @@ To perform the classification, run:
  pd.DataFrame.from_dict(query_classification_results)
  ```
 
-## Query Type Definitions
+XXXXX MIGRATE AND COLLAPSE
 
-### Keyword Queries
 
-Keyword queries don't have sentence structure. They consist of keywords and the order of words does not matter. For example:
-
-*   arya stark father
-*   jon snow country
-*   arya stark younger brothers
 
 ### Questions
 
