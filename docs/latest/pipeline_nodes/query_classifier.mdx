@@ -106,13 +106,13 @@ Here, the query is processed by only one branch of the pipeline, depending on th
     ]}
 />
 
-One recommended setup would be to route both questions and statements to a DensePassageRetriever, which is better accustomed to these types, while routing keyword queries to an ElasticsearchRetriever in order to save GPU resources.
+One recommended setup would be to route both questions and statements to a DensePassageRetriever, which is better accustomed to these types, while routing keyword queries to an ElasticsearchRetriever to save GPU resources.
 
 ![image](https://user-images.githubusercontent.com/6007894/127831511-f55bad86-4b4f-4b54-9889-7bba37e475c6.png)
 
-A code example of this configuration is shown in [Usage](/pipeline_nodes/query-classifier#usage).
+You can see a code example of this configuration in [Usage](/pipeline_nodes/query-classifier#usage).
 This pipeline has a `TransformersQueryClassifier` that routes questions and statements to the node's `output_1` and keyword queries to `output_2`.
-The DensePassageRetriever to `QueryClassifier.output_1` and the ESRetriever to `QueryClassifier.output_2`.
+The DensePassageRetriever takes its input from `QueryClassifier.output_1` and the ESRetriever from `QueryClassifier.output_2`.
 
 An alternative setup is to route questions to a question answering branch and keywords to a document search branch:
 
@@ -137,12 +137,12 @@ res_2 = pipe.run(query="arya stark father")
 
 ### Models
 
-To perform this classification of keywords, questions and statements, you can use either the TransformersQueryClassifier or SkLearnQueryClassifier.
+To perform this classification of keywords, questions, and statements, you can use either the TransformersQueryClassifier or SkLearnQueryClassifier.
 The TransformersQueryClassifier is more accurate than the SkLearnQueryClassifier as it is sensitive to the syntax of a sentence.
-However, it requires more memory and a GPU in order to run quickly.
+However, it requires more memory and a GPU to run quickly.
 You can mitigate those downsides by choosing a smaller transformer model.
 The default model used in the TransformerQueryClassifier is `shahrukhx01/bert-mini-finetune-question-detection`.
-We trained this using a mini BERT architecture which is about `50 MB` in size and allows relatively fast inference on CPU.
+We trained this model using a mini BERT architecture of about 50 MB in size, which allows relatively fast inference on the CPU.
 
 <Disclosures
     options={[
@@ -223,7 +223,7 @@ We trained this using a mini BERT architecture which is about `50 MB` in size an
 
 ## Zero-Shot Classification
 
-While most classification models, like those shown in the examples above, have a predefined set of labels, zero-shot classification models can perform classification with any set of labels that you define.
+While most classification models, like the ones in the examples above, have a predefined set of labels, zero-shot classification models can perform classification with any set of labels you define.
 To initialize a zero-shot QueryClassifier, run:
 
 ```python
@@ -251,6 +251,10 @@ To perform the classification, run:
 
  import pandas as pd
 
+# This object will contain results of the classification.
+# The "Query" key will contain a list of queries.
+# The "Output Branch" key will contain which branches the queries was routed through.
+# The "Class" key will contain the classification label of each query.
  query_classification_results = {"Query": [], "Output Branch": [], "Class": []}
 
  for query in queries:
