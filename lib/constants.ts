@@ -151,9 +151,9 @@ export const tutorialFilesLatest: Meta = {
       title: "Evaluation of a QA System",
     },
     {
-      slug: "dense-passage-retrieval",
+      slug: "embedding-retrieval",
       filename: "6.md",
-      title: 'Better Retrieval via "Dense Passage Retrieval"',
+      title: 'Better Retrieval via "Embedding Retrieval"',
     },
     {
       slug: "retrieval-augmented-generation",
