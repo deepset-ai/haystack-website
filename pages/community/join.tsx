@@ -16,9 +16,6 @@ export default function Index() {
     type Serverity = "error" | "success" | "info" | "warning" | undefined;
 
 const [email, setEmail] = useState('');
-const [github, setGithub] = useState('');
-const [twitter, setTwitter] = useState('');
-const [company, setCompany] = useState('');
 const [fname, setFName] = useState('');
 const [lname, setLName] = useState('');
 const [consentToProcess, setConsentToProcess] = useState(false);
@@ -46,18 +43,6 @@ const handleSubmit = (event: any) =>  {
           "value": email
         },
         {
-          "name": "github",
-          "value": github
-        },
-        {
-          "name": "twitter",
-          "value": twitter
-        },
-        {
-          "name": "company",
-          "value": company
-        },
-        {
           "name": "firstname",
           "value": fname
         },
@@ -68,7 +53,7 @@ const handleSubmit = (event: any) =>  {
       ],
       "context": {
         "pageUri": "haystack.deepset.ai",
-        "pageName": "Haystack Hub"
+        "pageName": "Discord Signup Page"
       },
       "legalConsentOptions":{ // Include this object when GDPR options are enabled
         "consent":{
@@ -77,7 +62,7 @@ const handleSubmit = (event: any) =>  {
           "communications":[
             {
               "value":communications,
-              "subscriptionTypeId":999,
+              "subscriptionTypeId":44544699,
               "text":"I agree to receive marketing communications from deepset GmbH."
             }
           ]
@@ -117,29 +102,16 @@ const handleSubmit = (event: any) =>  {
 
       // Sends the request 
       xhr.send(final_data);
-      window.open(
-        'https://join.slack.com/t/haystack-community/shared_invite/zt-n9pgt0w1-J7YB_FM4dFeubQI2t6WD8w',
-        '_blank'
-      );
-
+      var form = document.getElementById("signup-form");
+      if(form != null){
+        form.innerHTML = "Thank you for signing up ❤️";
+      }
   };
 
   const handleChangeEmail = (event: any) => {
     setEmail(event.target.value);
   };
    
-  const handleChangeGithub = (event: any) => {
-    setGithub(event.target.value);
-  };
-
-  const handleChangeTwitter = (event: any) => {
-    setTwitter(event.target.value);
-  };
-
-  const handleChangeCompany = (event: any) => {
-    setCompany(event.target.value);
-  };
-
   const handleChangeFName = (event: any) => {
     setFName(event.target.value);
   };
@@ -168,7 +140,7 @@ const handleSubmit = (event: any) =>  {
     return <div>
     <Head>
         <title>Haystack Community</title>
-        <meta name="description" content="Haystack Slack" />
+        <meta name="description" content="Haystack Discord" />
         <link rel="icon" href="/img/HaystackIcon.png" />
     </Head>
     <Header docsType={"haystack"}/>
@@ -180,48 +152,51 @@ const handleSubmit = (event: any) =>  {
 
     <div className="justify-center relative w-full p-8 dark:bg-gray-800 dark:text-white">
         <div className="flex justify-center mb-10">
-            <h1 className="text-5xl font-semibold max-w-4xl">Join the Haystack Community on Slack</h1>
+            <h1 className="text-5xl font-semibold max-w-4xl">Join the Haystack Community on Discord</h1>
         </div>
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-10">
             <h2 className="text-3xl font-semibold max-w-4xl text-center">Learn more about what people are building with Haystack, ask questions, share knowledge, track events, meet collaborators.</h2>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-10">
+                {/* <iframe src="https://discord.com/widget?id=993534733298450452&theme=dark" 
+                        width="350" height="350" 
+                        frameBorder="0" 
+                        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+                </iframe> */}
+              <form onSubmit={(e) => {
+                        e.preventDefault();
+                        window.location.href='https://discord.gg/VBpFzsgRVF';
+                        }}>
+                  <button 
+                      type="submit"
+                      className="bottom-2 right-2 bg-indigo-500 rounded-lg p-4 z-10 shadow border border-off-white text-white font-bold text-2xl"
+                  >
+                      Join the Haystack Community on Discord
+                  </button>
+              </form>
+        </div>
+        <div className="flex justify-center mb-10">
+            <h2 className="text-3xl font-semibold max-w-4xl text-center">(Optional) Subscribe to our updates and future newsletters 👇</h2>
+        </div>
+        <div className="flex justify-center" id="signup-form">
             <form onSubmit={handleSubmit}>
                 <div>
                     <div className="mb-2">
                         <FormControl className="form-control max-w-4xl w-full" variant="filled">
                             <InputLabel required htmlFor="fname">First Name</InputLabel>
-                            <Input required id="fname" value={fname} onChange={handleChangeFName} />
+                            <Input id="fname" value={fname} onChange={handleChangeFName} />
                         </FormControl>
                     </div>
                     <div className="mb-2">
                         <FormControl className="form-control max-w-4xl w-full" variant="filled">
                             <InputLabel required htmlFor="lname">Last Name</InputLabel>
-                            <Input required id="lname" value={lname} onChange={handleChangeLName} />
+                            <Input id="lname" value={lname} onChange={handleChangeLName} />
                         </FormControl>
                     </div>
                     <div className="mb-2">
                         <FormControl className="form-control max-w-4xl w-full" variant="filled">
                             <InputLabel required htmlFor="email">Email address</InputLabel>
-                            <Input required id="email" value={email} onChange={handleChangeEmail} />
-                        </FormControl>
-                    </div>
-                    <div className="mb-2">
-                        <FormControl className="form-control max-w-4xl w-full" variant="filled">
-                            <InputLabel htmlFor="company">Company/ Organization</InputLabel>
-                            <Input id="company" value={company} onChange={handleChangeCompany} />
-                        </FormControl>
-                    </div>
-                    <div className="mb-2">
-                        <FormControl className="form-control max-w-4xl w-full" variant="filled">
-                            <InputLabel htmlFor="github">GitHub username</InputLabel>
-                            <Input id="github" value={github} onChange={handleChangeGithub} />
-                        </FormControl>
-                    </div>
-                    <div className="mb-2">
-                        <FormControl className="form-control max-w-4xl w-full" variant="filled">
-                            <InputLabel htmlFor="twitter">Twitter handle</InputLabel>
-                            <Input id="twitter" value={twitter} onChange={handleChangeTwitter} />
+                            <Input id="email" value={email} onChange={handleChangeEmail} />
                         </FormControl>
                     </div>
                     <div className="mb-2">
@@ -236,15 +211,15 @@ const handleSubmit = (event: any) =>  {
                             label="I agree to receive information, product updates and commercial offers from deepset GmbH."
                             />
                     </div>
-                </div>                    
-                <div className="flex justify-center">
-                    <button
-                        type="submit"
-                        className="bottom-2 right-2 bg-dark-blue rounded-lg p-4 z-10 shadow border border-off-white text-white font-bold text-2xl"
-                    >
-                        Join the Haystack Community on Slack
-                    </button>
-                </div>
+                    <div className="flex justify-center">
+                        <button
+                            type="submit"
+                            className="bottom-2 right-2 bg-dark-blue rounded-lg p-4 z-10 shadow border border-off-white text-white font-bold text-2xl"
+                        >
+                            Sign up for Emails and Newsletters
+                        </button>
+                    </div>
+                </div>                       
             </form>
         </div>
     </div>
