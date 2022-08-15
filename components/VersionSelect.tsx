@@ -5,6 +5,7 @@ import { Listbox, Transition } from "@headlessui/react";
 
 const versionRoutesHaystack: { [key: string]: string } = {
   "latest": "/overview/intro",
+  "v1.7.0": "/overview/v1.7.0/intro",
   "v1.6.0": "/overview/v1.6.0/intro",
   "v1.5.0": "/overview/v1.5.0/intro",
   "v1.4.0": "/overview/v1.4.0/intro",
@@ -23,6 +24,7 @@ const versionRoutesHaystack: { [key: string]: string } = {
 
 const versionRoutesBenchmarks: { [key: string]: string } = {
   "latest": "/benchmarks/latest",
+  "v1.7.0": "/benchmarks/v1.7.0",
   "v1.6.0": "/benchmarks/v1.6.0",
   "v1.5.0": "/benchmarks/v1.5.0",
   "v1.4.0": "/benchmarks/v1.4.0",

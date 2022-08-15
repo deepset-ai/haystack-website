@@ -1,0 +1,58 @@
+# File Classifier
+
+A File Classifier distinguishes between text, PDF, Markdown, Docx and HTML files and routes them to the appropriate [File Converter](/pipeline_nodes/v1.7.0/file-converters) in an indexing pipeline.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| At the very beginning of an indexing pipeline |
+|__Input__       | File name                                                                                                                                                                  |
+|__Output__      | File name (routed)                                                                                                             |
+|__Classes__     | FileTypeClassifier                                                                                                           |
+|||
+
+## Usage
+
+By default, the FileTypeClassifier has 5 outgoing edges.
+It routes an incoming file through one of these to a File Converter,
+which then converts them into [Documents](/components/v1.7.0/documents-answers-labels#document).
+
+These are the default outgoing edges of the File Classifier:
+
+| Outgoing Edge | File Type |
+|---------------|-----------|
+| 1             | Text      |
+| 2             | PDF       |
+| 3             | Markdown  |
+| 4             | Docx      |
+| 5             | HTML      |
+
+To use a FileTypeClassifier in an indexing pipeline, run:
+
+```python
+from haystack.pipelines import Pipeline
+from haystack.nodes import TextConverter, FileTypeClassifier, PDFToTextConverter, MarkdownConverter, DocxToTextConverter, PreProcessor
+
+file_type_classifier = FileTypeClassifier()
+
+text_converter = TextConverter()
+pdf_converter = PDFToTextConverter()
+md_converter = MarkdownConverter()
+docx_converter = DocxToTextConverter()
+preprocessor = PreProcessor()
+
+# This is an indexing pipeline
+p = Pipeline()
+
+p.add_node(component=file_type_classifier, name="FileTypeClassifier", inputs=["File"])
+
+p.add_node(component=text_converter, name="TextConverter", inputs=["FileTypeClassifier.output_1"])
+p.add_node(component=pdf_converter, name="PdfConverter", inputs=["FileTypeClassifier.output_2"])
+p.add_node(component=md_converter, name="MarkdownConverter", inputs=["FileTypeClassifier.output_3"])
+p.add_node(component=docx_converter, name="DocxConverter", inputs=["FileTypeClassifier.output_4"])
+
+p.add_node(
+    component=preprocessor,
+    name="Preprocessor",
+    inputs=["TextConverter", "PdfConverter", "MarkdownConverter", "DocxConverter"],
+)
+```

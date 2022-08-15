@@ -1,0 +1,151 @@
+# Chatbot Integration
+
+It is easy and simple to imbue your chatbot with the NLP power that Haystack offers.
+If your chatbot is handling a question that is in the log tail of undefined intents, why not handle it using Haystack's question answering capabilities?
+Thanks to Haystack's REST API, chatbot frameworks can seamlessly communicate with your custom Haystack service.
+Below, we will trace through what it takes to set this up using the popular [Rasa](https://rasa.com/) framework.
+
+## Overview
+
+When a user speaks to a conversational AI program, each user message is classified and labelled with an intent.
+One approach to integrating Haystack would be to introduce a new intent, such as `knowledge question`,
+that triggers a call to a running Haystack API.
+
+Alternatively, in cases where they are uncertain what intent fits, chatbots can route requests to a fallback action.
+Rasa uses the [FallbackClassifier](https://rasa.com/docs/rasa/fallback-handoff/#nlu-fallback) to make this happen.
+
+In both cases, Rasa uses an [action server](https://rasa.com/docs/action-server/) to send a REST API request to Haystack.
+When it receives the result, it will base its next message to the user on the contents of this response.
+
+![image](/img/rasa_haystack.png)
+
+## Setting up Haystack with REST API
+
+To set up a Haystack instance with REST API, have a look at [this documentation page](/components/v1.7.0/rest-api).
+By default, the API server runs on `http://127.0.0.1:8000`.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Quick-start demo:** Bundled with the Github repository is an example Haystack service with REST API that queries the Game of Thrones Wiki.
+Simply clone it and call the following in the root directory:
+
+``` bash
+    cd haystack
+    docker-compose pull
+    docker-compose up
+
+    # Or on a GPU machine: docker-compose -f docker-compose-gpu.yml up
+```
+
+</div>
+
+## Setting Up a Rasa Chatbot
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Demo:** For a bare bones example of a Rasa chatbot communicating with Haystack, have a look at [this repo](https://github.com/deepset-ai/rasa-haystack).
+
+</div>
+
+After [installing](https://rasa.com/docs/rasa/installation) Rasa and [initializing](https://rasa.com/docs/rasa/command-line-interface/#rasa-init) a new project,
+there are a few steps that a developer needs to take in order to get Rasa to communicate with Haystack.
+
+In `data/nlu.yaml`, you will want to define a new intent by providing example utterances of that intent:
+```
+nlu:
+- intent: knowledge_question
+  examples: |
+    - Can you look this up: what is ?
+    - Look this up: what is?
+    - Can you check: what is?
+    - please check: What is ?
+    - Can you look this up: where is ?
+    - Look this up: where is?
+    - Can you check: where is?
+    - please check: where is ?
+````
+
+You will also want to define what action is taken when that intent is identified in the `data/rules.yml` file:
+```
+- rule: Query Haystack anytime the user has a direct question for your document base
+  steps:
+  - intent: knowledge_question
+  - action: call_haystack
+```
+
+If you want the Haystack API call to be triggered by a fallback instead of an intent, you will need to add the `FallbackClassifier` to the pipeline in `config.yml`:
+```
+pipeline:
+   - name: FallbackClassifier
+     threshold: 0.8
+     ambiguity_threshold: 0.1
+```
+You will also need to add the following to `data/rules.yml`:
+```
+- rule: Query Haystack whenever they send a message with low NLU confidence
+  steps:
+    - intent: nlu_fallback
+    - action: call_haystack
+```
+By default the Rasa custom action server API is blocked so you will need to uncomment this line from `endpoints.yml`:
+```
+action_endpoint:
+ url: "http://localhost:5055/webhook"
+```
+Finally, we can define an action function that calls the Haystack API and handles the response in `actions/actions.py`.
+Here is an example of what that might look like:
+
+``` python
+class ActionHaystack(Action):
+
+    def name(self) -> Text:
+        return "call_haystack"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        url = "http://localhost:8000/query"
+        payload = {"query": str(tracker.latest_message["text"])}
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        response = requests.request("POST", url, headers=headers, json=payload).json()
+
+        if response["answers"]:
+            answer = response["answers"][0]["answer"]
+        else:
+            answer = "No Answer Found!"
+
+        dispatcher.utter_message(text=answer)
+
+        return []
+```
+You will also want to declare this new action in the `domain.yml` file:
+```
+actions:
+- call_haystack
+```
+
+## Running the Chatbot
+
+Whenever changes are made to your Rasa project, you will want to retrain your chatbot via:
+```
+rasa train
+```
+You will need to start the Rasa action server using:
+```
+rasa run actions
+```
+To start interacting with the bot you have created, you can call
+```
+rasa shell
+```
+Now you can start talking to the Haystack enabled chatbot!
+
+![image](/img/rasa_conversation.png)
+
+Alternatively, you can use [Rasa X](https://rasa.com/docs/rasa-x/) which allows the chatbot to be run in a GUI.
+While interacting with you chatbot in this interface, you will also see the intent being assigned to each message as well as the action being taken.
+
+![image](/img/rasa_x_conversation.png)

@@ -1,0 +1,267 @@
+# Query Classifier
+
+Classifying queries lets you route them to specific branches of your pipeline that are better suited to handling them, giving you better search results.
+The QueryClassifier populates the metadata fields of the query with the classification label and can also handle the routing.
+
+For example, you can route keyword queries to a less computationally expensive sparse Retriever, while passing questions to a dense Retriever, thus saving you time and GPU resources.
+The QueryClassifier can also categorize queries by topic and, based on that, route them to the appropriate database.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| At the beginning of a query Pipeline |
+|__Input__       | Query                                                                                                                                                                  |
+|__Output__      | Query                                                                                                                                                                    |
+|__Classes__     | TransformersQueryClassifier<br />SklearnQueryClassifier                                                                                                                                             |
+|||
+
+## Usage
+
+You can use the QueryClassifier as a stand-alone node in which case it returns two objects: the query and the name of the output edge. To do so, run:
+
+```python
+from haystack.nodes import TransformersQueryClassifier
+
+queries = ["Arya Stark father","Jon Snow UK",
+           "who is the father of arya stark?","Which country was jon snow filmed in?"]
+
+question_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/bert-mini-finetune-question-detection")
+# Or Sklearn based:
+
+for query in queries:
+    result = question_classifier.run(query=query)
+    if result[1] == "output_1":
+        category = "question"
+    else:
+        category = "keywords"
+
+    print(f"Query: {query}, raw_output: {result}, class: {category}")
+
+# Returns:
+# Query: Arya Stark father, raw_output: ({'query': 'Arya Stark father'}, 'output_2'), class: keywords
+# Query: Jon Snow UK, raw_output: ({'query': 'Jon Snow UK'}, 'output_2'), class: keywords
+# Query: who is the father of arya stark?, raw_output: ({'query': 'who is the father of arya stark?'}, 'output_1'), class: question
+# Query: Which country was jon snow filmed in?, raw_output: ({'query': 'Which country was jon snow filmed in?'}, 'output_1'), class: question
+```
+
+To use the QueryClassifier within a pipeline as a [decision node](/pipeline_nodes/v1.7.0/overview#decision-nodes), run:
+
+```python
+from haystack import Pipeline
+from haystack.nodes import TransformersQueryClassifier
+from haystack.utils import print_answers
+
+query_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/bert-mini-finetune-question-detection")
+
+pipe = Pipeline()
+pipe.add_node(component=query_classifier, name="QueryClassifier", inputs=["Query"])
+pipe.add_node(component=dpr_retriever, name="DensePassageRetriever", inputs=["QueryClassifier.output_1"])
+pipe.add_node(component=bm25_retriever, name="BM25Retriever", inputs=["QueryClassifier.output_2"])
+
+# Pass a question -> run DPR
+res_1 = pipe.run(query="Who is the father of Arya Stark?")
+
+# Pass keywords -> run the BM25Retriever
+res_2 = pipe.run(query="arya stark father")
+```
+
+Here, the query is processed by only one branch of the pipeline, depending on the output of the QueryClassifier.
+
+## Classifying Keyword, Question, and Statement Queries
+
+<Disclosures
+    options={[
+        {
+            title: "Keyword",
+            content: (
+                <div>
+                    Keyword queries don't have sentence structure. They consist of keywords and the order of words does not matter. For example:
+                    <li>arya stark father</li>
+                    <li>jon snow country</li>
+                    <li>arya stark younger brothers</li>
+                </div>
+            )
+        },
+        {
+            title: "Question",
+            content: (
+                <div>
+                    In such queries, users ask a question in a complete, grammatical sentence. A QueryClassifier can classify a query regardless of whether it ends with a question mark or not. Examples of questions:
+                    <li>who is the father of arya stark?</li>
+                    <li>which country was jon snow filmed in</li>
+                    <li>who are the younger brothers of arya stark?</li>
+                </div>
+            )
+        },
+        {
+            title: "Statement",
+            content: (
+                <div>
+                    This type of query is a declarative sentence, such as:
+                    <li>Arya stark was a daughter of a lord.</li>
+                    <li>Show countries that Jon snow was filmed in.</li>
+                    <li>List all brothers of Arya.</li>
+                </div>
+            )
+        }
+    ]}
+/>
+
+One recommended setup would be to route both questions and statements to a DensePassageRetriever, which is better accustomed to these types, while routing keyword queries to an ElasticsearchRetriever to save GPU resources.
+
+![image](https://user-images.githubusercontent.com/6007894/127831511-f55bad86-4b4f-4b54-9889-7bba37e475c6.png)
+
+You can see a code example of this configuration in [Usage](/pipeline_nodes/v1.7.0/query-classifier#usage).
+This pipeline has a `TransformersQueryClassifier` that routes questions and statements to the node's `output_1` and keyword queries to `output_2`.
+The DensePassageRetriever takes its input from `QueryClassifier.output_1` and the ESRetriever from `QueryClassifier.output_2`.
+
+An alternative setup is to route questions to a question answering branch and keywords to a document search branch:
+
+```python
+haystack.pipeline import TransformersQueryClassifier, Pipeline
+from haystack.utils import print_answers
+
+query_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/question-vs-statement-classifier")
+
+pipe = Pipeline()
+pipe.add_node(component=query_classifier, name="QueryClassifier", inputs=["Query"])
+pipe.add_node(component=dpr_retriever, name="DPRRetriever", inputs=["QueryClassifier.output_1"])
+pipe.add_node(component=bm25_retriever, name="BM25", inputs=["QueryClassifier.output_2"])
+pipe.add_node(component=reader, name="QAReader", inputs=["DPRRetriever"])
+
+# Pass a question -> run DPR + QA -> return answers
+res_1 = pipe.run(query="Who is the father of Arya Stark?")
+
+# Pass keywords -> run only BM25Retriever -> return Documents
+res_2 = pipe.run(query="arya stark father")
+```
+
+### Models
+
+To perform this classification of keywords, questions, and statements, you can use either the TransformersQueryClassifier or SkLearnQueryClassifier.
+The TransformersQueryClassifier is more accurate than the SkLearnQueryClassifier as it is sensitive to the syntax of a sentence.
+However, it requires more memory and a GPU to run quickly.
+You can mitigate those downsides by choosing a smaller transformer model.
+The default model used in the TransformerQueryClassifier is `shahrukhx01/bert-mini-finetune-question-detection`.
+We trained this model using a mini BERT architecture of about 50 MB in size, which allows relatively fast inference on the CPU.
+
+<Disclosures
+    options={[
+        {
+            title: "bert-mini-finetune-question-detection",
+            content: (
+                <div>
+                    A model trained on the mini BERT architecture that distinguishes between questions/statements, and keywords.<br></br>
+                    <br></br>
+                    To initialize, run:
+                    <pre>
+                        <code>TransformersQueryClassifier(model_name_or_path="shahrukhx01/bert-mini-finetune-question-detection")</code>
+                    </pre>
+                    Output 1: Question/Statement<br></br>
+                    Output 2: Keyword<br></br>
+                    <br></br>
+                    To find out more about how it was trained and how well it performed, see its <a href="https://huggingface.co/shahrukhx01/bert-mini-finetune-question-detection">model card</a>.
+                </div>
+            )
+        },
+        {
+            title: "question-vs-statement-classifier",
+            content: (
+                <div>
+                    A model trained on the mini BERT architecture that distinguishes between questions and statements.<br></br>
+                    <br></br>
+                    To initialize, run:
+                    <pre>
+                        <code>TransformersQueryClassifier(model_name_or_path="shahrukhx01/question-vs-statement-classifier")</code>
+                    </pre>
+                    Output 1: Question<br></br>
+                    Output 2: Statement<br></br>
+                    <br></br>
+                    To find out more about how it was trained and how well it performed, see its <a href="https://huggingface.co/shahrukhx01/question-vs-statement-classifier">model card</a>.
+                </div>
+            )
+        },
+        {
+            title: "gradboost_query_classifier",
+            content: (
+                <div>
+                    A gradient boosting classifier that distinguishes between questions/statements and keywords.<br></br>
+                    <br></br>
+                    To initialize, run:
+                    <pre>
+                        <code>SklearnQueryClassifier(</code>
+                        <code>    query_classifier = "https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier/model.pickle",</code>
+                        <code>    query_vectorizer = "https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier/vectorizer.pickle")</code>
+                    </pre>
+                    Output 1: Question/Statement<br></br>
+                    Output 2: Keyword<br></br>
+                    <br></br>
+                    To find out more about how it was trained and how well it performed, see its <a href="https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier/readme.txt">Readme</a>.
+                </div>
+            )
+        },
+        {
+            title: "gradboost_query_classifier_statements",
+            content: (
+                <div>
+                    A gradient boosting classifier that distinguishes between questions and statements.<br></br>
+                    <br></br>
+                    To initialize, run:
+                    <pre>
+                        <code>SklearnQueryClassifier(</code>
+                        <code>    query_classifier = "https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier_statements/model.pickle",</code>
+                        <code>    query_vectorizer = "https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier_statements/vectorizer.pickle")</code>
+                    </pre>
+                    Output 1: Question<br></br>
+                    Output 2: Statement<br></br>
+                    <br></br>
+                    To find out more about how it was trained and how well it performed, see its <a href="https://ext-models-haystack.s3.eu-central-1.amazonaws.com/gradboost_query_classifier_statements/readme.txt">Readme</a>.
+                </div>
+            )
+        },
+    ]}
+/>
+
+## Zero-Shot Classification
+
+While most classification models, like the ones in the examples above, have a predefined set of labels, zero-shot classification models can perform classification with any set of labels you define.
+To initialize a zero-shot QueryClassifier, run:
+
+```python
+ # In zero-shot-classification, you can choose the labels
+ labels = ["music", "cinema"]
+
+ query_classifier = TransformersQueryClassifier(
+     model_name_or_path="typeform/distilbert-base-uncased-mnli",
+     use_gpu=True,
+     task="zero-shot-classification",
+     labels=labels,
+ )
+ ```
+
+Here the `labels` variable defines which labels you want the QueryClassifier to use. The model you pick should be a natural language inference model such as those trained on [the Multi-Genre Natural Language Inference (MultiNLI)](https://huggingface.co/datasets/multi_nli) dataset.
+
+To perform the classification, run:
+
+ ```python
+ queries = [
+     "In which films does John Travolta appear?",  # query about cinema
+     "What is the Rolling Stones first album?",  # query about music
+     "Who was Sergio Leone?",  # query about cinema
+ ]
+
+ import pandas as pd
+
+# This object will contain results of the classification.
+# The "Query" key will contain a list of queries.
+# The "Output Branch" key will contain which branches the queries was routed through.
+# The "Class" key will contain the classification label of each query.
+ query_classification_results = {"Query": [], "Output Branch": [], "Class": []}
+
+ for query in queries:
+     result = query_classifier.run(query=query)
+     query_classification_results["Query"].append(query)
+     query_classification_results["Output Branch"].append(result[1])
+     query_classification_results["Class"].append("music" if result[1] == "output_1" else "cinema")
+
+ pd.DataFrame.from_dict(query_classification_results)
+ ```

@@ -1,0 +1,64 @@
+# Language Models
+
+With such a variety of readily available fine-tuned models, it's difficult to choose the best one for your use case. This guide tells you about different types of models and when to use them.
+
+## What Are Language Models?
+
+Language models are neural networks trained on large amounts of text to learn how a language works. If you think about the way you're using your native tongue, you'll observe that it's intuitive. You don't have to think about grammar rules when speaking, you just know and apply them intuitively. A language model is an attempt to enable machines to use the language in a similar way humans do. 
+
+Language models are no magic. The way a model works is that it decides how probable it is that a word is valid in a particular word sequence. By _valid_, we mean that it resembles the way humans talk, not that it complies with any grammar rules.
+
+The latest advance in NLP is the transformer architecture which led to top-performing models, such as BERT. It differs from previously used architectures in that instead of processing passages of text word-by-word, transformer-based models can process whole sentences at once, which makes them much faster in training but also in inference. They can also learn the relations between different words in a sentence and how these relations affect the expected model output—a functionality called attention mechanism.
+
+### Fine-Tuned Models
+
+A fine-tuned model is a language model that was trained on a large dataset to perform a specific NLP task, such as text classification or question answering. A lot of fine-tuned models are publicly available for free on model hubs such as [Hugging Face](https://huggingface.co/models). This means that you can just grab them from there and use them in your NLP app as a starting point. You no longer need to train your own model, which takes a lot of time and a lot of data. If you find that the fine-tuned model you're using is not good enough, you can always just fine-tune it, which is much easier than training it from scratch.
+
+Model Naming Conventions
+------------------------
+
+If you're new to models, it's helpful to understand the model naming convention as already the name gives you a hint about what the model can do. The first part of the name is the user that trained and uploaded the model. Then, there is the architecture that the model uses and the size of the model. The last part of the name is the dataset used to train the model.  
+Here's a typical model name:
+
+`deepset/roberta-base-squad2`
+
+`deepset` is the user who trained and uploaded the model, `roberta` is the model architecture, `base` is the size, and `squad2` is the dataset on which the model was trained.
+
+### Model Types
+
+You don't need to have in-depth knowledge of the architecture to be able to use a model but it's helpful to have a rough overview of the most common model types out there and their key differences. This will help you to better understand which models to try out in your own pipeline.
+
+![image](/img/architecture_chronology.png)
+
+### Model Size
+
+Large models have better accuracy but it comes at a cost of speed and the resources it needs to run. Large models can be significantly slower than smaller ones and they use up a lot of your graphic card memory or even exceed its limit. Distilled models are a good compromise, as they preserve accuracy similar to the larger models but are much smaller and easier to deploy. To learn more about it, see [Model Distillation](https://haystack.deepset.ai/guides/v1.7.0/model-distillation).
+
+### Training Dataset
+
+There are standard datasets used when training a model for a particular task. For example, SQuAD stands for Stanford Question Answering Dataset and is the standard dataset used for training English-language models for question answering.
+
+**Tip**: When searching for a model for your task, you can check what dataset is typically used for it and then search for a model that was trained on this dataset.
+
+## Models in Haystack
+
+Haystack loads models directly from Hugging Face. You can use publicly available models but also your private ones. To use a private model, pass your Hugging Face user access token in the `use_auth_token` parameter.
+
+If you're trying to find the right model on Hugging Face, go to the Models menu and you'll find a list of tasks by which you can search for your model.
+
+![image](/img/models_on_hf.png)
+
+There are two types of pipeline nodes that use models: dense retrievers and readers. Readers use models for question answering, while retrievers use sentence similarity or DPR models.For information about choosing the models for pipeline nodes, see [EmbeddingRetriever](/pipeline_nodes/v1.7.0/retriever#embedding-retrieval-recommended), [DensePassageRetriever](/pipeline_nodes/v1.7.0/retriever#dense-passage-retrieval), and [Reader](/pipeline_nodes/v1.7.0/reader).
+
+To use a model, simply provide its Hugging Face location as a parameter to the node and deepset Cloud will take care of loading it. For example:
+
+```YAML
+- name: Retriever 
+    type: EmbeddingRetriever 
+    params:
+      document_store: DocumentStore
+      embedding_model: sentence-transformers/multi-qa-mpnet-base-dot-v1 
+      model_format: sentence_transformers
+      pooling_strategy: cls_token 
+      top_k: 20
+```
