@@ -102,8 +102,8 @@
         "title": "Evaluation of a QA System"
       },
       {
-        "slug": "dense-passage-retrieval",
-        "title": "Better Retrieval via \"Dense Passage Retrieval\""
+        "slug": "embedding-retrieval",
+        "title": "Better Retrieval via \"Embedding Retrieval\""
       },
       {
         "slug": "retrieval-augmented-generation",
