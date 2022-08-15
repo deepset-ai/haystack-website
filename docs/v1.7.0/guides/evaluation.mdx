@@ -1,0 +1,155 @@
+# Evaluation
+
+Haystack has all the tools needed to evaluate whole pipelines or individual Nodes, such as Retrievers, Readers, and Generators. 
+Use evaluation and the metrics it to:
+- Judge how well your system is performing on a given domain
+- Compare the performance of different models
+- Identify underperforming Nodes in your pipeline
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Tutorial:** This page gives an in-depth understanding of the evaluation concepts.
+To get started using Haystack for evaluation, have a look at our [evaluation tutorial](/tutorials/v1.7.0/evaluation).
+
+</div>
+
+## Integrated and Isolated Node Evaluation
+
+There are two evaluation modes for Pipelines: **integrated** and **isolated** Node evaluation.
+
+In **integrated** evaluation, a Node receives the predictions from the preceding Node as input.
+It shows the performance users can expect when running the pipeline and it's the default mode when calling `pipeline.eval()`.
+
+In **isolated** evaluation, a Node is isolated from the predictions of the preceding node.
+Instead, it receives ground-truth labels as input.
+Isolated evaluation shows the maximum performance of a Node if it receives the perfect input from the preceding node.
+You can activate it by running `pipeline.eval(add_isolated_node_eval=True)`.
+
+For example, in an `ExtractiveQAPipeline` comprised of a Retriever and a Reader,
+**isolated** evaluation would measure the upper bound of the Reader's performance, 
+that is the performance of the Reader assuming that the Retriever passes on all relevant documents.
+
+If the **isolated** evaluation result of a Node differs significantly from its **integrated** evaluation result,
+you may need to improve the preceding Node to get the best results from your pipeline.
+If the difference is small, it means that you should improve the Node that you evaluated to improve the pipeline's overall result quality.
+
+## Comparison to Open and Closed-Domain Question Answering
+
+**Integrated** evaluation on an `ExtractiveQAPipeline` is equivalent to **open-domain** question answering.
+In this setting, QA is performed over multiple documents, typically an entire database,
+and the relevant documents first need to be identified.
+
+In contrast, **isolated** evaluation of a Reader node is equivalent to **closed-domain** question answering.
+Here, the question is being asked on a single document.
+There is no retrieval step involved as the relevant document is already given.
+
+When using `pipeline.eval()` in either **integrated** or **isolated** modes,
+Haystack evaluates the correctness of an extracted answer by looking for a match or overlap between the answer and prediction strings.
+Even if the predicted answer is extracted from a different position than the correct answer, that's fine, as long as the strings match.
+
+## Including Scope in Evaluation
+
+In most cases, an answer is considered correct if it matches the gold answer in the labels, and a document is considered correct if its ID matches the gold document ID in the labels. However, you may want to be more specific about the scope (or context) within which an answer or a document is correct. You can do this using the `answer_scope` and `document_scope` parameters of `EvaluationResult.calculate_metrics()`.
+
+Specifying the answer or document scope comes in handy if you want to ensure that an answer is considered correct only if it exists within a specific context. It's especially useful for short answers, such as dates ("2004") or names of places ("Berlin"). Use the `answer_scope` (for question answering) or `document_scope` (for document retrieval) parameter of `calculate_metrics` to specify the scope in which the answer or document is considered correct. 
+
+If you want to try different preprocessors in your indexing pipeline with the same set of labels, the `context` value of `document_scope` is what you need. Using different preprocessors usually means that you end up with a different set of documents (the number of documents varies depending on the parameters set for a preprocessor) ultimately resulting in different document IDs. That's why you can't rely on document ID matching. The `context` value of `document_scope` solves that by using fuzzy string matching between documents and labels. 
+
+For more information, see the [Evaluation Tutorial](/tutorials/v1.7.0/evaluation).
+
+
+## Evaluating Information Retrieval with BEIR
+
+Haystack has an integration with the Benchmarking Information Retrieval (BEIR) tool that you can use to assess the quality of your information retrieval pipelines. BEIR contains preprocessed datasets for evaluating retrieval models in 17 languages.
+
+To use BEIR, install Haystack with BEIR dependency:
+```
+pip install farm-haystack[beir]
+```
+After that, you can evaluate your pipelines by calling ``Pipeline.eval_beir()``.
+Here is an example of how to run BEIR evaluation for `DocumentSearchPipeline`:
+
+```python
+from haystack.pipelines import DocumentSearchPipeline, Pipeline
+from haystack.nodes import TextConverter, BM25Retriever
+from haystack.document_stores.elasticsearch import ElasticsearchDocumentStore
+
+text_converter = TextConverter()
+document_store = ElasticsearchDocumentStore(search_fields=["content", "name"], index="scifact_beir")
+retriever = BM25Retriever(document_store=document_store, top_k=1000)
+
+index_pipeline = Pipeline()
+index_pipeline.add_node(text_converter, name="TextConverter", inputs=["File"])
+index_pipeline.add_node(document_store, name="DocumentStore", inputs=["TextConverter"])
+
+query_pipeline = DocumentSearchPipeline(retriever=retriever)
+
+ndcg, _map, recall, precision = Pipeline.eval_beir(
+    index_pipeline=index_pipeline, query_pipeline=query_pipeline, dataset="scifact"
+)
+```
+
+For more information, see [BEIR](https://github.com/beir-cellar/beir).
+
+## Metrics: Retrieval
+
+### Recall
+
+Recall measures how many times the correct document was among the retrieved documents over a set of queries.
+For a single query, the output is binary: either the correct document is contained in the selection, or it is not.
+Over the entire dataset, the recall score amounts to a number between zero (no query retrieved the right document) and one (all queries retrieved the right documents).
+
+In some scenarios, there can be multiple correct documents for one query. The metric `recall_single_hit` considers whether at least one of the correct documents is retrieved, whereas `recall_multi_hit` takes into account how many of the multiple correct documents for one query are retrieved.
+
+Note that recall is affected by the number of documents that the Retriever returns.
+If the Retriever returns few documents, it means that it is difficult to retrieve correct documents.
+Make sure to set the Retriever's `top_k` to an appropriate value in the pipeline that you're evaluating.
+
+### Mean Reciprocal Rank (MRR)
+
+In contrast to the recall metric, mean reciprocal rank takes the position of the top correctly retrieved document (the “rank”) into account.
+It does this to account for the fact that a query elicits multiple responses of varying relevance.
+Like recall, MRR can be a value between zero (no matches) and one (the system retrieved a correct document for all queries as the top result).
+For more details, check out [Mean Reciprocal Rank](https://en.wikipedia.org/wiki/Mean_reciprocal_rank).
+
+### Mean Average Precision (mAP)
+
+Mean average precision is similar to mean reciprocal rank but takes into account the position of every correctly retrieved document.
+Like MRR, mAP can be a value between zero (no matches) and one (the system retrieved correct documents for all top results).
+mAP is particularly useful in cases where there are more than one correct s to be retrieved.
+For more details, check out [Mean Average Precision](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision).
+
+
+## Metrics: Question Answering
+
+### Exact Match (EM)
+
+Exact match measures the proportion of cases where the predicted answer is identical to the correct answer.
+For example, for the annotated question answer pair “What is Haystack?" + "A question answering library in Python”,
+even a predicted answer like “A Python question-answering library” would yield a zero score because it does not match the expected answer 100%.
+
+### F1
+
+The F1 score is more forgiving and measures the word overlap between the labeled and the predicted answer.
+Whenever the EM is 1, F1 will also be 1.
+To learn more about the F1 score, see the [Wikipedia F-Score Page](https://en.wikipedia.org/wiki/F-score).
+
+### Semantic Answer Similarity (SAS)
+
+Semantic answer similarity uses a transformer-based, cross-encoder architecture to evaluate the semantic similarity of two answers rather than their lexical overlap. 
+While F1 and EM would both score *one hundred percent* as sharing zero similarity with *100 %*, SAS is trained to assign a high score to such cases.
+SAS is particularly useful to seek out cases where F1 doesn't give a good indication of the validity of a predicted answer.
+
+You can already start trying out SAS in our [Evaluation Tutorial](/tutorials/v1.7.0/evaluation). You can read more about SAS in [Semantic Answer Similarity for Evaluating Question-Answering Models](https://arxiv.org/abs/2108.06130).
+
+## Datasets
+
+Annotated datasets are crucial for evaluating the retrieval and the question-answering capabilities of your system.
+Haystack is designed to work with question-answering datasets that follow the SQuAD format.
+If you want to create your own dataset, have a look at [Annotation Tool](/components/v1.7.0/annotation). 
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Data Tool:**If you want to manipulate SQuAD-style data using Pandas dataframes, check the `SquadData` object in `haystack/squad_data.py`.
+
+</div>
