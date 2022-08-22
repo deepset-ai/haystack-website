@@ -302,19 +302,19 @@ transformers_models = reader.inferencer.model.convert_to_transformers()
 
 Instead of defining a fixed number of training epochs, you can train the model using a method called early stopping.
 This performs cycles of training and evaluation until the model is no longer improving.
-To go for this approach, run:
+To use this approach, run:
 
 ```python
 from haystack.nodes import FARMReader
-from haystack.modeling.training.base import EarlyStopping
+from haystack.utils.early_stopping import EarlyStopping
 
 early_stopping = EarlyStopping(
-        metric='top_n_accuracy',
-        save_dir='early_stop_model',
-        mode='max',
-        patience=10,
-        min_delta=0.001,
-        min_evals=0,
+    metric='top_n_accuracy',
+    save_dir='early_stop_model',
+    mode='max',
+    patience=10,
+    min_delta=0.001,
+    min_evals=0,
 )
 reader = FARMReader(model_name_or_path='deepset/roberta-base-squad2', use_gpu=True)
 reader.train(
