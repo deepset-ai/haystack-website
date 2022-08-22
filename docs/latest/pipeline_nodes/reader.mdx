@@ -300,6 +300,35 @@ This can be particularly useful if you want to upload the model to the Hugging F
 transformers_models = reader.inferencer.model.convert_to_transformers()
 ```
 
+Instead of defining a fixed number of training epochs, you can train the model using a method called early stopping.
+This performs cycles of training and evaluation until the model is no longer improving.
+To go for this approach, run:
+
+```python
+from haystack.nodes import FARMReader
+from haystack.modeling.training.base import EarlyStopping
+
+early_stopping = EarlyStopping(
+        metric='top_n_accuracy',
+        save_dir='early_stop_model',
+        mode='max',
+        patience=10,
+        min_delta=0.001,
+        min_evals=0,
+)
+reader = FARMReader(model_name_or_path='deepset/roberta-base-squad2', use_gpu=True)
+reader.train(
+        data_dir='./data',
+        train_filename='train.json',
+        dev_filename='dev.json',
+        use_gpu=True,
+        early_stopping=early_stopping
+)
+```
+
+You can find more details about the EarlyStopping class in the [EarlyStopping API documentation](/reference/utils#earlystopping).
+
+
 <div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
 
 **Tutorial:** For a hands-on example, check out our [tutorial on fine-tuning](/tutorials/fine-tuning-a-model).
