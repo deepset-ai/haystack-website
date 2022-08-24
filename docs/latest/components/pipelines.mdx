@@ -348,7 +348,7 @@ pipelines:
     name: DocumentStore
 ```
 
-For another example YAML configuration, check out [Pipelines in GitHub](https://github.com/deepset-ai/haystack/tree/master/rest_api/pipeline).
+For another example YAML configuration, check out [Pipelines in GitHub](https://github.com/deepset-ai/haystack/tree/main/rest_api/pipeline).
 
 #### Validating Your YAML
 
@@ -363,7 +363,7 @@ validate_yaml(Path("path_to_your_file"))
 You can also use your IDE to validate the file. The `*.haystack-pipeline.yml` suffix tells your IDE that this YAML contains Haystack pipeline configuration. It makes it possible for your IDE to show you feedback and autocompletion features, assuming that you have the relevant plugins like [YAML for VSCode](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml).
 
 You can find the schema used for validation in [SchemaStore](https://www.schemastore.org/json/)
-and [in our repo](https://raw.githubusercontent.com/deepset-ai/haystack/master/haystack/json-schemas/haystack-pipeline.schema.json).
+and [in our repo](https://raw.githubusercontent.com/deepset-ai/haystack/main/haystack/json-schemas/haystack-pipeline.schema.json).
 
 An update to the Haystack version might require small updates to the YAML files. You can set `version` to `unstable` in the pipeline YAML to circumvent validation or set it to the latest Haystack version if the components and parameters that you use are compatible with the latest version.
 
