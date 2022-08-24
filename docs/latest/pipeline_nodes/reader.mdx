@@ -318,11 +318,11 @@ early_stopping = EarlyStopping(
 )
 reader = FARMReader(model_name_or_path='deepset/roberta-base-squad2', use_gpu=True)
 reader.train(
-        data_dir='./data',
-        train_filename='train.json',
-        dev_filename='dev.json',
-        use_gpu=True,
-        early_stopping=early_stopping
+    data_dir='./data',
+    train_filename='train.json',
+    dev_filename='dev.json',
+    use_gpu=True,
+    early_stopping=early_stopping
 )
 ```
 
