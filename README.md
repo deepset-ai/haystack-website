@@ -51,7 +51,7 @@ These docs live in the `docs` directory, in the given version directory. The doc
 
 ### Tutorial & Reference Docs
 
-These docs live in the [Haystack repository](https://github.com/deepset-ai/haystack/tree/master/docs),
+These docs live in the [Haystack repository](https://github.com/deepset-ai/haystack/tree/main/docs),
 in the given version directory. The docs are generated markdown files and must be fetched before the
 build starts. Thanks to Vercel's [Incremental Static Regeneration](https://vercel.com/docs/next.js/incremental-static-regeneration), the static pages we create for these docs are always up-to-date. This
 means that if existing tutorials or references are changed, the changes will be visible on the docs
@@ -74,9 +74,9 @@ const res = await octokit.rest.repos.getContent({
   ref: HAYSTACK_BRANCH_NAME
 });
 ```
-### Preview from non-master branches
+### Preview from non-main branches
 
-To preview docs that are on a non-master branch of the Haystack repo, you run this project locally and navigate to `lib/github.ts`, where you have to add a `ref` parameter to the `octokit.rest.repos.getContent` function call with the value of the branch name that you would like to preview. You also need to add the tutorials/references you would like to preview to `docs/{GIVEN_VERSION}/menu.json` and `lib/constants.ts`.
+To preview docs that are on a non-main branch of the Haystack repo, you run this project locally and navigate to `lib/github.ts`, where you have to add a `ref` parameter to the `octokit.rest.repos.getContent` function call with the value of the branch name that you would like to preview. You also need to add the tutorials/references you would like to preview to `docs/{GIVEN_VERSION}/menu.json` and `lib/constants.ts`.
 
 ### Redirects In Case of Renaming or Restructuring Pages
 
@@ -108,7 +108,7 @@ Moreover, we need to point the links, which are pointing to the latest version, 
 
 Additionally, the `referenceFiles` and `tutorialFiles` constants in `lib/constants` need to be updated with any new reference or tutorial docs that get created as part of a new release. During a release, please add a new object `referenceFiles` and `tutorialFiles` with the release number to file. This change has also implications on the files `tutorials/[...slug].tsx` and `reference/[...slug].tsx`. Please update the functions `getStaticPaths` and `getStaticProps` in both files with an array representing the latest version.
 
-In the [haystack](https://github.com/deepset-ai/haystack) repo, we have to release the api and tutorial docs by copying them to a new version folder as well. If you want to include here files from another branch than master follow **Preview from non-master branches**. **Lastly**, we have to update the constant specified in the `components/VersionSelect` component, so that we default to the new version when navigating between pages.
+In the [haystack](https://github.com/deepset-ai/haystack) repo, we have to release the api and tutorial docs by copying them to a new version folder as well. If you want to include here files from another branch than main follow **Preview from non-main branches**. **Lastly**, we have to update the constant specified in the `components/VersionSelect` component, so that we default to the new version when navigating between pages.
 
 After releasing the docs, we need to release the benchmarks. Create a new version folder in the folder `benchmarks` and copy all folders from `latest` to the new folder.
 
@@ -122,7 +122,7 @@ We use [Tailwind](https://tailwindcss.com) for CSS. It's a CSS utility library, 
 
 This application gets deployed on [Vercel](https://vercel.com). In the dashboard, connect the
 `haystack-website` repo to a new project and it should handle builds, preview environments (all branches
-other than master), and production environments (master branch) automatically. Be sure to include
+other than main), and production environments (main branch) automatically. Be sure to include
 `yarn haystack` in the list of build commands.
 
 ## Future Work
