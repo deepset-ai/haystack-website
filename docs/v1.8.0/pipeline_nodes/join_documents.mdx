@@ -1,0 +1,46 @@
+# Join Documents
+
+This Node receives Documents from multiple Nodes and joins them back together.
+This allows for the merging of two separate Pipeline branches.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Position in a Pipeline__| Generally used in cases where two separate branches have two different Retrievers whose results need to be amalgamated |
+|__Input__       | [Documents](/components/v1.8.0/documents-answers-labels#document)                                                                                                                                                                  |
+|__Output__      | [Documents](/components/v1.8.0/documents-answers-labels#document)                                                                                                             |
+|__Classes__     | JoinDocuments                                                                                                           |
+|||
+
+## Usage
+
+* To initialize the Node, run:
+```python
+from haystack.nodes import JoinDocuments, TransformersQueryClassifier
+
+join_documents = JoinDocuments(
+    join_mode="concatenate",
+    top_k_join=10
+)
+```
+
+* To use `JoinDocuments` in a Pipeline, run the following code.
+Here the outputs of the ESRetriever and the DPRRetriever are combined by JoinDocuments.
+
+```python
+from haystack.pipelines import Pipeline
+from haystack.nodes import JoinDocuments, TransformersQueryClassifier, BM25Retriever, DensePassageRetriever
+
+# Here's how you initialize the JoinDocuments node. Note that before running the Pipeline, you need to initialize all the other nodes as well.
+join_documents = JoinDocuments(
+    join_mode="concatenate",
+    top_k_join=10
+)
+
+pipe = Pipeline()
+pipe.add_node(component=QueryClassifier(), name="TransformersQueryClassifier", inputs=["Query"])
+pipe.add_node(component=bm25_retriever, name="BM25Retriever", inputs=["TransformersQueryClassifier.output_1"])
+pipe.add_node(component=dpr_retriever, name="DensePassageRetriever", inputs=["TransformersQueryClassifier.output_2"])
+pipe.add_node(component=join_documents, name="JoinDocuments",
+              inputs=["ESRetriever", "DPRRetriever"])
+res = pipe.run(query="What did Einstein work on?")
+```

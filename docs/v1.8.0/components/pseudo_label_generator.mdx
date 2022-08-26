@@ -1,0 +1,41 @@
+# Pseudo Label Generator
+
+Use Pseudo Label Generator to create training data for dense retrievers without human annotation. Pseudo Label Generator uses Generative Pseudo Labelling (GPL), which is an unsupervised domain adaptation method for training dense retrievers. It generates labels for your Haystack Documents. When combined with a QuestionGenerator and a Retriever, it returns questions, labels, and negative passages that you can then use to train your EmbeddingRetriever.
+
+|||
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|__Input__       | Unlabelled target corpus (usually via Document Store) and Retriever (to mine for negative passages)                                                                                                                                                                  |
+|__Output__      | Labels                                                                                                            |
+|||
+
+## Usage
+
+```python
+from haystack.nodes import PseudoLabelGenerator
+
+document_store = DocumentStore(your_document_store)
+retriever = Retriever(your_retriever)
+qg = QuestionGenerator(model_name_or_path="doc2query/msmarco-t5-base-v1")
+plg = PseudoLabelGenerator(qg, retriever)
+train_examples = []
+
+for idx, doc in enumerate(document_store):
+    output_samples = plg.run(documents=[doc])
+    for item in output_samples:
+        train_examples.append(item)
+```
+
+You can also provide a list of questions-document dictionary pairs for which you want to generate pseudo labels:
+
+```python
+question_doc_pairs: List[Dict[str, str]] = [{"question": "question text", "document": "document text"}]
+plg = PseudoLabelGenerator(question_doc_pairs, retriever)
+train_examples = []
+
+for idx, doc in enumerate(document_store):
+    output_samples = plg.run(documents=[doc])
+    for item in output_samples:
+        train_examples.append(item)
+```
+
+For more information, see [GPL Guide](/guides/v1.8.0/gpl).

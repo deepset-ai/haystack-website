@@ -16,6 +16,7 @@ import {
   getH1FromMarkdown,
 } from "lib/utils";
 import { tutorialFilesLatest } from "lib/constants";
+import { tutorialFilesV180 } from "lib/constants";
 import { tutorialFilesV170 } from "lib/constants";
 import { tutorialFilesV160 } from "lib/constants";
 import { tutorialFilesV150 } from "lib/constants";
@@ -65,8 +66,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pathsLatest = [
     ...tutorialFilesLatest.items.map((item) => ({ params: { slug: [item.slug] } })),
   ];
+  const pathsV180 = [
+    ...tutorialFilesV180.items
+      .map((item) =>({
+          params: {
+            slug: ["v1.8.0", item.slug],
+          },
+        }))
+      .flat(),
+  ];
+
   const pathsV170 = [
-    ...tutorialFilesV160.items
+    ...tutorialFilesV170.items
       .map((item) =>({
           params: {
             slug: ["v1.7.0", item.slug],
@@ -200,7 +211,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
         }))
       .flat(),
   ];
-  let paths = pathsLatest.concat(pathsV170)
+  let paths = pathsLatest.concat(pathsV180)
+                          .concat(pathsV170)
                           .concat(pathsV160)
                           .concat(pathsV150)
                           .concat(pathsV140)
