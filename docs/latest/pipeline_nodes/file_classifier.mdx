@@ -26,6 +26,13 @@ These are the default outgoing edges of the File Classifier:
 | 4             | Docx      |
 | 5             | HTML      |
 
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+**Note: ** The FileTypeClassifier works best when you pass in one file per `Pipeline.run()` call.
+    If you pass multiple files of different format into Pipeline.run() or Pipeline.run_batch(), FileTypeClassifier returns an error.
+
+</div>
+
 To use a FileTypeClassifier in an indexing pipeline, run:
 
 ```python
