@@ -41,7 +41,7 @@ const Pre: FC<Props> = ({ children, className, ...props }) => {
           onClick={onClick}
           disabled={copied}
           className={classNames(
-            "transition border rounded-md p-2 focus:outline-none group-hover:flex fade-in",
+            "clipboard-button transition border rounded-md p-2 focus:outline-none group-hover:flex fade-in",
             {
               "text-green-dark-theme border-green-dark-theme": copied,
               "hover:border-off-white border-medium-grey focus:ring-4 focus:ring-green-dark-theme focus:ring-opacity-50":
