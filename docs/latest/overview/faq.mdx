@@ -96,3 +96,16 @@ In short, the FARMReader uses a QA pipeline implementation that comes from our o
 By contrast, the TransformersReader uses a QA pipeline implementation that comes from HuggingFace's [Transformers](https://github.com/huggingface/transformers).
 See [this section](/pipeline_nodes/reader#deeper-dive-farm-vs-transformers)
 for a more details about their differences!
+
+## Why is Haystack not logging everything to the console?
+
+The default logging level in Haystack is set to WARNING.
+This means that messages on the INFO level will not be logged.
+For example, if you call FARMReader.train() the evaluation reports won't be shown in the console output by default.
+In order to see logs at INFO level, run the following before your first import of Haystack:
+
+```python
+import logging
+logging.basicConfig(format="%(levelname)s - %(name)s - %(message)s", level=logging.WARNING)
+logging.getLogger("haystack").setLevel(logging.INFO)
+```
