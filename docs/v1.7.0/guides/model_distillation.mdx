@@ -116,7 +116,7 @@ The following paragraphs are only relevant for intermediate layer distillation. 
 
 ### Data Augmentation for Intermediate Layer Distillation
 
-The optional intermediate layer distillation step requires a lot of data. Because acquiring a lot of training data is expensive, the TinyBERT paper suggests a data augmentation approach in which you multiply existing datasets. For data augmentation, you can use the [`augment_squad.py`](https://github.com/deepset-ai/haystack/blob/master/haystack/utils/augment_squad.py) script from Haystack.
+The optional intermediate layer distillation step requires a lot of data. Because acquiring a lot of training data is expensive, the TinyBERT paper suggests a data augmentation approach in which you multiply existing datasets. For data augmentation, you can use the [`augment_squad.py`](https://github.com/deepset-ai/haystack/blob/main/haystack/utils/augment_squad.py) script from Haystack.
 
 This command creates an augmented dataset with 20 times the samples from the `dataset.json` data set and places it in the `augmented_dataset.json` file. In this example, `dataset.json` is in the same folder as `augment_squad.py`:
 ```
