@@ -73,14 +73,17 @@ filters = {
 It is not possible to use logical operators twice on the same level since dictionary keys have to be unique.
 For example, the following filter is not valid
 
-```
-{"$or":
-    {"$and": {
-         "Type": "News Paper",
-         "Date": {"$lt": "2019-01-01"},
-     "$and": {      # repeated key in dictionary
-         "Type": "Blog post",
-         "Date": {"$gte": "2019-01-01"}
+``` python
+{
+    "$or": {
+        "$and": {
+            "Type": "News Paper",
+            "Date": {"$lt": "2019-01-01"},
+        },
+        "$and": {      # repeated key in dictionary
+            "Type": "Blog post",
+            "Date": {"$gte": "2019-01-01"}
+        }
     }
 }
 ```
@@ -89,17 +92,21 @@ To get around this, we allow logical operators to take a list of dictionaries as
 This is what the above filter would look like in this style.
 
 ```
-{"$or": [
-    {"$and": {
-        "Type": "News Paper",
-        "Date": {"$lt": "2019-01-01"}
+{
+    "$or": [
+        {
+            "$and": {
+                "Type": "News Paper",
+                "Date": {"$lt": "2019-01-01"}
+            }
+        },
+        {
+            "$and": {
+                "Type": "Blog post",
+                "Date": {"$gte": "2019-01-01"}
+            }
         }
-    },
-    {"$and": {
-        "Type": "Blog post",
-        "Date": {"$gte": "2019-01-01"}
-        }
-    }]
+    ]
 }
 ```
 
