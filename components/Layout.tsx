@@ -59,10 +59,7 @@ const Layout: FC<LayoutProps> = ({
           property="og:url"
           content={`https://haystack.deepset.ai${router.asPath}`}
         />
-        <link
-          rel="canonical"
-          href={`https://haystack.deepset.ai${router.asPath}`}
-        />
+        <link rel="canonical" href={`${canonical}`}/>
         <link rel="icon" href="/img/HaystackIcon.png" />
         <meta property="og:type" content={meta.type} />
         <meta property="og:site_name" content="Haystack Docs" />
