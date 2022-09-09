@@ -32,6 +32,20 @@ const Layout: FC<LayoutProps> = ({
     type: "website",
   };
 
+  var canonical_map: { [key: string]: string; } = {};
+  canonical_map["/overview/nlp-resources"] = "/nlp-resources";
+
+  const get_canonical = function (current_path: string) {
+    var canonical = ''
+    if(canonical_map[current_path]){
+      canonical = canonical_map[current_path]
+    }
+    else canonical = current_path;
+    return `https://haystack.deepset.ai${canonical}`;
+  };
+
+  var canonical = get_canonical(router.asPath)
+
   return (
     <div className="dark:bg-gray-800">
       <Head>
