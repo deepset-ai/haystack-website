@@ -12,6 +12,7 @@ import {
 import { join } from "path";
 import fs from "fs";
 import Layout from "components/Layout";
+import Banner from "components/Banner";
 import {
   getSlugsFromLocalMarkdownFiles,
   getVersionFromParams,
@@ -40,6 +41,7 @@ export default function ComponentDoc({
       toc={toc}
       htmlTitle={htmlTitle}
     >
+      <Banner name="Components docs"/>
       {source && (
         <MDXRemote
           {...(source as MDXRemoteSerializeResult)}

@@ -65,7 +65,7 @@
   @apply list-decimal list-inside;
 }
 
-.markdown a {
+.markdown a :not(.banner){
   @apply text-blue-600 underline;
 }
 
