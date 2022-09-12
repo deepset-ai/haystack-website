@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "haystack": "git clone --depth=1 https://github.com/deepset-ai/haystack.git && git clone --depth=1 https://github.com/deepset-ai/haystack-tutorials.git",
+    "haystack": "git clone --depth=1 https://github.com/deepset-ai/haystack.git && git clone --depth=1 https://$GITHUB_PERSONAL_ACCESS_TOKEN:x-oauth-basic@github.com/deepset-ai/haystack-tutorials.git",
     "dev": "next dev",
     "dev:watch": "next-remote-watch ./docs",
     "build": "next build",
