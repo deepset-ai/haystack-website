@@ -6,6 +6,7 @@ import {
   InferGetStaticPropsType,
 } from "next";
 import Layout from "components/Layout";
+import Banner from "components/Banner"
 import { getRelativePath, getRawURL } from "lib/github";
 import {
   markdownToHtml,
@@ -52,6 +53,7 @@ export default function ReferenceDoc({
       toc={toc}
       htmlTitle={htmlTitle}
     >
+      <Banner name="API References"/>
       <div
         className={styles["nonMdx"]}
         dangerouslySetInnerHTML={{ __html: source as string }}
