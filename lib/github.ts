@@ -55,3 +55,19 @@ export function getRelativePath(
 
   return relPath;
 }
+
+/**
+ * Provided that the tutorials repo was cloned locally under `./haystack-tutorials`,
+ * this function returns the filesystem path to a certain file
+ *
+ * @param filename - the name of the file
+ * @returns - a path for a file relative to the local copy of Haystack
+ */
+export function getRelativePathTutorial(filename: string): string {
+  const relPath = `haystack-tutorials/markdowns/${filename}`;
+  if (!fs.existsSync(relPath)) {
+    return "";
+  }
+
+  return relPath;
+}

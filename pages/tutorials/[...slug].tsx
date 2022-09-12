@@ -6,7 +6,7 @@ import {
 } from "next";
 import styles from "components/non-mdx.module.css";
 import Layout from "components/Layout";
-import { getRelativePath, getRawURL } from "lib/github";
+import { getRelativePathTutorial, getRawURL } from "lib/github";
 import {
   markdownToHtml,
   getVersionFromParams,
@@ -331,7 +331,7 @@ export const getStaticProps: GetStaticProps<StaticPageProps> = async ({
     }
 
     const version = await getVersionFromParams(params.slug);
-    const filePath = getRelativePath(item.filename, tutorialFilesLatest.repoPath, version);
+    const filePath = getRelativePathTutorial(item.filename);
     if (!filePath) {
       return {
         notFound: true,

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "haystack": "git clone https://github.com/deepset-ai/haystack.git",
+    "tutorials": "git clone --depth=1 https://github.com/deepset-ai/haystack-tutorials.git",
     "dev": "next dev",
     "dev:watch": "next-remote-watch ./docs",
     "build": "next build",
