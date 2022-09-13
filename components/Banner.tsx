@@ -8,13 +8,13 @@ export default function Banner({name = "technical documentation"}:{name: string}
             <span className="bg-teal-700 flex items-center rounded-lg px-4 py-2">
               <IoConstructOutline className="h-6 w-6 text-white" aria-hidden="true" />
             </span>
-            <p className="ml-3 mr-3 font-medium text-white shrink">
+            <p className="ml-3 mr-3 font-medium text-white shrink text-center">
               <span className="md:inline">🎉 We are working to make this website better, stay tuned. In the meantime, have a look at our new documentation page for up to date {name} </span>
             </p>
           <div className="w-full sm:w-auto">
             <a
               href="https://docs.haystack.deepset.ai"
-              className="banner flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-center text-sm font-small text-teal-700 shadow-sm hover:bg-teal-100 h-full	"
+              className="banner flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-center text-sm font-small text-teal-700 shadow-sm hover:bg-teal-100 h-full"
             >
               New Docs
             </a>
