@@ -53,7 +53,7 @@ export default function ReferenceDoc({
       toc={toc}
       htmlTitle={htmlTitle}
     >
-      <Banner name="API References"/>
+      <Banner name="API Reference"/>
       <div
         className={styles["nonMdx"]}
         dangerouslySetInnerHTML={{ __html: source as string }}

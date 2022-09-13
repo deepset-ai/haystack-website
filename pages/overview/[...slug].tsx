@@ -12,6 +12,7 @@ import {
 import { join } from "path";
 import fs from "fs";
 import Layout from "components/Layout";
+import Banner from "components/Banner"
 import {
   getSlugsFromLocalMarkdownFiles,
   getVersionFromParams,
@@ -32,6 +33,14 @@ export default function OverviewDoc({
   source,
   htmlTitle,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  var docs_sections: Array<any> = ["Glossary", "Migration to v1", "Installation", "Frequently Asked Questions"]
+  let banner;
+  let index = docs_sections.indexOf(htmlTitle);
+  if( index > -1){
+    var text = docs_sections[index]
+    if (text == "Installation" || text == "Migration to v1") text = text + " guidelines"
+    banner = <Banner name={text}/>
+  }
   return (
     <Layout
       menu={menu}
@@ -40,6 +49,7 @@ export default function OverviewDoc({
       toc={toc}
       htmlTitle={htmlTitle}
     >
+      {banner}
       {source && (
         <MDXRemote
           {...(source as MDXRemoteSerializeResult)}
