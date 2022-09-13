@@ -41,7 +41,7 @@ export default function ComponentDoc({
       toc={toc}
       htmlTitle={htmlTitle}
     >
-      <Banner name="Components docs"/>
+      <Banner name="Components"/>
       {source && (
         <MDXRemote
           {...(source as MDXRemoteSerializeResult)}

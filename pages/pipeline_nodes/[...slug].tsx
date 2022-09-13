@@ -41,7 +41,7 @@ export default function PipelineNodeDoc({
       toc={toc}
       htmlTitle={htmlTitle}
     >
-      <Banner name="Pipeline Nodes docs"/>
+      <Banner name="Pipeline Nodes"/>
       {source && (
         <MDXRemote
           {...(source as MDXRemoteSerializeResult)}

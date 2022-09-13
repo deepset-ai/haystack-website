@@ -38,7 +38,6 @@ export default function OverviewDoc({
   let index = docs_sections.indexOf(htmlTitle);
   if( index > -1){
     var text = docs_sections[index]
-    if (text == "Installation" || text == "Migration to v1") text = text + " guidelines"
     banner = <Banner name={text}/>
   }
   return (
