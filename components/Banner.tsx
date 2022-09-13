@@ -1,20 +1,20 @@
-import { BellIcon } from '@heroicons/react/outline'
+import { IoConstructOutline } from 'react-icons/io5'
 
 export default function Banner({name = "technical documentation"}:{name: string}) {
   return (
     <div className="bg-teal-600 mb-3">
       <div className="mx-auto max-w-fit py-3 px-3 sm:px-6 lg:px-8">
-        <div className="flex flex-nowrap justify-between">
-            <span className="flex rounded-lg bg-teal-700 p-2 ml-2">
-              <BellIcon className="h-6 w-6 text-white" aria-hidden="true" />
+        <div className="flex justify-center align-middle">
+            <span className="bg-teal-700 flex items-center rounded-lg px-4 py-2">
+              <IoConstructOutline className="h-6 w-6 text-white" aria-hidden="true" />
             </span>
-            <p className="ml-3 font-medium text-white">
-              <span className="hidden md:inline">This website is being revamped. For up to date {name} go to our new Documentation website. Stay tuned 🎉</span>
+            <p className="ml-3 mr-3 font-medium text-white shrink">
+              <span className="md:inline">🎉 We are working to make this website better, stay tuned. In the meantime, have a look at our new documentation page for up to date {name} </span>
             </p>
-          <div className="order-3 mt-2 w-full flex-shrink sm:order-2 sm:mt-0 sm:w-auto">
+          <div className="w-full sm:w-auto">
             <a
               href="https://docs.haystack.deepset.ai"
-              className="banner flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-teal-700 shadow-sm hover:bg-teal-100"
+              className="banner flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-center text-sm font-small text-teal-700 shadow-sm hover:bg-teal-100 h-full	"
             >
               New Docs
             </a>
