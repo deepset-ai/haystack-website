@@ -1,0 +1,51 @@
+# What is Haystack?
+
+## Overview
+
+Haystack is an **open-source framework** for building **search systems** that work intelligently over large document collections.
+Recent advances in NLP have enabled the application of question answering, retrieval and summarization to real world settings
+and Haystack is designed to be the bridge between research and industry.
+
+- **NLP for Search**: Pick components that perform [retrieval](/pipeline_nodes/retriever),
+[question answering](/pipeline_nodes/reader), [reranking](/pipeline_nodes/ranker) and much more.
+
+- **Latest models**: Utilize all transformer based models (BERT, RoBERTa, MiniLM, DPR) and smoothly switch when new ones get published.
+
+- **Flexible databases**: Load data into and query from a range of [databases](/components/document-store) such as Elasticsearch, Milvus, FAISS, SQL and more.
+
+- **Scalability**: [Scale your system](/guides/optimization) to handle millions of documents and deploy them via [REST API](/components/rest-api).
+
+- **Domain adaptation**: All tooling you need to [annotate](/components/annotation) examples, collect [user-feedback](/guides/domain-adaptation#user-feedback), [evaluate](/guides/evaluation) components and [finetune](/guides/domain-adaptation) models.
+
+![image](/img/concepts_haystack_handdrawn.png)
+
+## Enabling New Styles of Search
+
+Haystack is designed to take your search to the next level.
+Keyword search is effective and appropriate for many situations,
+but Machine Learning has enabled systems to search based on word meaning rather than string matching.
+As new language processing models are developed, new styles of search are also possible.
+In Haystack, you can create systems that perform:
+
+- [Question Answering](/components/ready-made-pipelines#extractiveqapipeline)
+- [Summarization](/components/ready-made-pipelines#searchsummarizationpipeline)
+- [Document Search](/components/ready-made-pipelines#documentsearchpipeline)
+- [Question Generation](/components/ready-made-pipelines#questiongenerationpipeline)
+
+This is just a small subset of the kinds of systems that can be created in Haystack.
+
+## How Haystack Works
+
+Haystack is geared towards building great search pipelines that are customizable and production ready.
+There are 3 different levels on which you can interact with the components in Haystack.
+
+- Nodes
+- Pipelines
+- REST API
+
+To find out more, visit our Documentation
+
+XXX BUTTON TO DOCUMENTATION PAGE XXX
+
+
+

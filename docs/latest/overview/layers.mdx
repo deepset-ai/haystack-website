@@ -1,0 +1,57 @@
+# The Layers of Haystack
+
+### 1) Nodes
+
+Haystack offers different [Nodes](/pipeline_nodes/overview) that perform different kinds of text processing.
+These are often powered by the latest transformer models and code-wise they are Python classes whose methods can be called directly.
+For example, if you would like to perform question answering with a Reader model,
+all you need to do is provide it with documents and a question.
+
+Working on this level with Haystack Nodes is the "hands-on" approach and
+it gives you a very direct way of manipulating inputs and inspecting outputs.
+This can be useful for exploration, prototyping and debugging.
+
+```
+reader = FARMReader(model="deepset/roberta-base-squad2")
+result = reader.predict(
+    query="Which country is Canberra located in?",
+    documents=documents,
+    top_k=10
+)
+```
+
+### 2) Pipelines
+
+Haystack is built on the idea that great systems are more than the sum of their parts.
+By combining the NLP power of different Nodes, users can create powerful and customizable systems.
+The [Pipeline](/components/pipelines) is the key to making this modular approach work.
+
+When adding Nodes to a Pipeline, the user can define how data flows through the system and which Nodes perform their processing step when.
+On top of simplifying data flow logic, this also allows for complex routing options such as those involving [decision nodes](/pipeline_nodes/overview#decision-nodes).
+
+```
+p = Pipeline()
+p.add_node(component=retriever, name="Retriever", inputs=["Query"])
+p.add_node(component=reader, name="Reader", inputs=["Retriever"])
+result = p.run(query="What did Einstein work on?")
+```
+
+### 3) REST API
+
+In order to deploy a search system, you will need more than just a Python script.
+Rather you need a service that can stay on, handle requests as they come in and also be callable by many different applications.
+For this, Haystack comes with a [REST API](/components/rest-api) that is designed to work in production environments.
+
+When set up like this, you can load [Pipelines from YAML files](/components/pipelines#yaml-file-definitions),
+interact with Pipelines via HTTP requests and connect Haystack to a user-facing GUIs.
+
+```
+curl -X 'POST' \
+  'http://127.0.0.1:8000/query' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "query": "Who is the father of Arya Stark?",
+  "params": {}
+}'
+```

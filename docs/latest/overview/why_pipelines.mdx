@@ -1,0 +1,36 @@
+## Why Use Pipelines for Search?
+
+The value of chaining together different Nodes is clearest when looking at the Retriever-Reader Pipeline.
+It is one of the most common systems built in Haystack and it
+harnesses the reading comprehension power of the [Reader](/pipeline_nodes/reader)
+but also applies it to large document bases with the help of the [Retriever](/pipeline_nodes/retriever).
+
+**Readers**, also known as Closed-Domain Question Answering systems in Machine Learning speak,
+are powerful models that do close analysis of documents and perform the core task of question answering.
+The Readers in Haystack are trained from the latest transformer based language models and can be significantly sped up using GPU acceleration.
+However, it is not currently feasible to use the Reader directly on large collection of documents.
+
+The **Retriever** assists the Reader by acting as a lightweight filter that reduces the number of documents that the Reader has to process.
+It does this by scanning through all documents in the database and quickly identifying the relevant and dismissing the irrelevant.
+In the end, only a small set of candidate documents are passed on to the Reader.
+
+```
+p = ExtractiveQAPipeline(reader, retriever)
+result = p.run(query="What is the capital of Australia?")
+```
+
+Using just a Retriever will not enable users to perform question answering.
+And using just a Reader would be unacceptably slow.
+The power of this system comes from the combination of the two.
+
+<div className="max-w-xl bg-yellow-light-theme border-l-8 border-yellow-dark-theme px-6 pt-6 pb-4 my-4 rounded-md dark:bg-yellow-900">
+
+** Question Answering Tutorial**: To start building your first question answering system, see our [Introductory Tutorial](/tutorials/first-qa-system)
+
+</div>
+
+The Retriever-Reader pipeline is by no means the only one that Haystack offers,
+but it is perhaps the most instructive for showing the gains from combining Nodes.
+Many of the synergistic Node combinations are covered by our [Ready Made Pipelines](/components/ready-made-pipelines)
+but we are sure there many still to be discovered!
+
