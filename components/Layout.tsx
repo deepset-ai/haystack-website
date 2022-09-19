@@ -8,6 +8,7 @@ import MobileNav from "components/MobileNav";
 import Footer from "components/Footer";
 import Toc from "components/Toc";
 import { StaticPageProps } from "lib/utils";
+import CanonicalMap from "../canonical_mapping.json"
 
 type LayoutProps = Pick<
   StaticPageProps,
@@ -32,19 +33,14 @@ const Layout: FC<LayoutProps> = ({
     type: "website",
   };
 
-  var canonical_map: { [key: string]: string; } = {};
-  canonical_map["/overview/nlp-resources"] = "/nlp-resources";
 
-  const get_canonical = function (current_path: string) {
-    var canonical = ''
-    if(canonical_map[current_path]){
-      canonical = canonical_map[current_path]
-    }
-    else canonical = current_path;
-    return `https://haystack.deepset.ai${canonical}`;
+
+  const getCanonical = function (currentPath: string) {
+    const map: Record<string, {readme_filepath: string}> = CanonicalMap;
+    return map[currentPath]?.readme_filepath ?? `https://haystack.deepset.ai${currentPath}`;
   };
 
-  var canonical = get_canonical(router.asPath)
+  var canonical = getCanonical(router.asPath)
 
   return (
     <div className="dark:bg-gray-800">

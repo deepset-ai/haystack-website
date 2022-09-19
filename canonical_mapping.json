@@ -1,0 +1,1493 @@
+{
+  "/pipeline_nodes/v1.8.0/document-to-speech": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/document_to_speech"
+  },
+  "/pipeline_nodes/v1.8.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/query_classifier"
+  },
+  "/pipeline_nodes/v1.8.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/translator"
+  },
+  "/pipeline_nodes/v1.8.0/join-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/join_documents"
+  },
+  "/pipeline_nodes/v1.8.0/answer-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/answer_generator"
+  },
+  "/pipeline_nodes/v1.8.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/summarizer"
+  },
+  "/pipeline_nodes/v1.8.0/custom-nodes": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/custom_nodes"
+  },
+  "/pipeline_nodes/v1.8.0/overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/overview"
+  },
+  "/pipeline_nodes/v1.8.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/document_classifier"
+  },
+  "/pipeline_nodes/v1.8.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/retriever"
+  },
+  "/pipeline_nodes/v1.8.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/question_generator"
+  },
+  "/pipeline_nodes/v1.8.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/ranker"
+  },
+  "/pipeline_nodes/v1.8.0/entity-extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/entity_extractor"
+  },
+  "/pipeline_nodes/v1.8.0/docs2answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/docs2answers"
+  },
+  "/pipeline_nodes/v1.8.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/crawler"
+  },
+  "/pipeline_nodes/v1.8.0/join-answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/join_answers"
+  },
+  "/pipeline_nodes/v1.8.0/answer-to-speech": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/answer_to_speech"
+  },
+  "/pipeline_nodes/v1.8.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/reader"
+  },
+  "/pipeline_nodes/v1.8.0/file-converters": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/file_converters"
+  },
+  "/pipeline_nodes/v1.8.0/route-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/route_documents"
+  },
+  "/pipeline_nodes/v1.8.0/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/file_classifier"
+  },
+  "/pipeline_nodes/v1.8.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/preprocessor"
+  },
+  "/components/v1.8.0/annotation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/annotation"
+  },
+  "/components/v1.8.0/ready-made-pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/ready_made_pipelines"
+  },
+  "/components/v1.8.0/components-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/components_overview"
+  },
+  "/components/v1.8.0/rest-api-definition": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/rest_api"
+  },
+  "/components/v1.8.0/rest-api": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/rest_api"
+  },
+  "/components/v1.8.0/documents-answers-labels": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/documents_answers_labels"
+  },
+  "/components/v1.8.0/pseudo-label-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/pseudo_label_generator"
+  },
+  "/components/v1.8.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/document_store"
+  },
+  "/components/v1.8.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/pipelines"
+  },
+  "/guides/v1.8.0/language-models": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/language_models"
+  },
+  "/guides/v1.8.0/domain-adaptation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/domain_adaptation"
+  },
+  "/guides/v1.8.0/table-qa": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/table_qa"
+  },
+  "/guides/v1.8.0/languages": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/languages"
+  },
+  "/guides/v1.8.0/knowledge-graph": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/knowledge_graph"
+  },
+  "/guides/v1.8.0/model-distillation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/model_distillation"
+  },
+  "/guides/v1.8.0/gpl": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/gpl"
+  },
+  "/guides/v1.8.0/optimization": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/optimization"
+  },
+  "/guides/v1.8.0/guides-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/guides_overview"
+  },
+  "/guides/v1.8.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/telemetry"
+  },
+  "/guides/v1.8.0/metadata-filtering": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/metadata-filtering"
+  },
+  "/guides/v1.8.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/evaluation"
+  },
+  "/guides/v1.8.0/chatbots": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/chatbots"
+  },
+  "/overview/v1.8.0/glossary": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/glossary"
+  },
+  "/overview/v1.8.0/intro": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/intro"
+  },
+  "/overview/v1.8.0/get-started": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/get_started"
+  },
+  "/overview/v1.8.0/migration": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/migration"
+  },
+  "/overview/v1.8.0/quick-demo": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/quick_demo"
+  },
+  "/overview/v1.8.0/nlp-resources": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/nlp_resources"
+  },
+  "/overview/v1.8.0/use-cases": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/use_cases"
+  },
+  "/overview/v1.8.0/installation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/installation"
+  },
+  "/overview/v1.8.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/telemetry"
+  },
+  "/overview/v1.8.0/faq": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/faq"
+  },
+  "/overview/v1.8.0/roadmap": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/roadmap"
+  },
+  "/components/v1.3.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/query_classifier"
+  },
+  "/components/v1.3.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/translator"
+  },
+  "/components/v1.3.0/ready-made-pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/ready_made_pipelines"
+  },
+  "/components/v1.3.0/knowledge-graph": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/knowledge_graph"
+  },
+  "/components/v1.3.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/summarizer"
+  },
+  "/components/v1.3.0/primitives": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/primitives"
+  },
+  "/components/v1.3.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/document_classifier"
+  },
+  "/components/v1.3.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/generator"
+  },
+  "/components/v1.3.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/retriever"
+  },
+  "/components/v1.3.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/question_generator"
+  },
+  "/components/v1.3.0/preprocessing": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/preprocessing"
+  },
+  "/components/v1.3.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/ranker"
+  },
+  "/components/v1.3.0/entity-extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/entity_extractor"
+  },
+  "/components/v1.3.0/nodes": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/nodes"
+  },
+  "/components/v1.3.0/join-answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/join_answers"
+  },
+  "/components/v1.3.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/reader"
+  },
+  "/components/v1.3.0/route-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/route_documents"
+  },
+  "/components/v1.3.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/document_store"
+  },
+  "/components/v1.3.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/pipelines"
+  },
+  "/guides/v1.3.0/domain-adaptation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/domain_adaptation"
+  },
+  "/guides/v1.3.0/table-qa": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/table_qa"
+  },
+  "/guides/v1.3.0/languages": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/languages"
+  },
+  "/guides/v1.3.0/annotation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/annotation"
+  },
+  "/guides/v1.3.0/rest-api-definition": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/rest_api"
+  },
+  "/guides/v1.3.0/model-distillation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/model_distillation"
+  },
+  "/guides/v1.3.0/rest-api": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/rest_api"
+  },
+  "/guides/v1.3.0/optimization": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/optimization"
+  },
+  "/guides/v1.3.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/telemetry"
+  },
+  "/guides/v1.3.0/metadata-filtering": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/metadata_filtering"
+  },
+  "/guides/v1.3.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/evaluation"
+  },
+  "/guides/v1.3.0/chatbots": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/chatbots"
+  },
+  "/overview/v1.3.0/glossary": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/glossary"
+  },
+  "/overview/v1.3.0/intro": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/intro"
+  },
+  "/overview/v1.3.0/get-started": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/get_started"
+  },
+  "/overview/v1.3.0/migration": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/migration"
+  },
+  "/overview/v1.3.0/quick-demo": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/quick_demo"
+  },
+  "/overview/v1.3.0/use-cases": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/use_cases"
+  },
+  "/overview/v1.3.0/installation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/installation"
+  },
+  "/overview/v1.3.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/telemetry"
+  },
+  "/overview/v1.3.0/faq": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/faq"
+  },
+  "/overview/v1.3.0/roadmap": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/roadmap"
+  },
+  "/pipeline_nodes/v1.7.0/document-to-speech": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/document_to_speech"
+  },
+  "/pipeline_nodes/v1.7.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/query_classifier"
+  },
+  "/pipeline_nodes/v1.7.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/translator"
+  },
+  "/pipeline_nodes/v1.7.0/join-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/join_documents"
+  },
+  "/pipeline_nodes/v1.7.0/answer-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/answer_generator"
+  },
+  "/pipeline_nodes/v1.7.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/summarizer"
+  },
+  "/pipeline_nodes/v1.7.0/custom-nodes": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/custom_nodes"
+  },
+  "/pipeline_nodes/v1.7.0/overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/overview"
+  },
+  "/pipeline_nodes/v1.7.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/document_classifier"
+  },
+  "/pipeline_nodes/v1.7.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/retriever"
+  },
+  "/pipeline_nodes/v1.7.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/question_generator"
+  },
+  "/pipeline_nodes/v1.7.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/ranker"
+  },
+  "/pipeline_nodes/v1.7.0/entity-extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/entity_extractor"
+  },
+  "/pipeline_nodes/v1.7.0/docs2answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/docs2answers"
+  },
+  "/pipeline_nodes/v1.7.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/crawler"
+  },
+  "/pipeline_nodes/v1.7.0/join-answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/join_answers"
+  },
+  "/pipeline_nodes/v1.7.0/answer-to-speech": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/answer_to_speech"
+  },
+  "/pipeline_nodes/v1.7.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/reader"
+  },
+  "/pipeline_nodes/v1.7.0/file-converters": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/file_converters"
+  },
+  "/pipeline_nodes/v1.7.0/route-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/route_documents"
+  },
+  "/pipeline_nodes/v1.7.0/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/file_classifier"
+  },
+  "/pipeline_nodes/v1.7.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/preprocessor"
+  },
+  "/components/v1.7.0/annotation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/annotation"
+  },
+  "/components/v1.7.0/ready-made-pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/ready_made_pipelines"
+  },
+  "/components/v1.7.0/components-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/components_overview"
+  },
+  "/components/v1.7.0/rest-api-definition": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/rest_api"
+  },
+  "/components/v1.7.0/rest-api": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/rest_api"
+  },
+  "/components/v1.7.0/documents-answers-labels": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/documents_answers_labels"
+  },
+  "/components/v1.7.0/pseudo-label-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/pseudo_label_generator"
+  },
+  "/components/v1.7.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/document_store"
+  },
+  "/components/v1.7.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/pipelines"
+  },
+  "/guides/v1.7.0/language-models": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/language_models"
+  },
+  "/guides/v1.7.0/domain-adaptation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/domain_adaptation"
+  },
+  "/guides/v1.7.0/table-qa": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/table_qa"
+  },
+  "/guides/v1.7.0/languages": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/languages"
+  },
+  "/guides/v1.7.0/knowledge-graph": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/knowledge_graph"
+  },
+  "/guides/v1.7.0/model-distillation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/model_distillation"
+  },
+  "/guides/v1.7.0/gpl": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/gpl"
+  },
+  "/guides/v1.7.0/optimization": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/optimization"
+  },
+  "/guides/v1.7.0/guides-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/guides_overview"
+  },
+  "/guides/v1.7.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/telemetry"
+  },
+  "/guides/v1.7.0/metadata-filtering": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/metadata-filtering"
+  },
+  "/guides/v1.7.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/evaluation"
+  },
+  "/guides/v1.7.0/chatbots": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/chatbots"
+  },
+  "/overview/v1.7.0/glossary": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/glossary"
+  },
+  "/overview/v1.7.0/intro": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/intro"
+  },
+  "/overview/v1.7.0/get-started": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/get_started"
+  },
+  "/overview/v1.7.0/migration": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/migration"
+  },
+  "/overview/v1.7.0/quick-demo": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/quick_demo"
+  },
+  "/overview/v1.7.0/nlp-resources": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/nlp_resources"
+  },
+  "/overview/v1.7.0/use-cases": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/use_cases"
+  },
+  "/overview/v1.7.0/installation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/installation"
+  },
+  "/overview/v1.7.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/telemetry"
+  },
+  "/overview/v1.7.0/faq": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/faq"
+  },
+  "/overview/v1.7.0/roadmap": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/roadmap"
+  },
+  "/pipeline_nodes/v1.6.0/document-to-speech": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/document_to_speech"
+  },
+  "/pipeline_nodes/v1.6.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/query_classifier"
+  },
+  "/pipeline_nodes/v1.6.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/translator"
+  },
+  "/pipeline_nodes/v1.6.0/join-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/join_documents"
+  },
+  "/pipeline_nodes/v1.6.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/summarizer"
+  },
+  "/pipeline_nodes/v1.6.0/custom-nodes": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/custom_nodes"
+  },
+  "/pipeline_nodes/v1.6.0/overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/overview"
+  },
+  "/pipeline_nodes/v1.6.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/document_classifier"
+  },
+  "/pipeline_nodes/v1.6.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/generator"
+  },
+  "/pipeline_nodes/v1.6.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/retriever"
+  },
+  "/pipeline_nodes/v1.6.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/question_generator"
+  },
+  "/pipeline_nodes/v1.6.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/ranker"
+  },
+  "/pipeline_nodes/v1.6.0/entity-extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/entity_extractor"
+  },
+  "/pipeline_nodes/v1.6.0/docs2answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/docs2answers"
+  },
+  "/pipeline_nodes/v1.6.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/crawler"
+  },
+  "/pipeline_nodes/v1.6.0/join-answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/join_answers"
+  },
+  "/pipeline_nodes/v1.6.0/answer-to-speech": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/answer_to_speech"
+  },
+  "/pipeline_nodes/v1.6.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/reader"
+  },
+  "/pipeline_nodes/v1.6.0/file-converters": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/file_converters"
+  },
+  "/pipeline_nodes/v1.6.0/route-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/route_documents"
+  },
+  "/pipeline_nodes/v1.6.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/preprocessor"
+  },
+  "/components/v1.6.0/annotation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/annotation"
+  },
+  "/components/v1.6.0/ready-made-pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/ready_made_pipelines"
+  },
+  "/components/v1.6.0/components-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/components_overview"
+  },
+  "/components/v1.6.0/rest-api-definition": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/rest_api"
+  },
+  "/components/v1.6.0/rest-api": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/rest_api"
+  },
+  "/components/v1.6.0/documents-answers-labels": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/documents_answers_labels"
+  },
+  "/components/v1.6.0/pseudo-label-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/pseudo_label_generator"
+  },
+  "/components/v1.6.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/document_store"
+  },
+  "/components/v1.6.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/pipelines"
+  },
+  "/guides/v1.6.0/language-models": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/language_models"
+  },
+  "/guides/v1.6.0/domain-adaptation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/domain_adaptation"
+  },
+  "/guides/v1.6.0/table-qa": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/table_qa"
+  },
+  "/guides/v1.6.0/languages": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/languages"
+  },
+  "/guides/v1.6.0/knowledge-graph": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/knowledge_graph"
+  },
+  "/guides/v1.6.0/model-distillation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/model_distillation"
+  },
+  "/guides/v1.6.0/gpl": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/gpl"
+  },
+  "/guides/v1.6.0/optimization": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/optimization"
+  },
+  "/guides/v1.6.0/guides-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/guides_overview"
+  },
+  "/guides/v1.6.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/telemetry"
+  },
+  "/guides/v1.6.0/metadata-filtering": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/metadata_filtering"
+  },
+  "/guides/v1.6.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/evaluation"
+  },
+  "/guides/v1.6.0/chatbots": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/chatbots"
+  },
+  "/overview/v1.6.0/glossary": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/glossary"
+  },
+  "/overview/v1.6.0/intro": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/intro"
+  },
+  "/overview/v1.6.0/get-started": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/get_started"
+  },
+  "/overview/v1.6.0/migration": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/migration"
+  },
+  "/overview/v1.6.0/quick-demo": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/quick_demo"
+  },
+  "/overview/v1.6.0/nlp-resources": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/nlp_resources"
+  },
+  "/overview/v1.6.0/use-cases": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/use_cases"
+  },
+  "/overview/v1.6.0/installation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/installation"
+  },
+  "/overview/v1.6.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/telemetry"
+  },
+  "/overview/v1.6.0/faq": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/faq"
+  },
+  "/overview/v1.6.0/roadmap": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/roadmap"
+  },
+  "/pipeline_nodes/document-to-speech": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/document_to_speech"
+  },
+  "/pipeline_nodes/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/query_classifier"
+  },
+  "/pipeline_nodes/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/translator"
+  },
+  "/pipeline_nodes/join-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/join_documents"
+  },
+  "/pipeline_nodes/answer-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/answer_generator"
+  },
+  "/pipeline_nodes/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/summarizer"
+  },
+  "/pipeline_nodes/custom-nodes": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/custom_nodes"
+  },
+  "/pipeline_nodes/overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/overview"
+  },
+  "/pipeline_nodes/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/document_classifier"
+  },
+  "/pipeline_nodes/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/retriever"
+  },
+  "/pipeline_nodes/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/question_generator"
+  },
+  "/pipeline_nodes/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/ranker"
+  },
+  "/pipeline_nodes/entity-extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/entity_extractor"
+  },
+  "/pipeline_nodes/docs2answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/docs2answers"
+  },
+  "/pipeline_nodes/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/crawler"
+  },
+  "/pipeline_nodes/join-answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/join_answers"
+  },
+  "/pipeline_nodes/answer-to-speech": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/answer_to_speech"
+  },
+  "/pipeline_nodes/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/reader"
+  },
+  "/pipeline_nodes/file-converters": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/file_converters"
+  },
+  "/pipeline_nodes/route-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/route_documents"
+  },
+  "/pipeline_nodes/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/file_classifier"
+  },
+  "/pipeline_nodes/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/preprocessor"
+  },
+  "/components/annotation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/annotation"
+  },
+  "/components/ready-made-pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/ready_made_pipelines"
+  },
+  "/components/components-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/components_overview"
+  },
+  "/components/rest-api-definition": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/rest_api"
+  },
+  "/components/rest-api": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/rest_api"
+  },
+  "/components/documents-answers-labels": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/documents_answers_labels"
+  },
+  "/components/pseudo-label-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/pseudo_label_generator"
+  },
+  "/components/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/document_store"
+  },
+  "/components/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/pipelines"
+  },
+  "/haystack_home/intro": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/intro"
+  },
+  "/guides/language-models": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/language_models"
+  },
+  "/guides/domain-adaptation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/domain_adaptation"
+  },
+  "/guides/table-qa": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/table_qa"
+  },
+  "/guides/languages": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/languages"
+  },
+  "/guides/knowledge-graph": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/knowledge_graph"
+  },
+  "/guides/model-distillation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/model_distillation"
+  },
+  "/guides/gpl": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/gpl"
+  },
+  "/guides/optimization": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/optimization"
+  },
+  "/guides/guides-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/guides_overview"
+  },
+  "/guides/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/telemetry"
+  },
+  "/guides/metadata-filtering": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/metadata-filtering"
+  },
+  "/guides/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/evaluation"
+  },
+  "/guides/chatbots": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/chatbots"
+  },
+  "/overview/glossary": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/glossary"
+  },
+  "/overview/get-started": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/get_started"
+  },
+  "/overview/migration": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/migration"
+  },
+  "/overview/quick-demo": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/quick_demo"
+  },
+  "/overview/nlp-resources": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/nlp_resources"
+  },
+  "/overview/use-cases": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/use_cases"
+  },
+  "/overview/installation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/installation"
+  },
+  "/overview/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/telemetry"
+  },
+  "/overview/faq": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/faq"
+  },
+  "/overview/roadmap": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/docs/roadmap"
+  },
+  "/pipeline_nodes/v1.5.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/query_classifier"
+  },
+  "/pipeline_nodes/v1.5.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/translator"
+  },
+  "/pipeline_nodes/v1.5.0/join-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/join_documents"
+  },
+  "/pipeline_nodes/v1.5.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/summarizer"
+  },
+  "/pipeline_nodes/v1.5.0/custom-nodes": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/custom_nodes"
+  },
+  "/pipeline_nodes/v1.5.0/overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/overview"
+  },
+  "/pipeline_nodes/v1.5.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/document_classifier"
+  },
+  "/pipeline_nodes/v1.5.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/generator"
+  },
+  "/pipeline_nodes/v1.5.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/retriever"
+  },
+  "/pipeline_nodes/v1.5.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/question_generator"
+  },
+  "/pipeline_nodes/v1.5.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/ranker"
+  },
+  "/pipeline_nodes/v1.5.0/entity-extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/entity_extractor"
+  },
+  "/pipeline_nodes/v1.5.0/docs2answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/docs2answers"
+  },
+  "/pipeline_nodes/v1.5.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/crawler"
+  },
+  "/pipeline_nodes/v1.5.0/join-answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/join_answers"
+  },
+  "/pipeline_nodes/v1.5.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/reader"
+  },
+  "/pipeline_nodes/v1.5.0/file-converters": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/file_converters"
+  },
+  "/pipeline_nodes/v1.5.0/route-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/route_documents"
+  },
+  "/pipeline_nodes/v1.5.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/preprocessor"
+  },
+  "/components/v1.5.0/annotation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/annotation"
+  },
+  "/components/v1.5.0/ready-made-pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/ready_made_pipelines"
+  },
+  "/components/v1.5.0/components-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/components_overview"
+  },
+  "/components/v1.5.0/rest-api-definition": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/rest_api"
+  },
+  "/components/v1.5.0/rest-api": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/rest_api"
+  },
+  "/components/v1.5.0/documents-answers-labels": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/documents_answers_labels"
+  },
+  "/components/v1.5.0/pseudo-label-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/pseudo_label_generator"
+  },
+  "/components/v1.5.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/document_store"
+  },
+  "/components/v1.5.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/pipelines"
+  },
+  "/guides/v1.5.0/domain-adaptation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/domain_adaptation"
+  },
+  "/guides/v1.5.0/table-qa": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/table_qa"
+  },
+  "/guides/v1.5.0/languages": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/languages"
+  },
+  "/guides/v1.5.0/knowledge-graph": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/knowledge_graph"
+  },
+  "/guides/v1.5.0/model-distillation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/model_distillation"
+  },
+  "/guides/v1.5.0/gpl": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/gpl"
+  },
+  "/guides/v1.5.0/optimization": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/optimization"
+  },
+  "/guides/v1.5.0/guides-overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/guides_overview"
+  },
+  "/guides/v1.5.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/telemetry"
+  },
+  "/guides/v1.5.0/metadata-filtering": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/metadata-filtering"
+  },
+  "/guides/v1.5.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/evaluation"
+  },
+  "/guides/v1.5.0/chatbots": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/chatbots"
+  },
+  "/overview/v1.5.0/glossary": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/glossary"
+  },
+  "/overview/v1.5.0/intro": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/intro"
+  },
+  "/overview/v1.5.0/get-started": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/get_started"
+  },
+  "/overview/v1.5.0/migration": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/migration"
+  },
+  "/overview/v1.5.0/quick-demo": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/quick_demo"
+  },
+  "/overview/v1.5.0/nlp-resources": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/nlp_resources"
+  },
+  "/overview/v1.5.0/use-cases": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/use_cases"
+  },
+  "/overview/v1.5.0/installation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/installation"
+  },
+  "/overview/v1.5.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/telemetry"
+  },
+  "/overview/v1.5.0/faq": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/faq"
+  },
+  "/overview/v1.5.0/roadmap": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/roadmap"
+  },
+  "/pipeline_nodes/v1.4.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/query_classifier"
+  },
+  "/pipeline_nodes/v1.4.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/translator"
+  },
+  "/pipeline_nodes/v1.4.0/join-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/join_documents"
+  },
+  "/pipeline_nodes/v1.4.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/summarizer"
+  },
+  "/pipeline_nodes/v1.4.0/overview": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/overview"
+  },
+  "/pipeline_nodes/v1.4.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/document_classifier"
+  },
+  "/pipeline_nodes/v1.4.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/generator"
+  },
+  "/pipeline_nodes/v1.4.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/retriever"
+  },
+  "/pipeline_nodes/v1.4.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/question_generator"
+  },
+  "/pipeline_nodes/v1.4.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/ranker"
+  },
+  "/pipeline_nodes/v1.4.0/entity-extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/entity_extractor"
+  },
+  "/pipeline_nodes/v1.4.0/docs2answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/docs2answers"
+  },
+  "/pipeline_nodes/v1.4.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/crawler"
+  },
+  "/pipeline_nodes/v1.4.0/join-answers": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/join_answers"
+  },
+  "/pipeline_nodes/v1.4.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/reader"
+  },
+  "/pipeline_nodes/v1.4.0/file-converters": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/file_converters"
+  },
+  "/pipeline_nodes/v1.4.0/route-documents": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/route_documents"
+  },
+  "/pipeline_nodes/v1.4.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/preprocessor"
+  },
+  "/components/v1.4.0/annotation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/annotation"
+  },
+  "/components/v1.4.0/ready-made-pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/ready-made-pipelines"
+  },
+  "/components/v1.4.0/rest-api-definition": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/rest_api"
+  },
+  "/components/v1.4.0/rest-api": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/rest_api"
+  },
+  "/components/v1.4.0/documents-answers-labels": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/documents_answers_labels"
+  },
+  "/components/v1.4.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/document_store"
+  },
+  "/components/v1.4.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/pipelines"
+  },
+  "/guides/v1.4.0/domain-adaptation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/domain_adaptation"
+  },
+  "/guides/v1.4.0/table-qa": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/table_qa"
+  },
+  "/guides/v1.4.0/languages": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/languages"
+  },
+  "/guides/v1.4.0/knowledge-graph": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/knowledge_graph"
+  },
+  "/guides/v1.4.0/model-distillation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/model_distillation"
+  },
+  "/guides/v1.4.0/optimization": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/optimization"
+  },
+  "/guides/v1.4.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/telemetry"
+  },
+  "/guides/v1.4.0/metadata-filtering": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/metadata-filtering"
+  },
+  "/guides/v1.4.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/evaluation"
+  },
+  "/guides/v1.4.0/chatbots": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/chatbots"
+  },
+  "/overview/v1.4.0/glossary": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/glossary"
+  },
+  "/overview/v1.4.0/intro": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/intro"
+  },
+  "/overview/v1.4.0/get-started": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/get_started"
+  },
+  "/overview/v1.4.0/migration": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/migration"
+  },
+  "/overview/v1.4.0/quick-demo": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/quick_demo"
+  },
+  "/overview/v1.4.0/nlp-resources": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/nlp_resources"
+  },
+  "/overview/v1.4.0/use-cases": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/use_cases"
+  },
+  "/overview/v1.4.0/installation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/installation"
+  },
+  "/overview/v1.4.0/telemetry": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/telemetry"
+  },
+  "/overview/v1.4.0/faq": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/faq"
+  },
+  "/overview/v1.4.0/roadmap": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/roadmap"
+  },
+  "/reference/v1.8.0/primitives": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/primitives-api"
+  },
+  "/reference/v1.8.0/pseudo-label-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/pseudo-label-generator-api"
+  },
+  "/reference/v1.8.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/generator-api"
+  },
+  "/reference/v1.8.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/document-classifier-api"
+  },
+  "/reference/v1.8.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/question-generator-api"
+  },
+  "/reference/v1.8.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/ranker-api"
+  },
+  "/reference/v1.8.0/file-converter": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/file-converter-api"
+  },
+  "/reference/v1.8.0/utils": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/utils-api"
+  },
+  "/reference/v1.8.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/document-store-api"
+  },
+  "/reference/v1.8.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/preprocessor-api"
+  },
+  "/reference/v1.8.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/translator-api"
+  },
+  "/reference/v1.8.0/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/file-classifier-api"
+  },
+  "/reference/v1.8.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/evaluation-api"
+  },
+  "/reference/v1.8.0/extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/extractor-api"
+  },
+  "/reference/v1.8.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/query-classifier-api"
+  },
+  "/reference/v1.8.0/other-nodes": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/other-api"
+  },
+  "/reference/v1.8.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/crawler-api"
+  },
+  "/reference/v1.8.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/retriever-api"
+  },
+  "/reference/v1.8.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/reader-api"
+  },
+  "/reference/v1.8.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/pipelines-api"
+  },
+  "/reference/v1.8.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/reference/summarizer-api"
+  },
+  "/reference/primitives": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/primitives-api"
+  },
+  "/reference/pseudo-label-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/pseudo-label-generator-api"
+  },
+  "/reference/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/generator-api"
+  },
+  "/reference/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/document-classifier-api"
+  },
+  "/reference/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/question-generator-api"
+  },
+  "/reference/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/ranker-api"
+  },
+  "/reference/file-converter": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/file-converter-api"
+  },
+  "/reference/utils": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/utils-api"
+  },
+  "/reference/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/document-store-api"
+  },
+  "/reference/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/preprocessor-api"
+  },
+  "/reference/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/translator-api"
+  },
+  "/reference/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/file-classifier-api"
+  },
+  "/reference/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/evaluation-api"
+  },
+  "/reference/extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/extractor-api"
+  },
+  "/reference/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/query-classifier-api"
+  },
+  "/reference/other-nodes": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/other-api"
+  },
+  "/reference/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/crawler-api"
+  },
+  "/reference/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/retriever-api"
+  },
+  "/reference/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/reader-api"
+  },
+  "/reference/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/pipelines-api"
+  },
+  "/reference/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/reference/summarizer-api"
+  },
+  "/reference/v1.3.0/primitives": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/primitives-api"
+  },
+  "/reference/v1.3.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/generator-api"
+  },
+  "/reference/v1.3.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/document-classifier-api"
+  },
+  "/reference/v1.3.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/question-generator-api"
+  },
+  "/reference/v1.3.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/ranker-api"
+  },
+  "/reference/v1.3.0/file-converter": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/file-converter-api"
+  },
+  "/reference/v1.3.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/document-store-api"
+  },
+  "/reference/v1.3.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/preprocessor-api"
+  },
+  "/reference/v1.3.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/translator-api"
+  },
+  "/reference/v1.3.0/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/file-classifier-api"
+  },
+  "/reference/v1.3.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/evaluation-api"
+  },
+  "/reference/v1.3.0/extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/extractor-api"
+  },
+  "/reference/v1.3.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/query-classifier-api"
+  },
+  "/reference/v1.3.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/crawler-api"
+  },
+  "/reference/v1.3.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/retriever-api"
+  },
+  "/reference/v1.3.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/reader-api"
+  },
+  "/reference/v1.3.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/pipelines-api"
+  },
+  "/reference/v1.3.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/summarizer-api"
+  },
+  "/reference/v1.3.0/other": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/reference/other-api"
+  },
+  "/reference/v1.7.0/primitives": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/primitives-api"
+  },
+  "/reference/v1.7.0/pseudo-label-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/pseudo-label-generator-api"
+  },
+  "/reference/v1.7.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/generator-api"
+  },
+  "/reference/v1.7.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/document-classifier-api"
+  },
+  "/reference/v1.7.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/question-generator-api"
+  },
+  "/reference/v1.7.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/ranker-api"
+  },
+  "/reference/v1.7.0/file-converter": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/file-converter-api"
+  },
+  "/reference/v1.7.0/utils": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/utils-api"
+  },
+  "/reference/v1.7.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/document-store-api"
+  },
+  "/reference/v1.7.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/preprocessor-api"
+  },
+  "/reference/v1.7.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/translator-api"
+  },
+  "/reference/v1.7.0/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/file-classifier-api"
+  },
+  "/reference/v1.7.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/evaluation-api"
+  },
+  "/reference/v1.7.0/extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/extractor-api"
+  },
+  "/reference/v1.7.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/query-classifier-api"
+  },
+  "/reference/v1.7.0/other-nodes": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/other-api"
+  },
+  "/reference/v1.7.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/crawler-api"
+  },
+  "/reference/v1.7.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/retriever-api"
+  },
+  "/reference/v1.7.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/reader-api"
+  },
+  "/reference/v1.7.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/pipelines-api"
+  },
+  "/reference/v1.7.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/reference/summarizer-api"
+  },
+  "/reference/v1.6.0/primitives": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/primitives-api"
+  },
+  "/reference/v1.6.0/pseudo-label-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/pseudo-label-generator-api"
+  },
+  "/reference/v1.6.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/generator-api"
+  },
+  "/reference/v1.6.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/document-classifier-api"
+  },
+  "/reference/v1.6.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/question-generator-api"
+  },
+  "/reference/v1.6.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/ranker-api"
+  },
+  "/reference/v1.6.0/file-converter": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/file-converter-api"
+  },
+  "/reference/v1.6.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/document-store-api"
+  },
+  "/reference/v1.6.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/preprocessor-api"
+  },
+  "/reference/v1.6.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/translator-api"
+  },
+  "/reference/v1.6.0/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/file-classifier-api"
+  },
+  "/reference/v1.6.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/evaluation-api"
+  },
+  "/reference/v1.6.0/extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/extractor-api"
+  },
+  "/reference/v1.6.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/query-classifier-api"
+  },
+  "/reference/v1.6.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/crawler-api"
+  },
+  "/reference/v1.6.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/retriever-api"
+  },
+  "/reference/v1.6.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/reader-api"
+  },
+  "/reference/v1.6.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/pipelines-api"
+  },
+  "/reference/v1.6.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/summarizer-api"
+  },
+  "/reference/v1.6.0/other": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/reference/other-api"
+  },
+  "/reference/v1.5.0/primitives": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/primitives-api"
+  },
+  "/reference/v1.5.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/generator-api"
+  },
+  "/reference/v1.5.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/document-classifier-api"
+  },
+  "/reference/v1.5.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/question-generator-api"
+  },
+  "/reference/v1.5.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/ranker-api"
+  },
+  "/reference/v1.5.0/file-converter": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/file-converter-api"
+  },
+  "/reference/v1.5.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/document-store-api"
+  },
+  "/reference/v1.5.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/preprocessor-api"
+  },
+  "/reference/v1.5.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/translator-api"
+  },
+  "/reference/v1.5.0/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/file-classifier-api"
+  },
+  "/reference/v1.5.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/evaluation-api"
+  },
+  "/reference/v1.5.0/extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/extractor-api"
+  },
+  "/reference/v1.5.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/query-classifier-api"
+  },
+  "/reference/v1.5.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/crawler-api"
+  },
+  "/reference/v1.5.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/retriever-api"
+  },
+  "/reference/v1.5.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/reader-api"
+  },
+  "/reference/v1.5.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/pipelines-api"
+  },
+  "/reference/v1.5.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/summarizer-api"
+  },
+  "/reference/v1.5.0/other": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/reference/other-api"
+  },
+  "/reference/v1.4.0/primitives": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/primitives-api"
+  },
+  "/reference/v1.4.0/generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/generator-api"
+  },
+  "/reference/v1.4.0/document-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/document-classifier-api"
+  },
+  "/reference/v1.4.0/question-generator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/question-generator-api"
+  },
+  "/reference/v1.4.0/ranker": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/ranker-api"
+  },
+  "/reference/v1.4.0/file-converter": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/file-converter-api"
+  },
+  "/reference/v1.4.0/document-store": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/document-store-api"
+  },
+  "/reference/v1.4.0/preprocessor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/preprocessor-api"
+  },
+  "/reference/v1.4.0/translator": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/translator-api"
+  },
+  "/reference/v1.4.0/file-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/file-classifier-api"
+  },
+  "/reference/v1.4.0/evaluation": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/evaluation-api"
+  },
+  "/reference/v1.4.0/extractor": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/extractor-api"
+  },
+  "/reference/v1.4.0/query-classifier": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/query-classifier-api"
+  },
+  "/reference/v1.4.0/crawler": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/crawler-api"
+  },
+  "/reference/v1.4.0/retriever": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/retriever-api"
+  },
+  "/reference/v1.4.0/reader": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/reader-api"
+  },
+  "/reference/v1.4.0/pipelines": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/pipelines-api"
+  },
+  "/reference/v1.4.0/summarizer": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/summarizer-api"
+  },
+  "/reference/v1.4.0/other": {
+    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/reference/other-api"
+  }
+}
