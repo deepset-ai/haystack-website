@@ -18,7 +18,7 @@ The Haystack REST API exposes an HTTP interface for interacting with a pipeline.
 
 When running Haystack as a REST API, you'll need to define the pipeline you'll be using in the API as a YAML file. Check out the [Pipelines YAML doc](/components/v1.1.0/pipelines) for more details.
 
-The example Haystack pipeline that we’ll be using below is defined in the [rest_api/pipeline/pipelines.yaml](https://github.com/deepset-ai/haystack/blob/main/rest_api/pipeline/pipelines.yaml) file.
+The example Haystack pipeline that we’ll be using below is defined in the [rest_api/pipeline/pipelines.haystack-pipeline.yml](https://github.com/deepset-ai/haystack/blob/main/rest_api/rest_api/pipeline/pipelines.haystack-pipeline.yml) file.
 
 ## Setting up a REST API with Haystack
 
@@ -45,7 +45,7 @@ docker-compose will start three Docker containers:
 
 </div>
 
-By default, the Haystack API container will start with a pipeline defined in the [rest_api/pipeline/pipelines.yaml](https://github.com/deepset-ai/haystack/blob/main/rest_api/pipeline/pipelines.yaml) file. If you want to direct the API container to use a YAML file at a different location, you can set the [`PIPELINE_YAML_PATH` environment variable](https://github.com/deepset-ai/haystack/blob/main/rest_api/config.py#L3).
+By default, the Haystack API container will start with a pipeline defined in the [rest_api/rest_api/pipeline/pipelines.haystack-pipeline.yml](https://github.com/deepset-ai/haystack/blob/main/rest_api/rest_api/pipeline/pipelines.haystack-pipeline.yml) file. If you want to direct the API container to use a YAML file at a different location, you can set the [`PIPELINE_YAML_PATH` environment variable](https://github.com/deepset-ai/haystack/blob/master/rest_api/config.py#L3).
 
 ### Interacting with the Haystack API through a simple user interface
 
@@ -127,7 +127,7 @@ When using the indexing pipeline, the REST API startup flow would be:
 3. Add documents through the index endpoint
 4. Submit queries
 
-Our example `pipelines.yaml` file defines an [indexing pipeline](https://github.com/deepset-ai/haystack/blob/main/rest_api/pipeline/pipelines.yaml#L38-L50)—it processes text and PDF files that are submitted to the `file-upload` API endpoint. So if you submit an API request to the indexing endpoint, the submitted content will get processed by the Indexing pipeline, loaded into Elasticsearch, and made available to the `query` pipeline.
+Our example `pipelines.haystack-pipeline.yml` file defines an [indexing pipeline](https://github.com/deepset-ai/haystack/blob/main/rest_api/rest_api/pipeline/pipelines.haystack-pipeline.yml)—it processes text and PDF files that are submitted to the `file-upload` API endpoint. So if you submit an API request to the indexing endpoint, the submitted content will get processed by the Indexing pipeline, loaded into Elasticsearch, and made available to the `query` pipeline.
 
 Here’s how you can add a document through the indexing API by using [cURL](https://curl.se/) to make the HTTP request:
 
@@ -210,7 +210,7 @@ We get the same information in the response as what we previously saw in the UI:
 
 ## Building a custom API endpoint
 
-Existing API endpoints are defined using FastAPI route methods, e.g., in the [rest_api/controller/search.py file](https://github.com/deepset-ai/haystack/blob/main/rest_api/controller/search.py#L52).
+Existing API endpoints are defined using FastAPI route methods, e.g., in the [rest_api/rest_api/controller/search.py file](https://github.com/deepset-ai/haystack/blob/main/rest_api/rest_api/controller/search.py#L52).
 
 You can add custom endpoints to the Haystack API by defining new API endpoints using the FastAPI methods. Creating new endpoints can be handy for making multiple pipelines available under different API endpoints, or if you need to add custom metrics or modify how parameters are being passed to the pipelines.
 

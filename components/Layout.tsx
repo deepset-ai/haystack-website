@@ -33,8 +33,6 @@ const Layout: FC<LayoutProps> = ({
     type: "website",
   };
 
-
-
   const getCanonical = function (currentPath: string) {
     const map: Record<string, {readme_filepath: string}> = CanonicalMap;
     return map[currentPath]?.readme_filepath ?? `https://haystack.deepset.ai${currentPath}`;
