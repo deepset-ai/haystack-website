@@ -140,9 +140,6 @@
   "/overview/v1.8.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/migration"
   },
-  "/overview/v1.8.0/nlp-resources": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/nlp_resources"
-  },
   "/overview/v1.8.0/use-cases": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/use_cases"
   },
@@ -416,9 +413,6 @@
   "/overview/v1.7.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/migration"
   },
-  "/overview/v1.7.0/nlp-resources": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/nlp_resources"
-  },
   "/overview/v1.7.0/use-cases": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/use_cases"
   },
@@ -571,9 +565,6 @@
   },
   "/overview/v1.6.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/migration"
-  },
-  "/overview/v1.6.0/nlp-resources": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/nlp_resources"
   },
   "/overview/v1.6.0/use-cases": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/use_cases"
@@ -731,9 +722,6 @@
   "/overview/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/docs/migration"
   },
-  "/overview/nlp-resources": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/docs/nlp_resources"
-  },
   "/overview/use-cases": {
     "readme_filepath": "https://docs.haystack.deepset.ai/docs/use_cases"
   },
@@ -878,9 +866,6 @@
   "/overview/v1.5.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/migration"
   },
-  "/overview/v1.5.0/nlp-resources": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/nlp_resources"
-  },
   "/overview/v1.5.0/use-cases": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/use_cases"
   },
@@ -1009,9 +994,6 @@
   },
   "/overview/v1.4.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/migration"
-  },
-  "/overview/v1.4.0/nlp-resources": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/nlp_resources"
   },
   "/overview/v1.4.0/use-cases": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/use_cases"
