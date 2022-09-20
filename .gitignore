@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /haystack
+/haystack-tutorials
 
 # testing
 /coverage
