@@ -134,9 +134,6 @@
   "/overview/v1.8.0/glossary": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/glossary"
   },
-  "/overview/v1.8.0/intro": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/intro"
-  },
   "/overview/v1.8.0/get-started": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/get_started"
   },
@@ -256,9 +253,6 @@
   },
   "/overview/v1.3.0/glossary": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/glossary"
-  },
-  "/overview/v1.3.0/intro": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/intro"
   },
   "/overview/v1.3.0/get-started": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/get_started"
@@ -416,9 +410,6 @@
   "/overview/v1.7.0/glossary": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/glossary"
   },
-  "/overview/v1.7.0/intro": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/intro"
-  },
   "/overview/v1.7.0/get-started": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/get_started"
   },
@@ -575,9 +566,6 @@
   "/overview/v1.6.0/glossary": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/glossary"
   },
-  "/overview/v1.6.0/intro": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/intro"
-  },
   "/overview/v1.6.0/get-started": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/get_started"
   },
@@ -694,9 +682,6 @@
   },
   "/components/pipelines": {
     "readme_filepath": "https://docs.haystack.deepset.ai/docs/pipelines"
-  },
-  "/haystack_home/intro": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/docs/intro"
   },
   "/guides/language-models": {
     "readme_filepath": "https://docs.haystack.deepset.ai/docs/language_models"
@@ -887,9 +872,6 @@
   "/overview/v1.5.0/glossary": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/glossary"
   },
-  "/overview/v1.5.0/intro": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/intro"
-  },
   "/overview/v1.5.0/get-started": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/get_started"
   },
@@ -1021,9 +1003,6 @@
   },
   "/overview/v1.4.0/glossary": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/glossary"
-  },
-  "/overview/v1.4.0/intro": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/intro"
   },
   "/overview/v1.4.0/get-started": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/get_started"
