@@ -46,7 +46,7 @@ export default function TutorialDoc({
   return (
     <Layout
       menu={menu}
-      editOnGitHubLink="https://github.com/deepset-ai/haystack/tree/master/tutorials"
+      editOnGitHubLink="https://github.com/deepset-ai/haystack-tutorials"
       stars={stars}
       toc={toc}
       htmlTitle={htmlTitle}
