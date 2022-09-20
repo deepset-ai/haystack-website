@@ -143,9 +143,6 @@
   "/overview/v1.8.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/migration"
   },
-  "/overview/v1.8.0/quick-demo": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/quick_demo"
-  },
   "/overview/v1.8.0/nlp-resources": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/nlp_resources"
   },
@@ -268,9 +265,6 @@
   },
   "/overview/v1.3.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/migration"
-  },
-  "/overview/v1.3.0/quick-demo": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/quick_demo"
   },
   "/overview/v1.3.0/use-cases": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/use_cases"
@@ -431,9 +425,6 @@
   "/overview/v1.7.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/migration"
   },
-  "/overview/v1.7.0/quick-demo": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/quick_demo"
-  },
   "/overview/v1.7.0/nlp-resources": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/nlp_resources"
   },
@@ -592,9 +583,6 @@
   },
   "/overview/v1.6.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/migration"
-  },
-  "/overview/v1.6.0/quick-demo": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/quick_demo"
   },
   "/overview/v1.6.0/nlp-resources": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/nlp_resources"
@@ -758,9 +746,6 @@
   "/overview/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/docs/migration"
   },
-  "/overview/quick-demo": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/docs/quick_demo"
-  },
   "/overview/nlp-resources": {
     "readme_filepath": "https://docs.haystack.deepset.ai/docs/nlp_resources"
   },
@@ -911,9 +896,6 @@
   "/overview/v1.5.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/migration"
   },
-  "/overview/v1.5.0/quick-demo": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/quick_demo"
-  },
   "/overview/v1.5.0/nlp-resources": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/nlp_resources"
   },
@@ -1048,9 +1030,6 @@
   },
   "/overview/v1.4.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/migration"
-  },
-  "/overview/v1.4.0/quick-demo": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/quick_demo"
   },
   "/overview/v1.4.0/nlp-resources": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/nlp_resources"
