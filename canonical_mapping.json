@@ -137,9 +137,6 @@
   "/overview/v1.8.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/migration"
   },
-  "/overview/v1.8.0/use-cases": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/use_cases"
-  },
   "/overview/v1.8.0/installation": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.8.0/docs/installation"
   },
@@ -247,9 +244,6 @@
   },
   "/overview/v1.3.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/migration"
-  },
-  "/overview/v1.3.0/use-cases": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/use_cases"
   },
   "/overview/v1.3.0/installation": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.3.0/docs/installation"
@@ -398,9 +392,6 @@
   "/overview/v1.7.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/migration"
   },
-  "/overview/v1.7.0/use-cases": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/use_cases"
-  },
   "/overview/v1.7.0/installation": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.7.0/docs/installation"
   },
@@ -544,9 +535,6 @@
   },
   "/overview/v1.6.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/migration"
-  },
-  "/overview/v1.6.0/use-cases": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/use_cases"
   },
   "/overview/v1.6.0/installation": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.6.0/docs/installation"
@@ -695,9 +683,6 @@
   "/overview/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/docs/migration"
   },
-  "/overview/use-cases": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/docs/use_cases"
-  },
   "/overview/installation": {
     "readme_filepath": "https://docs.haystack.deepset.ai/docs/installation"
   },
@@ -833,9 +818,6 @@
   "/overview/v1.5.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/migration"
   },
-  "/overview/v1.5.0/use-cases": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/use_cases"
-  },
   "/overview/v1.5.0/installation": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.5.0/docs/installation"
   },
@@ -955,9 +937,6 @@
   },
   "/overview/v1.4.0/migration": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/migration"
-  },
-  "/overview/v1.4.0/use-cases": {
-    "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/use_cases"
   },
   "/overview/v1.4.0/installation": {
     "readme_filepath": "https://docs.haystack.deepset.ai/v1.4.0/docs/installation"
