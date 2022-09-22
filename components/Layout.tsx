@@ -8,6 +8,7 @@ import MobileNav from "components/MobileNav";
 import Footer from "components/Footer";
 import Toc from "components/Toc";
 import { StaticPageProps } from "lib/utils";
+import CanonicalMap from "../canonical_mapping.json"
 
 type LayoutProps = Pick<
   StaticPageProps,
@@ -32,6 +33,13 @@ const Layout: FC<LayoutProps> = ({
     type: "website",
   };
 
+  const getCanonical = function (currentPath: string) {
+    const map: Record<string, {readme_filepath: string}> = CanonicalMap;
+    return map[currentPath]?.readme_filepath ?? `https://haystack.deepset.ai${currentPath}`;
+  };
+
+  var canonical = getCanonical(router.asPath)
+
   return (
     <div className="dark:bg-gray-800">
       <Head>
@@ -45,10 +53,7 @@ const Layout: FC<LayoutProps> = ({
           property="og:url"
           content={`https://haystack.deepset.ai${router.asPath}`}
         />
-        <link
-          rel="canonical"
-          href={`https://haystack.deepset.ai${router.asPath}`}
-        />
+        <link rel="canonical" href={`${canonical}`}/>
         <link rel="icon" href="/img/HaystackIcon.png" />
         <meta property="og:type" content={meta.type} />
         <meta property="og:site_name" content="Haystack Docs" />
