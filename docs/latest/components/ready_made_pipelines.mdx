@@ -72,7 +72,7 @@ To create this pipeline, pass the Retriever into the pipeline’s constructor:
 ```
 pipeline = DocumentSearchPipeline(retriever)
 query = "Tell me something about that time when they play chess."
-result = pipeline.run(query, params={"Retriever": {"top_k": 2})
+result = pipeline.run(query, params={"Retriever": {"top_k": 2}})
 ```
 
 In the pipeline's **output**, a list of [Document](/components/documents-answers-labels#document) objects is returned under the `document` key.
@@ -220,7 +220,7 @@ Here’s an example of an FAQPipeline in action:
 ```
 pipeline = FAQPipeline(retriever=retriever)
 query = "How to reduce stigma around Covid-19?"
-result = pipeline.run(query=query, params={"Retriever": {"top_k": 1})
+result = pipeline.run(query=query, params={"Retriever": {"top_k": 1}})
 ```
 
 You will find a list of [Answer](/components/documents-answers-labels#answer) objects under the `answers` key of the pipeline output.
