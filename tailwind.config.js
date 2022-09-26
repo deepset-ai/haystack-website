@@ -26,6 +26,9 @@ module.exports = {
         "green-dark-theme": "#06C2A0",
         "red-dark-theme": "#ED6A5E",
         "monokai-dark-grey": "#272822",
+        "teal-700": "#0f766e",
+        "teal-600": "#0d9488",
+        "teal-100": "#ccfbf1"
       },
       fontFamily: {
         sans: ["Greycliff CF", ...defaultTheme.fontFamily.sans],
